@@ -230,6 +230,14 @@
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
         }
+
+        @media screen and (max-width: 280px) {
+            .search-form-major .date-wrap {
+                margin-top: initial;
+                margin-left: initial;
+            }
+
+        }
     </style>
 
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>

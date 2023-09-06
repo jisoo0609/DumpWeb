@@ -4,8 +4,8 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
-<script src="/resources/js/dailyReport/dailyform-sub.js"></script>
-<script src="/resources/js/dailyReport/dailyform.js"></script>
+<script src="/resources/js/dailyReport/step3/dailyform-sub.js"></script>
+<script src="/resources/js/dailyReport/step3/dailyform.js"></script>
 
 <section id="canvas" style="">
     <div id="dailyreport">

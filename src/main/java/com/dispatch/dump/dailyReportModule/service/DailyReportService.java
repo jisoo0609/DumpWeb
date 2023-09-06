@@ -6,6 +6,7 @@ import com.dispatch.dump.commonModule.db.mapper.DailyReportMapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.bridge.ICommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class DailyReportService {
      * @param dailyReport
      * @return
      */
-    public String driver(Model model, DailyReport dailyReport) {
+    public void list(Model model, DailyReport dailyReport) {
         HttpSession session = commonUtil.getSession();
 
         try {
@@ -41,124 +42,9 @@ public class DailyReportService {
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }
-        return "/dailyReport/step1/driver";
     }
 
-    public String manager(Model model, DailyReport dailyReport) {
-        HttpSession session = commonUtil.getSession();
-
-        try {
-            Login loginData = (Login) session.getAttribute("loginInfo");
-            dailyReport.setCarNo(loginData.getUserId());
-
-            log.info(dailyReport.getCarNo());
-            List<DailyReport> list = dailyReportMapper.findDailyReportList(dailyReport);
-            model.addAttribute("list", list);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return "/dailyReport/step2/manager";
-    }
-
-    public String form(Model model, DailyReport dailyReport) {
-        HttpSession session = commonUtil.getSession();
-
-        try {
-            Login loginData = (Login) session.getAttribute("loginInfo");
-            dailyReport.setCarNo(loginData.getUserId());
-
-            log.info(dailyReport.getCarNo());
-            List<DailyReport> list = dailyReportMapper.findDailyReportList(dailyReport);
-            model.addAttribute("list", list);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return "/dailyReport/step3/form";
-    }
-
-    public String list(Model model, DailyReport dailyReport) {
-        HttpSession session = commonUtil.getSession();
-
-        try {
-            Login loginData = (Login) session.getAttribute("loginInfo");
-            dailyReport.setCarNo(loginData.getUserId());
-
-            log.info(dailyReport.getCarNo());
-            List<DailyReport> list = dailyReportMapper.findDailyReportList(dailyReport);
-            model.addAttribute("list", list);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return "/dailyReport/step4/list";
-    }
-
-    public String carcareform(Model model, DailyReport dailyReport) {
-        HttpSession session = commonUtil.getSession();
-
-        try {
-            Login loginData = (Login) session.getAttribute("loginInfo");
-            dailyReport.setCarNo(loginData.getUserId());
-
-            log.info(dailyReport.getCarNo());
-            List<DailyReport> list = dailyReportMapper.findDailyReportList(dailyReport);
-            model.addAttribute("list", list);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return "/dailyReport/step5/carcareform";
-    }
-
-
-    public String nextcarcare(Model model, DailyReport dailyReport) {
-        HttpSession session = commonUtil.getSession();
-
-        try {
-            Login loginData = (Login) session.getAttribute("loginInfo");
-            dailyReport.setCarNo(loginData.getUserId());
-
-            log.info(dailyReport.getCarNo());
-            List<DailyReport> list = dailyReportMapper.findDailyReportList(dailyReport);
-            model.addAttribute("list", list);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return "/dailyReport/step5/nextcarcare";
-    }
-
-
-    public String carcarelist(Model model, DailyReport dailyReport) {
-        HttpSession session = commonUtil.getSession();
-
-        try {
-            Login loginData = (Login) session.getAttribute("loginInfo");
-            dailyReport.setCarNo(loginData.getUserId());
-
-            log.info(dailyReport.getCarNo());
-            List<DailyReport> list = dailyReportMapper.findDailyReportList(dailyReport);
-            model.addAttribute("list", list);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return "/dailyReport/step6/carcarelist";
-    }
-
-    public String receipts(Model model, DailyReport dailyReport) {
-        HttpSession session = commonUtil.getSession();
-
-        try {
-            Login loginData = (Login) session.getAttribute("loginInfo");
-            dailyReport.setCarNo(loginData.getUserId());
-
-            log.info(dailyReport.getCarNo());
-            List<DailyReport> list = dailyReportMapper.findDailyReportList(dailyReport);
-            model.addAttribute("list", list);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return "/dailyReport/step7/receipts";
-    }
-
-    public String oldform(Model model, DailyReport dailyReport) {
+    public void form(Model model, DailyReport dailyReport) {
         HttpSession session = commonUtil.getSession();
         Login loginData = (Login) session.getAttribute("loginInfo");
         dailyReport.setCarNo(loginData.getUserId());
@@ -172,9 +58,7 @@ public class DailyReportService {
             model.addAttribute("groupList", groupList);
         }
 
-        return "/dailyReport/oldform";
     }
-
 
     public String save(DailyReport dailyReport) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
@@ -192,8 +76,8 @@ public class DailyReportService {
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }
-        return commonUtil.jsonFormatTransfer(rtnMap); }
-
+        return commonUtil.jsonFormatTransfer(rtnMap);
+    }
 
     public String delete(DailyReport dailyReport) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
@@ -218,7 +102,6 @@ public class DailyReportService {
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }
-
 
         return commonUtil.jsonFormatTransfer(rtnMap);
     }

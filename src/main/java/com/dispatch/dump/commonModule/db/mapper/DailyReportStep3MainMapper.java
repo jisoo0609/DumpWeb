@@ -4,7 +4,7 @@ import com.dispatch.dump.commonModule.db.dto.DailyReportMain;
 
 import java.util.List;
 
-public interface DailyReportMainMapper {
+public interface DailyReportStep3MainMapper {
 
     /* FUNCTION ::  등록 */
     int insertDailyReportMain(DailyReportMain dailyReportMain);

@@ -1,9 +1,8 @@
 package com.dispatch.dump.commonModule.db.mapper;
 
-import com.dispatch.dump.commonModule.db.dto.DailyReportMain;
 import com.dispatch.dump.commonModule.db.dto.DailyReportSub;
 
-public interface DailyReportSubMapper {
+public interface DailyReportStep3SubMapper {
     
     /* FUNCTION ::  등록 */
     int insertDailyReportSub(DailyReportSub dailyReportSub);
