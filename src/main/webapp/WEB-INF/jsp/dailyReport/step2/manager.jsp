@@ -130,7 +130,7 @@
 </style>
 
 
-<section style=" background-color: #cce0f7">
+<section>
 
 
     <article class="homescreen">
