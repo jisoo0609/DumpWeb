@@ -1,6 +1,6 @@
 $.save = function() {
     $.ajax({
-        url: "/dailyReportMain/ajax/save",
+        url: "/dailyReport/workspace/ajax/save",
         type: "POST",
         data: $("[name=frm]").serialize(),
         success: function (data) {
