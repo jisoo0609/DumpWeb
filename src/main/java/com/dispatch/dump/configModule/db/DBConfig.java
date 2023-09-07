@@ -28,7 +28,7 @@ public class DBConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mapper/**/*.xml"));
-        sqlSessionFactoryBean.setTypeAliasesPackage("com.dispatch.dump.commonModule.db.dto");
+        sqlSessionFactoryBean.setTypeAliasesPackage("com.dispatch.dump.commonModule.db.dto, com.dispatch.dump.commonModule.db.dao");
 
         SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBean.getObject();
         sqlSessionFactory.getConfiguration().setMapUnderscoreToCamelCase(true);
