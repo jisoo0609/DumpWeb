@@ -3,9 +3,9 @@
 
 /* 삭제 */
 /* 전역 스타일 설정 */
-/* body {
+ body {
   background: #ddd;
-} */
+}
 
 span {
   color: var(--color-bg-border-blue);
@@ -42,10 +42,10 @@ span {
 
 /* 삭제 */
 /* 페이지 본문 스타일 */
-/* .sub_con_wrapper {
+.sub_con_wrapper {
   padding: 40px 30px 100px;
   background: #fff;
-} */
+}
 
 #maxwrap {
   overflow: hidden;
@@ -54,9 +54,9 @@ span {
 }
 
 /* 삭제 */
-/* .wp80 {
+ .wp80 {
   width: 80%;
-} */
+}
 
 /* 페이지 제목 스타일 */
 .subTitle_wrapper {
@@ -177,10 +177,12 @@ span {
   text-align: center;
 }
 
+
+
 /* 검색 버튼 스타일 */
 .search_btn {
   line-height: 38px;
-  background-image: url(/images/ico_search-b.png);
+  background-image: url(/resources/image/step6/ico_search-b.png);
   background-position: 25px 9px;
   background-repeat: no-repeat;
   background-size: 23px;
