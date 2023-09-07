@@ -4,8 +4,6 @@
 <script type="text/javascript"
         src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 
@@ -54,25 +52,8 @@
         height: 100%;
     }
 
-    /*Header*/
-    .header_top{
-        text-align: center;
-        padding: 10px 0;
-        border-bottom: 2px solid #003e6d;
-    }
-
     .maxwrap{
         padding: 0 20px;
-    }
-
-    .header_top_wrap{
-        display: flex;
-        text-align: center;
-        justify-content: space-between;
-    }
-
-    .carNumWrap{
-        border-bottom: 1px solid #cce0f3;
     }
 
     img[alt = calling_img]{
