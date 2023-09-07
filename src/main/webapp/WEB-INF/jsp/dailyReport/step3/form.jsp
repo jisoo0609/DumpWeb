@@ -45,14 +45,7 @@
             <input type="hidden" name="chk1" value=""/>
         </form>
 
-        <div id="popSearch" class="popup" style="z-index: 99;">
-            <div class="popup-content">
-                test
-                <button class="btn btn-white btn-popup" onclick="closePopSearch()">
-                    나가기
-                </button>
-            </div>
-        </div>
+        <%@ include file="/WEB-INF/jsp/dailyReport/step3/searchPop.jsp" %>
 
         <div class="mt10" >
             <p class="caption-like">
