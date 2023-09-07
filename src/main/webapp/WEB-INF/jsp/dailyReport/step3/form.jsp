@@ -4,8 +4,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
-<script src="/resources/js/dailyReport/dailyform-sub.js"></script>
-<script src="/resources/js/dailyReport/dailyform.js"></script>
+
 
 <section id="canvas" style="">
     <div id="dailyreport">
@@ -116,25 +115,7 @@
                                 거래처 저장
                             </button>
 
-                            <script>
-                                const checkbox = document.getElementById('checkbox');
-                                const dateDisplay = document.getElementById('dateDisplay');
-                                const currentDateSpan = document.getElementById('currentDate');
-                                     currentDateSpan.textContent = '연도- 월- 일';
 
-                                checkbox.addEventListener('click', () => {
-                                    if (checkbox.checked) {
-                                        const today = new Date();
-                                        const year = today.getFullYear();
-                                        const month = String(today.getMonth() + 1).padStart(2, '0');
-                                        const day = String(today.getDate()).padStart(2, '0');
-                                        const dateString = `${year}-${month}-${day}`;
-                                        currentDateSpan.textContent = year+'-'+month+'-'+day;
-                                    } else {
-                                        currentDateSpan.textContent = '연도- 월- 일';
-                                    }
-                                });
-                            </script>
                         </li>
                     </ul>
                 </div>
@@ -234,7 +215,7 @@
             <button type="button" class="btn btn-white " onClick="history.go(-1)">이전화면</button>
             <button id="clearButton" type="button" class="btn btn-white " onClick="clearAll()">전체삭제</button>
             <button type="button" class="btn btn-white ">신규등록</button>
-            <button type="button" class="btn btn-blue" id="checkButton" onClick="showDate()">제출하기
+            <button type="button" class="btn btn-blue" id="submitBtn" onClick="checkBox()">제출하기
             </button>
         </div>
     </div>
@@ -256,6 +237,7 @@
 
 
 
-
+<script src="/resources/js/dailyReport/step3/dailyform-sub.js"></script>
+<script src="/resources/js/dailyReport/step3/dailyform.js"></script>
 
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
