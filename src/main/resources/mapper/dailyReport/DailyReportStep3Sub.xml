@@ -20,7 +20,7 @@
 
 
     <!--운행 정보 저장-->
-    <insert id="insertDailyReportSub" parameterType="DailyReportSub">
+    <insert id="insertDailyReportSub" parameterType="DailyReportStep3Sub">
         <!--idx 자동->따로 작성 X-->
         insert into
         tSheet_sub
