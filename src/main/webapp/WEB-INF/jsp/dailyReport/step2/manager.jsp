@@ -15,7 +15,7 @@
 
         margin-bottom: 5%;
         margin-top: 5%;
-        margin-left: 17%;
+        margin-left: 12%;
 
     }
 
@@ -38,8 +38,8 @@
     .race-search,
     .car-repair,
     .car-search {
-        width: 90px;
-        height: 30%;
+        width: 60px;
+        height: 40%;
     }
 
     .race-registration,
@@ -146,24 +146,29 @@
                 <ul class="basic-menu">
                     <li>
                         총 운반 금액 :
-                        <div class="carrying-money" style="margin: 0 0 5% 0">원</div>
+                        <div class="carrying-money" style="margin: 0 0 5% 0">
+                        <input text class="" size="5px ,5px">원</div>
                     </li>
                     <li>
                         총 운행대 수 :
-                        <div class="carrying-car" style="margin: 0 0 5% 0">대</div>
+                        <div class="carrying-car" style="margin: 0 0 5% 0">
+                         <input text class="" size="5px ,5px">대</div>
                     </li>
                     <li>
                         총 비용 금액 :
-                        <div class="expense-money">원</div>
+                        <div class="expense-money">
+                         <input text class="" size="5px ,5px">원</div>
                     </li>
-                    <li>마지막 등록일 :</li>
+                    <li>
+                    마지막 등록일 :
+                    </li>
 
 
                 </ul>
             </div>
         </div>
 
-        <section class="management">
+        <section class="management" >
             <div style="display: flex; align-items: center">
                 <div style="margin-light:5%; text-align:center; font-weight: 600">
                     <div class="race-check">
