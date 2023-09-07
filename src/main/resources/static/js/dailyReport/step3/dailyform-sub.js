@@ -1,12 +1,15 @@
-/* function :   */
-const popup = document.getElementById('popup')
-
+/* function :   open/close search popup */
 function openPop() {
-    popup.style.display = 'flex';
+    document.getElementById('popup').style.display = 'flex';
 }
-
 function closePop() {
-    popup.style.display = 'none';
+    document.getElementById('popup').style.display = 'none';
+}
+function openPopSearch() {
+    document.getElementById('popSearch').style.display = 'flex';
+}
+function closePopSearch() {
+    document.getElementById('popSearch').style.display = 'none';
 }
 
 
@@ -24,10 +27,33 @@ function checkBox() {
          const year = today.getFullYear();
          const month = String(today.getMonth() + 1).padStart(2, '0');
          const day = String(today.getDate()).padStart(2, '0');
-         const dateString = `${year}-${month}-${day}`;
          currentDate.textContent = year+'-'+month+'-'+day;
+         checkbox.disabled = true;
      } else {
          currentDate.textContent = '연도- 월- 일';
      }
 }
 
+/* function : onfocus시 자동으로 010을 채워준다*/
+function fill010() {
+    const telInput = document.getElementById('carSubmitTel');
+    telInput.value = "010";
+}
+
+
+/* function: -,+로 날자 조정 */
+const dateInput = document.getElementById('date');
+
+function prevday(){
+    const currentDate = new Date(dateInput.value);
+    currentDate.setDate(currentDate.getDate() - 1);
+    const formattedDate = currentDate.toISOString().split('T')[0];
+    dateInput.value = formattedDate;
+}
+
+function nextday(){
+    const currentDate = new Date(dateInput.value);
+    currentDate.setDate(currentDate.getDate() + 1);
+    const formattedDate = currentDate.toISOString().split('T')[0];
+    dateInput.value = formattedDate;
+}

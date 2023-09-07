@@ -3,12 +3,15 @@ $(document).ready(function () {
         dateFormat: 'yy-mm-dd' // 날짜 표시형식 설정
         ,showOtherMonths: true
         ,showMonthAfterYear: true
+        ,changeYear: true
+        ,changeMonth: true
         ,yearSuffix: '년'
         ,monthNamesShort: MONTH_FORMAT
         ,monthNames: MONTH_NAME_FORMAT
         ,dayNamesMin: DAY_FORMAT
         ,dayNames: DAY_FORMAT
         ,setDate: 'today'
+        ,yearRange: '-5:+1'
     })
 })
 

@@ -69,17 +69,22 @@
                     <ul class="mtable__ul">
                         <li style="display: flex;">
                             <label class="t10">운행일</label>
-                            <span class="content">
-                                <input style="margin-left: 75px;" type="text" class="datepicker wp100" id="date" name="date"
-                                       value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="off">
-                            </span>
+                            <div class="datediv">
+                                <button type="button" id="prev-day" class="btn plusminus" onclick="prevday()">-</button>
+                                <span class="content">
+                                    <input  type="text" class="datepicker wp100" id="date" name="date"
+                                           value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="off">
+                                </span>
+                                <button type="button" id="next-day" class="btn plusminus" onclick="nextday()">+</button>
+                            </div>
+
                         </li>
 
                         <li>
                             <label class="t10">제출처</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input type="text" class="wp100 voice" name="carSubmit" id="carSubmit" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}">
+                                <input  type="text" class="wp100 voice" name="carSubmit" id="carSubmit" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}">
                             </span>
                         </li>
 
@@ -87,7 +92,7 @@
                             <label class="t10">담당자</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input type="text" class="wp100 voice" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}"
+                                <input  type="text" class="wp100 voice" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}"
                                        placeholder="담당자" autocomplete="off">
                             </span>
                         </li>
@@ -96,9 +101,9 @@
                             <label class="t10">휴대폰</label>
                             <div class="empty"></div>
                             <span class="content">
-                                <div style="width: 55px; margin-left: 10px;">010 <span style="font-size: 13px;">—</span> </div>
-                                <input type="tel" class="wp100" name="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
-                                       list="insiteDataList" placeholder="제출처 담당자 휴대폰 번호" autocomplete="off" pattern="-[0-9]{4}-[0-9]{4}" maxlength="9"
+                                <input  type="tel" class="wp100" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
+                                       list="insiteDataList" placeholder="-없이 숫자8자리를 입력해주세요" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
+                                       style="margin-left: 56px;" onfocus="fill010()"}
                                 >
                                 <datalist id="insiteDataList">
                                         <option value=""></option>
@@ -107,8 +112,8 @@
                         </li>
 
                         <li style="align-items: center; height: 28px;">
-                            <label for="checkbox">결재</label>
-                            <input type="checkbox" id="checkbox" name="chk1" style="margin-left: 50px;"
+                            <label for="checkbox">결재요청</label>
+                            <input type="checkbox" id="checkbox" name="chk1" style="margin-left: 70px;"
                             value="0">
                             <div id="dateDisplay" style="margin-left: 10px; width: 150px;">결재일 : <span id="currentDate" ></span></div>
                             <button class="btn addBtn" type="button" style="margin: 0 0 0 auto;  width: 120px;">
@@ -221,18 +226,6 @@
     </div>
     </div>
 </section>
-
-<script>
-    function openPopSearch() {
-            document.getElementById('popSearch').style.display = 'flex';
-        }
-
-    function closePopSearch() {
-        document.getElementById('popSearch').style.display = 'none';
-    }
-
-</script>
-
 
 
 
