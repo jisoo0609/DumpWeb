@@ -66,18 +66,18 @@
               </p>
          </li>
          <li>
-               <p>
-                   <a class="left_menu" href="/dailyReport/receipts">
-                       <span style="font-weight: bold; color: blue;">⑦</span> 제출처 전표 조회
-                   </a>
-               </p>
-         </li>
-         <li>
                 <p>
                     <a class="left_menu" href="/dailyReport/oldform">
-                        <span style="font-weight: bold; color: blue;">⑧</span> 제출처 주문 등록
+                        <span style="font-weight: bold; color: blue;">⑦</span> 제출처 주문 등록
                     </a>
                 </p>
+         </li>
+         <li>
+               <p>
+                   <a class="left_menu" href="/dailyReport/receipts">
+                       <span style="font-weight: bold; color: blue;">⑧</span> 제출처 전표 조회
+                   </a>
+               </p>
          </li>
 
     </ul>
