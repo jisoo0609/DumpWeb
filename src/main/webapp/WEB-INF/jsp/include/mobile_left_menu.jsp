@@ -5,7 +5,7 @@
     <!--로그인후//dis-n 클래스 로그인에 따라 추가-->
     <div class="mobile-navi-top">
         <span>
-            ${sessionScope.loginInfo.userId} 님
+            ${sessionScope.loginInfo.userId}
         </span>
         <span class="bar"></span>
         <span class="app-dis-n">
