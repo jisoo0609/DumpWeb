@@ -1,8 +1,8 @@
 package com.dispatch.dump.dailyReportModule.controller;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReport;
-import com.dispatch.dump.commonModule.db.dto.DailyReportMain;
-import com.dispatch.dump.commonModule.db.dto.DailyReportSub;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep3Main;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep3Sub;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step3Service;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +27,8 @@ public class Step3Controller {
 
     @RequestMapping(value = "/workspace/ajax/save", method = RequestMethod.POST)
     @ResponseBody
-    public String save(DailyReportMain dailyReportMain, DailyReportSub dailyReportSub) {
-        return step3Service.save(dailyReportMain, dailyReportSub);
+    public String save(DailyReportStep3Main dailyReportStep3Main, DailyReportStep3Sub dailyReportStep3Sub) {
+        return step3Service.save(dailyReportStep3Main, dailyReportStep3Sub);
     }
 
 }
