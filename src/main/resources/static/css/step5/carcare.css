@@ -1,10 +1,18 @@
 
+.ui-datepicker-trigger{
+    vertical-align: middle; width: 20px;
+}
+.ui-datepicker-trigger{
+    display: none;
+}
+/* ! galaxy fold size */
 @media screen and (max-width: 280px){
     .DrvSection{
         max-width: 700px; width: 96%; margin: 0 auto; padding: 0 2%;
     }
     .DrvSection h2{
         font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #999; padding-bottom: 20px;
+        margin-top: 20px;
     }
     .DrvSection form{
         margin-bottom: 15px;
@@ -32,18 +40,20 @@
         list-style: none; border-top: 2px solid #0068b7; padding-top: 20px;
     }
     .DrvSection form fieldset ul li{
-        margin-bottom: 4px; font-size: 13px; display: flex; align-items: center;
-        position: relative; font-weight: bold;
+        margin-bottom: 4px; font-size: 13px; position: relative; font-weight: bold;
+        vertical-align: middle;
     }
     .DrvSection form fieldset ul li .drvInputSpan{
-        padding-left: 100px; line-height: 1.4; font-size: 12px; width: 35%;
-        
+        padding-left: 90px; line-height: 1.4; font-size: 12px; width: 35%;
+
     }
     .DrvSection form fieldset ul li .drvLabel{
         position: absolute;
     }
-    .DrvSection form fieldset ul li input[type=date]{
-        width: 75%; height: 25px; font-size: 18px;
+    .DrvSection form fieldset ul li input#datepicker,
+    .DrvSection form fieldset ul li input#datepicker1,
+    .DrvSection form fieldset ul li input#datepicker2{
+        width: 90px; height: 25px; font-size: 16px;
     }
     .drvVoiceImg{
         width: 20px; vertical-align: middle; border-radius: 25px;
@@ -52,29 +62,27 @@
         cursor: pointer;
     }
     .DrvSection form fieldset ul li:first-of-type label:last-of-type{
-        width: 11%;
+        width: 10%;
     }
     .DrvSection form fieldset ul li input[type=text],
     .DrvSection form fieldset ul li input[type=number]{
-        width: 144%; height: 25px; font-size: 16px;
+        width: 150px; height: 25px; font-size: 12px;
     }
     .DrvSection form fieldset ul li .drvInputSpan2{
         padding-left: 35px;
     }
     .DrvSection form fieldset ul li textarea{
-        width: 144%; font-size: 16px;
+        width: 58%; font-size: 12px;
     }
     .DrvSection > div:first-of-type{
         text-align: center; margin-bottom: 30px;
     }
     .DrvSection > div:first-of-type button{
-        font-size: 14px; border: 1px solid #000; cursor: pointer;
+        font-size: 12px; border: 1px solid #000; cursor: pointer;
+        height: 30px;
     }
     .DrvSection > div:first-of-type button:nth-child(3){
         width: 28%;
-    }
-    .DrvSection > div:first-of-type button:not(:first-child){
-        margin-left: 2px;
     }
     .DrvSection > div:first-of-type button:nth-child(2){
         background-color: #0068b7; color: #fff;
@@ -83,7 +91,7 @@
         background-color: #fff;
     }
     .DrvSection > div:first-of-type button:last-child{
-        width: 34%;
+        width: 36%; word-break: break-all;
     }
 
     .DrvSection  [class ^='drvPopup']{
@@ -119,34 +127,41 @@
         border-top: 2px solid #0068b7; box-sizing: border-box;
     }
     .DrvSection table thead{
-        background-color: #f2f2f2; 
+        background-color: #f2f2f2;
     }
     .DrvSection table thead tr th{
-        font-size: 14px; padding: 20px 0; text-align: center;
+        font-size: 12px; padding: 20px 0; text-align: center;
     }
     .DrvSection table tbody tr{
         border-bottom: 1px solid #ddd;
     }
     .DrvSection table thead tr th,
-    .DrvSection table tbody tr td{
+    .DrvSection table tbody tr td:not(:nth-child(4)){
         border-left: 1px solid #ddd;
+    }
+    .DrvSection table thead tr .Drvth2{
+        width: 20%;
     }
     .DrvSection table thead tr th:last-child,
     .DrvSection table tbody tr td:last-child{
         border-right: 1px solid #ddd; width: 10%;
     }
     .DrvSection table tbody tr td{
-        font-size: 11px; padding: 20px 0; text-align: center;
+        font-size: 11px; text-align: center;
     }
-    .DrvSection table tbody tr td:nth-child(2){
+    .DrvSection table tbody tr td:not(:nth-child(4)){
+        padding: 20px 0;
+    }
+    .DrvSection table tbody tr td:first-child{
         width: 12%;
     }
-    .DrvSection table tbody tr td:nth-child(3),
-    .DrvSection table tbody tr td:nth-child(4){
-        width: 15%;
+    .DrvSection table tbody tr .Drvtd2{
+        width: 20%; border-right: 1px solid #ddd;
     }
-    .DrvSection table tbody tr td:nth-child(5){
-        width: 38%;
+    .DrvSection table tbody tr td:nth-child(4){
+        max-width: 80.6px; white-space: normal; display: -webkit-box;
+        -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        margin: 20px auto;
     }
 }
 
@@ -158,6 +173,7 @@
     }
     .DrvSection h2{
         font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #999; padding-bottom: 20px;
+        margin-top: 20px;
     }
     .DrvSection form{
         margin-bottom: 15px;
@@ -187,24 +203,26 @@
         position: relative; font-weight: bold;
     }
     .DrvSection form fieldset ul li .drvInputSpan{
-        padding-left: 120px; line-height: 1.4; font-size: 12px; width: 70%;
-        
+        padding-left: 120px; line-height: 1.4; font-size: 12px; width: 100%;
+
     }
     .DrvSection form fieldset ul li .drvLabel{
         position: absolute;
     }
-    .DrvSection form fieldset ul li input[type=date]{
-        width: 75%; height: 25px; font-size: 18px;
+    .DrvSection form fieldset ul li input#datepicker,
+    .DrvSection form fieldset ul li input#datepicker1,
+    .DrvSection form fieldset ul li input#datepicker2{
+        width: 130px; height: 25px; font-size: 14px;
     }
     .drvVoiceImg{
         width: 18%;
     }
     .DrvSection form fieldset ul li:first-of-type label:last-of-type{
-        width: 12%;
+        width: 10%;
     }
     .DrvSection form fieldset ul li input[type=text],
     .DrvSection form fieldset ul li input[type=number]{
-        width: 96%; height: 25px; font-size: 18px;
+        width: 96%; height: 25px; font-size: 12px;
     }
     .DrvSection form fieldset ul li .drvVoiceImg{
         border-radius: 25px; width: 12%; vertical-align: middle;
@@ -216,14 +234,15 @@
         padding-left: 55px;
     }
     .DrvSection form fieldset ul li textarea{
-        width: 96%; font-size: 18px;
+        width: 96%; font-size: 12px;
     }
     .DrvSection > div:first-of-type{
         text-align: center; margin-bottom: 30px;
     }
     .DrvSection > div:first-of-type button{
         font-size: 13px; width: 20%; border: 1px solid #000; cursor: pointer;
-    } 
+        height: 30px;
+    }
     .DrvSection > div:first-of-type button:not(:first-child){
         margin-left: 3px;
     }
@@ -263,14 +282,12 @@
     .DrvSection  [class ^='drvPopup'] input:hover{
         background-color: #0068b7; color: #fff;
     }
-
-
     .DrvSection table{
         max-width: 1200px; width: 100%; margin: 0 auto 40px;
         border-top: 2px solid #0068b7; box-sizing: border-box;
     }
     .DrvSection table thead{
-        background-color: #f2f2f2; 
+        background-color: #f2f2f2;
     }
     .DrvSection table thead tr th{
         font-size: 14px; padding: 20px 0; text-align: center;
@@ -279,25 +296,32 @@
         border-bottom: 1px solid #ddd;
     }
     .DrvSection table thead tr th,
-    .DrvSection table tbody tr td{
+    .DrvSection table tbody tr td:not(:nth-child(4)){
         border-left: 1px solid #ddd;
+    }
+    .DrvSection table thead tr .Drvth2{
+        width: 20%;
     }
     .DrvSection table thead tr th:last-child,
     .DrvSection table tbody tr td:last-child{
-        border-right: 1px solid #ddd;
+        border-right: 1px solid #ddd; width: 10%;
     }
     .DrvSection table tbody tr td{
-        font-size: 16px; padding: 20px 0; text-align: center;
+        font-size: 11px; text-align: center;
     }
-    .DrvSection table tbody tr td:nth-child(2){
+    .DrvSection table tbody tr td:not(:nth-child(4)){
+        padding: 20px 0;
+    }
+    .DrvSection table tbody tr td:first-child{
         width: 12%;
     }
-    .DrvSection table tbody tr td:nth-child(3),
-    .DrvSection table tbody tr td:nth-child(4){
-        width: 15%;
+    .DrvSection table tbody tr .Drvtd2{
+        width: 20%; border-right: 1px solid #ddd;
     }
-    .DrvSection table tbody tr td:nth-child(5){
-        width: 38%;
+    .DrvSection table tbody tr td:nth-child(4){
+        max-width: 167px; white-space: normal; display: -webkit-box;
+        -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        margin: 20px auto;
     }
 }
 
@@ -307,10 +331,11 @@
         max-width: 1200px; width: 90%; margin: 0 auto; padding: 0 5%;
     }
     .DrvSection h2{
-        font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #999; padding-bottom: 20px;
+        font-size: 24px; margin-bottom: 20px; border-bottom: 1px solid #999; padding-bottom: 20px;
+        margin-top: 20px;
     }
     .DrvSection form{
-        margin-bottom: 60px;
+        margin-bottom: 30px;
     }
     .DrvSection form fieldset > input{
         display: none; width: 0; height: 0; padding: 0; margin: 0;
@@ -341,13 +366,15 @@
         display: flex; align-items: center;
     }
     .DrvSection form fieldset ul li .drvLabel{
-        position: absolute;
+        position: absolute; font-weight: bold;
     }
-    .DrvSection form fieldset ul li input[type=date]{
-        width: 95%; height: 35px; font-size: 18px;
+    .DrvSection form fieldset ul li input#datepicker,
+    .DrvSection form fieldset ul li input#datepicker1,
+    .DrvSection form fieldset ul li input#datepicker2{
+        width: 50%; height: 25px; font-size: 16px;
     }
     .DrvSection form fieldset ul li:first-of-type label:last-of-type{
-        width: 6%;
+        width: 6%; font-weight: bold;
     }
     .DrvSection form fieldset ul li input[type=text],
     .DrvSection form fieldset ul li input[type=number]{
@@ -360,17 +387,17 @@
         cursor: pointer;
     }
     .DrvSection form fieldset ul li textarea{
-        width: 100%; font-size: 18px;
+        width: 100%; font-size: 16px;
     }
     .DrvSection > div:first-of-type{
         text-align: center; margin-bottom: 50px;
     }
     .DrvSection > div:first-of-type button{
-        font-size: 18px; width: 20%; border: 1px solid #000; line-height: 50px;
+        font-size: 16px; width: 120px; border: 1px solid #000; height: 45px;
         cursor: pointer;
-    } 
+    }
     .DrvSection > div:first-of-type button:not(:first-child){
-        margin-left: 40px;
+        margin-left: 5px;
     }
     .DrvSection > div:first-of-type button:nth-child(2){
         background-color: #0068b7; color: #fff;
@@ -412,27 +439,41 @@
         border-top: 2px solid #0068b7; box-sizing: border-box;
     }
     .DrvSection table thead{
-        background-color: #f2f2f2; 
+        background-color: #f2f2f2;
     }
     .DrvSection table thead tr th{
-        font-size: 16px; padding: 20px 0; text-align: center;
+        font-size: 14px; padding: 20px 0; text-align: center;
     }
     .DrvSection table tbody tr{
         border-bottom: 1px solid #ddd;
     }
     .DrvSection table thead tr th,
-    .DrvSection table tbody tr td{
-        border-left: 1px solid #ddd;
-    }
-    .DrvSection table thead tr th:last-child,
-    .DrvSection table tbody tr td:last-child{
-        border-right: 1px solid #ddd;
-    }
-    .DrvSection table tbody tr td{
-        font-size: 16px; padding: 20px 0; text-align: center;
-    }
-    .DrvSection table tbody tr td:nth-child(5){
-        width: 60%;
+        .DrvSection table tbody tr td:not(:nth-child(4)){
+            border-left: 1px solid #ddd;
+        }
+        .DrvSection table thead tr .Drvth2{
+            width: 20%;
+        }
+        .DrvSection table thead tr th:last-child,
+        .DrvSection table tbody tr td:last-child{
+            border-right: 1px solid #ddd; width: 10%;
+        }
+        .DrvSection table tbody tr td{
+            font-size: 11px; text-align: center;
+        }
+        .DrvSection table tbody tr td:not(:nth-child(4)){
+            padding: 20px 0;
+        }
+        .DrvSection table tbody tr td:first-child{
+            width: 12%;
+        }
+        .DrvSection table tbody tr .Drvtd2{
+            width: 20%; border-right: 1px solid #ddd;
+        }
+    .DrvSection table tbody tr td:nth-child(4){
+        max-width: 370px; white-space: normal; display: -webkit-box;
+        -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        margin: 20px auto;
     }
 }
 
@@ -442,10 +483,11 @@
         max-width: 1200px; width: 100%; margin: 0 auto;
     }
     .DrvSection h2{
-        font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #999; padding-bottom: 20px;
+        font-size: 24px; margin-bottom: 20px; border-bottom: 1px solid #999; padding-bottom: 20px;
+        margin-top: 20px;
     }
     .DrvSection form{
-        margin-bottom: 60px;
+        margin-bottom: 30px;
     }
     .DrvSection form fieldset > input{
         display: none; width: 0; height: 0; padding: 0; margin: 0;
@@ -464,7 +506,7 @@
     .DrvSection form fieldset > label:not(:first-of-type){
         margin-left: 30px;
     }
-    
+
     .DrvSection form fieldset ul{
         list-style: none; border-top: 2px solid #0068b7; padding-top: 20px;
     }
@@ -477,13 +519,15 @@
         display: flex; align-items: center;
     }
     .DrvSection form fieldset ul li .drvLabel{
-        position: absolute;
+        position: absolute; font-weight: bold;
     }
-    .DrvSection form fieldset ul li input[type=date]{
-        width: 50%; height: 35px; font-size: 18px;
+    .DrvSection form fieldset ul li input#datepicker,
+    .DrvSection form fieldset ul li input#datepicker1,
+    .DrvSection form fieldset ul li input#datepicker2{
+        width: 30%; height: 25px; font-size: 16px;
     }
     .DrvSection form fieldset ul li:first-of-type label:last-of-type{
-        width: 8%;
+        width: 3%; font-weight: bold;
     }
     .DrvSection form fieldset ul li input[type=text],
     .DrvSection form fieldset ul li input[type=number]{
@@ -502,11 +546,11 @@
         text-align: center; margin-bottom: 50px;
     }
     .DrvSection > div:first-of-type button{
-        font-size: 25px; width: 15%; border: 1px solid #000; line-height: 60px;
+        font-size: 16px; width: 120px; border: 1px solid #000; height: 45px;
         cursor: pointer;
-    } 
+    }
     .DrvSection > div:first-of-type button:not(:first-child){
-        margin-left: 50px;
+        margin-left: 5px;
     }
     .DrvSection > div:first-of-type button:nth-child(2){
         background-color: #0068b7; color: #fff;
@@ -542,33 +586,48 @@
     .DrvSection  [class ^='drvPopup'] input:hover{
         background-color: #0068b7; color: #fff;
     }
-
-
     .DrvSection table{
         max-width: 1200px; width: 100%; margin: 0 auto 60px;
         border-top: 2px solid #0068b7; box-sizing: border-box;
     }
     .DrvSection table thead{
-        background-color: #f2f2f2; 
+        background-color: #f2f2f2;
     }
     .DrvSection table thead tr th{
-        font-size: 16px; padding: 20px 0; text-align: center;
+        font-size: 14px; padding: 20px 0; text-align: center;
     }
     .DrvSection table tbody tr{
         border-bottom: 1px solid #ddd;
     }
     .DrvSection table thead tr th,
-    .DrvSection table tbody tr td{
+    .DrvSection table tbody tr td:not(:nth-child(4)){
         border-left: 1px solid #ddd;
+    }
+    .DrvSection table thead tr .Drvth2{
+        width: 20%;
     }
     .DrvSection table thead tr th:last-child,
     .DrvSection table tbody tr td:last-child{
-        border-right: 1px solid #ddd;
+         border-right: 1px solid #ddd; width: 10%;
     }
     .DrvSection table tbody tr td{
-        font-size: 16px; padding: 20px 0; text-align: center;
+        font-size: 11px; text-align: center;
     }
-    .DrvSection table tbody tr td:nth-child(5){
-        width: 60%;
+    .DrvSection table tbody tr td:not(:nth-child(4)){
+        padding: 20px 0;
+    }
+    .DrvSection table tbody tr td:first-child{
+        width: 12%;
+    }
+    .DrvSection table tbody tr .Drvtd2{
+        width: 20%; border-right: 1px solid #ddd;
+    }
+    .DrvSection table tbody tr td:nth-child(4){
+        max-width: 370px; white-space: normal; display: -webkit-box;
+        -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        margin: 20px auto;
     }
 }
+
+
+
