@@ -5,12 +5,31 @@ $.save = function() {
         data: $("[name=frm]").serialize(),
         success: function (data) {
             var json = $.parseJSON(data);
+            console.log("test-JJYY");
             console.log(json)
             if(json.httpCode == 200) {
                 alert("저장이 완료되었습니다.");
-                //location.href="/dailyReport/list";
+                $.list();
             } else {
                 alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
+            }
+        }
+    })
+}
+
+$.list = function() {
+    $.ajax({
+        url: "/dailyReport/workspace/ajax/list",
+        type: "POST",
+        data: $("[name=frm]").serialize(),
+        success: function (data) {
+            var json = $.parseJSON(data);
+            console.log("test-JJYY");
+            console.log(json)
+            if(json.httpCode == 200) {
+                alert("조회에 성공했습니다.");
+            } else {
+                alert("조회를 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
             }
         }
     })

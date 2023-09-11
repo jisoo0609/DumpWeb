@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.Map;
 
@@ -50,5 +51,49 @@ public class Step3Service {
             log.error("Exception["+ e.getMessage() +"]");
         }
         return commonUtil.jsonFormatTransfer(rtnMap); }
+
+    public String save(DailyReportStep3Main dailyReportStep3Main) {
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+        HttpSession session = commonUtil.getSession();
+
+        try {
+            Login loginData = (Login) session.getAttribute("loginInfo");
+            dailyReportStep3Main.setCarNo(loginData.getUserId());
+            if (dailyReportStep3Main.getSheetID() == 0) {
+                //제출처 정보가 조회된 게 있다면
+
+                //제출처 정보가 조회된 게 없다면
+                //dailyReportMain
+                dailyReportStep3MainMapper.insertDailyReportMain(dailyReportStep3Main);
+
+            } else  {
+                //dailyReportMainMapper.updateDailyReport(dailyReportMain);
+            }
+            rtnMap.put("httpCode", 200);
+        } catch (Exception e) {
+            log.error("Exception["+ e.getMessage() +"]");
+        }
+        return commonUtil.jsonFormatTransfer(rtnMap);
+    }
+
+    public String list(Model model, DailyReportStep3Main dailyReportStep3Main) {
+        HttpSession session = commonUtil.getSession();
+
+        try {
+            Login loginData = (Login) session.getAttribute("loginInfo");
+            dailyReportStep3Main.setCarNo(loginData.getUserId());
+
+            log.info("CarNo는?"+dailyReportStep3Main.getCarNo());
+            log.info("SheetID?"+dailyReportStep3Main.getSheetID());
+
+            DailyReportStep3Main list = dailyReportStep3MainMapper.findDailyReportMainList(dailyReportStep3Main);
+            System.out.println(list);
+
+            model.addAttribute("list", list);
+        } catch (Exception e) {
+            log.error("Exception["+ e.getMessage() +"]");
+        }
+        return "/dailyReport/workspace/list";
+    }
 
 }

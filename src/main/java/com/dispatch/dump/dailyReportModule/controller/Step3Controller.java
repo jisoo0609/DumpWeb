@@ -27,8 +27,23 @@ public class Step3Controller {
 
     @RequestMapping(value = "/workspace/ajax/save", method = RequestMethod.POST)
     @ResponseBody
-    public String save(DailyReportStep3Main dailyReportStep3Main, DailyReportStep3Sub dailyReportStep3Sub) {
-        return step3Service.save(dailyReportStep3Main, dailyReportStep3Sub);
+    public String save(DailyReportStep3Main dailyReportMain, DailyReportStep3Sub dailyReportStep3Sub) {
+        return step3Service.save(dailyReportMain, dailyReportStep3Sub);
     }
+
+    /*제출처만 저장*/
+    @RequestMapping(value = "/workspace/ajax/saveMain", method = RequestMethod.POST)
+    @ResponseBody
+    public String save(DailyReportStep3Main dailyReportMain) {
+        return step3Service.save(dailyReportMain);
+    }
+
+    /*insert 후 목록 조회*/
+    @RequestMapping(value = "/workspace/ajax/list", method = RequestMethod.POST)
+    @ResponseBody
+    public String list(Model model, DailyReportStep3Main dailyReportStep3Main) {
+        return step3Service.list(model, dailyReportStep3Main);
+    }
+
 
 }
