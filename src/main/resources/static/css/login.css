@@ -176,6 +176,12 @@ input::placeholder {
   position: relative;
   padding-top: 30px;
 }
+
+.b-loginM__tit.add__none{
+  position: relative;
+  padding-top: 30px;
+}
+
 .b-loginM__tit.add::before{
   position: absolute;
   content: "/";
