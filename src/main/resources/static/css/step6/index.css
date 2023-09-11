@@ -118,7 +118,7 @@ span {
   gap: 20px;
 }
 
-.inquiry_form label{
+.inquiry_form label {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -197,7 +197,7 @@ span {
 /* 검색 버튼 스타일 */
 .search_btn {
   line-height: 38px;
-background-image: url(/resources/image/step6/ico_search-b.png);
+  background-image: url(/resources/image/step6/ico_search-b.png);
   background-position: 25px 9px;
   background-repeat: no-repeat;
   background-size: 23px;
@@ -234,7 +234,7 @@ background-image: url(/resources/image/step6/ico_search-b.png);
   white-space: nowrap;
 }
 
-.th_title th{
+.th_title th {
   font-weight: var(--weight-bold);
   font-size: 14px;
 }
