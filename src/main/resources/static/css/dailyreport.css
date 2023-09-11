@@ -167,13 +167,16 @@ textarea::placeholder {
 }
 
 .plusminus {
-    border: 1px solid pink;
-    border-radius: 50%;
     width: 20px;
     height: 20px;
     border: 1px solid #0068b778;
     color: #0068b7;
     background: #fff;
+    margin-top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
 .datediv {
