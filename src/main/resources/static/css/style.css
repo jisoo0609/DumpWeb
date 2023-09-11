@@ -1795,9 +1795,9 @@ input[type="text"].readonly {
 
 .mobile-navi-top {
   background: #002c5a;
-  padding: 25px 20px;
+  padding: 25px 10px;
   position: relative;
-  font-size: 17px;
+  font-size: 15px;
   color: #fff;
   font-weight: 600; }
 .mobile-navi-top .close-btn {
