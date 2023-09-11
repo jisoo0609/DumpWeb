@@ -125,7 +125,7 @@
   <div class="table_container">
     <table>
       <thead>
-      <tr>
+        <tr class="th_title">
         <th>No</th>
         <th>차량번호</th>
         <th>품목</th>

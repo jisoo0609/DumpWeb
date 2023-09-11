@@ -27,8 +27,8 @@ span {
 /* 전역 변수 및 상수 설정 */
 :root {
   /* 폰트 크기 */
-  --font-large: 24px;
-  --font-medium: 15px;
+  --font-large: 18px;
+  --font-medium: 13px;
   --font-small: 14px;
   --font-X_small: 13px;
 
@@ -109,12 +109,19 @@ span {
 /* 조회 양식 스타일 */
 .inquiry_form {
   margin: 30px 0 10px;
+  font-size: var(--font-medium);
   border: 1px solid #ddd;
-  padding: 25px;
+  padding: 15px;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.inquiry_form label{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 운행 기간, 주유, 요소수, 정비 스타일 */
@@ -173,6 +180,7 @@ span {
   color: var(--color-black);
 }
 .conbox {
+  font-size: var(--font-medium);
   width: 80%;
   padding: 5px 10px;
   border: 1px solid var(--color-border-gray);
@@ -189,7 +197,7 @@ span {
 /* 검색 버튼 스타일 */
 .search_btn {
   line-height: 38px;
-  background-image: url(/resources/image/step6/ico_search-b.png);
+background-image: url(/resources/image/step6/ico_search-b.png);
   background-position: 25px 9px;
   background-repeat: no-repeat;
   background-size: 23px;
@@ -226,14 +234,16 @@ span {
   white-space: nowrap;
 }
 
-th {
+.th_title th{
   font-weight: var(--weight-bold);
+  font-size: 14px;
 }
 
 th,
 td {
   border: 1px solid var(--color-border-gray);
   padding: 10px 10px;
+  font-size: 12px;
 }
 
 /* 모바일 스타일 */
@@ -276,14 +286,6 @@ td {
     display: flex;
     flex-wrap: wrap;
   }
-  /* 전역 변수 및 상수 설정 */
-  :root {
-    /* 폰트 크기 */
-    --font-large: 20px;
-    --font-medium: 11px;
-    --font-small: 10px;
-    --font-X_small: 9px;
-  }
 }
 
 /* 모바일 스타일 */
@@ -295,7 +297,7 @@ td {
     gap: 10px;
     display: flex;
   }
-  .col span{
+  .col span {
     display: none;
   }
   .col input {
@@ -306,15 +308,6 @@ td {
   }
   .table_container {
     white-space: normal;
-  }
-
-  /* 전역 변수 및 상수 설정 */
-  :root {
-    /* 폰트 크기 */
-    --font-large: 21px;
-    --font-medium: 12px;
-    --font-small: 11px;
-    --font-X_small: 10px;
   }
 }
 
@@ -332,14 +325,6 @@ td {
   .col:first-child::after {
     content: "";
   }
-  /* 전역 변수 및 상수 설정 */
-  :root {
-    /* 폰트 크기 */
-    --font-large: 22px;
-    --font-medium: 13px;
-    --font-small: 12px;
-    --font-X_small: 11px;
-  }
 }
 
 /* 데스크탑 스타일 */
@@ -349,14 +334,5 @@ td {
   }
   .col input {
     padding: 5px 5px;
-  }
-
-  /* 전역 변수 및 상수 설정 */
-  :root {
-    /* 폰트 크기 */
-    --font-large: 23px;
-    --font-medium: 14px;
-    --font-small: 13px;
-    --font-X_small: 12px;
   }
 }
