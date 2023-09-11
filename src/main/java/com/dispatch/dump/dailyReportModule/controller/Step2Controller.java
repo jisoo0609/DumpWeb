@@ -1,7 +1,7 @@
 package com.dispatch.dump.dailyReportModule.controller;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReport;
-import com.dispatch.dump.commonModule.db.dao.DailyReportStep2Sub;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep2Sub;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step2Service;
 import lombok.RequiredArgsConstructor;
