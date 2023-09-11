@@ -12,15 +12,16 @@ span {
 }
 
 .common_btn {
-  cursor: pointer;
   text-align: center;
   border: 1px solid #0068b7;
+  cursor: pointer;
   background: #fff;
   font-size: 16px;
   color: #0064c1;
   font-weight: 600;
   width: 120px;
-  height: 40px;
+  height: 45px;
+  line-height: 43px;
 }
 
 /* 전역 변수 및 상수 설정 */
@@ -188,7 +189,7 @@ span {
 /* 검색 버튼 스타일 */
 .search_btn {
   line-height: 38px;
-  background-image: url(/images/ico_search-b.png);
+  background-image: url(/resources/image/step6/ico_search-b.png);
   background-position: 25px 9px;
   background-repeat: no-repeat;
   background-size: 23px;

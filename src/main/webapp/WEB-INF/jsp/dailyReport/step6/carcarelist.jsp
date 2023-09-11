@@ -145,8 +145,8 @@
       //  const today = new Date().toISOString().split('T')[0];
       //  documnt.getElementById('오늘날').value = today;
 
+
       document.addEventListener("DOMContentLoaded", function () {
-        const updateButton = document.getElementById("update-button");
         const startDateInput = document.getElementById("start-date");
         const endDateInput = document.getElementById("end-date");
 
@@ -164,13 +164,6 @@
         const formattedToday = today.toISOString().split("T")[0];
         endDateInput.value = formattedToday;
 
-        updateButton.addEventListener("click", function () {
-          const startDate = startDateInput.value;
-          const endDate = endDateInput.value;
-
-          console.log("시작 날짜:", startDate);
-          console.log("종료 날짜:", endDate);
-        });
       });
     </script>
 <script src="/resources/js/dailyReport/step6/index.js"></script>
