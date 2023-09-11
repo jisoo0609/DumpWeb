@@ -1,7 +1,7 @@
 package com.dispatch.dump.commonModule.db.mapper;
 
-import com.dispatch.dump.commonModule.db.dao.DailyReportStep2Main;
-import com.dispatch.dump.commonModule.db.dao.DailyReportStep2Sub;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep2Main;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep2Sub;
 
 
 import java.util.List;
