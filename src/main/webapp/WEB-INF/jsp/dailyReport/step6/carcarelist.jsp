@@ -118,14 +118,14 @@
     <h1></h1>
   </div>
   <div class="agreement_container">
-    <button class="common_btn">일괄결재</button>
-    <button class="common_btn">일괄취소</button>
-  </div>
+          <button class="common_btn" style="background: #333; color: white; border: none;" >일괄결재</button>
+          <button class="common_btn" style="background: #333; color: white; border: none;">취소</button>
+        </div>
   <div class="line"></div>
   <div class="table_container">
     <table>
       <thead>
-      <tr>
+        <tr class="th_title">
         <th>No</th>
         <th>차량번호</th>
         <th>품목</th>
