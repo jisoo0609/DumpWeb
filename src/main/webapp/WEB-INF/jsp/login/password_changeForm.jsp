@@ -78,10 +78,9 @@
 		<div class="b-loginM-wrap">
 
 			<h1 class="b-loginM__tit add__none">암호 재설정</h1>
-
+			<div class="line"></div>
 			<form name="pwfrm" onsubmit="return false;">
-				<div class="b-loginM__form">
-					<div class="line"></div>
+				<div class="b-loginM__form" style="padding: 35px 0;">
 					<div class="b-loginM__input">
 						<input type="hidden" name="uuserID" value="${sessionScope.loginInfo.uuserID}">
 					</div>
