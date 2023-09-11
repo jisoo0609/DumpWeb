@@ -1,8 +1,8 @@
 package com.dispatch.dump.dailyReportModule.service;
 
 import com.dispatch.dump.commonModule.db.dto.Summary;
-import com.dispatch.dump.commonModule.db.dao.DailyReportStep2Main;
-import com.dispatch.dump.commonModule.db.dao.DailyReportStep2Sub;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep2Main;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep2Sub;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep2Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
