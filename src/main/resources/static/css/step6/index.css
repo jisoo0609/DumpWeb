@@ -3,23 +3,25 @@
 
 /* 삭제 */
 /* 전역 스타일 설정 */
-/* body {
+body {
   background: #ddd;
-} */
+}
 
 span {
   color: var(--color-bg-border-blue);
 }
+
 .common_btn {
-  cursor: pointer;
   text-align: center;
   border: 1px solid #0068b7;
+  cursor: pointer;
   background: #fff;
   font-size: 16px;
   color: #0064c1;
   font-weight: 600;
   width: 120px;
-  height: 40px;
+  height: 45px;
+  line-height: 43px;
 }
 
 /* 전역 변수 및 상수 설정 */
@@ -42,10 +44,10 @@ span {
 
 /* 삭제 */
 /* 페이지 본문 스타일 */
-/* .sub_con_wrapper {
+.sub_con_wrapper {
   padding: 40px 30px 100px;
   background: #fff;
-} */
+}
 
 #maxwrap {
   overflow: hidden;
@@ -54,9 +56,9 @@ span {
 }
 
 /* 삭제 */
-/* .wp80 {
+.wp80 {
   width: 80%;
-} */
+}
 
 /* 페이지 제목 스타일 */
 .subTitle_wrapper {
@@ -157,12 +159,19 @@ span {
   left: 50%;
 }
 
-.form-row .col input {
+.col input {
   border: 1px solid var(--color-border-gray);
   padding: 5px 10px;
   cursor: pointer;
 }
 
+.col span {
+  color: var(--color-black);
+}
+
+.form-row .col input::placeholder {
+  color: var(--color-black);
+}
 .conbox {
   width: 80%;
   padding: 5px 10px;
@@ -180,7 +189,7 @@ span {
 /* 검색 버튼 스타일 */
 .search_btn {
   line-height: 38px;
-  background-image: url(/images/ico_search-b.png);
+  background-image: url(/resources/image/step6/ico_search-b.png);
   background-position: 25px 9px;
   background-repeat: no-repeat;
   background-size: 23px;
@@ -229,7 +238,6 @@ td {
 
 /* 모바일 스타일 */
 @media (max-width: 439px) {
-
   .content {
     display: block;
   }
@@ -240,16 +248,16 @@ td {
   .conbox {
     width: 100%;
   }
-  .form-row {
+  .col {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
   }
-  .form-row .col input {
+  .col input {
     padding: 5px 5px;
   }
-  .form-row .col:first-child::after {
+  .col:first-child::after {
     content: "";
   }
   .table_container {
@@ -264,7 +272,7 @@ td {
   .operating_period label {
     padding: 5px;
   }
-  #flex_important{
+  #flex_important {
     display: flex;
     flex-wrap: wrap;
   }
@@ -279,17 +287,21 @@ td {
 }
 
 /* 모바일 스타일 */
-@media (min-width: 440px) and (max-width: 550px) {
-  .form-row {
+@media (max-width: 550px) {
+  .col {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+    display: flex;
   }
-  .form-row .col input {
+  .col span{
+    display: none;
+  }
+  .col input {
     padding: 5px 5px;
   }
-  .form-row .col:first-child::after {
+  .col:first-child::after {
     content: "";
   }
   .table_container {
@@ -308,16 +320,16 @@ td {
 
 /* 태블릿 스타일 */
 @media (min-width: 551px) and (max-width: 768px) {
-  .form-row {
+  .col {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
   }
-  .form-row .col input {
+  .col input {
     padding: 5px 5px;
   }
-  .form-row .col:first-child::after {
+  .col:first-child::after {
     content: "";
   }
   /* 전역 변수 및 상수 설정 */
@@ -332,15 +344,13 @@ td {
 
 /* 데스크탑 스타일 */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .form-row {
+  .col {
     gap: 20px;
   }
-  .form-row .col input {
+  .col input {
     padding: 5px 5px;
   }
-  .form-row .col:first-child::after {
-    content: "";
-  }
+
   /* 전역 변수 및 상수 설정 */
   :root {
     /* 폰트 크기 */
