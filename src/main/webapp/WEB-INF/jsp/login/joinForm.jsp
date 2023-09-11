@@ -266,20 +266,20 @@
 				<input type="hidden" name="userPosition" value="${type}">
 				<div class="b-loginM__form driver <c:if test="${type == 'manager'}">dis-n</c:if>">
 					<div class="line"></div>
-<%--					<div class="b-loginM__input">--%>
-<%--						<input type="hidden" name="userSS">--%>
-<%--						<label>회사명</label>--%>
-<%--						<div class="b-selectCustomWrap">--%>
-<%--							<a href="javascript:void(0)">--%>
-<%--								선택해주세요--%>
-<%--							</a>--%>
-<%--							<ul class="b-selectCustom ssList">--%>
-<%--								<c:forEach var="ssInfo" items="${userSSList}">--%>
-<%--									<li select-data="${ssInfo.siteName}"><span>${ssInfo.customSiteName}</span><span>${ssInfo.siteLocation}</span></li>--%>
-<%--								</c:forEach>--%>
-<%--							</ul>--%>
-<%--						</div>--%>
-<%--					</div>--%>
+					<%--					<div class="b-loginM__input">--%>
+					<%--						<input type="hidden" name="userSS">--%>
+					<%--						<label>회사명</label>--%>
+					<%--						<div class="b-selectCustomWrap">--%>
+					<%--							<a href="javascript:void(0)">--%>
+					<%--								선택해주세요--%>
+					<%--							</a>--%>
+					<%--							<ul class="b-selectCustom ssList">--%>
+					<%--								<c:forEach var="ssInfo" items="${userSSList}">--%>
+					<%--									<li select-data="${ssInfo.siteName}"><span>${ssInfo.customSiteName}</span><span>${ssInfo.siteLocation}</span></li>--%>
+					<%--								</c:forEach>--%>
+					<%--							</ul>--%>
+					<%--						</div>--%>
+					<%--					</div>--%>
 					<div class="b-loginM__input">
 						<label>아이디</label>
 						<input type="text" placeholder="차량번호 전체" name="userId" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
@@ -362,7 +362,7 @@
 			</form>
 
 			<div class="b-question">
-<%--				<img src="/resources/image/icons/ico_que.png" alt="" style="margin-bottom: 5px; margin-right: 10px; margin-top: 4px;" class="que-dis-mn" onclick="$.openLayerHelpMsgPopUp(this, 'W01-1');">--%>
+				<%--				<img src="/resources/image/icons/ico_que.png" alt="" style="margin-bottom: 5px; margin-right: 10px; margin-top: 4px;" class="que-dis-mn" onclick="$.openLayerHelpMsgPopUp(this, 'W01-1');">--%>
 				<span class="fc-point que-dis-mn" style="margin-top: 3px; font-weight: 500;">
 				문의
 			</span>

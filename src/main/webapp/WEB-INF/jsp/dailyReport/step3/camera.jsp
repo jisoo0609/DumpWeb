@@ -28,27 +28,24 @@
         font-size: 30px;
         font-weight: bold;
         position: absolute;
-        top: 10px;
-        right: 15px;
+        top: -45px;
+        right: 0px;
         cursor: pointer;
     }
 </style>
 
 <div>
-    <div class="mt10">
-        <button id="cameraBtn" class="btn addBtn" type="button" onclick="handleCameraButtonClick()">사진촬영</button>
-        <button class="btn addBtn" type="button" style="margin: 0px; width: 120px;" onclick="openPop()">
-            운송 신규등록
-        </button>
-    </div>
+
+    <button id="cameraBtn" class="btn addBtn" type="button" style="width: 100px;" onclick="handleCameraButtonClick()">사진촬영</button>
+
     <div id="modal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
 
             <img id="modalPhoto" src="" alt="Uploaded Photo" style="max-height: 80vh; width: auto;">
             <div class="modal-buttons">
-                <button type="button" class="btn btn-blue" onclick="closeModal()">확인</button>
-                <button type="button" class="btn btn-blue" onclick="retryCapture()">재촬영</button>
+                <button type="button" style="width: 100px; !important" class="btn btn-blue" onclick="closeModal()">확인</button>
+                <button type="button" style="width: 100px; !important" class="btn btn-blue" onclick="retryCapture()">재촬영</button>
 
             </div>
         </div>
@@ -111,11 +108,5 @@
                 }
             }
         });
-
-        function msgChange() {
-            document.getElementById("picMsg").innerHTML = '사진 등록 OK!';
-            document.getElementById("picMsg").classList.add("editedMsg");
-            document.getElementById("modalOpenButton").style.display = 'block';
-        }
 
     </script>

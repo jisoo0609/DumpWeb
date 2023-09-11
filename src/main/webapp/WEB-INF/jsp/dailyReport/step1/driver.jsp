@@ -3,20 +3,17 @@
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
 <style>
-    .today-menu th,
-    .car-menu th {
-        font-weight: normal;
-    }
     .homescreen {
         background-color: #cce0f7;
         padding: 5px;
     }
     #datepicker1,
     #datepicker2 {
-        border: none;
         width: 100px;
-        background-color: #cce0f7;
     }
+    .ui-datepicker-trigger {
+                    display: none;
+                }
     #update-button {
         padding: 3px;
         border-radius: 10px;
@@ -24,6 +21,8 @@
         background-color: #ffffff;
         margin-left: 10px;
         border: 1px solid #0068b7;
+        font-size: 16px;
+        font-weight: bold;
     }
     ul.basic-menu {
         display: grid;
@@ -77,31 +76,39 @@
     .race-search,
     .car-repair,
     .car-search {
-        width: 50px;
+        width: 45px;
     }
     .race-management {
         border-right: 1px solid #0068b7;
     }
-    .today-graph {
-        border: 1px solid;
-        border-collapse: collapse;
-        width: 100%;
-    }
     .basic-menu li {
         display: flex;
     }
-    .today-menu th:nth-child(2) {
+    .today-recruitment-menu th, .today-menu th:nth-child(2) {
         border-left: 1px solid;
         border-right: 1px solid;
     }
-    .today-menu th:nth-child(4) {
+    .today-recruitment-menu th, .today-menu th:nth-child(4) {
         border-left: 1px solid;
         border-right: 1px solid;
     }
+    .today-recruitment-menu, .car-menu, .today-menu{
+        font-size : 14px;
+        font-weight : 600;
+        }
     .today-car,
     .car-care,
     .today-recruitment {
         margin-top: 30px;
+    }
+    .search-race{
+    margin-left : -5px
+    }
+    .write-race{
+    margin-left : -8px
+    }
+    .check-car, .registration-car{
+    margin-left : 6px
     }
     .today-car,
     .car-care,
@@ -109,14 +116,14 @@
         font-weight: bold;
     }
     .today-graph,
-    .car-graph {
+    .car-graph, .today-car-recruitment {
         margin-top: 10px;
     }
     .today-menu,
-    .car-menu {
+    .car-menu, .today-recruitment-menu {
         background-color: #e0e3e8;
     }
-    .car-graph {
+    .car-graph, .today-car-recruitment, .today-graph {
         border: 1px solid;
         border-collapse: collapse;
         width: 100%;
@@ -196,7 +203,7 @@
                 changeMonth: true, //option값  월 선택 가능
                 showOn: "both", //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
                 buttonImage:
-                    "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif", //버튼 이미지 경로
+                    "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
                 buttonImageOnly: true, //버튼 이미지만 깔끔하게 보이게함
                 buttonText: "선택", //버튼 호버 텍스트
                 yearSuffix: "년", //달력의 년도 부분 뒤 텍스트
@@ -383,6 +390,15 @@
                 </tr>
             </table>
             <p class="today-recruitment">금일 차량 모집 공고</p>
+            <table class="today-car-recruitment">
+                            <tr class="today-recruitment-menu">
+                                <th>제출처</th>
+                                <th>상차지</th>
+                                <th>하차지</th>
+                                <th>품목</th>
+                                <th>대수</th>
+                            </tr>
+                        </table>
         </section>
     </article>
 
