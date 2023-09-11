@@ -54,14 +54,14 @@
          <li>
              <p>
                  <a class="left_menu" href="/dailyReport/carcareform">
-                     <span style="font-weight: bold; color: blue;">⑤</span> 차량관리 등록
+                     <span style="font-weight: bold; color: blue;">⑤</span> 차량관리 차계부 등록
                  </a>
              </p>
          </li>
          <li>
               <p>
                   <a class="left_menu" href="/dailyReport/carcarelist">
-                      <span style="font-weight: bold; color: blue;">⑥</span> 차량관리 조회
+                      <span style="font-weight: bold; color: blue;">⑥</span> 차량관리 차계부 조회
                   </a>
               </p>
          </li>
@@ -76,6 +76,13 @@
                <p>
                    <a class="left_menu" href="/dailyReport/receipts">
                        <span style="font-weight: bold; color: blue;">⑧</span> 제출처 전표 조회
+                   </a>
+               </p>
+         </li>
+         <li>
+               <p>
+                   <a class="left_menu" href="/dailyReport/receipts">
+                       <span style="font-weight: bold; color: blue;">⑨</span> 제출처 차량관리
                    </a>
                </p>
          </li>
