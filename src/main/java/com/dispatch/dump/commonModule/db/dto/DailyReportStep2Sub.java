@@ -1,4 +1,4 @@
-package com.dispatch.dump.commonModule.db.dao;
+package com.dispatch.dump.commonModule.db.dto;
 
 import lombok.Data;
 
