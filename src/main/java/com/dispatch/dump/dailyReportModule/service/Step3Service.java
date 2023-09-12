@@ -6,7 +6,7 @@ import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep3MainMapper;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep3SubMapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

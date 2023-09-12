@@ -4,7 +4,7 @@ import com.dispatch.dump.commonModule.db.dto.DailyReport;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportMapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.bridge.ICommand;
 import org.slf4j.Logger;
