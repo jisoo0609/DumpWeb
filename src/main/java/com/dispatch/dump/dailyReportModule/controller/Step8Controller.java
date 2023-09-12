@@ -33,8 +33,6 @@ public class Step8Controller {
 //        dailyReportService.list(model, dailyReport);
 //        return "/dailyReport/step7/receipts";
 //    }
-}
-
 
 
 }
