@@ -45,20 +45,20 @@
   </div>
 
   <!-- 조회 양식-->
+      <div class="operating_period content conTop" >
+        <h1>
+          ▪운행기간
+          <!-- <img src="images/ico_que.png" alt="도움말" class="info" /> -->
+        </h1>
+        <label class="start-text col" for="start-date">
+          <input type="date" id="start-date" />
+          <span>~</span>
+          <input type="date" id="end-date" />
+        </label>
+      </div>
   <div class="inquiry_form">
     <div class="operating_period content">
       <h1>
-        운행 기간
-        <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
-      </h1>
-      <label class="start-text col" for="start-date">
-                  <input type="date" id="start-date" />
-                  <span>~</span>
-                  <input type="date" id="end-date" />
-                </label>
-    </div>
-    <div class="operating_period content">
-      <h1>
         주유
         <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
       </h1>
@@ -91,26 +91,26 @@
       </select>
     </div>
   </div>
-  <div class="inquiry_form section_check">
-    <div class="operating_period content" id="flex_important">
-      <label>
-        기간
-        <input type="radio" name="test" checked />
-      </label>
-      <label>
-        주유
-        <input type="radio" name="test" />
-      </label>
-      <label>
-        요소수
-        <input type="radio" name="test" />
-      </label>
-      <label>
-        정비
-        <input type="radio" name="test" />
-      </label>
-    </div>
-  </div>
+      <div class="inquiry_form section_check">
+        <div class="operating_period content" id="flex_important">
+          <label>
+            날짜 기준
+            <input type="radio" name="test" checked />
+          </label>
+          <label>
+            품목 기준
+            <input type="radio" name="test" />
+          </label>
+          <label>
+            요소수
+            <input type="radio" name="test" />
+          </label>
+          <label>
+            정비
+            <input type="radio" name="test" />
+          </label>
+        </div>
+      </div>
   <div class="search_container">
     <button class="search_btn common_btn">검색</button>
   </div>
@@ -118,9 +118,9 @@
     <h1></h1>
   </div>
   <div class="agreement_container">
-    <button class="common_btn">일괄결재</button>
-    <button class="common_btn">일괄취소</button>
-  </div>
+          <button class="common_btn" style="background: #333; color: white; border: none;" >일괄결재</button>
+          <button class="common_btn" style="background: #333; color: white; border: none;">취소</button>
+        </div>
   <div class="line"></div>
   <div class="table_container">
     <table>

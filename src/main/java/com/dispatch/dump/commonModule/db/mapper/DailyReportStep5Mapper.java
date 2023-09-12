@@ -2,8 +2,6 @@ package com.dispatch.dump.commonModule.db.mapper;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
 
-import java.util.List;
-
 public interface DailyReportStep5Mapper {
 
     /* FUNCTION ::  등록 */
@@ -15,6 +13,7 @@ public interface DailyReportStep5Mapper {
 
     *//* FUNCTION :: 일보 상세보기 *//*
     DailyReport findDailyReportBySheetID(DailyReport dailyReport);
+
 
 
     //* FUNCTION :: 일보 리스트 조회 (제출처별) */

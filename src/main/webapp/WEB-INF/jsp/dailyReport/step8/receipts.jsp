@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%--test123--%>
+<%--<%@ include file="/WEB-INF/jsp/include/header.jsp" %>--%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -22,6 +22,9 @@
     <link href="/resources/css/step7/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/loading.css">
     <style type="text/css">
+        .unit {
+            padding-left: 2px;
+        }
 
         .default-tab__ul.cnt8 li {
             width: 12.5%;
@@ -218,10 +221,10 @@
             text-align: center;
         }
 
-        .mobile-navi-dept1 a.active {
-            background: #0068b7;
-            color: #fff;
-        }
+        /*.mobile-navi-dept1 a.active {*/
+        /*    background: #0068b7;*/
+        /*    color: #fff;*/
+        /*}*/
 
         .closeMask {
             position: fixed;
@@ -239,7 +242,6 @@
 
         }
     </style>
-
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -324,30 +326,69 @@
         </div>
 
         <ul class="mobile-navi-dept1">
-
-
             <li>
                 <p>
-                    <a class="left_menu" href="/carManage/list">
-                        <span style="font-weight: bold; color: blue;">①</span>
-                        운행 및 배차진행·전표관리
+                    <a class="left_menu" href="/dailyReport/driver">
+                        <span style="font-weight: bold; color: blue;">①</span> 기사용 메뉴
                     </a>
                 </p>
             </li>
-
             <li>
-                <p><a class="left_menu" href="/integrateDispatch/list">
-
-                    <span style="font-weight: bold; color: blue;">③</span>
-
-
-                    차량별 배차현황
-
-
-                </a></p>
+                <p>
+                    <a class="left_menu" href="/dailyReport/manager">
+                        <span style="font-weight: bold; color: blue;">②</span> 제출처용 메뉴
+                    </a>
+                </p>
             </li>
-
-
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/form">
+                        <span style="font-weight: bold; color: blue;">③</span> 운행일보 등록
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/list">
+                        <span style="font-weight: bold; color: blue;">④</span> 운행일보 조회
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/carcareform">
+                        <span style="font-weight: bold; color: blue;">⑤</span> 차량관리 차계부 등록
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/carcarelist">
+                        <span style="font-weight: bold; color: blue;">⑥</span> 차량관리 차계부 조회
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/oldform">
+                        <span style="font-weight: bold; color: blue;">⑦</span> 제출처 주문 등록
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/receipts">
+                        <span style="font-weight: bold; color: blue;">⑧</span> 제출처 전표 조회
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/receipts">
+                        <span style="font-weight: bold; color: blue;">⑨</span> 제출처 차량관리
+                    </a>
+                </p>
+            </li>
         </ul>
     </nav>
 </header>
@@ -424,10 +465,9 @@
                 $('.last').datepicker("option", "minDate", $(".fst").val());
             });
         }
-
-
     });
 </script>
+
 
 <section class="sub-contents-wrap maxwrap">
 
@@ -487,13 +527,13 @@
     <form name="searchfrm" method="post">
         <input type="hidden" name="pageNo" value="1"/>
         <input type="hidden" id="searchDetailChk" name="searchDetailChk" value="0">
-
+        <input type="hidden" name="sheetID" value="${!empty view ? view.sheetID : 0}">
         <div class="search-form">
             <div class="search-form-major" id="dateArea">
                 <label>운행기간</label>
                 <div class="date-wrap dis-ib dis-b-t">
                     <input type="text" value="2023-08-31" class="fst datepicker"
-                           name="searchStartDate" readonly autocomplete="off"> <span class="unit">~</span>
+                           name="searchStartDate" readonly autocomplete="off"><span class="unit">~</span>
                     <input type="text" value="2023-08-31" class="last datepicker" name="searchEndDate"
                            readonly autocomplete="off">
                 </div>
@@ -506,7 +546,7 @@
                     <label>구분</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 clubAutocomplete trn" placeholder="구분" name="club" id="club"
-                               value=""
+                               value="${!empty view ? view.club : ''}"
                                autocomplete="off">
                         <%--                        <span class="input-group-clear dis-n" id="club_clear">x</span>--%>
                         <select class="club " id="clubBox" onchange="$.selectBoxChange(this.value, 'club')">
@@ -530,7 +570,7 @@
                     <label>상차지</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 fromsiteAutocomplete trn" placeholder="상차지" name="fromsite"
-                               id="fromsite" value="" autocomplete="off">
+                               id="fromsite" autocomplete="off" value="${!empty view ? view.fromsite : ''}">
                         <%--                        <span class="input-group-clear" id="fromsite_clear">x</span>--%>
                         <select class="fromsite " id="fromsiteBox" onchange="$.selectBoxChange(this.value, 'fromsite')">
                             <option value="">전체</option>
@@ -545,15 +585,13 @@
                 <li>
                     <label>하차지</label>
                     <div class="input-group select">
-                        <input type="text" class="wp100 tositeAutocomplete trn" placeholder="하차지" name="tosite"
-                               id="tosite" value="" autocomplete="off">
+                        <input type="text" class="wp100 tositeAuto complete trn" placeholder="하차지" name="tosite"
+                               id="tosite" autocomplete="off" value="${!empty view ? view.tosite : ''}">
                         <%--                        <span class="input-group-clear" id="tosite_clear">x</span>--%>
                         <select class="tosite " id="tositeBox" onchange="$.selectBoxChange(this.value, 'tosite')">
                             <option value="">전체</option>
 
-                            <option value="지밸리"
-                            >지밸리
-                            </option>
+                            <option value="지밸리">지밸리</option>
 
                         </select>
                     </div>
@@ -561,8 +599,8 @@
                 <li>
                     <label>품목</label>
                     <div class="input-group select">
-                        <input type="text" class="wp100 itemAutocomplete trn" placeholder="품목" name="item" id="item"
-                               value="" autocomplete="off">
+                        <input type="text" class="wp100 itemAuto complete trn" placeholder="품목" name="item" id="item"
+                               value="${!empty view ? view.item : ''}" autocomplete="off">
                         <%--                        <span class="input-group-clear" id="item_clear">x</span>--%>
                         <select class="item " id="itemBox" onchange="$.selectBoxChange(this.value, 'item')">
                             <option value="">전체</option>
@@ -579,8 +617,9 @@
                     <div class="input-group select">
 
 
-                        <input type="text" class="wp100 carHostAutocomplete trn" placeholder="차량번호"
-                               name="carHost" id="carHost" value="" autocomplete="off">
+                        <input type="text" class="wp100 carHostAuto complete trn" placeholder="차량번호"
+                               name="carHost" id="carHost" value="${!empty view ? view.carHost : ''}"
+                               autocomplete="off">
                         <%--                        <span class="input-group-clear dis-n" id="carHost_clear">x</span>--%>
                         <select class="carHost " id="carHostBox"
                                 onchange="$.selectBoxChange(this.value, 'carHost')">
@@ -620,7 +659,7 @@
             <div style="width: 50%;  float: left;">
                 <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
                         type="radio" name="searchType"
-                        value="car" checked/>차량 기준</label>
+                        value="car"/>차량 기준</label>
                 <%--                <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 155px;"><input--%>
                 <%--                        type="radio" name="searchType"--%>
                 <%--                        value="tosite"/>하차지 기준</label>--%>
@@ -631,8 +670,7 @@
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="searchType"
-                        value="fromsite"/>운행일 기준</label>
+                        type="radio" name="searchType" value="fromsite"/>운행일 기준</label>
                 <%--                <br/>--%>
                 <%--                <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 190px;"><input--%>
                 <%--                        type="radio" name="searchType"--%>
@@ -647,8 +685,37 @@
                onkeydown="if(event.keyCode == 13) return false;">
     </div>
 
-    <div class="">
+    <div id="tableshow">
         <div class="table-top" style="height: auto; display:  block;">
+            <%--            <table class="list-table" style="margin-left: auto; margin-right: auto; width: 100%; margin-bottom: 20px;">--%>
+            <%--                <colgroup>--%>
+            <%--                    <col width="50%">--%>
+            <%--                    <col width="50%">--%>
+            <%--                </colgroup>--%>
+            <%--                <tbody><tr>--%>
+            <%--                    <th></th>--%>
+            <%--                    <th>총 금액</th>--%>
+            <%--                </tr>--%>
+            <%--                <tr>--%>
+            <%--                    <th class="a-center">운반비 합계</th>--%>
+            <%--                    <td class="a-right" style="padding: 10px;">--%>
+            <%--                        5000--%>
+            <%--                    </td>--%>
+            <%--                </tr>--%>
+            <%--                <tr>--%>
+            <%--                    <th class="a-center">수수료</th>--%>
+            <%--                    <td class="a-right" style="padding: 10px;">--%>
+            <%--                        2000--%>
+            <%--                    </td>--%>
+            <%--                </tr>--%>
+            <%--                <tr>--%>
+            <%--                    <th class="a-center">운반비 공급가액</th>--%>
+            <%--                    <td class="a-right" style="padding: 10px;">--%>
+            <%--                        200000--%>
+            <%--                    </td>--%>
+            <%--                </tr>--%>
+            <%--                </tbody>--%>
+            <%--            </table>--%>
             <p class="total">
                 <span>데이터</span> <span class="cnt default-blue">1</span>
                 <span>건 (총대수 : <span class="cnt default-blue">1</span> 대)가 검색되었습니다.</span>
@@ -656,9 +723,11 @@
         </div>
 
         <div class="btn-area">
-            <input type="button" class="btn btn-black" value="일괄결제" onClick="$.search()"
+            <input type="button" style="background-image: none !important;text-indent: 0px !important;"
+                   class="btn btn-search btn-search__line" value="일괄결제" onClick="$.search()"
                    onkeydown="if(event.keyCode == 13) return false;">
-            <input type="button" class="btn btn-black" value="취소" onClick="$.search()"
+            <input type="button" style="background-image: none !important;text-indent: 0px !important;"
+                   class="btn btn-search btn-search__line" value="취소" onClick="$.search()"
                    onkeydown="if(event.keyCode == 13) return false;">
         </div>
 
@@ -677,25 +746,36 @@
                 <thead>
                 <tr>
                     <th>운행일</th>
-                    <%--                <th>차량번호</th>--%>
-                    <%--                <th>품목</th>--%>
                     <th>상차지</th>
                     <th>하차지</th>
                     <th>차량번호</th>
                     <th>대수</th>
                     <th>진행</th>
                 </tr>
-                </thead>
+                <tr>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        구디
+                    </td>
+                    <td>
+                        지밸리
+                    </td>
+                    <td>
+                        37우2598
+                    </td>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        <span style="color: #000080; font-weight: bold;">하차</span>
+                    </td>
+                </tr>
                 <tr style="border-bottom: 2px solid red;">
                     <td>
                         1
                     </td>
-                    <%--                <td>--%>
-                    <%--                    임창운--%>
-                    <%--                </td>--%>
-                    <%--                <td>--%>
-                    <%--                    출퇴근--%>
-                    <%--                </td>--%>
                     <td>
                         구디
                     </td>
@@ -782,4 +862,5 @@
 <%--</footer>--%>
 </body>
 </html>
+
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
