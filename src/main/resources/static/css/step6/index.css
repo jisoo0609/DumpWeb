@@ -7,10 +7,6 @@ body {
   background: #ddd;
 }
 
-span {
-  color: var(--color-bg-border-blue);
-}
-
 .common_btn {
   text-align: center;
   border: 1px solid #0068b7;
