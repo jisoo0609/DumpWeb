@@ -22,17 +22,18 @@ public class Step8Controller {
     private final Step8Service step8Service;
 
     @RequestMapping(value = "/receipts", method = RequestMethod.GET)
-    @ModelAttribute("receiptsList")
-    public List<DailyReportStep8Sub> getReceiptsList() {
-        List<DailyReportStep8Sub> receiptsList = step8Service.getSummary();
-        return receiptsList;
+    public String step8(Model model, DailyReport dailyReport) {
+        dailyReportService.list(model, dailyReport);
+        return "/dailyReport/step8/receipts";
     }
 
 //    @RequestMapping(value = "/receipts", method = RequestMethod.GET)
-//    public String step7(Model model, DailyReport dailyReport) {
-//        dailyReportService.list(model, dailyReport);
-//        return "/dailyReport/step7/receipts";
+//    @ModelAttribute("receiptsList")
+//    public List<DailyReportStep8Sub> getReceiptsList() {
+//        List<DailyReportStep8Sub> receiptsList = step8Service.getSummary();
+//        return receiptsList;
 //    }
+
 
 
 }
