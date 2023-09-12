@@ -5,7 +5,7 @@
 
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep8Mapper">
     <!--  1. tsitePw의 UserId와 tSheet의 carSubmitTel 같은거 찾아서 tsheet의 sheetId를 찾아오기-->
-    <select id="searchReceiptsMainByCarSubmitTel" resultType="DailyReportStep7Main">
+    <select id="searchReceiptsMainByCarSubmitTel" resultType="DailyReportStep8Main">
         SELECT sheetID, DATE_FORMAT(date, '%y-%m-%d') as date, CarNo
         FROM tsheet
         where carSubmitTel = #{userId}
@@ -13,7 +13,7 @@
 
 
     <!--  2. tsheet_sub의 sheetId2와 tsheet의 sheetId 같은걸 찾아오기-->
-    <select id="searchReceiptsMainBySheetID2" resultType="DailyReportStep7Sub">
+    <select id="searchReceiptsMainBySheetID2" resultType="DailyReportStep8Sub">
         select fromsite, tosite, item, Qty,Qtyup from tSheet_sub where sheetID2=#{sheetID2}
     </select>
 
