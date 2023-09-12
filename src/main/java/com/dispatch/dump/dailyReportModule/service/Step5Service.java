@@ -48,8 +48,7 @@ public class Step5Service {
             System.out.println("Received POST request body:");
             System.out.println(dailyReportStep5);
             log.error("Exception["+ e.getMessage() +"]");
-//            log.error("Exception Class: {}", e.getClass().getName()); // 예외 클래스 이름
-//            log.error("Exception Cause: {}", e.getCause()); // 예외 원인
+
 
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
