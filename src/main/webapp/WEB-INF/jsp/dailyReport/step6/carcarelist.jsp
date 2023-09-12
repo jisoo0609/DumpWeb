@@ -45,89 +45,72 @@
   </div>
 
   <!-- 조회 양식-->
+      <div class="operating_period content conTop" >
+        <h1>
+          ▪운행기간
+          <!-- <img src="images/ico_que.png" alt="도움말" class="info" /> -->
+        </h1>
+        <label class="start-text col" for="start-date">
+          <input type="date" id="start-date" />
+          <span>~</span>
+          <input type="date" id="end-date" />
+        </label>
+      </div>
   <div class="inquiry_form">
     <div class="operating_period content">
       <h1>
-        운행 기간
+        주유
         <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
       </h1>
-      <form>
-        <div class="form-row">
-          <div class="col">
-            <label for="startDate">시작 날짜:</label>
-            <input
-                    type="text"
-                    class="date-input"
-                    id="startDate"
-                    placeholder="시작 날짜를 선택하세요"
-            />
-          </div>
-          <div class="col">
-            <label for="endDate">종료 날짜:</label>
-            <input
-                    type="text"
-                    class="date-input"
-                    id="endDate"
-                    placeholder="종료 날짜를 선택하세요"
-            />
-          </div>
+      <select class="detailSelect conbox">
+        <option value="옵션1">옵션1</option>
+        <option value="옵션2">옵션2</option>
+        <option value="옵션3">옵션3</option>
+      </select>
+    </div>
+    <div class="operating_period content">
+      <h1>
+        요소수
+        <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
+      </h1>
+      <select class="detailSelect conbox">
+        <option value="옵션1">옵션1</option>
+        <option value="옵션2">옵션2</option>
+        <option value="옵션3">옵션3</option>
+      </select>
+    </div>
+    <div class="operating_period content">
+      <h1>
+        정비
+        <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
+      </h1>
+      <select class="detailSelect conbox">
+        <option value="옵션1">옵션1</option>
+        <option value="옵션2">옵션2</option>
+        <option value="옵션3">옵션3</option>
+      </select>
+    </div>
+  </div>
+      <div class="inquiry_form section_check">
+        <div class="operating_period content" id="flex_important">
+          <label>
+            날짜 기준
+            <input type="radio" name="test" checked />
+          </label>
+          <label>
+            품목 기준
+            <input type="radio" name="test" />
+          </label>
+          <label>
+            요소수
+            <input type="radio" name="test" />
+          </label>
+          <label>
+            정비
+            <input type="radio" name="test" />
+          </label>
         </div>
-      </form>
-    </div>
-    <div class="operating_period content">
-      <h1>
-        주유
-        <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
-      </h1>
-      <select class="detailSelect conbox">
-        <option value="옵션1">옵션1</option>
-        <option value="옵션2">옵션2</option>
-        <option value="옵션3">옵션3</option>
-      </select>
-    </div>
-    <div class="operating_period content">
-      <h1>
-        요소수
-        <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
-      </h1>
-      <select class="detailSelect conbox">
-        <option value="옵션1">옵션1</option>
-        <option value="옵션2">옵션2</option>
-        <option value="옵션3">옵션3</option>
-      </select>
-    </div>
-    <div class="operating_period content">
-      <h1>
-        정비
-        <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
-      </h1>
-      <select class="detailSelect conbox">
-        <option value="옵션1">옵션1</option>
-        <option value="옵션2">옵션2</option>
-        <option value="옵션3">옵션3</option>
-      </select>
-    </div>
-  </div>
-  <div class="inquiry_form section_check">
-    <div class="operating_period content" id="flex_important">
-      <label>
-        기간
-        <input type="radio" name="test" checked />
-      </label>
-      <label>
-        주유
-        <input type="radio" name="test" />
-      </label>
-      <label>
-        요소수
-        <input type="radio" name="test" />
-      </label>
-      <label>
-        정비
-        <input type="radio" name="test" />
-      </label>
-    </div>
-  </div>
+      </div>
   <div class="search_container">
     <button class="search_btn common_btn">검색</button>
   </div>
@@ -135,14 +118,14 @@
     <h1></h1>
   </div>
   <div class="agreement_container">
-    <button class="common_btn">일괄결재</button>
-    <button class="common_btn">일괄취소</button>
-  </div>
+          <button class="common_btn" style="background: #333; color: white; border: none;" >일괄결재</button>
+          <button class="common_btn" style="background: #333; color: white; border: none;">취소</button>
+        </div>
   <div class="line"></div>
   <div class="table_container">
     <table>
       <thead>
-      <tr>
+        <tr class="th_title">
         <th>No</th>
         <th>차량번호</th>
         <th>품목</th>
@@ -157,6 +140,32 @@
 
 <!-- 페이지 본문 종료 -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+      // 현재 날짜를 가져와서 운행일 입력 상자의 초기 값으로 설정
+      //  const today = new Date().toISOString().split('T')[0];
+      //  documnt.getElementById('오늘날').value = today;
+
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const startDateInput = document.getElementById("start-date");
+        const endDateInput = document.getElementById("end-date");
+
+        // 시작 날짜를 당월 1일로 설정
+        const today = new Date();
+        const firstDayOfMonth = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          1
+        );
+        const formattedFirstDay = firstDayOfMonth.toISOString().split("T")[0];
+        startDateInput.value = formattedFirstDay;
+
+        // 종료 날짜를 오늘로 설정
+        const formattedToday = today.toISOString().split("T")[0];
+        endDateInput.value = formattedToday;
+
+      });
+    </script>
 <script src="/resources/js/dailyReport/step6/index.js"></script>
 
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

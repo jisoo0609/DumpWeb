@@ -15,7 +15,7 @@
 
         margin-bottom: 5%;
         margin-top: 5%;
-        margin-left: 17%;
+        margin-left: 12%;
 
     }
 
@@ -38,8 +38,8 @@
     .race-search,
     .car-repair,
     .car-search {
-        width: 90px;
-        height: 30%;
+        width: 60px;
+        height: 40%;
     }
 
     .race-registration,
@@ -105,11 +105,7 @@
         font-weight: bold;
     }
 
-    .today-car,
-    .car-care,
-    .today-recruitment {
-        font-weight: bold;
-    }
+
 
     .today-graph {
         border: 1px solid;
@@ -130,7 +126,100 @@
 </style>
 
 
-<section>
+<section class="sub-contents-wrap maxwrap"style="background-color: #cce0f7">
+
+ <script>
+        // 달력 옵션 추가 코드
+        $(function () {
+            //input을 datepicker로 선언
+            $("#datepicker1,#datepicker2").datepicker({
+                dateFormat: "yy-mm-dd", //달력 날짜 형태
+                showOtherMonths: true, //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+                showMonthAfterYear: true, // 월- 년 순서가아닌 년도 - 월 순서
+                changeYear: true, //option값 년 선택 가능
+                changeMonth: true, //option값  월 선택 가능
+                showOn: "both", //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
+                buttonImage:
+                    "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif", //버튼 이미지 경로
+                buttonImageOnly: true, //버튼 이미지만 깔끔하게 보이게함
+                buttonText: "선택", //버튼 호버 텍스트
+                yearSuffix: "년", //달력의 년도 부분 뒤 텍스트
+                monthNamesShort: [
+                    "1월",
+                    "2월",
+                    "3월",
+                    "4월",
+                    "5월",
+                    "6월",
+                    "7월",
+                    "8월",
+                    "9월",
+                    "10월",
+                    "11월",
+                    "12월",
+                ], //달력의 월 부분 텍스트
+                monthNames: [
+                    "1월",
+                    "2월",
+                    "3월",
+                    "4월",
+                    "5월",
+                    "6월",
+                    "7월",
+                    "8월",
+                    "9월",
+                    "10월",
+                    "11월",
+                    "12월",
+                ], //달력의 월 부분 Tooltip
+                dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"], //달력의 요일 텍스트
+                dayNames: [
+                    "일요일",
+                    "월요일",
+                    "화요일",
+                    "수요일",
+                    "목요일",
+                    "금요일",
+                    "토요일",
+                ], //달력의 요일 Tooltip
+                minDate: "-5Y", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+                maxDate: "+5y", //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+            });
+
+            //초기값을 오늘 날짜로 설정해줘야 합니다.
+            $("#datepicker2").datepicker("setDate", "today"); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const updateButton = document.getElementById("update-button");
+            const startDateInput = document.getElementById("datepicker1");
+
+            // 시작 날짜를 당월 1일로 설정
+            const today = new Date();
+            const firstDayOfMonth = new Date(
+                today.getFullYear(),
+                today.getMonth(),
+                1
+            );
+            const formattedFirstDay = firstDayOfMonth
+                .toISOString()
+                .split("T")[0];
+            startDateInput.value = formattedFirstDay;
+
+            // 종료 날짜를 오늘로 설정
+            // const formattedToday = today.toISOString().split("T")[0];
+            // endDateInput.value = formattedToday;
+
+            // updateButton.addEventListener("click", function () {
+            //     const startDate = startDateInput.value;
+            //     const endDate = endDateInput.value;
+
+            //     console.log("시작 날짜:", startDate);
+            //     console.log("종료 날짜:", endDate);
+            // });
+        });
+    </script>
 
 
     <article class="homescreen">
@@ -138,39 +227,48 @@
             <div class="date-picker">
 
                 <label class="start-text" for="start-date">운행일
-                    <input type="date" id="start-date" />
+                    <input id="datepicker1" />
                     <span>~</span>
-                    <input type="date" id="end-date" />
+                    <input id="datepicker2" />
                 </label>
                 <button id="update-button">조회</button>
                 <ul class="basic-menu">
                     <li>
                         총 운반 금액 :
-                        <div class="carrying-money" style="margin: 0 0 5% 0">원</div>
+                        <div class="carrying-money" style="margin: 0 0 5% 0">
+                        <input text class="" size="5px ,5px">원</div>
                     </li>
                     <li>
                         총 운행대 수 :
-                        <div class="carrying-car" style="margin: 0 0 5% 0">대</div>
+                        <div class="carrying-car" style="margin: 0 0 5% 0">
+                         <input text class="" size="5px ,5px">대</div>
                     </li>
                     <li>
                         총 비용 금액 :
-                        <div class="expense-money">원</div>
+                        <div class="expense-money">
+                         <input text class="" size="5px ,5px">원</div>
                     </li>
-                    <li>마지막 등록일 :</li>
+                    <li>
+                    마지막 등록일 :
+                    </li>
 
 
                 </ul>
             </div>
         </div>
 
-        <section class="management">
+
+        <section class="management" >
+
+        <div>
             <div style="display: flex; align-items: center">
+
                 <div style="margin-light:5%; text-align:center; font-weight: 600">
                     <div class="race-check">
-                        <img class="race-search" src="/resources/image/ico_check.png" alt="일보조회" />
+                        <img class="race-search" src="/resources/image/ico_check.png" alt="거래처전표조회" />
                     </div>
 
-                    <span>일보조회</span>
+                    <span>거래처전표조회</span>
 
                 </div>
 
@@ -188,6 +286,7 @@
                     </div>
                     <span>차량관리</span>
                 </div>
+                </div>
         </section>
 
 
@@ -196,7 +295,7 @@
             <p class="today-car">금일 배차 현황</p>
             <table class="today-graph">
                 <tr class="today-menu">
-                    <th>제출처</th>
+                    <th>차량번호</th>
                     <th>상차지</th>
                     <th>하차지</th>
                     <th>품목</th>
@@ -206,7 +305,7 @@
             <p class="car-care">제출 받은 일보</p>
             <table class="car-graph">
                 <tr class="car-menu">
-                    <th>제출처</th>
+                    <th>차량번호</th>
                     <th>상차지</th>
                     <th>하차지</th>
                     <th>품목</th>
@@ -214,37 +313,18 @@
                 </tr>
             </table>
             <p class="today-recruitment">금일 차량 모집 공고</p>
+            <table class="car-graph">
+            <tr class="car-menu">
+                                <th>차량번호</th>
+                                <th>상차지</th>
+                                <th>하차지</th>
+                                <th>품목</th>
+                                <th>대수</th>
+                            </tr>
+                            </table>
         </section>
     </article>
-    <script>
-        // 현재 날짜를 가져와서 운행일 입력 상자의 초기 값으로 설정
-        //  const today = new Date().toISOString().split('T')[0];
-        //  documnt.getElementById('오늘날').value = today;
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const updateButton = document.getElementById("update-button");
-            const startDateInput = document.getElementById("start-date");
-            const endDateInput = document.getElementById("end-date");
-
-            // 시작 날짜를 당월 1일로 설정
-            const today = new Date();
-            const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-            const formattedFirstDay = firstDayOfMonth.toISOString().split("T")[0];
-            startDateInput.value = formattedFirstDay;
-
-            // 종료 날짜를 오늘로 설정
-            const formattedToday = today.toISOString().split("T")[0];
-            endDateInput.value = formattedToday;
-
-            updateButton.addEventListener("click", function() {
-                const startDate = startDateInput.value;
-                const endDate = endDateInput.value;
-
-                console.log("시작 날짜:", startDate);
-                console.log("종료 날짜:", endDate);
-            });
-        });
-    </script>
 </section>
 
 

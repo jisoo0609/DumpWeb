@@ -4,8 +4,7 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
-<script src="/resources/js/dailyReport/dailyform-sub.js"></script>
-<script src="/resources/js/dailyReport/dailyform.js"></script>
+
 
 <section id="canvas" style="">
     <div id="dailyreport">
@@ -46,14 +45,7 @@
             <input type="hidden" name="chk1" value=""/>
         </form>
 
-        <div id="popSearch" class="popup" style="z-index: 99;">
-            <div class="popup-content">
-                test
-                <button class="btn btn-white btn-popup" onclick="closePopSearch()">
-                    나가기
-                </button>
-            </div>
-        </div>
+        <%@ include file="/WEB-INF/jsp/dailyReport/step3/searchPop.jsp" %>
 
         <div class="mt10" >
             <p class="caption-like">
@@ -70,17 +62,22 @@
                     <ul class="mtable__ul">
                         <li style="display: flex;">
                             <label class="t10">운행일</label>
-                            <span class="content">
-                                <input style="margin-left: 75px;" type="text" class="datepicker wp100" id="date" name="date"
-                                       value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="off">
-                            </span>
+                            <div class="datediv">
+                                <button type="button" id="prev-day" class="btn plusminus" onclick="prevday()">-</button>
+                                <span class="content">
+                                    <input  type="text" class="datepicker wp100" id="date" name="date"
+                                           value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="off">
+                                </span>
+                                <button type="button" id="next-day" class="btn plusminus" onclick="nextday()">+</button>
+                            </div>
+
                         </li>
 
                         <li>
                             <label class="t10">제출처</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input type="text" class="wp100 voice" name="carSubmit" id="carSubmit" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}">
+                                <input  type="text" class="wp100 voice" name="carSubmit" id="carSubmit" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}">
                             </span>
                         </li>
 
@@ -88,7 +85,7 @@
                             <label class="t10">담당자</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input type="text" class="wp100 voice" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}"
+                                <input  type="text" class="wp100 voice" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}"
                                        placeholder="담당자" autocomplete="off">
                             </span>
                         </li>
@@ -97,9 +94,9 @@
                             <label class="t10">휴대폰</label>
                             <div class="empty"></div>
                             <span class="content">
-                                <div style="width: 55px; margin-left: 10px;">010 <span style="font-size: 13px;">—</span> </div>
-                                <input type="tel" class="wp100" name="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
-                                       list="insiteDataList" placeholder="제출처 담당자 휴대폰 번호" autocomplete="off" pattern="-[0-9]{4}-[0-9]{4}" maxlength="9"
+                                <input  type="tel" class="wp100" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
+                                       list="insiteDataList" placeholder="-없이 숫자8자리를 입력해주세요" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
+                                       style="margin-left: 56px;" onfocus="fill010()"}
                                 >
                                 <datalist id="insiteDataList">
                                         <option value=""></option>
@@ -108,33 +105,15 @@
                         </li>
 
                         <li style="align-items: center; height: 28px;">
-                            <label for="checkbox">결재</label>
-                            <input type="checkbox" id="checkbox" name="chk1" style="margin-left: 50px;"
+                            <label for="checkbox">결재요청</label>
+                            <input type="checkbox" id="checkbox" name="chk1" style="margin-left: 70px;"
                             value="0">
                             <div id="dateDisplay" style="margin-left: 10px; width: 150px;">결재일 : <span id="currentDate" ></span></div>
                             <button class="btn addBtn" type="button" style="margin: 0 0 0 auto;  width: 120px;">
                                 거래처 저장
                             </button>
 
-                            <script>
-                                const checkbox = document.getElementById('checkbox');
-                                const dateDisplay = document.getElementById('dateDisplay');
-                                const currentDateSpan = document.getElementById('currentDate');
-                                     currentDateSpan.textContent = '연도- 월- 일';
 
-                                checkbox.addEventListener('click', () => {
-                                    if (checkbox.checked) {
-                                        const today = new Date();
-                                        const year = today.getFullYear();
-                                        const month = String(today.getMonth() + 1).padStart(2, '0');
-                                        const day = String(today.getDate()).padStart(2, '0');
-                                        const dateString = `${year}-${month}-${day}`;
-                                        currentDateSpan.textContent = year+'-'+month+'-'+day;
-                                    } else {
-                                        currentDateSpan.textContent = '연도- 월- 일';
-                                    }
-                                });
-                            </script>
                         </li>
                     </ul>
                 </div>
@@ -234,28 +213,17 @@
             <button type="button" class="btn btn-white " onClick="history.go(-1)">이전화면</button>
             <button id="clearButton" type="button" class="btn btn-white " onClick="clearAll()">전체삭제</button>
             <button type="button" class="btn btn-white ">신규등록</button>
-            <button type="button" class="btn btn-blue" id="checkButton" onClick="showDate()">제출하기
+            <button type="button" class="btn btn-blue" id="submitBtn" onClick="checkBox()">제출하기
             </button>
         </div>
     </div>
     </div>
 </section>
 
-<script>
-    function openPopSearch() {
-            document.getElementById('popSearch').style.display = 'flex';
-        }
-
-    function closePopSearch() {
-        document.getElementById('popSearch').style.display = 'none';
-    }
-
-</script>
 
 
 
-
-
-
+<script src="/resources/js/dailyReport/step3/dailyform-sub.js"></script>
+<script src="/resources/js/dailyReport/step3/dailyform.js"></script>
 
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

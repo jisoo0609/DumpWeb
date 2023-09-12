@@ -3,30 +3,28 @@
 
 /* 삭제 */
 /* 전역 스타일 설정 */
-/* body {
+body {
   background: #ddd;
-} */
-
-span {
-  color: var(--color-bg-border-blue);
 }
+
 .common_btn {
-  cursor: pointer;
   text-align: center;
   border: 1px solid #0068b7;
+  cursor: pointer;
   background: #fff;
   font-size: 16px;
   color: #0064c1;
   font-weight: 600;
   width: 120px;
-  height: 40px;
+  height: 45px;
+  line-height: 43px;
 }
 
 /* 전역 변수 및 상수 설정 */
 :root {
   /* 폰트 크기 */
-  --font-large: 24px;
-  --font-medium: 15px;
+  --font-large: 18px;
+  --font-medium: 13px;
   --font-small: 14px;
   --font-X_small: 13px;
 
@@ -42,10 +40,10 @@ span {
 
 /* 삭제 */
 /* 페이지 본문 스타일 */
-/* .sub_con_wrapper {
+.sub_con_wrapper {
   padding: 40px 30px 100px;
   background: #fff;
-} */
+}
 
 #maxwrap {
   overflow: hidden;
@@ -54,9 +52,9 @@ span {
 }
 
 /* 삭제 */
-/* .wp80 {
+.wp80 {
   width: 80%;
-} */
+}
 
 /* 페이지 제목 스타일 */
 .subTitle_wrapper {
@@ -65,8 +63,6 @@ span {
   justify-content: space-between;
   align-items: center;
   background: #fff;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
 }
 
 .subTitle_wrapper h1 {
@@ -106,13 +102,20 @@ span {
 
 /* 조회 양식 스타일 */
 .inquiry_form {
-  margin: 30px 0 10px;
+  margin: 20px 0 10px;
+  font-size: var(--font-medium);
   border: 1px solid #ddd;
-  padding: 25px;
+  padding: 15px;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.inquiry_form label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* 운행 기간, 주유, 요소수, 정비 스타일 */
@@ -121,6 +124,10 @@ span {
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+
+.conTop {
+  margin-top: 20px;
 }
 
 .operating_period h1 {
@@ -157,13 +164,23 @@ span {
   left: 50%;
 }
 
-.form-row .col input {
+.col input {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 13px;
   border: 1px solid var(--color-border-gray);
   padding: 5px 10px;
   cursor: pointer;
 }
 
+.col span {
+  color: var(--color-black);
+}
+
+.form-row .col input::placeholder {
+  color: var(--color-black);
+}
 .conbox {
+  font-size: var(--font-medium);
   width: 80%;
   padding: 5px 10px;
   border: 1px solid var(--color-border-gray);
@@ -217,19 +234,20 @@ span {
   white-space: nowrap;
 }
 
-th {
+.th_title th {
   font-weight: var(--weight-bold);
+  font-size: 14px;
 }
 
 th,
 td {
   border: 1px solid var(--color-border-gray);
   padding: 10px 10px;
+  font-size: 12px;
 }
 
 /* 모바일 스타일 */
 @media (max-width: 439px) {
-
   .content {
     display: block;
   }
@@ -240,16 +258,16 @@ td {
   .conbox {
     width: 100%;
   }
-  .form-row {
+  .col {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
   }
-  .form-row .col input {
+  .col input {
     padding: 5px 5px;
   }
-  .form-row .col:first-child::after {
+  .col:first-child::after {
     content: "";
   }
   .table_container {
@@ -264,89 +282,58 @@ td {
   .operating_period label {
     padding: 5px;
   }
-  #flex_important{
+  #flex_important {
     display: flex;
     flex-wrap: wrap;
-  }
-  /* 전역 변수 및 상수 설정 */
-  :root {
-    /* 폰트 크기 */
-    --font-large: 20px;
-    --font-medium: 11px;
-    --font-small: 10px;
-    --font-X_small: 9px;
   }
 }
 
 /* 모바일 스타일 */
-@media (min-width: 440px) and (max-width: 550px) {
-  .form-row {
+@media (max-width: 550px) {
+  .col {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
+    display: flex;
   }
-  .form-row .col input {
+  .col span {
+    display: none;
+  }
+  .col input {
     padding: 5px 5px;
   }
-  .form-row .col:first-child::after {
+  .col:first-child::after {
     content: "";
   }
   .table_container {
     white-space: normal;
   }
-
-  /* 전역 변수 및 상수 설정 */
-  :root {
-    /* 폰트 크기 */
-    --font-large: 21px;
-    --font-medium: 12px;
-    --font-small: 11px;
-    --font-X_small: 10px;
-  }
 }
 
 /* 태블릿 스타일 */
 @media (min-width: 551px) and (max-width: 768px) {
-  .form-row {
+  .col {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px;
   }
-  .form-row .col input {
+  .col input {
     padding: 5px 5px;
   }
-  .form-row .col:first-child::after {
+  .col:first-child::after {
     content: "";
-  }
-  /* 전역 변수 및 상수 설정 */
-  :root {
-    /* 폰트 크기 */
-    --font-large: 22px;
-    --font-medium: 13px;
-    --font-small: 12px;
-    --font-X_small: 11px;
   }
 }
 
 /* 데스크탑 스타일 */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .form-row {
+  .col {
     gap: 20px;
   }
-  .form-row .col input {
+  .col input {
     padding: 5px 5px;
   }
-  .form-row .col:first-child::after {
-    content: "";
-  }
-  /* 전역 변수 및 상수 설정 */
-  :root {
-    /* 폰트 크기 */
-    --font-large: 23px;
-    --font-medium: 14px;
-    --font-small: 13px;
-    --font-X_small: 12px;
-  }
 }
+

@@ -3,7 +3,7 @@ package com.dispatch.dump.commonModule.db.dto;
 import lombok.Data;
 
 @Data
-public class DailyReportSub {
+public class DailyReportStep3Sub {
 
     //tSheet_sub테이블
     private int sheetsubID;
