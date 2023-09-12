@@ -19,7 +19,7 @@
     <link href="/resources/js/jquery.modal-master/css/jquery.modal.theme-atlant.css?version=1.2&20230831191239"
           type="text/css" rel="stylesheet"/>
 
-    <link href="/resources/css/step7/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
+    <link href="/resources/css/step8/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/loading.css">
     <style type="text/css">
         .unit {
@@ -425,7 +425,7 @@
 </div>
 
 <script type="text/javascript"
-        src="/resources/js/dailyReport/step7/list.js?jsVerType=2020230831191239"></script>
+        src="/resources/js/dailyReport/step8/list.js?jsVerType=2020230831191239"></script>
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64bdd806e937defb179aa9a2b9cc6c95&libraries=services"></script>
 
