@@ -5,7 +5,8 @@ import com.dispatch.dump.commonModule.db.dto.DailyReportStep4Sub;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep4Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
