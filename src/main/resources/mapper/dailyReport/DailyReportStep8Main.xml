@@ -14,7 +14,22 @@
 
     <!--  2. tsheet_sub의 sheetId2와 tsheet의 sheetId 같은걸 찾아오기-->
     <select id="searchReceiptsMainBySheetID2" resultType="DailyReportStep8Sub">
-        select fromsite, tosite, item, Qty,Qtyup from tSheet_sub where sheetID2=#{sheetID2}
+        select fromsite, tosite, item, Qty, Qtyup from tSheet_sub where sheetID2=#{sheetID2}
+    </select>
+
+    <select id ="searchReceipts" resultType="DailyReportStep8">
+        SELECT
+            t.sheetID,
+            DATE_FORMAT(t.date, '%y-%m-%d') as date,
+            t.CarNo,
+            s.fromsite,
+            s.tosite,
+            s.item,
+            s.Qty,
+            s.Qtyup
+        FROM tsheet t
+            JOIN tSheet_sub s ON t.sheetID = s.sheetID2
+        WHERE t.carSubmitTel = #{userId}
     </select>
 
 
