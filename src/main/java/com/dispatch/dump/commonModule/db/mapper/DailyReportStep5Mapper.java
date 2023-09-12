@@ -8,7 +8,7 @@ import java.util.List;
 public interface DailyReportStep5Mapper {
 
     /* FUNCTION ::  등록 */
-    int insertDailyReportStep5(DailyReportStep5 dailyReportMain);
+    int insertDailyReportStep5(DailyReportStep5 dailyReportStep5);
 
 
     /* FUNCTION :: 일보 수정 *//*
