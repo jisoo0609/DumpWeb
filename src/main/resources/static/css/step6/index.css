@@ -67,8 +67,6 @@ span {
   justify-content: space-between;
   align-items: center;
   background: #fff;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
 }
 
 .subTitle_wrapper h1 {
@@ -108,7 +106,7 @@ span {
 
 /* 조회 양식 스타일 */
 .inquiry_form {
-  margin: 30px 0 10px;
+  margin: 20px 0 10px;
   font-size: var(--font-medium);
   border: 1px solid #ddd;
   padding: 15px;
@@ -130,6 +128,10 @@ span {
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+
+.conTop {
+  margin-top: 20px;
 }
 
 .operating_period h1 {
@@ -167,6 +169,8 @@ span {
 }
 
 .col input {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 13px;
   border: 1px solid var(--color-border-gray);
   padding: 5px 10px;
   cursor: pointer;
@@ -197,7 +201,7 @@ span {
 /* 검색 버튼 스타일 */
 .search_btn {
   line-height: 38px;
-  background-image: url(/resources/image/step6/ico_search-b.png);
+  background-image: url(/images/ico_search-b.png);
   background-position: 25px 9px;
   background-repeat: no-repeat;
   background-size: 23px;
@@ -336,3 +340,4 @@ td {
     padding: 5px 5px;
   }
 }
+
