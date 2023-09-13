@@ -1,6 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%--test123--%>
+<%--<%@ include file="/WEB-INF/jsp/include/header.jsp" %>--%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -19,9 +20,19 @@
     <link href="/resources/js/jquery.modal-master/css/jquery.modal.theme-atlant.css?version=1.2&20230831191239"
           type="text/css" rel="stylesheet"/>
 
-    <link href="/resources/css/step7/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
+    <link href="/resources/css/step8/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/loading.css">
     <style type="text/css">
+        @media screen and (min-width: 280px) and (max-width: 1279px) {
+            .sub-title {
+                padding-bottom: initial;
+                border-bottom: initial;
+            }
+        }
+
+        .unit {
+            padding-left: 2px;
+        }
 
         .default-tab__ul.cnt8 li {
             width: 12.5%;
@@ -218,10 +229,10 @@
             text-align: center;
         }
 
-        .mobile-navi-dept1 a.active {
-            background: #0068b7;
-            color: #fff;
-        }
+        /*.mobile-navi-dept1 a.active {*/
+        /*    background: #0068b7;*/
+        /*    color: #fff;*/
+        /*}*/
 
         .closeMask {
             position: fixed;
@@ -239,7 +250,6 @@
 
         }
     </style>
-
     <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 
@@ -281,7 +291,7 @@
 
                 <!--업체명-->
                 <span class="comp-name">
-						미래내일
+						08호7313
 					</span>
 
                 <div class="header-top-right">
@@ -306,7 +316,7 @@
         <!--로그인후//dis-n 클래스 로그인에 따라 추가-->
         <div class="mobile-navi-top">
         <span>
-            임창운 님
+            08호7313
         </span>
             <span class="bar"></span>
             <span class="app-dis-n">
@@ -324,30 +334,69 @@
         </div>
 
         <ul class="mobile-navi-dept1">
-
-
             <li>
                 <p>
-                    <a class="left_menu" href="/carManage/list">
-                        <span style="font-weight: bold; color: blue;">①</span>
-                        운행 및 배차진행·전표관리
+                    <a class="left_menu" href="/dailyReport/driver">
+                        <span style="font-weight: bold; color: blue;">①</span> 기사용 메뉴
                     </a>
                 </p>
             </li>
-
             <li>
-                <p><a class="left_menu" href="/integrateDispatch/list">
-
-                    <span style="font-weight: bold; color: blue;">③</span>
-
-
-                    차량별 배차현황
-
-
-                </a></p>
+                <p>
+                    <a class="left_menu" href="/dailyReport/manager">
+                        <span style="font-weight: bold; color: blue;">②</span> 제출처용 메뉴
+                    </a>
+                </p>
             </li>
-
-
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/form">
+                        <span style="font-weight: bold; color: blue;">③</span> 운행일보 등록
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/list">
+                        <span style="font-weight: bold; color: blue;">④</span> 운행일보 조회
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/carcareform">
+                        <span style="font-weight: bold; color: blue;">⑤</span> 차량관리 차계부 등록
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/carcarelist">
+                        <span style="font-weight: bold; color: blue;">⑥</span> 차량관리 차계부 조회
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/oldform">
+                        <span style="font-weight: bold; color: blue;">⑦</span> 제출처 주문 등록
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/receipts">
+                        <span style="font-weight: bold; color: blue;">⑧</span> 제출처 전표 조회
+                    </a>
+                </p>
+            </li>
+            <li>
+                <p>
+                    <a class="left_menu" href="/dailyReport/receipts">
+                        <span style="font-weight: bold; color: blue;">⑨</span> 제출처 차량관리
+                    </a>
+                </p>
+            </li>
         </ul>
     </nav>
 </header>
@@ -384,51 +433,41 @@
 </div>
 
 <script type="text/javascript"
-        src="/resources/js/dailyReport/step7/list.js?jsVerType=2020230831191239"></script>
+        src="/resources/js/dailyReport/step8/list.js?jsVerType=2020230831191239"></script>
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64bdd806e937defb179aa9a2b9cc6c95&libraries=services"></script>
-
-<script>
+<script type="text/javascript">
     $(document).ready(function () {
-        if ('4' == 4) {
-            $(".datepicker").datepicker({
-                dateFormat: "yy-mm-dd",
-                showMonthAfterYear: true,
-                monthNamesShort: month_text,
-                dayNamesMin: day_text,
-                yearSuffix: "년",
-                changeYear: true,
-                changeMonth: true,
-                minDate: '-2m',
-                yearRange: "-1:+5",
-            });
-            $('.last').datepicker("option", "minDate", $(".fst").val()); // 운행기간 종료일 범위 초기값 설정
+        $(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd",
+            showMonthAfterYear: true,
+            monthNamesShort: month_text,
+            dayNamesMin: day_text,
+            yearSuffix: "년",
+            changeYear: true,
+            changeMonth: true,
+        });
+        $('.last').datepicker("option", "minDate", $(".fst").val()); // 운행기간 종료일 범위 초기값 설정
 
-            $('.fst').on('change', function () { // 운행기간 종료일 범위 동적처리
-                $('.last').datepicker("option", "minDate", $(".fst").val());
-            });
-        } else {
-            $(".datepicker").datepicker({
-                dateFormat: "yy-mm-dd",
-                showMonthAfterYear: true,
-                monthNamesShort: month_text,
-                dayNamesMin: day_text,
-                yearSuffix: "년",
-                changeYear: true,
-                changeMonth: true,
-                yearRange: "-5:+5",
-            });
-            $('.last').datepicker("option", "minDate", $(".fst").val()); // 운행기간 종료일 범위 초기값 설정
-
-            $('.fst').on('change', function () { // 운행기간 종료일 범위 동적처리
-                $('.last').datepicker("option", "minDate", $(".fst").val());
-            });
-        }
-
-
-    });
+        $('.fst').on('change', function () { // 운행기간 종료일 범위 동적처리
+            $('.last').datepicker("option", "minDate", $(".fst").val());
+        });
+    })
 </script>
 
+<script>
+    var totalQty = 0;
+    <c:forEach items="${receiptsList}" var="receipt">
+    var qty = parseInt("${receipt.qty}");
+    totalQty += qty;
+    </c:forEach>
+    window.onload = function () {
+        var totalQtySpan = document.getElementById("totalQty");
+        if (totalQtySpan) {
+            totalQtySpan.innerText = totalQty;
+        }
+    };
+</script>
 <section class="sub-contents-wrap maxwrap">
 
     <div class="sub-title">
@@ -487,13 +526,13 @@
     <form name="searchfrm" method="post">
         <input type="hidden" name="pageNo" value="1"/>
         <input type="hidden" id="searchDetailChk" name="searchDetailChk" value="0">
-
+        <input type="hidden" name="sheetID" value="${!empty view ? view.sheetID : 0}">
         <div class="search-form">
             <div class="search-form-major" id="dateArea">
                 <label>운행기간</label>
                 <div class="date-wrap dis-ib dis-b-t">
                     <input type="text" value="2023-08-31" class="fst datepicker"
-                           name="searchStartDate" readonly autocomplete="off"> <span class="unit">~</span>
+                           name="searchStartDate" readonly autocomplete="off"><span class="unit">~</span>
                     <input type="text" value="2023-08-31" class="last datepicker" name="searchEndDate"
                            readonly autocomplete="off">
                 </div>
@@ -506,7 +545,7 @@
                     <label>구분</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 clubAutocomplete trn" placeholder="구분" name="club" id="club"
-                               value=""
+                               value="${!empty view ? view.club : ''}"
                                autocomplete="off">
                         <%--                        <span class="input-group-clear dis-n" id="club_clear">x</span>--%>
                         <select class="club " id="clubBox" onchange="$.selectBoxChange(this.value, 'club')">
@@ -517,20 +556,11 @@
                         </select>
                     </div>
                 </li>
-                <%--                <li>--%>
-                <%--                    <label>차량번호</label>--%>
-                <%--                    <div class="input-group select">--%>
-                <%--                        <input type="text" class="wp100 carNoAutocomplete trn" placeholder="차량번호" name="carNo"--%>
-                <%--                               id="carNo" value="임창운"--%>
-                <%--                               autocomplete="off" disabled>--%>
-
-                <%--                    </div>--%>
-                <%--                </li>--%>
                 <li>
                     <label>상차지</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 fromsiteAutocomplete trn" placeholder="상차지" name="fromsite"
-                               id="fromsite" value="" autocomplete="off">
+                               id="fromsite" autocomplete="off" value="${!empty view ? view.fromsite : ''}">
                         <%--                        <span class="input-group-clear" id="fromsite_clear">x</span>--%>
                         <select class="fromsite " id="fromsiteBox" onchange="$.selectBoxChange(this.value, 'fromsite')">
                             <option value="">전체</option>
@@ -545,15 +575,13 @@
                 <li>
                     <label>하차지</label>
                     <div class="input-group select">
-                        <input type="text" class="wp100 tositeAutocomplete trn" placeholder="하차지" name="tosite"
-                               id="tosite" value="" autocomplete="off">
+                        <input type="text" class="wp100 tositeAuto complete trn" placeholder="하차지" name="tosite"
+                               id="tosite" autocomplete="off" value="${!empty view ? view.tosite : ''}">
                         <%--                        <span class="input-group-clear" id="tosite_clear">x</span>--%>
                         <select class="tosite " id="tositeBox" onchange="$.selectBoxChange(this.value, 'tosite')">
                             <option value="">전체</option>
 
-                            <option value="지밸리"
-                            >지밸리
-                            </option>
+                            <option value="지밸리">지밸리</option>
 
                         </select>
                     </div>
@@ -561,8 +589,8 @@
                 <li>
                     <label>품목</label>
                     <div class="input-group select">
-                        <input type="text" class="wp100 itemAutocomplete trn" placeholder="품목" name="item" id="item"
-                               value="" autocomplete="off">
+                        <input type="text" class="wp100 itemAuto complete trn" placeholder="품목" name="item" id="item"
+                               value="${!empty view ? view.item : ''}" autocomplete="off">
                         <%--                        <span class="input-group-clear" id="item_clear">x</span>--%>
                         <select class="item " id="itemBox" onchange="$.selectBoxChange(this.value, 'item')">
                             <option value="">전체</option>
@@ -579,8 +607,9 @@
                     <div class="input-group select">
 
 
-                        <input type="text" class="wp100 carHostAutocomplete trn" placeholder="차량번호"
-                               name="carHost" id="carHost" value="" autocomplete="off">
+                        <input type="text" class="wp100 carHostAuto complete trn" placeholder="차량번호"
+                               name="carHost" id="carHost" value="${!empty view ? view.carHost : ''}"
+                               autocomplete="off">
                         <%--                        <span class="input-group-clear dis-n" id="carHost_clear">x</span>--%>
                         <select class="carHost " id="carHostBox"
                                 onchange="$.selectBoxChange(this.value, 'carHost')">
@@ -620,7 +649,7 @@
             <div style="width: 50%;  float: left;">
                 <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
                         type="radio" name="searchType"
-                        value="car" checked/>차량 기준</label>
+                        value="car"/>차량 기준</label>
                 <%--                <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 155px;"><input--%>
                 <%--                        type="radio" name="searchType"--%>
                 <%--                        value="tosite"/>하차지 기준</label>--%>
@@ -631,8 +660,7 @@
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="searchType"
-                        value="fromsite"/>운행일 기준</label>
+                        type="radio" name="searchType" value="fromsite"/>운행일 기준</label>
                 <%--                <br/>--%>
                 <%--                <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 190px;"><input--%>
                 <%--                        type="radio" name="searchType"--%>
@@ -647,38 +675,56 @@
                onkeydown="if(event.keyCode == 13) return false;">
     </div>
 
-    <div class="">
+    <div id="tableshow">
         <div class="table-top" style="height: auto; display:  block;">
+            <%--            <table class="list-table" style="margin-left: auto; margin-right: auto; width: 100%; margin-bottom: 20px;">--%>
+            <%--                <colgroup>--%>
+            <%--                    <col width="50%">--%>
+            <%--                    <col width="50%">--%>
+            <%--                </colgroup>--%>
+            <%--                <tbody><tr>--%>
+            <%--                    <th></th>--%>
+            <%--                    <th>총 금액</th>--%>
+            <%--                </tr>--%>
+            <%--                <tr>--%>
+            <%--                    <th class="a-center">운반비 합계</th>--%>
+            <%--                    <td class="a-right" style="padding: 10px;">--%>
+            <%--                        5000--%>
+            <%--                    </td>--%>
+            <%--                </tr>--%>
+            <%--                <tr>--%>
+            <%--                    <th class="a-center">수수료</th>--%>
+            <%--                    <td class="a-right" style="padding: 10px;">--%>
+            <%--                        2000--%>
+            <%--                    </td>--%>
+            <%--                </tr>--%>
+            <%--                <tr>--%>
+            <%--                    <th class="a-center">운반비 공급가액</th>--%>
+            <%--                    <td class="a-right" style="padding: 10px;">--%>
+            <%--                        200000--%>
+            <%--                    </td>--%>
+            <%--                </tr>--%>
+            <%--                </tbody>--%>
+            <%--            </table>--%>
             <p class="total">
-                <span>데이터</span> <span class="cnt default-blue">1</span>
-                <span>건 (총대수 : <span class="cnt default-blue">1</span> 대)가 검색되었습니다.</span>
+                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}" /></span>
+                <span>건 (총대수 : <span class="cnt default-blue"><span id="totalQty"></span> </span> 대)가 검색되었습니다.</span>
             </p>
         </div>
 
         <div class="btn-area">
-            <input type="button" class="btn btn-black" value="일괄결제" onClick="$.search()"
+            <input type="button" style="background-image: none !important;text-indent: 0px !important;"
+                   class="btn btn-search btn-search__line" value="일괄결제" onClick="$.allChkChange(1);"
                    onkeydown="if(event.keyCode == 13) return false;">
-            <input type="button" class="btn btn-black" value="취소" onClick="$.search()"
+            <input type="button" style="background-image: none !important;text-indent: 0px !important;"
+                   class="btn btn-search btn-search__line" value="취소" onClick="$.allChkChange(0);"
                    onkeydown="if(event.keyCode == 13) return false;">
         </div>
-
-        <div style="width: 100%; overflow-x:auto; overflow-y: hidden;">
+        <div style="width: 100%; overflow-x: auto; overflow-y: hidden;">
             <table class="list-table">
-                <%--            <colgroup>--%>
-                <%--                <col style="width: 2%">--%>
-                <%--                <col style="width: 9%">--%>
-                <%--                <col style="width: 20%">--%>
-                <%--                <col style="width: 21%">--%>
-                <%--                <col style="width: 21%">--%>
-                <%--                <col style="width: 6%">--%>
-                <%--                <col style="width: 6%">--%>
-                <%--                <col style="width: 15%">--%>
-                <%--            </colgroup>--%>
                 <thead>
                 <tr>
                     <th>운행일</th>
-                    <%--                <th>차량번호</th>--%>
-                    <%--                <th>품목</th>--%>
                     <th>상차지</th>
                     <th>하차지</th>
                     <th>차량번호</th>
@@ -686,16 +732,11 @@
                     <th>진행</th>
                 </tr>
                 </thead>
-                <tr style="border-bottom: 2px solid red;">
+                <tbody>
+                <tr>
                     <td>
-                        1
+                        23-09-09
                     </td>
-                    <%--                <td>--%>
-                    <%--                    임창운--%>
-                    <%--                </td>--%>
-                    <%--                <td>--%>
-                    <%--                    출퇴근--%>
-                    <%--                </td>--%>
                     <td>
                         구디
                     </td>
@@ -712,30 +753,129 @@
                         <span style="color: #000080; font-weight: bold;">하차</span>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        23-09-10
+                    </td>
+                    <td>
+                        구디
+                    </td>
+                    <td>
+                        지밸리
+                    </td>
+                    <td>
+                        더미데이터
+                    </td>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        <span style="color: #000080; font-weight: bold;">하차</span>
+                    </td>
+                </tr>
+                <c:forEach items="${receiptsList}" var="receipt">
+                    <tr>
+                        <td>${receipt.date}</td>
+                        <td>${receipt.fromsite}</td>
+                        <td>${receipt.tosite}</td>
+                        <td>${receipt.carNo}</td>
+                        <td>${receipt.qty}</td>
+                        <td>
+                        <span style="color: #000080; font-weight: bold;">
+                                ${receipt.qty}
+                        </span>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
             </table>
-            <div>
-                <section class="paging">
-                    <ul class="paging__ul" id="page-div">
+        </div>
+        <%--기존코드--%>
+        <%--        <div style="width: 100%; overflow-x:auto; overflow-y: hidden;">--%>
+        <%--            <table class="list-table">--%>
+        <%--                &lt;%&ndash;            <colgroup>&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 2%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 9%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 20%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 21%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 21%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 6%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 6%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 15%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;            </colgroup>&ndash;%&gt;--%>
+        <%--                <thead>--%>
+        <%--                <tr>--%>
+        <%--                    <th>운행일</th>--%>
+        <%--                    <th>상차지</th>--%>
+        <%--                    <th>하차지</th>--%>
+        <%--                    <th>차량번호</th>--%>
+        <%--                    <th>대수</th>--%>
+        <%--                    <th>진행</th>--%>
+        <%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        구디--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        지밸리--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        37우2598--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        <span style="color: #000080; font-weight: bold;">하차</span>--%>
+        <%--                    </td>--%>
+        <%--                </tr>--%>
+        <%--                <tr style="border-bottom: 2px solid red;">--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        구디--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        지밸리--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        37우2598--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        <span style="color: #000080; font-weight: bold;">하차</span>--%>
+        <%--                    </td>--%>
+        <%--                </tr>--%>
+        <%--            </table>--%>
+        <div>
+            <section class="paging">
+                <ul class="paging__ul" id="page-div">
 
-                        <li><a style="cursor: pointer;" onclick="$.valuePg(1)"><img
-                                src="/resources/image/icons/ico_prev.png" alt="이전"></a></li>
+                    <li><a style="cursor: pointer;" onclick="$.valuePg(1)"><img
+                            src="/resources/image/icons/ico_prev.png" alt="이전"></a></li>
 
-                        <li class="pageNum">
-
-
-                            <a style="cursor: pointer;"
-                               onclick="$.valuePg(1)"
-                               class="active">1</a>
+                    <li class="pageNum">
 
 
-                        </li>
+                        <a style="cursor: pointer;"
+                           onclick="$.valuePg(1)"
+                           class="active">1</a>
 
-                        <li><a style="cursor: pointer;" onclick="$.valuePg(1);"><img
-                                src="/resources/image/icons/ico_next.png" alt="다음"></a></li>
-                    </ul>
-                </section>
 
-            </div>
+                    </li>
+
+                    <li><a style="cursor: pointer;" onclick="$.valuePg(1);"><img
+                            src="/resources/image/icons/ico_next.png" alt="다음"></a></li>
+                </ul>
+            </section>
+
+        </div>
 
 </section>
 
@@ -782,4 +922,5 @@
 <%--</footer>--%>
 </body>
 </html>
+
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

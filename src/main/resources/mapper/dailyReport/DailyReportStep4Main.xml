@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep4Mapper">
+    <select id="getDailyReportByCarNo" resultType="DailyReportStep4Main">
+        select sheetsubID, DATE_FORMAT(date, '%y-%m-%d') as date, CarNo, carSubmit, date from DailyReportStep4Main where CarNo = #{carNo}
+    </select>
+
+    <select id="getDailyReportMainBySheetID2" resultType="DailyReportStep4Sub">
+        select fromsite, tosite, item, Qty from tSheet_sub where sheetID2 = #{sheetID2}
+    </select>
+</mapper>
