@@ -26,8 +26,8 @@
 <div id="popSearch" class="popup" style="z-index: 99;">
     <div class="popup-content">
          <div class="search-container" >
-             <input type="text" id="search-input" placeholder="거래처 검색">
-             <button class="search-button">검색</button>
+             <input type="text" id="search-input" placeholder="거래처 검색" >
+             <button class="search-button" onclick="$.search()" id="searchText">검색</button>
          </div>
          <div style="border-top: 2px solid #0068b7; margin-top: 5px; padding-top: 5px;">
             <table class="list-table">
@@ -45,32 +45,11 @@
                     <th></th>
                 </tr>
                 </thead>
+                <tbody id="searchResult">
+                    <!-- 검색 결과는 이 부분에 동적으로 추가될 것입니다. -->
+                </tbody>
 
-                <tr>
-                    <td>기원테크</td>
-                    <td>jiji</td>
-                    <td>01012344321</td>
-                    <td>
-                        <button class="addBtn" style="width: 40px; margin-top: 0;">
-                            선택
-                        </button>
-                    </td>
-                </tr>
 
-                <tr>
-                    <c:forEach var="list" items="${groupList}" varStatus="status">
-                        <tr onclick="$.updateData(${list.sheetID}, '${list.carSubmit}')">
-                            <td>${list.carSubmit}</td>
-                            <td>${list.salesman}</td>
-                            <td>${list.carSubmitTel}</td>
-                            <td>
-                                <button class="btn addBtn" style="width: 40px; margin-top: 0;">
-                                    선택
-                                </button>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tr>
             </table>
 
          </div>
