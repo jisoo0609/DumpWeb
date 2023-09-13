@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -52,6 +53,7 @@ public class Step3Service {
         }
         return commonUtil.jsonFormatTransfer(rtnMap); }
 
+    /*제출처 정보만 저장*/
     public String save(DailyReportStep3Main dailyReportStep3Main) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
         HttpSession session = commonUtil.getSession();
@@ -70,6 +72,24 @@ public class Step3Service {
                 //dailyReportMainMapper.updateDailyReport(dailyReportMain);
             }
             rtnMap.put("httpCode", 200);
+        } catch (Exception e) {
+            log.error("Exception["+ e.getMessage() +"]");
+        }
+        return commonUtil.jsonFormatTransfer(rtnMap);
+    }
+
+    /*제출처 목록 조회*/
+    public String search(DailyReportStep3Main dailyReportStep3Main) {
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+
+        try {
+            System.out.print("CarSubmit는?"+dailyReportStep3Main.getCarSubmit());
+            System.out.print("CarSubmitTel은?"+dailyReportStep3Main.getCarSubmitTel());
+            System.out.print("salesman은?"+dailyReportStep3Main.getSalesman());
+            List<DailyReportStep3Main> searchList=dailyReportStep3MainMapper.findCarsubmitList(dailyReportStep3Main);
+            System.out.println("searchList는?"+searchList);
+            rtnMap.put("httpCode", 200);
+            rtnMap.put("searchList", searchList);
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }

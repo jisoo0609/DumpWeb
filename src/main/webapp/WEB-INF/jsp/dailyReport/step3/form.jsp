@@ -109,7 +109,7 @@
                             <input type="checkbox" id="checkbox" name="chk1" style="margin-left: 70px;"
                             value="0">
                             <div id="dateDisplay" style="margin-left: 10px; width: 150px;">결재일 : <span id="currentDate" ></span></div>
-                            <button class="btn addBtn" type="button" style="margin: 0 0 0 auto;  width: 120px;">
+                            <button class="btn addBtn" type="button" onclick="$.saveCarSubmit();"style="margin: 0 0 0 auto;  width: 120px;">
                                 거래처 저장
                             </button>
 

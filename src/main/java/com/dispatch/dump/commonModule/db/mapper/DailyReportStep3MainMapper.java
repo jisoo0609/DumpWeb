@@ -9,6 +9,8 @@ public interface DailyReportStep3MainMapper {
     /* FUNCTION ::  등록 */
     int insertDailyReportMain(DailyReportStep3Main dailyReportStep3Main);
 
+    /* FUNCTION ::  제출처 리스트 검색 */
+    List<DailyReportStep3Main> findCarsubmitList(DailyReportStep3Main dailyReportStep3Main);
     /*DailyReportStep3Main findJoinDailyReportList(DailyReportStep3Main dailyReportStep3Main);*/
 
     /* FUNCTION :: 일보 수정 *//*

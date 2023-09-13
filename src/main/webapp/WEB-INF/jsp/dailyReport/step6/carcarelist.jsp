@@ -30,12 +30,12 @@
   <!-- 페이지 제목 및 위치 정보 -->
   <div class="subTitle_wrapper">
     <h1>
-      차량관리 조회
+          차량관리 차계부 조회
       <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
     </h1>
     <ul class="location_ul">
       <li><img src="/resources/image/step6/ico_home.png" alt="홈" /></li>
-      <li>차량관리 조회</li>
+          <li>차량관리 차계부 조회</li>
       <img
               src="/resources/image/step6/ico_arrow_right_gray.png"
               alt="화살표"
@@ -47,7 +47,7 @@
   <!-- 조회 양식-->
       <div class="operating_period content conTop" >
         <h1>
-          ▪운행기간
+          기간
           <!-- <img src="images/ico_que.png" alt="도움말" class="info" /> -->
         </h1>
         <label class="start-text col" for="start-date">
@@ -63,36 +63,26 @@
         <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
       </h1>
       <select class="detailSelect conbox">
-        <option value="옵션1">옵션1</option>
-        <option value="옵션2">옵션2</option>
-        <option value="옵션3">옵션3</option>
+            <option value="옵션1">주유</option>
+            <option value="옵션2">요소수</option>
+            <option value="옵션3">엔진오일</option>
+            <option value="옵션3">정비(수리)</option>
+            <option value="옵션3">기타</option>
       </select>
     </div>
-    <div class="operating_period content">
-      <h1>
-        요소수
-        <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
-      </h1>
-      <select class="detailSelect conbox">
-        <option value="옵션1">옵션1</option>
-        <option value="옵션2">옵션2</option>
-        <option value="옵션3">옵션3</option>
-      </select>
-    </div>
-    <div class="operating_period content">
-      <h1>
-        정비
-        <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
-      </h1>
-      <select class="detailSelect conbox">
-        <option value="옵션1">옵션1</option>
-        <option value="옵션2">옵션2</option>
-        <option value="옵션3">옵션3</option>
-      </select>
-    </div>
-  </div>
+        <!-- <div class="operating_period content">
+        <h1>
+          정비
+        </h1>
+        <select class="detailSelect conbox">
+          <option value="옵션1">옵션1</option>
+          <option value="옵션2">옵션2</option>
+          <option value="옵션3">옵션3</option>
+        </select>
+      </div> -->
+      </div>
       <div class="inquiry_form section_check">
-        <div class="operating_period content" id="flex_important">
+        <div class="operating_period content conChoice" id="flex_important">
           <label>
             날짜 기준
             <input type="radio" name="test" checked />
@@ -101,41 +91,41 @@
             품목 기준
             <input type="radio" name="test" />
           </label>
-          <label>
-            요소수
-            <input type="radio" name="test" />
-          </label>
-          <label>
-            정비
-            <input type="radio" name="test" />
-          </label>
+          <!-- <label>
+          요소수
+          <input type="radio" name="test" />
+        </label>
+        <label>
+          정비
+          <input type="radio" name="test" />
+        </label> -->
         </div>
       </div>
-  <div class="search_container">
-    <button class="search_btn common_btn">검색</button>
-  </div>
-  <div class="result_search">
-    <h1></h1>
-  </div>
-  <div class="agreement_container">
-          <button class="common_btn" style="background: #333; color: white; border: none;" >일괄결재</button>
-          <button class="common_btn" style="background: #333; color: white; border: none;">취소</button>
-        </div>
-  <div class="line"></div>
-  <div class="table_container">
-    <table>
-      <thead>
-        <tr class="th_title">
-        <th>No</th>
-        <th>차량번호</th>
-        <th>품목</th>
-        <th>시간</th>
-        <th>진행</th>
-      </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+      <div class="search_container">
+        <button class="search_btn common_btn">검색</button>
+      </div>
+      <div class="result_search">
+        <h1></h1>
+      </div>
+      <div class="agreement_container">
+        <button class="common_btn">일괄결재</button>
+        <button class="common_btn">취소</button>
+      </div>
+      <div class="line"></div>
+      <div class="table_container">
+        <table>
+          <thead>
+            <tr class="th_title">
+              <th>분류</th>
+              <th>최종 주행거리</th>
+              <th>사용금액</th>
+              <th>기타(설명)</th>
+              <th>주유량</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
 </div>
 
 <!-- 페이지 본문 종료 -->
