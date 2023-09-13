@@ -69,7 +69,7 @@
             <ul>
                 <li>
                     <label class="drvLabel" for="datepicker">날짜</label>
-                    <span class="drvInputSpan"><input id="datepicker"></span>
+                    <span class="drvInputSpan"><input id="datepicker" inputmode="none"></span>
                     <label for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
                     <input id="chk2" type="checkbox">
                 </li>

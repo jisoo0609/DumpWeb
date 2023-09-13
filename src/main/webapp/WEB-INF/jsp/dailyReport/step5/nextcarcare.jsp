@@ -84,7 +84,7 @@
             <ul>
                 <li>
                     <label class="drvLabel" for="datepicker1">날짜</label>
-                    <span class="drvInputSpan"><input id="datepicker1"></span>
+                    <span class="drvInputSpan"><input id="datepicker1" inputmode="none"></span>
                     <label for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
                     <input id="chk2" type="checkbox">
                 </li>
@@ -106,7 +106,7 @@
                 </li>
                 <li>
                     <label class="drvLabel" for="datepicker2">교환 예정일</label>
-                    <span class="drvInputSpan"><input id="datepicker2"></span>
+                    <span class="drvInputSpan"><input id="datepicker2" inputmode="none"></span>
                 </li>
                 <li>
                     <label class="drvLabel" for="nextlastkm">교환 주행거리</label>
