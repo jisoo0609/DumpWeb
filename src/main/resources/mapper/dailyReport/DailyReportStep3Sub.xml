@@ -7,7 +7,8 @@
 
     <!--운행정보 조회-->
     <select id="findDailyReportSubList" parameterType="int" resultType="DailyReportStep3Sub">
-        select * from tSheet_sub where
+        select * from tSheet_sub
+        where
         sheetID2=#{com.dispatch.dump.commonModule.db.dto.DailyReportStep3Main.sheetID}
     </select>
 
