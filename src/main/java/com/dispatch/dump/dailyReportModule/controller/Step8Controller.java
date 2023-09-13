@@ -32,8 +32,7 @@ public class Step8Controller {
 
     @GetMapping("/receipts")
     public ModelAndView getReceipts() {
-        ModelAndView modelAndView = new ModelAndView("/dailyReport/step8/receipts"); // 뷰 이름 설정 (receipts.jsp)
-        // 모델 데이터 추가
+        ModelAndView modelAndView = new ModelAndView("/dailyReport/step8/receipts");
 //        List<DailyReportStep8> receiptsList = step8Service.getReceipts();
         modelAndView.addObject("receiptsList", step8Service.getReceipts());
         return modelAndView;

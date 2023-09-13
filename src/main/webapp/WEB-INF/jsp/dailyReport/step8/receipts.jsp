@@ -720,13 +720,53 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr>
+                    <td>
+                        23-09-09
+                    </td>
+                    <td>
+                        구디
+                    </td>
+                    <td>
+                        지밸리
+                    </td>
+                    <td>
+                        37우2598
+                    </td>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        <span style="color: #000080; font-weight: bold;">하차</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        23-09-10
+                    </td>
+                    <td>
+                        구디
+                    </td>
+                    <td>
+                        지밸리
+                    </td>
+                    <td>
+                        더미데이터
+                    </td>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        <span style="color: #000080; font-weight: bold;">하차</span>
+                    </td>
+                </tr>
                 <c:forEach items="${receiptsList}" var="receipt">
                     <tr>
-                        <td>${receipt.date}</td> <!-- DailyReportStep8Sub 객체의 'day' 필드 -->
-                        <td>${receipt.fromsite}</td> <!-- 'startLocation' 필드 -->
-                        <td>${receipt.tosite}</td> <!-- 'endLocation' 필드 -->
-                        <td>${receipt.carNo}</td> <!-- 'vehicleNumber' 필드 -->
-                        <td>${receipt.qty}</td> <!-- 'quantity' 필드 -->
+                        <td>${receipt.date}</td>
+                        <td>${receipt.fromsite}</td>
+                        <td>${receipt.tosite}</td>
+                        <td>${receipt.carNo}</td>
+                        <td>${receipt.qty}</td>
                         <td>
                         <span style="color: #000080; font-weight: bold;">
                                 ${receipt.qty}
@@ -737,92 +777,92 @@
                 </tbody>
             </table>
         </div>
-<%--기존코드--%>
-<%--        <div style="width: 100%; overflow-x:auto; overflow-y: hidden;">--%>
-<%--            <table class="list-table">--%>
-<%--                &lt;%&ndash;            <colgroup>&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                <col style="width: 2%">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                <col style="width: 9%">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                <col style="width: 20%">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                <col style="width: 21%">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                <col style="width: 21%">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                <col style="width: 6%">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                <col style="width: 6%">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;                <col style="width: 15%">&ndash;%&gt;--%>
-<%--                &lt;%&ndash;            </colgroup>&ndash;%&gt;--%>
-<%--                <thead>--%>
-<%--                <tr>--%>
-<%--                    <th>운행일</th>--%>
-<%--                    <th>상차지</th>--%>
-<%--                    <th>하차지</th>--%>
-<%--                    <th>차량번호</th>--%>
-<%--                    <th>대수</th>--%>
-<%--                    <th>진행</th>--%>
-<%--                </tr>--%>
-<%--                <tr>--%>
-<%--                    <td>--%>
-<%--                        1--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        구디--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        지밸리--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        37우2598--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        1--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        <span style="color: #000080; font-weight: bold;">하차</span>--%>
-<%--                    </td>--%>
-<%--                </tr>--%>
-<%--                <tr style="border-bottom: 2px solid red;">--%>
-<%--                    <td>--%>
-<%--                        1--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        구디--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        지밸리--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        37우2598--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        1--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        <span style="color: #000080; font-weight: bold;">하차</span>--%>
-<%--                    </td>--%>
-<%--                </tr>--%>
-<%--            </table>--%>
-            <div>
-                <section class="paging">
-                    <ul class="paging__ul" id="page-div">
+        <%--기존코드--%>
+        <%--        <div style="width: 100%; overflow-x:auto; overflow-y: hidden;">--%>
+        <%--            <table class="list-table">--%>
+        <%--                &lt;%&ndash;            <colgroup>&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 2%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 9%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 20%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 21%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 21%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 6%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 6%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 15%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;            </colgroup>&ndash;%&gt;--%>
+        <%--                <thead>--%>
+        <%--                <tr>--%>
+        <%--                    <th>운행일</th>--%>
+        <%--                    <th>상차지</th>--%>
+        <%--                    <th>하차지</th>--%>
+        <%--                    <th>차량번호</th>--%>
+        <%--                    <th>대수</th>--%>
+        <%--                    <th>진행</th>--%>
+        <%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        구디--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        지밸리--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        37우2598--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        <span style="color: #000080; font-weight: bold;">하차</span>--%>
+        <%--                    </td>--%>
+        <%--                </tr>--%>
+        <%--                <tr style="border-bottom: 2px solid red;">--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        구디--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        지밸리--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        37우2598--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        <span style="color: #000080; font-weight: bold;">하차</span>--%>
+        <%--                    </td>--%>
+        <%--                </tr>--%>
+        <%--            </table>--%>
+        <div>
+            <section class="paging">
+                <ul class="paging__ul" id="page-div">
 
-                        <li><a style="cursor: pointer;" onclick="$.valuePg(1)"><img
-                                src="/resources/image/icons/ico_prev.png" alt="이전"></a></li>
+                    <li><a style="cursor: pointer;" onclick="$.valuePg(1)"><img
+                            src="/resources/image/icons/ico_prev.png" alt="이전"></a></li>
 
-                        <li class="pageNum">
-
-
-                            <a style="cursor: pointer;"
-                               onclick="$.valuePg(1)"
-                               class="active">1</a>
+                    <li class="pageNum">
 
 
-                        </li>
+                        <a style="cursor: pointer;"
+                           onclick="$.valuePg(1)"
+                           class="active">1</a>
 
-                        <li><a style="cursor: pointer;" onclick="$.valuePg(1);"><img
-                                src="/resources/image/icons/ico_next.png" alt="다음"></a></li>
-                    </ul>
-                </section>
 
-            </div>
+                    </li>
+
+                    <li><a style="cursor: pointer;" onclick="$.valuePg(1);"><img
+                            src="/resources/image/icons/ico_next.png" alt="다음"></a></li>
+                </ul>
+            </section>
+
+        </div>
 
 </section>
 
