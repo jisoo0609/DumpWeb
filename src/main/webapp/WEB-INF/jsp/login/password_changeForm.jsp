@@ -76,14 +76,11 @@
 <div class="b-loginM">
 	<section class="b-loginM__inner join">
 		<div class="b-loginM-wrap">
-			<h1 class="b-loginM__tit">
-				배차관리<span>시스템</span>
-			</h1>
-			<h1 class="b-loginM__tit add">암호 재설정</h1>
 
+			<h1 class="b-loginM__tit add__none">암호 재설정</h1>
+			<div class="line"></div>
 			<form name="pwfrm" onsubmit="return false;">
-				<div class="b-loginM__form">
-					<div class="line"></div>
+				<div class="b-loginM__form" style="padding: 35px 0;">
 					<div class="b-loginM__input">
 						<input type="hidden" name="uuserID" value="${sessionScope.loginInfo.uuserID}">
 					</div>
