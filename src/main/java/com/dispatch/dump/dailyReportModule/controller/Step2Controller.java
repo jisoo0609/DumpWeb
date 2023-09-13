@@ -28,7 +28,7 @@ public class Step2Controller {
     @RequestMapping(value = "/step2/getCarAndExpense", method = RequestMethod.GET)
     @ModelAttribute("carAndExpense")
     public List<DailyReportStep2Sub> getCarAndExpense() {
-        List<DailyReportStep2Sub> carAndExpense = step2Service.getSummary();
+        List<DailyReportStep2Sub> carAndExpense = step2Service.getSummaryByBE();
         return carAndExpense;
     }
 }
