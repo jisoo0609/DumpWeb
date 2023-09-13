@@ -183,8 +183,8 @@
         <input type="button" value="검색">
     </div>
     <div class="bottom_table">
-        <div class="table_top">
-            <p class="total">데이터 0건이 검색되었습니다.</p>
+        <div class="table_top" style="margin: 10px 0;">
+            <p class="total">데이터 <span>2</span>건(총대수: <span>2</span>대)이 검색되었습니다.</p>
         </div>
         <div>
             <table class="list-table">

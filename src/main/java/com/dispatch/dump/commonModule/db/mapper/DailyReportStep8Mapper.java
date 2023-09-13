@@ -1,7 +1,8 @@
 package com.dispatch.dump.commonModule.db.mapper;
 
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep8Main;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep8Sub;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep8;
+//import com.dispatch.dump.commonModule.db.dto.DailyReportStep8Main;
+//import com.dispatch.dump.commonModule.db.dto.DailyReportStep8Sub;
 
 
 import java.util.List;
@@ -10,8 +11,9 @@ public interface DailyReportStep8Mapper {
 
 
     /* FUNCTION :: 요약 내용보기 */
-    List<DailyReportStep8Main> searchReceiptsMainByCarSubmitTel(String userId);
+    List<DailyReportStep8> searchReceipts(String userId);
+//    List<DailyReportStep8Main> searchReceiptsMainByCarSubmitTel(String userId);
 
-    DailyReportStep8Sub searchReceiptsMainBySheetID2(long sheetID2);
+//    DailyReportStep8Sub searchReceiptsMainBySheetID2(long sheetID2);
 
 }
