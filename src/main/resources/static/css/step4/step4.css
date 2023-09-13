@@ -136,7 +136,11 @@ input[type = button]{
 
 .total{
     font-size: 15px;
+}
+
+.total > span{
     font-weight: 600;
+    color: #0068b7;
 }
 
 .list-table{
