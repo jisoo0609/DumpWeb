@@ -197,7 +197,7 @@ body {
 /* 검색 버튼 스타일 */
 .search_btn {
   line-height: 38px;
-  background-image: url(/images/ico_search-b.png);
+  background-image: url(/resources/image/step6/ico_search-b.png);
   background-position: 25px 9px;
   background-repeat: no-repeat;
   background-size: 23px;
