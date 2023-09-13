@@ -1,12 +1,18 @@
+
 /* 외부 스타일시트 import */
 @import url(reset.css);
 
 /* 삭제 */
 /* 전역 스타일 설정 */
-body {
-  background: #ddd;
-}
 
+
+/* span {
+  color: var(--color-bg-border-blue);
+} */
+
+.blue {
+  color: var(--color-bg-border-blue);
+}
 .common_btn {
   text-align: center;
   border: 1px solid #0068b7;
@@ -16,8 +22,8 @@ body {
   color: #0064c1;
   font-weight: 600;
   width: 120px;
-  height: 45px;
-  line-height: 43px;
+  height: 40px;
+  line-height: 38px;
 }
 
 /* 전역 변수 및 상수 설정 */
@@ -182,7 +188,7 @@ body {
 .conbox {
   font-size: var(--font-medium);
   width: 80%;
-  padding: 5px 10px;
+  padding: 7px 0;
   border: 1px solid var(--color-border-gray);
 }
 
@@ -207,14 +213,14 @@ body {
 .result_search {
   margin: 20px 0;
   text-align: center;
-  font-size: var(--font-large);
+  font-size: 15px;
   font-weight: var(--weight-bold);
 }
 
 .agreement_container {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: center;
   gap: 5px;
   flex-wrap: wrap;
   margin-bottom: 10px;
@@ -246,14 +252,20 @@ td {
   font-size: 12px;
 }
 
+.conChoice {
+  justify-content: center;
+  gap: 20%;
+}
+
 /* 모바일 스타일 */
 @media (max-width: 439px) {
-  .content {
-    display: block;
+  .conChoice {
+    justify-content: center;
+    gap: 20%;
   }
+
   .content h1 {
     justify-content: center;
-    margin-bottom: 10px;
   }
   .conbox {
     width: 100%;
@@ -279,9 +291,6 @@ td {
   .operating_period {
     text-align: center;
   }
-  .operating_period label {
-    padding: 5px;
-  }
   #flex_important {
     display: flex;
     flex-wrap: wrap;
@@ -292,7 +301,7 @@ td {
 @media (max-width: 550px) {
   .col {
     gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     gap: 10px;
     display: flex;
@@ -300,9 +309,7 @@ td {
   .col span {
     display: none;
   }
-  .col input {
-    padding: 5px 5px;
-  }
+
   .col:first-child::after {
     content: "";
   }
