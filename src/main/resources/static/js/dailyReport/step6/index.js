@@ -1,95 +1,3 @@
-flatpickr("#startDate", {
-  enableTime: false,
-  dateFormat: "Y-m-d",
-  monthSelectorType: "static",
-  altInput: true,
-  altFormat: "시작 날짜를 선택하세요",
-  locale: {
-    months: {
-      shorthand: [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-      ],
-      longhand: [
-        "1월",
-        "2월",
-        "3월",
-        "4월",
-        "5월",
-        "6월",
-        "7월",
-        "8월",
-        "9월",
-        "10월",
-        "11월",
-        "12월",
-      ],
-    },
-  },
-  onChange: function (selectedDates, dateStr, instance) {
-    // 날짜가 선택될 때 실행되는 함수
-    if (dateStr) {
-      instance.altInput.value = dateStr; // 선택된 날짜를 altInput에 표시
-    }
-  },
-});
-
-flatpickr("#endDate", {
-  enableTime: false,
-  dateFormat: "Y-m-d",
-  monthSelectorType: "static",
-  altInput: true,
-  altFormat: "종료 날짜를 선택하세요",
-  locale: {
-    months: {
-      shorthand: [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-      ],
-      longhand: [
-        "1월",
-        "2월",
-        "3월",
-        "4월",
-        "5월",
-        "6월",
-        "7월",
-        "8월",
-        "9월",
-        "10월",
-        "11월",
-        "12월",
-      ],
-    },
-  },
-  onChange: function (selectedDates, dateStr, instance) {
-    // 날짜가 선택될 때 실행되는 함수
-    if (dateStr) {
-      instance.altInput.value = dateStr; // 선택된 날짜를 altInput에 표시
-    }
-  },
-});
-
 // 검색 버튼 요소를 가져옵니다.
 const searchButton = document.querySelector(".search_btn");
 
@@ -173,3 +81,95 @@ cancelButton.addEventListener("click", () => {
   const resultSearch = document.querySelector(".result_search");
   resultSearch.innerHTML = "";
 });
+
+// flatpickr("#startDate", {
+//   enableTime: false,
+//   dateFormat: "Y-m-d",
+//   monthSelectorType: "static",
+//   altInput: true,
+//   altFormat: "시작 날짜를 선택하세요",
+//   locale: {
+//     months: {
+//       shorthand: [
+//         "1",
+//         "2",
+//         "3",
+//         "4",
+//         "5",
+//         "6",
+//         "7",
+//         "8",
+//         "9",
+//         "10",
+//         "11",
+//         "12",
+//       ],
+//       longhand: [
+//         "1월",
+//         "2월",
+//         "3월",
+//         "4월",
+//         "5월",
+//         "6월",
+//         "7월",
+//         "8월",
+//         "9월",
+//         "10월",
+//         "11월",
+//         "12월",
+//       ],
+//     },
+//   },
+//   onChange: function (selectedDates, dateStr, instance) {
+//     // 날짜가 선택될 때 실행되는 함수
+//     if (dateStr) {
+//       instance.altInput.value = dateStr; // 선택된 날짜를 altInput에 표시
+//     }
+//   },
+// });
+
+// flatpickr("#endDate", {
+//   enableTime: false,
+//   dateFormat: "Y-m-d",
+//   monthSelectorType: "static",
+//   altInput: true,
+//   altFormat: "종료 날짜를 선택하세요",
+//   locale: {
+//     months: {
+//       shorthand: [
+//         "1",
+//         "2",
+//         "3",
+//         "4",
+//         "5",
+//         "6",
+//         "7",
+//         "8",
+//         "9",
+//         "10",
+//         "11",
+//         "12",
+//       ],
+//       longhand: [
+//         "1월",
+//         "2월",
+//         "3월",
+//         "4월",
+//         "5월",
+//         "6월",
+//         "7월",
+//         "8월",
+//         "9월",
+//         "10월",
+//         "11월",
+//         "12월",
+//       ],
+//     },
+//   },
+//   onChange: function (selectedDates, dateStr, instance) {
+//     // 날짜가 선택될 때 실행되는 함수
+//     if (dateStr) {
+//       instance.altInput.value = dateStr; // 선택된 날짜를 altInput에 표시
+//     }
+//   },
+// });
