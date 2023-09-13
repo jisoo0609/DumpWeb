@@ -44,66 +44,50 @@
     </ul>
   </div>
 
-  <!-- 조회 양식-->
-      <div class="operating_period content conTop" >
-        <h1>
-          기간
-          <!-- <img src="images/ico_que.png" alt="도움말" class="info" /> -->
-        </h1>
-        <label class="start-text col" for="start-date">
-          <input type="date" id="start-date" />
-          <span>~</span>
-          <input type="date" id="end-date" />
-        </label>
-      </div>
-  <div class="inquiry_form">
-    <div class="operating_period content">
-      <h1>
-        분류
-        <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
-      </h1>
-      <select class="detailSelect conbox">
-            <option value="옵션1">주유</option>
-            <option value="옵션2">요소수</option>
-            <option value="옵션3">엔진오일</option>
-            <option value="옵션3">정비(수리)</option>
-            <option value="옵션3">기타</option>
-      </select>
-    </div>
-        <!-- <div class="operating_period content">
-        <h1>
-          정비
-        </h1>
-        <select class="detailSelect conbox">
-          <option value="옵션1">옵션1</option>
-          <option value="옵션2">옵션2</option>
-          <option value="옵션3">옵션3</option>
-        </select>
-      </div> -->
-      </div>
+       <!-- 조회 양식-->
+       <div class="operating_period content conTop">
+         <h1>
+           기간
+         </h1>
+
+         <label class="start-text col" for="start-date">
+           <input type="date" id="start-date" />
+           <span>~</span>
+           <input type="date" id="end-date" />
+         </label>
+       </div>
+       <div class="operating_period content" style="gap: 20px">
+         <h1>
+           선택
+         </h1>
+         <select class="detailSelect conbox">
+           <option value="옵션1">주유</option>
+           <option value="옵션2">요소수</option>
+           <option value="옵션3">엔진오일</option>
+           <option value="옵션4">정비(수리)</option>
+           <option value="옵션5">기타</option>
+         </select>
+       </div>
+
+      <!-- 날짜 기준, 품목 기준 radio 버튼 추가 -->
       <div class="inquiry_form section_check">
         <div class="operating_period content conChoice" id="flex_important">
           <label>
             날짜 기준
-            <input type="radio" name="test" checked />
+            <input type="radio" name="search-type" value="date" checked />
           </label>
           <label>
             품목 기준
-            <input type="radio" name="test" />
+            <input type="radio" name="search-type" value="item" />
           </label>
-          <!-- <label>
-          요소수
-          <input type="radio" name="test" />
-        </label>
-        <label>
-          정비
-          <input type="radio" name="test" />
-        </label> -->
         </div>
       </div>
+
+      <!-- 검색 버튼 -->
       <div class="search_container">
-        <button class="search_btn common_btn">검색</button>
+        <button class="search_btn common_btn" id="search-button">검색</button>
       </div>
+
       <div class="result_search">
         <h1></h1>
       </div>
@@ -112,50 +96,28 @@
         <button class="common_btn">취소</button>
       </div>
       <div class="line"></div>
-      <div class="table_container">
-        <table>
-          <thead>
-            <tr class="th_title">
-              <th>분류</th>
-              <th>최종 주행거리</th>
-              <th>사용금액</th>
-              <th>기타(설명)</th>
-              <th>주유량</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
+
+            <!-- 결과를 표시할 테이블 -->
+            <div class="table_container">
+              <table>
+                <thead>
+                  <tr class="th_title">
+                    <th id="date-header">날짜</th>
+                    <th id="item-header">품목</th>
+                    <th>최종주행</th>
+                    <th>사용금액</th>
+                    <th>주유량(기타)</th>
+                  </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+            </div>
 </div>
 
 <!-- 페이지 본문 종료 -->
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script>
-      // 현재 날짜를 가져와서 운행일 입력 상자의 초기 값으로 설정
-      //  const today = new Date().toISOString().split('T')[0];
-      //  documnt.getElementById('오늘날').value = today;
 
-
-      document.addEventListener("DOMContentLoaded", function () {
-        const startDateInput = document.getElementById("start-date");
-        const endDateInput = document.getElementById("end-date");
-
-        // 시작 날짜를 당월 1일로 설정
-        const today = new Date();
-        const firstDayOfMonth = new Date(
-          today.getFullYear(),
-          today.getMonth(),
-          1
-        );
-        const formattedFirstDay = firstDayOfMonth.toISOString().split("T")[0];
-        startDateInput.value = formattedFirstDay;
-
-        // 종료 날짜를 오늘로 설정
-        const formattedToday = today.toISOString().split("T")[0];
-        endDateInput.value = formattedToday;
-
-      });
-    </script>
 <script src="/resources/js/dailyReport/step6/index.js"></script>
 
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
+
