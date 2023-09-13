@@ -59,7 +59,7 @@
   <div class="inquiry_form">
     <div class="operating_period content">
       <h1>
-        주유
+        분류
         <img src="/resources/image/step6/ico_que.png" alt="도움말" class="info" />
       </h1>
       <select class="detailSelect conbox">
