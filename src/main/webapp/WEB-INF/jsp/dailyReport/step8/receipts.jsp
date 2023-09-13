@@ -22,6 +22,13 @@
     <link href="/resources/css/step8/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/loading.css">
     <style type="text/css">
+        @media screen and (min-width: 280px) and (max-width: 1279px) {
+            .sub-title {
+                padding-bottom: initial;
+                border-bottom: initial;
+            }
+        }
+
         .unit {
             padding-left: 2px;
         }
@@ -283,7 +290,7 @@
 
                 <!--업체명-->
                 <span class="comp-name">
-						미래내일
+						08호7313
 					</span>
 
                 <div class="header-top-right">
@@ -308,7 +315,7 @@
         <!--로그인후//dis-n 클래스 로그인에 따라 추가-->
         <div class="mobile-navi-top">
         <span>
-            임창운 님
+            08호7313
         </span>
             <span class="bar"></span>
             <span class="app-dis-n">
@@ -428,46 +435,24 @@
         src="/resources/js/dailyReport/step8/list.js?jsVerType=2020230831191239"></script>
 <script type="text/javascript"
         src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64bdd806e937defb179aa9a2b9cc6c95&libraries=services"></script>
-
-<script>
+<script type="text/javascript">
     $(document).ready(function () {
-        if ('4' == 4) {
-            $(".datepicker").datepicker({
-                dateFormat: "yy-mm-dd",
-                showMonthAfterYear: true,
-                monthNamesShort: month_text,
-                dayNamesMin: day_text,
-                yearSuffix: "년",
-                changeYear: true,
-                changeMonth: true,
-                minDate: '-2m',
-                yearRange: "-1:+5",
-            });
-            $('.last').datepicker("option", "minDate", $(".fst").val()); // 운행기간 종료일 범위 초기값 설정
+        $(".datepicker").datepicker({
+            dateFormat: "yy-mm-dd",
+            showMonthAfterYear: true,
+            monthNamesShort: month_text,
+            dayNamesMin: day_text,
+            yearSuffix: "년",
+            changeYear: true,
+            changeMonth: true,
+        });
+        $('.last').datepicker("option", "minDate", $(".fst").val()); // 운행기간 종료일 범위 초기값 설정
 
-            $('.fst').on('change', function () { // 운행기간 종료일 범위 동적처리
-                $('.last').datepicker("option", "minDate", $(".fst").val());
-            });
-        } else {
-            $(".datepicker").datepicker({
-                dateFormat: "yy-mm-dd",
-                showMonthAfterYear: true,
-                monthNamesShort: month_text,
-                dayNamesMin: day_text,
-                yearSuffix: "년",
-                changeYear: true,
-                changeMonth: true,
-                yearRange: "-5:+5",
-            });
-            $('.last').datepicker("option", "minDate", $(".fst").val()); // 운행기간 종료일 범위 초기값 설정
-
-            $('.fst').on('change', function () { // 운행기간 종료일 범위 동적처리
-                $('.last').datepicker("option", "minDate", $(".fst").val());
-            });
-        }
-    });
+        $('.fst').on('change', function () { // 운행기간 종료일 범위 동적처리
+            $('.last').datepicker("option", "minDate", $(".fst").val());
+        });
+    })
 </script>
-
 
 <section class="sub-contents-wrap maxwrap">
 
@@ -557,15 +542,6 @@
                         </select>
                     </div>
                 </li>
-                <%--                <li>--%>
-                <%--                    <label>차량번호</label>--%>
-                <%--                    <div class="input-group select">--%>
-                <%--                        <input type="text" class="wp100 carNoAutocomplete trn" placeholder="차량번호" name="carNo"--%>
-                <%--                               id="carNo" value="임창운"--%>
-                <%--                               autocomplete="off" disabled>--%>
-
-                <%--                    </div>--%>
-                <%--                </li>--%>
                 <li>
                     <label>상차지</label>
                     <div class="input-group select">
@@ -724,10 +700,10 @@
 
         <div class="btn-area">
             <input type="button" style="background-image: none !important;text-indent: 0px !important;"
-                   class="btn btn-search btn-search__line" value="일괄결제" onClick="$.search()"
+                   class="btn btn-search btn-search__line" value="일괄결제" onClick="$.allChkChange(1);"
                    onkeydown="if(event.keyCode == 13) return false;">
             <input type="button" style="background-image: none !important;text-indent: 0px !important;"
-                   class="btn btn-search btn-search__line" value="취소" onClick="$.search()"
+                   class="btn btn-search btn-search__line" value="취소" onClick="$.allChkChange(0);"
                    onkeydown="if(event.keyCode == 13) return false;">
         </div>
 

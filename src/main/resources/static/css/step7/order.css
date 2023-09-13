@@ -23,6 +23,7 @@ time, mark, audio, video {
 body {
     line-height:1;
     font-family: 'Noto Sans KR';
+    box-sizing: border-box;
 }
 
 article,aside,details,figcaption,figure,
@@ -95,6 +96,12 @@ input, select {
     vertical-align:middle;
 }
 
+.ui-datepicker-trigger{
+    vertical-align: middle; width: 20px;
+}
+.ui-datepicker-trigger{
+    display: none;
+}
 
 @media screen and (max-width: 280px){
     .GolSection{
@@ -134,7 +141,6 @@ input, select {
     }
     .GolSection form fieldset ul li .golInputSpan{
         padding-left: 100px; line-height: 1.4; font-size: 12px; width: 35%;
-
     }
     .GolSection form fieldset ul li .golLabel{
         position: absolute;
@@ -282,11 +288,13 @@ input, select {
         position: relative; font-weight: bold;
     }
     .GolSection form fieldset ul li .golInputSpan{
-        padding-left: 60px; line-height: 1.4; font-size: 12px; width: 70%;
-
+        line-height: 1.4; font-size: 12px; width: 70%;
+    }
+    .GolSection form fieldset ul li:nth-child(1) .golInputSpan {
+        margin-left: 28.5%;
     }
     .GolSection form fieldset ul li .golLabel{
-        width: 28%; position: relative;
+        width: 17%; position: relative;
     }
     .GolSection form fieldset ul li input[type=date]{
         width: 75%; height: 25px; font-size: 18px;
@@ -433,6 +441,9 @@ input, select {
     .GolSection form fieldset ul li .golInputSpan{
         flex: 1; line-height: 1.4; font-size: 12px;
     }
+    .GolSection form fieldset ul li:nth-child(1) .golInputSpan {
+        margin-left: 15.4%;
+    }
     .GolSection form fieldset ul li .golLabel{
         width: 8%; position: relative;
     }
@@ -556,7 +567,7 @@ input, select {
         display: none; width: 0; height: 0; padding: 0; margin: 0;
     }
     .GolSection form fieldset > label{
-        font-size: 13px; border: 1px solid #000; border-radius: 15px; padding: 10px 20px;
+        font-size: 13px; border: 1px solid #ddd; border-radius: 15px; padding: 10px 20px;
         margin-bottom: 30px; display: inline-block; cursor: pointer;
     }
     .GolSection form fieldset > #rdOli:checked + label ,
@@ -578,12 +589,14 @@ input, select {
         position: relative;
     }
     .GolSection form fieldset ul li .golInputSpan{
-        /* padding-left: 250px; line-height: 1.4; font-size: 12px; width: 100%;
-        display: flex; align-items: center; */
         flex: 1; line-height: 1.4; font-size: 12px;
+        display: flex; align-items: center; padding-right: 20px;
+    }
+    .GolSection form fieldset ul li:nth-child(1) .golInputSpan {
+        margin-left: 8.2%;
     }
     .GolSection form fieldset ul li .golLabel{
-        width: 4%; position: relative;
+        width: 6%; height: 25px; font-size: 13px; font-weight: bold; position: absolute;
     }
     .GolSection form fieldset ul li input[type=date]{
         width: 50%; height: 35px; font-size: 18px;
@@ -591,9 +604,8 @@ input, select {
     .GolSection form fieldset ul li:first-of-type label:last-of-type{
         width: 8%;
     }
-    .GolSection form fieldset ul li input[type=text],
-    .GolSection form fieldset ul li input[type=number]{
-        width: 100%; height: 35px; font-size: 18px;
+    .GolSection form fieldset ul li input[type=text]{
+        width: 100%; height: 28px !important; font-size: 13px;
     }
     .GolSection form fieldset ul li img{
         cursor: pointer;
