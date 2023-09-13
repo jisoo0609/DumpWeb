@@ -7,10 +7,6 @@ body {
   background: #ddd;
 }
 
-span {
-  color: var(--color-bg-border-blue);
-}
-
 .common_btn {
   text-align: center;
   border: 1px solid #0068b7;
@@ -67,8 +63,6 @@ span {
   justify-content: space-between;
   align-items: center;
   background: #fff;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
 }
 
 .subTitle_wrapper h1 {
@@ -108,7 +102,7 @@ span {
 
 /* 조회 양식 스타일 */
 .inquiry_form {
-  margin: 30px 0 10px;
+  margin: 20px 0 10px;
   font-size: var(--font-medium);
   border: 1px solid #ddd;
   padding: 15px;
@@ -130,6 +124,10 @@ span {
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+
+.conTop {
+  margin-top: 20px;
 }
 
 .operating_period h1 {
@@ -167,6 +165,8 @@ span {
 }
 
 .col input {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 13px;
   border: 1px solid var(--color-border-gray);
   padding: 5px 10px;
   cursor: pointer;
@@ -336,3 +336,4 @@ td {
     padding: 5px 5px;
   }
 }
+
