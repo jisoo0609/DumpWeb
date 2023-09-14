@@ -7,18 +7,21 @@ import com.dispatch.dump.commonModule.util.CommonUtil;
 import javax.servlet.http.HttpSession;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class Step8Service {
     private final DailyReportStep8Mapper dailyReportStep8Mapper;
     private final CommonUtil commonUtil;
-
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     public List<DailyReportStep8> getReceipts() {
 
         HttpSession session = commonUtil.getSession();
@@ -33,9 +36,23 @@ public class Step8Service {
         for (DailyReportStep8 x : ReceiptsDataList) {
             System.out.println(x);
         }
-        System.out.println(summary.getTotalTransportationCost());
+        log.info("총운반비용 : "+summary.getTotalTransportationCost());
 
         return ReceiptsDataList;
+    }
+
+    public String searchReceipts(DailyReportStep8 dailyReportStep8) {
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+
+        try {
+            List<DailyReportStep8> searchList=dailyReportStep8Mapper.receiptsSearchCondition(dailyReportStep8);
+
+            rtnMap.put("httpCode", 200);
+            rtnMap.put("searchList", searchList);
+        } catch (Exception e) {
+            log.error("Exception["+ e.getMessage() +"]");
+        }
+        return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
 //    public List<DailyReportStep8> getReceipts() {

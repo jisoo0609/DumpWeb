@@ -1,5 +1,6 @@
 package com.dispatch.dump.commonModule.db.mapper;
 
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep3Main;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep8;
 //import com.dispatch.dump.commonModule.db.dto.DailyReportStep8Main;
 //import com.dispatch.dump.commonModule.db.dto.DailyReportStep8Sub;
@@ -14,6 +15,8 @@ public interface DailyReportStep8Mapper {
     List<DailyReportStep8> searchReceipts(String userId);
 
     List<DailyReportStep8> searchReceiptsWithCnt(String userId);
+
+    List<DailyReportStep8> receiptsSearchCondition(DailyReportStep8 dailyReportStep8);
 //    List<DailyReportStep8Main> searchReceiptsMainByCarSubmitTel(String userId);
 
 //    DailyReportStep8Sub searchReceiptsMainBySheetID2(long sheetID2);

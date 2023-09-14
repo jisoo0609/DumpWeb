@@ -69,6 +69,8 @@ $(document).ready(function () {
                     }
                 });
 
+
+
                 $(".fromsiteAutocomplete").autocomplete({
                     source: json.autoFromsite,
                     //조회를 위한 최소글자수
@@ -144,16 +146,41 @@ $.selectBoxChange = function (data, moveid) {
 $.valuePg = function (pageNo) {
     $("[name=pageNo]").val(pageNo);
     var frm = document.pagefrm;
-    frm.action = "/integrateDispatch/list";
+    frm.action = "/dailyReport/receipts";
     frm.submit();
 }
 
-$.search = function () {
-    var frm = document.searchfrm;
-    frm.action = "/integrateDispatch/list";
-    frm.submit();
-}
+// $.search = function () {
+//     var frm = document.searchfrm;
+//     frm.action = "/integrateDispatch/list";
+//     frm.submit();
+// }
 
+
+$.search = function() {
+    var searchText = $("#search-input").val();
+    var searchData = {
+        carSubmit: searchText,
+        carSubmitTel: searchText,
+        salesman: searchText
+    };
+    $.ajax({
+        url: "/dailyReport/receipts/search",
+        type: "GET",
+        data: searchData,
+        success: function (data) {
+            var json = $.parseJSON(data);
+            console.log(json)
+            if(json.httpCode == 200) {
+                alert("조회에 성공했습니다.");
+
+                displayResults(json.searchList);
+            } else {
+                alert("조회를 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
+            }
+        }
+    })
+}
 $.editFormMove = function (idx) {
     localStorage.setItem("prevBackUrl", "/integrateDispatch/list");
     $("[name=sheetID]").val(idx);
@@ -429,4 +456,9 @@ $.setChk = function (obj) {
     } else {
         $("[name=" + id + "]").val("0");
     }
+
+
+
 }
+
+
