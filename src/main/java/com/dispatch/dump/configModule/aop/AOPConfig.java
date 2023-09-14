@@ -39,7 +39,8 @@ public class AOPConfig {
             Login loginInfo = (Login) session.getAttribute("loginInfo");
 
             if (loginInfo == null) {
-                result = "redirect:/";
+//                result = "redirect:/";
+                result = pjp.proceed();
             } else {
                 result = pjp.proceed();
             }
