@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%--<%@ include file="/WEB-INF/jsp/include/header.jsp" %>--%>
@@ -454,6 +455,19 @@
     })
 </script>
 
+<script>
+    var totalQty = 0;
+    <c:forEach items="${receiptsList}" var="receipt">
+    var qty = parseInt("${receipt.qty}");
+    totalQty += qty;
+    </c:forEach>
+    window.onload = function () {
+        var totalQtySpan = document.getElementById("totalQty");
+        if (totalQtySpan) {
+            totalQtySpan.innerText = totalQty;
+        }
+    };
+</script>
 <section class="sub-contents-wrap maxwrap">
 
     <div class="sub-title">
@@ -693,8 +707,8 @@
             <%--                </tbody>--%>
             <%--            </table>--%>
             <p class="total">
-                <span>데이터</span> <span class="cnt default-blue">1</span>
-                <span>건 (총대수 : <span class="cnt default-blue">1</span> 대)가 검색되었습니다.</span>
+                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}" /></span>
+                <span>건 (총대수 : <span class="cnt default-blue"><span id="totalQty"></span> </span> 대)가 검색되었습니다.</span>
             </p>
         </div>
 
@@ -706,19 +720,8 @@
                    class="btn btn-search btn-search__line" value="취소" onClick="$.allChkChange(0);"
                    onkeydown="if(event.keyCode == 13) return false;">
         </div>
-
-        <div style="width: 100%; overflow-x:auto; overflow-y: hidden;">
+        <div style="width: 100%; overflow-x: auto; overflow-y: hidden;">
             <table class="list-table">
-                <%--            <colgroup>--%>
-                <%--                <col style="width: 2%">--%>
-                <%--                <col style="width: 9%">--%>
-                <%--                <col style="width: 20%">--%>
-                <%--                <col style="width: 21%">--%>
-                <%--                <col style="width: 21%">--%>
-                <%--                <col style="width: 6%">--%>
-                <%--                <col style="width: 6%">--%>
-                <%--                <col style="width: 15%">--%>
-                <%--            </colgroup>--%>
                 <thead>
                 <tr>
                     <th>운행일</th>
@@ -728,9 +731,11 @@
                     <th>대수</th>
                     <th>진행</th>
                 </tr>
+                </thead>
+                <tbody>
                 <tr>
                     <td>
-                        1
+                        23-09-09
                     </td>
                     <td>
                         구디
@@ -748,9 +753,9 @@
                         <span style="color: #000080; font-weight: bold;">하차</span>
                     </td>
                 </tr>
-                <tr style="border-bottom: 2px solid red;">
+                <tr>
                     <td>
-                        1
+                        23-09-10
                     </td>
                     <td>
                         구디
@@ -759,7 +764,7 @@
                         지밸리
                     </td>
                     <td>
-                        37우2598
+                        더미데이터
                     </td>
                     <td>
                         1
@@ -768,30 +773,109 @@
                         <span style="color: #000080; font-weight: bold;">하차</span>
                     </td>
                 </tr>
+                <c:forEach items="${receiptsList}" var="receipt">
+                    <tr>
+                        <td>${receipt.date}</td>
+                        <td>${receipt.fromsite}</td>
+                        <td>${receipt.tosite}</td>
+                        <td>${receipt.carNo}</td>
+                        <td>${receipt.qty}</td>
+                        <td>
+                        <span style="color: #000080; font-weight: bold;">
+                                ${receipt.qty}
+                        </span>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
             </table>
-            <div>
-                <section class="paging">
-                    <ul class="paging__ul" id="page-div">
+        </div>
+        <%--기존코드--%>
+        <%--        <div style="width: 100%; overflow-x:auto; overflow-y: hidden;">--%>
+        <%--            <table class="list-table">--%>
+        <%--                &lt;%&ndash;            <colgroup>&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 2%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 9%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 20%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 21%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 21%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 6%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 6%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;                <col style="width: 15%">&ndash;%&gt;--%>
+        <%--                &lt;%&ndash;            </colgroup>&ndash;%&gt;--%>
+        <%--                <thead>--%>
+        <%--                <tr>--%>
+        <%--                    <th>운행일</th>--%>
+        <%--                    <th>상차지</th>--%>
+        <%--                    <th>하차지</th>--%>
+        <%--                    <th>차량번호</th>--%>
+        <%--                    <th>대수</th>--%>
+        <%--                    <th>진행</th>--%>
+        <%--                </tr>--%>
+        <%--                <tr>--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        구디--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        지밸리--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        37우2598--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        <span style="color: #000080; font-weight: bold;">하차</span>--%>
+        <%--                    </td>--%>
+        <%--                </tr>--%>
+        <%--                <tr style="border-bottom: 2px solid red;">--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        구디--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        지밸리--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        37우2598--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        1--%>
+        <%--                    </td>--%>
+        <%--                    <td>--%>
+        <%--                        <span style="color: #000080; font-weight: bold;">하차</span>--%>
+        <%--                    </td>--%>
+        <%--                </tr>--%>
+        <%--            </table>--%>
+        <div>
+            <section class="paging">
+                <ul class="paging__ul" id="page-div">
 
-                        <li><a style="cursor: pointer;" onclick="$.valuePg(1)"><img
-                                src="/resources/image/icons/ico_prev.png" alt="이전"></a></li>
+                    <li><a style="cursor: pointer;" onclick="$.valuePg(1)"><img
+                            src="/resources/image/icons/ico_prev.png" alt="이전"></a></li>
 
-                        <li class="pageNum">
-
-
-                            <a style="cursor: pointer;"
-                               onclick="$.valuePg(1)"
-                               class="active">1</a>
+                    <li class="pageNum">
 
 
-                        </li>
+                        <a style="cursor: pointer;"
+                           onclick="$.valuePg(1)"
+                           class="active">1</a>
 
-                        <li><a style="cursor: pointer;" onclick="$.valuePg(1);"><img
-                                src="/resources/image/icons/ico_next.png" alt="다음"></a></li>
-                    </ul>
-                </section>
 
-            </div>
+                    </li>
+
+                    <li><a style="cursor: pointer;" onclick="$.valuePg(1);"><img
+                            src="/resources/image/icons/ico_next.png" alt="다음"></a></li>
+                </ul>
+            </section>
+
+        </div>
 
 </section>
 

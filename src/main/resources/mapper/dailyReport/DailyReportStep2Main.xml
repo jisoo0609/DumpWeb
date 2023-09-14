@@ -14,6 +14,37 @@
     </select>
 
 
+    <sql id="res_table">
+        with r1 as (select sheetID
+                    from tSheet
+                    where carSubmitTel =  ${userId}),
+             r2 as (select sheetID2
+                    from tSheet_sub)
+    </sql>
 
+    <select id="findJoinDailyReport"  resultType="DailyReportStep2Sub">
+        <include refid="res_table">
+            <property name="userId" value= "#{userId}"/>
+        </include>
+
+        select *
+            from tSheet_sub
+            where sheetID2 in (
+            select sheetID2
+            from r1 inner join r2
+                on r1.sheetID = r2.sheetID2
+        )
+    </select>
+
+    <select id="findJoinDailyReportForTotalTransportationCost"  resultType="int">
+        <include refid="res_table">
+            <property name="userId" value="#{userId}"/>
+        </include>
+        select sum(Qty * Qtyup)
+            from tSheet_sub
+            where sheetID2 in ( select sheetID2 from r1 inner join r2
+                on r1.sheetID = r2.sheetID2
+        )
+    </select>
 
 </mapper>
