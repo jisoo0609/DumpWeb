@@ -42,9 +42,9 @@ public class Step8Controller {
 //        return receiptsList;
 //    }
 
-    @RequestMapping(value = "/receipts/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/receipts/search", method = RequestMethod.POST)
     @ResponseBody
-    public String search(DailyReportStep8 dailyReportStep8){
+    public String searchReceipts(DailyReportStep8 dailyReportStep8){
         return step8Service.searchReceipts(dailyReportStep8);
     }
 

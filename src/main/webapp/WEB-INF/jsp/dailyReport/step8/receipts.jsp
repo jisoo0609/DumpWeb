@@ -559,7 +559,7 @@
                     <th>진행</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="receiptsSearchResult">
                 <tr>
                     <td>
                         23-09-09
@@ -615,6 +615,7 @@
                     </tr>
                 </c:forEach>
                 </tbody>
+
             </table>
         </div>
         <div>

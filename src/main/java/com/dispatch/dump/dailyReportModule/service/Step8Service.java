@@ -2,6 +2,8 @@ package com.dispatch.dump.dailyReportModule.service;
 
 import com.dispatch.dump.commonModule.db.dto.*;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep8Mapper;
+
+
 import com.dispatch.dump.commonModule.util.CommonUtil;
 
 import javax.servlet.http.HttpSession;
@@ -42,17 +44,20 @@ public class Step8Service {
     }
 
     public String searchReceipts(DailyReportStep8 dailyReportStep8) {
-        Map<String, Object> rtnMap = commonUtil.returnMap();
+        HttpSession session = commonUtil.getSession();
+        Login loginData = (Login) session.getAttribute("loginInfo");
+        Map<String, Object> searchReceiptsMap = commonUtil.returnMap();
 
         try {
-            List<DailyReportStep8> searchList=dailyReportStep8Mapper.receiptsSearchCondition(dailyReportStep8);
 
-            rtnMap.put("httpCode", 200);
-            rtnMap.put("searchList", searchList);
+            List<DailyReportStep8> receiptsSearchList=dailyReportStep8Mapper.receiptsSearchConditionWithCnt(dailyReportStep8, loginData.getUserId());
+
+            searchReceiptsMap.put("httpCode", 200);
+            searchReceiptsMap.put(" receiptsSearchList", receiptsSearchList);
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }
-        return commonUtil.jsonFormatTransfer(rtnMap);
+        return commonUtil.jsonFormatTransfer(searchReceiptsMap);  //스트링으로 변환해줌
     }
 
 //    public List<DailyReportStep8> getReceipts() {
