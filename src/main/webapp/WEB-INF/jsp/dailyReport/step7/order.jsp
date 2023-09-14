@@ -2,6 +2,7 @@
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
 <link rel="stylesheet" type="text/css" href="/resources/css/step7/order.css">
+<script src="/resources/js/dailyReport/step7/pop.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
@@ -141,37 +142,41 @@
       <button class="opBtn" data-popName="golPop4">이전화면</button>
     </div>
 
-    <div id="golPop1" class="golPopup1">
-      <div>
-        <span class="material-symbols-outlined clBtn">close</span>
-        <p>정말 <span style="font-weight: bold;">삭제</span>하시겠습니까?</p>
-        <input type="button" value="확인">
-      </div>
-    </div>
+		<div id="golPop1" class="golPopup1">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>정말 <span style="font-weight: bold;">삭제</span>하시겠습니까?</p>
+				<input type="button" value="확인">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
-    <div id="golPop2" class="golPopup2">
-      <div>
-        <span class="material-symbols-outlined clBtn">close</span>
-        <p>정말 <span style="font-weight: bold;">수정</span>하시겠습니까?</p>
-        <input type="button" value="확인">
-      </div>
-    </div>
+		<div id="golPop2" class="golPopup2">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>정말 <span style="font-weight: bold;">수정</span>하시겠습니까?</p>
+				<input type="button" value="확인">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
-    <div id="golPop3" class="golPopup3">
-      <div>
-        <span class="material-symbols-outlined clBtn">close</span>
-        <p>정말 <span style="font-weight: bold;">저장</span>를하시겠습니까?</p>
-        <input type="button" value="확인">
-      </div>
-    </div>
+		<div id="golPop3" class="golPopup3">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>정말 <span style="font-weight: bold;">저장</span>를하시겠습니까?</p>
+				<input type="button" value="확인">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
-    <div id="golpop4" class="golPopup4">
-      <div>
-        <span class="material-symbols-outlined clBtn">close</span>
-        <p>이전 <span style="font-weight: bold;">화면</span>으로 돌아가시겠습니까?</p>
-        <input type="button" value="확인" onClick="history.go(-1)">
-      </div>
-    </div>
+		<div id="golPop4" class="golPopup4">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>이전 <span style="font-weight: bold;">화면</span>으로 돌아가시겠습니까?</p>
+				<input type="button" value="확인" onClick="history.go(-1)">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
     <table>
       <thead>
