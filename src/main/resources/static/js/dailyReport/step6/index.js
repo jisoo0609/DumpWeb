@@ -50,7 +50,7 @@ searchButton.addEventListener("click", () => {
       품목: "박스",
       상차지: "출발지 A",
       하차지: "도착지 B",
-      시간: "2023-08-30 10:00",
+      비용금액: "999999999",
       대수: 2,
       진행: "진행 중",
     },
@@ -59,7 +59,7 @@ searchButton.addEventListener("click", () => {
       품목: "가전제품",
       상차지: "출발지 X",
       하차지: "도착지 Y",
-      시간: "2023-08-30 13:30",
+      비용금액: "999999999",
       대수: 5,
       진행: "완료",
     },
@@ -68,7 +68,7 @@ searchButton.addEventListener("click", () => {
       품목: "가전제품",
       상차지: "출발지 X",
       하차지: "도착지 Y",
-      시간: "2023-08-30 13:30",
+      비용금액: "999999999",
       대수: 1,
       진행: "완료",
     },
@@ -87,7 +87,7 @@ searchButton.addEventListener("click", () => {
     <td>${index + 1}</td>
     <td>${data.차량번호}</td>
     <td>${data.품목}</td>
-    <td>${data.시간}</td>
+    <td>${data.비용금액}</td>
     <td>${data.진행}</td>
   `;
     tableBody.appendChild(row);
