@@ -290,7 +290,8 @@
         background-color: #f2f2f2;
     }
     .DrvSection table thead tr th{
-        font-size: 14px; padding: 5px; text-align: center;
+        font-size: 14px; padding: 2px; text-align: center; height: 20px;
+        vertical-align : middle;
     }
     .DrvSection table tbody tr{
         border-bottom: 1px solid #ddd;
@@ -300,28 +301,28 @@
         border-left: 1px solid #ddd;
     }
     .DrvSection table thead tr .Drvth2{
-        width: 20%;
+        width: 17%;
     }
     .DrvSection table thead tr th:last-child,
     .DrvSection table tbody tr td:last-child{
         border-right: 1px solid #ddd; width: 10%;
     }
     .DrvSection table tbody tr td{
-        font-size: 11px; text-align: center;
+        font-size: 11px; text-align: center; vertical-align : middle;
     }
     .DrvSection table tbody tr td:not(:nth-child(4)){
-        padding: 20px 0;
+        padding: 3px
     }
     .DrvSection table tbody tr td:first-child{
         width: 12%;
     }
     .DrvSection table tbody tr .Drvtd2{
-        width: 20%; border-right: 1px solid #ddd;
+        width: 17%; border-right: 1px solid #ddd;
     }
     .DrvSection table tbody tr td:nth-child(4){
         max-width: 167px; white-space: normal; display: -webkit-box;
         -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-        margin: 20px auto;
+        margin: 3px;
     }
 }
 
