@@ -69,6 +69,7 @@ $(document).ready(function () {
                     }
                 });
 
+
                 $(".fromsiteAutocomplete").autocomplete({
                     source: json.autoFromsite,
                     //조회를 위한 최소글자수
@@ -144,14 +145,89 @@ $.selectBoxChange = function (data, moveid) {
 $.valuePg = function (pageNo) {
     $("[name=pageNo]").val(pageNo);
     var frm = document.pagefrm;
-    frm.action = "/integrateDispatch/list";
+    frm.action = "/dailyReport/receipts";
     frm.submit();
 }
 
-$.search = function () {
-    var frm = document.searchfrm;
-    frm.action = "/integrateDispatch/list";
-    frm.submit();
+// $.search = function () {
+//     var frm = document.searchfrm;
+//     frm.action = "/integrateDispatch/list";
+//     frm.submit();
+// }
+
+$.search = function() {
+    $.ajax({
+        url: "/dailyReport/receipts/search",
+        type: "POST",
+        data: $("[name=searchfrm]").serialize(),
+        success: function (data) {
+            var json = $.parseJSON(data);
+            console.log("test-JJYY");
+            console.log(json)
+            if(json.httpCode == 200) {
+                alert("저장이 완료되었습니다.");
+            } else if(json.httpCode == 100){
+                alert("기존에 저장된 정보가 존재합니다.");
+
+                //inputData(json.carSubmitTelResult);
+
+                //$.list();
+            } else{
+                alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
+            }
+        }
+    })
+}
+// $.search = function() {
+//     var searchFromsite = $("#fromsite").val();
+//     var searchTosite = $("#tositeBox").val();
+//     var searchItem = $("#item").val();
+//     var searchCarHost = $("#carHostBox").val();
+//
+//     var receiptsSearchData = {
+//         fromsite : searchFromsite,
+//         tosite : searchTosite,
+//         item : searchItem,
+//         CarNo : searchCarHost
+//     };
+//     $.ajax({
+//         url: "/dailyReport/receipts/search",
+//         type: "POST",
+//         data: receiptsSearchData,
+//         success: function (data) {
+//             var json = $.parseJSON(data);
+//             console.log(json)
+//             if(json.httpCode == 200) {
+//                 alert("조회에 성공했습니다.");
+//
+//                 receiptsSearchListResults(json.receiptsSearchList);
+//             } else {
+//                 alert("조회를 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
+//             }
+//         }
+//     })
+// }
+
+function receiptsSearchListResults(receiptsSearchResults) {
+    let receiptsResults = receiptsSearchResults;
+    let resultDiv = $("#receiptsSearchResult");
+
+    resultDiv.empty(); // 이전 결과 지우기
+    // 결과 데이터를 동적으로 추가
+    for (var i = 0; i < receiptsResults.length; i++) {
+        var result = receiptsResults[i];
+        var resultHtml =
+            '<tr>' +
+            '<td>' + result.carSubmit + '</td>' +
+            '<td>' + result.salesman + '</td>' +
+            '<td>' + result.carSubmitTel + '</td>' +
+            '<td>' +
+            '<button class="btn addBtn" style="width: 40px; margin-top: 0;" onclick="selectItem(' + i + ');">선택</button>' +
+            '</td>' +
+            '</tr>';
+
+        resultDiv.append(resultHtml);
+    }
 }
 
 $.editFormMove = function (idx) {
@@ -429,4 +505,9 @@ $.setChk = function (obj) {
     } else {
         $("[name=" + id + "]").val("0");
     }
+
+
+
 }
+
+

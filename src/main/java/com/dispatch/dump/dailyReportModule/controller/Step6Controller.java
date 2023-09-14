@@ -2,6 +2,7 @@ package com.dispatch.dump.dailyReportModule.controller;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReport;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep6;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep6SelectForm;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step6Service;
 import lombok.RequiredArgsConstructor;
@@ -22,40 +23,23 @@ public class Step6Controller {
 
     @RequestMapping(value = "/carcarelist", method = RequestMethod.GET)
     public String step6(Model model, DailyReport dailyReport) {
+        model.addAttribute("defaultList", step6Service.getCarListByDate());
         return "/dailyReport/step6/carcarelist";
     }
 
-    @RequestMapping(value = "/step6/getcarlist", method = RequestMethod.GET)
-    @ModelAttribute("carlist")
-    public List<DailyReportStep6> getcarlist() {
-        List<DailyReportStep6> carlist = step6Service.getcarlist();
-        return carlist;
-    }
-
-    @RequestMapping(value = "/step6/findDailyReportClub", method = RequestMethod.GET)
-    @ModelAttribute("carlist")
-    public List<DailyReportStep6> findDailyReportClub(
-            String carNo,
-            String drvClub
-    ) {
-        List<DailyReportStep6> carlist = step6Service.findDailyReportClub(carNo, drvClub);
-        return carlist;
-    }
-    @RequestMapping(value = "/step6/search", method = RequestMethod.POST)
-    @ModelAttribute("carlist")
-    public List<DailyReportStep6> searchDailyReport(
-            @RequestParam("carNo") String carNo,
-            @RequestParam("searchType") String searchType,
-            @RequestParam(value = "drvClub", required = false) String drvClub
-    ) {
-        if ("date".equals(searchType)) {
-            // 날짜 기준으로 검색
-            return step6Service.getcarlist();
-        } else if ("item".equals(searchType)) {
-            // 품목 기준으로 검색
-            return step6Service.findDailyReportClub(carNo, drvClub);
-        } else {
-            // 다른 경우에 대한 처리 (예: 오류 처리)
+    @RequestMapping(value = "/carcarelist", method = RequestMethod.POST)
+    @ResponseBody
+    public List<DailyReportStep6> searchDailyReport(DailyReportStep6SelectForm selectForm) {
+        // 날짜 기준으로 검색
+        if (selectForm.getSearchType().equals("date")) {
+            return step6Service.getCarListByDate();
+        }
+        // 품목 기준으로 검색
+        else if (selectForm.getSearchType().equals("item")) {
+            return step6Service.getCarListByItem(selectForm.getCarNo(), selectForm.getSelectOption());
+        }
+        // 다른 경우에 대한 처리 (예: 오류 처리)
+        else {
             return Collections.emptyList();
         }
     }

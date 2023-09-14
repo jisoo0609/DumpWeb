@@ -254,13 +254,9 @@
                     <li>
                         마지막 등록일 :
                     </li>
-
-
                 </ul>
             </div>
         </div>
-
-
         <section class="management" >
 
             <div>
@@ -317,7 +313,7 @@
 
                 <c:forEach var="item" items="${carAndExpense}">
                     <tr>
-                        <td>${item.fromsite}</td>
+                        <td>${item.carNo}</td>
                         <td>${item.fromsite}</td>
                         <td>${item.tosite}</td>
                         <td>${item.item}</td>

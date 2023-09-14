@@ -46,9 +46,9 @@
             <div class="data_Area">
                 <div>
                     <label style="font-size: 13px; font-weight: 600;">▪운행기간</label>
-                    <input class="fromDate" id="datepicker1">
+                    <input class="fromDate" id="datepicker1" readonly>
                     <span style="font-weight: 600; margin:0 30px 0 30px; padding-top: 5px;">~</span>
-                    <input class="toDate" id="datepicker2">
+                    <input class="toDate" id="datepicker2" readonly>
                     <!--                        input에 오늘 날짜 세팅을 위한 스크립트-->
                     <script>
                         $('.fromDate').attr("value",new Date().toISOString().substring(0,10))
@@ -152,7 +152,7 @@
         <div class="search_form_bottom_detail">
             <div style="width: 50%; float: left;">
                 <label for="searchType">
-                    <input type="radio" name="searchType" value="0">
+                    <input type="radio" name="searchType" value="0" checked>
                     제출처 기준
                 </label>
                 <br>
@@ -179,22 +179,34 @@
             </div>
         </div>
     </form>
-    <div class="btn_area">
-        <input type="button" value="검색">
-    </div>
+        <div class="btn_area">
+            <a href="/dailyReport/step4/getDailyReportList" id="link2Get">
+                <input type="button" value="검색">
+            </a>
+        </div>
     <div class="bottom_table">
         <div class="table_top" style="margin: 10px 0;">
             <p class="total">데이터 <span>2</span>건(총대수: <span>2</span>대)이 검색되었습니다.</p>
         </div>
+        <div class="cashNbtns">
+            <p>999,999,999 원</p>
+            <input type="button" value="일괄결재">
+            <input type="button" value="취소" id="cancelBtn">
+        </div>
+        <script>
+            $('#cancelBtn').click(() => {
+                $('.list-table tbody tr').remove();
+            });
+        </script>
         <div>
             <table class="list-table">
                 <colgroup>
                     <col width="10%">
                     <col width="19%">
-                    <col width="21%">
                     <col width="15%">
-                    <col width="19%">
-                    <col width="19%">
+                    <col width="15%">
+                    <col width="22%">
+                    <col width="22%">
                     <col width="12%">
                 </colgroup>
                 <thead>
@@ -212,7 +224,7 @@
                 <tr>
                     <td>1</td>
                     <td>오이 농장</td>
-                    <td>23.09.05</td>
+                    <td>09.05</td>
                     <td>오이</td>
                     <td>강원도</td>
                     <td>너네집</td>
@@ -221,7 +233,7 @@
                 <tr>
                     <td>2</td>
                     <td>강원도 햇감자 판매</td>
-                    <td>23.09.04</td>
+                    <td>09.04</td>
                     <td>감자</td>
                     <td>강원도</td>
                     <td>너네집</td>
@@ -229,45 +241,6 @@
                 </tr>
                 </tbody>
             </table>
-            <script>
-                // 테이블 정렬 함수
-                function sortTableByColumn(columnIndex) {
-                    var table, rows, switching, i, x, y, shouldSwitch;
-                    table = document.querySelector(".list-table");
-                    switching = true;
-
-                    while (switching) {
-                        switching = false;
-                        rows = table.rows;
-
-                        for (i = 1; i < rows.length - 1; i++) {
-                            shouldSwitch = false;
-                            x = rows[i].querySelectorAll("td")[columnIndex];
-                            y = rows[i + 1].querySelectorAll("td")[columnIndex];
-
-                            // 오름차순으로 정렬
-                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                                shouldSwitch = true;
-                                break;
-                            }
-                        }
-
-                        if (shouldSwitch) {
-                            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                            switching = true;
-                        }
-                    }
-                }
-
-                // 라디오 박스 클릭 시 해당 열을 기준으로 테이블 정렬 함수 호출
-                var radioInputs = document.querySelectorAll("input[name='searchType']");
-                radioInputs.forEach((input) =>  {
-                    input.addEventListener("click", function () {
-                        var columnIndex = parseInt(this.value);
-                        sortTableByColumn(columnIndex);
-                    });
-                });
-            </script>
         </div>
     </div>
 </section>

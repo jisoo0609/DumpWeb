@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<%--<%@ include file="/WEB-INF/jsp/include/header.jsp" %>--%>
+<%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -23,15 +23,26 @@
     <link href="/resources/css/step8/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/loading.css">
     <style type="text/css">
-        @media screen and (min-width: 280px) and (max-width: 1279px) {
+        @media screen and (min-width: 280px) and (max-width: 1024px) {
+            .search-form-major label {
+                width: initial;
+            }
+
+        }
+
+        .ui-datepicker-trigger {
+            display: none;
+        }
+
+        @media screen and (min-width: 280px) and (max-width: 1980px) {
             .sub-title {
                 padding-bottom: initial;
                 border-bottom: initial;
             }
-        }
 
-        .unit {
-            padding-left: 2px;
+            .search-form {
+                margin: 15px 0 10px;
+            }
         }
 
         .default-tab__ul.cnt8 li {
@@ -134,7 +145,7 @@
         }
 
         .ui-datepicker select.ui-datepicker-year {
-            width: 30%;
+            width: 40%;
             font-size: 11px;
             height: 20px
         }
@@ -175,7 +186,6 @@
             color: #6f1111;
             font-weight: bold;
         }
-
 
         .comp-name-mode {
             max-width: 310px;
@@ -229,11 +239,6 @@
             text-align: center;
         }
 
-        /*.mobile-navi-dept1 a.active {*/
-        /*    background: #0068b7;*/
-        /*    color: #fff;*/
-        /*}*/
-
         .closeMask {
             position: fixed;
             z-index: 99;
@@ -248,211 +253,110 @@
                 margin-left: initial;
             }
 
+            .list-table {
+                table-layout: initial;
+            }
+
+            .list-table td {
+                padding: 10px 1px;
+            }
+        }
+
+        @media screen and (max-width: 425px) {
+            .list-table th {
+                padding: 10px 4px;
+            }
+        }
+
+        @media screen and (max-width: 280px) {
+            .list-table th {
+                padding: 1px 10px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            .search-form-major .date-wrap .unit {
+                margin-top: 5px;
+                margin-left: -1px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            .search-form-major .date-wrap .fst {
+                font-size: 13px;
+            }
+
+            .search-form-major .date-wrap .last {
+                font-size: 13px;
+            }
         }
     </style>
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
-
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery.min.js"></script>
-    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-
-    <script src="/resources/js/include/header.js?jsVerType=2020230831191239"></script>
-
-    <script type="text/javascript"
-            src="/resources/js/jquery.modal-master/js/jquery.modal.js?jsVerType=20230831191239"></script>
-
-    <title>배차관리시스템</title>
 </head>
-
-
 <body>
-
-<div class="layer-mask"></div>
-<header class="header">
-    <div class="header-top">
-        <div class="maxwrap">
-            <div class="header-topWrap">
-					<span style="font-weight: bold; font-size: 0; display: inline-block;">
-						<img src="/resources/image/login/ico-call.png" alt="" onclick="document.location.href='tel:'">
-
-						<span style="padding-left: 10px;">
-
-
-
-									<img src="/resources/image/icons/ico_que.png" alt="" class="que-dis-mn"
-                                         onclick="$.openLayerHelpMsgPopUp(this, 'W01-3');">
-
-
-							</span>
-					</span>
-
-                <!--업체명-->
-                <span class="comp-name">
-						08호7313
-					</span>
-
-                <div class="header-top-right">
-                    <ul class="header-top__ul">
-                        <li><a href="#" onclick="$.logout();" style="width: auto; font-size: 17px; font-weight: bold;">로그아웃</a>
-                        </li>
-                        <li>
-                            <button class="header__btn-menu" onclick="$.toggleLeftMenu()"
-                                    style="width: 35px; font-size: 17px; font-weight: bold;">
-                                메뉴
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div><!--header-top-->
-
-    <nav class="mobile-navi-wrap">
-        <h1 class="offscreen">모바일 웹 네비게이션</h1>
-
-        <!--로그인후//dis-n 클래스 로그인에 따라 추가-->
-        <div class="mobile-navi-top">
-        <span>
-            08호7313
-        </span>
-            <span class="bar"></span>
-            <span class="app-dis-n">
-            <span onclick="$.moveChangeForm();">
-                암호변경
-            </span>
-        </span>
-            <span class="bar"></span>
-            <span class="app-dis-n">
-            <span onclick="$.logout()">종료</span>
-        </span>
-            <a href="javascript:$.toggleLeftMenu()" class="close-btn" title="메뉴창 닫힘">
-                <img src="/resources/image/icons/ico_close.png" alt="닫기">.
-            </a>
-        </div>
-
-        <ul class="mobile-navi-dept1">
-            <li>
-                <p>
-                    <a class="left_menu" href="/dailyReport/driver">
-                        <span style="font-weight: bold; color: blue;">①</span> 기사용 메뉴
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="left_menu" href="/dailyReport/manager">
-                        <span style="font-weight: bold; color: blue;">②</span> 제출처용 메뉴
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="left_menu" href="/dailyReport/form">
-                        <span style="font-weight: bold; color: blue;">③</span> 운행일보 등록
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="left_menu" href="/dailyReport/list">
-                        <span style="font-weight: bold; color: blue;">④</span> 운행일보 조회
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="left_menu" href="/dailyReport/carcareform">
-                        <span style="font-weight: bold; color: blue;">⑤</span> 차량관리 차계부 등록
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="left_menu" href="/dailyReport/carcarelist">
-                        <span style="font-weight: bold; color: blue;">⑥</span> 차량관리 차계부 조회
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="left_menu" href="/dailyReport/oldform">
-                        <span style="font-weight: bold; color: blue;">⑦</span> 제출처 주문 등록
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="left_menu" href="/dailyReport/receipts">
-                        <span style="font-weight: bold; color: blue;">⑧</span> 제출처 전표 조회
-                    </a>
-                </p>
-            </li>
-            <li>
-                <p>
-                    <a class="left_menu" href="/dailyReport/receipts">
-                        <span style="font-weight: bold; color: blue;">⑨</span> 제출처 차량관리
-                    </a>
-                </p>
-            </li>
-        </ul>
-    </nav>
-</header>
-
-<div id="page_loading_progressbar"
-     style="z-index:9998; position:fixed; visibility:hidden; left:calc(100%/2); top:calc(100%/2);">
-    <div class="closeMask" style="left:0px; top:0px;"></div>
-
-    <div id="ajaxloader2">
-        <div class="outer"></div>
-        <div class="inner" style="top: -40px;"></div>
-        <p style="color:#fff; text-align:center;">Checking...</p>
-    </div>
-</div>
-
-
-<div class="layerMask dis-n pop-wrap" id="pop-question" tabindex="0">
-    <div class="layerMask__inner" style="min-height: 50px">
-        <section class="layer-popup" style="min-height: 50px;">
-            <div class="pop-header modal-title">
-                <h3 id="helpMsgTitle"></h3>
-
-                <button type="button" onclick="$.closeLayerHelpMsgPopUp(this);" class="pop-close">
-                    <i class="ico-close-b"></i>
-                    <span class="offscreen">닫기버튼</span>
-                </button>
-            </div>
-
-            <div style="padding: 20px 10px;overflow-y: scroll;min-height: 50px; max-height: 450px;">
-                <pre style="white-space: break-spaces; font-family: 'NotoSansKR' !important;" id="helpMsgBody"></pre>
-            </div>
-        </section>
-    </div>
-</div>
-
 <script type="text/javascript"
         src="/resources/js/dailyReport/step8/list.js?jsVerType=2020230831191239"></script>
-<script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64bdd806e937defb179aa9a2b9cc6c95&libraries=services"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
+<%--<script type="text/javascript"--%>
+<%--        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64bdd806e937defb179aa9a2b9cc6c95&libraries=services"></script>--%>
+<script>
+    // 달력 옵션 추가 코드
+    $(function () {
+        //input을 datepicker로 선언
         $(".datepicker").datepicker({
-            dateFormat: "yy-mm-dd",
-            showMonthAfterYear: true,
-            monthNamesShort: month_text,
-            dayNamesMin: day_text,
+            dateFormat: "yy-mm-dd", //달력 날짜 형태
+            showOtherMonths: true, //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+            showMonthAfterYear: true, // 월- 년 순서가아닌 년도 - 월 순서
+            changeYear: true, //option값 년 선택 가능
+            changeMonth: true, //option값  월 선택 가능
+            showOn: "both",
+            // buttonImage:
+            //     "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+            // buttonImageOnly: true,
+            // buttonText: "선택",
             yearSuffix: "년",
-            changeYear: true,
-            changeMonth: true,
+            monthNamesShort: [
+                "1월",
+                "2월",
+                "3월",
+                "4월",
+                "5월",
+                "6월",
+                "7월",
+                "8월",
+                "9월",
+                "10월",
+                "11월",
+                "12월",
+            ], //달력의 월 부분 텍스트
+            monthNames: [
+                "1월",
+                "2월",
+                "3월",
+                "4월",
+                "5월",
+                "6월",
+                "7월",
+                "8월",
+                "9월",
+                "10월",
+                "11월",
+                "12월",
+            ], //달력의 월 부분 Tooltip
+            dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"], //달력의 요일 텍스트
+            dayNames: [
+                "일요일",
+                "월요일",
+                "화요일",
+                "수요일",
+                "목요일",
+                "금요일",
+                "토요일",
+            ],
+            minDate: "-5Y", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+            maxDate: "+5y", //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
         });
-        $('.last').datepicker("option", "minDate", $(".fst").val()); // 운행기간 종료일 범위 초기값 설정
 
-        $('.fst').on('change', function () { // 운행기간 종료일 범위 동적처리
-            $('.last').datepicker("option", "minDate", $(".fst").val());
-        });
-    })
+        $(".datepicker").datepicker("setDate", "today"); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+    });
 </script>
 
 <script>
@@ -468,6 +372,27 @@
         }
     };
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const updateButton = document.getElementById("update-button");
+        const startDateInput = document.getElementById("datepicker1");
+
+        // 시작 날짜를 당월 1일로 설정
+        const today = new Date();
+        const firstDayOfMonth = new Date(
+            today.getFullYear(),
+            today.getMonth(),
+            1
+        );
+        const formattedFirstDay = firstDayOfMonth
+            .toISOString()
+            .split("T")[0];
+        startDateInput.value = formattedFirstDay;
+    });
+</script>
+
+
 <section class="sub-contents-wrap maxwrap">
 
     <div class="sub-title">
@@ -531,9 +456,9 @@
             <div class="search-form-major" id="dateArea">
                 <label>운행기간</label>
                 <div class="date-wrap dis-ib dis-b-t">
-                    <input type="text" value="2023-08-31" class="fst datepicker"
+                    <input type="text" class="fst datepicker"
                            name="searchStartDate" readonly autocomplete="off"><span class="unit">~</span>
-                    <input type="text" value="2023-08-31" class="last datepicker" name="searchEndDate"
+                    <input type="text" class="last datepicker" name="searchEndDate"
                            readonly autocomplete="off">
                 </div>
 
@@ -549,7 +474,7 @@
                                autocomplete="off">
                         <%--                        <span class="input-group-clear dis-n" id="club_clear">x</span>--%>
                         <select class="club " id="clubBox" onchange="$.selectBoxChange(this.value, 'club')">
-                            <option value="">전체</option>
+                            <option value="전체">전체</option>
                             <option value="운반"
                             >운반
                             </option>
@@ -605,8 +530,6 @@
                 <li>
                     <label>차량번호</label>
                     <div class="input-group select">
-
-
                         <input type="text" class="wp100 carHostAuto complete trn" placeholder="차량번호"
                                name="carHost" id="carHost" value="${!empty view ? view.carHost : ''}"
                                autocomplete="off">
@@ -618,29 +541,9 @@
                             <option value="자차"
                             >자차
                             </option>
-
                         </select>
-
-
                     </div>
                 </li>
-
-                <%--                <li>--%>
-                <%--                    <label>진행상태</label>--%>
-                <%--                    <div class="input-group select">--%>
-                <%--                        <input type="text" class="wp100 Autocomplete trn" placeholder="진행상태"--%>
-                <%--                               name="currStatus" id="currStatus" value="" autocomplete="off">--%>
-                <%--                        <span class="input-group-clear dis-n" id="currStatus_clear">x</span>--%>
-                <%--                        <select class="currStatus " id="currStatusBox"--%>
-                <%--                                onchange="$.selectBoxChange(this.value, 'currStatus')">--%>
-                <%--                            <option value="">전체</option>--%>
-                <%--                            <option value="배차">배차</option>--%>
-                <%--                            <option value="요청">요청</option>--%>
-                <%--                            <option value="상차">상차</option>--%>
-                <%--                            <option value="하차">하차</option>--%>
-                <%--                        </select>--%>
-                <%--                    </div>--%>
-                <%--                </li>--%>
             </ul>
         </div>
 
@@ -649,23 +552,11 @@
             <div style="width: 50%;  float: left;">
                 <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
                         type="radio" name="searchType"
-                        value="car"/>차량 기준</label>
-                <%--                <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 155px;"><input--%>
-                <%--                        type="radio" name="searchType"--%>
-                <%--                        value="tosite"/>하차지 기준</label>--%>
-                <%--                <br/>--%>
-                <%--                <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 155px;"><input--%>
-                <%--                        type="radio" name="searchType"--%>
-                <%--                        value="operation"/>운행일 기준</label>--%>
+                        value="car" checked/>운행일 기준</label>
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="searchType" value="fromsite"/>운행일 기준</label>
-                <%--                <br/>--%>
-                <%--                <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 190px;"><input--%>
-                <%--                        type="radio" name="searchType"--%>
-                <%--                        value="carCost"/>차량 운반비--%>
-                <%--                    기준</label>--%>
+                        type="radio" name="searchType" value="fromsite"/>차량 기준</label>
             </div>
         </div>
     </form>
@@ -676,45 +567,16 @@
     </div>
 
     <div id="tableshow">
-        <div class="table-top" style="height: auto; display:  block;">
-            <%--            <table class="list-table" style="margin-left: auto; margin-right: auto; width: 100%; margin-bottom: 20px;">--%>
-            <%--                <colgroup>--%>
-            <%--                    <col width="50%">--%>
-            <%--                    <col width="50%">--%>
-            <%--                </colgroup>--%>
-            <%--                <tbody><tr>--%>
-            <%--                    <th></th>--%>
-            <%--                    <th>총 금액</th>--%>
-            <%--                </tr>--%>
-            <%--                <tr>--%>
-            <%--                    <th class="a-center">운반비 합계</th>--%>
-            <%--                    <td class="a-right" style="padding: 10px;">--%>
-            <%--                        5000--%>
-            <%--                    </td>--%>
-            <%--                </tr>--%>
-            <%--                <tr>--%>
-            <%--                    <th class="a-center">수수료</th>--%>
-            <%--                    <td class="a-right" style="padding: 10px;">--%>
-            <%--                        2000--%>
-            <%--                    </td>--%>
-            <%--                </tr>--%>
-            <%--                <tr>--%>
-            <%--                    <th class="a-center">운반비 공급가액</th>--%>
-            <%--                    <td class="a-right" style="padding: 10px;">--%>
-            <%--                        200000--%>
-            <%--                    </td>--%>
-            <%--                </tr>--%>
-            <%--                </tbody>--%>
-            <%--            </table>--%>
+        <div class="table-top" style="height: auto; display:  block; text-align: center">
             <p class="total">
-                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}" /></span>
+                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}"/></span>
                 <span>건 (총대수 : <span class="cnt default-blue"><span id="totalQty"></span> </span> 대)가 검색되었습니다.</span>
             </p>
         </div>
 
         <div class="btn-area">
             <input type="button" style="background-image: none !important;text-indent: 0px !important;"
-                   class="btn btn-search btn-search__line" value="일괄결제" onClick="$.allChkChange(1);"
+                   class="btn btn-search btn-search__line" value="일괄결재" onClick="$.allChkChange(1);"
                    onkeydown="if(event.keyCode == 13) return false;">
             <input type="button" style="background-image: none !important;text-indent: 0px !important;"
                    class="btn btn-search btn-search__line" value="취소" onClick="$.allChkChange(0);"
@@ -722,6 +584,14 @@
         </div>
         <div style="width: 100%; overflow-x: auto; overflow-y: hidden;">
             <table class="list-table">
+                <colgroup>
+                    <col style="width: 40%">
+                    <col style="width: 33%">
+                    <col style="width: 33%">
+                    <col style="width: 60%">
+                    <col style="width: 28%">
+                    <col style="width: 28%">
+                </colgroup>
                 <thead>
                 <tr>
                     <th>운행일</th>
@@ -732,7 +602,7 @@
                     <th>진행</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="receiptsSearchResult">
                 <tr>
                     <td>
                         23-09-09
@@ -788,71 +658,9 @@
                     </tr>
                 </c:forEach>
                 </tbody>
+
             </table>
         </div>
-        <%--기존코드--%>
-        <%--        <div style="width: 100%; overflow-x:auto; overflow-y: hidden;">--%>
-        <%--            <table class="list-table">--%>
-        <%--                &lt;%&ndash;            <colgroup>&ndash;%&gt;--%>
-        <%--                &lt;%&ndash;                <col style="width: 2%">&ndash;%&gt;--%>
-        <%--                &lt;%&ndash;                <col style="width: 9%">&ndash;%&gt;--%>
-        <%--                &lt;%&ndash;                <col style="width: 20%">&ndash;%&gt;--%>
-        <%--                &lt;%&ndash;                <col style="width: 21%">&ndash;%&gt;--%>
-        <%--                &lt;%&ndash;                <col style="width: 21%">&ndash;%&gt;--%>
-        <%--                &lt;%&ndash;                <col style="width: 6%">&ndash;%&gt;--%>
-        <%--                &lt;%&ndash;                <col style="width: 6%">&ndash;%&gt;--%>
-        <%--                &lt;%&ndash;                <col style="width: 15%">&ndash;%&gt;--%>
-        <%--                &lt;%&ndash;            </colgroup>&ndash;%&gt;--%>
-        <%--                <thead>--%>
-        <%--                <tr>--%>
-        <%--                    <th>운행일</th>--%>
-        <%--                    <th>상차지</th>--%>
-        <%--                    <th>하차지</th>--%>
-        <%--                    <th>차량번호</th>--%>
-        <%--                    <th>대수</th>--%>
-        <%--                    <th>진행</th>--%>
-        <%--                </tr>--%>
-        <%--                <tr>--%>
-        <%--                    <td>--%>
-        <%--                        1--%>
-        <%--                    </td>--%>
-        <%--                    <td>--%>
-        <%--                        구디--%>
-        <%--                    </td>--%>
-        <%--                    <td>--%>
-        <%--                        지밸리--%>
-        <%--                    </td>--%>
-        <%--                    <td>--%>
-        <%--                        37우2598--%>
-        <%--                    </td>--%>
-        <%--                    <td>--%>
-        <%--                        1--%>
-        <%--                    </td>--%>
-        <%--                    <td>--%>
-        <%--                        <span style="color: #000080; font-weight: bold;">하차</span>--%>
-        <%--                    </td>--%>
-        <%--                </tr>--%>
-        <%--                <tr style="border-bottom: 2px solid red;">--%>
-        <%--                    <td>--%>
-        <%--                        1--%>
-        <%--                    </td>--%>
-        <%--                    <td>--%>
-        <%--                        구디--%>
-        <%--                    </td>--%>
-        <%--                    <td>--%>
-        <%--                        지밸리--%>
-        <%--                    </td>--%>
-        <%--                    <td>--%>
-        <%--                        37우2598--%>
-        <%--                    </td>--%>
-        <%--                    <td>--%>
-        <%--                        1--%>
-        <%--                    </td>--%>
-        <%--                    <td>--%>
-        <%--                        <span style="color: #000080; font-weight: bold;">하차</span>--%>
-        <%--                    </td>--%>
-        <%--                </tr>--%>
-        <%--            </table>--%>
         <div>
             <section class="paging">
                 <ul class="paging__ul" id="page-div">
@@ -874,9 +682,7 @@
                             src="/resources/image/icons/ico_next.png" alt="다음"></a></li>
                 </ul>
             </section>
-
         </div>
-
 </section>
 
 
@@ -904,22 +710,6 @@
 <button class="screen_top up-btn">
     <img src="/resources/image/icons/ico-top.png" style="width: 40px; height: 40px;">
 </button>
-<%--<footer class="footer" id="footer">--%>
-<%--    <h1>--%>
-<%--        <img src="/resources/image/common/erp_logo_white.png">--%>
-<%--        <a href="http://www.kiwontech.com" target="_blank" style="color: #FFFFFF;">http://www.kiwontech.com</a>--%>
-<%--    </h1>--%>
-
-<%--    <p>--%>
-<%--        <span>(주)기원테크</span>--%>
-<%--        <span class="btw_bar">|</span>--%>
-<%--        <span>서울특별시 구로구 디지털로31길 53 이앤씨벤처드림타워5차 509호</span>--%>
-<%--        <span class="btw_bar">|</span>--%>
-<%--        <span>대표전화: <a href="tel:010-3717-7406">010-3717-7406</a></span>--%>
-<%--        <span class="btw_bar">|</span>--%>
-<%--        <span>e-mail:100@kiwontech.com</span>--%>
-<%--    </p>--%>
-<%--</footer>--%>
 </body>
 </html>
 
