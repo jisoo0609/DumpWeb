@@ -40,7 +40,7 @@
         <include refid="res_table">
             <property name="userId" value="#{userId}"/>
         </include>
-        select sum(Qty * Qtyup)
+        select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup))
             from tSheet_sub
             where sheetID2 in ( select sheetID2 from r1 inner join r2
                 on r1.sheetID = r2.sheetID2
