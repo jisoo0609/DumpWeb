@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DailyReportStep6Mapper {
 
-    List<DailyReportStep6> findDailyReportSix (String carNo);
-    List<DailyReportStep6> findDailyReportClub(String carNo, String drvClub);
+    List<DailyReportStep6> findCarListByDate (String carNo);
+    List<DailyReportStep6> findCarListByItem(String carNo, String selectOption);
 
 }
