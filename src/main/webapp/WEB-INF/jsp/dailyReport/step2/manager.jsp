@@ -313,7 +313,7 @@
 
                 <c:forEach var="item" items="${carAndExpense}">
                     <tr>
-                        <td>${item.fromsite}</td>
+                        <td>${item.carNo}</td>
                         <td>${item.fromsite}</td>
                         <td>${item.tosite}</td>
                         <td>${item.item}</td>
