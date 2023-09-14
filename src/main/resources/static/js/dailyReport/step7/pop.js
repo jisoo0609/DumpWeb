@@ -1,5 +1,5 @@
-var closeBtn = null;
-var openBtn = null;
+var clBtn = null;
+var opBtn = null;
 
 $(document).ready(function(){
     init();
