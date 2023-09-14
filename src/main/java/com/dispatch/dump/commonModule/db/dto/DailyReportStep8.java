@@ -22,6 +22,10 @@ public class DailyReportStep8 {
     private String Rem;             // LINE :: 비고
     private int sheetID2;            // LINE :: tSheet FK
     private String tosite;          // LINE :: 하차지
+
+    //cnt추가
+    private String totalData;
+
     // VO
     //private long idx;
 }

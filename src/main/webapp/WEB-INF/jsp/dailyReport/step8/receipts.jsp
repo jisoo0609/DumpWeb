@@ -455,6 +455,19 @@
     })
 </script>
 
+<script>
+    var totalQty = 0;
+    <c:forEach items="${receiptsList}" var="receipt">
+    var qty = parseInt("${receipt.qty}");
+    totalQty += qty;
+    </c:forEach>
+    window.onload = function () {
+        var totalQtySpan = document.getElementById("totalQty");
+        if (totalQtySpan) {
+            totalQtySpan.innerText = totalQty;
+        }
+    };
+</script>
 <section class="sub-contents-wrap maxwrap">
 
     <div class="sub-title">
@@ -694,8 +707,8 @@
             <%--                </tbody>--%>
             <%--            </table>--%>
             <p class="total">
-                <span>데이터</span> <span class="cnt default-blue">1</span>
-                <span>건 (총대수 : <span class="cnt default-blue">1</span> 대)가 검색되었습니다.</span>
+                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}" /></span>
+                <span>건 (총대수 : <span class="cnt default-blue"><span id="totalQty"></span> </span> 대)가 검색되었습니다.</span>
             </p>
         </div>
 

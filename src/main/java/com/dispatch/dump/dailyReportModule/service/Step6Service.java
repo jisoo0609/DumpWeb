@@ -37,4 +37,17 @@ public class Step6Service {
 
         return tdrive;
     }
+
+    public List<DailyReportStep6> findDailyReportClub(String carNo, String drvClub) {
+        //1. login 정보 받아오기.
+        HttpSession session = commonUtil.getSession();
+        Login loginData = (Login) session.getAttribute("loginInfo");
+
+        List<DailyReportStep6> tdclub = new ArrayList<>();
+        tdclub = dailyReportStep6Mapper.findDailyReportClub(carNo, drvClub);
+
+        return tdclub;
+    }
+
+
 }
