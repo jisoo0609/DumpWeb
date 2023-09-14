@@ -50,10 +50,15 @@ public class Step8Service {
 
         try {
 
-            List<DailyReportStep8> receiptsSearchList=dailyReportStep8Mapper.receiptsSearchConditionWithCnt(dailyReportStep8, loginData.getUserId());
+            System.out.println("상차지는?"+ dailyReportStep8.getFromsite());
+            System.out.println("Carno?"+ dailyReportStep8.getCarNo());
+            dailyReportStep8.setCarSubmitTel(loginData.getUserId());
+            List<DailyReportStep8> receiptsSearchList=dailyReportStep8Mapper.receiptsSearchConditionWithCnt(dailyReportStep8);
+            System.out.println("receiptsSearchList?"+ receiptsSearchList);
 
             searchReceiptsMap.put("httpCode", 200);
-            searchReceiptsMap.put(" receiptsSearchList", receiptsSearchList);
+            searchReceiptsMap.put("receiptsSearchList", receiptsSearchList);
+
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }

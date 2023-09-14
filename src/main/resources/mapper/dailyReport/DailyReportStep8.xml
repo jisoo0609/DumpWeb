@@ -15,14 +15,14 @@
     s.item,
     s.Qty,
     s.Qtyup,
-    (SELECT COUNT(*) FROM tsheet t2 WHERE t2.carSubmitTel = #{userId}) as totalData
+    (SELECT COUNT(*) FROM tsheet t2 WHERE t2.carSubmitTel = #{carSubmitTel}) as totalData
         FROM tsheet t
             JOIN tSheet_sub s
         ON t.sheetID = s.sheetID2
-        WHERE t.carSubmitTel = #{userId}
+        WHERE t.carSubmitTel = #{carSubmitTel}
           and t.CarNo = #{CarNo}
           and s.fromsite = #{fromsite}
-          and s.tosite = #{fromsite}
+          and s.tosite = #{tosite}
           and s.item= #{item};
 
     </select>
@@ -55,7 +55,7 @@
     s.Qtyup,
     (SELECT COUNT(*) FROM tsheet t2
        JOIN tSheet_sub s2 ON t2.sheetID = s2.sheetID2
-       WHERE t2.carSubmitTel = #{userId}
+       WHERE t2.carSubmitTel = #{carSubmitTel}
        AND t2.CarNo = t.CarNo
        AND s2.fromsite = s.fromsite
        AND s2.tosite = s.tosite
@@ -63,7 +63,7 @@
         FROM tsheet t
             JOIN tSheet_sub s
         ON t.sheetID = s.sheetID2
-        WHERE t.carSubmitTel = #{userId}
+        WHERE t.carSubmitTel = #{carSubmitTel}
           AND t.CarNo = #{CarNo}
           AND s.fromsite = #{fromsite}
           AND s.tosite =  #{tosite}

@@ -496,7 +496,7 @@
                     <label>차량번호</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 carHostAuto complete trn" placeholder="차량번호"
-                               name="carHost" id="carHost" value="${!empty view ? view.carHost : ''}"
+                               name="CarNo" id="CarNo" value="${!empty view ? view.carHost : ''}"
                                autocomplete="off">
                         <%--                        <span class="input-group-clear dis-n" id="carHost_clear">x</span>--%>
                         <select class="carHost " id="carHostBox"
@@ -630,7 +630,7 @@
 
                         <a style="cursor: pointer;"
                            onclick="$.valuePg(1)"
-                           class="active">1</a>
+                           class="active"        @media screen and (min-width: 280px) and (max-width: 1024px) {>1</a>
 
 
                     </li>

@@ -17,6 +17,6 @@ public interface DailyReportStep8Mapper {
 
     List<DailyReportStep8> receiptsSearchCondition(DailyReportStep8 dailyReportStep8);
 
-    List<DailyReportStep8> receiptsSearchConditionWithCnt(DailyReportStep8 dailyReportStep8, String userId);
+    List<DailyReportStep8> receiptsSearchConditionWithCnt(DailyReportStep8 dailyReportStep8);
 
 }
