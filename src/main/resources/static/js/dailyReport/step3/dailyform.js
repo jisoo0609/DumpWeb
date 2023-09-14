@@ -1,4 +1,5 @@
 var resultDiv = $("#searchResult");
+var results;
 
 /*tSheet, tSheet_sub insert*/
 $.save = function() {
@@ -12,8 +13,13 @@ $.save = function() {
             console.log(json)
             if(json.httpCode == 200) {
                 alert("저장이 완료되었습니다.");
+            } else if(json.httpCode == 100){
+                alert("기존에 저장된 정보가 존재합니다.");
+
+                inputData(json.carSubmitTelResult);
+
                 //$.list();
-            } else {
+            } else{
                 alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
             }
         }
@@ -32,12 +38,27 @@ $.saveCarSubmit = function() {
             console.log(json)
             if(json.httpCode == 200) {
                 alert("제출처 저장이 완료되었습니다.");
-            } else {
+            } else if(json.httpCode == 100){
+                alert("기존에 저장된 정보가 존재합니다.");
+
+                inputData(json.carSubmitTelResult);
+
+                $.list();
+            } else{
                 alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
             }
         }
     })
 }
+
+/*기존 제출처 정보 채우기*/
+function inputData(carSubmitTelResult){
+        $("[name=carSubmit]").val(carSubmitTelResult.carSubmit);
+        $("[name=carSubmitTel]").val(carSubmitTelResult.carSubmitTel);
+        $("[name=salesman]").val(carSubmitTelResult.salesman);
+
+}
+
 
 /*제출처 검색*/
 $.search = function() {
@@ -47,7 +68,6 @@ $.search = function() {
         carSubmitTel: searchText,
         salesman: searchText
     };
-
        $.ajax({
            url: "/dailyReport/search",
            type: "GET",
@@ -67,10 +87,9 @@ $.search = function() {
        })
    }
 
-function displayResults(results) {
-
+function displayResults(searchResults) {
+    results = searchResults; // results 변수에 데이터를 설정
     resultDiv.empty(); // 이전 결과 지우기
-
     // 결과 데이터를 동적으로 추가
     for (var i = 0; i < results.length; i++) {
         var result = results[i];
@@ -88,9 +107,17 @@ function displayResults(results) {
     }
 }
 
-// 선택 버튼 클릭 시 실행될 함수
+
+
+/*선택 버튼*/
 function selectItem(index) {
-    alert("기능 추가 예정!");
+    var selectedResult = results[index];
+    $("[name=date]").val(selectedResult.date);
+    $("[name=carSubmit]").val(selectedResult.carSubmit);
+    $("[name=carSubmitTel]").val(selectedResult.carSubmitTel);
+    $("[name=salesman]").val(selectedResult.salesman);
+    closePopSearch();
+    console.log(selectedResult.date);
 }
 
 $.list = function() {
