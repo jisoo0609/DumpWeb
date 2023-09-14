@@ -35,7 +35,7 @@
     </h1>
   </div>
 
-      <form method="POST" action="/dailyReport/step6/search">
+      <form name="select_frm">
         <input type="hidden" name="carNo" value=${sessionScope.loginInfo.userId} />
             <!-- 조회 양식 -->
             <div class="operating_period content conTop">
@@ -73,7 +73,7 @@
 
             <!-- 검색 버튼 -->
             <div class="search_container">
-                <button type="submit" class="search_btn common_btn" id="search-button">검색</button>
+                <button type="button" class="search_btn common_btn" id="search-button" onclick=bindList() >검색</button>
             </div>
         </form>
 
@@ -98,7 +98,19 @@
                     <th>주유량(기타)</th>
                   </tr>
                 </thead>
-                <tbody id="table-body"></tbody>
+                <tbody id="table-body">
+                    <tr>
+                        <c:forEach var="list" items="${defaultList}" varStatus="status">
+                                <td>${list.drvDate}</td>
+                                <td>${list.drvClub}</td>
+                                <td>${list.lastKm}</td>
+                                <td>${list.useAmt}</td>
+                                <td>${list.useOil}</td>
+                            </tr>
+                    </c:forEach>
+                </tr>
+                </tbody>
+
               </table>
             </div>
 </div>
