@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // 시작 날짜를 당월 1일로 설정
   const today = new Date();
   const firstDayOfMonth = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    1
+      today.getFullYear(),
+      today.getMonth(),
+      1
   );
   const formattedFirstDay = firstDayOfMonth.toISOString().split("T")[0];
   startDateInput.value = formattedFirstDay;
@@ -96,8 +96,8 @@ searchButton.addEventListener("click", () => {
   // 검색 결과 텍스트 생성
   const dataCount = searchResultData.length;
   const totalCount = searchResultData.reduce(
-    (total, data) => total + data.대수,
-    0
+      (total, data) => total + data.대수,
+      0
   );
   const resultText = `데이터 <span class="blue">${dataCount}</span>건 (총대수: <span class="blue">${totalCount}</span>대)가 검색되었습니다.`;
 
@@ -125,3 +125,15 @@ cancelButton.addEventListener("click", () => {
 // 페이지 로드 시 초기 테이블 열 순서 설정
 changeTableColumnOrder();
 
+
+$.bindList = function() {
+  $.ajax({
+    url: "/dailyReport/carcarelist",
+    type: "POST",
+    data: $("[name=select_frm]").serialize(),
+    success: function (data) {
+      console.log("post 처리");
+      $("#table-body").empty();
+    }
+  })
+}
