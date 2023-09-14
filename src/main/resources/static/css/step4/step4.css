@@ -121,8 +121,17 @@ input[type = text]{
 
 .cashNbtns{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
+}
+
+.cashNbtns > p{
+    margin-right: 10px;
+}
+
+input[value="일괄결재"]{
+    margin-right: 10px;
 }
 
 .btn_area{
