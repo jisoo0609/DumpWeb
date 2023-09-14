@@ -2,6 +2,7 @@
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
 <link rel="stylesheet" type="text/css" href="/resources/css/step7/order.css">
+<script src="/resources/js/dailyReport/step7/pop.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
@@ -98,118 +99,106 @@
 </script>
 
 <section class="GolSection">
-    <h2>제출처 주문 등록</h2> <span></span>
+<h2>제출처 주문 등록</h2>
     <form method="post">
-        <fieldset>
-            <ul>
-                <li>
-                    <label class="golLabel" for="datepicker">주문일</label>
-                    <div class="calendarBox">
-                        <span class="golInputSpan"></span><input id="datepicker">
-                    </div>
-                </li>
-                <li>
-                    <label class="golLabel" for="loadPoint">
-                        상차지
-                        <img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼">
-                    </label>
-                    <span class="golInputSpan"></span><input class="golIn" id="loadPoint" type="text" placeholder="상차지">
-                </li>
-                <li>
-                    <label class="golLabel" for="unloadPoint">
-                        하차지
-                        <img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼">
-                    </label>
-                    <span class="golInputSpan"></span><input class="golIn" id="unloadPoint" type="text" placeholder="하차지">
-                </li>
-                <li>
-                    <label class="golLabel" for="golItems">
-                        품목
-                        <img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼">
-                    </label>
-                    <span class="golInputSpan"></span><input class="golIn" id="golItems" type="text" placeholder="품목">
-                </li>
-                <li>
-                    <label class="golLabel" for="golCount">대수</label>
-                    <span class="golInputSpan"></span><input class="golIn" id="golCount" type="number" pattern="[0-9]"
-                        inputmode="numeric" placeholder="대수">
-                </li>
-                <li>
-                    <label class="golLabel" for="carNumb">
-                        차량번호
-                        <img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼">
-                    </label>
-                    <span class="golInputSpan"></span><input class="golIn" id="carNumb" type="text" placeholder="차량번호">
-                </li>
-                <li>
-                    <label for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-                    <input id="chk2" type="checkbox">
-                </li>
-            </ul>
-        </fieldset>
+      <fieldset>
+        <ul>
+          <li>
+            <label class="golLabel" for="datepicker">주문일</label>
+            <span class="golInputSpan"><input id="datepicker"></span>
+            <label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+            <input id="check67" type="checkbox">
+          </li>
+          <li>
+            <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <span class="golInputSpan"><input class="golIn" id="loadPoint" type="text" placeholder="상차지"></span>
+          </li>
+          <li>
+            <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <span class="golInputSpan"><input class="golIn" id="unloadPoint" type="text" placeholder="하차지"></span>
+          </li>
+          <li>
+            <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <span class="golInputSpan"><input class="golIn" id="golItems" type="text" placeholder="품목"></span>
+          </li>
+          <li>
+            <label class="golLabel" for="golCount">대수</label>
+            <span class="golInputSpan">
+              <input class="golIn" id="golCount" type="number" pattern="[0-9]" inputmode="numeric" placeholder="대수">
+            </span>
+          </li>
+          <li>
+            <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <span class="golInputSpan"><input class="golIn" id="carNumb" type="text" placeholder="차량번호"></span>
+          </li>
+        </ul>
+      </fieldset>
     </form>
-    <script src="/resources/js/dailyReport/step7/voice.js"></script>
+    <script src="/resources/js/voice.js"></script>
     <div>
-        <button class="opBtn" data-popName="golPop1">삭제</button>
-        <button class="opBtn" data-popName="golPop2">수정</button>
-        <button class="opBtn" data-popName="golPop3">저장+추가</button>
-        <button class="opBtn" data-popName="golPop4">이전화면</button>
+      <button class="opBtn" data-popName="golPop1">삭제</button>
+      <button class="opBtn" data-popName="golPop2">수정</button>
+      <button class="opBtn" data-popName="golPop3">저장</button>
+      <button class="opBtn" data-popName="golPop4">이전화면</button>
     </div>
 
-    <div id="golPop1" class="golPopup1">
-        <div>
-            <span class="material-symbols-outlined clBtn">close</span>
-            <p>정말 <span style="font-weight: bold;">삭제</span>하시겠습니까?</p>
-            <input type="button" value="확인">
-        </div>
-    </div>
+		<div id="golPop1" class="golPopup1">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>정말 <span style="font-weight: bold;">삭제</span>하시겠습니까?</p>
+				<input type="button" value="확인">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
-    <div id="golPop2" class="golPopup2">
-        <div>
-            <span class="material-symbols-outlined clBtn">close</span>
-            <p>정말 <span style="font-weight: bold;">수정</span>하시겠습니까?</p>
-            <input type="button" value="확인">
-        </div>
-    </div>
+		<div id="golPop2" class="golPopup2">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>정말 <span style="font-weight: bold;">수정</span>하시겠습니까?</p>
+				<input type="button" value="확인">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
-    <div id="golPop3" class="golPopup3">
-        <div>
-            <span class="material-symbols-outlined clBtn">close</span>
-            <p>정말 <span style="font-weight: bold;">저장 및 추가</span>를하시겠습니까?</p>
-            <input type="button" value="확인" onclick="location.href='nextgol'">
-            <!-- 위 내용 저장후 새페이지로 데이터값 그대로 적용된 상태에서 이동 -->
-        </div>
-    </div>
+		<div id="golPop3" class="golPopup3">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>정말 <span style="font-weight: bold;">저장</span>를하시겠습니까?</p>
+				<input type="button" value="확인">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
-    <div id="golPop4" class="golPopup4">
-        <div>
-            <span class="material-symbols-outlined clBtn">close</span>
-            <p>이전 <span style="font-weight: bold;">화면</span>으로 돌아가시겠습니까?</p>
-            <input type="button" value="확인" onClick="history.go(-1)">
-        </div>
-    </div>
+		<div id="golPop4" class="golPopup4">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>이전 <span style="font-weight: bold;">화면</span>으로 돌아가시겠습니까?</p>
+				<input type="button" value="확인" onClick="history.go(-1)">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
     <table>
-        <thead>
-            <tr>
-                <th>주문일</th>
-                <th>상차지</th>
-                <th>하차지</th>
-                <th>품목</th>
-                <th>대수</th>
-                <th>차량번호</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>03.09.11</td>
-                <td></td>
-                <td></td>
-                <td>모래, 자갈</td>
-                <td>100</td>
-                <td>123가 1234</td>
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th>주문일</th>
+          <th>상차지</th>
+          <th>하차지</th>
+          <th>품목</th>
+          <th>대수</th>
+          <th>차량번호</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>09.11</td>
+          <td>강남</td>
+          <td>구로</td>
+          <td>모래, 자갈,</td>
+          <td>100</td>
+          <td>675가8989</td>
+        </tr>
+      </tbody>
     </table>
 </section>
 

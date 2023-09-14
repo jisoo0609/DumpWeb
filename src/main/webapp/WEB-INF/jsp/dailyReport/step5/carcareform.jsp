@@ -11,8 +11,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-
-
 <script>
     function dvFristbtn(){
         $('#droildiv').css('color: rgb(0, 203, 230)', 'border-color: rgb(0, 203, 230)');
@@ -21,30 +19,30 @@
 
 
 <script>  // 달력 옵션 추가 코드
-$(function() {
-    //input을 datepicker로 선언
-    $("#datepicker").datepicker({
-        dateFormat: 'yy-mm-dd' //달력 날짜 형태
-        ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-        ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
-        ,changeYear: true //option값 년 선택 가능
-        ,changeMonth: true //option값  월 선택 가능
-        ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
-        ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
-        ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
-        ,buttonText: "선택" //버튼 호버 텍스트
-        ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
-        ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
-        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
-        ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
-        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
-        ,minDate: "-5Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-        ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
-    });
+   $(function() {
+       //input을 datepicker로 선언
+       $("#datepicker1, #datepicker2").datepicker({
+           dateFormat: 'yy-mm-dd' //달력 날짜 형태
+           ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+           ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
+           ,changeYear: true //option값 년 선택 가능
+           ,changeMonth: true //option값  월 선택 가능
+           ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
+           ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+           ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
+           ,buttonText: "선택" //버튼 호버 텍스트
+           ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+           ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
+           ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
+           ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
+           ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
+           ,minDate: "-5Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+           ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+       });
 
-    //초기값을 오늘 날짜로 설정해줘야 합니다.
-    $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-});
+       //초기값을 오늘 날짜로 설정해줘야 합니다.
+       $('#datepicker1, #datepicker2').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+   });
 </script>
 
 <section class="DrvSection">
@@ -66,10 +64,10 @@ $(function() {
             <input type="radio" name="drvClub" id="rdNote">
             <label for="rdNote">기타</label>
 
-            <ul>
+            <ul class="">
                 <li>
-                    <label class="drvLabel" for="datepicker">날짜</label>
-                    <span class="drvInputSpan"><input id="datepicker" inputmode="none" name="drvDate"></span>
+                    <label class="drvLabel" for="datepicker1">날짜</label>
+                    <span class="drvInputSpan"><input id="datepicker1" inputmode="none" name="drvDate"></span>
                     <label for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
                     <input id="chk2" type="checkbox">
                 </li>
@@ -89,13 +87,33 @@ $(function() {
                     <label class="drvLabel" for="drvRem">기타(설명) <span><img class="drvVoiceImg" src="/resources/image/step5/ico_mic.png" alt="음성인식 버튼"></span> </label>
                     <span class="drvInputSpan"><textarea placeholder="주유소 및 정비소와 수리내용" id="drvRem voiceNotification" name="drvRem" class="voice-notification" cols="30" rows="2"></textarea></span>
                 </li>
-
+                <li class="tabBtn" data-teb="Nli">
+                    <label for="NCare">다음 교환 주기 입력</label>
+                    <span class="drvInputSpan2"><input id="NCare" type="checkbox"></input></span>
+                </li>
+            </ul>
+            <ul class="tabPg active" id="Nli">
+                <li>
+                    <label class="drvLabel" for="datepicker2">교환 예정일</label>
+                    <span class="drvInputSpan"><input id="datepicker2" inputmode="none" name="datepicker2"></span>
+                </li>
+                <li>
+                    <label class="drvLabel" for="nextlastkm">교환 주행거리</label>
+                    <span class="drvInputSpan"><input id="nextlastkm" type="number" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리"></span>
+                </li>
+                <li>
+                     <label for="ChangeConf">교환 확인</label>
+                     <span class="drvInputSpan2"><input id="ChangeConf" type="checkbox" value=""></span>
+                </li>
             </ul>
         </fieldset>
     </form>
+
     <script src="/resources/js/dailyReport/step5/voice.js"></script>
+    <script src="/resources/js/dailyReport/step5/tabInput.js"></script>
+
     <div>
-        <button class="openBtn" data-popName="drvpop1">삭제</button> <button class="openBtn" data-popName="drvpop2">저장</button> <button class="openBtn" data-popName="drvpop3">이전화면</button> <button class="openBtn" data-popName="drvpop4">다음 교환 주기</button>
+        <button class="openBtn" data-popName="drvpop1">삭제</button> <button class="openBtn" data-popName="drvpop2">저장</button> <button class="openBtn" data-popName="drvpop3">이전화면</button>
     </div>
 
     <div id="drvpop1" class="drvPopup1">
@@ -119,14 +137,6 @@ $(function() {
             <span class="material-symbols-outlined closeBtn">close</span>
             <p>이전 화면으로 돌아가시겠습니까?</p>
             <input type="button" value="확인" onClick="history.go(-1)">
-        </div>
-    </div>
-
-    <div id="drvpop4" class="drvPopup4">
-        <div>
-            <span class="material-symbols-outlined closeBtn">close</span>
-            <p>다음 교환 주기를 입력 하시겠습니까?</p>
-            <input type="button" value="확인" onclick="location.href='nextcarcare'"> <!--?위 내용 저장후 새페이지로 데이터값 그대로 적용된 상태에서 이동 -->
         </div>
     </div>
 
