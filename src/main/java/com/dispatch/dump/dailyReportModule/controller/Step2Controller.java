@@ -21,6 +21,7 @@ public class Step2Controller {
 
     @RequestMapping(value = "/manager", method = RequestMethod.GET)
     public String step2(Model model, DailyReport dailyReport) {
+        model.addAttribute("carAndExpense", step2Service.getSummaryBySql());
         return "/dailyReport/step2/manager";
     }
 
@@ -28,7 +29,7 @@ public class Step2Controller {
     @RequestMapping(value = "/step2/getCarAndExpense", method = RequestMethod.GET)
     @ModelAttribute("carAndExpense")
     public List<DailyReportStep2Sub> getCarAndExpense() {
-        List<DailyReportStep2Sub> carAndExpense = step2Service.getSummary();
+        List<DailyReportStep2Sub> carAndExpense = step2Service.getSummaryByBE();
         return carAndExpense;
     }
 }

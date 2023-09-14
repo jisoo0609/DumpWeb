@@ -1,100 +1,48 @@
-flatpickr("#startDate", {
-  enableTime: false,
-  dateFormat: "Y-m-d",
-  monthSelectorType: "static",
-  altInput: true,
-  altFormat: "시작 날짜를 선택하세요",
-  locale: {
-    months: {
-      shorthand: [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-      ],
-      longhand: [
-        "1월",
-        "2월",
-        "3월",
-        "4월",
-        "5월",
-        "6월",
-        "7월",
-        "8월",
-        "9월",
-        "10월",
-        "11월",
-        "12월",
-      ],
-    },
-  },
-  onChange: function (selectedDates, dateStr, instance) {
-    // 날짜가 선택될 때 실행되는 함수
-    if (dateStr) {
-      instance.altInput.value = dateStr; // 선택된 날짜를 altInput에 표시
-    }
-  },
-});
+// 현재 날짜를 가져와서 운행일 입력 상자의 초기 값으로 설정
+document.addEventListener("DOMContentLoaded", function () {
+  const startDateInput = document.getElementById("start-date");
+  const endDateInput = document.getElementById("end-date");
 
-flatpickr("#endDate", {
-  enableTime: false,
-  dateFormat: "Y-m-d",
-  monthSelectorType: "static",
-  altInput: true,
-  altFormat: "종료 날짜를 선택하세요",
-  locale: {
-    months: {
-      shorthand: [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-      ],
-      longhand: [
-        "1월",
-        "2월",
-        "3월",
-        "4월",
-        "5월",
-        "6월",
-        "7월",
-        "8월",
-        "9월",
-        "10월",
-        "11월",
-        "12월",
-      ],
-    },
-  },
-  onChange: function (selectedDates, dateStr, instance) {
-    // 날짜가 선택될 때 실행되는 함수
-    if (dateStr) {
-      instance.altInput.value = dateStr; // 선택된 날짜를 altInput에 표시
-    }
-  },
+  // 시작 날짜를 당월 1일로 설정
+  const today = new Date();
+  const firstDayOfMonth = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    1
+  );
+  const formattedFirstDay = firstDayOfMonth.toISOString().split("T")[0];
+  startDateInput.value = formattedFirstDay;
+
+  // 종료 날짜를 오늘로 설정
+  const formattedToday = today.toISOString().split("T")[0];
+  endDateInput.value = formattedToday;
 });
 
 // 검색 버튼 요소를 가져옵니다.
 const searchButton = document.querySelector(".search_btn");
 
+// radio 버튼에 따라 테이블 열 순서 변경 함수
+function changeTableColumnOrder() {
+  const dateHeader = document.getElementById("date-header");
+  const itemHeader = document.getElementById("item-header");
+  const searchTypeRadio = document.querySelectorAll('input[name="search-type"]:checked');
+
+  if (searchTypeRadio.length > 0) {
+    if (searchTypeRadio[0].value === "date") {
+      dateHeader.textContent = "날짜";
+      itemHeader.textContent = "품목";
+    } else if (searchTypeRadio[0].value === "item") {
+      dateHeader.textContent = "품목";
+      itemHeader.textContent = "날짜";
+    }
+  }
+}
+
 // 검색 버튼 클릭 이벤트를 처리합니다.
 searchButton.addEventListener("click", () => {
+  // radio 버튼에 따라 테이블 열 순서 변경
+  changeTableColumnOrder();
+
   // 검색 결과 데이터 (가상 데이터로 가정)
   const searchResultData = [
     {
@@ -173,3 +121,7 @@ cancelButton.addEventListener("click", () => {
   const resultSearch = document.querySelector(".result_search");
   resultSearch.innerHTML = "";
 });
+
+// 페이지 로드 시 초기 테이블 열 순서 설정
+changeTableColumnOrder();
+

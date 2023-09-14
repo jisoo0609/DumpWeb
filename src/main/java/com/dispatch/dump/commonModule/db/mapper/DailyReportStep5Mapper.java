@@ -9,7 +9,7 @@ public interface DailyReportStep5Mapper {
 
 
     /* FUNCTION :: 일보 수정 *//*
-    int updateDailyReportStep5(DailyReport dailyReport);
+    int updateDailyReportStep5(DailyReportStep5 dailyReportStep5);
 
     *//* FUNCTION :: 일보 상세보기 *//*
     DailyReport findDailyReportBySheetID(DailyReport dailyReport);

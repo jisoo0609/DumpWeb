@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep8Mapper">
+
+
+
+    <select id = "searchReceiptsWithCnt" resultType="DailyReportStep8">
+        SELECT
+            t.sheetID,
+            DATE_FORMAT(t.date, '%y-%m-%d') as date,
+    t.CarNo,
+    s.fromsite,
+    s.tosite,
+    s.item,
+    s.Qty,
+    s.Qtyup,
+    (SELECT COUNT(*) FROM tsheet t2 WHERE t2.carSubmitTel = #{userId}) as totalData
+        FROM tsheet t
+            JOIN tSheet_sub s ON t.sheetID = s.sheetID2
+        WHERE t.carSubmitTel = #{userId};
+
+    </select>
+
+    <select id ="searchReceipts" resultType="DailyReportStep8">
+        SELECT
+            t.sheetID,
+            DATE_FORMAT(t.date, '%y-%m-%d') as date,
+            t.CarNo,
+            s.fromsite,
+            s.tosite,
+            s.item,
+            s.Qty,
+            s.Qtyup
+        FROM tsheet t
+            JOIN tSheet_sub s ON t.sheetID = s.sheetID2
+        WHERE t.carSubmitTel = #{userId}
+    </select>
+
+
+</mapper>
