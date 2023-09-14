@@ -10,65 +10,14 @@
         src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
         function dvFristbtn() {
             $('#droildiv').css('color: rgb(0, 203, 230)', 'border-color: rgb(0, 203, 230)');
         }
-    var rdOli = null;
-    var rdDEF = null;
-    var rdEngOil = null;
-    var rdFix = null;
-    var rdNote = null;
-
-    $(document).ready(function () {
-        init();
-        popupJS(rdOli, rdDEF, rdEngOil, rdFix, rdNote);
-    });
-
-    function init() {
-        rdOli = $('#rdOli');
-        rdDEF = $('#rdDEF');
-        rdEngOil = $('#rdEngOil');
-        rdFix = $('#rdFix');
-        rdNote = $('#rdNote');
-    }
-
-    function clickJS(rdOli, rdDEF, rdEngOil, rdFix, rdNote) {
-        var clickTarget;
-        $(rdOli, rdDEF, rdEngOil, rdFix, rdNote).click(function () {
-            clickTarget = "#" + $(this).attr("data-popName");
-            $(clickTarget).toggleClass('active');
-        });
-
-    }
-</script>
-
-<script>
-    var clBtn = null;
-    var opBtn = null;
-
-    $(document).ready(function () {
-        init();
-        popupJS(opBtn, clBtn);
-    });
-
-    function init() {
-        clBtn = $(".clBtn");
-        opBtn = $(".opBtn");
-    }
-
-    function popupJS(opBtn, clBtn) {
-        var opTarget;
-        $(opBtn).click(function () {
-            opTarget = "#" + $(this).attr("data-popName");
-            $(opTarget).addClass('active');
-        });
-        $(clBtn).click(function () {
-            $(opTarget).removeClass("active")
-        });
-    }
-
 </script>
 
 <script>  // 달력 옵션 추가 코드
