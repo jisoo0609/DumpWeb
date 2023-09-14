@@ -6,9 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // 시작 날짜를 당월 1일로 설정
   const today = new Date();
   const firstDayOfMonth = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    1
+      today.getFullYear(),
+      today.getMonth(),
+      1
   );
   const formattedFirstDay = firstDayOfMonth.toISOString().split("T")[0];
   startDateInput.value = formattedFirstDay;
@@ -18,8 +18,11 @@ document.addEventListener("DOMContentLoaded", function () {
   endDateInput.value = formattedToday;
 });
 
+
 // 검색 버튼 요소를 가져옵니다.
 const searchButton = document.querySelector(".search_btn");
+
+
 
 // radio 버튼에 따라 테이블 열 순서 변경 함수
 function changeTableColumnOrder() {
@@ -39,40 +42,9 @@ function changeTableColumnOrder() {
 }
 
 // 검색 버튼 클릭 이벤트를 처리합니다.
-searchButton.addEventListener("click", () => {
+function printTableColumnOrder(searchResultData) {
   // radio 버튼에 따라 테이블 열 순서 변경
   changeTableColumnOrder();
-
-  // 검색 결과 데이터 (가상 데이터로 가정)
-  const searchResultData = [
-    {
-      차량번호: "ABC 123",
-      품목: "박스",
-      상차지: "출발지 A",
-      하차지: "도착지 B",
-      시간: "2023-08-30 10:00",
-      대수: 2,
-      진행: "진행 중",
-    },
-    {
-      차량번호: "XYZ 789",
-      품목: "가전제품",
-      상차지: "출발지 X",
-      하차지: "도착지 Y",
-      시간: "2023-08-30 13:30",
-      대수: 5,
-      진행: "완료",
-    },
-    {
-      차량번호: "XYZ 789",
-      품목: "가전제품",
-      상차지: "출발지 X",
-      하차지: "도착지 Y",
-      시간: "2023-08-30 13:30",
-      대수: 1,
-      진행: "완료",
-    },
-  ];
 
   // 테이블 본문 요소
   const tableBody = document.querySelector("table tbody");
@@ -84,11 +56,11 @@ searchButton.addEventListener("click", () => {
   searchResultData.forEach((data, index) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-    <td>${index + 1}</td>
-    <td>${data.차량번호}</td>
-    <td>${data.품목}</td>
-    <td>${data.시간}</td>
-    <td>${data.진행}</td>
+    <td>${data.drvDate}</td>
+    <td>${data.drvClub}</td>
+    <td>${data.lastKm}</td>
+    <td>${data.useAmt}</td>
+    <td>${data.useOil}</td> 
   `;
     tableBody.appendChild(row);
   });
@@ -96,15 +68,15 @@ searchButton.addEventListener("click", () => {
   // 검색 결과 텍스트 생성
   const dataCount = searchResultData.length;
   const totalCount = searchResultData.reduce(
-    (total, data) => total + data.대수,
-    0
+      (total, data) => total + data.useOil,
+      0
   );
   const resultText = `데이터 <span class="blue">${dataCount}</span>건 (총대수: <span class="blue">${totalCount}</span>대)가 검색되었습니다.`;
 
   // 결과를 result_search 요소에 출력
   const resultSearch = document.querySelector(".result_search");
   resultSearch.innerHTML = `<h1>${resultText}</h1>`;
-});
+};
 
 // 일괄취소 버튼 요소를 가져옵니다.
 const cancelButton = document.querySelector(".common_btn:nth-of-type(2)");
@@ -125,3 +97,14 @@ cancelButton.addEventListener("click", () => {
 // 페이지 로드 시 초기 테이블 열 순서 설정
 changeTableColumnOrder();
 
+
+function bindList() {
+  $.ajax({
+    url: "/dailyReport/carcarelist",
+    type: "POST",
+    data: $("[name=select_frm]").serialize(),
+    success: function (data) {
+      printTableColumnOrder(data);
+    }
+  })
+}
