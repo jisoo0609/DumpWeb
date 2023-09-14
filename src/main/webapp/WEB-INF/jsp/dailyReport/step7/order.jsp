@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
-<script src="/resources/js/dailyReport/step5/popup.js"></script>
-<link rel="stylesheet" type="text/css" href="/resources/css/step8/order.css">
+
+<link rel="stylesheet" type="text/css" href="/resources/css/step7/order.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
@@ -103,48 +103,43 @@
         <fieldset>
             <ul>
                 <li>
-                    <label class="golLabel" for="datepicker" style="width: 12.3%;">주문일</label>
-                    <span class="golInputSpan"><input id="datepicker"></span>
+                    <label class="golLabel" for="datepicker">주문일</label>
+                    <div class="calendarBox">
+                        <span class="golInputSpan"></span><input id="datepicker">
+                    </div>
                 </li>
                 <li>
-                    <label class="golLabel" for="lastKm">상차지</label>
-                    <span>
+                    <label class="golLabel" for="loadPoint">
+                        상차지
                         <img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼">
-                    </span>
-                    <span class="golInputSpan"><input id="lastKm" type="number" pattern="[0-9]*" inputmode="numeric"
-                            placeholder="상차지"></span>
+                    </label>
+                    <span class="golInputSpan"></span><input class="golIn" id="loadPoint" type="text" placeholder="상차지">
                 </li>
                 <li>
-                    <label class="golLabel" for="useAmt">하차지</label>
-                    <span>
+                    <label class="golLabel" for="unloadPoint">
+                        하차지
                         <img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼">
-                    </span>
-                    <span class="golInputSpan"><input id="useAmt" type="number" pattern="[0-9]*" inputmode="numeric"
-                            placeholder="하차지"></span>
+                    </label>
+                    <span class="golInputSpan"></span><input class="golIn" id="unloadPoint" type="text" placeholder="하차지">
                 </li>
                 <li>
-                    <label class="golLabel" for="useOil">품목</label>
-                    <span>
+                    <label class="golLabel" for="golItems">
+                        품목
                         <img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼">
-                    </span>
-                    <span class="golInputSpan"><input id="useOil" type="number" pattern="[0-9]*" inputmode="numeric"
-                            placeholder="품목"></span>
+                    </label>
+                    <span class="golInputSpan"></span><input class="golIn" id="golItems" type="text" placeholder="품목">
                 </li>
                 <li>
-                    <label class="golLabel" for="useOil">대수</label>
-                    <span>
-                        <img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼">
-                    </span>
-                    <span class="golInputSpan"><input id="useOil" type="number" pattern="[0-9]*" inputmode="numeric"
-                            placeholder="대수"></span>
+                    <label class="golLabel" for="golCount">대수</label>
+                    <span class="golInputSpan"></span><input class="golIn" id="golCount" type="number" pattern="[0-9]"
+                        inputmode="numeric" placeholder="대수">
                 </li>
                 <li>
-                    <label class="golLabel" for="useOil">차량번호</label>
-                    <span>
+                    <label class="golLabel" for="carNumb">
+                        차량번호
                         <img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼">
-                    </span>
-                    <span class="golInputSpan"><input id="useOil" type="number" pattern="[0-9]*" inputmode="numeric"
-                            placeholder="차량번호"></span>
+                    </label>
+                    <span class="golInputSpan"></span><input class="golIn" id="carNumb" type="text" placeholder="차량번호">
                 </li>
                 <li>
                     <label for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
@@ -153,7 +148,7 @@
             </ul>
         </fieldset>
     </form>
-    <script src="/resources/js/voice.js"></script>
+    <script src="/resources/js/dailyReport/step7/voice.js"></script>
     <div>
         <button class="opBtn" data-popName="golPop1">삭제</button>
         <button class="opBtn" data-popName="golPop2">수정</button>
@@ -163,33 +158,33 @@
 
     <div id="golPop1" class="golPopup1">
         <div>
-            <span class="material-symbols-outlined closeBtn">close</span>
-            <p>정말 삭제하시겠습니까?</p>
+            <span class="material-symbols-outlined clBtn">close</span>
+            <p>정말 <span style="font-weight: bold;">삭제</span>하시겠습니까?</p>
             <input type="button" value="확인">
         </div>
     </div>
 
     <div id="golPop2" class="golPopup2">
         <div>
-            <span class="material-symbols-outlined closeBtn">close</span>
-            <p>정말 수정하시겠습니까?</p>
+            <span class="material-symbols-outlined clBtn">close</span>
+            <p>정말 <span style="font-weight: bold;">수정</span>하시겠습니까?</p>
             <input type="button" value="확인">
         </div>
     </div>
 
     <div id="golPop3" class="golPopup3">
         <div>
-            <span class="material-symbols-outlined closeBtn">close</span>
-            <p>정말 저장하시겠습니까?</p>
+            <span class="material-symbols-outlined clBtn">close</span>
+            <p>정말 <span style="font-weight: bold;">저장 및 추가</span>를하시겠습니까?</p>
             <input type="button" value="확인" onclick="location.href='nextgol'">
             <!-- 위 내용 저장후 새페이지로 데이터값 그대로 적용된 상태에서 이동 -->
         </div>
     </div>
 
-    <div id="golpop4" class="golPopup4">
+    <div id="golPop4" class="golPopup4">
         <div>
-            <span class="material-symbols-outlined closeBtn">close</span>
-            <p>이전 화면으로 돌아가시겠습니까?</p>
+            <span class="material-symbols-outlined clBtn">close</span>
+            <p>이전 <span style="font-weight: bold;">화면</span>으로 돌아가시겠습니까?</p>
             <input type="button" value="확인" onClick="history.go(-1)">
         </div>
     </div>

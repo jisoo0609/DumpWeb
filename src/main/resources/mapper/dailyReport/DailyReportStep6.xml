@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep6Mapper">
+
+    <select id="findDailyReportSix" resultType="DailyReportStep6">
+        SELECT drvDate, drvClub, lastKm, useAmt, useOil, drvRem
+        FROM tdrive
+        WHERE carNo=#{carNo}
+        ORDER BY drvDate DESC
+    </select>
+    
+    <select id="findDailyReportClub" resultType="DailyReportStep6">
+        SELECT drvClub, drvDate, lastKm, useAmt, useOil, drvRem
+        FROM tdrive
+        WHERE carNo=#{carNo} AND drvClub=#{drvClub}
+        ORDER BY drvDate DESC
+    </select>
+
+
+
+
+
+</mapper>

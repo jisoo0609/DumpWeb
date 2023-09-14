@@ -4,7 +4,7 @@ import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep5Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,14 +28,14 @@ public class Step5Service {
         HttpSession session = commonUtil.getSession();
 
         try {
-//            Login loginData = (Login) session.getAttribute("loginInfo");
-//            dailyReportStep5.setCarNo(loginData.getUserId());
-            dailyReportStep5.setCarNo("5041");
+            Login loginData = (Login) session.getAttribute("loginInfo");
+            dailyReportStep5.setCarNo(loginData.getUserId());
+            //해당 driveid가 없다면 (insert 신규등록)
             if (dailyReportStep5.getDriveID() == 0) {
                 dailyReportStep5Mapper.insertDailyReportStep5(dailyReportStep5);
                 System.out.println("if Received POST request body:");
                 System.out.println(dailyReportStep5);
-            } else  {
+            } else { //update 수정
                 dailyReportStep5Mapper.insertDailyReportStep5(dailyReportStep5);
                 System.out.println("else Received POST request body:");
                 System.out.println(dailyReportStep5);
@@ -48,8 +48,7 @@ public class Step5Service {
             System.out.println("Received POST request body:");
             System.out.println(dailyReportStep5);
             log.error("Exception["+ e.getMessage() +"]");
-//            log.error("Exception Class: {}", e.getClass().getName()); // 예외 클래스 이름
-//            log.error("Exception Cause: {}", e.getCause()); // 예외 원인
+
 
         }
         return commonUtil.jsonFormatTransfer(rtnMap);

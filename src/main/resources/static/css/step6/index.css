@@ -7,10 +7,13 @@ body {
   background: #ddd;
 }
 
-span {
+/* span {
+  color: var(--color-bg-border-blue);
+} */
+
+.blue {
   color: var(--color-bg-border-blue);
 }
-
 .common_btn {
   text-align: center;
   border: 1px solid #0068b7;
@@ -20,8 +23,8 @@ span {
   color: #0064c1;
   font-weight: 600;
   width: 120px;
-  height: 45px;
-  line-height: 43px;
+  height: 40px;
+  line-height: 38px;
 }
 
 /* 전역 변수 및 상수 설정 */
@@ -67,8 +70,6 @@ span {
   justify-content: space-between;
   align-items: center;
   background: #fff;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
 }
 
 .subTitle_wrapper h1 {
@@ -108,7 +109,7 @@ span {
 
 /* 조회 양식 스타일 */
 .inquiry_form {
-  margin: 30px 0 10px;
+  margin: 20px 0 10px;
   font-size: var(--font-medium);
   border: 1px solid #ddd;
   padding: 15px;
@@ -130,6 +131,11 @@ span {
   justify-content: space-between;
   align-items: center;
   position: relative;
+}
+
+.conTop {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .operating_period h1 {
@@ -167,6 +173,8 @@ span {
 }
 
 .col input {
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 13px;
   border: 1px solid var(--color-border-gray);
   padding: 5px 10px;
   cursor: pointer;
@@ -182,7 +190,7 @@ span {
 .conbox {
   font-size: var(--font-medium);
   width: 80%;
-  padding: 5px 10px;
+  padding: 7px 0;
   border: 1px solid var(--color-border-gray);
 }
 
@@ -207,14 +215,14 @@ span {
 .result_search {
   margin: 20px 0;
   text-align: center;
-  font-size: var(--font-large);
+  font-size: 15px;
   font-weight: var(--weight-bold);
 }
 
 .agreement_container {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: center;
   gap: 5px;
   flex-wrap: wrap;
   margin-bottom: 10px;
@@ -246,17 +254,31 @@ td {
   font-size: 12px;
 }
 
+.conChoice {
+  justify-content: center;
+  gap: 20%;
+}
+
+/* #table-body tr td:last-child{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: nowrap;
+} */
+
 /* 모바일 스타일 */
 @media (max-width: 439px) {
-  .content {
-    display: block;
+  .conChoice {
+    justify-content: center;
+    gap: 20%;
   }
+
   .content h1 {
     justify-content: center;
-    margin-bottom: 10px;
   }
   .conbox {
-    width: 100%;
+    width: 80%;
   }
   .col {
     gap: 20px;
@@ -279,9 +301,6 @@ td {
   .operating_period {
     text-align: center;
   }
-  .operating_period label {
-    padding: 5px;
-  }
   #flex_important {
     display: flex;
     flex-wrap: wrap;
@@ -292,7 +311,7 @@ td {
 @media (max-width: 550px) {
   .col {
     gap: 20px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     gap: 10px;
     display: flex;
@@ -300,9 +319,7 @@ td {
   .col span {
     display: none;
   }
-  .col input {
-    padding: 5px 5px;
-  }
+
   .col:first-child::after {
     content: "";
   }
@@ -336,3 +353,4 @@ td {
     padding: 5px 5px;
   }
 }
+

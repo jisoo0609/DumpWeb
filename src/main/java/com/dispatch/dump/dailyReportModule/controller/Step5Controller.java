@@ -21,7 +21,6 @@ public class Step5Controller {
     private final Step5Service step5Service;
 
     @RequestMapping(value = "/carcareform", method = RequestMethod.GET)
-    @ResponseBody
     public String step5main(Model model, DailyReport dailyReport) {
          dailyReportService.list(model, dailyReport);
         return "/dailyReport/step5/carcareform";

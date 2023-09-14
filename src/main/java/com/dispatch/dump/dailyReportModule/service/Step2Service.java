@@ -6,7 +6,7 @@ import com.dispatch.dump.commonModule.db.dto.DailyReportStep2Sub;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep2Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ public class Step2Service {
     private final DailyReportStep2Mapper dailyReportStep2Mapper;
     private final CommonUtil commonUtil;
 
-    public List<DailyReportStep2Sub> getSummary() {
+    public List<DailyReportStep2Sub> getSummaryByBE() {
         //1. login 정보 받아오기.
         HttpSession session = commonUtil.getSession();
         Login loginData = (Login) session.getAttribute("loginInfo");
@@ -40,6 +40,21 @@ public class Step2Service {
         System.out.println(summary.getTotalTransportationCost());
 
         return tSheetSub;
+    }
+
+    public List<DailyReportStep2Sub> getSummaryBySql() {
+        //1. login 정보 받아오기.
+        HttpSession session = commonUtil.getSession();
+        Login loginData = (Login) session.getAttribute("loginInfo");
+
+        //2. login id와 tsheet의 CarSubmitTel이 똑같은 튜플 값을 tSheet에서 가져옴.
+        List<DailyReportStep2Sub> tSheet = new ArrayList<>();
+        tSheet = dailyReportStep2Mapper.findJoinDailyReport(loginData.getUserId());
+        tSheet.forEach(t -> System.out.println(t));
+
+        System.out.println(dailyReportStep2Mapper.findJoinDailyReportForTotalTransportationCost(loginData.getUserId()));
+
+        return tSheet;
     }
 
 
