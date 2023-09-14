@@ -14,4 +14,7 @@ public class DailyReportStep2Sub {
     private String Rem;             // LINE :: 비고
     private int sheetID2;            // LINE :: tSheet FK
     private String tosite;          // LINE :: 하차지
+
+    // tSheet테이블 : 차량번호
+    public String CarNo;
 }
