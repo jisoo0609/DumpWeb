@@ -10,7 +10,7 @@ function openPopSearch() {
 }
 function closePopSearch() {
     resultDiv.empty(); // 이전 결과 지우기
-    $("#searchInput").val(""); //input box 비우기
+    $("#search-input").val(""); //input box 비우기
 
     document.getElementById('popSearch').style.display = 'none';
 

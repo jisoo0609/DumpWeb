@@ -18,13 +18,13 @@
             </a>
           </div>
           <div class="con">
-            <a href="https://m.blog.naver.com/kiwontech2">
+            <a href="https://youtu.be/UYOVB-HeA-s">
               <img class="con-pic" src="/resources/image/footer/youtube.png" alt="홍보영상1"/>
               <span class="con-tex">홍보동영상①</sapn>
             </a>
           </div>
           <div class="con">
-            <a href="https://m.blog.naver.com/kiwontech2">
+            <a href="https://youtu.be/jfT4asf-23Y">
               <img class="con-pic" src="/resources/image/footer/youtube.png" alt="홍보영상2"/>
               <span class="con-tex">홍보동영상②</span>
             </a>

@@ -25,7 +25,7 @@ public class Step8Service {
         Login loginData = (Login) session.getAttribute("loginInfo");
 
         List<DailyReportStep8> ReceiptsDataList = new ArrayList<>();
-        ReceiptsDataList = dailyReportStep8Mapper.searchReceipts(loginData.getUserId());
+        ReceiptsDataList = dailyReportStep8Mapper.searchReceiptsWithCnt(loginData.getUserId());
 
         Summary summary = new Summary(0, 0, 0, new Date());
         ReceiptsDataList.stream().forEach(t -> summary.setTotalTransportationCost(summary.getTotalTransportationCost() + t.getQty() * t.getQtyup()));
@@ -37,6 +37,25 @@ public class Step8Service {
 
         return ReceiptsDataList;
     }
+
+//    public List<DailyReportStep8> getReceipts() {
+//
+//        HttpSession session = commonUtil.getSession();
+//        Login loginData = (Login) session.getAttribute("loginInfo");
+//
+//        List<DailyReportStep8> ReceiptsDataList = new ArrayList<>();
+//        ReceiptsDataList = dailyReportStep8Mapper.searchReceipts(loginData.getUserId());
+//
+//        Summary summary = new Summary(0, 0, 0, new Date());
+//        ReceiptsDataList.stream().forEach(t -> summary.setTotalTransportationCost(summary.getTotalTransportationCost() + t.getQty() * t.getQtyup()));
+//
+//        for (DailyReportStep8 x : ReceiptsDataList) {
+//            System.out.println(x);
+//        }
+//        System.out.println(summary.getTotalTransportationCost());
+//
+//        return ReceiptsDataList;
+//    }
 
 //    public List<DailyReportStep8Main> getTsheet() {
 //        //1. login 정보 받아오기.
