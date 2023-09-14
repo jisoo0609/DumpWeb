@@ -74,21 +74,22 @@ $(function() {
                     <input id="chk2" type="checkbox">
                 </li>
                 <li>
-                    <label class="drvLabel" for="lastKm">최종 주행거리</label>
-                    <span class="drvInputSpan"><input id="lastKm" name="lastKm" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="최종 주행거리"></span>
+                    <label class="drvLabel" for="lastKm">최종 주행거리 km</label>
+                    <span class="drvInputSpan"><input id="lastKm" name="lastKm" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="차량계기판의 최종 주행거리"></span>
                 </li>
                 <li>
                     <label class="drvLabel" for="useAmt">사용금액</label>
                     <span class="drvInputSpan"><input id="useAmt" name="useAmt" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="사용금액"></span>
                 </li>
                 <li>
-                    <label class="drvLabel" for="useOil">주유량</label>
+                    <label class="drvLabel" for="useOil">주유량 L</label>
                     <span class="drvInputSpan"><input id="useOil" name="useOil" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="주유량"></span>
                 </li>
                 <li>
                     <label class="drvLabel" for="drvRem">기타(설명) <span><img class="drvVoiceImg" src="/resources/image/step5/ico_mic.png" alt="음성인식 버튼"></span> </label>
-                    <span class="drvInputSpan"><textarea id="drvRem voiceNotification" name="drvRem" class="voice-notification" cols="30" rows="2"></textarea></span>
+                    <span class="drvInputSpan"><textarea placeholder="주유소 및 정비소와 수리내용" id="drvRem voiceNotification" name="drvRem" class="voice-notification" cols="30" rows="2"></textarea></span>
                 </li>
+
             </ul>
         </fieldset>
     </form>
@@ -197,8 +198,8 @@ $(function() {
         <thead>
         <tr>
             <th>분류</th>
-            <th class="Drvth2" >최종주행거리</th>
-            <th class="Drvth2" >사용금액</th>
+            <th class="Drvth2">최종</br>주행거리</th>
+            <th class="Drvth2">사용금액</th>
             <th>기타(설명)</th>
             <th>교환 주기</th>
         </tr>
