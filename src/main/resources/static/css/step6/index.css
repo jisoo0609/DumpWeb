@@ -48,7 +48,7 @@ body {
 /* 삭제 */
 /* 페이지 본문 스타일 */
 .sub_con_wrapper {
-  padding: 40px 30px 100px;
+  padding: 20px 10px 50px;
   background: #fff;
 }
 
@@ -56,11 +56,6 @@ body {
   overflow: hidden;
   max-width: 1200px;
   margin: 0 auto;
-}
-
-/* 삭제 */
-.wp80 {
-  width: 80%;
 }
 
 /* 페이지 제목 스타일 */
@@ -135,7 +130,7 @@ body {
 
 .conTop {
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 7px;
 }
 
 .operating_period h1 {
@@ -305,6 +300,7 @@ td {
     display: flex;
     flex-wrap: wrap;
   }
+
 }
 
 /* 모바일 스타일 */
@@ -315,6 +311,7 @@ td {
     justify-content: center;
     gap: 10px;
     display: flex;
+    width: 258px;
   }
   .col span {
     display: none;
@@ -322,6 +319,9 @@ td {
 
   .col:first-child::after {
     content: "";
+  }
+  .conbox {
+    width: 258px;
   }
   .table_container {
     white-space: normal;
