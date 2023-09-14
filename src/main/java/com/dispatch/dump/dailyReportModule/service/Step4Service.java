@@ -34,6 +34,7 @@ public class Step4Service {
         tSheet.stream().forEach(t -> tSheetSub.add(dailyReportStep4Mapper.getDailyReportMainBySheetID2(t.getSheetID())));
 
         // 로그로 DB 조회 결과 출력 (System.out.println 사용)
+        System.out.println("DailyReport Main List: "+ tSheet);
         System.out.println("DailyReport List Retrieved: " + tSheetSub);
 
         return tSheetSub;
