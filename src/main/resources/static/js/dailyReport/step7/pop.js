@@ -3,21 +3,21 @@ var openBtn = null;
 
 $(document).ready(function(){
     init();
-    popupJS(opBtn,clBtn);
+    popJS(opBtn,clBtn);
 });
 
 function init(){
-    closeBtn = $(".clBtn");
-    openBtn = $(".opBtn");
+    clBtn = $(".clBtn");
+    opBtn = $(".opBtn");
 }
 
-function popupJS(opBtn,clBtn){
-    var openTarget;
+function popJS(opBtn,clBtn){
+    var opTarget;
     $(opBtn).click(function(){
-        openTarget = "#"+ $(this).attr("data-popName");
-        $(openTarget).addClass('active');
+        opTarget = "#"+ $(this).attr("data-popName");
+        $(opTarget).addClass('active');
     });
     $(clBtn).click(function(){
-       $(openTarget).removeClass("active") 
+       $(opTarget).removeClass("active")
     });
 }
