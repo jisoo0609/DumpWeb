@@ -182,7 +182,9 @@
     <div class="cashNbtns">
         <p>999,999,999 원</p>
         <div class="btn_area">
-            <input type="button" value="검색">
+            <a href="/dailyReport/step4/getDailyReportList">
+                <input type="button" value="검색">
+            </a>
             <input type="button" value="일괄결재">
         </div>
     </div>
