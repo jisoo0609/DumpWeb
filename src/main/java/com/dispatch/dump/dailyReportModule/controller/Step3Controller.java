@@ -39,6 +39,13 @@ public class Step3Controller {
         return step3Service.save(dailyReportMain);
     }
 
+    /*운송정보만 저장*/
+    @RequestMapping(value="/workspace/ajax/saveSub", method = RequestMethod.POST)
+    @ResponseBody
+    public String save(DailyReportStep3Sub dailyReportStep3Sub){
+        return step3Service.save(dailyReportStep3Sub);
+    }
+
     /*제출처 목록 조회*/
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ResponseBody

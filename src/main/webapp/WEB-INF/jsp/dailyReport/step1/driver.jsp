@@ -139,9 +139,6 @@
         text-decoration-line: none;
     }
     @media (min-width: 551px) {
-        .homescreen {
-            position: absolute;
-        }
         .start-text {
             font-size: 18px;
             font-weight: bold;
