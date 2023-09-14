@@ -31,9 +31,11 @@ public class Step4Service {
 
         // 3. 가져온 튜플의 sheetID와 tSheetSub의 sheetID2가 똑같은 튜플 값을 tSheetSub에서 가져옴
         List<DailyReportStep4Sub> tSheetSub = new ArrayList<>();
-        for (DailyReportStep4Main t : tSheet) {
-            tSheetSub.addAll(dailyReportStep4Mapper.getDailyReportMainBySheetID2(t.getSheetID()));
-        }
+        tSheet.stream().forEach(t -> tSheetSub.add(dailyReportStep4Mapper.getDailyReportMainBySheetID2(t.getSheetID())));
+
+        // 로그로 DB 조회 결과 출력 (System.out.println 사용)
+        System.out.println("DailyReport Main List: "+ tSheet);
+        System.out.println("DailyReport List Retrieved: " + tSheetSub);
 
         return tSheetSub;
     }
