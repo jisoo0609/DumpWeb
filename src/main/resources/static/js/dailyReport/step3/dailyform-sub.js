@@ -31,7 +31,7 @@ function checkBox() {
          const year = today.getFullYear();
          const month = String(today.getMonth() + 1).padStart(2, '0');
          const day = String(today.getDate()).padStart(2, '0');
-         currentDate.textContent = year+'-'+month+'-'+day;
+         currentDate.textContent = year % 100 +'-'+month+'-'+day;
          checkbox.disabled = true;
      } else {
          currentDate.textContent = '연도- 월- 일';
@@ -114,3 +114,13 @@ popCheckbox.addEventListener("change", function() {
         checkboxLabel.style.color = "#aaa";
     }
 });
+
+/* 전체 삭제 버튼 누르면 인풋 비우기 */
+function clearInputs() {
+    const form = document.getElementById("canvas");
+    const inputs = form.getElementsByTagName("input");
+
+    for (let i = 0; i < inputs.length; i++) {
+        inputs[i].value = ""; // Set the value of each input field to an empty string
+    }
+}
