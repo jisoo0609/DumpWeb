@@ -73,7 +73,7 @@
 
             <!-- 검색 버튼 -->
             <div class="search_container">
-                <button type="button" class="search_btn common_btn" id="search-button" onclick="$.bindList();">검색</button>
+                <button type="button" class="search_btn common_btn" id="search-button" onclick=bindList() >검색</button>
             </div>
         </form>
 
