@@ -21,7 +21,7 @@ public class Step4Service {
     private final DailyReportStep4Mapper dailyReportStep4Mapper;
     private final CommonUtil commonUtil;
 
-    public List<DailyReportStep4Sub> getSummary() {
+    public List<DailyReportStep4Sub> getSummary1() {
         // 1. login 정보 받아오기
         HttpSession session = commonUtil.getSession();
         Login loginData = (Login) session.getAttribute("loginInfo");
@@ -34,9 +34,21 @@ public class Step4Service {
         tSheet.stream().forEach(t -> tSheetSub.add(dailyReportStep4Mapper.getDailyReportMainBySheetID2(t.getSheetID())));
 
         // 로그로 DB 조회 결과 출력 (System.out.println 사용)
-        System.out.println("DailyReport Main List: "+ tSheet);
-        System.out.println("DailyReport List Retrieved: " + tSheetSub);
+        System.out.println("DailyReport List tSheet_sub: " + tSheetSub);
 
         return tSheetSub;
+    }
+
+    public List<DailyReportStep4Main> getSummary2() {
+        // 1. login 정보 받아오기
+        HttpSession session = commonUtil.getSession();
+        Login loginData = (Login) session.getAttribute("loginInfo");
+
+        //2. login id와 tsheet의 CarNo가 똑같은 튜플 값을 tSheet에서 가져옴.
+        List<DailyReportStep4Main> tSheet = dailyReportStep4Mapper.getDailyReportByCarNo(loginData.getUserId());
+
+        tSheet.stream().forEach(t->System.out.println(t));
+
+        return tSheet;
     }
 }
