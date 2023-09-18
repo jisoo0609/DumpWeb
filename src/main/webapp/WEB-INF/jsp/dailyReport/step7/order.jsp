@@ -11,8 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
         function dvFristbtn() {
@@ -55,6 +53,7 @@
           <li>
             <label class="golLabel" for="datepicker">주문일</label>
             <span class="golInputSpan"><input id="datepicker"></span>
+						<input class="golSearch" type="button" value="조회">
             <label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
             <input id="check67" type="checkbox">
           </li>
@@ -130,7 +129,6 @@
     <table>
       <thead>
         <tr>
-          <th>주문일</th>
           <th>상차지</th>
           <th>하차지</th>
           <th>품목</th>
@@ -140,10 +138,9 @@
       </thead>
       <tbody>
         <tr>
-          <td>09.11</td>
           <td>강남</td>
           <td>구로</td>
-          <td>모래, 자갈,</td>
+          <td>모래, 자갈</td>
           <td>100</td>
           <td>675가8989</td>
         </tr>

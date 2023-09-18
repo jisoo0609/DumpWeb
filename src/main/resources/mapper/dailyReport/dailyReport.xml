@@ -25,7 +25,7 @@
                carSubmit,
                carSubmitTel,
                salesman,
-               chk1;
+               chk1;x
         FROM tSheet WHERE sheetID = #{idx}
     </select>
     <select id="findDailyReportListByCarSubmit">
