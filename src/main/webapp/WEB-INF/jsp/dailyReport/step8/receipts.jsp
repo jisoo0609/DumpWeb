@@ -23,10 +23,13 @@
     <link href="/resources/css/step8/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/loading.css">
     <style type="text/css">
-        /*.mobile-navi-dept1 a.active {*/
-        /*    background: initial;*/
-        /*    color: initial;*/
-        /*}*/
+        @media screen and (min-width: 280px) and (max-width: 1024px) {
+            .search-form-major label {
+                width: initial;
+            }
+
+        }
+
         .ui-datepicker-trigger {
             display: none;
         }
@@ -40,10 +43,6 @@
             .search-form {
                 margin: 15px 0 10px;
             }
-        }
-
-        .unit {
-            padding-left: 2px;
         }
 
         .default-tab__ul.cnt8 li {
@@ -254,6 +253,42 @@
                 margin-left: initial;
             }
 
+            .list-table {
+                table-layout: initial;
+            }
+
+            .list-table td {
+                padding: 10px 1px;
+            }
+        }
+
+        @media screen and (max-width: 425px) {
+            .list-table th {
+                padding: 10px 4px;
+            }
+        }
+
+        @media screen and (max-width: 280px) {
+            .list-table th {
+                padding: 1px 10px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            .search-form-major .date-wrap .unit {
+                margin-top: 5px;
+                margin-left: -1px;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            .search-form-major .date-wrap .fst {
+                font-size: 13px;
+            }
+
+            .search-form-major .date-wrap .last {
+                font-size: 13px;
+            }
         }
     </style>
 </head>
@@ -439,7 +474,7 @@
                                autocomplete="off">
                         <%--                        <span class="input-group-clear dis-n" id="club_clear">x</span>--%>
                         <select class="club " id="clubBox" onchange="$.selectBoxChange(this.value, 'club')">
-                            <option value="">전체</option>
+                            <option value="전체">전체</option>
                             <option value="운반"
                             >운반
                             </option>
@@ -517,11 +552,11 @@
             <div style="width: 50%;  float: left;">
                 <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
                         type="radio" name="searchType"
-                        value="car"/>차량 기준</label>
+                        value="car" checked/>운행일 기준</label>
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="searchType" value="fromsite"/>운행일 기준</label>
+                        type="radio" name="searchType" value="fromsite"/>차량 기준</label>
             </div>
         </div>
     </form>
@@ -534,14 +569,14 @@
     <div id="tableshow">
         <div class="table-top" style="height: auto; display:  block; text-align: center">
             <p class="total">
-                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}" /></span>
+                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}"/></span>
                 <span>건 (총대수 : <span class="cnt default-blue"><span id="totalQty"></span> </span> 대)가 검색되었습니다.</span>
             </p>
         </div>
 
         <div class="btn-area">
             <input type="button" style="background-image: none !important;text-indent: 0px !important;"
-                   class="btn btn-search btn-search__line" value="일괄결제" onClick="$.allChkChange(1);"
+                   class="btn btn-search btn-search__line" value="일괄결재" onClick="$.allChkChange(1);"
                    onkeydown="if(event.keyCode == 13) return false;">
             <input type="button" style="background-image: none !important;text-indent: 0px !important;"
                    class="btn btn-search btn-search__line" value="취소" onClick="$.allChkChange(0);"
@@ -549,6 +584,14 @@
         </div>
         <div style="width: 100%; overflow-x: auto; overflow-y: hidden;">
             <table class="list-table">
+                <colgroup>
+                    <col style="width: 40%">
+                    <col style="width: 33%">
+                    <col style="width: 33%">
+                    <col style="width: 60%">
+                    <col style="width: 28%">
+                    <col style="width: 28%">
+                </colgroup>
                 <thead>
                 <tr>
                     <th>운행일</th>
@@ -559,7 +602,7 @@
                     <th>진행</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="receiptsSearchResult">
                 <tr>
                     <td>
                         23-09-09
@@ -615,6 +658,7 @@
                     </tr>
                 </c:forEach>
                 </tbody>
+
             </table>
         </div>
         <div>
