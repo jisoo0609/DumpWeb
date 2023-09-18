@@ -10,11 +10,11 @@ public class DailyReportStep6 {
     private String carNo; //차량번호
     private String drvClub; //구분(주유,정비등)
     private String drvDate; //날짜
-    private int lastKm; //최종주행거리
-    private int useAmt; //사용금액
-    private int useOil; //주유량,요소수량
+    private String lastKm; //최종주행거리
+    private String useAmt; //사용금액
+    private String useOil; //주유량,요소수량
     private String drvRem; //비고
-    private Boolean ck2; //결제체크
+    private Boolean chk2; //결제체크
     private Date repDate; //등록시간
     private int repaddkm; //교환주행거리
     private Date rependdate; //교환예정일

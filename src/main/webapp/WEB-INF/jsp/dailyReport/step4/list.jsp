@@ -189,7 +189,7 @@
             <p class="total">데이터 <span>2</span>건(총대수: <span>2</span>대)이 검색되었습니다.</p>
         </div>
         <div class="cashNbtns">
-            <p>999,999,999 원</p>
+            <p>운반금액: 999,999,999 원</p>
             <input type="button" value="일괄결재">
             <input type="button" value="취소" id="cancelBtn">
         </div>
