@@ -176,6 +176,11 @@
                     <input type="radio" name="searchType" value="4">
                     품목 기준
                 </label>
+                <br>
+                <label for="searchType">
+                    <input type="radio" name="searchType" value="4">
+                    운반비 기준
+                </label>
             </div>
         </div>
     </form>
@@ -189,7 +194,10 @@
             <p class="total">데이터 <span>2</span>건(총대수: <span>2</span>대)이 검색되었습니다.</p>
         </div>
         <div class="cashNbtns">
-            <p>운반금액: 999,999,999 원</p>
+            <p>
+                운반금액: <br>
+                999,999,999
+            </p>
             <input type="button" value="일괄결재">
             <input type="button" value="취소" id="cancelBtn">
         </div>
@@ -201,43 +209,54 @@
         <div>
             <table class="list-table">
                 <colgroup>
-                    <col width="10%">
                     <col width="19%">
                     <col width="15%">
                     <col width="15%">
-                    <col width="22%">
-                    <col width="22%">
-                    <col width="12%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="10%">
+                    <col width="16%">
                 </colgroup>
                 <thead>
                 <tr>
-                    <th>No</th>
                     <th>제출처</th>
                     <th>운행일</th>
                     <th>품목</th>
                     <th>상차지</th>
                     <th>하차지</th>
                     <th>대수</th>
+                    <th>운반비</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>1</td>
                     <td>오이 농장</td>
                     <td>09.05</td>
                     <td>오이</td>
                     <td>강원도</td>
                     <td>너네집</td>
                     <td>141</td>
+                    <td>123456789</td>
                 </tr>
                 <tr>
-                    <td>2</td>
                     <td>강원도 햇감자 판매</td>
                     <td>09.04</td>
                     <td>감자</td>
-                    <td>강원도</td>
                     <td>너네집</td>
+                    <td>강원도</td>
                     <td>140</td>
+                    <td>123456789</td>
+                </tr>
+                <tr>
+                    <c:forEach var="list" items="${tsheet}">
+                        <td>1</td>
+                        <td>1</td>
+                        <td>${list.item}</td>
+                        <td>${list.fromsite}</td>
+                        <td>${list.tosite}</td>
+                        <td>${list.qty}</td>
+                        <td>1원</td>
+                    </c:forEach>
                 </tr>
                 </tbody>
             </table>
