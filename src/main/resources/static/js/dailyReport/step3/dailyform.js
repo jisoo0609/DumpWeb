@@ -88,13 +88,15 @@ $.search = function() {
    }
 
 function displayResults(searchResults) {
+    const salesSubmit = document.getElementById('salesSubmit');
+    const salesEdit = document.getElementById('salesEdit');
     results = searchResults; // results 변수에 데이터를 설정
     resultDiv.empty(); // 이전 결과 지우기
     // 결과 데이터를 동적으로 추가
     for (var i = 0; i < results.length; i++) {
         var result = results[i];
         var resultHtml =
-         '<tr>' +
+         '<tr style="width: 80%; scroll-y: auto;">' +
          '<td>' + result.carSubmit + '</td>' +
          '<td>' + result.salesman + '</td>' +
          '<td>' + result.carSubmitTel + '</td>' +
@@ -105,6 +107,8 @@ function displayResults(searchResults) {
 
         resultDiv.append(resultHtml);
     }
+    salesSubmit.style.display = 'none';
+    salesEdit.style.display = 'flex';
 }
 
 
@@ -127,8 +131,6 @@ $.list = function() {
         data: $("[name=frm]").serialize(),
         success: function (data) {
             var json = $.parseJSON(data);
-            console.log("test-JJYY");
-            console.log(json)
             if(json.httpCode == 200) {
                 alert("조회에 성공했습니다.");
             } else {
@@ -168,4 +170,6 @@ $.updateData = function (idx) {
 
 $.deleteRow = function() {
     alert("정말 삭제하시겠습니까?")
+    document.getElementById('salesEdit').style.display = 'none';
+    document.getElementById('salesSubmit').salesEdit.style.display = 'flex';
 }
