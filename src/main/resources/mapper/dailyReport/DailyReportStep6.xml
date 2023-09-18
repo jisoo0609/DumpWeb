@@ -4,28 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep6Mapper">
 
-    <select id="findCarListByDate" resultType="DailyReportStep6">
-        SELECT DATE_FORMAT(drvdate,'%Y-%m-%d') AS 'drvdate',
+    <select id="findCarListByOption" parameterType="DailyReportStep6SelectForm" resultType="DailyReportStep6">
+        SELECT DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
                drvclub,
-               lastkm,
-               useamt,
-               useoil,
-               drvrem
-        FROM   tdrive
-        WHERE  carno = #{carNo}
-        ORDER  BY drvdate DESC
-    </select>
-    
-    <select id="findCarListByItem" resultType="DailyReportStep6">
-        SELECT drvclub,
-               DATE_FORMAT(drvdate,'%Y-%m-%d') AS 'drvdate',
-               lastkm,
-               useamt,
-               useoil,
-               drvrem
+               FORMAT(lastkm, '#,#')            AS 'lastkm',
+               FORMAT(useamt, '#,#')            AS 'useamt',
+               drvrem,
+               rependchk
         FROM   tdrive
         WHERE  carno = #{carNo}
         AND drvclub = #{selectOption}
+        AND drvdate BETWEEN #{startDate} AND #{endDate}
         ORDER  BY drvdate DESC
     </select>
 </mapper>
