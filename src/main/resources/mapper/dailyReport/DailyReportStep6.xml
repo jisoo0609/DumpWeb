@@ -7,14 +7,16 @@
     <select id="findCarListByOption" parameterType="DailyReportStep6SelectForm" resultType="DailyReportStep6">
         SELECT DATE_FORMAT(drvdate, '%m-%d') AS 'drvdate',
                drvclub,
-               FORMAT(lastkm, '#,#')            AS 'lastkm',
-               FORMAT(useamt, '#,#')            AS 'useamt',
+               lastkm,
+               useamt,
                drvrem,
                rependchk
         FROM   tdrive
         WHERE  carno = #{carNo}
-        AND drvclub = #{selectOption}
         AND drvdate BETWEEN #{startDate} AND #{endDate}
+        <if test="selectOption !='전체'">
+            AND drvclub = #{selectOption}
+        </if>
         ORDER  BY drvdate DESC
     </select>
 </mapper>
