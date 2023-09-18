@@ -1,3 +1,8 @@
+// var receiptsResultDiv = $("#receiptsSearchResult");
+// //const tableBody = document.querySelector("table tbody");
+// var receiptsResults;
+
+
 var month_text = [
     "1월",
     "2월",
@@ -97,8 +102,8 @@ $(document).ready(function () {
                     }
                 });
 
-                $(".carHostAutocomplete").autocomplete({
-                    source: json.autoDataCarHost,
+                $(".CarNoAutocomplete").autocomplete({
+                    source: json.autoDataCarNo,
                     //조회를 위한 최소글자수
                     minLength: 1,
                     focus: function (event, ui) {
@@ -157,41 +162,71 @@ $.valuePg = function (pageNo) {
 
 $.search = function() {
     $.ajax({
-        url: "/dailyReport/receipts/search",
+        url: "/dailyReport/receipts",
         type: "POST",
         data: $("[name=searchfrm]").serialize(),
         success: function (data) {
-            var json = $.parseJSON(data);
+            var receiptsJson = $.parseJSON(data);
+            console.log("json은")
+            console.log(receiptsJson)
+            console.log(receiptsJson.receiptsSearchList)
 
-            console.log(json)
-            if(json.httpCode == 200) {
-                alert("저장이 완료되었습니다.");
-            } else if(json.httpCode == 100){
-                alert("기존에 저장된 정보가 존재합니다.");
-
-                //inputData(json.carSubmitTelResult);
-
-                //$.list();
+            if(receiptsJson.httpCode == 200) {
+                alert("조회가 완료되었습니다.");
+                receiptsSearchResults(receiptsJson.receiptsSearchList);
             } else{
                 alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
             }
         }
     })
 }
+
+function receiptsSearchResults(receiptsSearchResults) {
+    // receiptsResultDiv.empty(); // 이전 결과 지우기
+    var receiptsResultDiv = document.getElementById("receiptsSearchResult");
+    receiptsResultDiv.innerHTML = "";
+    var receiptsResults = receiptsSearchResults;
+
+    console.log(receiptsResults)
+    console.log(receiptsResultDiv)
+
+    // 결과 데이터를 동적으로 추가
+    for (var i = 0; i < receiptsResults.length; i++) {
+        var result = receiptsResults[i];
+        console.log("result?")
+        console.log(result)
+        console.log(result.fromsite)
+        console.log(result.date)
+        var resultHtml =
+            '<tr>' +
+            '<td>' + result.date + '</td>' +
+            '<td>' + result.fromsite + '</td>' +
+            '<td>' + result.tosite + '</td>' +
+            '<td>' + result.CarNo + '</td>' +
+            '<td>' + result.Qty + '</td>'   +
+            '<td>' + result.Qty + '</td>'   +
+            // '<button class="btn addBtn" style="width: 40px; margin-top: 0;" onclick="selectItem(' + i + ');">선택</button>' +
+            //     '</td>' +
+            '</tr>';
+
+        receiptsResultDiv.append(resultHtml);
+    }
+}
+
 // $.search = function() {
 //     var searchFromsite = $("#fromsite").val();
 //     var searchTosite = $("#tositeBox").val();
 //     var searchItem = $("#item").val();
-//     var searchCarHost = $("#carHostBox").val();
+//     var searchCarNo = $("#CarNoBox").val();
 //
 //     var receiptsSearchData = {
 //         fromsite : searchFromsite,
 //         tosite : searchTosite,
 //         item : searchItem,
-//         CarNo : searchCarHost
+//         CarNo : searchCarNo
 //     };
 //     $.ajax({
-//         url: "/dailyReport/receipts/search",
+//         url: "/dailyReport/receipts",
 //         type: "POST",
 //         data: receiptsSearchData,
 //         success: function (data) {
@@ -208,27 +243,7 @@ $.search = function() {
 //     })
 // }
 
-function receiptsSearchListResults(receiptsSearchResults) {
-    let receiptsResults = receiptsSearchResults;
-    let resultDiv = $("#receiptsSearchResult");
 
-    resultDiv.empty(); // 이전 결과 지우기
-    // 결과 데이터를 동적으로 추가
-    for (var i = 0; i < receiptsResults.length; i++) {
-        var result = receiptsResults[i];
-        var resultHtml =
-            '<tr>' +
-            '<td>' + result.carSubmit + '</td>' +
-            '<td>' + result.salesman + '</td>' +
-            '<td>' + result.carSubmitTel + '</td>' +
-            '<td>' +
-            '<button class="btn addBtn" style="width: 40px; margin-top: 0;" onclick="selectItem(' + i + ');">선택</button>' +
-            '</td>' +
-            '</tr>';
-
-        resultDiv.append(resultHtml);
-    }
-}
 
 $.editFormMove = function (idx) {
     localStorage.setItem("prevBackUrl", "/integrateDispatch/list");
