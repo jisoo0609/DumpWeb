@@ -123,7 +123,6 @@ textarea {
 		font-size: 18px;
 		margin-top: 20px;
 		margin-bottom: 20px;
-		border-bottom: 1px solid #999;
 		padding-bottom: 20px;
 	}
 
@@ -181,13 +180,6 @@ textarea {
 		justify-content: space-between;
 	}
 
-	.golInputSpan {
-		padding-left: 120px;
-		line-height: 1.4;
-		font-size: 12px;
-		width: 100%;
-	}
-
 	.golLabel {
 		position: absolute;
 		width: 30%;
@@ -203,8 +195,10 @@ textarea {
 		width: 85%;
 	}
 
-	.check67{
+	.checkbox{
 		width: 20%;
+		display: flex;
+		align-items: center;
 	}
 
 	label {
@@ -226,6 +220,8 @@ textarea {
 	.golInputSpan {
 		width: 100%;
 		padding-left: 70px;
+		line-height: 1.4;
+		font-size: 12px;
 		display: flex;
 		position: relative;
 	}
@@ -394,7 +390,6 @@ textarea {
 		font-size: 18px;
 		margin-top: 20px;
 		margin-bottom: 20px;
-		border-bottom: 1px solid #999;
 		padding-bottom: 20px;
 	}
 
@@ -451,13 +446,6 @@ textarea {
 		justify-content: space-between;
 	}
 
-	.golInputSpan {
-		padding-left: 120px;
-		line-height: 1.4;
-		font-size: 12px;
-		width: 100%;
-	}
-
 	.golLabel {
 		position: absolute;
 		width: 30%;
@@ -470,10 +458,18 @@ textarea {
 
 	input#datepicker {
 		height: 25px;
+		width: 80%;
 	}
 
-	.check67{
-		width: 13%;
+	.golSearch {
+		margin-left: -10%;
+	}
+
+	.checkbox{
+		width: 40%;
+		display: flex;
+		align-items: center;
+		/* margin-left: 5%; */
 	}
 
 	label {
@@ -495,6 +491,8 @@ textarea {
 	.golInputSpan {
 		width: 100%;
 		padding-left: 90px;
+		line-height: 1.4;
+		font-size: 12px;
 		display: flex;
 		position: relative;
 	}
@@ -660,7 +658,6 @@ textarea {
 	.GolSection h2 {
 		font-size: 18px;
 		margin-bottom: 20px;
-		border-bottom: 1px solid #999;
 		padding-bottom: 20px;
 	}
 
@@ -913,7 +910,6 @@ textarea {
 	.GolSection h2 {
 		font-size: 18px;
 		margin-bottom: 20px;
-		border-bottom: 1px solid #999;
 		padding-bottom: 20px;
 	}
 
