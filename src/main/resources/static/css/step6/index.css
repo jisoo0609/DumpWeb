@@ -237,6 +237,14 @@ body {
   white-space: nowrap;
 }
 
+.table_container table tbody {
+  text-align: center;
+}
+
+.table_container table tbody tr td:nth-child(4) {
+  text-align: right;
+}
+
 .th_title th {
   font-weight: var(--weight-bold);
   font-size: 14px;
@@ -245,7 +253,7 @@ body {
 th,
 td {
   border: 1px solid var(--color-border-gray);
-  padding: 10px 10px;
+  padding: 10px 0;
   font-size: 12px;
 }
 
@@ -309,19 +317,17 @@ td {
     gap: 20px;
     flex-wrap: nowrap;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
     display: flex;
-    width: 258px;
-  }
-  .col span {
-    display: none;
+    align-items: center;
+    width: 298px;
   }
 
   .col:first-child::after {
     content: "";
   }
   .conbox {
-    width: 258px;
+    width: 298px;
   }
   .table_container {
     white-space: normal;
@@ -353,4 +359,5 @@ td {
     padding: 5px 5px;
   }
 }
+
 

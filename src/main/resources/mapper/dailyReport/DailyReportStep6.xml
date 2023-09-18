@@ -5,7 +5,7 @@
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep6Mapper">
 
     <select id="findCarListByOption" parameterType="DailyReportStep6SelectForm" resultType="DailyReportStep6">
-        SELECT DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
+        SELECT DATE_FORMAT(drvdate, '%m-%d') AS 'drvdate',
                drvclub,
                FORMAT(lastkm, '#,#')            AS 'lastkm',
                FORMAT(useamt, '#,#')            AS 'useamt',
