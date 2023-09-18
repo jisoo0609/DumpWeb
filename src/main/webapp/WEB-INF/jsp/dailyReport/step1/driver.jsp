@@ -4,7 +4,6 @@
 
 <style>
     .homescreen {
-        background-color: #cce0f7;
         padding: 5px;
     }
     #datepicker1,
@@ -23,6 +22,7 @@
         border: 1px solid #0068b7;
         font-size: 16px;
         font-weight: bold;
+        width: -webkit-fill-available;
     }
     ul.basic-menu {
         display: grid;
@@ -84,14 +84,7 @@
     .basic-menu li {
         display: flex;
     }
-    .today-recruitment-menu th, .today-menu th:nth-child(2) {
-        border-left: 1px solid;
-        border-right: 1px solid;
-    }
-    .today-recruitment-menu th, .today-menu th:nth-child(4) {
-        border-left: 1px solid;
-        border-right: 1px solid;
-    }
+
     .today-recruitment-menu, .car-menu, .today-menu{
         font-size : 14px;
         font-weight : 600;
@@ -128,6 +121,13 @@
         border-collapse: collapse;
         width: 100%;
     }
+    .today-menu th, .car-menu th{
+            border: 1px solid black;
+        }
+        .today-graph td, .car-graph td{
+             border: 1px solid black;
+             text-align: center;
+        }
     .car-menu th:nth-child(2) {
         border-left: 1px solid;
         border-right: 1px solid;
@@ -138,6 +138,7 @@
     .race-write-link {
         text-decoration-line: none;
     }
+
     @media (min-width: 551px) {
         .start-text {
             font-size: 18px;
@@ -184,7 +185,7 @@
 
 <script type="text/javascript"
         src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
-<section class="sub-contents-wrap maxwrap">
+<section class="sub-contents-wrap maxwrap" style="background-color: #cce0f7">
 
 
 
@@ -411,4 +412,20 @@
     </article>
 
 </section>
+<script>
+    var tableRows = document.querySelectorAll("table tr");
+
+    tableRows.forEach(function(row) {
+        var qtyCell = row.querySelector("td:nth-child(5)");
+
+        if (qtyCell) {
+            var cellText = qtyCell.textContent;
+            var intValue = parseInt(cellText);
+
+            if (!isNaN(intValue)) {
+                qtyCell.textContent = intValue;
+            }
+        }
+    });
+</script>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

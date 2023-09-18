@@ -31,6 +31,7 @@
         border: 2px solid #0068b7;
         font-size: 16px;
         font-weight: bold;
+        width: -webkit-fill-available;
     }
     #datepicker1,
     #datepicker2 {
@@ -246,14 +247,6 @@
                         <div class="carrying-car" style="margin: 0 0 5% 0">
                             <input text class="" size="5px ,5px">대</div>
                     </li>
-                    <li>
-                        총 비용 금액 :
-                        <div class="expense-money">
-                            <input text class="" size="5px ,5px">원</div>
-                    </li>
-                    <li>
-                        마지막 등록일 :
-                    </li>
                 </ul>
             </div>
         </div>
@@ -302,6 +295,7 @@
                 </tr>
             </table>
             <p class="car-care">제출 받은 일보</p>
+            <c:if test="${not empty carAndExpense}">
             <table class="car-graph">
                 <tr class="car-menu">
                     <th>차량번호</th>
@@ -321,6 +315,7 @@
                     </tr>
                 </c:forEach>
             </table>
+            </c:if>
             <p class="today-recruitment">금일 차량 모집 공고</p>
             <table class="car-graph">
                 <tr class="car-menu">
@@ -336,18 +331,17 @@
 
 </section>
 <script>
-    // JavaScript로 HTML 테이블을 조작
-    var tableRows = document.querySelectorAll("table tr"); // 테이블의 모든 행을 선택
+    var tableRows = document.querySelectorAll("table tr");
 
     tableRows.forEach(function(row) {
-        var qtyCell = row.querySelector("td:nth-child(5)"); // 다섯 번째 열(td) 선택
+        var qtyCell = row.querySelector("td:nth-child(5)");
 
-        if (qtyCell) { // 해당 셀이 존재하는 경우
+        if (qtyCell) {
             var cellText = qtyCell.textContent;
             var intValue = parseInt(cellText);
 
-            if (!isNaN(intValue)) { // 정수로 변환 가능한 경우
-                qtyCell.textContent = intValue; // 정수 값으로 업데이트
+            if (!isNaN(intValue)) {
+                qtyCell.textContent = intValue;
             }
         }
     });
