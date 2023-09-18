@@ -5,6 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script type="text/javascript"
         src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <style>
     ul.basic-menu {
@@ -18,7 +19,9 @@
         margin-left: 12%;
 
     }
-
+    .ui-datepicker-trigger {
+        display: none;
+    }
     #update-button {
         padding: 5px;
         border-radius: 10px;
@@ -26,14 +29,16 @@
         background-color: #ffffff;
         margin-left: 10px;
         border: 2px solid #0068b7;
+        font-size: 16px;
+        font-weight: bold;
     }
-
+    #datepicker1,
+    #datepicker2 {
+            width: 100px;
+        }
     .basic-menu li {
         display: flex;
-
     }
-
-
     .race-write,
     .race-search,
     .car-repair,
@@ -105,30 +110,28 @@
         font-weight: bold;
     }
 
-
-
-    .today-graph {
-        border: 1px solid;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
     .today-graph,
     .car-graph {
         margin-top: 10px;
     }
 
-    .car-graph {
-        border: 1px solid black;
+    .today-graph, .car-graph {
         border-collapse: collapse;
         width: 100%;
+    }
+    .today-menu th, .car-menu th{
+        border: 1px solid black;
+    }
+    .today-menu-td, .car-graph td{
+         border: 1px solid black;
+         text-align: center;
     }
 </style>
 
 
 <section class="sub-contents-wrap maxwrap"style="background-color: #cce0f7">
 
- <script>
+    <script>
         // 달력 옵션 추가 코드
         $(function () {
             //input을 datepicker로 선언
@@ -227,65 +230,61 @@
             <div class="date-picker">
 
                 <label class="start-text" for="start-date">운행일
-                    <input id="datepicker1" />
+                    <input id="datepicker1" readonly/>
                     <span>~</span>
-                    <input id="datepicker2" />
+                    <input id="datepicker2" readonly/>
                 </label>
                 <button id="update-button">조회</button>
                 <ul class="basic-menu">
                     <li>
                         총 운반 금액 :
                         <div class="carrying-money" style="margin: 0 0 5% 0">
-                        <input text class="" size="5px ,5px">원</div>
+                            <input text class="" size="5px ,5px">원</div>
                     </li>
                     <li>
                         총 운행대 수 :
                         <div class="carrying-car" style="margin: 0 0 5% 0">
-                         <input text class="" size="5px ,5px">대</div>
+                            <input text class="" size="5px ,5px">대</div>
                     </li>
                     <li>
                         총 비용 금액 :
                         <div class="expense-money">
-                         <input text class="" size="5px ,5px">원</div>
+                            <input text class="" size="5px ,5px">원</div>
                     </li>
                     <li>
-                    마지막 등록일 :
+                        마지막 등록일 :
                     </li>
-
-
                 </ul>
             </div>
         </div>
-
-
         <section class="management" >
 
-        <div>
-            <div style="display: flex; align-items: center">
+            <div>
+                <div style="display: flex; align-items: center">
 
-                <div style="margin-light:5%; text-align:center; font-weight: 600">
-                    <div class="race-check">
-                        <img class="race-search" src="/resources/image/ico_check.png" alt="거래처전표조회" />
-                    </div>
-
-                    <span>거래처전표조회</span>
-
-                </div>
-
-                <div class="car-bundle">
-                    <div style=" text-align:center; font-weight: 600">
-                        <div class="car-registration">
-                            <img class="car-repair" src="/resources/image/ico_carrepair.png" alt="주문배차등록" />
+                    <div style="margin-light:5%; text-align:center; font-weight: 600">
+                        <div class="race-check">
+                            <img class="race-search" src="/resources/image/ico_check.png" alt="거래처전표조회" />
                         </div>
-                        <span>주문배차등록</span>
+
+                        <span>거래처전표조회</span>
+
                     </div>
-                </div>
-                <div style=" text-align:center; font-weight: 600">
-                    <div class="car-check">
-                        <img class="car-search" src="/resources/image/ico_carcheck.png" alt="" />
+
+                    <div class="car-bundle">
+                        <div style=" text-align:center; font-weight: 600">
+                            <div class="car-registration">
+                                <img class="car-repair" src="/resources/image/ico_carrepair.png" alt="주문배차등록" />
+                            </div>
+                            <span>주문배차등록</span>
+                        </div>
                     </div>
-                    <span>차량관리</span>
-                </div>
+                    <div style=" text-align:center; font-weight: 600">
+                        <div class="car-check">
+                            <img class="car-search" src="/resources/image/ico_carcheck.png" alt="" />
+                        </div>
+                        <span>차량관리</span>
+                    </div>
                 </div>
         </section>
 
@@ -311,21 +310,48 @@
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
+
+                <c:forEach var="item" items="${carAndExpense}">
+                    <tr>
+                        <td>${item.carNo}</td>
+                        <td>${item.fromsite}</td>
+                        <td>${item.tosite}</td>
+                        <td>${item.item}</td>
+                        <td>${item.qty}</td>
+                    </tr>
+                </c:forEach>
             </table>
             <p class="today-recruitment">금일 차량 모집 공고</p>
             <table class="car-graph">
-            <tr class="car-menu">
-                                <th>차량번호</th>
-                                <th>상차지</th>
-                                <th>하차지</th>
-                                <th>품목</th>
-                                <th>대수</th>
-                            </tr>
-                            </table>
+                <tr class="car-menu">
+                    <th>차량번호</th>
+                    <th>상차지</th>
+                    <th>하차지</th>
+                    <th>품목</th>
+                    <th>대수</th>
+                </tr>
+            </table>
         </section>
     </article>
 
 </section>
+<script>
+    // JavaScript로 HTML 테이블을 조작
+    var tableRows = document.querySelectorAll("table tr"); // 테이블의 모든 행을 선택
+
+    tableRows.forEach(function(row) {
+        var qtyCell = row.querySelector("td:nth-child(5)"); // 다섯 번째 열(td) 선택
+
+        if (qtyCell) { // 해당 셀이 존재하는 경우
+            var cellText = qtyCell.textContent;
+            var intValue = parseInt(cellText);
+
+            if (!isNaN(intValue)) { // 정수로 변환 가능한 경우
+                qtyCell.textContent = intValue; // 정수 값으로 업데이트
+            }
+        }
+    });
+</script>
 
 
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

@@ -15,11 +15,13 @@ public class Step7Controller {
 
     private final DailyReportService dailyReportService;
 
-    @RequestMapping(value = "/receipts", method = RequestMethod.GET)
+    @RequestMapping(value = "/oldform", method = RequestMethod.GET)
     public String step7(Model model, DailyReport dailyReport) {
-         dailyReportService.list(model, dailyReport);
-        return "/dailyReport/step7/receipts";
+        dailyReportService.list(model, dailyReport);
+        return "/dailyReport/step7/order";
 
     }
+
+
 
 }

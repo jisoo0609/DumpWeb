@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Aspect
 @Component
@@ -39,7 +39,8 @@ public class AOPConfig {
             Login loginInfo = (Login) session.getAttribute("loginInfo");
 
             if (loginInfo == null) {
-                result = "redirect:/";
+//                result = "redirect:/";
+                result = pjp.proceed();
             } else {
                 result = pjp.proceed();
             }
