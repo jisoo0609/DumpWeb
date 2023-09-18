@@ -54,19 +54,21 @@
             <label class="golLabel" for="datepicker">주문일</label>
             <span class="golInputSpan"><input id="datepicker"></span>
 						<input class="golSearch" type="button" value="조회">
-            <label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-            <input id="check67" type="checkbox">
+						<div class="checkbox">
+							<label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+							<input id="check67" type="checkbox">
+						</div>
           </li>
           <li>
-            <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="loadPoint" type="text" placeholder="상차지"></span>
           </li>
           <li>
-            <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="unloadPoint" type="text" placeholder="하차지"></span>
           </li>
           <li>
-            <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="golItems" type="text" placeholder="품목"></span>
           </li>
           <li>
@@ -76,13 +78,13 @@
             </span>
           </li>
           <li>
-            <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="carNumb" type="text" placeholder="차량번호"></span>
           </li>
         </ul>
       </fieldset>
     </form>
-    <script src="/resources/js/voice.js"></script>
+    <script src="/resources/js/dailyReport/step7/voice.js"></script>
     <div>
       <button class="opBtn" data-popName="golPop1">삭제</button>
       <button class="opBtn" data-popName="golPop2">수정</button>
