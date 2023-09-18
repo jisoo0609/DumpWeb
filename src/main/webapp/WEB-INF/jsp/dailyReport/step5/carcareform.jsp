@@ -105,7 +105,7 @@
                 </li>
                 <li>
                      <label for="ChangeConf">교환 확인</label>
-                     <span class="drvInputSpan3"><input id="ChangeConf" type="checkbox" value="교환확인" name="rependchk"></span>
+                     <span class="drvInputSpan3"><input id="ChangeConf" type="checkbox" name="rependchk"></span>
                 </li>
             </ul>
         </fieldset>
@@ -140,7 +140,6 @@
             <input type="button" value="확인" onClick="history.go(-1)">
         </div>
     </div>
-
 <script>
      // "확인" 버튼을 클릭하면 실행되는 함수
      function saveData() {
@@ -201,7 +200,6 @@
             console.error('오류:', error);
         });
      }
-
 
 </script>
 

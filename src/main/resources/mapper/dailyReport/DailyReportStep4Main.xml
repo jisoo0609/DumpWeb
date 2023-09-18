@@ -8,7 +8,7 @@
     </select>
 
     <select id="getDailyReportMainBySheetID2" resultType="DailyReportStep4Sub">
-        select fromsite, tosite, item, Qty, Qtyup, sheetID2, sheetsubID from tSheet_sub where sheetID2 = #{sheetID2}
+        select fromsite, tosite, item, Qty, Qtyup, sheetID2, sheetsubID, Qtyup from tSheet_sub where sheetID2 = #{sheetID2}
     </select>
 
     
