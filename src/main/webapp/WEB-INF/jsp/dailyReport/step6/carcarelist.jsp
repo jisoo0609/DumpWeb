@@ -49,7 +49,7 @@
             <div class="operating_period content" style="gap: 20px">
                 <h1>품목</h1>
                 <select class="detailSelect conbox" name="selectOption" id="selectOption">
-                    <option value="전체">전체</option>
+                    <option value="전체" selected>전체</option>
                     <option value="주유">주유</option>
                     <option value="요소수">요소수</option>
                     <option value="엔진오일">엔진오일</option>
@@ -101,17 +101,6 @@
                   </tr>
                 </thead>
                 <tbody id="table-body">
-                    <tr>
-                        <c:forEach var="list" items="${defaultList}" varStatus="status">
-                                <td>${list.drvDate}</td>
-                                <td>${list.drvClub}</td>
-                                <td>${list.lastKm}</td>
-                                <td>${list.useAmt}</td>
-                                <td>${list.drvRem}</td>
-                                <td>${list.rependchk}</td>
-                            </tr>
-                    </c:forEach>
-                </tr>
                 </tbody>
 
               </table>
