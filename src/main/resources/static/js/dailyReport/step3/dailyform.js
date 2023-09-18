@@ -9,8 +9,6 @@ $.save = function() {
         data: $("[name=frm]").serialize(),
         success: function (data) {
             var json = $.parseJSON(data);
-            console.log("test-JJYY");
-            console.log(json)
             if(json.httpCode == 200) {
                 alert("저장이 완료되었습니다.");
             } else if(json.httpCode == 100){
