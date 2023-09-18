@@ -310,7 +310,7 @@ textarea {
 	}
 
 	.GolSection [class ^='golPopup'] input {
-		margin: 0 0 20px 20px;
+		margin: 0 0 20px 10px;
 		background: none;
 		border: none;
 		font-size: 20px;
@@ -363,24 +363,23 @@ textarea {
 		text-align: center;
 	}
 
-	.GolSection table tbody tr td:nth-child(2),
-	.GolSection table tbody tr td:nth-child(3) {
-		width: 15%;
+	.GolSection table tbody tr td:nth-child(1),
+	.GolSection table tbody tr td:nth-child(2) {
+		width: 16%;
 	}
 
-	.GolSection table tbody tr td:nth-child(4) {
+	.GolSection table tbody tr td:nth-child(3) {
 		width: 20%;
 	}
 
-	.GolSection table tbody tr td:nth-child(5) {
+	.GolSection table tbody tr td:nth-child(4) {
 		width: 10%;
 	}
 
-	.GolSection table tbody tr td:nth-child(6) {
-		width: 23%;
+	.GolSection table tbody tr td:nth-child(5) {
+		width: 18%;
 	}
 }
-
 
 /* ! mobile */
 @media screen and (min-width: 281px) and (max-width: 767px) {
@@ -474,7 +473,7 @@ textarea {
 	}
 
 	.check67{
-		width: 12%;
+		width: 13%;
 	}
 
 	label {
@@ -577,7 +576,7 @@ textarea {
 	}
 
 	.GolSection [class ^='golPopup'] input {
-		margin: 0 0 20px 20px;
+		margin: 0 0 20px 10px;
 		background: none;
 		border: none;
 		font-size: 20px;
@@ -629,23 +628,22 @@ textarea {
 		font-size: 12px;
 		padding: 15px 0;
 		text-align: center;
-		width: 13%;
 	}
 
-	.GolSection table tbody tr td:nth-child(2),
+	.GolSection table tbody tr td:nth-child(1),
+	.GolSection table tbody tr td:nth-child(2) {
+		width: 18%;
+	}
+
 	.GolSection table tbody tr td:nth-child(3) {
 		width: 18%;
 	}
 
 	.GolSection table tbody tr td:nth-child(4) {
-		width: 16%;
-	}
-
-	.GolSection table tbody tr td:nth-child(5) {
 		width: 8%;
 	}
 
-	.GolSection table tbody tr td:nth-child(6) {
+	.GolSection table tbody tr td:nth-child(5) {
 		width: 17%;
 	}
 }
@@ -836,7 +834,7 @@ textarea {
 	}
 
 	.GolSection [class ^='golPopup'] input {
-		margin: 0 0 20px 20px;
+		margin: 0 0 20px 10px;
 		background: none;
 		border: none;
 		font-size: 20px;
@@ -887,19 +885,19 @@ textarea {
 		font-size: 12px;
 		padding: 20px 0;
 		text-align: center;
-		width: 10%;
 	}
 
+	.GolSection table tbody tr td:nth-child(1),
 	.GolSection table tbody tr td:nth-child(2),
-	.GolSection table tbody tr td:nth-child(3) {
+	.GolSection table tbody tr td:nth-child(5) {
 		width: 20%;
 	}
 
-	.GolSection table tbody tr td:nth-child(4) {
+	.GolSection table tbody tr td:nth-child(3) {
 		width: 30%;
 	}
 
-	.GolSection table tbody tr td:nth-child(5) {
+	.GolSection table tbody tr td:nth-child(4) {
 		width: 5%;
 	}
 }
@@ -954,76 +952,76 @@ textarea {
 		margin-left: 30px;
 	}
 
-	.GolSection form fieldset ul {
+	.GolSection ul {
 		list-style: none;
 		border-top: 2px solid #0068b7;
 		padding-top: 20px;
 	}
 
-	.GolSection form fieldset ul li {
-		margin-bottom: 20px;
+	.GolSection li {
+		width: 100%;
 		font-size: 13px;
+		font-weight: bold;
 		display: flex;
+		margin-bottom: 4px;
 		align-items: center;
+		position: relative;
+		justify-content: space-between;
+	}
+
+	.golInputSpan {
+		padding-left: 120px;
+		line-height: 1.4;
+		font-size: 12px;
+		width: 100%;
+	}
+
+	.golLabel {
+		position: absolute;
+		width: 30%;
+	}
+
+	.GolSection li:first-child{
+		/* justify-content: start; */
+		gap: 5px;
+	}
+
+	input#datepicker {
+		height: 25px;
+		width: 85%;
+	}
+
+	.check67{
+		width: 20%;
+	}
+
+	label {
+		/* display: flex; */
+		align-items: center;
+		gap: 5px;
+	}
+
+	.golVoiceImg {
+		border-radius: 25px;
+		width: 5%;
+		vertical-align: middle;
+	}
+
+	label img {
+		cursor: pointer;
+	}
+
+	.golInputSpan {
+		width: 100%;
+		padding-left: 70px;
+		display: flex;
 		position: relative;
 	}
 
-	.GolSection form fieldset ul li .golInputSpan {
-		flex: 1;
-		line-height: 1.4;
-		font-size: 12px;
-		display: flex;
-		align-items: center;
-		padding-right: 20px;
-	}
-
-	.GolSection form fieldset ul li:nth-child(1) .golInputSpan {
-		margin-left: 8.2%;
-	}
-
-	.GolSection form fieldset ul li:nth-child(5) .golInputSpan {
-		margin-left: 8.3%;
-	}
-
-	.GolSection form fieldset ul li .golLabel {
-		width: 6%;
-		height: 25px;
-		font-size: 13px;
-		font-weight: bold;
-		position: absolute;
-	}
-
-	.GolSection form fieldset ul li input[type=date] {
-		width: 50%;
-		height: 35px;
-		font-size: 18px;
-	}
-
-	.GolSection form fieldset ul li:first-of-type label:last-of-type {
-		width: 8%;
-	}
-
-	.GolSection form fieldset ul li input[type=text],
-	.GolSection form fieldset ul li input[type=number] {
+	.golIn {
+		float: right;
+		height: 28px;
 		width: 100%;
-		height: 28px !important;
-		font-size: 13px;
-	}
-
-	.GolSection form fieldset ul li img {
-		cursor: pointer;
-	}
-
-	.GolSection form fieldset ul li .golVoiceImg {
-		border-radius: 25px;
-		width: 20%;
-		vertical-align: middle;
-		cursor: pointer;
-	}
-
-	.GolSection form fieldset ul li textarea {
-		width: 100%;
-		font-size: 18px;
 	}
 
 	.GolSection>div:first-of-type {
@@ -1083,7 +1081,6 @@ textarea {
 		top: 15px;
 		color: #fff;
 		cursor: pointer;
-		;
 	}
 
 	.GolSection [class ^='golPopup'] p {
@@ -1094,7 +1091,7 @@ textarea {
 	}
 
 	.GolSection [class ^='golPopup'] input {
-		margin: 0 0 20px 20px;
+		margin: 0 0 20px 10px;
 		background: none;
 		border: none;
 		font-size: 20px;
@@ -1145,19 +1142,18 @@ textarea {
 		font-size: 12px;
 		padding: 20px 0;
 		text-align: center;
-		width: 10%;
 	}
 
-	.GolSection table tbody tr td:nth-child(2),
-	.GolSection table tbody tr td:nth-child(3) {
+	.GolSection table tbody tr td:nth-child(1),
+	.GolSection table tbody tr td:nth-child(2) {
 		width: 20%;
 	}
 
-	.GolSection table tbody tr td:nth-child(4) {
+	.GolSection table tbody tr td:nth-child(3) {
 		width: 30%;
 	}
 
-	.GolSection table tbody tr td:nth-child(5) {
+	.GolSection table tbody tr td:nth-child(4) {
 		width: 5%;
 	}
 }
