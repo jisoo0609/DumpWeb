@@ -35,6 +35,11 @@
         #{tosite})
     </insert>
 
+    <!--운행정보 삭제(1건)-->
+    <delete id="deleteByOne" parameterType="int">
+        delete from tSheet_sub from sheetsubID = #{sheetsubID}
+    </delete>
+
     <!--    &lt;!&ndash;CarNo로 전체 조회하기, Join필요&ndash;&gt;
         <select id="findDailyReportList" resultType="DailyReportSub" parameterMap="DailyReportSubMapper">
             select * from tSheet where CarNo = #{CarNo}

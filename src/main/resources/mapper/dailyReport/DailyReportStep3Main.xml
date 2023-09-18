@@ -53,7 +53,7 @@
     <select id="findCarsubmitList" parameterType="DailyReportStep3Main" resultMap="DailyReportStep3MainMapper">
         select sheetID, DATE_FORMAT(date, '%Y-%m-%d') as date, carSubmit, salesman, carSubmitTel from tSheet
         where
-        carSubmit = #{carSubmit}
+        carSubmit like CONCAT('%', #{carSubmit}, '%')
         or
         carSubmitTel = #{carSubmitTel}
         or
