@@ -1,27 +1,18 @@
-// 현재 날짜를 가져와서 운행일 입력 상자의 초기 값으로 설정
-document.addEventListener("DOMContentLoaded", function () {
-    const startDateInput = document.getElementById("start-date");
-    const endDateInput = document.getElementById("end-date");
+// 일괄취소 버튼 요소를 가져옵니다.
+const cancelButton = document.querySelector(".common_btn:nth-of-type(2)");
 
-    // 시작 날짜를 당월 1일로 설정
-    const today = new Date();
-    const firstDayOfMonth = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        1
-    );
-    const formattedFirstDay = firstDayOfMonth.toISOString().split("T")[0];
-    startDateInput.value = formattedFirstDay;
+// 일괄취소 버튼 클릭 이벤트를 처리합니다.
+cancelButton.addEventListener("click", () => {
+    // 테이블 본문 요소를 찾습니다.
+    const tableBody = document.querySelector("table tbody");
 
-    // 종료 날짜를 오늘로 설정
-    const formattedToday = today.toISOString().split("T")[0];
-    endDateInput.value = formattedToday;
+    // 테이블 본문 내용을 초기화합니다. (데이터 삭제)
+    tableBody.innerHTML = "";
+
+    // 검색 결과 텍스트 초기화
+    const resultSearch = document.querySelector(".result_search");
+    resultSearch.innerHTML = "";
 });
-
-
-// 검색 버튼 요소를 가져옵니다.
-const searchButton = document.querySelector(".search_btn");
-
 
 // radio 버튼에 따라 테이블 열 순서 변경 함수
 function changeTableColumnOrder() {
@@ -38,7 +29,6 @@ function changeTableColumnOrder() {
         itemHeader.textContent = "날짜"
         return 2;
     }
-
 }
 
 // 검색 버튼 클릭 이벤트를 처리합니다.
@@ -59,27 +49,29 @@ function printTableColumnOrder(searchResultData) {
 
         if (orderFlag == 1) {
             orderInfo = [`<td>${data.drvDate}</td>`, `<td>${data.drvClub}</td>`]
-        } else if(orderFlag == 2) {
+        } else if (orderFlag == 2) {
             orderInfo = [`<td>${data.drvClub}</td>`, `<td>${data.drvDate}</td>`]
         }
-        //23.09.14 다시 볼 것.
+
+        const lastKm = data.lastKm.toLocaleString();
+        const useAmt = data.useAmt.toLocaleString();
+        const rependchk = data.rependchk === true ? 'O' : 'X';
 
         row.innerHTML = `
                     ${orderInfo[0]}
                     ${orderInfo[1]}
-                    <td>${data.lastKm}</td> 
-                    <td>${data.useAmt}</td>
+                    <td>${lastKm}</td> 
+                    <td>${useAmt}</td>
                     <td>${data.drvRem}</td> 
-                    <td>${data.rependchk}</td>
+                    <td>${rependchk}</td>
                  `;
         tableBody.appendChild(row);
     });
-    //23.09.14 sql에서 쉼표 쓰지 않고 toLocaleString()사용하는 코드 고려 해볼 것
 
     // 검색 결과 텍스트 생성
     const dataCount = searchResultData.length;
 
-    const totalCount = searchResultData.reduce((total, data) => total + parseInt(data.useAmt.replace(/,/g, '')), 0);
+    const totalCount = searchResultData.reduce((total, data) => total + data.useAmt, 0);
 
     const resultText = `
                    데이터 <span class="blue">${dataCount}</span>건이 검색되었습니다.
@@ -92,24 +84,6 @@ function printTableColumnOrder(searchResultData) {
     resultSearch.innerHTML = `<h1>${resultText}</h1>`;
 };
 
-// 일괄취소 버튼 요소를 가져옵니다.
-const cancelButton = document.querySelector(".common_btn:nth-of-type(2)");
-
-// 일괄취소 버튼 클릭 이벤트를 처리합니다.
-cancelButton.addEventListener("click", () => {
-    // 테이블 본문 요소를 찾습니다.
-    const tableBody = document.querySelector("table tbody");
-
-    // 테이블 본문 내용을 초기화합니다. (데이터 삭제)
-    tableBody.innerHTML = "";
-
-    // 검색 결과 텍스트 초기화
-    const resultSearch = document.querySelector(".result_search");
-    resultSearch.innerHTML = "";
-});
-
-// 페이지 로드 시 초기 테이블 열 순서 설정
-changeTableColumnOrder();
 
 function bindList() {
     $.ajax({
@@ -121,3 +95,29 @@ function bindList() {
         }
     })
 }
+
+// 현재 날짜를 가져와서 운행일 입력 상자의 초기 값으로 설정
+document.addEventListener("DOMContentLoaded", function () {
+    // 페이지 로드 시 초기 테이블 열 순서 설정
+    changeTableColumnOrder();
+
+    const startDateInput = document.getElementById("start-date");
+    const endDateInput = document.getElementById("end-date");
+
+    const today = new Date();
+    const firstDayOfMonth = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        2
+    );
+
+
+    // 시작 날짜를 당월 1일로 설정
+    startDateInput.value = firstDayOfMonth.toISOString().split("T")[0];
+
+    // 종료 날짜를 오늘로 설정
+    endDateInput.value = today.toISOString().split("T")[0];
+
+    const searchButton = document.querySelector(".search_btn");
+    searchButton.onclick();
+});
