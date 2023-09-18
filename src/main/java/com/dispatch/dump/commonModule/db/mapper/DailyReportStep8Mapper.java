@@ -13,6 +13,8 @@ public interface DailyReportStep8Mapper {
     /* FUNCTION :: 요약 내용보기 */
     List<DailyReportStep8> searchReceipts(String userId);
 
+    List<DailyReportStep8> getAllReceipts(String carSubmitTel);
+
     List<DailyReportStep8> getAllReceiptsWithCnt(String carSubmitTel);
 
     List<DailyReportStep8> receiptsSearchCondition(DailyReportStep8 dailyReportStep8);
