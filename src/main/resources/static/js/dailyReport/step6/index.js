@@ -87,7 +87,7 @@ function printTableColumnOrder(searchResultData) {
 
 function bindList() {
     $.ajax({
-        url: "/dailyReport/carcarelist",
+        url: "/dailyReport/ajax/carcarelist",
         type: "POST",
         data: $("[name=select_frm]").serialize(),
         success: function (data) {

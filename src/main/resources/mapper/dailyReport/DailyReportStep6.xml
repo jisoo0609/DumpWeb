@@ -17,6 +17,13 @@
         <if test="selectOption !='전체'">
             AND drvclub = #{selectOption}
         </if>
-        ORDER  BY drvdate DESC
+        <choose>
+            <when test="searchType == 'date'">
+                ORDER BY drvdate DESC, drvclub ASC
+            </when>
+            <otherwise>
+                ORDER BY drvclub ASC, drvdate DESC
+            </otherwise>
+        </choose>
     </select>
 </mapper>
