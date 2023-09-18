@@ -139,9 +139,6 @@
         text-decoration-line: none;
     }
     @media (min-width: 551px) {
-        .homescreen {
-            position: absolute;
-        }
         .start-text {
             font-size: 18px;
             font-weight: bold;
@@ -380,6 +377,16 @@
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
+                <c:forEach var="item" items="${driverList}">
+                    <tr>
+                        <td>${item.fromsite}</td>
+                        <td>${item.fromsite}</td>
+                        <td>${item.tosite}</td>
+                        <td>${item.item}</td>
+                        <td>${item.qty}</td>
+
+                    </tr>
+                </c:forEach>
             </table>
             <p class="car-care">차량 관리</p>
             <table class="car-graph">
@@ -398,6 +405,7 @@
                                 <th>품목</th>
                                 <th>대수</th>
                             </tr>
+
                         </table>
         </section>
     </article>

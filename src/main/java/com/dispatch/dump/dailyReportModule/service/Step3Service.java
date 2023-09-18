@@ -87,16 +87,27 @@ public class Step3Service {
                 rtnMap.put("carSubmitTelResult", carSubmitTelResult);
                 //제출처 정보 등록 성공 코드 전달
                 rtnMap.put("httpCode", 100);
-
             }
-            
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
-    /*제출처 목록 조회*/
+    /*운송정보만 저장*/
+    public String save(DailyReportStep3Sub dailyReportStep3Sub){
+        HttpSession session=commonUtil.getSession();
+
+        try {
+            dailyReportStep3SubMapper.insertDailyReportSub(dailyReportStep3Sub);
+
+        }catch (Exception e){
+            log.error("Exception["+ e.getMessage() +"]");
+        }
+        return null;
+    }
+
+    /*제출처 검색 목록 조회*/
     public String search(DailyReportStep3Main dailyReportStep3Main) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
 
@@ -122,14 +133,14 @@ public class Step3Service {
             log.info("CarNo는?"+dailyReportStep3Main.getCarNo());
             log.info("SheetID?"+dailyReportStep3Main.getSheetID());
 
-            DailyReportStep3Main list = dailyReportStep3MainMapper.findDailyReportMainList(dailyReportStep3Main);
-            System.out.println(list);
+            DailyReportStep3Main DailyReportList = dailyReportStep3MainMapper.findDailyReportMainList(dailyReportStep3Main);
+            System.out.println(DailyReportList);
 
-            model.addAttribute("list", list);
+            model.addAttribute("list", DailyReportList);
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }
-        return "/dailyReport/workspace/list";
+        return "/dailyReport/form";
     }
 
 }
