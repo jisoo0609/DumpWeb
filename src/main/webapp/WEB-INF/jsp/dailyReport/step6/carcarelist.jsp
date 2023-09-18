@@ -95,7 +95,8 @@
                     <th id="item-header">품목</th>
                     <th>최종주행</th>
                     <th>사용금액</th>
-                    <th>주유량(기타)</th>
+                    <th>기타(설명)</th>
+                    <th>교환 주기</th>
                   </tr>
                 </thead>
                 <tbody id="table-body">
@@ -105,7 +106,8 @@
                                 <td>${list.drvClub}</td>
                                 <td>${list.lastKm}</td>
                                 <td>${list.useAmt}</td>
-                                <td>${list.useOil}</td>
+                                <td>${list.drvRem}</td>
+                                <td>${list.rependchk}</td>
                             </tr>
                     </c:forEach>
                 </tr>

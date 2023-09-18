@@ -22,17 +22,18 @@
                     from tSheet_sub)
     </sql>
 
-    <select id="findJoinDailyReport"  resultType="DailyReportStep2Sub">
+    <select id="findJoinDailyReport" resultType="DailyReportStep2Sub">
         <include refid="res_table">
-            <property name="userId" value= "#{userId}"/>
+            <property name="userId" value="#{userId}" />
         </include>
 
-        select *
-            from tSheet_sub
-            where sheetID2 in (
-            select sheetID2
-            from r1 inner join r2
-                on r1.sheetID = r2.sheetID2
+        select tSheet_sub.*, tSheet.CarNo
+        from tSheet_sub
+        inner join tSheet on tSheet_sub.sheetID2 = tSheet.sheetID
+        where tSheet_sub.sheetID2 in (
+        select sheetID2
+        from r1 inner join r2
+        on r1.sheetID = r2.sheetID2
         )
     </select>
 
@@ -41,9 +42,9 @@
             <property name="userId" value="#{userId}"/>
         </include>
         select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup))
-            from tSheet_sub
-            where sheetID2 in ( select sheetID2 from r1 inner join r2
-                on r1.sheetID = r2.sheetID2
+        from tSheet_sub
+        where sheetID2 in ( select sheetID2 from r1 inner join r2
+        on r1.sheetID = r2.sheetID2
         )
     </select>
 

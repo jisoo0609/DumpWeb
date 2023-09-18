@@ -2,6 +2,7 @@
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
 <link rel="stylesheet" type="text/css" href="/resources/css/step7/order.css">
+<script src="/resources/js/dailyReport/step7/pop.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
@@ -9,65 +10,14 @@
         src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
         function dvFristbtn() {
             $('#droildiv').css('color: rgb(0, 203, 230)', 'border-color: rgb(0, 203, 230)');
         }
-    var rdOli = null;
-    var rdDEF = null;
-    var rdEngOil = null;
-    var rdFix = null;
-    var rdNote = null;
-
-    $(document).ready(function () {
-        init();
-        popupJS(rdOli, rdDEF, rdEngOil, rdFix, rdNote);
-    });
-
-    function init() {
-        rdOli = $('#rdOli');
-        rdDEF = $('#rdDEF');
-        rdEngOil = $('#rdEngOil');
-        rdFix = $('#rdFix');
-        rdNote = $('#rdNote');
-    }
-
-    function clickJS(rdOli, rdDEF, rdEngOil, rdFix, rdNote) {
-        var clickTarget;
-        $(rdOli, rdDEF, rdEngOil, rdFix, rdNote).click(function () {
-            clickTarget = "#" + $(this).attr("data-popName");
-            $(clickTarget).toggleClass('active');
-        });
-
-    }
-</script>
-
-<script>
-    var clBtn = null;
-    var opBtn = null;
-
-    $(document).ready(function () {
-        init();
-        popupJS(opBtn, clBtn);
-    });
-
-    function init() {
-        clBtn = $(".clBtn");
-        opBtn = $(".opBtn");
-    }
-
-    function popupJS(opBtn, clBtn) {
-        var opTarget;
-        $(opBtn).click(function () {
-            opTarget = "#" + $(this).attr("data-popName");
-            $(opTarget).addClass('active');
-        });
-        $(clBtn).click(function () {
-            $(opTarget).removeClass("active")
-        });
-    }
-
 </script>
 
 <script>  // 달력 옵션 추가 코드
@@ -105,6 +55,7 @@
           <li>
             <label class="golLabel" for="datepicker">주문일</label>
             <span class="golInputSpan"><input id="datepicker"></span>
+						<input class="golSearch" type="button" value="조회">
             <label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
             <input id="check67" type="checkbox">
           </li>
@@ -141,42 +92,45 @@
       <button class="opBtn" data-popName="golPop4">이전화면</button>
     </div>
 
-    <div id="golPop1" class="golPopup1">
-      <div>
-        <span class="material-symbols-outlined clBtn">close</span>
-        <p>정말 <span style="font-weight: bold;">삭제</span>하시겠습니까?</p>
-        <input type="button" value="확인">
-      </div>
-    </div>
+		<div id="golPop1" class="golPopup1">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>정말 <span style="font-weight: bold;">삭제</span>하시겠습니까?</p>
+				<input type="button" value="확인">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
-    <div id="golPop2" class="golPopup2">
-      <div>
-        <span class="material-symbols-outlined clBtn">close</span>
-        <p>정말 <span style="font-weight: bold;">수정</span>하시겠습니까?</p>
-        <input type="button" value="확인">
-      </div>
-    </div>
+		<div id="golPop2" class="golPopup2">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>정말 <span style="font-weight: bold;">수정</span>하시겠습니까?</p>
+				<input type="button" value="확인">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
-    <div id="golPop3" class="golPopup3">
-      <div>
-        <span class="material-symbols-outlined clBtn">close</span>
-        <p>정말 <span style="font-weight: bold;">저장</span>를하시겠습니까?</p>
-        <input type="button" value="확인">
-      </div>
-    </div>
+		<div id="golPop3" class="golPopup3">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>정말 <span style="font-weight: bold;">저장</span>를하시겠습니까?</p>
+				<input type="button" value="확인">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
-    <div id="golpop4" class="golPopup4">
-      <div>
-        <span class="material-symbols-outlined clBtn">close</span>
-        <p>이전 <span style="font-weight: bold;">화면</span>으로 돌아가시겠습니까?</p>
-        <input type="button" value="확인" onClick="history.go(-1)">
-      </div>
-    </div>
+		<div id="golPop4" class="golPopup4">
+			<div>
+				<span class="material-symbols-outlined clBtn">close</span>
+				<p>이전 <span style="font-weight: bold;">화면</span>으로 돌아가시겠습니까?</p>
+				<input type="button" value="확인" onClick="history.go(-1)">
+				<input type="button" value="취소">
+			</div>
+		</div>
 
     <table>
       <thead>
         <tr>
-          <th>주문일</th>
           <th>상차지</th>
           <th>하차지</th>
           <th>품목</th>
@@ -186,10 +140,9 @@
       </thead>
       <tbody>
         <tr>
-          <td>09.11</td>
           <td>강남</td>
           <td>구로</td>
-          <td>모래, 자갈,</td>
+          <td>모래, 자갈</td>
           <td>100</td>
           <td>675가8989</td>
         </tr>
