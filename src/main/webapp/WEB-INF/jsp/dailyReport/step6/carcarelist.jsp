@@ -47,8 +47,9 @@
                 </label>
             </div>
             <div class="operating_period content" style="gap: 20px">
-                <h1>선택</h1>
+                <h1>품목</h1>
                 <select class="detailSelect conbox" name="selectOption" id="selectOption">
+                    <option value="전체">전체</option>
                     <option value="주유">주유</option>
                     <option value="요소수">요소수</option>
                     <option value="엔진오일">엔진오일</option>
