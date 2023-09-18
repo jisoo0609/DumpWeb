@@ -121,13 +121,17 @@ input[type = text]{
 
 .cashNbtns{
     display: flex;
+    justify-content: center;
     align-items: center;
     margin: 25px 0;
     padding-left: 2%;
 }
 
 .cashNbtns > p{
-    margin-right: 28%;
+    border: 1px solid #0068b7;
+    color: #0068b7;
+    padding: 8px 25px;
+    margin-right: 10%;
 }
 
 input[value="일괄결재"]{
@@ -141,7 +145,7 @@ input[value="일괄결재"]{
 input[type = button]{
     background-color: #fff;
     font-weight: 600;
-    width: 60px;
+    width: 80px;
     height: 40px;
     color: #0068b7;
     border: 1px solid #0068b7;

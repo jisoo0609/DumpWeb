@@ -13,7 +13,7 @@ public interface DailyReportStep1Mapper {
 
 
 
-    List<DailyReportStep1Main> findJoinDailyReport(String userId);
+    List<DailyReportStep1Sub> findJoinDailyReport(String userId);
     int findJoinDailyReportForTotalTransportationCost(String userId);
 
 }
