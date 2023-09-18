@@ -230,32 +230,16 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>오이 농장</td>
-                    <td>09.05</td>
-                    <td>오이</td>
-                    <td>강원도</td>
-                    <td>너네집</td>
-                    <td>141</td>
-                    <td>123456789</td>
-                </tr>
-                <tr>
-                    <td>강원도 햇감자 판매</td>
-                    <td>09.04</td>
-                    <td>감자</td>
-                    <td>너네집</td>
-                    <td>강원도</td>
-                    <td>140</td>
-                    <td>123456789</td>
-                </tr>
-                <tr>
-                    <c:forEach var="list" items="${tsheet}">
-                        <td>1</td>
-                        <td>1</td>
-                        <td>${list.item}</td>
-                        <td>${list.fromsite}</td>
-                        <td>${list.tosite}</td>
-                        <td>${list.qty}</td>
-                        <td>1원</td>
+                    <c:forEach var="listMain" items="${tSheetMain}">
+                        <c:forEach var="listSub" items="${tSheetSub}">
+                        <td>${listMain.carSubmit}</td>
+                        <td>${listMain.date}</td>
+                        <td>${listSub.item}</td>
+                        <td>${listSub.fromsite}</td>
+                        <td>${listSub.tosite}</td>
+                        <td>${listSub.qty}</td>
+                        <td>${listSub.qtyup}</td>
+                        </c:forEach>
                     </c:forEach>
                 </tr>
                 </tbody>
