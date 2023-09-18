@@ -121,8 +121,17 @@ input[type = text]{
 
 .cashNbtns{
     display: flex;
-    justify-content: space-evenly;
     align-items: center;
+    margin: 25px 0;
+    padding-left: 2%;
+}
+
+.cashNbtns > p{
+    margin-right: 28%;
+}
+
+input[value="일괄결재"]{
+    margin-right: 10px;
 }
 
 .btn_area{
@@ -132,13 +141,14 @@ input[type = text]{
 input[type = button]{
     background-color: #fff;
     font-weight: 600;
-    width: 120px;
+    width: 60px;
     height: 40px;
     color: #0068b7;
     border: 1px solid #0068b7;
 }
 
 input[value="검색"]{
+    width: 120px;
     background-image: url("/resources/image/icons/ico_search-b.png");
     background-position: 25px 9px;
     background-repeat: no-repeat;

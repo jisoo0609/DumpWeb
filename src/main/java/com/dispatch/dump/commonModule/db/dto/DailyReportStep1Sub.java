@@ -3,8 +3,7 @@ package com.dispatch.dump.commonModule.db.dto;
 import lombok.Data;
 
 @Data
-public class DailyReportStep2Sub {
-
+public class DailyReportStep1Sub {
     //tSheet_sub테이블
     private int sheetsubID;
     private String fromsite;         // LINE :: 상차지
@@ -14,7 +13,4 @@ public class DailyReportStep2Sub {
     private String Rem;             // LINE :: 비고
     private int sheetID2;            // LINE :: tSheet FK
     private String tosite;          // LINE :: 하차지
-
-    // tSheet테이블 : 차량번호
-    public String CarNo;
 }
