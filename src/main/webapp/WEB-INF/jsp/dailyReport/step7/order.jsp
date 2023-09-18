@@ -87,7 +87,7 @@
     <script src="/resources/js/dailyReport/step7/voice.js"></script>
     <div>
       <button class="opBtn" data-popName="golPop1">삭제</button>
-      <button class="opBtn" data-popName="golPop2">수정</button>
+      <button class="opBtn" data-popName="golPop2">취소</button>
       <button class="opBtn" data-popName="golPop3">저장</button>
       <button class="opBtn" data-popName="golPop4">이전화면</button>
     </div>
