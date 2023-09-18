@@ -163,6 +163,7 @@ td{
 .popBtns {
     display: flex;
     justify-content: space-evenly;
+    margin-left: 10px;
 }
 
 @media screen and (max-width: 425px) {
@@ -181,11 +182,13 @@ td{
 
 }
 
+@media screen and (max-width: 320px) {
+button #btn-area {
+    color:red;
+}
+}
 
 .datediv {
-    width: 80%;
+    width: 30%;
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-left: 95px;
 }
