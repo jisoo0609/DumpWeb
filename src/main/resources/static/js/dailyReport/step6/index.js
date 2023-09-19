@@ -42,15 +42,17 @@ function printTableColumnOrder(searchResultData) {
     // 테이블 본문 내용 초기화
     tableBody.innerHTML = "";
 
+    let start = orderFlag === 1 ? searchResultData[0].drvDate : searchResultData[0].drvClub;
+
     // 검색 결과 데이터를 테이블 본문에 추가합니다.
     searchResultData.forEach((data, index) => {
         const row = document.createElement("tr");
         let orderInfo
 
         if (orderFlag == 1) {
-            orderInfo = [`<td>${data.drvDate}</td>`, `<td>${data.drvClub}</td>`]
+            orderInfo = [`${data.drvDate}`, `${data.drvClub}`]
         } else if (orderFlag == 2) {
-            orderInfo = [`<td>${data.drvClub}</td>`, `<td>${data.drvDate}</td>`]
+            orderInfo = [`${data.drvClub}`, `${data.drvDate}`]
         }
 
         const lastKm = data.lastKm.toLocaleString();
@@ -58,13 +60,23 @@ function printTableColumnOrder(searchResultData) {
         const rependchk = data.rependchk === true ? 'O' : 'X';
 
         row.innerHTML = `
-                    ${orderInfo[0]}
-                    ${orderInfo[1]}
+                    <tr>
+                    <td>${orderInfo[0]}</td>
+                    <td>${orderInfo[1]}</td>
                     <td>${lastKm}</td> 
                     <td>${useAmt}</td>
                     <td>${data.drvRem}</td> 
                     <td>${rependchk}</td>
+                    </tr>
                  `;
+
+        let end = orderInfo[0];
+
+        if(start !== end){
+            start = end;
+            row.classList.add("red-line-divider")
+        }
+
         tableBody.appendChild(row);
     });
 
@@ -87,7 +99,7 @@ function printTableColumnOrder(searchResultData) {
 
 function bindList() {
     $.ajax({
-        url: "/dailyReport/carcarelist",
+        url: "/dailyReport/ajax/carcarelist",
         type: "POST",
         data: $("[name=select_frm]").serialize(),
         success: function (data) {
