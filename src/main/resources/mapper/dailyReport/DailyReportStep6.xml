@@ -5,7 +5,7 @@
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep6Mapper">
 
     <select id="findCarListByOption" parameterType="DailyReportStep6SelectForm" resultType="DailyReportStep6">
-        SELECT DATE_FORMAT(drvdate, '%m-%d') AS 'drvdate',
+        SELECT DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
                drvclub,
                lastkm,
                useamt,
@@ -17,6 +17,13 @@
         <if test="selectOption !='전체'">
             AND drvclub = #{selectOption}
         </if>
-        ORDER  BY drvdate DESC
+        <choose>
+            <when test="searchType == 'date'">
+                ORDER BY drvdate DESC, drvclub ASC
+            </when>
+            <otherwise>
+                ORDER BY drvclub ASC, drvdate DESC
+            </otherwise>
+        </choose>
     </select>
 </mapper>

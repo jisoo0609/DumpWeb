@@ -377,14 +377,18 @@
                     <th>하차지</th>
                     <th>품목</th>
                     <th>대수</th>
+                    <th>날짜</th>
                 </tr>
-                <c:forEach var="item" items="${driverList}">
+
+
+                <c:forEach var="item" items="${list}">
                     <tr>
-                        <td>${item.fromsite}</td>
+                        <td>${item.carSubmit}</td>
                         <td>${item.fromsite}</td>
                         <td>${item.tosite}</td>
                         <td>${item.item}</td>
                         <td>${item.qty}</td>
+                        <td>${item.date}</td>
 
                     </tr>
                 </c:forEach>

@@ -217,10 +217,22 @@ body {
 .agreement_container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   gap: 5px;
   flex-wrap: wrap;
   margin-bottom: 10px;
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.agreement_container button {
+  font-size: 12px;
+  line-height: 15px;
+  width: 80px;
+}
+
+.agreement_container button {
+    width:80px
 }
 
 .line {
@@ -228,6 +240,7 @@ body {
   height: 2px;
   background: var(--color-bg-border-blue);
 }
+
 
 .table_container {
   display: grid;
@@ -241,6 +254,20 @@ body {
   text-align: center;
 }
 
+
+.table_container table thead tr th {
+  padding: 10px 7px;
+}
+
+.table_container table thead tr th:nth-child(1),
+.table_container table thead tr th:nth-child(2){
+  white-space: nowrap;
+}
+
+.table_container table tbody tr td:nth-child(1){
+  padding: 0 10px
+}
+.table_container table tbody tr td:nth-child(3),
 .table_container table tbody tr td:nth-child(4) {
   text-align: right;
 }
@@ -289,14 +316,16 @@ td {
     justify-content: center;
     gap: 10px;
   }
-  .col input {
-    padding: 5px 5px;
-  }
+
   .col:first-child::after {
     content: "";
   }
   .table_container {
     white-space: normal;
+  }
+
+  .table_container table {
+  word-break: inherit;
   }
   .inquiry_form {
     padding: 15px;
@@ -334,6 +363,10 @@ td {
   }
 }
 
+.red-line-divider {
+  border-top: 2px solid red; /* 그룹 헤더 아래쪽 경계선 추가 */
+}
+
 /* 태블릿 스타일 */
 @media (min-width: 551px) and (max-width: 768px) {
   .col {
@@ -342,9 +375,7 @@ td {
     justify-content: center;
     gap: 10px;
   }
-  .col input {
-    padding: 5px 5px;
-  }
+
   .col:first-child::after {
     content: "";
   }
@@ -355,9 +386,8 @@ td {
   .col {
     gap: 20px;
   }
-  .col input {
-    padding: 5px 5px;
-  }
+
 }
+
 
 
