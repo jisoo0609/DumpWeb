@@ -1,10 +1,10 @@
 
 .ui-datepicker-trigger{
-    vertical-align: middle; width: 20px;
-}
-.ui-datepicker-trigger{
     display: none;
 }
+.DrvSection form fieldset .bdnUl{
+        border: none; padding-top: 0;
+    }
 /* ! galaxy fold size */
 @media screen and (max-width: 280px){
     .DrvSection{
@@ -61,7 +61,7 @@
     .DrvSection form fieldset ul li img{
         cursor: pointer;
     }
-    .DrvSection form fieldset ul li:first-of-type label:last-of-type{
+    .DrvSection form fieldset ul:first-child li:first-of-type .chk2{
         width: 10%;
     }
     .DrvSection form fieldset ul li input[type=text],
@@ -69,7 +69,10 @@
         width: 150px; height: 25px; font-size: 12px;
     }
     .DrvSection form fieldset ul li .drvInputSpan2{
-        padding-left: 50px;
+        padding-left: 0px;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan3{
+        padding-left: 52px
     }
     .DrvSection form fieldset ul li textarea{
         width: 58%; font-size: 12px;
@@ -163,7 +166,6 @@
     }
 }
 
-
 /* ! mobile */
 @media screen and (min-width: 281px) and (max-width: 767px){
     .DrvSection{
@@ -193,13 +195,13 @@
     .DrvSection form fieldset > label:not(:first-of-type){
         margin-left: 4px;
     }
-    .DrvSection form fieldset ul{
+    .DrvSection form fieldset ul.CarUl{
         list-style: none; border-top: 2px solid #0068b7; padding-top: 20px;
     }
     .DrvSection form fieldset ul:last-type{
         border: none;
     }
-    .DrvSection form fieldset ul:first-child li{
+    .DrvSection form fieldset ul li{
         margin-bottom: 4px; font-size: 13px; display: flex; align-items: center;
         position: relative; font-weight: bold;
     }
@@ -217,7 +219,7 @@
     .drvVoiceImg{
         width: 18%;
     }
-    .DrvSection form fieldset ul li:first-of-type label:last-of-type{
+    .DrvSection form fieldset ul li:first-of-type .chk2{
         width: 10%;
     }
     .DrvSection form fieldset ul li input[type=text],
@@ -231,16 +233,13 @@
         cursor: pointer;
     }
     .DrvSection form fieldset ul li .drvInputSpan2{
-        padding-left: 40px;
+        padding-left: 10px;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan3{
+        padding-left: 65px
     }
     .DrvSection form fieldset ul li textarea{
         width: 96%; font-size: 12px;
-    }
-    .DrvSection [class ^= 'tabPg']{
-        display: none;
-    }
-    .DrvSection [class ^= 'tabPg'].active{
-        display: block;
     }
     .DrvSection > div:first-of-type{
         text-align: center; margin-bottom: 30px;
@@ -364,6 +363,9 @@
     .DrvSection form fieldset ul{
         list-style: none; border-top: 2px solid #0068b7; padding-top: 20px;
     }
+    .DrvSection form fieldset ul:last-type{
+        border: none;
+    }
     .DrvSection form fieldset ul li{
         margin-bottom: 4px; font-size: 13px; display: flex; align-items: center;
         position: relative;
@@ -380,7 +382,7 @@
     .DrvSection form fieldset ul li input#datepicker2{
         width: 50%; height: 25px; font-size: 16px;
     }
-    .DrvSection form fieldset ul li:first-of-type label:last-of-type{
+    .DrvSection form fieldset ul li:first-of-type .chk2{
         width: 6%; font-weight: bold;
     }
     .DrvSection form fieldset ul li input[type=text],
@@ -392,6 +394,12 @@
     }
     .DrvSection form fieldset ul li img{
         cursor: pointer;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan2{
+        padding-left: 40px;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan3{
+        padding-left: 95px
     }
     .DrvSection form fieldset ul li textarea{
         width: 100%; font-size: 16px;
@@ -517,6 +525,9 @@
     .DrvSection form fieldset ul{
         list-style: none; border-top: 2px solid #0068b7; padding-top: 20px;
     }
+    .DrvSection form fieldset ul:last-type{
+        border: none;
+    }
     .DrvSection form fieldset ul li{
         margin-bottom: 20px; font-size: 13px; display: flex; align-items: center;
         position: relative;
@@ -533,7 +544,7 @@
     .DrvSection form fieldset ul li input#datepicker2{
         width: 30%; height: 25px; font-size: 16px;
     }
-    .DrvSection form fieldset ul li:first-of-type label:last-of-type{
+    .DrvSection form fieldset ul li:first-of-type .chk2{
         width: 3%; font-weight: bold;
     }
     .DrvSection form fieldset ul li input[type=text],
@@ -545,6 +556,12 @@
     }
     .DrvSection form fieldset ul li .drvVoiceImg{
         border-radius: 25px; width: 12%; vertical-align: middle; cursor: pointer;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan2{
+        padding-left: 140px;
+    }
+    .DrvSection form fieldset ul li .drvInputSpan3{
+        padding-left: 195px
     }
     .DrvSection form fieldset ul li textarea{
         width: 100%; font-size: 18px;

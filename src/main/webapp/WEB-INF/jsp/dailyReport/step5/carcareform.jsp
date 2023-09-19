@@ -5,11 +5,11 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
-<script type="text/javascript"
-        src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
+<script type="text/javascript"  src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
 
 <script>
     function dvFristbtn(){
@@ -45,30 +45,32 @@
    });
 </script>
 
+
+
 <section class="DrvSection">
     <h2>차량관리 차계부 등록</h2> <span></span>
     <form action="result" method="post">
         <fieldset>
-            <input type="radio" name="drvClub" id="rdOli">
+            <input type="radio" name="drvClub" id="rdOli" value="주유">
             <label for="rdOli" class="active">주유</label>
 
-            <input type="radio" name="drvClub" id="rdDEF">
+            <input type="radio" name="drvClub" id="rdDEF" value="요소수">
             <label for="rdDEF">요소수</label>
 
-            <input type="radio" name="drvClub" id="rdEngOil">
+            <input type="radio" name="drvClub" id="rdEngOil" value="엔진오일">
             <label for="rdEngOil">엔진오일</label>
 
-            <input type="radio" name="drvClub" id="rdFix">
+            <input type="radio" name="drvClub" id="rdFix" value="정비(수리)">
             <label for="rdFix">정비(수리)</label>
 
-            <input type="radio" name="drvClub" id="rdNote">
+            <input type="radio" name="drvClub" id="rdNote" value="기타">
             <label for="rdNote">기타</label>
 
-            <ul class="">
+            <ul class="CarUl">
                 <li>
                     <label class="drvLabel" for="datepicker1">날짜</label>
                     <span class="drvInputSpan"><input id="datepicker1" inputmode="none" name="drvDate"></span>
-                    <label for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+                    <label class="chk2" for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
                     <input id="chk2" type="checkbox">
                 </li>
                 <li>
@@ -87,30 +89,29 @@
                     <label class="drvLabel" for="drvRem">기타(설명) <span><img class="drvVoiceImg" src="/resources/image/step5/ico_mic.png" alt="음성인식 버튼"></span> </label>
                     <span class="drvInputSpan"><textarea placeholder="주유소 및 정비소와 수리내용" id="drvRem voiceNotification" name="drvRem" class="voice-notification" cols="30" rows="2"></textarea></span>
                 </li>
-                <li class="tabBtn" data-teb="Nli">
-                    <label for="NCare">다음 교환 주기 입력</label>
-                    <span class="drvInputSpan2"><input id="NCare" type="checkbox"></input></span>
+                <li class="tabBtn" data-tab="hiddenPart" >
+                    <label for="showHideCheckbox">다음 교환 주기 입력</label>
+                    <span class="drvInputSpan2"><input checked id="showHideCheckbox" type="checkbox"></input></span>
                 </li>
             </ul>
-            <ul class="tabPg active" id="Nli">
+            <ul class="bdnUl" id="hiddenPart">
                 <li>
                     <label class="drvLabel" for="datepicker2">교환 예정일</label>
                     <span class="drvInputSpan"><input id="datepicker2" inputmode="none" name="datepicker2"></span>
                 </li>
                 <li>
                     <label class="drvLabel" for="nextlastkm">교환 주행거리</label>
-                    <span class="drvInputSpan"><input id="nextlastkm" type="number" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리"></span>
+                    <span class="drvInputSpan"><input name="repaddkm" id="nextlastkm" type="number" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리"></span>
                 </li>
                 <li>
                      <label for="ChangeConf">교환 확인</label>
-                     <span class="drvInputSpan2"><input id="ChangeConf" type="checkbox" value=""></span>
+                     <span class="drvInputSpan3"><input id="ChangeConf" type="checkbox" name="rependchk"></span>
                 </li>
             </ul>
         </fieldset>
     </form>
-
+    <script src="/resources/js/dailyReport/step5/tabpage.js"></script>
     <script src="/resources/js/dailyReport/step5/voice.js"></script>
-    <script src="/resources/js/dailyReport/step5/tabInput.js"></script>
 
     <div>
         <button class="openBtn" data-popName="drvpop1">삭제</button> <button class="openBtn" data-popName="drvpop2">저장</button> <button class="openBtn" data-popName="drvpop3">이전화면</button>
@@ -139,7 +140,6 @@
             <input type="button" value="확인" onClick="history.go(-1)">
         </div>
     </div>
-
 <script>
      // "확인" 버튼을 클릭하면 실행되는 함수
      function saveData() {
@@ -200,7 +200,6 @@
             console.error('오류:', error);
         });
      }
-
 
 </script>
 
