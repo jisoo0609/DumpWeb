@@ -55,6 +55,7 @@ label[for = searchType]{
 
 .data_Area > div{
     display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
 }
 
@@ -180,14 +181,11 @@ input[value="검색"]{
     color: #0068b7;
 }
 
-.list-table{
-    border-top: 2px solid #0068b7;
-    width: 100%;
-    border-collapse: collapse;
-    word-break: keep-all;
-}
-
 thead{
     display: table-header-group;
     vertical-align: middle;
+}
+
+td{
+    height: 50px;
 }
