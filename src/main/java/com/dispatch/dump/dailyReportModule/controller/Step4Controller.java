@@ -22,14 +22,15 @@ public class Step4Controller {
     public String step4(Model model, DailyReport dailyReport) {
         dailyReportService.list(model, dailyReport);
         model.addAttribute("tSheet", step4Service.getSummary());
+        model.addAttribute("totalAmount", step4Service.getTotalTransportAmount());
         return "/dailyReport/step4/list";
     }
 
-    @RequestMapping(value = "/totalTransportAmount", method = RequestMethod.GET)
-    public String getTotalTransportAmount(Model model, DailyReport dailyReport) {
-        dailyReportService.list(model, dailyReport);
-        model.addAttribute("totalAmount", step4Service.getTotalTransportAmount());
-        return "/dailyReport/step4/totalTransportAmount";
-    }
+//    @RequestMapping(value = "/totalTransportAmount", method = RequestMethod.GET)
+//    public String getTotalTransportAmount(Model model, DailyReport dailyReport) {
+//        dailyReportService.list(model, dailyReport);
+//        model.addAttribute("totalAmount", step4Service.getTotalTransportAmount());
+//        return "/dailyReport/step4/totalTransportAmount";
+//    }
 
 }
