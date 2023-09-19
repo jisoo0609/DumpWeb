@@ -33,14 +33,17 @@ public class Step3Service {
             Login loginData = (Login) session.getAttribute("loginInfo");
             dailyReportStep3Main.setCarNo(loginData.getUserId());
 
-            //제출처 정보 등록
+            //상위 테이블 등록
+            //user idx 저장
+            dailyReportStep3Main.setSheetSS(Integer.parseInt(loginData.getUuserID()));
             dailyReportStep3MainMapper.insertDailyReportMain(dailyReportStep3Main);
-            //위에서 등록한 idx를 등록하기(mapper에 selectKey로 등록해둠)
+            
+            //상위 table의 idx를 저장
             dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
-            //dailyReportSub
+            //user idx 저장
+            dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(loginData.getUuserID()));
             dailyReportStep3SubMapper.insertDailyReportSub(dailyReportStep3Sub);
             rtnMap.put("httpCode", 200);
-
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }
@@ -52,7 +55,6 @@ public class Step3Service {
         Map<String, Object> rtnMap = commonUtil.returnMap();
 
         try {
-
             List<DailyReportStep3Main> searchList=dailyReportStep3MainMapper.findCarsubmitList(dailyReportStep3Main);
 
             rtnMap.put("httpCode", 200);
@@ -62,7 +64,6 @@ public class Step3Service {
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
-
 
     public String searchByCarSubmit(DailyReportStep3Main dailyReportStep3Main) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
@@ -109,16 +110,13 @@ public class Step3Service {
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
-
-
-
-
     public String list(Model model, DailyReportStep3Main dailyReportStep3Main) {
         HttpSession session = commonUtil.getSession();
 
         try {
             Login loginData = (Login) session.getAttribute("loginInfo");
             dailyReportStep3Main.setCarNo(loginData.getUserId());
+            dailyReportStep3Main.setSheetSS(Integer.parseInt(loginData.getUserSS()));
 
             log.info("CarNo는?"+dailyReportStep3Main.getCarNo());
             log.info("SheetID?"+dailyReportStep3Main.getSheetID());
@@ -132,5 +130,20 @@ public class Step3Service {
         }
         return "/dailyReport/form";
     }
-
+    
+    /*삭제*/
+    public void delete(int sheetsubID){
+        //우선 작성
+        //join 쿼리를 직접 작성/단계적으로 처리 둘 중 뭐가 나은지 확인하고 선택하여 진행
+        //1)넘겨 받은 idx로 tSheet_sub를 select해서 sheetID2를 가져온다
+        int sheetID=dailyReportStep3SubMapper.selectBySheetSubID(sheetsubID);
+        //2) sheetID2로 tSheet를 조회해서 chk1을 확인한다
+        boolean chk1=dailyReportStep3MainMapper.selectBySheetID(sheetID);
+        //3) chk1값이 0이면 삭제, 1이면 삭제 X
+        if(chk1==false){
+            dailyReportStep3SubMapper.deleteByOne(sheetsubID);
+        }else{
+            //삭제 불가능 메세지 보내기
+        }
+    }
 }
