@@ -70,6 +70,10 @@ function printTableColumnOrder(searchResultData) {
                     <td>${useAmt}</td>
                     <td>${data.drvRem}</td> 
                     <td>${rependchk}</td>
+                    <td style="display: none">${data.chk2}</td>
+                    <td style="display: none">${data.useOil}</td>
+                    <td style="display: none">${data.rependdate}</td>
+                    <td style="display: none">${data.repaddkm}</td>
                  `;
 
         n++;
@@ -150,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const searchTypeRadio = document.querySelectorAll('input[name="searchType"]:checked');
 
-        let tmpValue = ["",inputValue[1].textContent, inputValue[2].textContent];
+        let tmpValue = ["", inputValue[1].textContent, inputValue[2].textContent];
 
         if (searchTypeRadio[0].value === "item") {
             [tmpValue[1], tmpValue[2]] = [tmpValue[2], tmpValue[1]]
@@ -164,7 +168,12 @@ document.addEventListener("DOMContentLoaded", function () {
             "&lastKm=" + inputValue[3].textContent +
             "&useAmt=" + inputValue[4].textContent +
             "&drvRem=" + inputValue[5].textContent +
-            "&rependchk=" + inputValue[6].textContent;
+            "&rependchk=" + inputValue[6].textContent +
+
+            "&chk2=" + inputValue[7].textContent + // (inputValue[7].textContent === "true" ? "true" : "false")
+            "&useOil=" + inputValue[8].textContent +
+            "&rependdate=" + inputValue[9].textContent +
+            "&repaddkm=" + inputValue[10].textContent;
 
 
         let url = "/dailyReport/carcareform" + rowData;
