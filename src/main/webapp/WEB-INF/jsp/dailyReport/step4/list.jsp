@@ -229,19 +229,21 @@
                 </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="listMain" items="${tSheet}">
                 <tr>
-                    <c:forEach var="listMain" items="${tSheetMain}">
-                        <c:forEach var="listSub" items="${tSheetSub}">
+
+
                         <td>${listMain.carSubmit}</td>
                         <td>${listMain.date}</td>
-                        <td>${listSub.item}</td>
-                        <td>${listSub.fromsite}</td>
-                        <td>${listSub.tosite}</td>
-                        <td>${listSub.qty}</td>
-                        <td>${listSub.qtyup}</td>
-                        </c:forEach>
-                    </c:forEach>
+                        <td>${listMain.item}</td>
+                        <td>${listMain.fromsite}</td>
+                        <td>${listMain.tosite}</td>
+                        <td>${listMain.qty}</td>
+                        <td>${listMain.qtyup}</td>
+
+
                 </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>

@@ -26,10 +26,9 @@ public class Step6Controller {
         return "/dailyReport/step6/carcarelist";
     }
 
-    @RequestMapping(value = "/carcarelist", method = RequestMethod.POST)
+    @RequestMapping(value = "/ajax/carcarelist", method = RequestMethod.POST)
     @ResponseBody
     public List<DailyReportStep6> searchDailyReport(DailyReportStep6SelectForm selectForm) {
-        System.out.println(selectForm);
         return step6Service.getCarListByOption(selectForm);
     }
 }

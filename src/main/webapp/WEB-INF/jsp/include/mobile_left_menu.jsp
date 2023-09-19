@@ -79,13 +79,6 @@
                    </a>
                </p>
          </li>
-         <li>
-               <p>
-                   <a class="left_menu" href="javascript:alert('개발중입니다.')">
-                       <span style="font-weight: bold; color: blue;">⑨</span> 제출처 차량관리
-                   </a>
-               </p>
-         </li>
 
     </ul>
 </nav>
