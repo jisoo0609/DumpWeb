@@ -9,7 +9,7 @@
 <section id="canvas" style="">
     <div id="dailyreport">
         <%--<a target="_blank" href="https://icons8.com/icon/12653/microphone">Microphone</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>--%>
-        <div class="sub-title" style="border-bottom: 1px solid #ddd;">
+        <div class="sub-title" style="border-bottom: 1px solid #ddd; padding-bottom: 10px;">
             <h1 class="sub-title__h1">
                 <span class="v-mid">운행 일보 등록</span>
                 <img src="/resources/image/icons/ico_que.png" alt="" class="que-dis-mn"
@@ -66,7 +66,7 @@
 
 
                         <li>
-                            <label class="t10" style="font-size : var(--main-font-size);">제출처</label>
+                            <label class="t10">제출처</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
                                 <input  type="text" class="wp100 voice" name="carSubmit" id="carSubmit" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}">
@@ -74,7 +74,7 @@
                         </li>
 
                         <li >
-                            <label class="t10" style="font-size : var(--main-font-size);">담당자</label>
+                            <label class="t10">담당자</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
                                 <input  type="text" class="wp100 voice" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}"
@@ -83,12 +83,12 @@
                         </li>
 
                         <li>
-                            <label class="t10" style="font-size : var(--main-font-size);">휴대폰</label>
+                            <label class="t10">휴대폰</label>
                             <div class="empty"></div>
                             <span class="content">
                                 <input  type="tel" class="wp100" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
-                                       list="insiteDataList" placeholder="-없이 숫자8자리를 입력해주세요" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                       style="margin-left: 56px;" onfocus="fill010()"}
+                                       list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
+                                       style="margin-left: 75px;" onfocus="fill010()"}
                                 >
                                 <datalist id="insiteDataList">
                                         <option value=""></option>
@@ -96,23 +96,31 @@
                             </span>
                         </li>
 
-                        <li style="display: flex; ">
+                        <li class="adjustMax359" style="display: flex; justify-content: space-between;">
                             <div class="datediv">
-                                <label class="t10" style="font-size : var(--main-font-size);">운행일</label>
+                                <label class="t10">운행일</label>
                                 <span class="content">
                                     <input type="text" class="datepicker" id="date" name="date" style="width: 80px; margin-left: 75px; text-align: center; padding-left: 0;"
                                         value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="off">
                                 </span>
                             </div>
-                            <div style="margin-left: 90px;">
-                                <label for="checkbox" style="font-size : var(--main-font-size);">결재</label>
-                                <input type="checkbox" id="checkbox" name="chk1" style="margin-left: 35px;"
-                                value="0">
-                            </div>
-                            <div style="margin-left: 35px;">
-                                <label for="checkbox" style="font-size : var(--main-font-size); ">제출</label>
-                                <input type="checkbox" id="checkbox" name="chk2" style="margin-left: 35px;"
-                                value="0">
+                            <div class="haveTwo">
+                                <div id="chk1">
+                                    <label >결재</label>
+                                    <input type="checkbox" id="chk1" name="chk1" value="0"onChange="approved()">
+                                </div>
+                                <div id="chk2" style="overflow:visible !important;">
+                                    <label>진행</label>
+                                    <div class="select" id="dropdown">
+                                      <div class="selected">
+                                        <div class="selected-value">배차</div>
+                                      </div>
+                                      <ul>
+                                        <li class="option">배차</li>
+                                        <li class="option">결제</li>
+                                      </ul>
+                                    </div>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -121,21 +129,23 @@
         </div>
 
         <div class="mt10">
-            <div class="title" style="border-bottom: 2px solid #0068b7;">
+            <div class="title adjustMax359" style="border-bottom: 2px solid #0068b7;">
                 <p class="caption-like">
                     <span class="v-mid" data-trn-key="TR_MENU_KEY_375">운송 정보 등록</span>
                 </p>
-                <button class="btn addBtn" type="button" style="margin: 0 10px 0 auto; width: 100px;" onclick="openPop()">
-                    운송 신규등록
-                </button>
-                <%@ include file="popupInput.jsp" %>
-                <%@ include file="camera.jsp" %>
+                <div class="haveTwo">
+                    <button class="btn addBtn" type="button" style="margin: 0 5px 0 auto; width: 100px;" onclick="openPop()">
+                        운송 신규등록
+                    </button>
+                    <%@ include file="popupInput.jsp" %>
+                    <%@ include file="camera.jsp" %>
+                </div>
             </div>
         </div>
 
 
         <div>
-            <table class="list-table mt5">
+            <table class="list-table mt5" >
                 <colgroup>
                     <col width="22%">
                     <col width="22%">
@@ -145,11 +155,11 @@
                 </colgroup>
                 <thead style="border-top: 2px solid #ddd;">
                 <tr>
-                    <th style="font-size: var( --main-font-size);">상차지</th>
-                    <th style="font-size: var( --main-font-size);">하차지</th>
-                    <th style="font-size: var( --main-font-size);">품목</th>
-                    <th style="font-size: var( --main-font-size);">대수</th>
-                    <th style="font-size: var( --main-font-size);">비고</th>
+                    <th>상차지</th>
+                    <th>하차지</th>
+                    <th>품목</th>
+                    <th>대수</th>
+                    <th>비고</th>
                 </tr>
                 </thead>
 
@@ -178,8 +188,8 @@
 
         <div class="btn-area">
             <button type="button" class="btn btn-white" onclick="clearInputs()">전체삭제</button>
-            <button type="button" class="btn btn-blue" id="submitBtn" onClick="checkBox()">제출하기</button>
-            <button type="button" class="btn btn-blue " onClick="">신규저장</button>
+            <button type="button" class="btn btn-blue" id="submitBtn" onClick="submitCheck()">제출하기</button>
+            <button type="button" class="btn btn-blue " onClick="">저장</button>
             <button type="button" class="btn btn-white " onClick="history.go(-1)">이전화면</button>
         </div>
     </div>
