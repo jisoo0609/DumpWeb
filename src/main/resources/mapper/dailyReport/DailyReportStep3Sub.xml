@@ -4,12 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep3SubMapper">
 
-
     <!--운행정보 조회-->
     <select id="findDailyReportSubList" parameterType="int" resultType="DailyReportStep3Sub">
         select * from tSheet_sub
         where
         sheetID2=#{com.dispatch.dump.commonModule.db.dto.DailyReportStep3Main.sheetID}
+        and
+        sheetsubSS=#{sheetsubSS}
+        order by fromsiate asc
     </select>
 
     <!--운행 정보 저장-->
@@ -23,7 +25,8 @@
         <if test="Qtyup != null">Qtyup,</if>
         <if test="Rem != null">Rem,</if>
         sheetID2,
-        tosite)
+        tosite,
+        sheetsubSS)
         values
         (
         #{fromsite},
@@ -32,17 +35,19 @@
         <if test="Qtyup != null">#{Qtyup},</if>
         <if test="Rem != null">#{Rem},</if>
         #{sheetID2},
-        #{tosite})
+        #{tosite},
+        #{sheetsubSS})
     </insert>
+    
+    <!--삭제 관련-->
+    <!--sheetsubID로 조회-->
+    <select id="selectBySheetSubID" parameterType="int">
+        select sheetID2 from tSheet_sub where sheetsubID=#{sheetsubID}
+    </select>
 
     <!--운행정보 삭제(1건)-->
     <delete id="deleteByOne" parameterType="int">
-        delete from tSheet_sub where sheetsubID = #{sheetsubID} and date=#{date} and chk1=0;
+        delete from tSheet_sub where sheetsubID = #{sheetsubID}
     </delete>
-
-    <!--    &lt;!&ndash;CarNo로 전체 조회하기, Join필요&ndash;&gt;
-        <select id="findDailyReportList" resultType="DailyReportSub" parameterMap="DailyReportSubMapper">
-            select * from tSheet where CarNo = #{CarNo}
-        </select>-->
 
 </mapper>

@@ -15,6 +15,9 @@ public interface DailyReportStep3MainMapper {
     List<DailyReportStep3Main> selectByCarSubmitTel(DailyReportStep3Main dailyReportStep3Main);
     List<DailyReportStep3Main> selectBySalesman(DailyReportStep3Main dailyReportStep3Main);
 
+    /* FUNCTION ::  삭제를 위한 chk1 조회 */
+    Boolean selectBySheetID(int sheetID);
+
     /*나중에 지울 내용*/
     List<DailyReportStep3Main> findCarsubmitList(DailyReportStep3Main dailyReportStep3Main);
     

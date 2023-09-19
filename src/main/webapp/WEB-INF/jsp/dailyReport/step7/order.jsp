@@ -113,7 +113,7 @@
 		<div id="golPop3" class="golPopup3">
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
-				<p>정말 <span style="font-weight: bold;">저장</span>를하시겠습니까?</p>
+				<p>정말 <span style="font-weight: bold;">저장</span>하시겠습니까?</p>
 				<input type="button" value="확인">
 				<input type="button" value="취소">
 			</div>
@@ -122,7 +122,7 @@
 		<div id="golPop4" class="golPopup4">
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
-				<p>이전 <span style="font-weight: bold;">화면</span>으로 돌아가시겠습니까?</p>
+				<p>정말 <span style="font-weight: bold;">이전화면</span>으로 돌아가시겠습니까?</p>
 				<input type="button" value="확인" onClick="history.go(-1)">
 				<input type="button" value="취소">
 			</div>
@@ -131,28 +131,24 @@
     <table>
       <thead>
         <tr>
-          <th>상차지</th>
-          <th>하차지</th>
-          <th>품목</th>
-          <th>대수</th>
-          <th>차량번호</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>강남</td>
-          <td>구로</td>
-          <td>모래, 자갈</td>
-          <td>100</td>
-          <td>675가8989</td>
-        </tr>
-        <tr onclick="openPopupTest('dispatchform');">
-          <td>강남</td>
-          <td>구로</td>
-          <td>모래, 자갈</td>
-          <td>100</td>
-          <td>미지정</td>
-        </tr>
+				<tr>
+					<th>No.</th>
+					<th>상차지</th>
+					<th>하차지</th>
+					<th>품목</th>
+					<th>대수</th>
+					<th>차량번호 <span style="font-weight: normal;">(일괄배차)</span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>999</td>
+					<td>강남</td>
+					<td>구로</td>
+					<td>모래, 자갈</td>
+					<td>100</td>
+					<td>미지정</td>
+				</tr>
       </tbody>
     </table>
 </section>
