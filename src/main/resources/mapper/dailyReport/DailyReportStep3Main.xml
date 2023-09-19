@@ -22,7 +22,8 @@
     </resultMap>
     <select id="findDailyReportMainList"  resultMap="DailyReportStep3MainMapper" parameterType="DailyReportStep3Main">
         select * from tSheet
-        where CarNo=#{carNo} and date=#{date} and carSubmit=#{carSubmit}
+        where date=#{date} and carSubmit=#{carSubmit} and carSubmitTel=#{carSubmitTel} and salesman=#{salesman}
+        and sheetSS=#{sheetSS}
         order by carSubmit asc
     </select>
 
@@ -31,9 +32,9 @@
         <!--idx 자동->따로 작성 X-->
         insert into
         tSheet
-        (CarNo, carSubmit, carSubmitTel, salesman, chk1, date)
+        (CarNo, carSubmit, carSubmitTel, salesman, chk1, date, sheetSS)
         values
-        (#{CarNo}, #{carSubmit}, #{carSubmitTel}, #{salesman}, 1, #{date})
+        (#{CarNo}, #{carSubmit}, #{carSubmitTel}, #{salesman}, 1, #{date}, #{sheetSS})
         <!--selectKey 활용
         -채번한 값을 객체에 저장한 후 그 값을 insert에 사용하므로, 멀티스레드 상황에서 안전
         *order="AFTER" 삽입 후에 조회
@@ -115,5 +116,9 @@
         and (carSubmit != carSubmit or carSubmitTel != carSubmitTel or salesman != salesman)
     </update>
 
-
+    <!--삭제 관련-->
+    <!--sheetID로 조회-->
+    <select id="selectBySheetID" parameterType="int">
+        select chk1 from tSheet where sheetID=#{sheetID}
+    </select>
 </mapper>
