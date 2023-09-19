@@ -37,7 +37,7 @@
 
     <!--운행정보 삭제(1건)-->
     <delete id="deleteByOne" parameterType="int">
-        delete from tSheet_sub from sheetsubID = #{sheetsubID}
+        delete from tSheet_sub where sheetsubID = #{sheetsubID} and date=#{date} and chk1=0;
     </delete>
 
     <!--    &lt;!&ndash;CarNo로 전체 조회하기, Join필요&ndash;&gt;

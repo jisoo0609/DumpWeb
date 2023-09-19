@@ -73,15 +73,15 @@ function printTableColumnOrder(searchResultData) {
 
     const totalCount = searchResultData.reduce((total, data) => total + data.useAmt, 0);
 
-    const resultText = `
-                   데이터 <span class="blue">${dataCount}</span>건이 검색되었습니다.
-                   <br> 
-                   총 사용 금액은 <span class="blue">${totalCount.toLocaleString()}</span>원입니다.
-                    `;
+    // 비용금액 버튼 내용 변경
+    const costButton = document.querySelector(".agreement_container .resultPrice");
+    costButton.innerHTML = `${totalCount.toLocaleString()}원`;
+    // ...
 
     // 결과를 result_search 요소에 출력
     const resultSearch = document.querySelector(".result_search");
-    resultSearch.innerHTML = `<h1>${resultText}</h1>`;
+    resultSearch.innerHTML = `<h1>데이터 <span class="blue">${dataCount}</span>건이 검색되었습니다.</h1>`;
+
 };
 
 

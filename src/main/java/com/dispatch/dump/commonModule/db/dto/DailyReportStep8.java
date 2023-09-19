@@ -24,7 +24,7 @@ public class DailyReportStep8 {
     private String tosite;          // LINE :: 하차지
 
     //cnt추가
-    private String totalData;
+//    private String totalData;
 
     // VO
     //private long idx;
