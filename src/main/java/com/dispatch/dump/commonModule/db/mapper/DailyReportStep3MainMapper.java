@@ -10,23 +10,20 @@ public interface DailyReportStep3MainMapper {
     /* FUNCTION ::  등록 */
     int insertDailyReportMain(DailyReportStep3Main dailyReportStep3Main);
 
-    /* FUNCTION ::  제출처 리스트 검색 */
-    List<DailyReportStep3Main> findCarsubmitList(DailyReportStep3Main dailyReportStep3Main);
-    /*DailyReportStep3Main findJoinDailyReportList(DailyReportStep3Main dailyReportStep3Main);*/
+    /* FUNCTION ::  제출처별 리스트 검색 */
+    List<DailyReportStep3Main> selectByCarSubmit(DailyReportStep3Main dailyReportStep3Main);
+    List<DailyReportStep3Main> selectByCarSubmitTel(DailyReportStep3Main dailyReportStep3Main);
+    List<DailyReportStep3Main> selectBySalesman(DailyReportStep3Main dailyReportStep3Main);
 
+    /*나중에 지울 내용*/
+    List<DailyReportStep3Main> findCarsubmitList(DailyReportStep3Main dailyReportStep3Main);
+    
     //* FUNCTION :: 제출처 1건 조회 *//
     DailyReportStep3Main findBycarSubmitTel(DailyReportStep3Main dailyReportStep3Main);
 
-    /* FUNCTION :: 일보 수정 *//*
-    int updateDailyReport(DailyReport dailyReport);
-
-    *//* FUNCTION :: 일보 상세보기 *//*
-    DailyReport findDailyReportBySheetID(DailyReport dailyReport);
 
     /* FUNCTION :: 일보 리스트 조회(전체조건) */
     DailyReportStep3Main findDailyReportMainList(DailyReportStep3Main dailyReportStep3Main);
 
 
-
-    int deleteDailyReport(DailyReport dailyReport);
 }

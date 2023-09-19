@@ -26,8 +26,8 @@
         @media screen and (min-width: 280px) and (max-width: 1024px) {
             .search-form-major label {
                 width: initial;
+                margin-bottom: 8px;
             }
-
         }
 
         .ui-datepicker-trigger {
@@ -42,6 +42,11 @@
 
             .search-form {
                 margin: 15px 0 10px;
+            }
+
+            .table-btn {
+                text-align: center;
+                float: none;
             }
         }
 
@@ -266,6 +271,10 @@
             .list-table th {
                 padding: 10px 4px;
             }
+
+            .table-btn {
+                width: 60%;
+            }
         }
 
         @media screen and (max-width: 280px) {
@@ -290,6 +299,30 @@
                 font-size: 13px;
             }
         }
+
+        @media screen and (max-width: 425px) {
+            .jack {
+                margin: 0 auto;
+                display: inline-grid;
+                border: 1px solid #0068b7;
+                width: 110px;
+            }
+
+            .area {
+                display: flex;
+                align-items: center;
+            }
+
+            #button1 {
+                width: 80px;
+                margin: 0 10px;
+            }
+
+            #button2 {
+                width: 70px;
+                margin: 0 1px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -297,6 +330,34 @@
         src="/resources/js/dailyReport/step8/list.js?jsVerType=2020230831191239"></script>
 <%--<script type="text/javascript"--%>
 <%--        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64bdd806e937defb179aa9a2b9cc6c95&libraries=services"></script>--%>
+
+<script>
+    // 페이지 로드 시 실행
+    $(document).ready(function () {
+        // 체크박스 요소와 테이블 요소 가져오기
+        const toggleTableCheckbox1 = $("#toggleTableCheckbox1");
+        const toggleTableCheckbox2 = $("#toggleTableCheckbox2");
+        const dataTable = $("#dataTable");
+
+        // 체크박스 클릭 이벤트 처리
+        toggleTableCheckbox1.click(function () {
+            if (toggleTableCheckbox1.is(":checked")) {
+                // 운행일 기준 테이블을 보이도록 설정
+                dataTable.html('<tr><th>운행일</th><th>상차지</th><th>하차지</th><th>차량번호</th><th>대수</th><th>진행</th></tr><tr><td>09.09</td><td>구디 </td> <td>지밸리 </td> <td>37우2598 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
+                toggleTableCheckbox2.prop("checked", false); // 다른 체크박스 해제
+            }
+        });
+
+        toggleTableCheckbox2.click(function () {
+            if (toggleTableCheckbox2.is(":checked")) {
+                // 차량 기준 테이블을 보이도록 설정
+                dataTable.html('<tr><th>차량번호</th><th>상차지</th><th>하차지</th><th>운행일</th><th>대수</th><th>진행</th></tr>  <tr> <td>37우2598</td> <td>구디 </td> <td>지밸리 </td> <td>09.17 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
+                toggleTableCheckbox1.prop("checked", false); // 다른 체크박스 해제
+            }
+        });
+    });
+</script>
+
 <script>
     // 달력 옵션 추가 코드
     $(function () {
@@ -552,12 +613,11 @@
         <div style="text-align: center;padding-top: 30px;border: 1px solid #ddd;padding-bottom: 30px; margin: 0 0 10px;">
             <div style="width: 50%;  float: left;">
                 <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
-                        type="radio" name="searchType"
-                        value="car" checked/>운행일 기준</label>
+                        type="radio" name="searchType" id="toggleTableCheckbox1" checked/>운행일 기준</label>
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="searchType" value="fromsite"/>차량 기준</label>
+                        type="radio" name="searchType" id="toggleTableCheckbox2"/>차량 기준</label>
             </div>
         </div>
     </form>
@@ -570,28 +630,37 @@
     <div id="tableshow">
         <div class="table-top" style="height: auto; display:  block; text-align: center">
             <p class="total">
-                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}"/></span>
+                <%-- <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}"/></span>--%>
+                <%-- <span>데이터</span> <span class="cnt default-blue"><c:out value="${fn:length(receiptsList)}"/></span>--%>
+                <span>데이터</span> <span class="cnt default-blue" id="receiptsCnt">${fn:length(receiptsList)}</span>
                 <span>건 (총대수 : <span class="cnt default-blue"><span id="totalQty"></span> </span> 대)가 검색되었습니다.</span>
             </p>
         </div>
 
-        <div class="btn-area">
-            <input type="button" style="background-image: none !important;text-indent: 0px !important;"
-                   class="btn btn-search btn-search__line" value="일괄결재" onClick="$.allChkChange(1);"
-                   onkeydown="if(event.keyCode == 13) return false;">
-            <input type="button" style="background-image: none !important;text-indent: 0px !important;"
-                   class="btn btn-search btn-search__line" value="취소" onClick="$.allChkChange(0);"
-                   onkeydown="if(event.keyCode == 13) return false;">
-        </div>
         <div style="width: 100%; overflow-x: auto; overflow-y: hidden;">
-            <table class="list-table">
+            <div class="area">
+                <div class="jack"
+                     style="font-size: 14px; color: #0064c1; font-weight: 600; margin-bottom: 10px; text-align: center">
+                    <label>운반금액(원)</label>
+                    <label>999,999,999</label>
+                </div>
+                <div class="table-btn" style="margin-bottom: 10px;">
+                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(1);"
+                           style="background-image: none !important; text-indent: 0px !important; height: 35px; width: 100px; line-height: 33px;"
+                           value="일괄결재">
+                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(0);"
+                           style="background-image: none !important; text-indent: 0px !important; height: 35px; width: 100px; line-height: 33px;"
+                           value="취소">
+                </div>
+            </div>
+            <table class="list-table" id="dataTable">
                 <colgroup>
-                    <col style="width: 40%">
-                    <col style="width: 33%">
-                    <col style="width: 33%">
-                    <col style="width: 60%">
-                    <col style="width: 28%">
-                    <col style="width: 28%">
+                    <col style="width: 3%">
+                    <col style="width: 2%">
+                    <col style="width: 2%">
+                    <col style="width: 4%">
+                    <col style="width: 2%">
+                    <col style="width: 2%">
                 </colgroup>
                 <thead>
                 <tr>
@@ -606,7 +675,7 @@
                 <tbody id="receiptsSearchResult">
                 <tr>
                     <td>
-                        23-09-09
+                        09.09
                     </td>
                     <td>
                         구디
@@ -626,7 +695,7 @@
                 </tr>
                 <tr>
                     <td>
-                        23-09-10
+                        09.10
                     </td>
                     <td>
                         구디
@@ -674,7 +743,7 @@
 
                         <a style="cursor: pointer;"
                            onclick="$.valuePg(1)"
-                           class="active"        @media screen and (min-width: 280px) and (max-width: 1024px) {>1</a>
+                           class="active" @media screen and (min-width: 280px) and (max-width: 1024px) {>1</a>
 
 
                     </li>
