@@ -253,6 +253,7 @@
         <section class="management" >
 
             <div>
+                <a href="/dailyReport/receipts">
                 <div style="display: flex; align-items: center">
 
                     <div style="margin-light:5%; text-align:center; font-weight: 600">
@@ -263,7 +264,8 @@
                         <span>거래처전표조회</span>
 
                     </div>
-
+                       </a>
+                       <a href="/dailyReport/oldform">
                     <div class="car-bundle">
                         <div style=" text-align:center; font-weight: 600">
                             <div class="car-registration">
@@ -272,6 +274,7 @@
                             <span>주문배차등록</span>
                         </div>
                     </div>
+                    </a>
 
                 </div>
         </section>

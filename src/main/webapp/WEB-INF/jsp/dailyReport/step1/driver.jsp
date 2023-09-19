@@ -296,11 +296,17 @@
                 <ul class="basic-menu">
                     <li>
                         총 운반 금액 :
-                        <div class="carrying-money">원</div>
+                        <div class="carrying-money"> <%= request.getAttribute("totalTransportationCost") %>원</div>
                     </li>
+
+
                     <li>
                         총 운행대 수 :
-                        <div class="carrying-car">대</div>
+                        <div class="carrying-car"> 대</div>
+
+
+
+
                     </li>
                     <li>
                         총 비용 금액 :
