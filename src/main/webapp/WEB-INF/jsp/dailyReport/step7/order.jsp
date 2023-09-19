@@ -146,8 +146,16 @@
           <td>100</td>
           <td>675가8989</td>
         </tr>
+        <tr onclick="openPopupTest('dispatchform');">
+          <td>강남</td>
+          <td>구로</td>
+          <td>모래, 자갈</td>
+          <td>100</td>
+          <td>미지정</td>
+        </tr>
       </tbody>
     </table>
 </section>
 
+<%@ include file="popup/layer_popup.jsp" %>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
