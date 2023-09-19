@@ -11,8 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
         function dvFristbtn() {
@@ -56,19 +54,21 @@
             <label class="golLabel" for="datepicker">주문일</label>
             <span class="golInputSpan"><input id="datepicker"></span>
 						<input class="golSearch" type="button" value="조회">
-            <label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-            <input id="check67" type="checkbox">
+						<div class="checkbox">
+							<label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+							<input id="check67" type="checkbox">
+						</div>
           </li>
           <li>
-            <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="loadPoint" type="text" placeholder="상차지"></span>
           </li>
           <li>
-            <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="unloadPoint" type="text" placeholder="하차지"></span>
           </li>
           <li>
-            <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="golItems" type="text" placeholder="품목"></span>
           </li>
           <li>
@@ -78,16 +78,16 @@
             </span>
           </li>
           <li>
-            <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="carNumb" type="text" placeholder="차량번호"></span>
           </li>
         </ul>
       </fieldset>
     </form>
-    <script src="/resources/js/voice.js"></script>
+    <script src="/resources/js/dailyReport/step7/voice.js"></script>
     <div>
       <button class="opBtn" data-popName="golPop1">삭제</button>
-      <button class="opBtn" data-popName="golPop2">수정</button>
+      <button class="opBtn" data-popName="golPop2">취소</button>
       <button class="opBtn" data-popName="golPop3">저장</button>
       <button class="opBtn" data-popName="golPop4">이전화면</button>
     </div>
@@ -146,8 +146,16 @@
           <td>100</td>
           <td>675가8989</td>
         </tr>
+        <tr onclick="openPopupTest('dispatchform');">
+          <td>강남</td>
+          <td>구로</td>
+          <td>모래, 자갈</td>
+          <td>100</td>
+          <td>미지정</td>
+        </tr>
       </tbody>
     </table>
 </section>
 
+<%@ include file="popup/layer_popup.jsp" %>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

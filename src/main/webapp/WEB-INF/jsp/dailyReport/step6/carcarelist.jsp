@@ -46,9 +46,10 @@
                     <input type="date" id="end-date" name="endDate" />
                 </label>
             </div>
-            <div class="operating_period content" style="gap: 20px">
-                <h1>선택</h1>
+            <div class="operating_period content">
+                <h1>품목</h1>
                 <select class="detailSelect conbox" name="selectOption" id="selectOption">
+                    <option value="전체" selected>전체</option>
                     <option value="주유">주유</option>
                     <option value="요소수">요소수</option>
                     <option value="엔진오일">엔진오일</option>
@@ -81,8 +82,11 @@
         <h1></h1>
       </div>
       <div class="agreement_container">
-        <button class="common_btn">일괄결재</button>
-        <button class="common_btn">취소</button>
+      <button class="common_btn" style="width: 110px;">비용금액(원)<br /><span class="resultPrice">0원</span></button>
+        <div class="btnWraaper">
+          <button class="common_btn">일괄결재</button>
+          <button class="common_btn">취소</button>
+        </div>
       </div>
       <div class="line"></div>
 
@@ -93,24 +97,13 @@
                   <tr class="th_title">
                     <th id="date-header">날짜</th>
                     <th id="item-header">품목</th>
-                    <th>최종주행</th>
-                    <th>사용금액</th>
-                    <th>기타(설명)</th>
+                    <th>최종주행(km)</th>
+                    <th>사용금액(원)</th>
+                    <th>기타 (설명)</th>
                     <th>교환 주기</th>
                   </tr>
                 </thead>
                 <tbody id="table-body">
-                    <tr>
-                        <c:forEach var="list" items="${defaultList}" varStatus="status">
-                                <td>${list.drvDate}</td>
-                                <td>${list.drvClub}</td>
-                                <td>${list.lastKm}</td>
-                                <td>${list.useAmt}</td>
-                                <td>${list.drvRem}</td>
-                                <td>${list.rependchk}</td>
-                            </tr>
-                    </c:forEach>
-                </tr>
                 </tbody>
 
               </table>

@@ -12,15 +12,6 @@
             (driveID, carNo, drvDate, lastKm, drvClub, useAmt, useOil, drvRem, chk2)
         values
             (#{driveID}, #{carNo}, #{drvDate}, #{lastKm}, #{drvClub}, #{useAmt}, #{useOil}, #{drvRem}, #{chk2})
-
-<!--        <selectKey-->
-<!--                keyColumn="driveID"-->
-<!--                keyProperty="driveID"-->
-<!--                order="AFTER"-->
-<!--                resultType="int"-->
-<!--        >-->
-<!--            select last_insert_id() as driveID-->
-<!--        </selectKey>-->
     </insert>
 
 

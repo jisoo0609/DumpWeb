@@ -1,7 +1,6 @@
 package com.dispatch.dump.dailyReportModule.service;
 
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep4Main;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep4Sub;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep4;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep4Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
@@ -21,22 +20,18 @@ public class Step4Service {
     private final DailyReportStep4Mapper dailyReportStep4Mapper;
     private final CommonUtil commonUtil;
 
-    public List<DailyReportStep4Sub> getSummary() {
+    public List<DailyReportStep4> getSummary() {
         // 1. login 정보 받아오기
         HttpSession session = commonUtil.getSession();
         Login loginData = (Login) session.getAttribute("loginInfo");
 
         // 2. login id와 tSheet의 CarNo가 똑같은 tuple값을 tSheet에서 가져옴.
-        List<DailyReportStep4Main> tSheet = dailyReportStep4Mapper.getDailyReportByCarNo(loginData.getUserId());
-
-        // 3. 가져온 튜플의 sheetID와 tSheetSub의 sheetID2가 똑같은 튜플 값을 tSheetSub에서 가져옴
-        List<DailyReportStep4Sub> tSheetSub = new ArrayList<>();
-        tSheet.stream().forEach(t -> tSheetSub.add(dailyReportStep4Mapper.getDailyReportMainBySheetID2(t.getSheetID())));
+        List<DailyReportStep4> tSheet = dailyReportStep4Mapper.getDailyReportByCarNo(loginData.getUserId());
 
         // 로그로 DB 조회 결과 출력 (System.out.println 사용)
-        System.out.println("DailyReport Main List: "+ tSheet);
-        System.out.println("DailyReport List Retrieved: " + tSheetSub);
+        System.out.println("DailyReport List tSheet: " + tSheet);
 
-        return tSheetSub;
+        return tSheet;
     }
+
 }
