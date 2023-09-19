@@ -21,3 +21,16 @@ function popJS(opBtn,clBtn){
        $(opTarget).removeClass("active")
     });
 }
+
+
+/*
+    2023-09-18 김준형
+    일괄배차 팝업 open, close 함수 추가
+ */
+function openPopupTest(pop_name) {
+    $("#pop-" + pop_name).removeClass("dis-n");
+}
+
+function closePopUpTest(e) {
+    $(e).closest(".layerMask").addClass("dis-n");
+}

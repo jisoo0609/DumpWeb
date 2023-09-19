@@ -190,6 +190,16 @@ function receiptsSearchResults(receiptsSearchResults) {
     console.log(receiptsResults)
     console.log(receiptsResultDiv)
 
+    // 총 대수를 계산할 변수 초기화
+    var totalQty = 0;
+
+    // 총 검색결과 카운트
+    var receiptsCnt = receiptsResults.length;
+    var receiptsCntElement = document.getElementById("receiptsCnt");
+    if (receiptsCntElement) {
+        receiptsCntElement.innerText = receiptsCnt;
+    }
+
     // 결과 데이터를 동적으로 추가
     for (var i = 0; i < receiptsResults.length; i++) {
         var result = receiptsResults[i];
@@ -197,20 +207,35 @@ function receiptsSearchResults(receiptsSearchResults) {
         console.log(result)
         console.log(result.fromsite)
         console.log(result.date)
+        console.log(result.carNo)
+        console.log(result.qty)
+
+        // 각 결과의 qty 값을 정수로 파싱하여 누적
+        var qty = parseInt(result.qty);
+        totalQty += qty;
+
         var resultHtml =
             '<tr>' +
             '<td>' + result.date + '</td>' +
             '<td>' + result.fromsite + '</td>' +
             '<td>' + result.tosite + '</td>' +
-            '<td>' + result.CarNo + '</td>' +
-            '<td>' + result.Qty + '</td>'   +
-            '<td>' + result.Qty + '</td>'   +
+            '<td>' + result.carNo + '</td>' +
+            '<td>' + result.qty + '</td>'   +
+            '<td>' + result.qty + '</td>'   +
             // '<button class="btn addBtn" style="width: 40px; margin-top: 0;" onclick="selectItem(' + i + ');">선택</button>' +
             //     '</td>' +
             '</tr>';
 
-        receiptsResultDiv.append(resultHtml);
+        // receiptsResultDiv.append(resultHtml);
+        receiptsResultDiv.innerHTML += resultHtml;
     }
+
+    // 총 대수 엘리먼트 업데이트
+    var totalQtySpan = document.getElementById("totalQty");
+    if (totalQtySpan) {
+        totalQtySpan.innerText = totalQty;
+    }
+
 }
 
 // $.search = function() {

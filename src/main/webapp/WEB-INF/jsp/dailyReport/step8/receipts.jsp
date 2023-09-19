@@ -570,7 +570,9 @@
     <div id="tableshow">
         <div class="table-top" style="height: auto; display:  block; text-align: center">
             <p class="total">
-                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}"/></span>
+                <%-- <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}"/></span>--%>
+                <%-- <span>데이터</span> <span class="cnt default-blue"><c:out value="${fn:length(receiptsList)}"/></span>--%>
+                <span>데이터</span> <span class="cnt default-blue" id="receiptsCnt">${fn:length(receiptsList)}</span>
                 <span>건 (총대수 : <span class="cnt default-blue"><span id="totalQty"></span> </span> 대)가 검색되었습니다.</span>
             </p>
         </div>
@@ -674,7 +676,7 @@
 
                         <a style="cursor: pointer;"
                            onclick="$.valuePg(1)"
-                           class="active"        @media screen and (min-width: 280px) and (max-width: 1024px) {>1</a>
+                           class="active" @media screen and (min-width: 280px) and (max-width: 1024px) {>1</a>
 
 
                     </li>

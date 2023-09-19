@@ -28,6 +28,7 @@ public class Step4Service {
 
         // 2. login id와 tSheet의 CarNo가 똑같은 tuple값을 tSheet에서 가져옴.
         List<DailyReportStep4Main> tSheet = dailyReportStep4Mapper.getDailyReportByCarNo(loginData.getUserId());
+        System.out.println("어떤 형태로 가져올까요~?:" + tSheet);
 
         // 3. 가져온 튜플의 sheetID와 tSheetSub의 sheetID2가 똑같은 튜플 값을 tSheetSub에서 가져옴
         List<DailyReportStep4Sub> tSheetSub = new ArrayList<>();
