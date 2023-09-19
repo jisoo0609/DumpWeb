@@ -32,25 +32,27 @@ public class Step3Controller {
         return step3Service.save(dailyReportMain, dailyReportStep3Sub);
     }
 
-    /*제출처만 저장*/
-    @RequestMapping(value = "/workspace/ajax/saveMain", method = RequestMethod.POST)
-    @ResponseBody
-    public String save(DailyReportStep3Main dailyReportMain) {
-        return step3Service.save(dailyReportMain);
-    }
-
-    /*운송정보만 저장*/
-    @RequestMapping(value="/workspace/ajax/saveSub", method = RequestMethod.POST)
-    @ResponseBody
-    public String save(DailyReportStep3Sub dailyReportStep3Sub){
-        return step3Service.save(dailyReportStep3Sub);
-    }
-
     /*제출처 목록 조회*/
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ResponseBody
     public String search(DailyReportStep3Main dailyReportStep3Main){
         return step3Service.search(dailyReportStep3Main);
+    }
+
+    @RequestMapping(value = "/search/carSubmit", method = RequestMethod.GET)
+    @ResponseBody
+    public String carSubmitList(DailyReportStep3Main dailyReportStep3Main){
+        return step3Service.searchByCarSubmit(dailyReportStep3Main);
+    }
+    @RequestMapping(value = "/search/carSubmitTel", method = RequestMethod.GET)
+    @ResponseBody
+    public String carSubmitTelList(DailyReportStep3Main dailyReportStep3Main){
+        return step3Service.searchByCarSubmitTel(dailyReportStep3Main);
+    }
+    @RequestMapping(value = "/search/salesman", method = RequestMethod.GET)
+    @ResponseBody
+    public String salesmanList(DailyReportStep3Main dailyReportStep3Main){
+        return step3Service.searchBySalesman(dailyReportStep3Main);
     }
 
     /*insert 후 목록 조회--> 보완 예정*/

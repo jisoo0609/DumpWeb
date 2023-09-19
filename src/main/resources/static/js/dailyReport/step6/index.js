@@ -42,15 +42,17 @@ function printTableColumnOrder(searchResultData) {
     // 테이블 본문 내용 초기화
     tableBody.innerHTML = "";
 
+    let start = orderFlag === 1 ? searchResultData[0].drvDate : searchResultData[0].drvClub;
+
     // 검색 결과 데이터를 테이블 본문에 추가합니다.
     searchResultData.forEach((data, index) => {
         const row = document.createElement("tr");
         let orderInfo
 
         if (orderFlag == 1) {
-            orderInfo = [`<td>${data.drvDate}</td>`, `<td>${data.drvClub}</td>`]
+            orderInfo = [`${data.drvDate}`, `${data.drvClub}`]
         } else if (orderFlag == 2) {
-            orderInfo = [`<td>${data.drvClub}</td>`, `<td>${data.drvDate}</td>`]
+            orderInfo = [`${data.drvClub}`, `${data.drvDate}`]
         }
 
         const lastKm = data.lastKm.toLocaleString();
@@ -58,13 +60,23 @@ function printTableColumnOrder(searchResultData) {
         const rependchk = data.rependchk === true ? 'O' : 'X';
 
         row.innerHTML = `
-                    ${orderInfo[0]}
-                    ${orderInfo[1]}
+                    <tr>
+                    <td>${orderInfo[0]}</td>
+                    <td>${orderInfo[1]}</td>
                     <td>${lastKm}</td> 
                     <td>${useAmt}</td>
                     <td>${data.drvRem}</td> 
                     <td>${rependchk}</td>
+                    </tr>
                  `;
+
+        let end = orderInfo[0];
+
+        if(start !== end){
+            start = end;
+            row.classList.add("red-line-divider")
+        }
+
         tableBody.appendChild(row);
     });
 
@@ -73,21 +85,21 @@ function printTableColumnOrder(searchResultData) {
 
     const totalCount = searchResultData.reduce((total, data) => total + data.useAmt, 0);
 
-    const resultText = `
-                   데이터 <span class="blue">${dataCount}</span>건이 검색되었습니다.
-                   <br> 
-                   총 사용 금액은 <span class="blue">${totalCount.toLocaleString()}</span>원입니다.
-                    `;
+    // 비용금액 버튼 내용 변경
+    const costButton = document.querySelector(".agreement_container .resultPrice");
+    costButton.innerHTML = `${totalCount.toLocaleString()}원`;
+    // ...
 
     // 결과를 result_search 요소에 출력
     const resultSearch = document.querySelector(".result_search");
-    resultSearch.innerHTML = `<h1>${resultText}</h1>`;
+    resultSearch.innerHTML = `<h1>데이터 <span class="blue">${dataCount}</span>건이 검색되었습니다.</h1>`;
+
 };
 
 
 function bindList() {
     $.ajax({
-        url: "/dailyReport/carcarelist",
+        url: "/dailyReport/ajax/carcarelist",
         type: "POST",
         data: $("[name=select_frm]").serialize(),
         success: function (data) {
