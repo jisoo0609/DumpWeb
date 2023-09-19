@@ -81,8 +81,9 @@
                                 onchange="document.querySelector('.club_input').value=
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="운반">운반</option>
+                            <c:forEach var="listMain" items="${tSheet}">
+                                <option value="${listMain.carSubmit}">${listMain.carSubmit}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -94,8 +95,9 @@
                                 onchange="document.querySelector('.fromSite_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="출퇴근">출퇴근</option>
+                            <c:forEach var="listMain" items="${tSheet}">
+                                <option value="${listMain.fromsite}">${listMain.fromsite}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -107,8 +109,9 @@
                                 onchange="document.querySelector('.toSite_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="자차">자차</option>
+                            <c:forEach var="listMain" items="${tSheet}">
+                                <option value="${listMain.tosite}">${listMain.tosite}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -120,8 +123,9 @@
                                 onchange="document.querySelector('.things_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="운반">운반</option>
+                            <c:forEach var="listMain" items="${tSheet}">
+                                <option value="${listMain.item}">${listMain.item}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -146,8 +150,8 @@
                                 onchange="document.querySelector('.state_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="지밸리">지밸리</option>
+                            <option value="결재O">결재O</option>
+                            <option value="결재X">결재X</option>
                         </select>
                     </div>
                 </li>
@@ -189,29 +193,31 @@
         </div>
     </form>
         <div class="btn_area">
-            <a href="/dailyReport/step4/getDailyReportList" id="link2Get">
+            <a href="/dailyReport/list" id="link2Get">
                 <input type="button" value="검색">
             </a>
         </div>
     <div class="bottom_table">
+<%--        총 대수를 계산하는 코드--%>
+        <%
+            int totalQty = 0;
+            for(DailyReportStep4 data: tSheet){
+                totalQty += data.getQty();
+            }
+        %>
         <div class="table_top" style="margin: 10px 0;">
             <p class="total">
-                데이터 <span><%= tSheet.size() %></span>건(총대수:
-                <span><%= tSheet.size() %></span>
-                대)이 검색되었습니다.
+                데이터
+                <span><%= tSheet.size() %></span>건(총대수:
+                <span>
+                    <%= totalQty %>
+                </span>대)이 검색되었습니다.
             </p>
         </div>
         <div class="cashNbtns">
-<%--            <%--%>
-<%--                // 데이터를 사용하는 부분에서 다시 변수를 사용--%>
-<%--                int totalAmount = 0;--%>
-<%--                for (DailyReportStep4 data : tSheet) {--%>
-<%--                    totalAmount += data.getAmount();--%>
-<%--                }--%>
-<%--            %>--%>
             <p>
                 운반금액: <br>
-                999,999,999
+                ${totalAmount[0]}
             </p>
             <input type="button" value="일괄결재">
             <input type="button" value="취소" id="cancelBtn">
@@ -232,15 +238,16 @@
                     <col width="10%">
                     <col width="16%">
                 </colgroup>
-                <tr>
-                    <th>제출처</th>
-                    <th>운행일</th>
-                    <th>품목</th>
-                    <th>상차지</th>
-                    <th>하차지</th>
-                    <th>대수</th>
-                    <th>운반비</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>제출처</th>
+                        <th>운행일</th>
+                        <th>품목</th>
+                        <th>상차지</th>
+                        <th>하차지</th>
+                        <th>대수</th>
+                        <th>운반비</th>
+                    </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="listMain" items="${tSheet}">
