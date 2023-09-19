@@ -128,6 +128,32 @@ body {
   position: relative;
 }
 
+#datepicker1,
+#datepicker2{
+  width:125px
+}
+
+.ui-datepicker-year,
+.ui-datepicker-month{
+  text-align:center;
+  font-size:13px !important;
+}
+
+.ui-datepicker-year {
+  position:relative;
+}
+
+/* datepicker의 년도 옵션에 "년" 추가 */
+.ui-datepicker-year option::after {
+  content: "년";
+  position: absolute;
+  right: 0;
+}
+
+.ui-datepicker-trigger{
+        display: none;
+}
+
 .conTop {
   margin-top: 20px;
   margin-bottom: 7px;
@@ -297,8 +323,39 @@ td {
   white-space: nowrap;
 } */
 
+@media (max-width: 320px) {
+  .col {
+    width: 265px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .conbox {
+  width:265px;
+  }
+
+}
+
+@media (min-width: 321px) and (max-width: 375px) {
+
+
+  .table_container table thead tr th {
+      padding: 10px 8px;
+  }
+  .col {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .conbox {
+    width: 90%;
+  }
+}
+
 /* 모바일 스타일 */
-@media (max-width: 439px) {
+@media (min-width: 376px) and (max-width: 439px) {
   .conChoice {
     justify-content: center;
     gap: 20%;
@@ -311,10 +368,10 @@ td {
     width: 80%;
   }
   .col {
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .col:first-child::after {
@@ -341,12 +398,11 @@ td {
 }
 
 /* 모바일 스타일 */
-@media (max-width: 550px) {
+@media (min-width: 439px) and (max-width: 550px) {
   .col {
     gap: 20px;
     flex-wrap: nowrap;
     justify-content: center;
-    gap: 20px;
     display: flex;
     align-items: center;
     width: 298px;
