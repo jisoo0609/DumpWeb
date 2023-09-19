@@ -128,6 +128,9 @@
              border: 1px solid black;
              text-align: center;
         }
+    .today-graph td:nth-child(6){
+        display: none;
+        }
     .car-menu th:nth-child(2) {
         border-left: 1px solid;
         border-right: 1px solid;
@@ -383,7 +386,6 @@
                     <th>하차지</th>
                     <th>품목</th>
                     <th>대수</th>
-                    <th>날짜</th>
                 </tr>
 
 
@@ -437,5 +439,21 @@
             }
         }
     });
+</script>
+<script>
+var currentDate = new Date();
+var tableRows = document.querySelectorAll(".today-graph tr");
+
+tableRows.forEach(function(row) {
+  var dateCell = row.querySelector("td:nth-child(6)"); // 날짜 정보를 포함한 <td>의 클래스를 지정해주세요.
+  if (dateCell) {
+    var rowDate = new Date(dateCell.textContent); // 날짜 정보를 Date 객체로 파싱 (예: "2023-09-19")
+    if (rowDate.toDateString() === currentDate.toDateString()) {
+      row.style.display = "table-row"; // 현재 날짜와 일치하는 경우 표시
+    } else {
+      row.style.display = "none"; // 일치하지 않는 경우 숨김
+    }
+  }
+});
 </script>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
