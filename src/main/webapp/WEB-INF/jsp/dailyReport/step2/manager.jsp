@@ -127,6 +127,8 @@
          border: 1px solid black;
          text-align: center;
     }
+
+
 </style>
 
 
@@ -236,23 +238,28 @@
                     <input id="datepicker2" readonly/>
                 </label>
                 <button id="update-button">조회</button>
-                <ul class="basic-menu">
-                    <li>
-                        총 운반 금액 :
-                        <div class="carrying-money" style="margin: 0 0 5% 0">
-                            <input text class="" size="5px ,5px">원</div>
-                    </li>
-                    <li>
-                        총 운행대 수 :
-                        <div class="carrying-car" style="margin: 0 0 5% 0">
-                            <input text class="" size="5px ,5px">대</div>
-                    </li>
-                </ul>
+               <ul class="basic-menu">
+                   <li style="margin-left:10%">
+                       총 운반 금액 :
+                       <div class="carrying-money" style="margin: 0 0 5% 0">
+                           <!-- 값을 표시하기 위한 div -->
+                           <div id="ttamount">${totalCarryingAmount}원</div>
+                       </div>
+                   </li>
+                   <li>
+                       총 운행대 수 :
+                       <div class="carrying-car" style="margin: 0 0 5% 0" id="tnumber">
+                           <!-- 값을 표시하기 위한 div -->
+                           <div id="tncars">${totalCarryingCars}대</div>
+                       </div>
+                   </li>
+               </ul>
             </div>
         </div>
         <section class="management" >
 
             <div>
+                <a href="/dailyReport/receipts">
                 <div style="display: flex; align-items: center">
 
                     <div style="margin-light:5%; text-align:center; font-weight: 600">
@@ -263,7 +270,8 @@
                         <span>거래처전표조회</span>
 
                     </div>
-
+                       </a>
+                       <a href="/dailyReport/oldform">
                     <div class="car-bundle">
                         <div style=" text-align:center; font-weight: 600">
                             <div class="car-registration">
@@ -272,6 +280,7 @@
                             <span>주문배차등록</span>
                         </div>
                     </div>
+                    </a>
 
                 </div>
         </section>

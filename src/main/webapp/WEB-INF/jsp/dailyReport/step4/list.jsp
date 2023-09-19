@@ -1,3 +1,5 @@
+<%@ page import="com.dispatch.dump.commonModule.db.dto.DailyReportStep4" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
@@ -30,10 +32,17 @@
         });
 
         //초기값을 오늘 날짜로 설정해줘야 합니다.
-        $("#datepicker1, #datepicker2").datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+        $("#datepicker2").datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+
+        // datepicker1을 매달 1일로 설정
+        $("#datepicker1").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth(), 1));
     });
 </script>
 
+<%
+    // 모델로부터 받은 데이터를 변수에 저장
+    List<DailyReportStep4> tSheet = (List<DailyReportStep4>) request.getAttribute("tSheet");
+%>
 <section class="sub-contents-wrap maxwrap">
     <div>
         <h1 class="subtitle" >
@@ -49,11 +58,6 @@
                     <input class="fromDate" id="datepicker1" readonly>
                     <span style="font-weight: 600; margin:0 30px 0 30px; padding-top: 5px;">~</span>
                     <input class="toDate" id="datepicker2" readonly>
-                    <!--                        input에 오늘 날짜 세팅을 위한 스크립트-->
-                    <script>
-                        $('.fromDate').attr("value",new Date().toISOString().substring(0,10))
-                        $('.toDate').attr("value",new Date().toISOString().substring(0,10))
-                    </script>
                 </div>
                 <button type="button" class="adsearch_btn">상세검색 열기 ▼</button>
                 <!--                    상세검색 열고 닫는 스크립트-->
@@ -77,8 +81,9 @@
                                 onchange="document.querySelector('.club_input').value=
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="운반">운반</option>
+                            <c:forEach var="listMain" items="${tSheet}">
+                                <option value="${listMain.carSubmit}">${listMain.carSubmit}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -90,8 +95,9 @@
                                 onchange="document.querySelector('.fromSite_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="출퇴근">출퇴근</option>
+                            <c:forEach var="listMain" items="${tSheet}">
+                                <option value="${listMain.fromsite}">${listMain.fromsite}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -103,8 +109,9 @@
                                 onchange="document.querySelector('.toSite_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="자차">자차</option>
+                            <c:forEach var="listMain" items="${tSheet}">
+                                <option value="${listMain.tosite}">${listMain.tosite}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -116,8 +123,9 @@
                                 onchange="document.querySelector('.things_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="운반">운반</option>
+                            <c:forEach var="listMain" items="${tSheet}">
+                                <option value="${listMain.item}">${listMain.item}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -142,8 +150,8 @@
                                 onchange="document.querySelector('.state_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="지밸리">지밸리</option>
+                            <option value="결재O">결재O</option>
+                            <option value="결재X">결재X</option>
                         </select>
                     </div>
                 </li>
@@ -185,18 +193,31 @@
         </div>
     </form>
         <div class="btn_area">
-            <a href="/dailyReport/step4/getDailyReportList" id="link2Get">
+            <a href="/dailyReport/list" id="link2Get">
                 <input type="button" value="검색">
             </a>
         </div>
     <div class="bottom_table">
+<%--        총 대수를 계산하는 코드--%>
+        <%
+            int totalQty = 0;
+            for(DailyReportStep4 data: tSheet){
+                totalQty += data.getQty();
+            }
+        %>
         <div class="table_top" style="margin: 10px 0;">
-            <p class="total">데이터 <span>2</span>건(총대수: <span>2</span>대)이 검색되었습니다.</p>
+            <p class="total">
+                데이터
+                <span><%= tSheet.size() %></span>건(총대수:
+                <span>
+                    <%= totalQty %>
+                </span>대)이 검색되었습니다.
+            </p>
         </div>
         <div class="cashNbtns">
             <p>
                 운반금액: <br>
-                999,999,999
+                ${totalAmount[0]}
             </p>
             <input type="button" value="일괄결재">
             <input type="button" value="취소" id="cancelBtn">
@@ -218,30 +239,28 @@
                     <col width="16%">
                 </colgroup>
                 <thead>
-                <tr>
-                    <th>제출처</th>
-                    <th>운행일</th>
-                    <th>품목</th>
-                    <th>상차지</th>
-                    <th>하차지</th>
-                    <th>대수</th>
-                    <th>운반비</th>
-                </tr>
+                    <tr>
+                        <th>제출처</th>
+                        <th>운행일</th>
+                        <th>품목</th>
+                        <th>상차지</th>
+                        <th>하차지</th>
+                        <th>대수</th>
+                        <th>운반비</th>
+                    </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="listMain" items="${tSheet}">
                 <tr>
-                    <c:forEach var="listMain" items="${tSheetMain}">
-                        <c:forEach var="listSub" items="${tSheetSub}">
-                        <td>${listMain.carSubmit}</td>
-                        <td>${listMain.date}</td>
-                        <td>${listSub.item}</td>
-                        <td>${listSub.fromsite}</td>
-                        <td>${listSub.tosite}</td>
-                        <td>${listSub.qty}</td>
-                        <td>${listSub.qtyup}</td>
-                        </c:forEach>
-                    </c:forEach>
+                    <td>${listMain.carSubmit}</td>
+                    <td>${listMain.date}</td>
+                    <td>${listMain.item}</td>
+                    <td>${listMain.fromsite}</td>
+                    <td>${listMain.tosite}</td>
+                    <td>${listMain.qty}</td>
+                    <td>${listMain.qtyup}</td>
                 </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>

@@ -1,12 +1,12 @@
 package com.dispatch.dump.dailyReportModule.service;
 
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep4Main;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep4Sub;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep4;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep4Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.cj.log.Log;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,35 +21,33 @@ public class Step4Service {
     private final DailyReportStep4Mapper dailyReportStep4Mapper;
     private final CommonUtil commonUtil;
 
-    public List<DailyReportStep4Sub> getSummary1() {
+    public List<DailyReportStep4> getSummary() {
         // 1. login 정보 받아오기
         HttpSession session = commonUtil.getSession();
         Login loginData = (Login) session.getAttribute("loginInfo");
 
         // 2. login id와 tSheet의 CarNo가 똑같은 tuple값을 tSheet에서 가져옴.
-        List<DailyReportStep4Main> tSheet = dailyReportStep4Mapper.getDailyReportByCarNo(loginData.getUserId());
-        System.out.println("어떤 형태로 가져올까요~?:" + tSheet);
-
-        // 3. 가져온 튜플의 sheetID와 tSheetSub의 sheetID2가 똑같은 튜플 값을 tSheetSub에서 가져옴
-        List<DailyReportStep4Sub> tSheetSub = new ArrayList<>();
-        tSheet.stream().forEach(t -> tSheetSub.add(dailyReportStep4Mapper.getDailyReportMainBySheetID2(t.getSheetID())));
+        List<DailyReportStep4> tSheet = dailyReportStep4Mapper.getDailyReportByCarNo(loginData.getUserId());
 
         // 로그로 DB 조회 결과 출력 (System.out.println 사용)
-        System.out.println("DailyReport List tSheet_sub: " + tSheetSub);
+        System.out.println("DailyReport List tSheet: " + tSheet);
 
-        return tSheetSub;
+        return tSheet;
     }
 
-    public List<DailyReportStep4Main> getSummary2() {
+
+    public List<DailyReportStep4> getTotalTransportAmount() {
         // 1. login 정보 받아오기
         HttpSession session = commonUtil.getSession();
         Login loginData = (Login) session.getAttribute("loginInfo");
 
-        //2. login id와 tsheet의 CarNo가 똑같은 튜플 값을 tSheet에서 가져옴.
-        List<DailyReportStep4Main> tSheet = dailyReportStep4Mapper.getDailyReportByCarNo(loginData.getUserId());
+        // 2. 총 운반금액을 가져오는 메서드 호출
+        List<DailyReportStep4> totalAmount = dailyReportStep4Mapper.getTotalTransportAmount(loginData.getUserId());
 
-        tSheet.stream().forEach(t->System.out.println(t));
+        // 로그로 DB 조회 결과 출력 (System.out.println 사용)
+        System.out.println("total: " + totalAmount);
 
-        return tSheet;
+        return totalAmount;
     }
+
 }
