@@ -197,19 +197,22 @@ function receiptsSearchResults(receiptsSearchResults) {
         console.log(result)
         console.log(result.fromsite)
         console.log(result.date)
+        console.log(result.carNo)
+        console.log(result.qty)
         var resultHtml =
             '<tr>' +
             '<td>' + result.date + '</td>' +
             '<td>' + result.fromsite + '</td>' +
             '<td>' + result.tosite + '</td>' +
-            '<td>' + result.CarNo + '</td>' +
-            '<td>' + result.Qty + '</td>'   +
-            '<td>' + result.Qty + '</td>'   +
+            '<td>' + result.carNo + '</td>' +
+            '<td>' + result.qty + '</td>'   +
+            '<td>' + result.qty + '</td>'   +
             // '<button class="btn addBtn" style="width: 40px; margin-top: 0;" onclick="selectItem(' + i + ');">선택</button>' +
             //     '</td>' +
             '</tr>';
 
-        receiptsResultDiv.append(resultHtml);
+        // receiptsResultDiv.append(resultHtml);
+        receiptsResultDiv.innerHTML += resultHtml;
     }
 }
 

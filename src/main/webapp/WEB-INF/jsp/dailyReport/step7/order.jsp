@@ -87,7 +87,7 @@
     <script src="/resources/js/dailyReport/step7/voice.js"></script>
     <div>
       <button class="opBtn" data-popName="golPop1">삭제</button>
-      <button class="opBtn" data-popName="golPop2">수정</button>
+      <button class="opBtn" data-popName="golPop2">취소</button>
       <button class="opBtn" data-popName="golPop3">저장</button>
       <button class="opBtn" data-popName="golPop4">이전화면</button>
     </div>
@@ -146,8 +146,16 @@
           <td>100</td>
           <td>675가8989</td>
         </tr>
+        <tr onclick="openPopupTest('dispatchform');">
+          <td>강남</td>
+          <td>구로</td>
+          <td>모래, 자갈</td>
+          <td>100</td>
+          <td>미지정</td>
+        </tr>
       </tbody>
     </table>
 </section>
 
+<%@ include file="popup/layer_popup.jsp" %>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

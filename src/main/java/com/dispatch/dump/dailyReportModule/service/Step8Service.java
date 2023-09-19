@@ -31,7 +31,7 @@ public class Step8Service {
     }
 
     public List<DailyReportStep8> getAllReceipts() {
-        List<DailyReportStep8> ReceiptsDataList = dailyReportStep8Mapper.getAllReceiptsWithCnt(getSessionLoginData().getUserId());
+        List<DailyReportStep8> ReceiptsDataList = dailyReportStep8Mapper.getAllReceipts(getSessionLoginData().getUserId());
 
 //        Summary summary = new Summary(0, 0, 0, new Date());
 //        ReceiptsDataList.stream().forEach(t -> summary.setTotalTransportationCost(summary.getTotalTransportationCost() + t.getQty() * t.getQtyup()));
@@ -51,7 +51,7 @@ public class Step8Service {
             System.out.println("상차지는?" + dailyReportStep8.getFromsite());
             System.out.println("Carno?" + dailyReportStep8.getCarNo());
             dailyReportStep8.setCarSubmitTel(getSessionLoginData().getUserId());
-            List<DailyReportStep8> receiptsSearchList = dailyReportStep8Mapper.receiptsSearchConditionWithCnt(dailyReportStep8);
+            List<DailyReportStep8> receiptsSearchList = dailyReportStep8Mapper.receiptsSearchCondition(dailyReportStep8);
             System.out.println("receiptsSearchList?" + receiptsSearchList);
 
            // receiptsSearchList.add(dailyReportStep8Mapper.)

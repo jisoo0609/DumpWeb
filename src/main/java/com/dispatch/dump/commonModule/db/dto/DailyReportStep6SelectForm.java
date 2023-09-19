@@ -10,4 +10,5 @@ public class DailyReportStep6SelectForm {
     String startDate;
     String endDate;
     String selectOption;
+    String searchType;
 }
