@@ -1,3 +1,5 @@
+<%@ page import="com.dispatch.dump.commonModule.db.dto.DailyReportStep4" %>
+<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
@@ -37,6 +39,10 @@
     });
 </script>
 
+<%
+    // 모델로부터 받은 데이터를 변수에 저장
+    List<DailyReportStep4> tSheet = (List<DailyReportStep4>) request.getAttribute("tSheet");
+%>
 <section class="sub-contents-wrap maxwrap">
     <div>
         <h1 class="subtitle" >
@@ -52,11 +58,6 @@
                     <input class="fromDate" id="datepicker1" readonly>
                     <span style="font-weight: 600; margin:0 30px 0 30px; padding-top: 5px;">~</span>
                     <input class="toDate" id="datepicker2" readonly>
-                    <!--                        input에 오늘 날짜 세팅을 위한 스크립트-->
-<%--                    <script>--%>
-<%--                        $('.fromDate').attr("value",new Date().toISOString().substring(0,10))--%>
-<%--                        $('.toDate').attr("value",new Date().toISOString().substring(0,10))--%>
-<%--                    </script>--%>
                 </div>
                 <button type="button" class="adsearch_btn">상세검색 열기 ▼</button>
                 <!--                    상세검색 열고 닫는 스크립트-->
@@ -194,9 +195,20 @@
         </div>
     <div class="bottom_table">
         <div class="table_top" style="margin: 10px 0;">
-            <p class="total">데이터 <span>2</span>건(총대수: <span>2</span>대)이 검색되었습니다.</p>
+            <p class="total">
+                데이터 <span><%= tSheet.size() %></span>건(총대수:
+                <span><%= tSheet.size() %></span>
+                대)이 검색되었습니다.
+            </p>
         </div>
         <div class="cashNbtns">
+<%--            <%--%>
+<%--                // 데이터를 사용하는 부분에서 다시 변수를 사용--%>
+<%--                int totalAmount = 0;--%>
+<%--                for (DailyReportStep4 data : tSheet) {--%>
+<%--                    totalAmount += data.getAmount();--%>
+<%--                }--%>
+<%--            %>--%>
             <p>
                 운반금액: <br>
                 999,999,999
@@ -220,7 +232,6 @@
                     <col width="10%">
                     <col width="16%">
                 </colgroup>
-                <thead>
                 <tr>
                     <th>제출처</th>
                     <th>운행일</th>
