@@ -7,6 +7,7 @@
         src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <style>
     ul.basic-menu {
         display: grid;
@@ -148,33 +149,34 @@
                 buttonImageOnly: true, //버튼 이미지만 깔끔하게 보이게함
                 buttonText: "선택", //버튼 호버 텍스트
                 yearSuffix: "년", //달력의 년도 부분 뒤 텍스트
+
                 monthNamesShort: [
-                    "1월",
-                    "2월",
-                    "3월",
-                    "4월",
-                    "5월",
-                    "6월",
-                    "7월",
-                    "8월",
-                    "9월",
-                    "10월",
-                    "11월",
-                    "12월",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
                 ], //달력의 월 부분 텍스트
                 monthNames: [
-                    "1월",
-                    "2월",
-                    "3월",
-                    "4월",
-                    "5월",
-                    "6월",
-                    "7월",
-                    "8월",
-                    "9월",
-                    "10월",
-                    "11월",
-                    "12월",
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12",
                 ], //달력의 월 부분 Tooltip
                 dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"], //달력의 요일 텍스트
                 dayNames: [
@@ -188,6 +190,18 @@
                 ], //달력의 요일 Tooltip
                 minDate: "-5Y", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
                 maxDate: "+5y", //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+
+                // beforeShow 이벤트를 활용하여 월 이름을 한글로 설정
+                 beforeShow: function (input, inst) {
+                            var datepicker = $(this).datepicker("widget");
+                            var months = datepicker.find(".ui-datepicker-month");
+
+                            months.each(function (index, element) {
+                                $(element).text((index + 1) + "월");
+                            });
+                        }
+
+
             });
 
             //초기값을 오늘 날짜로 설정해줘야 합니다.
@@ -236,23 +250,30 @@
                     <input id="datepicker2" readonly/>
                 </label>
                 <button id="update-button">조회</button>
-                <ul class="basic-menu">
+
+
+               <ul class="basic-menu">
                     <li>
-                        총 운반 금액 :
-                        <div class="carrying-money" style="margin: 0 0 5% 0">
-                            <input text class="" size="5px ,5px">원</div>
-                    </li>
-                    <li>
-                        총 운행대 수 :
-                        <div class="carrying-car" style="margin: 0 0 5% 0">
-                            <input text class="" size="5px ,5px">대</div>
-                    </li>
-                </ul>
+                           총 운반 금액 :
+                           <div class="carrying-money" style="margin: 0 0 5% 0">
+                               <!-- 값을 표시하기 위한 div -->
+                               <div id="ttamount">${totalCarryingAmount}원</div>
+                           </div>
+                       </li>
+                       <li>
+                           총 운행대 수 :
+                           <div class="carrying-car" style="margin: 0 0 5% 0" >
+                               <!-- 값을 표시하기 위한 div -->
+                               <div id="tncars">${totalCarryingCars}대</div>
+                           </div>
+                       </li>
+               </ul>
             </div>
         </div>
         <section class="management" >
 
             <div>
+                <a href="/dailyReport/receipts">
                 <div style="display: flex; align-items: center">
 
                     <div style="margin-light:5%; text-align:center; font-weight: 600">
@@ -263,7 +284,8 @@
                         <span>거래처전표조회</span>
 
                     </div>
-
+                       </a>
+                       <a href="/dailyReport/oldform">
                     <div class="car-bundle">
                         <div style=" text-align:center; font-weight: 600">
                             <div class="car-registration">
@@ -272,6 +294,7 @@
                             <span>주문배차등록</span>
                         </div>
                     </div>
+                    </a>
 
                 </div>
         </section>

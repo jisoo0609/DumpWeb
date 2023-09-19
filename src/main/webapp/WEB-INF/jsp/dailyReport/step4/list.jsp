@@ -30,7 +30,10 @@
         });
 
         //초기값을 오늘 날짜로 설정해줘야 합니다.
-        $("#datepicker1, #datepicker2").datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+        $("#datepicker2").datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+
+        // datepicker1을 매달 1일로 설정
+        $("#datepicker1").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth(), 1));
     });
 </script>
 
@@ -50,10 +53,10 @@
                     <span style="font-weight: 600; margin:0 30px 0 30px; padding-top: 5px;">~</span>
                     <input class="toDate" id="datepicker2" readonly>
                     <!--                        input에 오늘 날짜 세팅을 위한 스크립트-->
-                    <script>
-                        $('.fromDate').attr("value",new Date().toISOString().substring(0,10))
-                        $('.toDate').attr("value",new Date().toISOString().substring(0,10))
-                    </script>
+<%--                    <script>--%>
+<%--                        $('.fromDate').attr("value",new Date().toISOString().substring(0,10))--%>
+<%--                        $('.toDate').attr("value",new Date().toISOString().substring(0,10))--%>
+<%--                    </script>--%>
                 </div>
                 <button type="button" class="adsearch_btn">상세검색 열기 ▼</button>
                 <!--                    상세검색 열고 닫는 스크립트-->
@@ -229,19 +232,17 @@
                 </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="listMain" items="${tSheet}">
                 <tr>
-                    <c:forEach var="listMain" items="${tSheetMain}">
-                        <c:forEach var="listSub" items="${tSheetSub}">
-                        <td>${listMain.carSubmit}</td>
-                        <td>${listMain.date}</td>
-                        <td>${listSub.item}</td>
-                        <td>${listSub.fromsite}</td>
-                        <td>${listSub.tosite}</td>
-                        <td>${listSub.qty}</td>
-                        <td>${listSub.qtyup}</td>
-                        </c:forEach>
-                    </c:forEach>
+                    <td>${listMain.carSubmit}</td>
+                    <td>${listMain.date}</td>
+                    <td>${listMain.item}</td>
+                    <td>${listMain.fromsite}</td>
+                    <td>${listMain.tosite}</td>
+                    <td>${listMain.qty}</td>
+                    <td>${listMain.qtyup}</td>
                 </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
