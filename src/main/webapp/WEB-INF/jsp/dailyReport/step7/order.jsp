@@ -10,65 +10,12 @@
         src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script>
         function dvFristbtn() {
             $('#droildiv').css('color: rgb(0, 203, 230)', 'border-color: rgb(0, 203, 230)');
         }
-    var rdOli = null;
-    var rdDEF = null;
-    var rdEngOil = null;
-    var rdFix = null;
-    var rdNote = null;
-
-    $(document).ready(function () {
-        init();
-        popupJS(rdOli, rdDEF, rdEngOil, rdFix, rdNote);
-    });
-
-    function init() {
-        rdOli = $('#rdOli');
-        rdDEF = $('#rdDEF');
-        rdEngOil = $('#rdEngOil');
-        rdFix = $('#rdFix');
-        rdNote = $('#rdNote');
-    }
-
-    function clickJS(rdOli, rdDEF, rdEngOil, rdFix, rdNote) {
-        var clickTarget;
-        $(rdOli, rdDEF, rdEngOil, rdFix, rdNote).click(function () {
-            clickTarget = "#" + $(this).attr("data-popName");
-            $(clickTarget).toggleClass('active');
-        });
-
-    }
-</script>
-
-<script>
-    var clBtn = null;
-    var opBtn = null;
-
-    $(document).ready(function () {
-        init();
-        popupJS(opBtn, clBtn);
-    });
-
-    function init() {
-        clBtn = $(".clBtn");
-        opBtn = $(".opBtn");
-    }
-
-    function popupJS(opBtn, clBtn) {
-        var opTarget;
-        $(opBtn).click(function () {
-            opTarget = "#" + $(this).attr("data-popName");
-            $(opTarget).addClass('active');
-        });
-        $(clBtn).click(function () {
-            $(opTarget).removeClass("active")
-        });
-    }
-
 </script>
 
 <script>  // 달력 옵션 추가 코드
@@ -106,19 +53,22 @@
           <li>
             <label class="golLabel" for="datepicker">주문일</label>
             <span class="golInputSpan"><input id="datepicker"></span>
-            <label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-            <input id="check67" type="checkbox">
+						<input class="golSearch" type="button" value="조회">
+						<div class="checkbox">
+							<label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+							<input id="check67" type="checkbox">
+						</div>
           </li>
           <li>
-            <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="loadPoint" type="text" placeholder="상차지"></span>
           </li>
           <li>
-            <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="unloadPoint" type="text" placeholder="하차지"></span>
           </li>
           <li>
-            <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="golItems" type="text" placeholder="품목"></span>
           </li>
           <li>
@@ -128,16 +78,16 @@
             </span>
           </li>
           <li>
-            <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+            <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
             <span class="golInputSpan"><input class="golIn" id="carNumb" type="text" placeholder="차량번호"></span>
           </li>
         </ul>
       </fieldset>
     </form>
-    <script src="/resources/js/voice.js"></script>
+    <script src="/resources/js/dailyReport/step7/voice.js"></script>
     <div>
       <button class="opBtn" data-popName="golPop1">삭제</button>
-      <button class="opBtn" data-popName="golPop2">수정</button>
+      <button class="opBtn" data-popName="golPop2">취소</button>
       <button class="opBtn" data-popName="golPop3">저장</button>
       <button class="opBtn" data-popName="golPop4">이전화면</button>
     </div>
@@ -181,7 +131,6 @@
     <table>
       <thead>
         <tr>
-          <th>주문일</th>
           <th>상차지</th>
           <th>하차지</th>
           <th>품목</th>
@@ -191,15 +140,22 @@
       </thead>
       <tbody>
         <tr>
-          <td>09.11</td>
           <td>강남</td>
           <td>구로</td>
-          <td>모래, 자갈,</td>
+          <td>모래, 자갈</td>
           <td>100</td>
           <td>675가8989</td>
+        </tr>
+        <tr onclick="openPopupTest('dispatchform');">
+          <td>강남</td>
+          <td>구로</td>
+          <td>모래, 자갈</td>
+          <td>100</td>
+          <td>미지정</td>
         </tr>
       </tbody>
     </table>
 </section>
 
+<%@ include file="popup/layer_popup.jsp" %>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

@@ -18,25 +18,13 @@ function closePopSearch() {
 
 
 /* function : 결재버튼을 통해서만 체크박스를 체크하거나 해제할 수 있다.  */
-const dateDisplay = document.getElementById('dateDisplay');
-const currentDate = document.getElementById('currentDate');
-currentDate.textContent = '연도- 월- 일';
+/* function: 오늘 날자로 인풋 자동 채우기 */
+const dateInput = document.getElementById('date');
+const todayDate = new Date();
+dateInput.value = todayDate.toISOString().slice(0, 10);
 
-function checkBox() {
-     const checkbox = document.getElementById('checkbox');
-     checkbox.checked = !checkbox.checked;
 
-     if (checkbox.checked) {
-         const today = new Date();
-         const year = today.getFullYear();
-         const month = String(today.getMonth() + 1).padStart(2, '0');
-         const day = String(today.getDate()).padStart(2, '0');
-         currentDate.textContent = year % 100 +'-'+month+'-'+day;
-         checkbox.disabled = true;
-     } else {
-         currentDate.textContent = '연도- 월- 일';
-     }
-}
+
 
 /* function : onfocus시 자동으로 010을 채워준다*/
 function fill010() {
@@ -45,32 +33,13 @@ function fill010() {
 }
 
 
-/* function: -,+로 날자 조정 */
-const dateInput = document.getElementById('date');
-
-function prevday(){
-    const currentDate = new Date(dateInput.value);
-    currentDate.setDate(currentDate.getDate() - 1);
-    const formattedDate = currentDate.toISOString().split('T')[0];
-    dateInput.value = formattedDate;
-}
-
-function nextday(){
-    const currentDate = new Date(dateInput.value);
-    currentDate.setDate(currentDate.getDate() + 1);
-    const formattedDate = currentDate.toISOString().split('T')[0];
-    dateInput.value = formattedDate;
-}
 
 /* 비고 사이즈 자동변경 */
-const lineheight = 25;
-const freetext = document.querySelector('.Rem');
-
+const freetext = document.getElementById('Rem');
 freetext.oninput = event => {
-    const $target = event.target;
-
-    $target.style.height = 0
-    $target.style.height = lineheight + $target.scrollHeight + 'px';
+    const inputValue = event.target;
+    freetext.style.height = 0
+    freetext.style.height = 22 + inputValue.scrollHeight + 'px';
 };
 
 
@@ -124,3 +93,5 @@ function clearInputs() {
         inputs[i].value = ""; // Set the value of each input field to an empty string
     }
 }
+
+

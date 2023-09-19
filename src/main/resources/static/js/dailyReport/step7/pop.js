@@ -1,23 +1,36 @@
-var closeBtn = null;
-var openBtn = null;
+var clBtn = null;
+var opBtn = null;
 
 $(document).ready(function(){
     init();
-    popupJS(opBtn,clBtn);
+    popJS(opBtn,clBtn);
 });
 
 function init(){
-    closeBtn = $(".clBtn");
-    openBtn = $(".opBtn");
+    clBtn = $(".clBtn");
+    opBtn = $(".opBtn");
 }
 
-function popupJS(opBtn,clBtn){
-    var openTarget;
+function popJS(opBtn,clBtn){
+    var opTarget;
     $(opBtn).click(function(){
-        openTarget = "#"+ $(this).attr("data-popName");
-        $(openTarget).addClass('active');
+        opTarget = "#"+ $(this).attr("data-popName");
+        $(opTarget).addClass('active');
     });
     $(clBtn).click(function(){
-       $(openTarget).removeClass("active") 
+       $(opTarget).removeClass("active")
     });
+}
+
+
+/*
+    2023-09-18 김준형
+    일괄배차 팝업 open, close 함수 추가
+ */
+function openPopupTest(pop_name) {
+    $("#pop-" + pop_name).removeClass("dis-n");
+}
+
+function closePopUpTest(e) {
+    $(e).closest(".layerMask").addClass("dis-n");
 }

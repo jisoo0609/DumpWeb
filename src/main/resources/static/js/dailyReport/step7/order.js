@@ -1,64 +1,47 @@
-// 검색 버튼 요소를 가져옵니다.
-const searchButton = document.querySelector(".search_btn");
+$(document).ready(function() {
+    // 저장 버튼 클릭 이벤트 리스너
+    $("#golPop3 input[value='확인']").click(function() {
+        // 입력 필드에서 데이터 가져오기
+        var orderDate = $("#datepicker").val();
+        var loadPoint = $("#loadPoint").val();
+        var unloadPoint = $("#unloadPoint").val();
+        var items = $("#golItems").val();
+        var count = $("#golCount").val();
+        var carNumber = "(일괄배차) 미지정"; // 고정된 차량번호
 
-// 검색 버튼 클릭 이벤트를 처리합니다.
-searchButton.addEventListener("click", () => {
-  // 검색 결과 데이터 (가상 데이터로 가정)
-  const searchResultData = [
-    {
-      주문일: "09.11",
-      상차지: "출발지 A",
-      하차지: "도착지 B",
-      품목: "자갈, 모래",
-      대수: 23,
-      차량번호: "157호 7589",
-    }
-  ];
+        // 주문일 형식 변경
+        var formattedOrderDate = new Date(orderDate).toLocaleDateString('en-US', { month: '2-digit', day: '2-digit' });
 
-  // 테이블 본문 요소
-  const tableBody = document.querySelector("table tbody");
+        // AJAX 요청 보내기
+        $.ajax({
+            url: 'order.jsp', // 서버 엔드포인트 설정
+            method: 'POST', // 또는 'GET'에 따라서
+            data: {
+                orderDate: formattedOrderDate, // 변경된 주문일 사용
+                loadPoint: loadPoint,
+                unloadPoint: unloadPoint,
+                items: items,
+                count: count,
+                carNumber: carNumber
+            },
+            success: function(response) {
+                // 서버 응답 처리
+                if (response.success) {
+                    // 서버에서 성공 응답을 받았을 때 표에 행 추가
+                    var newRow = "<tr><td>" + formattedOrderDate + "</td><td>" + loadPoint + "</td><td>" + unloadPoint + "</td><td>" + items + "</td><td>" + count + "</td><td>" + carNumber + "</td></tr>";
+                    $("table tbody").append(newRow);
 
-  // 테이블 본문 내용 초기화
-  tableBody.innerHTML = "";
-
-  // 검색 결과 데이터를 테이블 본문에 추가합니다.
-  searchResultData.forEach((data, index) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-    <td>${index + 1}</td>
-    <td>${data.차량번호}</td>
-    <td>${data.품목}</td>
-    <td>${data.대수}</td>
-    <td>${data.차량번호}</td>
-  `;
-    tableBody.appendChild(row);
-  });
-
-  // 검색 결과 텍스트 생성
-  const dataCount = searchResultData.length;
-  const totalCount = searchResultData.reduce(
-    (total, data) => total + data.대수,
-    0
-  );
-  const resultText = `데이터 <span class="blue">${dataCount}</span>건 (총대수: <span class="blue">${totalCount}</span>대)가 검색되었습니다.`;
-
-  // 결과를 result_search 요소에 출력
-  const resultSearch = document.querySelector(".result_search");
-  resultSearch.innerHTML = `<h1>${resultText}</h1>`;
-});
-
-// 일괄취소 버튼 요소를 가져옵니다.
-const cancelButton = document.querySelector(".common_btn:nth-of-type(2)");
-
-// 일괄취소 버튼 클릭 이벤트를 처리합니다.
-cancelButton.addEventListener("click", () => {
-  // 테이블 본문 요소를 찾습니다.
-  const tableBody = document.querySelector("table tbody");
-
-  // 테이블 본문 내용을 초기화합니다. (데이터 삭제)
-  tableBody.innerHTML = "";
-
-  // 검색 결과 텍스트 초기화
-  const resultSearch = document.querySelector(".result_search");
-  resultSearch.innerHTML = "";
+                    // 입력 필드 초기화
+                    $("#datepicker, #loadPoint, #unloadPoint, #golItems, #golCount").val("");
+                } else {
+                    // 서버에서 실패 응답을 받았을 때 처리
+                    alert("서버에서 저장 중 오류가 발생했습니다.");
+                }
+            },
+            error: function() {
+                // AJAX 요청 자체에 실패한 경우 처리
+                alert("서버에 연결할 수 없습니다.");
+            }
+        });
+    });
 });

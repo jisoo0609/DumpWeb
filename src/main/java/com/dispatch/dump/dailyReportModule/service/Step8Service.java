@@ -2,40 +2,66 @@ package com.dispatch.dump.dailyReportModule.service;
 
 import com.dispatch.dump.commonModule.db.dto.*;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep8Mapper;
+
+
 import com.dispatch.dump.commonModule.util.CommonUtil;
 
 import javax.servlet.http.HttpSession;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class Step8Service {
     private final DailyReportStep8Mapper dailyReportStep8Mapper;
     private final CommonUtil commonUtil;
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    public List<DailyReportStep8> getReceipts() {
 
-        HttpSession session = commonUtil.getSession();
-        Login loginData = (Login) session.getAttribute("loginInfo");
+    public Login getSessionLoginData() {
+        return (Login) commonUtil.getSession().getAttribute("loginInfo");
+    }
 
-        List<DailyReportStep8> ReceiptsDataList = new ArrayList<>();
-        ReceiptsDataList = dailyReportStep8Mapper.searchReceiptsWithCnt(loginData.getUserId());
+    public List<DailyReportStep8> getAllReceipts() {
+        List<DailyReportStep8> ReceiptsDataList = dailyReportStep8Mapper.getAllReceipts(getSessionLoginData().getUserId());
 
-        Summary summary = new Summary(0, 0, 0, new Date());
-        ReceiptsDataList.stream().forEach(t -> summary.setTotalTransportationCost(summary.getTotalTransportationCost() + t.getQty() * t.getQtyup()));
-
+//        Summary summary = new Summary(0, 0, 0, new Date());
+//        ReceiptsDataList.stream().forEach(t -> summary.setTotalTransportationCost(summary.getTotalTransportationCost() + t.getQty() * t.getQtyup()));
+//        log.info("총운반비용 : " + summary.getTotalTransportationCost());
         for (DailyReportStep8 x : ReceiptsDataList) {
             System.out.println(x);
         }
-        System.out.println(summary.getTotalTransportationCost());
-
         return ReceiptsDataList;
+    }
+
+    public String searchReceipts(DailyReportStep8 dailyReportStep8) {
+
+        Map<String, Object> searchReceiptsMap = commonUtil.returnMap();
+
+        try {
+
+            System.out.println("상차지는?" + dailyReportStep8.getFromsite());
+            System.out.println("Carno?" + dailyReportStep8.getCarNo());
+            dailyReportStep8.setCarSubmitTel(getSessionLoginData().getUserId());
+            List<DailyReportStep8> receiptsSearchList = dailyReportStep8Mapper.receiptsSearchCondition(dailyReportStep8);
+            System.out.println("receiptsSearchList?" + receiptsSearchList);
+
+           // receiptsSearchList.add(dailyReportStep8Mapper.)
+            searchReceiptsMap.put("httpCode", 200);
+            searchReceiptsMap.put("receiptsSearchList", receiptsSearchList);
+
+        } catch (Exception e) {
+            log.error("Exception[" + e.getMessage() + "]");
+        }
+        return commonUtil.jsonFormatTransfer(searchReceiptsMap);  //스트링으로 변환해줌
     }
 
 //    public List<DailyReportStep8> getReceipts() {

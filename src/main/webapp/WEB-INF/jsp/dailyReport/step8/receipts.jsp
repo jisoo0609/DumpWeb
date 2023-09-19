@@ -360,6 +360,7 @@
 </script>
 
 <script>
+    //총대수 cnt
     var totalQty = 0;
     <c:forEach items="${receiptsList}" var="receipt">
     var qty = parseInt("${receipt.qty}");
@@ -440,7 +441,7 @@
         <input type="hidden" name="item" value=""/>
         <input type="hidden" name="searchType" value="car"/>
         <input type="hidden" name="club" value=""/>
-        <input type="hidden" name="carHost" value=""/>
+        <input type="hidden" name="CarNo" value=""/>
         <input type="hidden" name="allChk2Result" value="0">
         <input type="hidden" name="searchDetailChk" value="0">
         <input type="hidden" name="sscode" value="">
@@ -530,12 +531,12 @@
                 <li>
                     <label>차량번호</label>
                     <div class="input-group select">
-                        <input type="text" class="wp100 carHostAuto complete trn" placeholder="차량번호"
-                               name="carHost" id="carHost" value="${!empty view ? view.carHost : ''}"
+                        <input type="text" class="wp100 CarNoAuto complete trn" placeholder="차량번호"
+                               name="CarNo" id="CarNo" value="${!empty view ? view.CarNo : ''}"
                                autocomplete="off">
-                        <%--                        <span class="input-group-clear dis-n" id="carHost_clear">x</span>--%>
-                        <select class="carHost " id="carHostBox"
-                                onchange="$.selectBoxChange(this.value, 'carHost')">
+                        <%--                        <span class="input-group-clear dis-n" id="CarNo_clear">x</span>--%>
+                        <select class="CarNo " id="CarNoBox"
+                                onchange="$.selectBoxChange(this.value, 'CarNo')">
                             <option value="">전체</option>
 
                             <option value="자차"
@@ -569,7 +570,8 @@
     <div id="tableshow">
         <div class="table-top" style="height: auto; display:  block; text-align: center">
             <p class="total">
-                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}"/></span>
+<%--                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}"/></span>--%>
+                <span>데이터</span> <span class="cnt default-blue"><c:out value="${fn:length(receiptsList)}"/></span>
                 <span>건 (총대수 : <span class="cnt default-blue"><span id="totalQty"></span> </span> 대)가 검색되었습니다.</span>
             </p>
         </div>
@@ -602,7 +604,7 @@
                     <th>진행</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="receiptsSearchResult">
                 <tr>
                     <td>
                         23-09-09
@@ -658,6 +660,7 @@
                     </tr>
                 </c:forEach>
                 </tbody>
+
             </table>
         </div>
         <div>
@@ -672,7 +675,7 @@
 
                         <a style="cursor: pointer;"
                            onclick="$.valuePg(1)"
-                           class="active">1</a>
+                           class="active"        @media screen and (min-width: 280px) and (max-width: 1024px) {>1</a>
 
 
                     </li>
