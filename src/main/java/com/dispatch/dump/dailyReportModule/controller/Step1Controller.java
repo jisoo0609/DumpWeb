@@ -29,8 +29,25 @@ public class Step1Controller {
     //tsheet_sub 조회
     @RequestMapping(value = "/driver", method = RequestMethod.GET)
     public String step1(Model model, DailyReport dailyReport) {
-        model.addAttribute("list", step1Service.getMain());
+
+        List<DailyReportStep1Sub> subList = step1Service.getSub();
+        model.addAttribute("subList", subList);
+
+        // 총 운반 금액을 모델에 추가
+        double totalTransportationCost = subList.stream()
+                .mapToDouble(sub -> sub.getQty() * sub.getQtyup())
+                .sum();
+        model.addAttribute("totalTransportationCost", totalTransportationCost);
+
+        List<DailyReportStep1Sub> mainList = step1Service.getMain();
+        model.addAttribute("list", mainList);
+
         return "/dailyReport/step1/driver";
+
+
+
+       /* model.addAttribute("list", step1Service.getMain());
+        return "/dailyReport/step1/driver";*/
     }
 
 
