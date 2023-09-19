@@ -6,6 +6,7 @@ import com.dispatch.dump.commonModule.db.mapper.DailyReportStep4Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
 import javax.servlet.http.HttpSession;
 
+import com.mysql.cj.log.Log;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,21 @@ public class Step4Service {
         System.out.println("DailyReport List tSheet: " + tSheet);
 
         return tSheet;
+    }
+
+
+    public List<DailyReportStep4> getTotalTransportAmount() {
+        // 1. login 정보 받아오기
+        HttpSession session = commonUtil.getSession();
+        Login loginData = (Login) session.getAttribute("loginInfo");
+
+        // 2. 총 운반금액을 가져오는 메서드 호출
+        List<DailyReportStep4> totalAmount = dailyReportStep4Mapper.getTotalTransportAmount(loginData.getUserId());
+
+        // 로그로 DB 조회 결과 출력 (System.out.println 사용)
+        System.out.println("total: " + totalAmount);
+
+        return totalAmount;
     }
 
 }

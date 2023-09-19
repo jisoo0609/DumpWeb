@@ -14,8 +14,12 @@
             WHERE t.carNo = #{CarNo}
     </select>
 
-    <select id="getDailyReportMainBySheetID2" parameterType="DailyReportStep4" resultType="DailyReportStep4">
-
+    <select id="getTotalTransportAmount" resultType="int">
+        SELECT IF(sum(s.Qty * s.Qtyup) IS NULL, 0, sum(s.Qty * s.Qtyup))
+        FROM tSheet t
+            JOIN tsheet_sub s
+        ON t.sheetID = s.sheetID2
+        WHERE t.carNo = #{CarNo}
     </select>
 
 </mapper>
