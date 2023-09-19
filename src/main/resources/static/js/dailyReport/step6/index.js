@@ -44,14 +44,17 @@ function printTableColumnOrder(searchResultData) {
 
     let start = orderFlag === 1 ? searchResultData[0].drvDate : searchResultData[0].drvClub;
 
+
+    let n = 1;
+
     // 검색 결과 데이터를 테이블 본문에 추가합니다.
     searchResultData.forEach((data, index) => {
         const row = document.createElement("tr");
-        let orderInfo
+        let orderInfo = [`${data.drvDate}`, `${data.drvClub}`];
 
-        if (orderFlag == 1) {
+        if (orderFlag === 1) {
             orderInfo = [`${data.drvDate}`, `${data.drvClub}`]
-        } else if (orderFlag == 2) {
+        } else if (orderFlag === 2) {
             orderInfo = [`${data.drvClub}`, `${data.drvDate}`]
         }
 
@@ -59,20 +62,22 @@ function printTableColumnOrder(searchResultData) {
         const useAmt = data.useAmt.toLocaleString();
         const rependchk = data.rependchk === true ? 'O' : 'X';
 
-        row.innerHTML = `
-                    <tr>
+        row.innerHTML = ` 
+                    <td class="idx" id="${n}" style="display: none"></td>
                     <td>${orderInfo[0]}</td>
                     <td>${orderInfo[1]}</td>
                     <td>${lastKm}</td> 
                     <td>${useAmt}</td>
                     <td>${data.drvRem}</td> 
                     <td>${rependchk}</td>
-                    </tr>
                  `;
+
+        n++;
+
 
         let end = orderInfo[0];
 
-        if(start !== end){
+        if (start !== end) {
             start = end;
             row.classList.add("red-line-divider")
         }
@@ -132,4 +137,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const searchButton = document.querySelector(".search_btn");
     searchButton.onclick();
+
+    const listRow = document.querySelector("table tbody");
+    console.log(listRow);
+
+
+    listRow.addEventListener("click", (event) => {
+
+        let inputValue = event.target.parentElement.getElementsByTagName("td");
+
+        let rowData = "";
+
+        const searchTypeRadio = document.querySelectorAll('input[name="searchType"]:checked');
+
+        let tmpValue = ["",inputValue[1].textContent, inputValue[2].textContent];
+
+        if (searchTypeRadio[0].value === "item") {
+            [tmpValue[1], tmpValue[2]] = [tmpValue[2], tmpValue[1]]
+        }
+
+        console.log(tmpValue);
+
+        rowData =
+            "?drvDate=" + tmpValue[1] +
+            "&drvClub=" + tmpValue[2] +
+            "&lastKm=" + inputValue[3].textContent +
+            "&useAmt=" + inputValue[4].textContent +
+            "&drvRem=" + inputValue[5].textContent +
+            "&rependchk=" + inputValue[6].textContent;
+
+
+        let url = "/dailyReport/carcareform" + rowData;
+        console.log(url);
+        window.location.href = url;
+    });
 });
