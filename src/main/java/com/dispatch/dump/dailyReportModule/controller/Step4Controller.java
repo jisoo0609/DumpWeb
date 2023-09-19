@@ -1,6 +1,7 @@
 package com.dispatch.dump.dailyReportModule.controller;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReport;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep4Main;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep4Sub;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step4Service;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,15 +27,9 @@ public class Step4Controller {
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String step4(Model model, DailyReport dailyReport) {
         dailyReportService.list(model, dailyReport);
+        model.addAttribute("tSheetSub", step4Service.getSummary1());
+        model.addAttribute("tSheetMain", step4Service.getSummary2());
         return "/dailyReport/step4/list";
     }
-
-    @RequestMapping(value = "/step4/getDailyReportList", method = RequestMethod.GET)
-    @ModelAttribute("DailyReportList")
-    public List<DailyReportStep4Sub> getDailyReportList() {
-       List<DailyReportStep4Sub> DailyReportList = step4Service.getSummary();
-       return DailyReportList;
-    }
-
 
 }

@@ -22,7 +22,7 @@ public class Step1Service {
         HttpSession session = commonUtil.getSession();
         Login loginData = (Login) session.getAttribute("loginInfo");
 
-        //login id 와 tsheet 의 carsubmittel이 똑같은 튜플값을 리스트 tsheet에서 가져옴
+        //login id 와 tsheet 의 carsubmittel이 똑같은 튜플값을 리스트 tsheetsub에서 가져옴
         List<DailyReportStep1Main> tSheet = new ArrayList<>();
         tSheet = dailyReportStep1Mapper.findDailyReportMainByCarSubmitTel(loginData.getUserId());
 
@@ -40,12 +40,13 @@ public class Step1Service {
 
 
     }
-    public List<DailyReportStep1Main> get(){
+    public List<DailyReportStep1Sub> getMain(){
         //login 정보 받아오기
         HttpSession session = commonUtil.getSession();
         Login loginData = (Login) session.getAttribute("loginInfo");
 
-        List<DailyReportStep1Main> tSheet = new ArrayList<>();
+
+        List<DailyReportStep1Sub> tSheet = new ArrayList<>();
         tSheet = dailyReportStep1Mapper.findJoinDailyReport(loginData.getUserId());
         tSheet.forEach(t -> System.out.println(t));
 
