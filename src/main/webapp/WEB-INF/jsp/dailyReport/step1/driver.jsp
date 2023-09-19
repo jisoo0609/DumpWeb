@@ -291,9 +291,9 @@
             <div class="date-picker">
                 <label class="start-text" for="start-date"
                 >운행일
-                    <input id="datepicker1" readonly/>
+                    <input id="datepicker1" name="startDate" readonly/>
                     <span>~</span>
-                    <input id="datepicker2" readonly/>
+                    <input id="datepicker2" name="endDate" readonly/>
                 </label>
                 <button id="update-button">조회</button>
                 <ul class="basic-menu">
