@@ -272,12 +272,7 @@
                             <span>주문배차등록</span>
                         </div>
                     </div>
-                    <div style=" text-align:center; font-weight: 600">
-                        <div class="car-check">
-                            <img class="car-search" src="/resources/image/ico_carcheck.png" alt="" />
-                        </div>
-                        <span>차량관리</span>
-                    </div>
+
                 </div>
         </section>
 
