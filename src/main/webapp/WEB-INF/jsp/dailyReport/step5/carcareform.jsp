@@ -274,6 +274,8 @@
     </table>
 </section>
 
+<script src="/resources/js/dailyReport/step5/index.js"></script>
+
 
 <!-- <footer>
 <h1>
