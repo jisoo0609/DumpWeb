@@ -25,5 +25,11 @@ public class Step4Controller {
         return "/dailyReport/step4/list";
     }
 
+    @RequestMapping(value = "/totalTransportAmount", method = RequestMethod.GET)
+    public String getTotalTransportAmount(Model model, DailyReport dailyReport) {
+        dailyReportService.list(model, dailyReport);
+        model.addAttribute("totalAmount", step4Service.getTotalTransportAmount());
+        return "/dailyReport/step4/totalTransportAmount";
+    }
 
 }
