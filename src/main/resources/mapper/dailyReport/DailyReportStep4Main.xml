@@ -3,13 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep4Mapper">
-    <select id="getDailyReportByCarNo" resultType="DailyReportStep4Main">
-        select sheetID, DATE_FORMAT(date, '%m.%d') as date, CarNo, carSubmit, date from tSheet where CarNo = #{carNo}
+
+
+    <select id="getDailyReportByCarNo" resultType="DailyReportStep4">
+        SELECT t.sheetID,
+               DATE_FORMAT(t.date, '%m.%d') as date, t.CarNo, t.carSubmit, s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup
+            FROM tsheet t
+                JOIN tSheet_sub s
+            ON t.sheetID = s.sheetID2
+            WHERE t.carNo = #{CarNo}
     </select>
 
-    <select id="getDailyReportMainBySheetID2" resultType="DailyReportStep4Sub">
-        select fromsite, tosite, item, Qty, Qtyup, sheetID2, sheetsubID, Qtyup from tSheet_sub where sheetID2 = #{sheetID2}
+    <select id="getTotalTransportAmount" resultType="int">
+        SELECT IF(sum(s.Qty * s.Qtyup) IS NULL, 0, sum(s.Qty * s.Qtyup))
+        FROM tSheet t
+            JOIN tsheet_sub s
+        ON t.sheetID = s.sheetID2
+        WHERE t.carNo = #{CarNo}
     </select>
 
-    
 </mapper>
