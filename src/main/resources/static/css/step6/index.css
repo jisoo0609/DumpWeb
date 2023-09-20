@@ -292,18 +292,24 @@ body {
   cursor: pointer;
 }
 
+
 .table_container table thead tr th:nth-child(1),
 .table_container table thead tr th:nth-child(2){
   white-space: nowrap;
 }
 
-.table_container table thead tr th:nth-child(6){
+.table_container table thead tr th:nth-child(3){
   word-break: keep-all;
 }
 
 .table_container table tbody tr td:nth-child(2){
   padding: 0 10px
 }
+
+.table_container table tbody tr td:nth-child(3){
+  word-break: keep-all;
+}
+
 .table_container table tbody tr td:nth-child(4),
 .table_container table tbody tr td:nth-child(5) {
   text-align: right;
