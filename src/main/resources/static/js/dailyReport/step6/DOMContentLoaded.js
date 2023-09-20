@@ -7,5 +7,5 @@ document.addEventListener("DOMContentLoaded", function () {
     clickSearchButton();
 
     //리스트를 통한 페이지 이동 처리.
-    clickRowAndRedirect();
+    clickListThAndRedirect();
 });
