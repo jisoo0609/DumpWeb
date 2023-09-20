@@ -15,7 +15,7 @@ public class Step7Controller {
 
     private final DailyReportService dailyReportService;
 
-    @RequestMapping(value = "/oldform", method = RequestMethod.GET)
+    @RequestMapping(value = "/orderform", method = RequestMethod.GET)
     public String step7(Model model, DailyReport dailyReport) {
         dailyReportService.list(model, dailyReport);
         return "/dailyReport/step7/order";

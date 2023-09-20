@@ -139,7 +139,7 @@ input[type = text]{
 .cashNbtns > p{
     border: 1px solid #0068b7;
     color: #0068b7;
-    padding: 8px 25px;
+    padding: 0 25px;
     margin-right: 10%;
 }
 

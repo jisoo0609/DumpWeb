@@ -216,7 +216,7 @@
         </div>
         <div class="cashNbtns">
             <p>
-                운반금액: <br>
+                운반금액(원) <br>
                 ${totalAmount[0]}
             </p>
             <input type="button" value="일괄결재">
