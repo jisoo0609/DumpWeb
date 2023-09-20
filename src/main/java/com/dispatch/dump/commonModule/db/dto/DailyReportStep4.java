@@ -9,7 +9,9 @@ public class DailyReportStep4 {
     private int sheetID;
     private String CarNo;           // LINE :: 차량번호
     private String carSubmit;       // LINE :: 제출처
+    private String carSubmitTel;    // LINE :: 제출처 연락처
     private String date;            // LINE :: 운행일
+    private Boolean chk1;           // LINE :: 결재여부
 
 
     // tSheet_sub
