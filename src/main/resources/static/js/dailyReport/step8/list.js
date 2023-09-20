@@ -203,6 +203,7 @@ function receiptsSearchResults(receiptsSearchResults) {
     // 결과 데이터를 동적으로 추가
     for (var i = 0; i < receiptsResults.length; i++) {
         var result = receiptsResults[i];
+        var No = i + 1;
         console.log("result?")
         console.log(result)
         console.log(result.fromsite)
@@ -210,15 +211,17 @@ function receiptsSearchResults(receiptsSearchResults) {
         console.log(result.carNo)
         console.log(result.qty)
 
-        // 각 결과의 qty 값을 정수로 파싱하여 누적
+        // 각 결과의 qty 값을 int로 파싱하여 누적
         var qty = parseInt(result.qty);
         totalQty += qty;
 
         var resultHtml =
             '<tr>' +
+            '<td>' + No + '</td>' +
             '<td>' + result.date + '</td>' +
             '<td>' + result.fromsite + '</td>' +
             '<td>' + result.tosite + '</td>' +
+            '<td>' + result.item + '</td>' +
             '<td>' + result.carNo + '</td>' +
             '<td>' + result.qty + '</td>'   +
             '<td>' + result.qty + '</td>'   +

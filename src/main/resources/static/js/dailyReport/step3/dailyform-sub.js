@@ -110,7 +110,7 @@ function approved() {
         // 거래처정보 인풋 비활성화
         inputElements.forEach(function(input) {
             input.disabled = true;
-            input.style.backgroundColor = "#ddd";
+            input.style.backgroundColor = "#F2F2F2";
         });
     } else {
         chk.value = '0';
@@ -131,7 +131,7 @@ function approved() {
 function submitCheck() {
     const dropdown = document.getElementById('dropdown')
     const chk1 = document.getElementById('checkbox');
-    chk1.disabled = true;
+    //chk1.disabled = true;
     chk1.checked = true;
     dropdown.textContent = "제출";
     dropdown.style.color = "#0068b7";
