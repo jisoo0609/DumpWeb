@@ -95,3 +95,70 @@ function clearInputs() {
 }
 
 
+/* 결재 체크박스 체크되면 밸류 바꾸기 */
+
+function approved() {
+    const chk1 = document.getElementById('chk1');
+    if (chk1.checked) {
+        chk1.value = '1';
+    } else {
+        chk1.value = '0';
+    }
+}
+
+
+/* 제출체크박스는 제출하기 버튼을 클릭해야만 체크되고 제출체크가 체크하면되 결재도 체크됨
+function checkChk1() {
+    if (chk2.checked) {
+        chk1.checked = true;
+        approved();
+    }
+}
+
+function submitCheck() {
+   chk2.checked = true;
+   checkChk1();
+}
+*/
+
+/* 결재가 체크되면 더 이상 인풋을 수정할 수 없게 된다 */
+const selectBoxElements = document.querySelectorAll(".select");
+
+function toggleSelectBox(selectBox) {
+  selectBox.classList.toggle("active");
+}
+
+function selectOption(optionElement) {
+  const selectBox = optionElement.closest(".select");
+  const selectedElement = selectBox.querySelector(".selected-value");
+  selectedElement.textContent = optionElement.textContent;
+  toggleSelectBox(selectBox); // Close the dropdown after selecting an option
+}
+
+selectBoxElements.forEach(selectBoxElement => {
+  selectBoxElement.addEventListener("click", function (e) {
+    const targetElement = e.target;
+    const isOptionElement = targetElement.classList.contains("option");
+
+    if (isOptionElement) {
+      selectOption(targetElement);
+    } else if (targetElement.classList.contains("selected-value")) {
+      toggleSelectBox(selectBoxElement);
+    }
+  });
+});
+
+document.addEventListener("click", function (e) {
+  const targetElement = e.target;
+  const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
+
+  if (!isSelect) {
+    const allSelectBoxElements = document.querySelectorAll(".select");
+
+    allSelectBoxElements.forEach(boxElement => {
+      boxElement.classList.remove("active");
+    });
+  }
+});
+
+
