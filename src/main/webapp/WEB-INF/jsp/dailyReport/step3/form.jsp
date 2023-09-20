@@ -69,7 +69,7 @@
                             <label class="t10">제출처</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input  type="text" class="wp100 voice" name="carSubmit" id="carSubmit" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}">
+                                <input  type="text" class="wp100 voice input" name="carSubmit" id="carSubmit" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}">
                             </span>
                         </li>
 
@@ -77,7 +77,7 @@
                             <label class="t10">담당자</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input  type="text" class="wp100 voice" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}"
+                                <input  type="text" class="wp100 voice input" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}"
                                        placeholder="담당자" autocomplete="off">
                             </span>
                         </li>
@@ -86,7 +86,7 @@
                             <label class="t10">휴대폰</label>
                             <div class="empty"></div>
                             <span class="content">
-                                <input  type="tel" class="wp100" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
+                                <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
                                        list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
                                        style="margin-left: 75px;" onfocus="fill010()"}
                                 >
@@ -100,7 +100,7 @@
                             <div class="datediv">
                                 <label class="t10">운행일</label>
                                 <span class="content">
-                                    <input type="text" class="datepicker" id="date" name="date" style="width: 80px; margin-left: 75px; text-align: center; padding-left: 0;"
+                                    <input type="text" class="datepicker input" id="date" name="date" style="width: 80px; margin-left: 75px; text-align: center; padding-left: 0;"
                                         value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="off">
                                 </span>
                             </div>
@@ -148,22 +148,14 @@
                     <col width="25%">
                 </colgroup>
                 <thead style="border-top: 2px solid #ddd;">
-                <tr>
-                    <th>상차지</th>
-                    <th>하차지</th>
-                    <th>품목</th>
-                    <th>대수</th>
-                    <th>비고</th>
-                </tr>
+                    <tr>
+                        <th>상차지</th>
+                        <th>하차지</th>
+                        <th>품목</th>
+                        <th>대수</th>
+                        <th>비고</th>
+                    </tr>
                 </thead>
-
-                <tr>
-                    <td>상차상차</td>
-                    <td>하차하차</td>
-                    <td>아이템아이템</td>
-                    <td>33</td>
-                    <td>비고비고비고</td>
-                </tr>
 
                 <tr>
                     <c:forEach var="list" items="${groupList}" varStatus="status">
