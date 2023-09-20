@@ -1,5 +1,5 @@
 function insertFirstHeader(arr,idx){
-    //삽입 -> 삭제하여 header td를 제일 앞으로 옮김.
+    //삭제 -> 삽입하여 header td를 제일 앞으로 옮김.
     const firstHeader = arr.splice(idx,1)[0];
     arr.splice(0,0,firstHeader);
 }
