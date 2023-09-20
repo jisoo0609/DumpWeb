@@ -23,6 +23,7 @@
         font-size: 16px;
         font-weight: bold;
         width: -webkit-fill-available;
+        margin-right: 15px;
     }
     ul.basic-menu {
         display: grid;
