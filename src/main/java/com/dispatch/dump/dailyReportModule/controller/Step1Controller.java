@@ -10,10 +10,7 @@ import com.dispatch.dump.dailyReportModule.service.Step1Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -32,6 +29,8 @@ public class Step1Controller {
 
         List<DailyReportStep1Sub> subList = step1Service.getSub();
         model.addAttribute("subList", subList);
+
+
 
         // 총 운반 금액을 모델에 추가
         double totalTransportationCost = subList.stream()
@@ -67,6 +66,7 @@ public class Step1Controller {
         return modelAndView;
     }*/
 
+/*
     @RequestMapping(value = "/step1/getList", method = RequestMethod.GET)
     @ModelAttribute("list")
     public List<DailyReportStep1Sub> getList() {
@@ -74,6 +74,7 @@ public class Step1Controller {
         return list;
     }
 
+*/
 
 
 

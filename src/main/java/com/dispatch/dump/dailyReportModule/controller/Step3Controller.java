@@ -8,6 +8,7 @@ import com.dispatch.dump.dailyReportModule.service.Step3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,6 +61,12 @@ public class Step3Controller {
     @ResponseBody
     public String list(Model model, DailyReportStep3Main dailyReportStep3Main) {
         return step3Service.list(model, dailyReportStep3Main);
+    }
+
+    @RequestMapping(value = "/workspace/ajax/delete", method = RequestMethod.GET)
+    @ResponseBody
+    public void delete(int sheetsubID){
+        step3Service.delete(sheetsubID);
     }
 
 
