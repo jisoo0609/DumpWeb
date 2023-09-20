@@ -1,5 +1,7 @@
 <%@ page import="com.dispatch.dump.commonModule.db.dto.DailyReportStep4" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.Set" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
@@ -42,6 +44,7 @@
 <%
     // 모델로부터 받은 데이터를 변수에 저장
     List<DailyReportStep4> tSheet = (List<DailyReportStep4>) request.getAttribute("tSheet");
+    List<DailyReportStep4> totalAmount = (List<DailyReportStep4>) request.getAttribute("totalAmount");
 %>
 <section class="sub-contents-wrap maxwrap">
     <div>
@@ -73,6 +76,12 @@
                 </script>
             </div>
             <ul class="search_ul" hidden>
+                <%
+                    Set<String> fromSiteValue = new HashSet();
+
+                    for(DailyReportStep4 data : tSheet)
+                        fromSiteValue.add(data.getFromsite());
+                %>
                 <li>
                     <label for=""></label>
                     <div class="input_select">
@@ -95,8 +104,8 @@
                                 onchange="document.querySelector('.fromSite_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <c:forEach var="listMain" items="${tSheet}">
-                                <option value="${listMain.fromsite}">${listMain.fromsite}</option>
+                            <c:forEach var="fromSite" items="<%=fromSiteValue%>">
+                                <option value="${fromSite}">${fromSite}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -215,10 +224,14 @@
             </p>
         </div>
         <div class="cashNbtns">
-            <p>
-                운반금액(원) <br>
-                ${totalAmount[0]}
-            </p>
+            <%--            금액 단위 표시 스크립트--%>
+            <script>
+                const elementDiv = document.querySelector('.cashNbtns');
+                const totalAmount = ${totalAmount[0]};
+                const formattedAmount = new Intl.NumberFormat('ko-KR').format(totalAmount);
+
+                elementDiv.innerHTML = "<p>운반금액(원)<br>" + formattedAmount + "</p>";
+            </script>
             <input type="button" value="일괄결재">
             <input type="button" value="취소" id="cancelBtn">
         </div>
@@ -246,7 +259,7 @@
                         <th>상차지</th>
                         <th>하차지</th>
                         <th>대수</th>
-                        <th>운반비</th>
+                        <th>운반단가</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -258,7 +271,10 @@
                     <td>${listMain.fromsite}</td>
                     <td>${listMain.tosite}</td>
                     <td>${listMain.qty}</td>
-                    <td>${listMain.qtyup}</td>
+                    <td>
+<%--                        운반단가 쉼표 표시 코드--%>
+                        <fmt:formatNumber value="${listMain.qtyup}" type="number"/>
+                    </td>
                 </tr>
                 </c:forEach>
                 </tbody>
@@ -267,5 +283,5 @@
     </div>
 </section>
 
-
+<script src="/resources/js/step4/step4.js"></script>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
