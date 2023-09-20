@@ -3,15 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep7Mapper">
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep7MainMapper">
 
     <!-- 제출처 정보 저장-->
     <insert id="insertDailyReportStep7" parameterType="DailyReportStep7Main">
         insert into
         tSheet
-        (date, CarNo, chk1)
+        (date, CarNo, chk1, sheetSS2)
         values
-        (#{date}, #{CarNo}, #{chk1})
+        (#{date}, #{CarNo}, #{chk1}, #{sheetSS2})
 
         <selectKey
                 keyColumn="sheetID"

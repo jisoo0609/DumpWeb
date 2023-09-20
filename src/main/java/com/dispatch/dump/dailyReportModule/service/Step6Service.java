@@ -1,7 +1,7 @@
 package com.dispatch.dump.dailyReportModule.service;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep6;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep6SelectForm;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep6OptionForm;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep6Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
@@ -21,10 +21,9 @@ public class Step6Service {
         return (Login) commonUtil.getSession().getAttribute("loginInfo");
     }
 
-    public List<DailyReportStep6> getCarListByOption(DailyReportStep6SelectForm selectForm) {
-        selectForm.setCarNo(getSessionLoginData().getUserId());
-        System.out.println(dailyReportStep6Mapper.findCarListByOption(selectForm));
-        return dailyReportStep6Mapper.findCarListByOption(selectForm);
+    public List<DailyReportStep6> getCarListByOption(DailyReportStep6OptionForm optionForm) {
+        optionForm.setCarNo(getSessionLoginData().getUserId());
+        return dailyReportStep6Mapper.findCarListByOption(optionForm);
     }
 
 }
