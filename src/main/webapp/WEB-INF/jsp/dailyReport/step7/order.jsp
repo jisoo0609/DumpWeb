@@ -137,12 +137,12 @@
 					<th>하차지</th>
 					<th>품목</th>
 					<th>대수</th>
-					<th>차량번호 <span style="font-weight: normal;">(일괄배차)</span></th>
+					<th>차량번호 <br> <span style="font-weight: normal;">(일괄배차)</span></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td>999</td>
+					<td>1</td>
 					<td>강남</td>
 					<td>구로</td>
 					<td>모래, 자갈</td>
