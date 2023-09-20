@@ -69,7 +69,7 @@
                             <label class="t10">제출처</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input  type="text" class="wp100 voice input" name="carSubmit" id="carSubmit" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}">
+                                <input type="text" class="wp100 voice input" name="carSubmit" id="carSubmit" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}">
                             </span>
                         </li>
 

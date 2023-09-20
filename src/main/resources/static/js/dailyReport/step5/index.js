@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // URL의 쿼리 문자열에서 값을 추출한것
   const dateMonthDay = params.get("drvDate").split(".");
-  console.log(new Date().getFullYear() + '-' + dateMonthDay[0] + '-' + dateMonthDay[1]);
   elements.datepicker1.value = new Date().getFullYear() + '-' + dateMonthDay[0] + '-' + dateMonthDay[1];
   elements.lastKm.value = parseInt(params.get("lastKm").replace(/,/g, ''));
   elements.useAmt.value = parseInt(params.get("useAmt").replace(/,/g, ''));
