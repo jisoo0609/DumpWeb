@@ -26,8 +26,8 @@
         @media screen and (min-width: 280px) and (max-width: 1024px) {
             .search-form-major label {
                 width: initial;
+                margin-bottom: 8px;
             }
-
         }
 
         .ui-datepicker-trigger {
@@ -42,6 +42,11 @@
 
             .search-form {
                 margin: 15px 0 10px;
+            }
+
+            .table-btn {
+                text-align: center;
+                float: none;
             }
         }
 
@@ -266,11 +271,18 @@
             .list-table th {
                 padding: 10px 4px;
             }
+
+            .table-btn {
+                width: 60%;
+            }
         }
 
         @media screen and (max-width: 280px) {
             .list-table th {
                 padding: 1px 10px;
+            }
+            .btn {
+                margin-bottom: 5px;
             }
         }
 
@@ -290,13 +302,67 @@
                 font-size: 13px;
             }
         }
+
+        @media screen and (max-width: 425px) {
+            .jack {
+                margin: 0 auto;
+                display: inline-grid;
+                border: 1px solid #0068b7;
+                width: 110px;
+            }
+
+            .area {
+                display: flex;
+                align-items: center;
+            }
+
+            #button1 {
+                width: 80px;
+                margin: 0 10px;
+            }
+
+            #button2 {
+                width: 70px;
+                margin: 0 1px;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .btn {
+                margin-top: initial;
+            }
+        }
     </style>
 </head>
 <body>
 <script type="text/javascript"
         src="/resources/js/dailyReport/step8/list.js?jsVerType=2020230831191239"></script>
-<%--<script type="text/javascript"--%>
-<%--        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=64bdd806e937defb179aa9a2b9cc6c95&libraries=services"></script>--%>
+<script>
+    // 페이지 로드 시 실행
+    $(document).ready(function () {
+        // 체크박스 요소와 테이블 요소 가져오기
+        const toggleTableCheckbox1 = $("#toggleTableCheckbox1");
+        const toggleTableCheckbox2 = $("#toggleTableCheckbox2");
+        const dataTable = $("#dataTable");
+
+        // 체크박스 클릭 이벤트 처리
+        toggleTableCheckbox1.click(function () {
+            if (toggleTableCheckbox1.is(":checked")) {
+                // 운행일 기준 테이블을 보이도록 설정
+                dataTable.html('<tr><th>운행일</th><th>상차지</th><th>하차지</th><th>차량번호</th><th>대수</th><th>진행</th></tr><tr><td>09.09</td><td>구디 </td> <td>지밸리 </td> <td>37우2598 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
+                toggleTableCheckbox2.prop("checked", false); // 다른 체크박스 해제
+            }
+        });
+
+        toggleTableCheckbox2.click(function () {
+            if (toggleTableCheckbox2.is(":checked")) {
+                // 차량 기준 테이블을 보이도록 설정
+                dataTable.html('<tr><th>차량번호</th><th>상차지</th><th>하차지</th><th>운행일</th><th>대수</th><th>진행</th></tr>  <tr> <td>37우2598</td> <td>구디 </td> <td>지밸리 </td> <td>09.17 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
+                toggleTableCheckbox1.prop("checked", false); // 다른 체크박스 해제
+            }
+        });
+    });
+</script>
+
 <script>
     // 달력 옵션 추가 코드
     $(function () {
@@ -473,7 +539,6 @@
                         <input type="text" class="wp100 clubAutocomplete trn" placeholder="구분" name="club" id="club"
                                value="${!empty view ? view.club : ''}"
                                autocomplete="off">
-                        <%--                        <span class="input-group-clear dis-n" id="club_clear">x</span>--%>
                         <select class="club " id="clubBox" onchange="$.selectBoxChange(this.value, 'club')">
                             <option value="전체">전체</option>
                             <option value="운반"
@@ -487,7 +552,6 @@
                     <div class="input-group select">
                         <input type="text" class="wp100 fromsiteAutocomplete trn" placeholder="상차지" name="fromsite"
                                id="fromsite" autocomplete="off" value="${!empty view ? view.fromsite : ''}">
-                        <%--                        <span class="input-group-clear" id="fromsite_clear">x</span>--%>
                         <select class="fromsite " id="fromsiteBox" onchange="$.selectBoxChange(this.value, 'fromsite')">
                             <option value="">전체</option>
 
@@ -503,7 +567,6 @@
                     <div class="input-group select">
                         <input type="text" class="wp100 tositeAuto complete trn" placeholder="하차지" name="tosite"
                                id="tosite" autocomplete="off" value="${!empty view ? view.tosite : ''}">
-                        <%--                        <span class="input-group-clear" id="tosite_clear">x</span>--%>
                         <select class="tosite " id="tositeBox" onchange="$.selectBoxChange(this.value, 'tosite')">
                             <option value="">전체</option>
 
@@ -517,7 +580,6 @@
                     <div class="input-group select">
                         <input type="text" class="wp100 itemAuto complete trn" placeholder="품목" name="item" id="item"
                                value="${!empty view ? view.item : ''}" autocomplete="off">
-                        <%--                        <span class="input-group-clear" id="item_clear">x</span>--%>
                         <select class="item " id="itemBox" onchange="$.selectBoxChange(this.value, 'item')">
                             <option value="">전체</option>
 
@@ -534,7 +596,6 @@
                         <input type="text" class="wp100 CarNoAuto complete trn" placeholder="차량번호"
                                name="CarNo" id="CarNo" value="${!empty view ? view.CarNo : ''}"
                                autocomplete="off">
-                        <%--                        <span class="input-group-clear dis-n" id="CarNo_clear">x</span>--%>
                         <select class="CarNo " id="CarNoBox"
                                 onchange="$.selectBoxChange(this.value, 'CarNo')">
                             <option value="">전체</option>
@@ -552,12 +613,11 @@
         <div style="text-align: center;padding-top: 30px;border: 1px solid #ddd;padding-bottom: 30px; margin: 0 0 10px;">
             <div style="width: 50%;  float: left;">
                 <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
-                        type="radio" name="searchType"
-                        value="car" checked/>운행일 기준</label>
+                        type="radio" name="searchType" checked/>운행일 기준</label>
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="searchType" value="fromsite"/>차량 기준</label>
+                        type="radio" name="searchType"/>차량 기준</label>
             </div>
         </div>
     </form>
@@ -570,32 +630,40 @@
     <div id="tableshow">
         <div class="table-top" style="height: auto; display:  block; text-align: center">
             <p class="total">
-<%--                <span>데이터</span> <span class="cnt default-blue"><c:out value="${receiptsList[0].totalData}"/></span>--%>
-                <span>데이터</span> <span class="cnt default-blue"><c:out value="${fn:length(receiptsList)}"/></span>
+                <span>데이터</span> <span class="cnt default-blue" id="receiptsCnt">${fn:length(receiptsList)}</span>
                 <span>건 (총대수 : <span class="cnt default-blue"><span id="totalQty"></span> </span> 대)가 검색되었습니다.</span>
             </p>
         </div>
 
-        <div class="btn-area">
-            <input type="button" style="background-image: none !important;text-indent: 0px !important;"
-                   class="btn btn-search btn-search__line" value="일괄결재" onClick="$.allChkChange(1);"
-                   onkeydown="if(event.keyCode == 13) return false;">
-            <input type="button" style="background-image: none !important;text-indent: 0px !important;"
-                   class="btn btn-search btn-search__line" value="취소" onClick="$.allChkChange(0);"
-                   onkeydown="if(event.keyCode == 13) return false;">
-        </div>
         <div style="width: 100%; overflow-x: auto; overflow-y: hidden;">
+            <div class="area">
+                <div class="jack"
+                     style="font-size: 14px; color: #0064c1; font-weight: 600; margin-bottom: 10px; text-align: center">
+                    <label>운반금액(원)</label>
+                    <label>999,999,999</label>
+                </div>
+                <div class="table-btn" style="margin-bottom: 10px;">
+                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(1);"
+                           style="background-image: none !important; text-indent: 0px !important; height: 42px; width: 100px; line-height: 33px;"
+                           value="일괄결재">
+                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(0);"
+                           style="background-image: none !important; text-indent: 0px !important; height: 42px; width: 100px; line-height: 33px;"
+                           value="취소">
+                </div>
+            </div>
             <table class="list-table">
                 <colgroup>
-                    <col style="width: 40%">
-                    <col style="width: 33%">
-                    <col style="width: 33%">
-                    <col style="width: 60%">
-                    <col style="width: 28%">
-                    <col style="width: 28%">
+                    <col style="width: 2%">
+                    <col style="width: 3%">
+                    <col style="width: 3%">
+                    <col style="width: 3%">
+                    <col style="width: 4%">
+                    <col style="width: 2%">
+                    <col style="width: 2%">
                 </colgroup>
                 <thead>
                 <tr>
+                    <th>No</th>
                     <th>운행일</th>
                     <th>상차지</th>
                     <th>하차지</th>
@@ -607,7 +675,10 @@
                 <tbody id="receiptsSearchResult">
                 <tr>
                     <td>
-                        23-09-09
+                        1
+                    </td>
+                    <td>
+                        09.09
                     </td>
                     <td>
                         구디
@@ -627,7 +698,10 @@
                 </tr>
                 <tr>
                     <td>
-                        23-09-10
+                        2
+                    </td>
+                    <td>
+                        09.10
                     </td>
                     <td>
                         구디
@@ -647,6 +721,7 @@
                 </tr>
                 <c:forEach items="${receiptsList}" var="receipt">
                     <tr>
+                        <td>${receipt.qtyup}</td>
                         <td>${receipt.date}</td>
                         <td>${receipt.fromsite}</td>
                         <td>${receipt.tosite}</td>
@@ -675,7 +750,7 @@
 
                         <a style="cursor: pointer;"
                            onclick="$.valuePg(1)"
-                           class="active"        @media screen and (min-width: 280px) and (max-width: 1024px) {>1</a>
+                           class="active" @media screen and (min-width: 280px) and (max-width: 1024px) {>1</a>
 
 
                     </li>

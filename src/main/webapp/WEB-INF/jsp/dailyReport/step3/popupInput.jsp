@@ -79,7 +79,7 @@
                 </div>
             </form>
         </div>
-        <div class="popBtns">
+        <div class="btn-area">
             <button class="btn btn-white btn-popup" onclick="$.deleteRow()">
                 삭제
             </button>

@@ -67,7 +67,7 @@
          </li>
          <li>
                 <p>
-                    <a class="left_menu" href="/dailyReport/oldform">
+                    <a class="left_menu" href="/dailyReport/orderform">
                         <span style="font-weight: bold; color: blue;">⑦</span> 제출처 주문 등록
                     </a>
                 </p>
