@@ -69,7 +69,6 @@ public class Step3Service {
         Map<String, Object> rtnMap = commonUtil.returnMap();
 
         try {
-
             List<DailyReportStep3Main> carSubmitList=dailyReportStep3MainMapper.selectByCarSubmit(dailyReportStep3Main);
 
             rtnMap.put("httpCode", 200);
@@ -84,7 +83,6 @@ public class Step3Service {
         Map<String, Object> rtnMap = commonUtil.returnMap();
 
         try {
-
             List<DailyReportStep3Main> carSubmitTelList=dailyReportStep3MainMapper.selectByCarSubmitTel(dailyReportStep3Main);
 
             rtnMap.put("httpCode", 200);
@@ -99,7 +97,6 @@ public class Step3Service {
         Map<String, Object> rtnMap = commonUtil.returnMap();
 
         try {
-
             List<DailyReportStep3Main> salesmanList=dailyReportStep3MainMapper.selectBySalesman(dailyReportStep3Main);
 
             rtnMap.put("httpCode", 200);

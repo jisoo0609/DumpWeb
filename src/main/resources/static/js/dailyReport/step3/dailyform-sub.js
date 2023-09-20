@@ -96,19 +96,34 @@ function clearInputs() {
 
 
 /* 결재 체크박스 체크되면 밸류 바꾸기 */
+/* 결재 체크박스 체크되면 인풋 수정 불가 */
+
 function approved() {
     const chk = document.getElementById('checkbox');
+    const mtable = document.getElementById('main-table');
+    const inputElements = mtable.querySelectorAll('.input');
+
     if (chk.checked) {
         chk.value = '1';
-        chk.disabled = true;
         console.log(chk.value);
+
+        // 거래처정보 인풋 비활성화
+        inputElements.forEach(function(input) {
+            input.disabled = true;
+            input.style.backgroundColor = "#F2F2F2";
+        });
     } else {
         chk.value = '0';
         console.log(chk.value);
+
+        // 결재 취소하면 다시 활성화
+        inputElements.forEach(function(input) {
+            input.disabled = false;
+            input.style.backgroundColor = "#fff";
+        });
     }
 }
 
-/* 결재 체크박스 체크되면 인풋 수정 불가 */
 
 
 
@@ -116,6 +131,7 @@ function approved() {
 function submitCheck() {
     const dropdown = document.getElementById('dropdown')
     const chk1 = document.getElementById('checkbox');
+    //chk1.disabled = true;
     chk1.checked = true;
     dropdown.textContent = "제출";
     dropdown.style.color = "#0068b7";
