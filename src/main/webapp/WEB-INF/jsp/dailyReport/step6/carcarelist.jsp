@@ -2,39 +2,6 @@
          pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
-<script>
-    $(function() {
-        // input을 datepicker로 선언
-        $("#datepicker1, #datepicker2").datepicker({
-            dateFormat: 'yy년 mm월 dd일', // 년도, 월, 일 텍스트 형식
-            showOtherMonths: true,
-            showMonthAfterYear: true,
-            changeYear: true,
-            changeMonth: true,
-            showOn: "both",
-            buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-            buttonImageOnly: true,
-            buttonText: "선택",
-            monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-            monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-            dayNamesMin: ['일','월','화','수','목','금','토'],
-            dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],
-            minDate: "-10Y",
-            maxDate: "+10y"
-        });
-
-        // 초기값을 오늘 날짜로 설정
-        $("#datepicker1, #datepicker2").datepicker('setDate', 'today');
-
-        // datepicker1을 매달 1일로 설정
-        $("#datepicker1").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth(), 1));
-
-        // datepicker2를 오늘 날짜로 설정
-        $("#datepicker2").datepicker('setDate', 'today');
-    });
-</script>
-
-
   <!-- 스타일시트 연결 -->
 <link rel="stylesheet" type="text/css" href="/resources/css/step6/index.css">
 
