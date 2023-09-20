@@ -86,12 +86,12 @@
                     <label for=""></label>
                     <div class="input_select">
                         <input type="text" placeholder="제출처" name="club" class="club_input">
-                        <select class="club_slect"
+                        <select class="club_slect" id="club_select"
                                 onchange="document.querySelector('.club_input').value=
                                     this.options[this.selectedIndex].value"
                         >
                             <c:forEach var="carSubmit" items="<%=carSubmitValue%>">
-                                <option value="${carSubmit}">${carSubmit}</option>
+                                <option value="${carSubmit}" selected>${carSubmit}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -111,7 +111,7 @@
                                     this.options[this.selectedIndex].value"
                         >
                             <c:forEach var="fromSite" items="<%=fromSiteValue%>">
-                                <option value="${fromSite}">${fromSite}</option>
+                                <option value="${fromSite}" selected>${fromSite}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -131,7 +131,7 @@
                                     this.options[this.selectedIndex].value"
                         >
                             <c:forEach var="toSite" items="<%=toSiteValue%>">
-                                <option value="${toSite}">${toSite}</option>
+                                <option value="${toSite}" selected>${toSite}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -151,7 +151,7 @@
                                     this.options[this.selectedIndex].value"
                         >
                             <c:forEach var="item" items="<%=itemValue%>">
-                                <option value="${item}">${item}</option>
+                                <option value="${item}" selected>${item}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -161,7 +161,7 @@
                         Set<String> carSumitTelValue = new HashSet();
 
                         for(DailyReportStep4 data : tSheet)
-                            carSumitTelValue.add(data.getCarSubmit());
+                            carSumitTelValue.add(data.getCarSubmitTel());
                     %>
                     <label for=""></label>
                     <div class="input_select">
@@ -171,7 +171,7 @@
                                     this.options[this.selectedIndex].value"
                         >
                             <c:forEach var="carSubmitTel" items="<%=carSumitTelValue%>">
-                                <option value="${carSubmitTel}">${carSubmitTel}</option>
+                                <option value="${carSubmitTel}" selected>${carSubmitTel}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -184,7 +184,7 @@
                                 onchange="document.querySelector('.state_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="true">결재O</option>
+                            <option value="true" selected>결재O</option>
                             <option value="false">결재X</option>
                         </select>
                     </div>
