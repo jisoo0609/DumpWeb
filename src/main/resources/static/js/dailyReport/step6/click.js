@@ -23,25 +23,9 @@ function clickListThAndRedirect(){
     const listRow = document.querySelector("table tbody");
     listRow.addEventListener("click", (event) => {
 
-        let input = Array.from(event.target.parentElement.getElementsByTagName("td"));
-        const searchTypeRadio = document.querySelectorAll('input[name="searchType"]:checked');
+        let driveID = event.target.parentElement.getAttribute("data-drive-id")
 
-        insertTitleThInFront(input,parseInt(searchTypeRadio[0].value));
-
-        let rowData =
-            "?drvDate=" + input[0].textContent +
-            "&drvClub=" + input[1].textContent +
-            "&lastKm=" + input[2].textContent +
-            "&useAmt=" + input[3].textContent +
-            "&drvRem=" + input[4].textContent +
-            "&rependchk=" + input[5].textContent +
-
-            "&chk2=" + input[6].textContent +
-            "&useOil=" + input[7].textContent +
-            "&rependdate=" + input[8].textContent +
-            "&repaddkm=" + input[9].textContent;
-
-        let url = "/dailyReport/carcareform" + rowData;
+        let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
         window.location.href = url;
     });
 }

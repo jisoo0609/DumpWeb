@@ -65,6 +65,7 @@ function printList(searchResultData) {
             row.classList.add("red-line-divider")
         }
 
+        row.setAttribute("data-drive-id", data.driveID);
         tableBody.appendChild(row);
     });
 
