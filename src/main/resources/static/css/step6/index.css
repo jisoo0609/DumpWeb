@@ -290,13 +290,14 @@ body {
   white-space: nowrap;
 }
 
+.table_container table thead tr th:nth-child(5),
 .table_container table thead tr th:nth-child(6) {
   word-break: keep-all;
 }
 
 .table_container table thead tr th:nth-child(3),
 .table_container table thead tr th:nth-child(4) {
-  text-align: right;
+  text-align: center;
 }
 
 .table_container table tbody tr td:nth-child(1) {
