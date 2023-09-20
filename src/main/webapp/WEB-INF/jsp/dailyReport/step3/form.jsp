@@ -106,19 +106,13 @@
                             </div>
                             <div class="haveTwo">
                                 <div id="chk1">
-                                    <label >결재</label>
-                                    <input type="checkbox" id="chk1" name="chk1" value="0"onChange="approved()">
+                                    <label>결재</label>
+                                    <input type="checkbox" id="checkbox" name="chk1" value="0" onChange="approved()">
                                 </div>
-                                <div id="chk2" style="overflow:visible !important;">
+                                <div id="chk2">
                                     <label>진행</label>
                                     <div class="select" id="dropdown">
-                                      <div class="selected">
-                                        <div class="selected-value">배차</div>
-                                      </div>
-                                      <ul>
-                                        <li class="option">배차</li>
-                                        <li class="option">결제</li>
-                                      </ul>
+                                        배차
                                     </div>
                                 </div>
                             </div>
