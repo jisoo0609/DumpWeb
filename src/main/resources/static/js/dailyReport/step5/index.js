@@ -1,44 +1,38 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const queryString = window.location.search;
-    const params = new URLSearchParams(queryString);
+  const queryString = window.location.search;
+  const params = new URLSearchParams(queryString);
 
-    //
-    const drvDate = params.get("drvDate");
-    const drvClub = params.get("drvClub");
-    const lastKm = params.get("lastKm");
-    const useAmt = params.get("useAmt");
-    const drvRem = params.get("drvRem");
-    const rependchk = params.get("rependchk");
+   // step6에 있는 value값을 가지도 옵니다.
+  const elementIds = [
+    "datepicker1",
+    "lastKm",
+    "useAmt",
+    "drvRem voiceNotification",
+    "showHideCheckbox",
+    "chk2",
+    "useOil",
+    "datepicker2",
+    "nextlastkm"
+  ];
 
-    const chk2 = params.get("chk2");
-    const useOil = params.get("useOil");
-    const rependdate = params.get("rependdate");
-    const repaddkm = params.get("repaddkm");
+   // 객체 초기화
+  const elements = {};
 
-    //
-    const drvDateElement = document.getElementById("datepicker1");
-    const lastKmElement = document.getElementById("lastKm");
-    const useAmtElement = document.getElementById("useAmt");
-    const drvRemElement = document.getElementById("drvRem voiceNotification");
-    const checkboxElement = document.getElementById("showHideCheckbox");
+  // elementIds 배열에 있는 각 요소 ID를 사용하여 웹 페이지의 DOM 요소를 가져와서 elements 객체에 할당
+  elementIds.forEach((id) => {
+    elements[id] = document.getElementById(id);
+  });
 
-    const chk2Element = document.getElementById("chk2");
-    const useOilElement = document.getElementById("useOil");
-    const rependdateElement = document.getElementById("datepicker2");
-    const repaddkmElement = document.getElementById("nextlastkm");
-
-    //
-    const dateMonthDay = drvDate.split(".");
-    console.log(new Date().getFullYear() + '-' + dateMonthDay[0] + '-' + dateMonthDay[1]);
-    drvDateElement.value = new Date().getFullYear() + '-' + dateMonthDay[0] + '-' + dateMonthDay[1];
-    lastKmElement.value = parseInt(lastKm.replace(/,/g, ''));
-    useAmtElement.value = parseInt(useAmt.replace(/,/g, ''));
-    drvRemElement.value = drvRem;
-    checkboxElement.checked = (rependchk === "O" ? true : false);
-
-    chk2Element.checked = chk2;
-    useOilElement.value = parseInt(useOil);
-    rependdateElement.value = rependdate.split("T")[0];
-    repaddkmElement.value = parseInt(repaddkm);
-
+  // URL의 쿼리 문자열에서 값을 추출한것
+  const dateMonthDay = params.get("drvDate").split(".");
+  console.log(new Date().getFullYear() + '-' + dateMonthDay[0] + '-' + dateMonthDay[1]);
+  elements.datepicker1.value = new Date().getFullYear() + '-' + dateMonthDay[0] + '-' + dateMonthDay[1];
+  elements.lastKm.value = parseInt(params.get("lastKm").replace(/,/g, ''));
+  elements.useAmt.value = parseInt(params.get("useAmt").replace(/,/g, ''));
+  elements["drvRem voiceNotification"].value = params.get("drvRem");
+  elements.showHideCheckbox.checked = (params.get("rependchk") === "O");
+  elements.chk2.checked = (params.get("chk2") === "true");
+  elements.useOil.value = parseInt(params.get("useOil"));
+  elements.datepicker2.value = params.get("rependdate").split("T")[0];
+  elements.nextlastkm.value = parseInt(params.get("repaddkm"));
 });
