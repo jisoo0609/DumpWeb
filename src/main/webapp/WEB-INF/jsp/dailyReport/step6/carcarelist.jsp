@@ -41,9 +41,9 @@
             <div class="operating_period content conTop">
                 <h1>기간</h1>
                 <label class="start-text col" for="start-date">
-                    <input type="date" id="start-date" name="startDate" />
+                    <input id="datepicker1" name="startDate" readonly />
                     <span>~</span>
-                    <input type="date" id="end-date" name="endDate" />
+                    <input id="datepicker2" name="endDate" readonly />
                 </label>
             </div>
             <div class="operating_period content">
@@ -82,7 +82,7 @@
         <h1></h1>
       </div>
       <div class="agreement_container">
-      <button class="common_btn" style="width: 110px;">비용금액(원)<br /><span class="resultPrice">0원</span></button>
+      <button class="common_btn" style="width: 110px;">비용금액(원)<br /><span class="resultPrice">0</span></button>
         <div class="btnWraaper">
           <button class="common_btn">일괄결재</button>
           <button class="common_btn">취소</button>
