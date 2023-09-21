@@ -13,6 +13,7 @@ public class DailyReportStep1Sub {
     private String Rem;             // LINE :: 비고
     private int sheetID2;            // LINE :: tSheet FK
     private String tosite;          // LINE :: 하차지
+    private int sheetsubSS;          // LINE :: 회원 idx
 
     //tSheet 테이블
 
