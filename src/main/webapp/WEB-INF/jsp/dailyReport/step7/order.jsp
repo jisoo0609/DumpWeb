@@ -61,15 +61,15 @@
               </div>
             </li>
             <li>
-              <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="/resources/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
               <span class="golInputSpan"><input class="golIn" id="loadPoint" name="loadPoint" type="text" placeholder="상차지"></span>
             </li>
             <li>
-              <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="/resources/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
               <span class="golInputSpan"><input class="golIn" id="unloadPoint" name="unloadPoint" type="text" placeholder="하차지"></span>
             </li>
             <li>
-              <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="/resources/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
               <span class="golInputSpan"><input class="golIn" id="golItems" name="golItems" type="text" placeholder="품목"></span>
             </li>
             <li>
@@ -79,7 +79,7 @@
               </span>
             </li>
             <li>
-              <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
               <span class="golInputSpan"><input class="golIn" id="carNumb" name="carNumb" type="text" placeholder="미지정 또는 차량번호"></span>
             </li>
           </ul>
