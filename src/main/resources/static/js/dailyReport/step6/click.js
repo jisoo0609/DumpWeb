@@ -1,6 +1,12 @@
 
 /* 일괄취소 버튼 클릭 이벤트를 처리 */
 document.querySelector(".common_btn:nth-of-type(2)").addEventListener("click", () => {
+    // 비용금액 업데이트를 0으로 설정합니다.
+    const costButton = document.querySelector(".agreement_container .resultPrice");
+    costButton.innerHTML = "0";
+
+    // 이 부분에서 필요한 다른 작업을 수행할 수도 있습니다.
+
     // 테이블 본문 요소를 찾습니다.
     const tableBody = document.querySelector("table tbody");
 
