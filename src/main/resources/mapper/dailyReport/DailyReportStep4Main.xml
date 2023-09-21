@@ -26,10 +26,10 @@
 
     <select id="findCarListByOption" parameterType="DailyReportStep4OptionForm" resultType="DailyReportStep4">
         SELECT t.sheetID,
-            DATE_FORMAT(t.date, '%m.%d') AS formatted_date,
+            DATE_FORMAT(t.date, '%m.%d') AS date,
             t.CarNo, t.carSubmit, t.carSubmitTel, t.chk1,
             s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup,
-            IF(t.date IS NULL, '1999-01-01', t.date) AS date_processed
+            IF(t.date IS NULL, '1999-01-01', t.date) AS date
         FROM tsheet t
         JOIN tSheet_sub s ON t.sheetID = s.sheetID2
         WHERE t.carNo = #{carNo}
