@@ -36,6 +36,18 @@ function bindList() {
   })
 }
 
+function bindList() {
+    $.ajax({
+        url: "/dailyReport/orderform/ajax/datelist",
+        type: "POST",
+        data: {date : $("#datepicker").val()},
+        success: function (data) {
+            printList(data);
+        }
+    })
+}
+
+
 function insertFirstHeader(arr,idx) {
   //삭제 -> 삽입하여 header td를 제일 앞으로 옮김.
   const firstHeader = arr.splice(idx,1)[0];
