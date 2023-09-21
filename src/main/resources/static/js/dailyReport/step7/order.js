@@ -1,10 +1,10 @@
-/* js에서 search_btn이 눌릴 수 있도록 처리 */
+/* js에서 gsearchBtn이 눌릴 수 있도록 처리 */
 function clickSearchButton(){
   document.querySelector(".gsearchBtn").onclick();
 }
 
 
-/* 리스트의 행 클릭시, 파라미터와 함께 step5로 이동하도록 처리. */
+/* 리스트의 행 클릭시, 파라미터와 함께 step7의 필드로 이동하도록 처리. */
 function clickRowAndRedirect(){
   
   let currentNumber = 2;
@@ -15,7 +15,7 @@ function clickRowAndRedirect(){
       let input = Array.from(event.target.parentElement.getElementsByTagName("td"));
       const confirmButton = document.querySelector("#golPop3 input[value='확인']");
 
-      let rowData =
+      let newData =
           "?currentNumber=" + input[0].textContent +
           "&loadPoint=" + input[1].textContent +
           "&unloadPoint=" + input[2].textContent +
@@ -23,7 +23,7 @@ function clickRowAndRedirect(){
           "&golCount=" + input[4].textContent +
           "&carNumb=" + input[5].textContent;
 
-      let url = "/dailyReport/orderform" + rowData;
+      let url = "/dailyReport/orderform" + newData;
       window.location.href = url;
   });
 }
