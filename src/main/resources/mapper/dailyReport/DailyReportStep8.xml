@@ -29,6 +29,7 @@
         t.CarNo,
         s.fromsite,
         s.tosite,
+        s.item,
         s.Qty,
         s.Qtyup
         FROM tsheet t

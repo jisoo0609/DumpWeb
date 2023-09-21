@@ -18,8 +18,8 @@ $("#start-date, #end-date").datepicker({
     ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
 });
 
-// datepicker1을 매달 1일로 설정
+// start-date을 매달 1일로 설정
 $("#start-date").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth(), 1));
 
-// datepicker2를 오늘 날짜로 설정
+// end-date를 오늘 날짜로 설정
 $("#end-date").datepicker('setDate', 'today');

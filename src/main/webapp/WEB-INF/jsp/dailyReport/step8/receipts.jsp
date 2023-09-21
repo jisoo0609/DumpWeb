@@ -281,6 +281,7 @@
             .list-table th {
                 padding: 1px 10px;
             }
+
             .btn {
                 margin-bottom: 5px;
             }
@@ -326,6 +327,7 @@
                 margin: 0 1px;
             }
         }
+
         @media screen and (max-width: 768px) {
             .btn {
                 margin-top: initial;
@@ -657,6 +659,7 @@
                     <col style="width: 3%">
                     <col style="width: 3%">
                     <col style="width: 3%">
+                    <col style="width: 2%">
                     <col style="width: 4%">
                     <col style="width: 2%">
                     <col style="width: 2%">
@@ -667,6 +670,7 @@
                     <th>운행일</th>
                     <th>상차지</th>
                     <th>하차지</th>
+                    <th>품목</th>
                     <th>차량번호</th>
                     <th>대수</th>
                     <th>진행</th>
@@ -685,6 +689,9 @@
                     </td>
                     <td>
                         지밸리
+                    </td>
+                    <td>
+                        모래
                     </td>
                     <td>
                         37우2598
@@ -710,6 +717,9 @@
                         지밸리
                     </td>
                     <td>
+                        자갈
+                    </td>
+                    <td>
                         더미데이터
                     </td>
                     <td>
@@ -719,12 +729,13 @@
                         <span style="color: #000080; font-weight: bold;">하차</span>
                     </td>
                 </tr>
-                <c:forEach items="${receiptsList}" var="receipt">
+                <c:forEach items="${receiptsList}" var="receipt" varStatus="No">
                     <tr>
-                        <td>${receipt.qtyup}</td>
+                        <td>${No.index + 1}</td>
                         <td>${receipt.date}</td>
                         <td>${receipt.fromsite}</td>
                         <td>${receipt.tosite}</td>
+                        <td>${receipt.item}</td>
                         <td>${receipt.carNo}</td>
                         <td>${receipt.qty}</td>
                         <td>
