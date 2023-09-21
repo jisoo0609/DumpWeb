@@ -115,6 +115,7 @@
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
 
 <script src="/resources/js/dailyReport/step6/datepicker.js"></script>
-<script src="/resources/js/dailyReport/step6/cancelbutton.js"></script>
-<script src="/resources/js/dailyReport/step6/index.js"></script>
+<script src="/resources/js/dailyReport/step6/list.js"></script>
+<script src="/resources/js/dailyReport/step6/click.js"></script>
+<script src="/resources/js/dailyReport/step6/DOMContentLoaded.js"></script>
 
