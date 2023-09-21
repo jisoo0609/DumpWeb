@@ -34,4 +34,16 @@ public class Step5Controller {
         return step5Service.getCarListByDate(date);
     }
 
+    @RequestMapping(value = "/carcareform/ajax/getDriveIDForm", method = RequestMethod.POST)
+    @ResponseBody
+    public DailyReportStep5 searchDriveIDForm(int driveID) {
+        return step5Service.getDriveIDForm(driveID);
+    }
+
+    @RequestMapping(value = "/carcareform/ajax/delete", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteDataByDriveID(int driveID) {
+        step5Service.deleteDataByDriveID(driveID);
+    }
+
 }
