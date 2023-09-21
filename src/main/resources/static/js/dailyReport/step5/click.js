@@ -3,6 +3,17 @@ function getCheckParam(id){
     return  "&" + id + "=" + checkBox.checked;
 }
 
+function bindList() {
+    $.ajax({
+        url: "/dailyReport/carcareform/ajax/list",
+        type: "POST",
+        data: {date : $("#reg-date").val()},
+        success: function (data) {
+            printList(data);
+        }
+    })
+}
+
 
 function save() {
     //fetch 코드도 고민해볼 것.
@@ -20,21 +31,12 @@ function save() {
         type: "POST",
         data: $("[name=entry_form]").serialize() + checkData,
         success: function (data) {
-            console.log('정상 저장');
+            alert('저장 되었습니다.');
+            bindList();
         }
     })
 }
 
-function bindList() {
-    $.ajax({
-        url: "/dailyReport/carcareform/ajax/listload",
-        type: "POST",
-        data: {date : $("#reg-date").val()},
-        success: function (data) {
-            printList(data);
-        }
-    })
-}
 
 function deleteData(){
     $.ajax({
@@ -42,7 +44,18 @@ function deleteData(){
         type: "DELETE",
         data : {driveID : $("[name=driveID]").val()},
         success: function (data) {
-            console.log("제거 완료");
+            alert('삭제 되었습니다.');
+            bindList();
         }
     })
+}
+
+function clickListThAndRedirect(){
+    const listRow = document.querySelector("table tbody");
+
+    listRow.addEventListener("click", (event) => {
+        let driveID = event.target.parentElement.getAttribute("data-drive-id")
+        let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
+        window.location.href = url;
+    });
 }

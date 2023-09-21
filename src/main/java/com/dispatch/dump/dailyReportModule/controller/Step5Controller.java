@@ -21,29 +21,29 @@ public class Step5Controller {
         return "/dailyReport/step5/carcareform";
     }
 
+    /* click.js */
     @RequestMapping(value = "/carcareform/ajax/save", method = RequestMethod.POST)
     @ResponseBody
-    public String save(DailyReportStep5 dailyReportStep5) {
-        return step5Service.save(dailyReportStep5);
+    public String tDriveSave(DailyReportStep5 dailyReportStep5) {
+        return step5Service.saveTDrive(dailyReportStep5);
     }
 
-
-    @RequestMapping(value = "/carcareform/ajax/listload", method = RequestMethod.POST)
+    @RequestMapping(value = "/carcareform/ajax/list", method = RequestMethod.POST)
     @ResponseBody
-    public List<DailyReportStep5> searchDailyReport(String date) {
-        return step5Service.getCarListByDate(date);
-    }
-
-    @RequestMapping(value = "/carcareform/ajax/getDriveIDForm", method = RequestMethod.POST)
-    @ResponseBody
-    public DailyReportStep5 searchDriveIDForm(int driveID) {
-        return step5Service.getDriveIDForm(driveID);
+    public List<DailyReportStep5> tDriveList(String date) {
+        return step5Service.findTDriveList(date);
     }
 
     @RequestMapping(value = "/carcareform/ajax/delete", method = RequestMethod.DELETE)
     @ResponseBody
-    public void deleteDataByDriveID(int driveID) {
-        step5Service.deleteDataByDriveID(driveID);
+    public void tDriveRemove(int driveID) {
+        step5Service.removeTDrive(driveID);
     }
 
+    /* param.js */
+    @RequestMapping(value = "/carcareform/ajax/details", method = RequestMethod.POST)
+    @ResponseBody
+    public DailyReportStep5 tDriveDetails(int driveID) {
+        return step5Service.findTDriveDetails(driveID);
+    }
 }

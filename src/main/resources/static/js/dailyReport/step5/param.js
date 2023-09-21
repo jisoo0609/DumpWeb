@@ -8,11 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
         getDriveIDDataByParams(driveID);
     }
 
+    clickListThAndRedirect();
 });
 
 function getDriveIDDataByParams(driveID) {
     $.ajax({
-        url: "/dailyReport/carcareform/ajax/getDriveIDForm",
+        url: "/dailyReport/carcareform/ajax/details",
         type: "POST",
         data: {driveID: driveID},
         success: function (data) {
@@ -21,11 +22,17 @@ function getDriveIDDataByParams(driveID) {
     })
 }
 
+const drvClubList = {
+    "주유": 0
+    , "요소수": 1
+    , "엔진오일": 2
+    , "정비(수리)": 3,
+    "기타": 4
+};
+
 function inputDataByParams(data) {
 
     for (const key in data) {
-
-        console.log(key,data[key]);
 
         if (data[key] == null) {
             continue;
@@ -33,17 +40,10 @@ function inputDataByParams(data) {
 
         if (key === "drvClub") {
             const itemList = document.querySelectorAll('input[name="drvClub"]');
-
-            itemList.forEach((item) => {
-                if (item.value === data[key]) {
-                    item.checked = true;
-                    return false;
-                }
-            });
-        } else if(data[key] === true || data[key] === false){
+            itemList[drvClubList[data[key]]].checked = true;
+        } else if (typeof data[key] === "boolean") {
             document.getElementById(key).checked = data[key];
-        }
-        else {
+        } else {
             document.querySelector('[name=' + key + ']').value = data[key];
         }
     }

@@ -4,8 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep5Mapper">
 
-    <!--차계부 내용 저장-->
-    <insert id="insertDailyReportStep5" parameterType="DailyReportStep5">
+    <insert id="insertTDrive" parameterType="DailyReportStep5">
         INSERT INTO tdrive
         (
          carno,
@@ -38,9 +37,7 @@
     </insert>
 
 
-    <!--차계부 내용 업데이트-->
-    <!--drvclub=IF(#{drvclub} IS NOT NULL, #{drvdate}, '요소수')-->
-    <update id="updateDailyReportStep5" parameterType="DailyReportStep5">
+    <update id="updateTDrive" parameterType="DailyReportStep5">
         UPDATE tdrive
         SET drvdate = #{drvDate},
             drvclub = #{drvClub},
@@ -52,11 +49,12 @@
             rependdate = #{rependdate},
             repaddkm = #{repaddkm},
             rependchk = #{rependchk}
-        WHERE driveid = #{driveID}
+        WHERE carno = #{userID}
+          AND driveid = #{driveID}
     </update>
 
 
-    <select id="findCarListByDate" resultType="DailyReportStep5">
+    <select id="selectTDriveList" resultType="DailyReportStep5">
         SELECT driveID,
         DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
         drvclub,
@@ -74,7 +72,16 @@
         ORDER BY drvclub ASC
     </select>
 
-    <select id="findDriveIDForm" resultType="DailyReportStep5">
+
+    <delete id="deleteTDrive">
+        DELETE
+        FROM   tdrive
+        WHERE  carno = #{userID}
+          AND driveID = #{driveID}
+    </delete>
+
+
+    <select id="selectTDriveDetails" resultType="DailyReportStep5">
         SELECT driveID,
                DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
                drvclub,
@@ -90,12 +97,5 @@
         WHERE  carno = #{userID}
           AND driveID = #{driveID}
     </select>
-
-    <delete id="deleteDataByDriveID" >
-        DELETE
-        FROM   tdrive
-        WHERE  carno = #{userID}
-          AND driveID = #{driveID}
-    </delete>
 
 </mapper>
