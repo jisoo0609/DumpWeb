@@ -24,7 +24,7 @@ public class Step5Service {
     }
 
 
-    public String save(DailyReportStep5 dailyReportStep5) {
+    public String saveTDrive(DailyReportStep5 dailyReportStep5) {
 
         Map<String, Object> rtnMap = commonUtil.returnMap();
 
@@ -32,10 +32,9 @@ public class Step5Service {
             dailyReportStep5.setCarNo(getSessionLoginData().getUserId());
 
             if (dailyReportStep5.getDriveID() == 0) {
-                dailyReportStep5Mapper.insertDailyReportStep5(dailyReportStep5);
-            } else { //update 수정
-                System.out.println(dailyReportStep5);
-                dailyReportStep5Mapper.updateDailyReportStep5(dailyReportStep5);
+                dailyReportStep5Mapper.insertTDrive(dailyReportStep5);
+            } else {
+                dailyReportStep5Mapper.updateTDrive(dailyReportStep5);
             }
             rtnMap.put("httpCode", 200);
 
@@ -46,19 +45,15 @@ public class Step5Service {
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
-    public List<DailyReportStep5> getCarListByDate(String date) {
-        String userID = getSessionLoginData().getUserId();
-        return dailyReportStep5Mapper.findCarListByDate(userID, date);
+    public List<DailyReportStep5> findTDriveList(String date) {
+        return dailyReportStep5Mapper.selectTDriveList(getSessionLoginData().getUserId(), date);
     }
 
-    public DailyReportStep5 getDriveIDForm(int driveID) {
-        String userID = getSessionLoginData().getUserId();
-        return dailyReportStep5Mapper.findDriveIDForm(userID, driveID);
+    public void removeTDrive(int driveID) {
+        dailyReportStep5Mapper.deleteTDrive(getSessionLoginData().getUserId(), driveID);
     }
 
-    public void deleteDataByDriveID(int driveID) {
-        String userID = getSessionLoginData().getUserId();
-        dailyReportStep5Mapper.deleteDataByDriveID(userID, driveID);
+    public DailyReportStep5 findTDriveDetails(int driveID) {
+        return dailyReportStep5Mapper.selectTDriveDetails(getSessionLoginData().getUserId(), driveID);
     }
-
 }

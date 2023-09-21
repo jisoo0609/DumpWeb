@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function getDriveIDDataByParams(driveID) {
     $.ajax({
-        url: "/dailyReport/carcareform/ajax/getDriveIDForm",
+        url: "/dailyReport/carcareform/ajax/details",
         type: "POST",
         data: {driveID: driveID},
         success: function (data) {

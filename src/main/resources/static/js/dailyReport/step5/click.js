@@ -27,7 +27,7 @@ function save() {
 
 function bindList() {
     $.ajax({
-        url: "/dailyReport/carcareform/ajax/listload",
+        url: "/dailyReport/carcareform/ajax/list",
         type: "POST",
         data: {date : $("#reg-date").val()},
         success: function (data) {

@@ -6,15 +6,14 @@ import java.util.List;
 
 public interface DailyReportStep5Mapper {
 
-    /* FUNCTION ::  등록 */
-    void insertDailyReportStep5(DailyReportStep5 dailyReportStep5);
+    void insertTDrive(DailyReportStep5 dailyReportStep5);
 
-    void updateDailyReportStep5(DailyReportStep5 dailyReportStep5);
+    void updateTDrive(DailyReportStep5 dailyReportStep5);
 
-    List<DailyReportStep5> findCarListByDate(String userID, String date);
+    List<DailyReportStep5> selectTDriveList(String userID, String date);
 
-    DailyReportStep5 findDriveIDForm(String userID, int driveID);
+    void deleteTDrive(String userID, int driveID);
 
-    void deleteDataByDriveID(String userID, int driveID);
+    DailyReportStep5 selectTDriveDetails(String userID, int driveID);
 
 }
