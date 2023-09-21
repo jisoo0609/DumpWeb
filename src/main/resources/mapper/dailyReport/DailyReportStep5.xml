@@ -59,7 +59,7 @@
         repaddkm
         FROM   tdrive
         WHERE  carno = #{userID}
-        AND drvdate BETWEEN #{date} AND #{date}
+        AND drvdate LIKE CONCAT(#{date}, '%')
         ORDER BY drvclub ASC
     </select>
 
