@@ -1,27 +1,22 @@
-var rdOli = null;
-var rdDEF = null;
-var rdEngOil = null;
-var rdFix = null;
-var rdNote = null;
-
-$(document).ready(function(){
-    init();
-    popupJS(rdOli,rdDEF,rdEngOil,rdFix,rdNote);
-});
-
-function init(){
-    rdOli = $('#rdOli');
-    rdDEF = $('#rdDEF');
-    rdEngOil = $('#rdEngOil');
-    rdFix = $('#rdFix');
-    rdNote = $('#rdNote');
+function save() {
+    //fetch 코드도 고민해볼 것.
+    $.ajax({
+        url: "/dailyReport/carcareform/ajax/save",
+        type: "POST",
+        data: $("[name=entry_form]").serialize(),
+        success: function (data) {
+            console.log('정상 저장');
+        }
+    })
 }
 
-function clickJS(rdOli,rdDEF,rdEngOil,rdFix,rdNote){
-    var clickTarget;
-    $(rdOli,rdDEF,rdEngOil,rdFix,rdNote).click(function(){
-        clickTarget = "#"+ $(this).attr("data-popName");
-        $(clickTarget).addClass('active');
-    });
-
+function bindList() {
+    $.ajax({
+        url: "/dailyReport/carcareform/ajax/listload",
+        type: "POST",
+        data: {date : $("#reg-date").val()},
+        success: function (data) {
+            printList(data);
+        }
+    })
 }
