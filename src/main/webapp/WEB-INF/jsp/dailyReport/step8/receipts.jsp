@@ -882,12 +882,12 @@
             <table class="list-table" id="tableOrderByDate" style="display:<%= "orderByDate".equals(searchType) ? "block" : "none" %>">
                 <colgroup>
                     <col style="width: 3%">
-                    <col style="width: 5%">
+                    <col style="width: 7%">
                     <col style="width: 5%">
                     <col style="width: 5%">
                     <col style="width: 5%">
                     <col style="width: 7%">
-                    <col style="width: 4%">
+                    <col style="width: 5%">
                     <col style="width: 4%">
                 </colgroup>
                 <thead>
@@ -987,22 +987,22 @@
                     <td>1</td>
                     <td><span style="color: #000080; font-weight: bold;">하차</span></td>
                 </tr>
-                <c:forEach items="${receiptsList}" var="receipt" varStatus="No">
-                    <tr>
-                        <td>${No.index + 1}</td>
-                        <td>${receipt.carNo}</td>
-                        <td>${receipt.fromsite}</td>
-                        <td>${receipt.tosite}</td>
-                        <td>${receipt.item}</td>
-                        <td>${receipt.date}</td>
-                        <td>${receipt.qty}</td>
-                        <td>
-                        <span style="color: #000080; font-weight: bold;">
-                                ${receipt.qty}
-                        </span>
-                        </td>
-                    </tr>
-                </c:forEach>
+<%--                <c:forEach items="${receiptsList}" var="receipt" varStatus="No">--%>
+<%--                    <tr>--%>
+<%--                        <td>${No.index + 1}</td>--%>
+<%--                        <td>${receipt.carNo}</td>--%>
+<%--                        <td>${receipt.fromsite}</td>--%>
+<%--                        <td>${receipt.tosite}</td>--%>
+<%--                        <td>${receipt.item}</td>--%>
+<%--                        <td>${receipt.date}</td>--%>
+<%--                        <td>${receipt.qty}</td>--%>
+<%--                        <td>--%>
+<%--                        <span style="color: #000080; font-weight: bold;">--%>
+<%--                                ${receipt.qty}--%>
+<%--                        </span>--%>
+<%--                        </td>--%>
+<%--                    </tr>--%>
+<%--                </c:forEach>--%>
                 </tbody>
             </table>
         </div>

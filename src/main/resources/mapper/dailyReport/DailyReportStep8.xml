@@ -19,6 +19,7 @@
             JOIN tSheet_sub s
         ON t.sheetID = s.sheetID2
         WHERE t.carSubmitTel = #{carSubmitTel}
+        order by date desc;
 
     </select>
 
@@ -55,7 +56,6 @@
         </if>
         order by date desc, t.CarNo asc;
     </select>
-
 
 
     <select id="receiptsSearchOrderByCarNo" parameterType="DailyReportStep8OptionForm"
