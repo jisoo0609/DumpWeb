@@ -32,21 +32,23 @@ public class Step1Controller {
 
 
 
+
         // 총 운반 금액을 모델에 추가
         double totalTransportationCost = subList.stream()
                 .mapToDouble(sub -> sub.getQty() * sub.getQtyup())
                 .sum();
         model.addAttribute("totalTransportationCost", totalTransportationCost);
+        // 총 운행 대수를 계산하고 모델에 추가
+        int totalQty = subList.stream()
+                .mapToInt(sub -> (int) sub.getQty())
+                .sum();
+        model.addAttribute("totalQty", totalQty);
 
         List<DailyReportStep1Sub> mainList = step1Service.getMain();
         model.addAttribute("list", mainList);
 
         return "/dailyReport/step1/driver";
 
-
-
-       /* model.addAttribute("list", step1Service.getMain());
-        return "/dailyReport/step1/driver";*/
     }
 
 
