@@ -24,10 +24,22 @@ function getDriveIDDataByParams(driveID){
 function inputDataByParams(data){
 
   for (const key in data) {
-    console.log(data[key]);
 
-    if(data[key] != null){
-    document.querySelector('[name=' + key + ']').value = data[key] ;
+    if(data[key] == null){
+      continue;
+    }
+
+    if(key === "drvClub"){
+      const itemList=document.querySelectorAll('input[name="drvClub"]');
+
+      itemList.forEach((item) => {
+        if (item.value === data[key]) {
+          item.checked = true;
+          return false;
+        }
+      });
+    }else{
+      document.querySelector('[name=' + key + ']').value = data[key];
     }
   }
 
