@@ -183,7 +183,7 @@ $.search = function() {
 
 function receiptsSearchResults(receiptsSearchResults) {
     // receiptsResultDiv.empty(); // 이전 결과 지우기
-    var receiptsResultDiv = document.getElementById("receiptsSearchResult");
+    var receiptsResultDiv = document.getElementById("receiptsResultBodyOrderByDate");
     receiptsResultDiv.innerHTML = "";
     var receiptsResults = receiptsSearchResults;
 

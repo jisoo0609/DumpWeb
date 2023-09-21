@@ -42,24 +42,34 @@ public class Step8Service {
         return ReceiptsDataList;
     }
 
-    public String searchReceipts(DailyReportStep8 dailyReportStep8) {
+    public String searchReceipts(DailyReportStep8OptionForm dailyReportStep8OptionForm) {
 
         Map<String, Object> searchReceiptsMap = commonUtil.returnMap();
 
         try {
 
-            System.out.println("상차지는?" + dailyReportStep8.getFromsite());
-            System.out.println("Carno?" + dailyReportStep8.getCarNo());
+            System.out.println("상차지는?" + dailyReportStep8OptionForm.getFromsite());
+            System.out.println("Carno?" + dailyReportStep8OptionForm.getCarNo());
+            System.out.println("시작일은?" + dailyReportStep8OptionForm.getSearchStartDate());
+            System.out.println("종료일은?" + dailyReportStep8OptionForm.getSearchEndDate());
 
-            dailyReportStep8.setCarSubmitTel(getSessionLoginData().getUserId());
-            System.out.println("carSubmitTel: " + dailyReportStep8.getCarSubmitTel());
+            dailyReportStep8OptionForm.setCarSubmitTel(getSessionLoginData().getUserId());
+            System.out.println("carSubmitTel: " + dailyReportStep8OptionForm.getCarSubmitTel());
+            System.out.println("searchType?" + dailyReportStep8OptionForm.getSearchType());
 
-            List<DailyReportStep8> receiptsSearchList = dailyReportStep8Mapper.receiptsSearchCondition(dailyReportStep8);
+            List<DailyReportStep8> receiptsSearchList;
+            if (dailyReportStep8OptionForm.getSearchType().equals("orderByDate") ) {
+                receiptsSearchList = dailyReportStep8Mapper.receiptsSearchOrderByDate(dailyReportStep8OptionForm);
+            } else {
+                receiptsSearchList = dailyReportStep8Mapper.receiptsSearchOrderByCarNo(dailyReportStep8OptionForm);
+            }
+
             System.out.println("receiptsSearchList?" + receiptsSearchList);
 
-           // receiptsSearchList.add(dailyReportStep8Mapper.)
+            // receiptsSearchList.add(dailyReportStep8Mapper.)
             searchReceiptsMap.put("httpCode", 200);
             searchReceiptsMap.put("receiptsSearchList", receiptsSearchList);
+
 
         } catch (Exception e) {
             log.error("Exception[" + e.getMessage() + "]");

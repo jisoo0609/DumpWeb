@@ -2,6 +2,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
+
+<%
+    //라디오 선택값 가져올 변수 선언
+    String searchType = request.getParameter("searchType");
+    if (searchType == null) {
+        // 기본 선택값 설정 (운행일 기준)
+        searchType = "orderByDate";
+    }
+    System.out.println("searchType 값: " + searchType);
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -545,29 +555,29 @@
         src="/resources/js/dailyReport/step8/list.js?jsVerType=2020230831191239"></script>
 <script>
     // 페이지 로드 시 실행
-    $(document).ready(function () {
-        // 체크박스 요소와 테이블 요소 가져오기
-        const toggleTableCheckbox1 = $("#toggleTableCheckbox1");
-        const toggleTableCheckbox2 = $("#toggleTableCheckbox2");
-        const dataTable = $("#dataTable");
-
-        // 체크박스 클릭 이벤트 처리
-        toggleTableCheckbox1.click(function () {
-            if (toggleTableCheckbox1.is(":checked")) {
-                // 운행일 기준 테이블을 보이도록 설정
-                dataTable.html('<tr><th>운행일</th><th>상차지</th><th>하차지</th><th>차량번호</th><th>대수</th><th>진행</th></tr><tr><td>09.09</td><td>구디 </td> <td>지밸리 </td> <td>37우2598 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
-                toggleTableCheckbox2.prop("checked", false); // 다른 체크박스 해제
-            }
-        });
-
-        toggleTableCheckbox2.click(function () {
-            if (toggleTableCheckbox2.is(":checked")) {
-                // 차량 기준 테이블을 보이도록 설정
-                dataTable.html('<tr><th>차량번호</th><th>상차지</th><th>하차지</th><th>운행일</th><th>대수</th><th>진행</th></tr>  <tr> <td>37우2598</td> <td>구디 </td> <td>지밸리 </td> <td>09.17 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
-                toggleTableCheckbox1.prop("checked", false); // 다른 체크박스 해제
-            }
-        });
-    });
+    // $(document).ready(function () {
+    //     // 체크박스 요소와 테이블 요소 가져오기
+    //     const toggleTableCheckbox1 = $("#toggleTableCheckbox1");
+    //     const toggleTableCheckbox2 = $("#toggleTableCheckbox2");
+    //     const dataTable = $("#dataTable");
+    //
+    //     // // 체크박스 클릭 이벤트 처리
+    //     // toggleTableCheckbox1.click(function () {
+    //     //     if (toggleTableCheckbox1.is(":checked")) {
+    //     //         // 운행일 기준 테이블을 보이도록 설정
+    //     //         dataTable.html('<tr><th>운행일</th><th>상차지</th><th>하차지</th><th>차량번호</th><th>대수</th><th>진행</th></tr><tr><td>09.09</td><td>구디 </td> <td>지밸리 </td> <td>37우2598 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
+    //     //         toggleTableCheckbox2.prop("checked", false); // 다른 체크박스 해제
+    //     //     }
+    //     // });
+    //
+    //     toggleTableCheckbox2.click(function () {
+    //         if (toggleTableCheckbox2.is(":checked")) {
+    //             // 차량 기준 테이블을 보이도록 설정
+    //             dataTable.html('<tr><th>차량번호</th><th>상차지</th><th>하차지</th><th>운행일</th><th>대수</th><th>진행</th></tr>  <tr> <td>37우2598</td> <td>구디 </td> <td>지밸리 </td> <td>09.17 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
+    //             toggleTableCheckbox1.prop("checked", false); // 다른 체크박스 해제
+    //         }
+    //     });
+    // });
 </script>
 
 <script>
@@ -700,7 +710,7 @@
         <input type="hidden" name="item" value=""/>
         <input type="hidden" name="currStatus" value=""/>
         <input type="hidden" name="sheetID"/>
-        <input type="hidden" name="searchType" value="car"/>
+<%--        <input type="hidden" name="searchType" value="car"/>--%>
         <input type="hidden" name="searchDetailChk" value="0">
     </form>
 
@@ -712,7 +722,7 @@
         <input type="hidden" name="fromsite" value=""/>
         <input type="hidden" name="tosite" value=""/>
         <input type="hidden" name="item" value=""/>
-        <input type="hidden" name="searchType" value="car"/>
+<%--        <input type="hidden" name="searchType" value="car"/>--%>
         <input type="hidden" name="club" value=""/>
         <input type="hidden" name="CarNo" value=""/>
         <input type="hidden" name="allChk2Result" value="0">
@@ -820,11 +830,11 @@
         <div style="text-align: center;padding-top: 30px;border: 1px solid #ddd;padding-bottom: 30px; margin: 0 0 10px;">
             <div style="width: 50%;  float: left;">
                 <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
-                        type="radio" name="searchType" checked/>운행일 기준</label>
+                        type="radio" name="searchType" value="orderByDate" checked/>운행일 기준</label>
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="searchType"/>차량 기준</label>
+                        type="radio" name="searchType" value="orderByCarNo"/>차량 기준</label>
             </div>
         </div>
     </form>
@@ -869,7 +879,7 @@
 <%--                           value="취소">--%>
 <%--                </div>--%>
 <%--            </div>--%>
-            <table class="list-table">
+            <table class="list-table" id="tableOrderByDate" style="display:<%= "orderByDate".equals(searchType) ? "block" : "none" %>">
                 <colgroup>
                     <col style="width: 3%">
                     <col style="width: 5%">
@@ -892,58 +902,26 @@
                     <th>진행</th>
                 </tr>
                 </thead>
-                <tbody id="receiptsSearchResult">
+                <tbody id="receiptsResultBodyOrderByDate">
                 <tr>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        09.09
-                    </td>
-                    <td>
-                        구디
-                    </td>
-                    <td>
-                        지밸리
-                    </td>
-                    <td>
-                        모래
-                    </td>
-                    <td>
-                        37우2598
-                    </td>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        <span style="color: #000080; font-weight: bold;">하차</span>
-                    </td>
+                    <td>1</td>
+                    <td>09.09</td>
+                    <td>구디</td>
+                    <td>지밸리</td>
+                    <td>모래</td>
+                    <td>37우2598</td>
+                    <td>1</td>
+                    <td><span style="color: #000080; font-weight: bold;">하차</span></td>
                 </tr>
                 <tr>
-                    <td>
-                        2
-                    </td>
-                    <td>
-                        09.10
-                    </td>
-                    <td>
-                        구디
-                    </td>
-                    <td>
-                        지밸리
-                    </td>
-                    <td>
-                        자갈
-                    </td>
-                    <td>
-                        더미데이터
-                    </td>
-                    <td>
-                        1
-                    </td>
-                    <td>
-                        <span style="color: #000080; font-weight: bold;">하차</span>
-                    </td>
+                    <td>2</td>
+                    <td>09.10</td>
+                    <td>구디</td>
+                    <td>지밸리</td>
+                    <td>자갈</td>
+                    <td>더미데이터</td>
+                    <td>1</td>
+                    <td><span style="color: #000080; font-weight: bold;">하차</span></td>
                 </tr>
                 <c:forEach items="${receiptsList}" var="receipt" varStatus="No">
                     <tr>
@@ -962,7 +940,70 @@
                     </tr>
                 </c:forEach>
                 </tbody>
+            </table>
 
+
+            <table class="list-table" id="tableOrderByCarNo" style="display:<%= "orderByCarNo".equals(searchType) ? "block" : "none" %>">
+                <colgroup>
+                    <col style="width: 3%">
+                    <col style="width: 5%">
+                    <col style="width: 5%">
+                    <col style="width: 5%">
+                    <col style="width: 5%">
+                    <col style="width: 7%">
+                    <col style="width: 4%">
+                    <col style="width: 4%">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>차량번호</th>
+                    <th>상차지</th>
+                    <th>하차지</th>
+                    <th>품목</th>
+                    <th>운행일</th>
+                    <th>대수</th>
+                    <th>진행</th>
+                </tr>
+                </thead>
+                <tbody id="receiptsResultBodyOrderByCarNo">
+                <tr>
+                    <td>1</td>
+                    <td>37우2598</td>
+                    <td>구디</td>
+                    <td>지밸리</td>
+                    <td>모래</td>
+                    <td>09.09</td>
+                    <td>1</td>
+                    <td><span style="color: #000080; font-weight: bold;">하차</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>더미데이터</td>
+                    <td>구디</td>
+                    <td>지밸리</td>
+                    <td>자갈</td>
+                    <td>09.10</td>
+                    <td>1</td>
+                    <td><span style="color: #000080; font-weight: bold;">하차</span></td>
+                </tr>
+                <c:forEach items="${receiptsList}" var="receipt" varStatus="No">
+                    <tr>
+                        <td>${No.index + 1}</td>
+                        <td>${receipt.carNo}</td>
+                        <td>${receipt.fromsite}</td>
+                        <td>${receipt.tosite}</td>
+                        <td>${receipt.item}</td>
+                        <td>${receipt.date}</td>
+                        <td>${receipt.qty}</td>
+                        <td>
+                        <span style="color: #000080; font-weight: bold;">
+                                ${receipt.qty}
+                        </span>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tbody>
             </table>
         </div>
         <div>
@@ -987,6 +1028,7 @@
                 </ul>
             </section>
         </div>
+    </div>
 </section>
 
 
