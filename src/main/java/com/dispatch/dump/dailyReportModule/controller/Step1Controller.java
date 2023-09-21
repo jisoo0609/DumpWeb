@@ -59,12 +59,12 @@ public class Step1Controller {
     }
     //tsheet 조회*/
 
- /*   @GetMapping("/driver/main")
+    @GetMapping("/driver/main")
     public ModelAndView listMain(){
         ModelAndView modelAndView = new ModelAndView ("/dailyReport/step1/driver");
         modelAndView.addObject("list",step1Service.getMain());
         return modelAndView;
-    }*/
+    }
 
 /*
     @RequestMapping(value = "/step1/getList", method = RequestMethod.GET)

@@ -1,15 +1,18 @@
 package com.dispatch.dump.dailyReportModule.service;
 
-import com.dispatch.dump.commonModule.db.dto.*;
-import com.dispatch.dump.commonModule.util.CommonUtil;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Main;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Sub;
+import com.dispatch.dump.commonModule.db.dto.Login;
+import com.dispatch.dump.commonModule.db.dto.Summary;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep1Mapper;
-import javax.servlet.http.HttpSession;
 
-import com.sun.org.apache.xml.internal.serializer.AttributesImplSerializer;
+import com.dispatch.dump.commonModule.util.CommonUtil;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,11 +28,13 @@ public class Step1Service {
         HttpSession session = commonUtil.getSession();
         Login loginData = (Login) session.getAttribute("loginInfo");
 
-        //login id 와 tsheet 의 carsubmittel이 똑같은 튜플값을 리스트 tsheetsub에서 가져옴
-        List<DailyReportStep1Main> tSheet = new ArrayList<>();
-        tSheet = dailyReportStep1Mapper.findDailyReportMainByCarSubmitTel(loginData.getUserId());
 
-        // 가져온 튜플의 sheetID 와 tsheetSub의 sheetID2가 똑같은 튜플 값을 tsheet에서 가져옴
+
+        //tsitepw의 uuserID 와 tsheet 의 sheetSS이 똑같은 튜플값을 리스트 tsheet에서 가져옴
+        List<DailyReportStep1Main> tSheet = new ArrayList<>();
+        tSheet = dailyReportStep1Mapper.findDailyReportMainByCarSubmitTel(loginData.getUuserID());
+
+        // 가져온 튜플의 sheetID 와 tsheetSub의 sheetID2가 똑같은 튜플 값을 tsheetsub에서 가져옴
         List<DailyReportStep1Sub> tSheetSub = new ArrayList<>();
         tSheet.stream().forEach(t -> tSheetSub.add(dailyReportStep1Mapper.findDailyReportMainBySheetID2(t.getSheetID())));
 
@@ -50,11 +55,14 @@ public class Step1Service {
 
 
         List<DailyReportStep1Sub> tSheet = new ArrayList<>();
-        tSheet = dailyReportStep1Mapper.findJoinDailyReport(loginData.getUserId());
+        tSheet = dailyReportStep1Mapper.findJoinDailyReport(loginData.getUuserID());
         tSheet.forEach(t -> System.out.println(t));
 
-        System.out.println(dailyReportStep1Mapper.findJoinDailyReportForTotalTransportationCost(loginData.getUserId()));
+        System.out.println(dailyReportStep1Mapper.findJoinDailyReportForTotalTransportationCost(loginData.getUuserID()));
 
         return tSheet;
     }
+
+
+
 }

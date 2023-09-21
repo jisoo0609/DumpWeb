@@ -18,6 +18,7 @@ $.save = function() {
             var json = $.parseJSON(data);
             if(json.httpCode == 200) {
 
+
                 alert("저장이 완료되었습니다.");
                 $.list();
                 const popup = document.getElementById("popup");
@@ -25,7 +26,6 @@ $.save = function() {
                 for (let i = 0; i < popinputs.length; i++) {
                     popinputs[i].value = ""; // Set the value of each input field to an empty string
                 }
-
             } else{
                 alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
             }

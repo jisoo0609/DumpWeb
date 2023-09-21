@@ -49,8 +49,8 @@
 
             <img id="modalPhoto" src="" alt="Uploaded Photo" style="height: auto;">
             <div class="modal-buttons">
-                <button type="button" style="width: 100px; !important" class="btn btn-blue" onclick="closeModal()">확인</button>
-                <button type="button" style="width: 100px; !important" class="btn btn-blue" onclick="retryCapture()">재촬영</button>
+                <button type="button" style="width: 150px; !important" class="btn btn-white" onclick="closeModal()">확인</button>
+                <button type="button" style="width: 150px; !important" class="btn btn-blue" onclick="retryCapture()">재촬영</button>
 
             </div>
         </div>
