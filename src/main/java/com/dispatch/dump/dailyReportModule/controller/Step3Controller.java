@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/dailyReport")
@@ -59,8 +60,8 @@ public class Step3Controller {
     /*insert 후 목록 조회--> 보완 예정*/
     @RequestMapping(value = "/workspace/ajax/list", method = RequestMethod.POST)
     @ResponseBody
-    public String list(Model model, DailyReportStep3Main dailyReportStep3Main) {
-        return step3Service.list(model, dailyReportStep3Main);
+    public String list(DailyReportStep3Main dailyReportStep3Main) {
+        return step3Service.list(dailyReportStep3Main);
     }
 
     @RequestMapping(value = "/workspace/ajax/delete", method = RequestMethod.GET)
