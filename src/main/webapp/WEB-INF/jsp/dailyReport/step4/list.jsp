@@ -53,14 +53,15 @@
             <img src="/resources/image/icons/ico_que.png" alt="" class="que-dis-mn" onclick="">
         </h1>
     </div>
-    <form>
+    <form name="data_frm">
         <div class="search_form">
+            <input type="hidden" name="carNo" value="${sessionScope.loginInfo.userId}">
             <div class="data_Area">
                 <div>
                     <label style="font-size: 13px; font-weight: 600;">▪운행기간</label>
-                    <input class="fromDate" id="datepicker1" readonly>
+                    <input class="fromDate" id="datepicker1" name="fromDate" readonly>
                     <span style="font-weight: 600; margin:0 30px 0 30px; padding-top: 5px;">~</span>
-                    <input class="toDate" id="datepicker2" readonly>
+                    <input class="toDate" id="datepicker2" name="toData" readonly>
                 </div>
                 <button type="button" class="adsearch_btn">상세검색 열기 ▼</button>
                 <!--                    상세검색 열고 닫는 스크립트-->
@@ -90,8 +91,9 @@
                                 onchange="document.querySelector('.club_input').value=
                                     this.options[this.selectedIndex].value"
                         >
+                            <option value="전체" selected>전체</option>
                             <c:forEach var="carSubmit" items="<%=carSubmitValue%>">
-                                <option value="${carSubmit}" selected>${carSubmit}</option>
+                                <option value="${carSubmit}">${carSubmit}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -110,8 +112,9 @@
                                 onchange="document.querySelector('.fromSite_input').value =
                                     this.options[this.selectedIndex].value"
                         >
+                            <option value="전체" selected>전체</option>
                             <c:forEach var="fromSite" items="<%=fromSiteValue%>">
-                                <option value="${fromSite}" selected>${fromSite}</option>
+                                <option value="${fromSite}">${fromSite}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -130,8 +133,9 @@
                                 onchange="document.querySelector('.toSite_input').value =
                                     this.options[this.selectedIndex].value"
                         >
+                            <option value="전체" selected>전체</option>
                             <c:forEach var="toSite" items="<%=toSiteValue%>">
-                                <option value="${toSite}" selected>${toSite}</option>
+                                <option value="${toSite}">${toSite}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -145,13 +149,14 @@
                     %>
                     <label for=""></label>
                     <div class="input_select">
-                        <input type="text" placeholder="품목" name="things" class="things_input">
+                        <input type="text" placeholder="품목" name="item" class="things_input">
                         <select class="club_slect"
                                 onchange="document.querySelector('.things_input').value =
                                     this.options[this.selectedIndex].value"
                         >
+                            <option value="전체" selected>전체</option>
                             <c:forEach var="item" items="<%=itemValue%>">
-                                <option value="${item}" selected>${item}</option>
+                                <option value="${item}">${item}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -170,8 +175,9 @@
                                 onchange="document.querySelector('.tel_input').value=
                                     this.options[this.selectedIndex].value"
                         >
+                            <option value="전체" selected>전체</option>
                             <c:forEach var="carSubmitTel" items="<%=carSumitTelValue%>">
-                                <option value="${carSubmitTel}" selected>${carSubmitTel}</option>
+                                <option value="${carSubmitTel}">${carSubmitTel}</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -184,7 +190,8 @@
                                 onchange="document.querySelector('.state_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="true" selected>결재O</option>
+                            <option value="전체" selected>전체</option>
+                            <option value="true">결재O</option>
                             <option value="false">결재X</option>
                         </select>
                     </div>
@@ -225,12 +232,12 @@
                 </label>
             </div>
         </div>
-    </form>
         <div class="btn_area">
-            <a href="/dailyReport/list" id="link2Get">
-                <input type="button" value="검색">
-            </a>
+            <%--            <a href="/dailyReport/list" id="link2Get">--%>
+            <input type="button" value="검색" onclick="getList()">
+            <%--            </a>--%>
         </div>
+    </form>
     <div class="bottom_table">
 <%--        총 대수를 계산하는 코드--%>
         <%
@@ -308,5 +315,6 @@
     </div>
 </section>
 
-<script src="/resources/js/step4/step4.js"></script>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
+
+<script src="/resources/js/dailyReport/step4/step4.js"></script>

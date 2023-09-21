@@ -24,4 +24,9 @@
         WHERE t.carNo = #{CarNo}
     </select>
 
+    <select id="findCarListByOption" parameterType="DailyReportStep4OptionForm" resultType="DailyReportStep4">
+        SELECT carSubmit,
+
+    </select>
+
 </mapper>
