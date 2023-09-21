@@ -50,7 +50,10 @@ public class Step8Service {
 
             System.out.println("상차지는?" + dailyReportStep8.getFromsite());
             System.out.println("Carno?" + dailyReportStep8.getCarNo());
+
             dailyReportStep8.setCarSubmitTel(getSessionLoginData().getUserId());
+            System.out.println("carSubmitTel: " + dailyReportStep8.getCarSubmitTel());
+
             List<DailyReportStep8> receiptsSearchList = dailyReportStep8Mapper.receiptsSearchCondition(dailyReportStep8);
             System.out.println("receiptsSearchList?" + receiptsSearchList);
 

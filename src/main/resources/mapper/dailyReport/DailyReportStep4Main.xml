@@ -7,7 +7,9 @@
 
     <select id="getDailyReportByCarNo" resultType="DailyReportStep4">
         SELECT t.sheetID,
-               DATE_FORMAT(t.date, '%m.%d') as date, t.CarNo, t.carSubmit, s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup
+               DATE_FORMAT(t.date, '%m.%d') as date,
+                t.CarNo, t.carSubmit, t.carSubmitTel, t.chk1,
+                s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup
             FROM tsheet t
                 JOIN tSheet_sub s
             ON t.sheetID = s.sheetID2
