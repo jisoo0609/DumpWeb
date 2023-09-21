@@ -11,14 +11,20 @@ function getList(){
 
 function printTable(datas){
     const tableBody = document.querySelector(".list-table tbody");
+    const totalAmt = document.querySelector(".total");
+
     tableBody.innerHTML = "";
+    totalAmt.innerHTML = "";
 
     datas.forEach((data, idx) => {
         const row = document.createElement("tr");
         let order = [
             data.carSubmit, data.date,
-            data.item, data.fromsite, data.tosite, data.Qty, data.Qtyup.toLocaleString()
+            data.item, data.fromsite, data.tosite, data.qty, data.qtyup.toLocaleString(),
         ];
+        // let cost = `
+        //         데이터 <span>${order.length}</span>건(총대수: ${});
+        // `
 
         row.innerHTML = `
                     <td>${order[0]}</td>
@@ -27,7 +33,7 @@ function printTable(datas){
                     <td>${order[3]}</td>
                     <td>${order[4]}</td>
                     <td>${order[5]}</td>
-                    <td>${order[6]}</td>
+                    <td style="text-align: right;">${order[6]}</td>
         `;
 
         tableBody.appendChild(row);
