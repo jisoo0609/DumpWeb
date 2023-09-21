@@ -55,7 +55,7 @@ function validateInput3(input) {
 
 /* function : open/close popup */
 function openPop() {
-    if(dateInput === '') { // 데이트 기록이 없으면
+    if(dateInput.value === '') { // 데이트 기록이 없으면
         openable4 = false;
     } else {
         openable4 = true;
