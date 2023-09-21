@@ -33,7 +33,7 @@
                     <label class="drvLabel" for="reg-date">날짜</label>
                     <span class="drvInputSpan"><input id="reg-date" inputmode="none" name="drvDate" onchange="bindList()"></span>
                     <label class="chk2" for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-                    <input id="chk2" type="checkbox" name="chk2">
+                    <input id="chk2" type="checkbox">
                 </li>
                 <li>
                     <label class="drvLabel" for="lastKm">최종 주행거리 km</label>
@@ -60,7 +60,7 @@
                 </li>
                 <li class="tabBtn" data-tab="hiddenPart">
                     <label for="showHideCheckbox">다음 교환 주기 입력</label>
-                    <span class="drvInputSpan2"><input checked id="showHideCheckbox" type="checkbox"></span>
+                    <span class="drvInputSpan2"><input id="showHideCheckbox" type="checkbox"></span>
                 </li>
             </ul>
             <ul class="bdnUl" id="hiddenPart">
@@ -74,8 +74,8 @@
                                                       placeholder="다음 차량계기판의 최종 주행거리"></span>
                 </li>
                 <li>
-                    <label for="ChangeConf">교환 확인</label>
-                    <span class="drvInputSpan3"><input id="ChangeConf" type="checkbox" name="rependchk"></span>
+                    <label for="rependchk">교환 확인</label>
+                    <span class="drvInputSpan3"><input id="rependchk" type="checkbox"></span>
                 </li>
             </ul>
         </fieldset>
@@ -91,7 +91,7 @@
         <div>
             <span class="material-symbols-outlined closeBtn">close</span>
             <p>정말 삭제하시겠습니까?</p>
-            <input type="button" value="확인">
+            <input type="button" value="확인" onclick="deleteData()">
         </div>
     </div>
 

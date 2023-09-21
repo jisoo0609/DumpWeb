@@ -16,6 +16,9 @@
          useoil,
          drvrem,
          chk2,
+         rependdate,
+         repaddkm,
+         rependchk,
          drivess)
         VALUES      (
                       #{carNo},
@@ -26,6 +29,9 @@
                       #{useOil},
                       #{drvRem},
                       #{chk2},
+                      #{rependdate},
+                      #{repaddkm},
+                      #{rependchk},
                       (SELECT uuserid
                        FROM   tsitepw
                        WHERE  userid = #{carNo}))
@@ -33,15 +39,20 @@
 
 
     <!--차계부 내용 업데이트-->
+    <!--drvclub=IF(#{drvclub} IS NOT NULL, #{drvdate}, '요소수')-->
     <update id="updateDailyReportStep5" parameterType="DailyReportStep5">
         UPDATE tdrive
-        SET drvdate=IF(#{drvdate} IS NOT NULL, #{drvdate}, getdate()),
-            drvclub=IF(#{drvclub} IS NOT NULL, #{drvdate}, '요소수'),
-            lastkm = IF(#{lastkm} IS NOT NULL, #{lastkm}, NULL),
-            useoil = IF(#{useoil} IS NOT NULL, #{useoil}, NULL),
-            drvrem = IF(#{drvrem} IS NOT NULL, #{drvrem}, NULL),
-            chk2   = IF(#{chk2} IS NOT NULL, #{chk2}, 0),
-            WHERE driveid = #{driveid}
+        SET drvdate = #{drvDate},
+            drvclub = #{drvClub},
+            lastkm = #{lastKm},
+            useAmt = #{useAmt},
+            useoil = #{useOil},
+            drvrem = #{drvRem},
+            chk2   = #{chk2},
+            rependdate = #{rependdate},
+            repaddkm = #{repaddkm},
+            rependchk = #{rependchk}
+        WHERE driveid = #{driveID}
     </update>
 
 
@@ -79,5 +90,12 @@
         WHERE  carno = #{userID}
           AND driveID = #{driveID}
     </select>
+
+    <delete id="deleteDataByDriveID" >
+        DELETE
+        FROM   tdrive
+        WHERE  carno = #{userID}
+          AND driveID = #{driveID}
+    </delete>
 
 </mapper>

@@ -1,8 +1,6 @@
 package com.dispatch.dump.commonModule.db.mapper;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep6;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep6OptionForm;
 
 import java.util.List;
 
@@ -16,5 +14,7 @@ public interface DailyReportStep5Mapper {
     List<DailyReportStep5> findCarListByDate(String userID, String date);
 
     DailyReportStep5 findDriveIDForm(String userID, int driveID);
+
+    void deleteDataByDriveID(String userID, int driveID);
 
 }

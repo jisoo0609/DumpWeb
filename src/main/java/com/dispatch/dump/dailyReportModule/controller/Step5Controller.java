@@ -40,4 +40,10 @@ public class Step5Controller {
         return step5Service.getDriveIDForm(driveID);
     }
 
+    @RequestMapping(value = "/carcareform/ajax/delete", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteDataByDriveID(int driveID) {
+        step5Service.deleteDataByDriveID(driveID);
+    }
+
 }
