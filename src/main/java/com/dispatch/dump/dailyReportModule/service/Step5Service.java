@@ -52,9 +52,12 @@ public class Step5Service {
 
     public List<DailyReportStep5> getCarListByDate(String date) {
         String userID = getSessionLoginData().getUserId();
+        return dailyReportStep5Mapper.findCarListByDate(userID, date);
+    }
 
-        System.out.println(dailyReportStep5Mapper.findCarListByDate(userID,date));
-        return dailyReportStep5Mapper.findCarListByDate(userID,date);
+    public DailyReportStep5 getDriveIDForm(int driveID) {
+        String userID = getSessionLoginData().getUserId();
+        return dailyReportStep5Mapper.findDriveIDForm(userID, driveID);
     }
 
 }

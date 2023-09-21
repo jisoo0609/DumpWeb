@@ -134,7 +134,7 @@
 <script src="/resources/js/dailyReport/step5/list.js"></script>
 <script src="/resources/js/dailyReport/step5/click.js"></script>
 <script src="/resources/js/dailyReport/step5/popup.js"></script>
-<script src="/resources/js/dailyReport/step5/index.js"></script>
+<script src="/resources/js/dailyReport/step5/param.js"></script>
 
 
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
