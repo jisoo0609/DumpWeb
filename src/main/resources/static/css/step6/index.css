@@ -441,6 +441,7 @@ body {
 
 .red-line-divider {
   border-top: 2px solid red; /* 그룹 헤더 아래쪽 경계선 추가 */
+  border-bottom: 1px solid #ddd;
 }
 
 @media (min-width: 551px) and (max-width: 768px) {
