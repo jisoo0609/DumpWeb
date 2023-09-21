@@ -31,7 +31,7 @@
             <ul class="CarUl">
                 <li>
                     <label class="drvLabel" for="reg-date">날짜</label>
-                    <span class="drvInputSpan"><input id="reg-date" inputmode="none" name="drvDate"></span>
+                    <span class="drvInputSpan"><input id="reg-date" inputmode="none" name="drvDate" onchange="bindList()"></span>
                     <label class="chk2" for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
                     <input id="chk2" type="checkbox" name="chk2">
                 </li>
@@ -114,6 +114,7 @@
     <table>
         <thead>
         <tr>
+            <th>날짜</th>
             <th>분류</th>
             <th class="Drvth2">최종</br>주행거리</th>
             <th class="Drvth2">사용금액</th>
@@ -130,6 +131,7 @@
 <script src="/resources/js/dailyReport/step5/datepicker.js"></script>
 <script src="/resources/js/dailyReport/step5/tabpage.js"></script>
 <script src="/resources/js/dailyReport/step5/voice.js"></script>
+<script src="/resources/js/dailyReport/step5/list.js"></script>
 <script src="/resources/js/dailyReport/step5/click.js"></script>
 <script src="/resources/js/dailyReport/step5/popup.js"></script>
 <script src="/resources/js/dailyReport/step5/index.js"></script>

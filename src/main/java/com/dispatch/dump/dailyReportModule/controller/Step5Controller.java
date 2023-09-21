@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/dailyReport")
 @RequiredArgsConstructor
@@ -24,4 +26,12 @@ public class Step5Controller {
     public String save(DailyReportStep5 dailyReportStep5) {
         return step5Service.save(dailyReportStep5);
     }
+
+
+    @RequestMapping(value = "/carcareform/ajax/listload", method = RequestMethod.POST)
+    @ResponseBody
+    public List<DailyReportStep5> searchDailyReport(String date) {
+        return step5Service.getCarListByDate(date);
+    }
+
 }

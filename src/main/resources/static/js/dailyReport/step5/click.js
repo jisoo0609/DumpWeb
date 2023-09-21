@@ -1,6 +1,5 @@
 function save() {
     //fetch 코드도 고민해볼 것.
-
     $.ajax({
         url: "/dailyReport/carcareform/ajax/save",
         type: "POST",
@@ -11,3 +10,13 @@ function save() {
     })
 }
 
+function bindList() {
+    $.ajax({
+        url: "/dailyReport/carcareform/ajax/listload",
+        type: "POST",
+        data: {date : $("#reg-date").val()},
+        success: function (data) {
+            printList(data);
+        }
+    })
+}

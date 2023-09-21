@@ -1,6 +1,8 @@
 package com.dispatch.dump.dailyReportModule.service;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep6;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep6OptionForm;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep5Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
@@ -12,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -45,6 +48,13 @@ public class Step5Service {
         }
 
         return commonUtil.jsonFormatTransfer(rtnMap);
+    }
+
+    public List<DailyReportStep5> getCarListByDate(String date) {
+        String userID = getSessionLoginData().getUserId();
+
+        System.out.println(dailyReportStep5Mapper.findCarListByDate(userID,date));
+        return dailyReportStep5Mapper.findCarListByDate(userID,date);
     }
 
 }

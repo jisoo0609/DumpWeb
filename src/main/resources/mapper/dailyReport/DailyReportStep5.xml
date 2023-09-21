@@ -5,9 +5,6 @@
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep5Mapper">
 
     <!--차계부 내용 저장-->
-
-
-
     <insert id="insertDailyReportStep5" parameterType="DailyReportStep5">
         INSERT INTO tdrive
         (driveid,
@@ -46,4 +43,24 @@
                chk2 = IF(#{chk2} IS NOT NULL,#{chk2}, 0),
                WHERE  driveid=#{driveid}
     </update>
+
+
+    <select id="findCarListByDate" resultType="DailyReportStep5">
+        SELECT driveID,
+        DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
+        drvclub,
+        chk2,
+        lastkm,
+        useamt,
+        useOil,
+        drvrem,
+        rependchk,
+        IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
+        repaddkm
+        FROM   tdrive
+        WHERE  carno = #{userID}
+        AND drvdate BETWEEN #{date} AND #{date}
+        ORDER BY drvclub ASC
+    </select>
+
 </mapper>
