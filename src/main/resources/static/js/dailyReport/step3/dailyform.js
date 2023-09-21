@@ -11,9 +11,9 @@ $.save = function() {
             var json = $.parseJSON(data);
             if(json.httpCode == 200) {
                 alert("저장이 완료되었습니다.");
+
             } else if(json.httpCode == 100){
                 alert("기존에 저장된 정보가 존재합니다.");
-
                 inputData(json.carSubmitTelResult);
 
                 //$.list();
