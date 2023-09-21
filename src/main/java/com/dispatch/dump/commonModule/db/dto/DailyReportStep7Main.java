@@ -15,5 +15,6 @@ public class DailyReportStep7Main {
     private String carSubmitTel;    // LINE :: 제출처 연락처
     private String salesman;        // LINE :: 제출처 담당자
     private Boolean chk1;           // LINE :: 결재여부
+    private int sheetSS2;           // LINE :: 회원 idx
 
 }
