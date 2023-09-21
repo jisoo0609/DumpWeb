@@ -186,7 +186,6 @@
     }
 </style>
 
-
 <script type="text/javascript"
         src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
 <section class="sub-contents-wrap maxwrap" style="background-color: #cce0f7">
@@ -286,8 +285,6 @@
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
-
-
                 <c:forEach var="item" items="${list}">
                     <tr>
                         <td>${item.carSubmit}</td>
@@ -317,7 +314,6 @@
                                 <th>품목</th>
                                 <th>대수</th>
                             </tr>
-
                         </table>
         </section>
     </article>
