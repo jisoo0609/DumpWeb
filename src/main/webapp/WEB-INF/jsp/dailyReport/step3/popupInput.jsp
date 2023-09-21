@@ -60,9 +60,8 @@
                                         <li>
                                             <label style="font-size : var( --main-font-size);">운반 단가</label>
                                             <span class="content">
-                                                    <input type="number" class="wp70 ml75" name="Qtyup" id="Qtyup"
-                                                           placeholder="운반 단가" autocomplete="off">
-                                                </span>
+                                                 <input type="number" class="wp70 ml75" name="Qtyup" id="Qtyup" placeholder="운반 단가" autocomplete="off">
+                                            </span>
                                         </li>
                                         <li>
                                             <label style="font-size : var( --main-font-size);">운반 총액</label>
