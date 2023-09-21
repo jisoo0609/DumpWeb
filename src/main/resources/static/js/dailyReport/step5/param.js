@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         getDriveIDDataByParams(driveID);
     }
 
+    clickListThAndRedirect();
 });
 
 function getDriveIDDataByParams(driveID) {

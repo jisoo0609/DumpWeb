@@ -19,12 +19,10 @@ function clickSearchButton(){
 
 /* 리스트의 행 클릭시, 파라미터와 함께 step5로 이동하도록 처리. */
 function clickListThAndRedirect(){
-
     const listRow = document.querySelector("table tbody");
+
     listRow.addEventListener("click", (event) => {
-
         let driveID = event.target.parentElement.getAttribute("data-drive-id")
-
         let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
         window.location.href = url;
     });
