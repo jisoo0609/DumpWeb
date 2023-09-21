@@ -55,7 +55,9 @@
 #canvas th{
     height: 27px;
     font-size: var( --main-font-size);
+    text-align: left;
 }
+
 
 #canvas td{
     overflow: hidden;
@@ -63,6 +65,11 @@
     text-overflow: ellipsis;
     font-size: var(--main-font-size);
     height: 27px;
+    text-align: left;
+}
+
+#canvas td:nth-child(4) {
+    text-align: right;
 }
 
 .title {

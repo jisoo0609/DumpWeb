@@ -27,11 +27,23 @@ dateInput.value = todayDate.toISOString().slice(0, 10);
 
 
 /* function : onfocus시 자동으로 010을 채워준다*/
+var phoneNumberPattern = /^010[0-9]{8}$/;
 function fill010() {
     const telInput = document.getElementById('carSubmitTel');
-    telInput.value = "010";
+    if (phoneNumberPattern.test(telInput.value)) {
+    } else {
+        telInput.value = "010";
+    }
 }
 
+/* function : oninput 인풋이 바르지 않으면 보더컬러를 red로 바꿈 */
+function validateInput(input) {
+    if (phoneNumberPattern.test(input.value)) {
+        input.style.borderColor = '';
+    } else {
+        input.style.borderColor = 'red';
+    }
+}
 
 
 /* 비고 사이즈 자동변경 */
@@ -111,6 +123,7 @@ function approved() {
         inputElements.forEach(function(input) {
             input.disabled = true;
             input.style.backgroundColor = "#F2F2F2";
+            input.style.color = "333"
         });
     } else {
         chk.value = '0';
@@ -138,5 +151,4 @@ function submitCheck() {
     dropdown.style.border = "1px solid #0068b778";
     approved();
 }
-
 
