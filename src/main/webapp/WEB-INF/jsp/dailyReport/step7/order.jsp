@@ -142,7 +142,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+				<tr onclick="openPopupTest('dispatchform');">
 					<td>1</td>
 					<td>강남</td>
 					<td>구로</td>
