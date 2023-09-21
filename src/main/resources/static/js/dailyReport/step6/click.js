@@ -32,6 +32,9 @@ function clickListThAndRedirect(){
 
 /* 선택한 옵션을 통해 데이터를 받아올 수 있도록 ajax POST 처리. */
 function bindList() {
+
+    console.log($("[name=select_frm]").serialize());
+
     $.ajax({
         url: "/dailyReport/ajax/carcarelist",
         type: "POST",

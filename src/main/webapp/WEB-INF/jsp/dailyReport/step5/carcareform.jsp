@@ -9,9 +9,10 @@
 
 <section class="DrvSection">
     <h2>차량관리 차계부 등록</h2> <span></span>
-    <form action="entry-form">
+    <form name="entry_form">
+        <input type="hidden" name="driveID" type="number" value = "0">
         <fieldset>
-            <div class="item">
+            <div class="item" name="item">
                 <input type="radio" name="drvClub" id="rdOli" value="주유">
                 <label for="rdOli" class="active">주유</label>
 
@@ -29,10 +30,10 @@
             </div>
             <ul class="CarUl">
                 <li>
-                    <label class="drvLabel" for="datepicker1">날짜</label>
-                    <span class="drvInputSpan"><input id="datepicker1" inputmode="none" name="drvDate"></span>
+                    <label class="drvLabel" for="reg-date">날짜</label>
+                    <span class="drvInputSpan"><input id="reg-date" inputmode="none" name="drvDate"></span>
                     <label class="chk2" for="chk2">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-                    <input id="chk2" type="checkbox">
+                    <input id="chk2" type="checkbox" name="chk2">
                 </li>
                 <li>
                     <label class="drvLabel" for="lastKm">최종 주행거리 km</label>
@@ -59,13 +60,13 @@
                 </li>
                 <li class="tabBtn" data-tab="hiddenPart">
                     <label for="showHideCheckbox">다음 교환 주기 입력</label>
-                    <span class="drvInputSpan2"><input checked id="showHideCheckbox" type="checkbox"></input></span>
+                    <span class="drvInputSpan2"><input checked id="showHideCheckbox" type="checkbox"></span>
                 </li>
             </ul>
             <ul class="bdnUl" id="hiddenPart">
                 <li>
-                    <label class="drvLabel" for="datepicker2">교환 예정일</label>
-                    <span class="drvInputSpan"><input id="datepicker2" inputmode="none" name="datepicker2"></span>
+                    <label class="drvLabel" for="exchange-date">교환 예정일</label>
+                    <span class="drvInputSpan"><input id="exchange-date" inputmode="none" name="rependdate"></span>
                 </li>
                 <li>
                     <label class="drvLabel" for="nextlastkm">교환 주행거리</label>

@@ -1,5 +1,5 @@
 // input을 datepicker로 선언
-$("#start-date, #end-date").datepicker({
+$("#reg-date, #exchange-date").datepicker({
     dateFormat: 'yy-mm-dd' //달력 날짜 형태
     ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
     ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
@@ -18,8 +18,7 @@ $("#start-date, #end-date").datepicker({
     ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
 });
 
-// start-date을 매달 1일로 설정
-$("#start-date").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth(), 1));
 
-// end-date를 오늘 날짜로 설정
-$("#end-date").datepicker('setDate', 'today');
+$("#reg-date").datepicker('setDate', 'today');
+
+$("#exchange-date").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDay()));
