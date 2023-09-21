@@ -55,12 +55,12 @@ function validateInput3(input) {
 
 /* function : open/close popup */
 function openPop() {
-    if(dateInput.value ==='') { // 데이트 기록이 없으면
+    if(dateInput === '') { // 데이트 기록이 없으면
         openable4 = false;
     } else {
         openable4 = true;
     }
-    if(openable1 & openable2 & openable3 & openable4 === true) {
+    if(openable1 & openable2& openable3 & openable4 === true) {
         document.getElementById('popup').style.display = 'flex';
     } else {
         alert("입력된 정보를 다시 확인해주세요");
