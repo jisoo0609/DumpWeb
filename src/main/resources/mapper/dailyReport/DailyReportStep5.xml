@@ -49,7 +49,7 @@
             rependdate = #{rependdate},
             repaddkm = #{repaddkm},
             rependchk = #{rependchk}
-        WHERE carno = #{userID}
+        WHERE carno = #{carNo}
           AND driveid = #{driveID}
     </update>
 
