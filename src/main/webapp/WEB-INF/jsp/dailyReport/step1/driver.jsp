@@ -207,7 +207,7 @@
                     </li>
                     <li>
                         총 운행대 수 :
-                        <div class="carrying-car"> 대</div>
+                        <div class="carrying-car"><%= request.getAttribute("totalQty") %> 대</div>
                     </li>
                     <li>
                         총 비용 금액 :
