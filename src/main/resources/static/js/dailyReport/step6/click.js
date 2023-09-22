@@ -1,8 +1,11 @@
 
 /* 일괄취소 버튼 클릭 이벤트를 처리 */
 document.querySelector(".common_btn:nth-of-type(2)").addEventListener("click", () => {
-    // 테이블 본문 요소를 탐색.
-    const tableBody = document.querySelector("table tbody");
+
+   const costButton = document.querySelector(".agreement_container .resultPrice");
+   costButton.innerHTML = "0";
+    
+   const tableBody = document.querySelector("table tbody");
 
     // 테이블 본문 내용을 초기화. (데이터 삭제)
     tableBody.innerHTML = "";
