@@ -19,11 +19,13 @@
             JOIN tSheet_sub s
         ON t.sheetID = s.sheetID2
         WHERE t.carSubmitTel = #{carSubmitTel}
+        order by date desc;
 
     </select>
 
-    <!-- "전체" 클릭했을 때 where절에서 제외하는 조건 추가 -->
-    <select id="receiptsSearchCondition" parameterType="DailyReportStep8" resultType="DailyReportStep8">
+
+    <select id="receiptsSearchOrderByDate" parameterType="DailyReportStep8OptionForm"
+            resultType="DailyReportStep8">
         SELECT t.sheetID,
         DATE_FORMAT(t.date, '%m-%d') as date,
         t.CarNo,
@@ -38,6 +40,8 @@
         WHERE 1=1
         AND
         t.carSubmitTel = #{carSubmitTel}
+        AND
+        date BETWEEN #{searchStartDate} and #{searchEndDate}
         <if test="CarNo != ''">
             AND t.CarNo = #{CarNo}
         </if>
@@ -50,8 +54,42 @@
         <if test="item != ''">
             AND s.item = #{item}
         </if>
+        order by date desc, t.CarNo asc;
     </select>
 
+
+    <select id="receiptsSearchOrderByCarNo" parameterType="DailyReportStep8OptionForm"
+            resultType="DailyReportStep8">
+        SELECT t.sheetID,
+        DATE_FORMAT(t.date, '%m-%d') as date,
+        t.CarNo,
+        s.fromsite,
+        s.tosite,
+        s.item,
+        s.Qty,
+        s.Qtyup
+        FROM tsheet t
+        JOIN tSheet_sub s
+        ON t.sheetID = s.sheetID2
+        WHERE 1=1
+        AND
+        t.carSubmitTel = #{carSubmitTel}
+        AND
+        date BETWEEN #{searchStartDate} and #{searchEndDate}
+        <if test="CarNo != ''">
+            AND t.CarNo = #{CarNo}
+        </if>
+        <if test="fromsite != ''">
+            AND s.fromsite = #{fromsite}
+        </if>
+        <if test="tosite != ''">
+            AND s.tosite = #{tosite}
+        </if>
+        <if test="item != ''">
+            AND s.item = #{item}
+        </if>
+        order by t.CarNo asc, date asc;
+    </select>
 
     <!--기존꺼-->
     <!--    <select id="receiptsSearchCondition" parameterType="DailyReportStep8" resultType="DailyReportStep8">-->
