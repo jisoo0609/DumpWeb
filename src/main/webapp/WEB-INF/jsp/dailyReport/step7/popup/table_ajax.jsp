@@ -4,7 +4,7 @@
 <%@ taglib prefix="e" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<table class="popSearch-list list33" style="font-size: 14px;">
+<table class="popSearch-list list33" style="font-size: 12px;">
     <colgroup>
         <col style="width: 8%">
         <col style="width: 18%">

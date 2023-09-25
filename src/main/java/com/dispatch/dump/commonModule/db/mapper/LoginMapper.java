@@ -20,4 +20,6 @@ public interface LoginMapper {
      int updateSheetSsByUserId(Login login);
 
      int updateCarNoSsByUserId(Login login);
+
+     int updateSheetSubSsByUserId(Login login);
 }
