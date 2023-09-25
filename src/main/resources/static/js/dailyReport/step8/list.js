@@ -160,7 +160,7 @@ $.valuePg = function (pageNo) {
 //     frm.submit();
 // }
 
-$.search = function() {
+$.search = function () {
     $.ajax({
         url: "/dailyReport/receipts",
         type: "POST",
@@ -171,10 +171,10 @@ $.search = function() {
             console.log(receiptsJson)
             console.log(receiptsJson.receiptsSearchList)
 
-            if(receiptsJson.httpCode == 200) {
+            if (receiptsJson.httpCode == 200) {
                 alert("조회가 완료되었습니다.");
                 receiptsSearchResults(receiptsJson.receiptsSearchList);
-            } else{
+            } else {
                 alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
             }
         }
@@ -182,16 +182,114 @@ $.search = function() {
 }
 
 function receiptsSearchResults(receiptsSearchResults) {
-    // receiptsResultDiv.empty(); // 이전 결과 지우기
-    var receiptsResultDiv = document.getElementById("receiptsSearchResult");
-    receiptsResultDiv.innerHTML = "";
+    var receiptsBodyOrderByDate = document.getElementById("receiptsResultBodyOrderByDate");
+    var receiptsBodyOrderByCarNo = document.getElementById("receiptsResultBodyOrderByCarNo");
+    var selectedRadio = document.querySelector('input[name="searchType"]:checked').value;
     var receiptsResults = receiptsSearchResults;
+    var resultHtml = '';
+
+    console.log(selectedRadio)
+
+    if (selectedRadio === "orderByDate") {
+        receiptsBodyOrderByDate.innerHTML = "";
+        var totalQty = 0;
+
+        document.getElementById("tableOrderByDate").style.display = "table";
+        document.getElementById("tableOrderByCarNo").style.display = "none";
+
+        // 결과 데이터를 동적으로 추가
+        for (var i = 0; i < receiptsResults.length; i++) {
+            var result = receiptsResults[i];
+            var No = i + 1;
+
+
+            console.log("result?")
+            console.log(result)
+            console.log(result.fromsite)
+
+            console.log(result.carNo)
+            console.log(result.qty)
+
+            // 각 결과의 qty 값을 int로 파싱하여 누적
+            var qty = parseInt(result.qty);
+            totalQty += qty;
+
+            // 빨간 줄 추가
+            if (i >= 1 && result.date !== receiptsResults[i - 1].date) {
+                resultHtml += '</tr>'; // 이전 행 닫음
+                resultHtml += '<tr style="border-top: 2px solid red;">'; // 새로운 행 열기
+            } else if (i > 0) {
+                resultHtml += '</tr>';
+            }
+
+            resultHtml +=
+                '<td>' + No + '</td>' +
+                '<td>' + result.date + '</td>' +
+                '<td>' + result.fromsite + '</td>' +
+                '<td>' + result.tosite + '</td>' +
+                '<td>' + result.item + '</td>' +
+                '<td>' + result.carNo + '</td>' +
+                '<td>' + result.qty + '</td>' +
+                '<td>' + "하차" + '</td>';
+
+
+            // 마지막 행 닫음
+            if (receiptsResults.length > 0) {
+                resultHtml += '</tr>';
+            }
+            // receiptsBodyOrderByDate.append(resultHtml);
+            receiptsBodyOrderByDate.innerHTML = resultHtml;
+        }
+    } else if (selectedRadio === "orderByCarNo") {
+        document.getElementById("tableOrderByDate").style.display = "none";
+        document.getElementById("tableOrderByCarNo").style.display = "table";
+        receiptsBodyOrderByCarNo.innerHTML = "";
+        var totalQty = 0;
+
+        // 결과 데이터를 동적으로 추가
+        for (var i = 0; i < receiptsResults.length; i++) {
+            var result = receiptsResults[i];
+            var No = i + 1;
+
+            // 각 결과의 qty 값을 int로 파싱하여 누적
+            var qty = parseInt(result.qty);
+            totalQty += qty;
+
+
+            // 빨간 줄 추가
+            if (i >= 1 && result.carNo !== receiptsResults[i - 1].carNo) {
+                resultHtml += '</tr>'; // 이전 행 닫음
+                resultHtml += '<tr style="border-top: 2px solid red;">'; // 새로운 행 열기
+            } else if (i > 0) {
+                resultHtml += '</tr>';
+            }
+
+            resultHtml +=
+                '<tr>' +
+                '<td>' + No + '</td>' +
+                '<td>' + result.carNo + '</td>' +
+                '<td>' + result.fromsite + '</td>' +
+                '<td>' + result.tosite + '</td>' +
+                '<td>' + result.item + '</td>' +
+                '<td>' + result.date + '</td>' +
+                '<td>' + result.qty + '</td>' +
+                '<td>' + "하차" + '</td>' +
+                '</tr>';
+
+            receiptsBodyOrderByCarNo.innerHTML = resultHtml;
+        }
+    }
+    //  receiptsResultDiv.empty(); // 이전 결과 지우기
+    // var receiptsResultDiv = document.getElementById("receiptsResultBodyOrderByDate");
+    //
+    // receiptsBodyOrderByDate.innerHTML = "";
+    // var receiptsResults = receiptsSearchResults;
 
     console.log(receiptsResults)
-    console.log(receiptsResultDiv)
+    console.log(receiptsBodyOrderByDate)
 
-    // 총 대수를 계산할 변수 초기화
-    var totalQty = 0;
+    // // 총 대수를 계산할 변수 초기화
+    // var totalQty = 0;
 
     // 총 검색결과 카운트
     var receiptsCnt = receiptsResults.length;
@@ -200,38 +298,6 @@ function receiptsSearchResults(receiptsSearchResults) {
         receiptsCntElement.innerText = receiptsCnt;
     }
 
-    // 결과 데이터를 동적으로 추가
-    for (var i = 0; i < receiptsResults.length; i++) {
-        var result = receiptsResults[i];
-        var No = i + 1;
-        console.log("result?")
-        console.log(result)
-        console.log(result.fromsite)
-        console.log(result.date)
-        console.log(result.carNo)
-        console.log(result.qty)
-
-        // 각 결과의 qty 값을 int로 파싱하여 누적
-        var qty = parseInt(result.qty);
-        totalQty += qty;
-
-        var resultHtml =
-            '<tr>' +
-            '<td>' + No + '</td>' +
-            '<td>' + result.date + '</td>' +
-            '<td>' + result.fromsite + '</td>' +
-            '<td>' + result.tosite + '</td>' +
-            '<td>' + result.item + '</td>' +
-            '<td>' + result.carNo + '</td>' +
-            '<td>' + result.qty + '</td>'   +
-            '<td>' + result.qty + '</td>'   +
-            // '<button class="btn addBtn" style="width: 40px; margin-top: 0;" onclick="selectItem(' + i + ');">선택</button>' +
-            //     '</td>' +
-            '</tr>';
-
-        // receiptsResultDiv.append(resultHtml);
-        receiptsResultDiv.innerHTML += resultHtml;
-    }
 
     // 총 대수 엘리먼트 업데이트
     var totalQtySpan = document.getElementById("totalQty");
@@ -270,7 +336,6 @@ function receiptsSearchResults(receiptsSearchResults) {
 //         }
 //     })
 // }
-
 
 
 $.editFormMove = function (idx) {
@@ -394,7 +459,7 @@ $.statusChange = function (club, grade) {
                                     $.statementPrintMove();
                                 }
                             } else {
-                                if(json.httpCode == 300) {
+                                if (json.httpCode == 300) {
                                     alert("출하실 입구에서 상차요청 가능합니다");
 
                                 } else {
@@ -412,7 +477,7 @@ $.statusChange = function (club, grade) {
                     });
                 });
 
-            }, $.geolocationerr, {timeout : 3000});
+            }, $.geolocationerr, {timeout: 3000});
         } else {
             modal({
                 title: '알림메시지',
@@ -427,7 +492,7 @@ $.statusChange = function (club, grade) {
 
 }
 
-$.geolocationerr =function (error) {
+$.geolocationerr = function (error) {
     var errormsg = {
         0: "요청을 처리하는 도중 오류가 발생하였습니다.\n관리자에게 문의해주세요.",
         1: "위치사용 권한이 허용되지 않았습니다. 권한을 허용해주세요.",
@@ -455,7 +520,7 @@ $.cctvCapture = function () {
                     } else {
                         $(".integrateFromArea .pop-ul").remove();
                         $(".integrateFromArea .btn-area").remove();
-                        $(".integrateFromArea").append('<img class="topImage" src="/cctv/' + json.imageView + '?date= "'  + new Date().getTime() + ' style="width: 300px; height: 250px; margin: 0 auto;">');
+                        $(".integrateFromArea").append('<img class="topImage" src="/cctv/' + json.imageView + '?date= "' + new Date().getTime() + ' style="width: 300px; height: 250px; margin: 0 auto;">');
                         $(".integrateFromArea").append('<div class="btn-area">' +
                             '<button type="button" class="btn-black" onclick="$.cctvCapture();">재촬영</button> ' +
                             '<button type="button" class="btn-white" onclick="location.href=\'/integrateDispatch/list\'">확인</button> ' +
@@ -470,13 +535,13 @@ $.cctvCapture = function () {
             }
         })
     } else {
-        location.href="/integrateDispatch/list";
+        location.href = "/integrateDispatch/list";
     }
 
 }
 $.quitChange = function (idx, club) {
 
-    if(confirm("하차확인을 하시겠습니까?")) {
+    if (confirm("하차확인을 하시겠습니까?")) {
         if (navigator.geolocation) {
             console.log(navigator.geolocation);
             navigator.geolocation.getCurrentPosition(function (pos) {
@@ -503,7 +568,7 @@ $.quitChange = function (idx, club) {
                             var json = $.parseJSON(data);
                             if (json.httpCode == 200) {
                                 alert("하차확인되었습니다.");
-                                location.href="/integrateDispatch/list";
+                                location.href = "/integrateDispatch/list";
                             } else {
                                 console.log(json.httpCode);
                                 alert("요청을 처리하는 도중 오류가 발생하였습니다.\n관리자에게 문의해주세요.");
@@ -517,7 +582,7 @@ $.quitChange = function (idx, club) {
                         }
                     });
                 });
-            }, $.geolocationerr, {timeout : 3000});
+            }, $.geolocationerr, {timeout: 3000});
         } else {
             modal({
                 title: '알림메시지',
@@ -529,28 +594,26 @@ $.quitChange = function (idx, club) {
     }
 }
 
-$.statementPrintMove = function(){
-    if($("[name=nomanPrt]").val() == "true") {
+$.statementPrintMove = function () {
+    if ($("[name=nomanPrt]").val() == "true") {
         var frm = document.integrateForm;
         frm.action = "/integrateDispatch/statementPrint";
         frm.method = "post"
         frm.submit();
     } else {
-        location.href="/integrateDispatch/list";
+        location.href = "/integrateDispatch/list";
     }
 }
 
 $.setChk = function (obj) {
     var id = $(obj).attr("id");
     console.log(id);
-    if($(obj).is(":checked")) {
+    if ($(obj).is(":checked")) {
         $("[name=" + id + "]").val("1");
     } else {
         $("[name=" + id + "]").val("0");
     }
 
 
-
 }
-
 
