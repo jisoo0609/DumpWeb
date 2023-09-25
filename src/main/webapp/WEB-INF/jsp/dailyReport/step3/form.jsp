@@ -70,7 +70,7 @@
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
                                 <input type="text" class="wp100 voice input" name="carSubmit" id="carSubmit" oninput="validateInput1(this)"
-                                    autocomplete="on" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}">
+                                    autocomplete="on" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}" onkeyup="searchByCarsubmit(this)">
                             </span>
                         </li>
 
@@ -79,7 +79,7 @@
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
                                 <input  type="text" class="wp100 voice input" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}"
-                                       placeholder="담당자" autocomplete="on" oninput="validateInput2(this)">
+                                       placeholder="담당자" autocomplete="on" oninput="validateInput2(this)" onkeyup="searchBySalesman(this)">
                             </span>
                         </li>
 
@@ -89,7 +89,7 @@
                             <span class="content">
                                 <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
                                        list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                       style="margin-left: 75px;" onfocus="fill010()" oninput="validateInput3(this)"}
+                                       style="margin-left: 75px;" onfocus="fill010()" oninput="validateInput3(this)" onkeyup="searchByCarsubmitTel(this)"}
                                 >
                             </span>
                         </li>
@@ -154,34 +154,15 @@
                         <th>비고</th>
                     </tr>
                 </thead>
-                <tobody>
-                    <tr>
-                      <td>대양골재</td>
-                      <td>강석골재</td>
-                      <td>자갈</td>
-                      <td>5</td>
-                      <td>버터알감자볶음</td>
-                    </tr>
-                    <tr>
-                        <c:forEach var="list" items="${groupList}" varStatus="status">
-                            <tr onclick="$.updateData(${list.sheetID}, '${list.carSubmit}')">
-                                <td>${list.status}</td>
-                                <td>${list.fromsite}</td>
-                                <td>${list.tosite}</td>
-                                <td>${list.item}</td>
-                                <td>${list.Qty}</td>
-                                <td>${list.Rem}</td>
-                            </tr>
-                        </c:forEach>
-                    </tr>
-                </tobody>
+                <tbody id="transportContainer">
+                </tbody>
             </table>
         </div>
 
         <div class="btn-area">
             <button type="button" class="btn btn-white" onclick="clearInputs()">전체삭제</button>
             <button type="button" class="btn btn-blue" id="submitBtn" onClick="submitCheck()">제출하기</button>
-            <button type="button" class="btn btn-blue " onclick="editInputs()">저장하기</button>
+            <button type="button" class="btn btn-blue " onClick="$.list()">저장하기</button>
             <button type="button" class="btn btn-white " onClick="history.go(-1)">이전화면</button>
         </div>
     </div>
