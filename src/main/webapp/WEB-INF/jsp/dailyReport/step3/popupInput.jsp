@@ -4,7 +4,7 @@
     <div class="popup-content">
         <div class="mt10">
             <form method="post" name="frm">
-                <input type="hidden" name="sheetID" value="${!empty view ? view.sheetID : 0}">
+                <input type="hidden" name="sheetsubID" id="sheetsubID" >
 
                 <div class="mtable">
                     <ul class="mtable__ul" style="border-bottom: 1px solid transparent !important;">
