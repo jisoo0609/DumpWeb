@@ -18,7 +18,7 @@ function fill010() {
     const telInput = document.getElementById('carSubmitTel');
     if (phoneNumberPattern.test(telInput.value)) {
         openable3 = true;
-    } else {
+    } if(telInput.value.length <=3) {
         telInput.value = "010";
     }
 }
@@ -54,14 +54,15 @@ function validateInput3(input) {
 
 
 /* function : open/close popup */
+const popup = document.getElementById('popup');
 function openPop() {
-    if(dateInput.value === '') { // 데이트 기록이 없으면
+    if(dateInput === '') { // 데이트 기록이 없으면
         openable4 = false;
     } else {
         openable4 = true;
     }
     if(openable1 & openable2& openable3 & openable4 === true) {
-        document.getElementById('popup').style.display = 'flex';
+        popup.style.display = 'flex';
     } else {
         alert("입력된 정보를 다시 확인해주세요");
     }
@@ -69,7 +70,7 @@ function openPop() {
 
 
 function closePop() {
-    document.getElementById('popup').style.display = 'none';
+    popup.style.display = 'none';
 }
 
 
@@ -180,3 +181,25 @@ function submitCheck() {
     approved();
 }
 
+function fillPop(event) {
+    var clicked = event.currentTarget.id;
+    const clickedRow = document.getElementById(clicked);
+    var td1 = clickedRow.querySelector('td:nth-child(1)').textContent;
+    var td2 = clickedRow.querySelector('td:nth-child(2)').textContent;
+    var td3 = clickedRow.querySelector('td:nth-child(3)').textContent;
+    var td4 = clickedRow.querySelector('td:nth-child(4)').textContent;
+    var td5 = clickedRow.querySelector('td:nth-child(5)').textContent;
+    var td6 = clickedRow.querySelector('td:nth-child(6)').textContent;
+
+    // Fill the input fields in the popup with these values
+    document.getElementById('fromsite').value = td1;
+    document.getElementById('tosite').value = td2;
+    document.getElementById('item').value = td3;
+    document.getElementById('Qty').value = td4;
+    document.getElementById('Rem').value = td5;
+    document.getElementById('sheetsubID').value = td6;
+
+
+    // Open the popup
+    openPop();
+}
