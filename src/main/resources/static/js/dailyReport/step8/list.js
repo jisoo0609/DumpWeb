@@ -154,26 +154,20 @@ $.valuePg = function (pageNo) {
     frm.submit();
 }
 
-// $.search = function () {
-//     var frm = document.searchfrm;
-//     frm.action = "/integrateDispatch/list";
-//     frm.submit();
-// }
 
-$.search = function () {
+$.search = function () {   //검색 버튼 눌렀을 때 실행됨
     $.ajax({
         url: "/dailyReport/receipts",
         type: "POST",
         data: $("[name=searchfrm]").serialize(),
         success: function (data) {
             var receiptsJson = $.parseJSON(data);
-            console.log("json은")
-            console.log(receiptsJson)
+            console.log("json은?" + receiptsJson)
             console.log(receiptsJson.receiptsSearchList)
 
             if (receiptsJson.httpCode == 200) {
                 alert("조회가 완료되었습니다.");
-                receiptsSearchResults(receiptsJson.receiptsSearchList);
+                receiptsSearchResults(receiptsJson.receiptsSearchList);    //화면에 검색 결과 테이블 띄울 함수 호출
             } else {
                 alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
             }
@@ -181,131 +175,150 @@ $.search = function () {
     })
 }
 
-function receiptsSearchResults(receiptsSearchResults) {
-    var receiptsBodyOrderByDate = document.getElementById("receiptsResultBodyOrderByDate");
-    var receiptsBodyOrderByCarNo = document.getElementById("receiptsResultBodyOrderByCarNo");
-    var selectedRadio = document.querySelector('input[name="searchType"]:checked').value;
-    var receiptsResults = receiptsSearchResults;
-    var resultHtml = '';
-
-    console.log(selectedRadio)
-
-    if (selectedRadio === "orderByDate") {
-        receiptsBodyOrderByDate.innerHTML = "";
-        var totalQty = 0;
-
-        document.getElementById("tableOrderByDate").style.display = "table";
-        document.getElementById("tableOrderByCarNo").style.display = "none";
-
-        // 결과 데이터를 동적으로 추가
-        for (var i = 0; i < receiptsResults.length; i++) {
-            var result = receiptsResults[i];
-            var No = i + 1;
+function clearTableContents(tableElement) {     //테이블 값 초기화
+    tableElement.innerHTML = "";
+}
 
 
-            console.log("result?")
-            console.log(result)
-            console.log(result.fromsite)
-
-            console.log(result.carNo)
-            console.log(result.qty)
-
-            // 각 결과의 qty 값을 int로 파싱하여 누적
-            var qty = parseInt(result.qty);
-            totalQty += qty;
-
-            // 빨간 줄 추가
-            if (i >= 1 && result.date !== receiptsResults[i - 1].date) {
-                resultHtml += '</tr>'; // 이전 행 닫음
-                resultHtml += '<tr style="border-top: 2px solid red;">'; // 새로운 행 열기
-            } else if (i > 0) {
-                resultHtml += '</tr>';
-            }
-
-            resultHtml +=
-                '<td>' + No + '</td>' +
-                '<td>' + result.date + '</td>' +
-                '<td>' + result.fromsite + '</td>' +
-                '<td>' + result.tosite + '</td>' +
-                '<td>' + result.item + '</td>' +
-                '<td>' + result.carNo + '</td>' +
-                '<td>' + result.qty + '</td>' +
-                '<td>' + "하차" + '</td>';
-
-
-            // 마지막 행 닫음
-            if (receiptsResults.length > 0) {
-                resultHtml += '</tr>';
-            }
-            // receiptsBodyOrderByDate.append(resultHtml);
-            receiptsBodyOrderByDate.innerHTML = resultHtml;
-        }
-    } else if (selectedRadio === "orderByCarNo") {
-        document.getElementById("tableOrderByDate").style.display = "none";
-        document.getElementById("tableOrderByCarNo").style.display = "table";
-        receiptsBodyOrderByCarNo.innerHTML = "";
-        var totalQty = 0;
-
-        // 결과 데이터를 동적으로 추가
-        for (var i = 0; i < receiptsResults.length; i++) {
-            var result = receiptsResults[i];
-            var No = i + 1;
-
-            // 각 결과의 qty 값을 int로 파싱하여 누적
-            var qty = parseInt(result.qty);
-            totalQty += qty;
-
-
-            // 빨간 줄 추가
-            if (i >= 1 && result.carNo !== receiptsResults[i - 1].carNo) {
-                resultHtml += '</tr>'; // 이전 행 닫음
-                resultHtml += '<tr style="border-top: 2px solid red;">'; // 새로운 행 열기
-            } else if (i > 0) {
-                resultHtml += '</tr>';
-            }
-
-            resultHtml +=
-                '<tr>' +
-                '<td>' + No + '</td>' +
-                '<td>' + result.carNo + '</td>' +
-                '<td>' + result.fromsite + '</td>' +
-                '<td>' + result.tosite + '</td>' +
-                '<td>' + result.item + '</td>' +
-                '<td>' + result.date + '</td>' +
-                '<td>' + result.qty + '</td>' +
-                '<td>' + "하차" + '</td>' +
-                '</tr>';
-
-            receiptsBodyOrderByCarNo.innerHTML = resultHtml;
-        }
+function updateTotalQty(totalQty) {    //총대수 업데이트해서 띄우기
+    var totalQtySpan = document.getElementById("totalQty");
+    if (totalQtySpan) {
+        totalQtySpan.innerText = totalQty;
     }
-    //  receiptsResultDiv.empty(); // 이전 결과 지우기
-    // var receiptsResultDiv = document.getElementById("receiptsResultBodyOrderByDate");
-    //
-    // receiptsBodyOrderByDate.innerHTML = "";
-    // var receiptsResults = receiptsSearchResults;
+}
 
-    console.log(receiptsResults)
-    console.log(receiptsBodyOrderByDate)
 
-    // // 총 대수를 계산할 변수 초기화
-    // var totalQty = 0;
+function addRedLineIfDateChanged(resultHtml, index, results) {     //라디오 값이 운행일 기준일 때 빨간줄 긋기
+    if (index >= 1 && results[index].date !== results[index - 1].date) {
+        resultHtml += '</tr>'; // 이전 행 닫음
+        resultHtml += '<tr style="border-top: 2px solid red;">'; // 새로운 행 열기
+    } else if (index > 0) {
+        resultHtml += '</tr>';
+    }
+    return resultHtml;
+}
 
-    // 총 검색결과 카운트
+
+function addRedLineIfCarNoChanged(resultHtml, currentIndex, receiptsResults) {    //라디오 값이 차량 기준일 때 빨간줄 긋기
+    if (currentIndex > 0 && receiptsResults[currentIndex].carNo !== receiptsResults[currentIndex - 1].carNo) {
+        resultHtml += '</tr>'; // 이전 행 닫음
+        resultHtml += '<tr style="border-top: 2px solid red;">'; // 새로운 행 열기
+    } else if (currentIndex > 0) {
+        resultHtml += '</tr>';
+    }
+    return resultHtml;
+}
+
+
+function calculateTotalQty(results) {    //총대수 계산
+    var totalQty = 0;
+    for (var i = 0; i < results.length; i++) {
+        var qty = parseInt(results[i].qty);
+        totalQty += qty;
+    }
+    return totalQty;
+}
+
+
+function createTableRow(result, No, selectedRadio) {   //라디오 값에 따라 테이블 바디 순서 다르게~
+    var rowHtml = '<tr>' +
+        '<td>' + No + '</td>';
+
+    if (selectedRadio === "orderByDate") {   //운행일 기준일 땐 운행일이 두번째 셀
+        rowHtml += '<td>' + result.date + '</td>';
+    } else if (selectedRadio === "orderByCarNo") {   //차량 기준일 땐 차량번호가 두번째 셀
+        rowHtml += '<td>' + result.carNo + '</td>';
+    }
+
+    rowHtml +=      //나머진 순서 똑같음
+        '<td>' + result.fromsite + '</td>' +
+        '<td>' + result.tosite + '</td>' +
+        '<td>' + result.item + '</td>';
+
+    if (selectedRadio === "orderByDate") {     //라디오 값에 따라 운행일 값과 차량번호 값을 자리바꿈
+        rowHtml += '<td>' + result.carNo + '</td>';
+    } else if (selectedRadio === "orderByCarNo") {
+        rowHtml += '<td>' + result.date + '</td>';
+    }
+
+    rowHtml +=      //나머진 순서 똑같음
+        '<td>' + result.qty + '</td>' +
+        '<td>' + "하차" + '</td>' +
+        '</tr>';
+
+    return rowHtml;
+}
+
+
+function updateSearchResultCount(receiptsResults) {   //총 데이터 개수 계산하고 띄우기
     var receiptsCnt = receiptsResults.length;
     var receiptsCntElement = document.getElementById("receiptsCnt");
     if (receiptsCntElement) {
         receiptsCntElement.innerText = receiptsCnt;
     }
+}
 
 
-    // 총 대수 엘리먼트 업데이트
-    var totalQtySpan = document.getElementById("totalQty");
-    if (totalQtySpan) {
-        totalQtySpan.innerText = totalQty;
+function receiptsSearchResults(receiptsSearchResults) {   //검색 결과 테이블 띄우기 
+    var receiptsBodyOrderByDate = document.getElementById("receiptsResultBodyOrderByDate");   //운행일 기준 tbody 가져오기
+    var receiptsBodyOrderByCarNo = document.getElementById("receiptsResultBodyOrderByCarNo");  //차량 기준 tbody 가져오기
+    var selectedRadio = document.querySelector('input[name="searchType"]:checked').value;  //라디오 선택된 값 가져오기
+    var receiptsResults = receiptsSearchResults;
+    var resultHtml = '';
+    var totalQty = 0;
+
+    console.log("라디오 값은?" + selectedRadio)
+
+    if (selectedRadio === "orderByDate") {  //라디오 값이 운행일 기준
+        clearTableContents(receiptsBodyOrderByDate);
+        totalQty = calculateTotalQty(receiptsResults);
+
+        document.getElementById("tableOrderByDate").style.display = "table";   //운행일 기준일 땐 운행일 기준 테이블 띄우고 
+        document.getElementById("tableOrderByCarNo").style.display = "none";   //차량번호 기준 테이블은 지우기
+
+        for (var i = 0; i < receiptsResults.length; i++) {
+            var result = receiptsResults[i];  //각 행의 데이터 result 변수에 저장해서 꺼내쓸 수 있도록
+            var No = i + 1;      //검색 결과 행 번호 매기기
+
+            //테스트용 출력(나중에 지울 거)
+            console.log("상차지는?" + result.fromsite)
+            console.log("차량번호는?" + result.carNo)
+            console.log("대수는?" + result.qty)
+
+            // 빨간 줄 추가
+            resultHtml = addRedLineIfDateChanged(resultHtml, i, receiptsResults);
+            resultHtml += createTableRow(result, No, selectedRadio);
+        } 
+    }else if (selectedRadio === "orderByCarNo") {    //라디오 값이 차량 기준
+        clearTableContents(receiptsBodyOrderByCarNo);
+         totalQty = calculateTotalQty(receiptsResults);
+
+        for (var i = 0; i < receiptsResults.length; i++) {
+            var result = receiptsResults[i];
+            var No = i + 1;
+
+            // 빨간 줄 추가
+            resultHtml = addRedLineIfCarNoChanged(resultHtml, i, receiptsResults);
+            resultHtml += createTableRow(result, No, selectedRadio);
+        }
+        document.getElementById("tableOrderByDate").style.display = "none";    //차량 기준일 땐 운행일 기준 테이블 지우고 
+        document.getElementById("tableOrderByCarNo").style.display = "table";  //차량 기준 테이블을 띄우기
+        }
+
+    // 테이블에 데이터 삽입
+    if (selectedRadio === "orderByDate") {
+        receiptsBodyOrderByDate.innerHTML = resultHtml;
+    } else if (selectedRadio === "orderByCarNo") {
+        receiptsBodyOrderByCarNo.innerHTML = resultHtml;
     }
 
-}
+    // 검색 결과 데이터 개수 업데이트
+    updateSearchResultCount(receiptsResults);
+    // 총 대수 업데이트
+    updateTotalQty(totalQty);
+    }
+ 
+
 
 // $.search = function() {
 //     var searchFromsite = $("#fromsite").val();
