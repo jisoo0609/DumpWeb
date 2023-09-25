@@ -82,7 +82,7 @@
             <button class="btn btn-white btn-popup" onclick="$.deleteRow()">
                 삭제
             </button>
-            <button class="btn btn-blue btn-popup" onclick="$.save();" onkeydown="if(event.keyCode == 13) return false;" method="">
+            <button class="btn btn-blue btn-popup" onclick="$.save()" onkeydown="if(event.keyCode == 13) return false;" method="">
                 저장
             </button>
             <button id="closePopupButton" class="btn btn-white btn-popup" onclick="closePop()">
