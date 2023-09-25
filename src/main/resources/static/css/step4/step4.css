@@ -98,9 +98,6 @@ input[type = text]{
     text-align: center;
 }
 
-/*.ui-datepicker-year option::after{*/
-/*    content: "년";*/
-/*}*/
 
 .input_select{
     position: relative;
