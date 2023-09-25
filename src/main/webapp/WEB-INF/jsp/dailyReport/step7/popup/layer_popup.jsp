@@ -12,11 +12,12 @@
             </div>
             <div style="min-height: 60px; padding: 10px;">
                 <table class="list-table">
+
                     <tr>
                         <th style="width: 25%;">상차지</th>
-                        <th style="width: 25%;">하차지</th>
+                        <th style="width: 35%;">하차지</th>
                         <th style="width: 25%;">품목</th>
-                        <th style="width: 25%;">대수</th>
+                        <th style="width: 15%;">대수</th>
                     </tr>
                     <tr>
                         <td style="width: 25%;">test</td>
@@ -36,7 +37,7 @@
 
             </div>
             <div style="display: flex; justify-content: space-between; padding: 10px;">
-            <div style="min-height: auto;box-sizing: border-box; display: flex; align-items: center;">
+            <div style="min-height: auto;box-sizing: border-box; display: flex; align-items: center; font-size: 12px;">
                 <input type="checkbox" id="divisionChk"> 분리배차
 
             </div>

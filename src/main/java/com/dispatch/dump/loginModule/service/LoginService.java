@@ -54,9 +54,9 @@ public class LoginService {
                             rtnUrl = "/dailyReport/manager";
                         }
                     }
-                    loginMapper.updateSheetSsByUserId(loginInfo);
+//                    loginMapper.updateSheetSsByUserId(loginInfo);
 //                    loginMapper.updateSheetSubSsByUserId(loginInfo); 추가 조건 필요
-                    loginMapper.updateCarNoSsByUserId(loginInfo);
+//                    loginMapper.updateCarNoSsByUserId(loginInfo);
                     rtnMap.put("rtnUrl", rtnUrl);
                     rtnMap.put("httpCode", 200);
                 } else {
