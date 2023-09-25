@@ -1,6 +1,13 @@
 var resultDiv = $("#searchResult");
 var results;
 
+function clearSubInputs() {
+    const popup = document.getElementById("popup");
+    const popinputs = popup.querySelectorAll('.input');
+    for (let i = 0; i < popinputs.length; i++) {
+        popinputs[i].value = ""; // Set the value of each input field to an empty string
+    }
+}
 /*tSheet, tSheet_sub insert*/
 $.save = function() {
     $.ajax({
@@ -10,18 +17,73 @@ $.save = function() {
         success: function (data) {
             var json = $.parseJSON(data);
             if(json.httpCode == 200) {
+
+
                 alert("저장이 완료되었습니다.");
-            } else if(json.httpCode == 100){
-                alert("기존에 저장된 정보가 존재합니다.");
-
-                inputData(json.carSubmitTelResult);
-
-                //$.list();
+                $.list();
+                const popup = document.getElementById("popup");
+                const popinputs = popup.querySelectorAll('.input');
+                for (let i = 0; i < popinputs.length; i++) {
+                    popinputs[i].value = ""; // Set the value of each input field to an empty string
+                }
             } else{
                 alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
             }
         }
     })
+}
+
+$.list = function() {
+    $.ajax({
+        url: "/dailyReport/workspace/ajax/list",
+        type: "POST",
+        data: $("[name=frm]").serialize(),
+        success: function (data) {
+            var json = $.parseJSON(data);
+            if(json.httpCode == 200) {
+                alert("조회에 성공했습니다.");
+                // 서버에서 반환된 데이터를 이용하여 테이블 형태로 생성
+                var html = '<table>';
+                for (var i = 0; i < json.DailyReportList.dailyReportStep3SubList.length; i++) {
+                    var subData = json.DailyReportList.dailyReportStep3SubList[i];
+                    html += '<tr>';
+                    html += '<td>' + subData.fromsite + '</td>';
+                    html += '<td>' + subData.tosite + '</td>';
+                    html += '<td>' + subData.item + '</td>';
+                    html += '<td>' + subData.qty + '</td>';
+                    html += '<td>' + subData.rem + '</td>';
+                    html += '</tr>';
+                }
+                html += '</table>';
+
+                // 데이터를 표시할 위치에 추가
+                $('#subListContainer').html(html);
+            } else {
+                alert("조회를 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
+            }
+        }
+    })
+}
+
+function displayResults(searchResults) {
+
+    // 결과 데이터를 동적으로 추가
+    for (var i = 0; i < results.length; i++) {
+        var result = results[i];
+        var resultHtml =
+         '<tr style="width: 80%; scroll-y: auto;">' +
+         '<td>' + result.fromsite + '</td>' +
+         '<td>' + result.tosite + '</td>' +
+         '<td>' + result.item + '</td>' +
+         '<td>' + result.Qty + '</td>' +
+         '<td>' + result.Rem + '</td>' +
+         '<td>' +
+         '</tr>';
+
+        resultDiv.append(resultHtml);
+    }
+    salesSubmit.style.display = 'none';
+    salesEdit.style.display = 'flex';
 }
 
 /*tSheet만 insert*/
@@ -36,11 +98,6 @@ $.saveCarSubmit = function() {
             console.log(json)
             if(json.httpCode == 200) {
                 alert("제출처 저장이 완료되었습니다.");
-            } else if(json.httpCode == 100){
-                alert("기존에 저장된 정보가 존재합니다.");
-
-                inputData(json.carSubmitTelResult);
-
                 $.list();
             } else{
                 alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
@@ -49,13 +106,7 @@ $.saveCarSubmit = function() {
     })
 }
 
-/*기존 제출처 정보 채우기*/
-function inputData(carSubmitTelResult){
-        $("[name=carSubmit]").val(carSubmitTelResult.carSubmit);
-        $("[name=carSubmitTel]").val(carSubmitTelResult.carSubmitTel);
-        $("[name=salesman]").val(carSubmitTelResult.salesman);
 
-}
 
 
 /*제출처 검색*/
@@ -85,29 +136,7 @@ $.search = function() {
        })
    }
 
-function displayResults(searchResults) {
-    const salesSubmit = document.getElementById('salesSubmit');
-    const salesEdit = document.getElementById('salesEdit');
-    results = searchResults; // results 변수에 데이터를 설정
-    resultDiv.empty(); // 이전 결과 지우기
-    // 결과 데이터를 동적으로 추가
-    for (var i = 0; i < results.length; i++) {
-        var result = results[i];
-        var resultHtml =
-         '<tr style="width: 80%; scroll-y: auto;">' +
-         '<td>' + result.carSubmit + '</td>' +
-         '<td>' + result.salesman + '</td>' +
-         '<td>' + result.carSubmitTel + '</td>' +
-         '<td>' +
-         '<button class="btn addBtn" style="width: 40px; margin-top: 0;" onclick="selectItem(' + i + ');">선택</button>' +
-         '</td>' +
-         '</tr>';
 
-        resultDiv.append(resultHtml);
-    }
-    salesSubmit.style.display = 'none';
-    salesEdit.style.display = 'flex';
-}
 
 
 
@@ -120,22 +149,6 @@ function selectItem(index) {
     $("[name=salesman]").val(selectedResult.salesman);
     closePopSearch();
     console.log(selectedResult.date);
-}
-
-$.list = function() {
-    $.ajax({
-        url: "/dailyReport/workspace/ajax/list",
-        type: "POST",
-        data: $("[name=frm]").serialize(),
-        success: function (data) {
-            var json = $.parseJSON(data);
-            if(json.httpCode == 200) {
-                alert("조회에 성공했습니다.");
-            } else {
-                alert("조회를 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
-            }
-        }
-    })
 }
 
 $.backMove = function () {
@@ -171,3 +184,4 @@ $.deleteRow = function() {
     document.getElementById('salesEdit').style.display = 'none';
     document.getElementById('salesSubmit').salesEdit.style.display = 'flex';
 }
+

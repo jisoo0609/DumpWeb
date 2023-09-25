@@ -32,18 +32,29 @@ public class Step3Service {
         try {
             Login loginData = (Login) session.getAttribute("loginInfo");
             dailyReportStep3Main.setCarNo(loginData.getUserId());
-
-            //상위 테이블 등록
-            //user idx 저장
             dailyReportStep3Main.setSheetSS(Integer.parseInt(loginData.getUuserID()));
-            dailyReportStep3MainMapper.insertDailyReportMain(dailyReportStep3Main);
-            
-            //상위 table의 idx를 저장
-            dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
-            //user idx 저장
-            dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(loginData.getUuserID()));
-            dailyReportStep3SubMapper.insertDailyReportSub(dailyReportStep3Sub);
-            rtnMap.put("httpCode", 200);
+
+            //제출처, date 확인
+            DailyReportStep3Main result=dailyReportStep3MainMapper.findDailyReportMainList(dailyReportStep3Main);
+            System.out.println(result);
+            if(result != null){
+                //제출처 정보가 있을때
+                dailyReportStep3Sub.setSheetID2(result.getSheetID());
+                dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(loginData.getUuserID()));
+
+                dailyReportStep3SubMapper.insertDailyReportSub(dailyReportStep3Sub);
+                rtnMap.put("httpCode", 200);
+            }else{
+
+                dailyReportStep3Main.setSheetSS(Integer.parseInt(loginData.getUuserID()));
+                dailyReportStep3MainMapper.insertDailyReportMain(dailyReportStep3Main);
+
+                dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
+                dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(loginData.getUuserID()));
+
+                dailyReportStep3SubMapper.insertDailyReportSub(dailyReportStep3Sub);
+                rtnMap.put("httpCode", 200);
+            }
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }
@@ -106,14 +117,17 @@ public class Step3Service {
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
-
-    public String list(Model model, DailyReportStep3Main dailyReportStep3Main) {
+    
+    
+    //전체목록 조회
+    public String list(DailyReportStep3Main dailyReportStep3Main) {
+        Map<String, Object> rtnMap = commonUtil.returnMap();
         HttpSession session = commonUtil.getSession();
 
         try {
             Login loginData = (Login) session.getAttribute("loginInfo");
             dailyReportStep3Main.setCarNo(loginData.getUserId());
-            dailyReportStep3Main.setSheetSS(Integer.parseInt(loginData.getUserSS()));
+            //dailyReportStep3Main.setSheetSS(Integer.parseInt(loginData.getUserSS()));
 
             log.info("CarNo는?"+dailyReportStep3Main.getCarNo());
             log.info("SheetID?"+dailyReportStep3Main.getSheetID());
@@ -121,11 +135,13 @@ public class Step3Service {
             DailyReportStep3Main DailyReportList = dailyReportStep3MainMapper.findDailyReportMainList(dailyReportStep3Main);
             System.out.println(DailyReportList);
 
-            model.addAttribute("list", DailyReportList);
+            rtnMap.put("httpCode", 200);
+            rtnMap.put("DailyReportList", DailyReportList);
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
+            log.error("Exception occurred: {}", e.getMessage(), e);
         }
-        return "/dailyReport/form";
+        return commonUtil.jsonFormatTransfer(rtnMap);
     }
     
     /*삭제*/

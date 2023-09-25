@@ -12,6 +12,7 @@
         <result column="chk1"            property="chk1"/>
         <result column="date"            property="date"/>
         <result column="salesman"        property="salesman"/>
+        <result column="sheetSS"         property="sheetSS"/>
         <collection
                 column="sheetID"
                 javaType="java.util.List"
@@ -22,8 +23,11 @@
     </resultMap>
     <select id="findDailyReportMainList"  resultMap="DailyReportStep3MainMapper" parameterType="DailyReportStep3Main">
         select * from tSheet
-        where date=#{date} and carSubmit=#{carSubmit} and carSubmitTel=#{carSubmitTel} and salesman=#{salesman}
-        and sheetSS=#{sheetSS}
+        where
+        date = #{date} and
+        carSubmit = #{carSubmit} and
+        carSubmitTel = #{carSubmitTel} and
+        salesman = #{salesman}
         order by carSubmit asc
     </select>
 

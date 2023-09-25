@@ -19,7 +19,8 @@ public class DailyReportStep1Sub {
 
     public String carSubmit;      //Line :: 제출처
     private String date;          //Line :: 운행일
-    double totalTransportationCost;
+    double totalTransportationCost; //Line :: 운행일
+    int totalQty;                   //Line :: 총운행대수
 
 
 }
