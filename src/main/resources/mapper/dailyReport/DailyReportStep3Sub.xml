@@ -8,8 +8,7 @@
     <select id="findDailyReportSubList" parameterType="int" resultType="DailyReportStep3Sub">
         select * from tSheet_sub
         where
-        sheetID2=#{com.dispatch.dump.commonModule.db.dto.DailyReportStep3Main.sheetID}
-
+        sheetID2=#{sheetID2}
     </select>
 
     <!--운행 정보 저장-->

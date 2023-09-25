@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/dailyReport")
 @RequiredArgsConstructor
@@ -27,41 +29,34 @@ public class Step3Controller {
         return "/dailyReport/step3/form";
     }
 
-    /*제출처, 운송정보 같이 저장*/
+    /*제출처, 운송정보 저장*/
     @RequestMapping(value = "/workspace/ajax/save", method = RequestMethod.POST)
     @ResponseBody
-    public String save(DailyReportStep3Main dailyReportMain, DailyReportStep3Sub dailyReportStep3Sub) {
-        return step3Service.save(dailyReportMain, dailyReportStep3Sub);
+    public void save(DailyReportStep3Main dailyReportStep3Main, DailyReportStep3Sub dailyReportStep3Sub) {
+        step3Service.save(dailyReportStep3Main, dailyReportStep3Sub);
     }
 
-    /*제출처 목록 조회*/
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    /*목록조회*/
+    @RequestMapping(value = "/workspace/ajax/list", method = RequestMethod.POST)
     @ResponseBody
-    public String search(DailyReportStep3Main dailyReportStep3Main){
-        return step3Service.search(dailyReportStep3Main);
+    public DailyReportStep3Main list(DailyReportStep3Main dailyReportStep3Main) {
+        return step3Service.list(dailyReportStep3Main);
     }
 
     @RequestMapping(value = "/search/carSubmit", method = RequestMethod.GET)
     @ResponseBody
-    public String carSubmitList(DailyReportStep3Main dailyReportStep3Main){
+    public List<DailyReportStep3Main> carSubmitList(DailyReportStep3Main dailyReportStep3Main){
         return step3Service.searchByCarSubmit(dailyReportStep3Main);
     }
     @RequestMapping(value = "/search/carSubmitTel", method = RequestMethod.GET)
     @ResponseBody
-    public String carSubmitTelList(DailyReportStep3Main dailyReportStep3Main){
+    public List<DailyReportStep3Main> carSubmitTelList(DailyReportStep3Main dailyReportStep3Main){
         return step3Service.searchByCarSubmitTel(dailyReportStep3Main);
     }
     @RequestMapping(value = "/search/salesman", method = RequestMethod.GET)
     @ResponseBody
-    public String salesmanList(DailyReportStep3Main dailyReportStep3Main){
+    public List<DailyReportStep3Main> salesmanList(DailyReportStep3Main dailyReportStep3Main){
         return step3Service.searchBySalesman(dailyReportStep3Main);
-    }
-
-    /*insert 후 목록 조회--> 보완 예정*/
-    @RequestMapping(value = "/workspace/ajax/list", method = RequestMethod.POST)
-    @ResponseBody
-    public String list(DailyReportStep3Main dailyReportStep3Main) {
-        return step3Service.list(dailyReportStep3Main);
     }
 
     @RequestMapping(value = "/workspace/ajax/delete", method = RequestMethod.GET)
