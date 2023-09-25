@@ -21,7 +21,7 @@
 	<link rel="shortcut icon" href="/resources/image/favicon/favicon.png">
 
 	<meta property="og:image" content="/resources/image/favicon/favicon.png">
-	<meta property="og:title" content="배차관리시스템">
+	<meta property="og:title" content="배차.일보관리시스템">
 
 	<!-- js -->
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -59,7 +59,7 @@
 	<section class="b-loginM__inner">
 		<div class="b-loginM__top"></div>
 		<h1 class="b-loginM__tit">
-			덤프트럭관리<span>시스템</span>
+			배차.일보관리<span>시스템</span>
 		</h1>
 		<form method="post" name="loginfrm" onsubmit="return false;">
 			<input type="hidden" name="address">

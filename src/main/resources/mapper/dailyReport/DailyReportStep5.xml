@@ -4,10 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep5Mapper">
 
-    <!--차계부 내용 저장-->
-    <insert id="insertDailyReportStep5" parameterType="DailyReportStep5">
+    <insert id="insertTDrive" parameterType="DailyReportStep5">
         INSERT INTO tdrive
-        (driveid,
+        (
          carno,
          drvdate,
          lastkm,
@@ -16,36 +15,46 @@
          useoil,
          drvrem,
          chk2,
+         rependdate,
+         repaddkm,
+         rependchk,
          drivess)
-        VALUES      ( # {driveID},
-                      # {carNo},
-                      # {drvDate},
-                      # {lastKm},
-                      # {drvClub},
-                      # {useAmt},
-                      # {useOil},
-                      # {drvRem},
-                      # {chk2},
+        VALUES      (
+                      #{carNo},
+                      #{drvDate},
+                      #{lastKm},
+                      #{drvClub},
+                      #{useAmt},
+                      #{useOil},
+                      #{drvRem},
+                      #{chk2},
+                      #{rependdate},
+                      #{repaddkm},
+                      #{rependchk},
                       (SELECT uuserid
                        FROM   tsitepw
-                       WHERE  userid = # {carNo}))
+                       WHERE  userid = #{carNo}))
     </insert>
 
 
-    <!--차계부 내용 업데이트-->
-    <update id="updateDailyReportStep5" parameterType="DailyReportStep5">
+    <update id="updateTDrive" parameterType="DailyReportStep5">
         UPDATE tdrive
-        SET    drvdate=IF(#{drvdate} IS NOT NULL,#{drvdate}, getdate()),
-               drvclub=IF(#{drvclub} IS NOT NULL,#{drvdate}, '요소수'),
-               lastkm = IF(#{lastkm} IS NOT NULL,#{lastkm}, NULL),
-               useoil = IF(#{useoil} IS NOT NULL,#{useoil}, NULL),
-               drvrem = IF(#{drvrem} IS NOT NULL,#{drvrem}, NULL),
-               chk2 = IF(#{chk2} IS NOT NULL,#{chk2}, 0),
-               WHERE  driveid=#{driveid}
+        SET drvdate = #{drvDate},
+            drvclub = #{drvClub},
+            lastkm = #{lastKm},
+            useAmt = #{useAmt},
+            useoil = #{useOil},
+            drvrem = #{drvRem},
+            chk2   = #{chk2},
+            rependdate = #{rependdate},
+            repaddkm = #{repaddkm},
+            rependchk = #{rependchk}
+        WHERE carno = #{carNo}
+          AND driveid = #{driveID}
     </update>
 
 
-    <select id="findCarListByDate" resultType="DailyReportStep5">
+    <select id="selectTDriveList" resultType="DailyReportStep5">
         SELECT driveID,
         DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
         drvclub,
@@ -59,8 +68,34 @@
         repaddkm
         FROM   tdrive
         WHERE  carno = #{userID}
-        AND drvdate BETWEEN #{date} AND #{date}
+        AND drvdate LIKE CONCAT(#{date}, '%')
         ORDER BY drvclub ASC
+    </select>
+
+
+    <delete id="deleteTDrive">
+        DELETE
+        FROM   tdrive
+        WHERE  carno = #{userID}
+          AND driveID = #{driveID}
+    </delete>
+
+
+    <select id="selectTDriveDetails" resultType="DailyReportStep5">
+        SELECT driveID,
+               DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
+               drvclub,
+               chk2,
+               lastkm,
+               useamt,
+               useOil,
+               drvrem,
+               IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
+               repaddkm,
+               rependchk
+        FROM   tdrive
+        WHERE  carno = #{userID}
+          AND driveID = #{driveID}
     </select>
 
 </mapper>

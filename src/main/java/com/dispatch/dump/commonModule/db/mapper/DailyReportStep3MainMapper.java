@@ -26,7 +26,7 @@ public interface DailyReportStep3MainMapper {
 
 
     /* FUNCTION :: 일보 리스트 조회(전체조건) */
-    DailyReportStep3Main findDailyReportMainList(DailyReportStep3Main dailyReportStep3Main);
+    DailyReportStep3Main findCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
 
 
 }
