@@ -81,7 +81,7 @@
             </otherwise>
         </choose>
         WHERE 1=1
-        <include refid="queryByPosition"></include>
+        AND carnoFull = #{userId}
     </update>
 </mapper>
 
