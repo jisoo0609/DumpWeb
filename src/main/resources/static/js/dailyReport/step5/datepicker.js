@@ -18,7 +18,28 @@ $("#reg-date, #exchange-date").datepicker({
     ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
 });
 
-
 $("#reg-date").datepicker('setDate', 'today');
 
-$("#exchange-date").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDay()));
+$(document).ready(function() {
+    var checkbox = $("#showHideCheckbox");
+    var exchangeDateInput = $("#exchange-date");
+
+    checkbox.change(function() {
+        if (checkbox.is(":checked")) {
+            var today = new Date();
+
+            var yyyy = today.getFullYear();
+            var mm = String(today.getMonth() + 1).padStart(2, "0");
+            var dd = String(today.getDate()).padStart(2, "0");
+            var formattedDate = yyyy + "-" + mm + "-" + dd;
+
+            exchangeDateInput.val(formattedDate);
+        } else {
+            exchangeDateInput.val("");
+        }
+    });
+});
+
+//$("#exchange-date").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDay()));
+
+//document.getElementById('exchange-date').value = new Date().toISOString().substring(0, 10);;
