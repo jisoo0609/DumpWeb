@@ -19,14 +19,7 @@
     <meta name="msapplication-TileImage" content="/resources/image/favicon/favicon.png">
     <link rel="shortcut icon" href="/resources/image/favicon/favicon.png">
 
-    <%--    <!-- Style-->--%>
-    <%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.css?version=1.2&20230831191239" type="text/css"--%>
-    <%--          rel="stylesheet"/>--%>
-    <%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.theme-xenon.css?version=1.2&20230831191239"--%>
-    <%--          type="text/css" rel="stylesheet"/>--%>
-    <%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.theme-atlant.css?version=1.2&20230831191239"--%>
-    <%--          type="text/css" rel="stylesheet"/>--%>
-
+    <!-- Style-->
     <link href="/resources/css/step8/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/loading.css">
     <style>
@@ -235,41 +228,12 @@
             .search-form-major .date-wrap .last {
                 font-size: 13px;
             }
-
-
         }
     </style>
 </head>
 <body>
 <script type="text/javascript"
         src="/resources/js/dailyReport/step8/list.js?jsVerType=2020230831191239"></script>
-<script>
-    // 페이지 로드 시 실행
-    // $(document).ready(function () {
-    //     // 체크박스 요소와 테이블 요소 가져오기
-    //     const toggleTableCheckbox1 = $("#toggleTableCheckbox1");
-    //     const toggleTableCheckbox2 = $("#toggleTableCheckbox2");
-    //     const dataTable = $("#dataTable");
-    //
-    //     // // 체크박스 클릭 이벤트 처리
-    //     // toggleTableCheckbox1.click(function () {
-    //     //     if (toggleTableCheckbox1.is(":checked")) {
-    //     //         // 운행일 기준 테이블을 보이도록 설정
-    //     //         dataTable.html('<tr><th>운행일</th><th>상차지</th><th>하차지</th><th>차량번호</th><th>대수</th><th>진행</th></tr><tr><td>09.09</td><td>구디 </td> <td>지밸리 </td> <td>37우2598 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
-    //     //         toggleTableCheckbox2.prop("checked", false); // 다른 체크박스 해제
-    //     //     }
-    //     // });
-    //
-    //     toggleTableCheckbox2.click(function () {
-    //         if (toggleTableCheckbox2.is(":checked")) {
-    //             // 차량 기준 테이블을 보이도록 설정
-    //             dataTable.html('<tr><th>차량번호</th><th>상차지</th><th>하차지</th><th>운행일</th><th>대수</th><th>진행</th></tr>  <tr> <td>37우2598</td> <td>구디 </td> <td>지밸리 </td> <td>09.17 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
-    //             toggleTableCheckbox1.prop("checked", false); // 다른 체크박스 해제
-    //         }
-    //     });
-    // });
-</script>
-
 <script>
     // 달력 옵션 추가 코드
     $(function () {
@@ -366,7 +330,6 @@
         startDateInput.value = formattedFirstDay;
     });
 </script>
-
 
 <section class="sub-contents-wrap maxwrap">
 
@@ -549,27 +512,10 @@
                 </button>
                 <div class="btnWraaper">
                     <button class="common_btn" onclick="$.allChkChange(1);">일괄결재</button>
-                    <button class="common_btn" onclick="$.allChkChange(0);">취소</button>
+                    <button class="common_btn" onclick="$.allChkChange(0);">일괄취소</button>
                 </div>
             </div>
 
-
-
-            <%--            <div class="area">--%>
-            <%--                <div class="jack"--%>
-            <%--                     style="font-size: 14px; color: #0064c1; font-weight: 600; margin-bottom: 10px; text-align: center">--%>
-            <%--                    <label>운반금액(원)</label>--%>
-            <%--                    <label>999,999,999</label>--%>
-            <%--                </div>--%>
-            <%--                <div class="table-btn" style="margin-bottom: 10px;">--%>
-            <%--                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(1);"--%>
-            <%--                           style="background-image: none !important; text-indent: 0px !important; height: 42px; width: 100px; line-height: 33px;"--%>
-            <%--                           value="일괄결재">--%>
-            <%--                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(0);"--%>
-            <%--                           style="background-image: none !important; text-indent: 0px !important; height: 42px; width: 100px; line-height: 33px;"--%>
-            <%--                           value="취소">--%>
-            <%--                </div>--%>
-            <%--            </div>--%>
             <table class="list-table" id="tableOrderByDate" style="display:<%= "orderByDate".equals(searchType) ? "block" : "none" %>">
                 <colgroup>
                     <col style="width: 3%">
