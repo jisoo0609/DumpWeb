@@ -47,22 +47,26 @@ public class LoginService {
                 if(loginInfo != null ) {
                     HttpSession session = request.getSession();
                     session.setAttribute("loginInfo", loginInfo);
-
-                    rtnMap.put("httpCode", 200);
-                    if (loginInfo.getUserPosition().equals("driver")) {
-                        rtnUrl = "/dailyReport/driver";
-                    } else {
-                        rtnUrl = "/dailyReport/manager";
+                    if (loginInfo.getUserPosition() != null) {
+                        if (loginInfo.getUserPosition().equals("driver")) {
+                            rtnUrl = "/dailyReport/driver";
+                        } else {
+                            rtnUrl = "/dailyReport/manager";
+                        }
                     }
+                    loginMapper.updateSheetSsByUserId(loginInfo);
+//                    loginMapper.updateSheetSubSsByUserId(loginInfo); 추가 조건 필요
+                    loginMapper.updateCarNoSsByUserId(loginInfo);
                     rtnMap.put("rtnUrl", rtnUrl);
+                    rtnMap.put("httpCode", 200);
                 } else {
-                    rtnMap.put("httpCode", 403);
                     rtnMap.put("message", "패스워드가 일치하지 않습니다.");
+                    rtnMap.put("httpCode", 403);
 
                 }
             } else {
-                rtnMap.put("httpCode", 403);
                 rtnMap.put("message", "등록되지 않은 ID 입니다.");
+                rtnMap.put("httpCode", 403);
 
             }
         } catch (Exception e) {
@@ -151,8 +155,11 @@ public class LoginService {
                 loginData.setTestUserChk(true);
                 HttpSession session = request.getSession();
                 session.setAttribute("loginInfo", loginData);
-                rtnMap.put("httpCode", 200);
+                loginMapper.updateSheetSsByUserId(loginData);
+//                loginMapper.updateSheetSubSsByUserId(loginData); // 추가 조건 필요
+                loginMapper.updateCarNoSsByUserId(loginData);
                 rtnMap.put("rtnUrl", rtnUrl);
+                rtnMap.put("httpCode", 200);
             }
         } catch (Exception e) {
             log.error("Exception[" + e.getMessage() + "]");
