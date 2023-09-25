@@ -66,9 +66,9 @@
         <include refid="queryByPosition"></include>
     </update>
 
-    <!--<update id="updateSheetSubSsByUserId" parameterType="Login">
-        UPDATE tsheet_sub SET sheetsubSS = #{uuserID}
-    </update>-->
+    <update id="updateSheetSubSsByUserId" parameterType="Login">
+        UPDATE tsheet_sub SET sheetsubSS = #{uuserID} WHERE sheetID2 IN (select distinct(sheetID) from tsheet where sheetSS = #{uuserID})
+    </update>
 
     <update id="updateCarNoSsByUserId" parameterType="Login">
         UPDATE tsheet_carno SET
