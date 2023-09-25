@@ -22,127 +22,57 @@ public class Step3Service {
     private final DailyReportStep3MainMapper dailyReportStep3MainMapper;
     private final DailyReportStep3SubMapper dailyReportStep3SubMapper;
     private final CommonUtil commonUtil;
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
-    //제출처(상위테이블), 상하차정보(하위테이블) 동시 저장
-    public String save(DailyReportStep3Main dailyReportStep3Main, DailyReportStep3Sub dailyReportStep3Sub) {
-        Map<String, Object> rtnMap = commonUtil.returnMap();
-        HttpSession session = commonUtil.getSession();
-
-        try {
-            Login loginData = (Login) session.getAttribute("loginInfo");
-            dailyReportStep3Main.setCarNo(loginData.getUserId());
-            dailyReportStep3Main.setSheetSS(Integer.parseInt(loginData.getUuserID()));
-
-            //제출처, date 확인
-            DailyReportStep3Main result=dailyReportStep3MainMapper.findDailyReportMainList(dailyReportStep3Main);
-            System.out.println(result);
-            if(result != null){
-                //제출처 정보가 있을때
-                dailyReportStep3Sub.setSheetID2(result.getSheetID());
-                dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(loginData.getUuserID()));
-
-                dailyReportStep3SubMapper.insertDailyReportSub(dailyReportStep3Sub);
-                rtnMap.put("httpCode", 200);
-            }else{
-
-                dailyReportStep3Main.setSheetSS(Integer.parseInt(loginData.getUuserID()));
-                dailyReportStep3MainMapper.insertDailyReportMain(dailyReportStep3Main);
-
-                dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
-                dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(loginData.getUuserID()));
-
-                dailyReportStep3SubMapper.insertDailyReportSub(dailyReportStep3Sub);
-                rtnMap.put("httpCode", 200);
-            }
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return commonUtil.jsonFormatTransfer(rtnMap);
+    public Login getSessionLoginData() {
+        return (Login) commonUtil.getSession().getAttribute("loginInfo");
     }
 
-    /*제출처 검색 목록 조회*/
-    public String search(DailyReportStep3Main dailyReportStep3Main) {
-        Map<String, Object> rtnMap = commonUtil.returnMap();
+    public void saveTransPortInfo(DailyReportStep3Sub dailyReportStep3Sub){
+        dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+        dailyReportStep3SubMapper.insertDailyReportSub(dailyReportStep3Sub);
+    };
 
-        try {
-            List<DailyReportStep3Main> searchList=dailyReportStep3MainMapper.findCarsubmitList(dailyReportStep3Main);
+    //제출처, 운송정보 저장
+    public void save(DailyReportStep3Main dailyReportStep3Main, DailyReportStep3Sub dailyReportStep3Sub) {
+        dailyReportStep3Main.setCarNo(getSessionLoginData().getUserId());
+        dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
 
-            rtnMap.put("httpCode", 200);
-            rtnMap.put("searchList", searchList);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
+        DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
+        if(null != carSubmitResult){
+            dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
+            saveTransPortInfo(dailyReportStep3Sub);
+        }else{
+            dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+            dailyReportStep3MainMapper.insertDailyReportMain(dailyReportStep3Main);
+
+            dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
+            saveTransPortInfo(dailyReportStep3Sub);
         }
-        return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
-    public String searchByCarSubmit(DailyReportStep3Main dailyReportStep3Main) {
-        Map<String, Object> rtnMap = commonUtil.returnMap();
-
-        try {
-            List<DailyReportStep3Main> carSubmitList=dailyReportStep3MainMapper.selectByCarSubmit(dailyReportStep3Main);
-
-            rtnMap.put("httpCode", 200);
-            rtnMap.put("carSubmitList", carSubmitList);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return commonUtil.jsonFormatTransfer(rtnMap);
-    }
-
-    public String searchByCarSubmitTel(DailyReportStep3Main dailyReportStep3Main) {
-        Map<String, Object> rtnMap = commonUtil.returnMap();
-
-        try {
-            List<DailyReportStep3Main> carSubmitTelList=dailyReportStep3MainMapper.selectByCarSubmitTel(dailyReportStep3Main);
-
-            rtnMap.put("httpCode", 200);
-            rtnMap.put("carSubmitTelList", carSubmitTelList);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return commonUtil.jsonFormatTransfer(rtnMap);
-    }
-
-    public String searchBySalesman(DailyReportStep3Main dailyReportStep3Main) {
-        Map<String, Object> rtnMap = commonUtil.returnMap();
-
-        try {
-            List<DailyReportStep3Main> salesmanList=dailyReportStep3MainMapper.selectBySalesman(dailyReportStep3Main);
-
-            rtnMap.put("httpCode", 200);
-            rtnMap.put("salesmanList", salesmanList);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-        }
-        return commonUtil.jsonFormatTransfer(rtnMap);
-    }
-    
-    
     //전체목록 조회
-    public String list(DailyReportStep3Main dailyReportStep3Main) {
-        Map<String, Object> rtnMap = commonUtil.returnMap();
-        HttpSession session = commonUtil.getSession();
+    public DailyReportStep3Main list(DailyReportStep3Main dailyReportStep3Main) {
+        dailyReportStep3Main.setCarNo(getSessionLoginData().getUuserID());
 
-        try {
-            Login loginData = (Login) session.getAttribute("loginInfo");
-            dailyReportStep3Main.setCarNo(loginData.getUserId());
-            //dailyReportStep3Main.setSheetSS(Integer.parseInt(loginData.getUserSS()));
-
-            log.info("CarNo는?"+dailyReportStep3Main.getCarNo());
-            log.info("SheetID?"+dailyReportStep3Main.getSheetID());
-
-            DailyReportStep3Main DailyReportList = dailyReportStep3MainMapper.findDailyReportMainList(dailyReportStep3Main);
-            System.out.println(DailyReportList);
-
-            rtnMap.put("httpCode", 200);
-            rtnMap.put("DailyReportList", DailyReportList);
-        } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
-            log.error("Exception occurred: {}", e.getMessage(), e);
-        }
-        return commonUtil.jsonFormatTransfer(rtnMap);
+        return dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
     }
+
+    //Q.3개를 따로 만들 필요없나..?고민할것
+    //제출처 카테고리 생성용
+    public List<DailyReportStep3Main> searchByCarSubmit(DailyReportStep3Main dailyReportStep3Main) {
+        return dailyReportStep3MainMapper.selectByCarSubmit(dailyReportStep3Main);
+    }
+    //제출처 연락처 카테고리 생성용
+    public List<DailyReportStep3Main> searchByCarSubmitTel(DailyReportStep3Main dailyReportStep3Main) {
+        return dailyReportStep3MainMapper.selectByCarSubmitTel(dailyReportStep3Main);
+    }
+
+    public List<DailyReportStep3Main> searchBySalesman(DailyReportStep3Main dailyReportStep3Main) {
+        return dailyReportStep3MainMapper.selectBySalesman(dailyReportStep3Main);
+    }
+    
+    
+
     
     /*삭제*/
     public void delete(int sheetsubID){
