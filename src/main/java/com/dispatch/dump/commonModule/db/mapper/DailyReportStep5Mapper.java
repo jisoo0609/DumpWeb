@@ -2,22 +2,18 @@ package com.dispatch.dump.commonModule.db.mapper;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
 
+import java.util.List;
+
 public interface DailyReportStep5Mapper {
 
-    /* FUNCTION ::  등록 */
-    int insertDailyReportStep5(DailyReportStep5 dailyReportStep5);
+    void insertTDrive(DailyReportStep5 dailyReportStep5);
 
+    void updateTDrive(DailyReportStep5 dailyReportStep5);
 
-    /* FUNCTION :: 일보 수정 *//*
-    int updateDailyReportStep5(DailyReportStep5 dailyReportStep5);
+    List<DailyReportStep5> selectTDriveList(String userID, String date);
 
-    *//* FUNCTION :: 일보 상세보기 *//*
-    DailyReport findDailyReportBySheetID(DailyReport dailyReport);
+    void deleteTDrive(String userID, int driveID);
 
+    DailyReportStep5 selectTDriveDetails(String userID, int driveID);
 
-
-    //* FUNCTION :: 일보 리스트 조회 (제출처별) */
-/*    List<DailyReport> findDailyReportListByCarSubmit(DailyReport dailyReport);
-
-    int deleteDailyReport(DailyReport dailyReport);*/
 }
