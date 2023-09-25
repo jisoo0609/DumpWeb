@@ -20,8 +20,6 @@ public class DailyReportStep5 {
     private String rependdate;      // LINE :: 교환예정일
     private boolean rependchk;      // LINE :: 교환확인여부
 
-
-
     // VO
     //private long idx;
 }

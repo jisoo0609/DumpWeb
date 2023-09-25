@@ -39,7 +39,7 @@
     <tr>
 
         <td class="a-center"><input type="checkbox" class="enableYN" onchange="$.selectCarNo(this, '4444')"></td>
-        <td class="a-center">4444</td>
+        <td class="a-left">4444</td>
         <td class="a-center">43테4444</td>
         <td class="a-center">010-0000-0000</td>
         <td class="a-center">김준형</td>

@@ -1,23 +1,23 @@
-var closeBtn = null;
-var openBtn = null;
-
-$(document).ready(function(){
-    init();
-    popupJS(openBtn,closeBtn);
+document.addEventListener("DOMContentLoaded", function () {
+    let closeBtn = document.querySelectorAll(".closeBtn");
+    let openBtn = document.querySelectorAll(".openBtn");
+    popupJS(openBtn, closeBtn);
 });
 
-function init(){
-    closeBtn = $(".closeBtn");
-    openBtn = $(".openBtn");
-}
 
-function popupJS(openBtn,closeBtn){
-    var openTarget;
-    $(openBtn).click(function(){
-        openTarget = "#"+ $(this).attr("data-popName");
-        $(openTarget).addClass('active');
+function popupJS(openBtn, closeBtn) {
+    let openTarget;
+
+    openBtn.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            openTarget = "#" + this.getAttribute("data-popName");
+            document.querySelector(openTarget).classList.add('active');
+        });
     });
-    $(closeBtn).click(function(){
-       $(openTarget).removeClass("active") 
+
+    closeBtn.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            document.querySelector(openTarget).classList.remove("active");
+        });
     });
 }
