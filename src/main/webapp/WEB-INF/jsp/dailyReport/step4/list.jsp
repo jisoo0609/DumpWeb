@@ -295,20 +295,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="listMain" items="${tSheet}">
-                <tr>
-                    <td>${listMain.carSubmit}</td>
-                    <td>${listMain.date}</td>
-                    <td>${listMain.item}</td>
-                    <td>${listMain.fromsite}</td>
-                    <td>${listMain.tosite}</td>
-                    <td>${listMain.qty}</td>
-                    <td style="text-align: right">
-<%--                        운반단가 쉼표 표시 코드--%>
-                        <fmt:formatNumber value="${listMain.qtyup}" type="number"/>
-                    </td>
-                </tr>
-                </c:forEach>
+<%--                <c:forEach var="listMain" items="${tSheet}">--%>
+<%--                <tr>--%>
+<%--                    <td>${listMain.carSubmit}</td>--%>
+<%--                    <td>${listMain.date}</td>--%>
+<%--                    <td>${listMain.item}</td>--%>
+<%--                    <td>${listMain.fromsite}</td>--%>
+<%--                    <td>${listMain.tosite}</td>--%>
+<%--                    <td>${listMain.qty}</td>--%>
+<%--                    <td style="text-align: right">--%>
+<%--&lt;%&ndash;                        운반단가 쉼표 표시 코드&ndash;%&gt;--%>
+<%--                        <fmt:formatNumber value="${listMain.qtyup}" type="number"/>--%>
+<%--                    </td>--%>
+<%--                </tr>--%>
+<%--                </c:forEach>--%>
                 </tbody>
             </table>
         </div>

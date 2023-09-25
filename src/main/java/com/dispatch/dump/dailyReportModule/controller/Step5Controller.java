@@ -1,40 +1,49 @@
 package com.dispatch.dump.dailyReportModule.controller;
 
-import com.dispatch.dump.commonModule.db.dto.DailyReport;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
-import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step5Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/dailyReport")
 @RequiredArgsConstructor
 public class Step5Controller {
-
-    private final DailyReportService dailyReportService;
     private final Step5Service step5Service;
 
     @RequestMapping(value = "/carcareform", method = RequestMethod.GET)
-    public String step5main(Model model, DailyReport dailyReport) {
-         dailyReportService.list(model, dailyReport);
+    public String step5() {
         return "/dailyReport/step5/carcareform";
     }
 
-    @RequestMapping(value = "/nextcarcare", method = RequestMethod.GET)
-    public String step5next(Model model, DailyReport dailyReport) {
-        dailyReportService.list(model, dailyReport);
-        return "/dailyReport/step5/nextcarcare";
+    /* click.js */
+    @RequestMapping(value = "/carcareform/ajax/save", method = RequestMethod.POST)
+    @ResponseBody
+    public String tDriveSave(DailyReportStep5 dailyReportStep5) {
+        return step5Service.saveTDrive(dailyReportStep5);
     }
 
-    @RequestMapping(value = "/carcare/ajax/save", method = RequestMethod.POST)
+    @RequestMapping(value = "/carcareform/ajax/list", method = RequestMethod.POST)
     @ResponseBody
-    public String save(@RequestBody DailyReportStep5 dailyReportStep5) {
-        return step5Service.save(dailyReportStep5);
+    public List<DailyReportStep5> tDriveList(String date) {
+        return step5Service.findTDriveList(date);
+    }
+
+    @RequestMapping(value = "/carcareform/ajax/delete", method = RequestMethod.DELETE)
+    @ResponseBody
+    public void tDriveRemove(int driveID) {
+        step5Service.removeTDrive(driveID);
+    }
+
+    /* param.js */
+    @RequestMapping(value = "/carcareform/ajax/details", method = RequestMethod.POST)
+    @ResponseBody
+    public DailyReportStep5 tDriveDetails(int driveID) {
+        return step5Service.findTDriveDetails(driveID);
     }
 }
