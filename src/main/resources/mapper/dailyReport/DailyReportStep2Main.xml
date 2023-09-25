@@ -7,17 +7,17 @@
     <sql id="res_table">
         WITH r1 AS
                  (
-                 SELECT sheetid
+                 SELECT sheetid, carNo
                   FROM tsheet
                   WHERE carsubmittel = ${userId}
                     AND date BETWEEN ${startDate} AND ${endDate}
                     ),
             r2 AS
             (
-        SELECT sheetid2
+        SELECT *
         FROM tsheet_sub
         ),r3 AS(
-        SELECT sheetid2
+        SELECT *
         FROM r1
             INNER JOIN r2
         ON r1.sheetid = r2.sheetid2
@@ -34,7 +34,17 @@
         select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup)) as 'totalTransportationCost',
         SUM(Qty) as 'totalTrips'
         from tSheet_sub
-        where sheetID2 in (select * from r3)
+        where sheetID2 in (select sheetid2 from r3)
+    </select>
+
+    <select id="selectDispatchStatusList" resultType="DailyReportStep2Sub">
+        <include refid="res_table">
+            <property name="userId" value="#{userId}"/>
+            <property name="startDate" value="#{today}"/>
+            <property name="endDate" value="#{today}"/>
+        </include>
+
+        select * from r3
     </select>
 
 </mapper>

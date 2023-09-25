@@ -25,12 +25,16 @@ public class Step2Controller {
         return "/dailyReport/step2/manager";
     }
 
-
     @RequestMapping(value = "/manager/ajax/summary", method = RequestMethod.POST)
     @ResponseBody
     public DailyReportStep2Summary tDriveSummary(DailyReportStep2Option option) {
-        System.out.println(step2Service.findCalSummary(option));
         return step2Service.findCalSummary(option);
+    }
+
+    @RequestMapping(value = "/manager/ajax/submitlist", method = RequestMethod.GET)
+    @ResponseBody
+    public List<DailyReportStep2Sub> dispatchStatusList() {
+        return step2Service.findDispatchStatusList();
     }
 }
 

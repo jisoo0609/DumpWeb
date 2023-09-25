@@ -11,4 +11,6 @@ import java.util.List;
 public interface DailyReportStep2Mapper {
     DailyReportStep2Summary selectCalSummary(DailyReportStep2Option option,String userId);
 
+    List<DailyReportStep2Sub> selectDispatchStatusList(String userId,String today);
+
 }

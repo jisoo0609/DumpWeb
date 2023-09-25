@@ -8,13 +8,13 @@
     <article class="homescreen">
         <div class="date-container">
             <form name="option_frm">
-            <div class="date-picker">
-                <label class="start-text" for="start-date">운행일
-                    <input id="start-date" name="startDate"/>
-                    <span>~</span>
-                    <input id="end-date" name="endDate"/>
-                </label>
-            </div>
+                <div class="date-picker">
+                    <label class="start-text" for="start-date">운행일
+                        <input id="start-date" name="startDate"/>
+                        <span>~</span>
+                        <input id="end-date" name="endDate"/>
+                    </label>
+                </div>
             </form>
             <button id="update-button" type="submit" onclick="bindSummary()">조회</button>
             <ul class="basic-menu">
@@ -65,13 +65,18 @@
         <section>
             <p class="today-car">금일 배차 현황</p>
             <table class="today-graph">
-                <tr class="today-menu">
+                <thead>
+                <tr class="car-menu">
                     <th>차량번호</th>
                     <th>상차지</th>
                     <th>하차지</th>
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
+                </thead>
+                <tbody>
+                <!-- 작업 -->
+                </tbody>
             </table>
 
             <p class="car-care">제출 받은 일보</p>
@@ -86,7 +91,6 @@
                     <th>대수</th>
                 </tr>
                 </thead>
-
                 <tbody>
                 <!-- 작업 -->
                 </tbody>
