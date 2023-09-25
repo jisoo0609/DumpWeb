@@ -8,19 +8,23 @@
     <select id="findDailyReportMainByCarSubmitTel" resultType="DailyReportStep1Main">
         select sheetID, DATE_FORMAT(date, '%y-%m-%d') as date,
         carSubmit,
-        salesman
+        salesman,
+        sheetSS
         from tSheet
-        where carSubmitTel = #{userId}
+        where sheetSS = #{uuserID}
+
     </select>
 
     <select id="findDailyReportMainBySheetID2"  resultType="DailyReportStep1Sub">
-        select fromsite, tosite, item, Qty,Qtyup from tSheet_sub where sheetID2=#{sheetID2}
+        select fromsite, tosite, item, Qty,Qtyup,sheetsubSS
+        from tSheet_sub
+        where sheetID2=#{sheetID2}
     </select>
 
     <sql id="res_table">
         with r1 as (select sheetID
                     from tSheet
-                    where carSubmitTel =  ${userId}),
+                    where sheetSS =  ${uuserID}),
              r2 as (select sheetID2
                     from tSheet_sub)
     </sql>
@@ -46,9 +50,18 @@
         </include>
         select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup))
         from tSheet_sub
-        where sheetID2 in ( select sheetID2 from r1 inner join r2
+        where sheetID2 in (
+        select sheetID2
+        from r1 inner join r2
         on r1.sheetID = r2.sheetID2
         )
+        AND tSheet_sub.sheetID2 in (
+        select sheetID2
+        from tSheet
+        where date BETWEEN #{startDate} AND #{endDate}
+        )
+
+
     </select>
 
 

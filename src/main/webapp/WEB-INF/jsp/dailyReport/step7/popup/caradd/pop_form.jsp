@@ -11,28 +11,39 @@
         </button>
       </div>
       <div class="popSearch-listWrap unspecifiedFromArea" style="padding-bottom: 60px">
-        <table class="popSearch-list list33">
-          <colgroup>
-            <col style="width: 17%">
-            <col style="width: 33%">
-            <col style="width: 33%">
-            <col style="width: 17%">
-          </colgroup>
-          <tr>
-            <th>차량번호</th>
-            <th>전체 차량번호</th>
-            <th>휴대폰 번호</th>
-            <th>기사명</th>
-          </tr>
-          <tr>
-            <td class="a-center"><input type="text" style="width: 100%;" name="carNoKey"></td>
-            <td class="a-center"><input type="text" style="width: 100%;" name="carNoFull"></td>
-            <td class="a-center"><input type="text" style="width: 100%;" name="carNoHp"></td>
-            <td class="a-center"><input type="text" style="width: 100%;" name="carNoName"></td>
-          </tr>
-        </table>
+        <form name="cardatafrm">
+          <ul class="mtable__ul">
+            <li><label >차량번호</label>
+              <span class="content" style="padding-left: 100px;">
+                <input type="text" style="width: 100%;" name="carNoKey" autocomplete="off">
+              </span>
+            </li>
+            <li><label>전체 차량번호</label>
+              <span class="content" style="padding-left: 100px;">
+                  <div class="input-group select">
+                    <input type="text" class="trn" style="width: 100%;" name="carNoFull" id="carNoFull" autocomplete="off">
+                    <span class="input-group-clear dis-n" id="carNoFull_clear">x</span>
+                    <select class="carNoFull" id="carNoFullBox" onchange="$.selectBoxChange(this.value, 'carNoFull');">
+                    <option value="">직접입력</option>
+                      <c:forEach var="item" items="${carNoList}">
+                        <option value="${item}">${item}</option>
+                      </c:forEach>
+                    </select>
+              </div>
+              </span>
+            </li>
+            <li><label>휴대폰 번호</label>
+              <span class="content" style="padding-left: 100px;">
+                <input type="text" style="width: 100%;" name="carNoHp" autocomplete="off">
+              </span></li>
+            <li><label>기사명</label>
+              <span class="content" style="padding-left: 100px;">
+                <input type="text" style="width: 100%;" name="carNoName" autocomplete="off">
+              </span></li>
+          </ul>
+        </form>
         <div class="btn-area">
-            <input type="button" class="btn btn-blue" value="등록">
+            <input type="button" class="btn btn-blue" value="등록" onclick="saveCarData();">
             <input type="button" class="btn btn-white" value="닫기" onclick="closePopUpTest(this);">
         </div>
       </div>

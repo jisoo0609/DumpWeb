@@ -1,14 +1,9 @@
 package com.dispatch.dump.dailyReportModule.service;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep6;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep6OptionForm;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep5Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
-
-import javax.servlet.http.HttpSession;
-
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +24,7 @@ public class Step5Service {
     }
 
 
-    public String save(DailyReportStep5 dailyReportStep5) {
+    public String saveTDrive(DailyReportStep5 dailyReportStep5) {
 
         Map<String, Object> rtnMap = commonUtil.returnMap();
 
@@ -37,9 +32,9 @@ public class Step5Service {
             dailyReportStep5.setCarNo(getSessionLoginData().getUserId());
 
             if (dailyReportStep5.getDriveID() == 0) {
-                dailyReportStep5Mapper.insertDailyReportStep5(dailyReportStep5);
-            } else { //update 수정
-                dailyReportStep5Mapper.updateDailyReportStep5(dailyReportStep5);
+                dailyReportStep5Mapper.insertTDrive(dailyReportStep5);
+            } else {
+                dailyReportStep5Mapper.updateTDrive(dailyReportStep5);
             }
             rtnMap.put("httpCode", 200);
 
@@ -50,11 +45,15 @@ public class Step5Service {
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
-    public List<DailyReportStep5> getCarListByDate(String date) {
-        String userID = getSessionLoginData().getUserId();
-
-        System.out.println(dailyReportStep5Mapper.findCarListByDate(userID,date));
-        return dailyReportStep5Mapper.findCarListByDate(userID,date);
+    public List<DailyReportStep5> findTDriveList(String date) {
+        return dailyReportStep5Mapper.selectTDriveList(getSessionLoginData().getUserId(), date);
     }
 
+    public void removeTDrive(int driveID) {
+        dailyReportStep5Mapper.deleteTDrive(getSessionLoginData().getUserId(), driveID);
+    }
+
+    public DailyReportStep5 findTDriveDetails(int driveID) {
+        return dailyReportStep5Mapper.selectTDriveDetails(getSessionLoginData().getUserId(), driveID);
+    }
 }

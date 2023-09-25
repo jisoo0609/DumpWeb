@@ -12,4 +12,14 @@ public interface LoginMapper {
      int insertUserInfo(Login login);
 
      int updateUserPassword(Login login);
+
+     int insertDefaultCarData(Login login);
+
+     int countDefaultCarData(Login login);
+
+     int updateSheetSsByUserId(Login login);
+
+     int updateCarNoSsByUserId(Login login);
+
+     int updateSheetSubSsByUserId(Login login);
 }

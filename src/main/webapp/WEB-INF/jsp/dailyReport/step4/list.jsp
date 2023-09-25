@@ -61,7 +61,7 @@
                     <label style="font-size: 13px; font-weight: 600;">▪운행기간</label>
                     <input class="fromDate" id="datepicker1" name="fromDate" readonly>
                     <span style="font-weight: 600; margin:0 30px 0 30px; padding-top: 5px;">~</span>
-                    <input class="toDate" id="datepicker2" name="toData" readonly>
+                    <input class="toDate" id="datepicker2" name="toDate" readonly>
                 </div>
                 <button type="button" class="adsearch_btn">상세검색 열기 ▼</button>
                 <!--                    상세검색 열고 닫는 스크립트-->
@@ -295,20 +295,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="listMain" items="${tSheet}">
-                <tr>
-                    <td>${listMain.carSubmit}</td>
-                    <td>${listMain.date}</td>
-                    <td>${listMain.item}</td>
-                    <td>${listMain.fromsite}</td>
-                    <td>${listMain.tosite}</td>
-                    <td>${listMain.qty}</td>
-                    <td style="text-align: right">
-<%--                        운반단가 쉼표 표시 코드--%>
-                        <fmt:formatNumber value="${listMain.qtyup}" type="number"/>
-                    </td>
-                </tr>
-                </c:forEach>
+<%--                <c:forEach var="listMain" items="${tSheet}">--%>
+<%--                <tr>--%>
+<%--                    <td>${listMain.carSubmit}</td>--%>
+<%--                    <td>${listMain.date}</td>--%>
+<%--                    <td>${listMain.item}</td>--%>
+<%--                    <td>${listMain.fromsite}</td>--%>
+<%--                    <td>${listMain.tosite}</td>--%>
+<%--                    <td>${listMain.qty}</td>--%>
+<%--                    <td style="text-align: right">--%>
+<%--&lt;%&ndash;                        운반단가 쉼표 표시 코드&ndash;%&gt;--%>
+<%--                        <fmt:formatNumber value="${listMain.qtyup}" type="number"/>--%>
+<%--                    </td>--%>
+<%--                </tr>--%>
+<%--                </c:forEach>--%>
                 </tbody>
             </table>
         </div>
