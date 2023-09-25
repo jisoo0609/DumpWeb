@@ -19,13 +19,13 @@
     <meta name="msapplication-TileImage" content="/resources/image/favicon/favicon.png">
     <link rel="shortcut icon" href="/resources/image/favicon/favicon.png">
 
-<%--    <!-- Style-->--%>
-<%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.css?version=1.2&20230831191239" type="text/css"--%>
-<%--          rel="stylesheet"/>--%>
-<%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.theme-xenon.css?version=1.2&20230831191239"--%>
-<%--          type="text/css" rel="stylesheet"/>--%>
-<%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.theme-atlant.css?version=1.2&20230831191239"--%>
-<%--          type="text/css" rel="stylesheet"/>--%>
+    <%--    <!-- Style-->--%>
+    <%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.css?version=1.2&20230831191239" type="text/css"--%>
+    <%--          rel="stylesheet"/>--%>
+    <%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.theme-xenon.css?version=1.2&20230831191239"--%>
+    <%--          type="text/css" rel="stylesheet"/>--%>
+    <%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.theme-atlant.css?version=1.2&20230831191239"--%>
+    <%--          type="text/css" rel="stylesheet"/>--%>
 
     <link href="/resources/css/step8/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/loading.css">
@@ -235,320 +235,322 @@
             .search-form-major .date-wrap .last {
                 font-size: 13px;
             }
+
+
         }
     </style>
-<%--    <style type="text/css">--%>
-<%--        @media screen and (min-width: 280px) and (max-width: 1024px) {--%>
-<%--            .search-form-major label {--%>
-<%--                width: initial;--%>
-<%--                margin-bottom: 8px;--%>
-<%--            }--%>
-<%--        }--%>
+    <%--    <style type="text/css">--%>
+    <%--        @media screen and (min-width: 280px) and (max-width: 1024px) {--%>
+    <%--            .search-form-major label {--%>
+    <%--                width: initial;--%>
+    <%--                margin-bottom: 8px;--%>
+    <%--            }--%>
+    <%--        }--%>
 
-<%--        .ui-datepicker-trigger {--%>
-<%--            display: none;--%>
-<%--        }--%>
+    <%--        .ui-datepicker-trigger {--%>
+    <%--            display: none;--%>
+    <%--        }--%>
 
-<%--        @media screen and (min-width: 280px) and (max-width: 1980px) {--%>
-<%--            .sub-title {--%>
-<%--                padding-bottom: initial;--%>
-<%--                border-bottom: initial;--%>
-<%--            }--%>
+    <%--        @media screen and (min-width: 280px) and (max-width: 1980px) {--%>
+    <%--            .sub-title {--%>
+    <%--                padding-bottom: initial;--%>
+    <%--                border-bottom: initial;--%>
+    <%--            }--%>
 
-<%--            .search-form {--%>
-<%--                margin: 15px 0 10px;--%>
-<%--            }--%>
+    <%--            .search-form {--%>
+    <%--                margin: 15px 0 10px;--%>
+    <%--            }--%>
 
-<%--            .table-btn {--%>
-<%--                text-align: center;--%>
-<%--                float: none;--%>
-<%--            }--%>
-<%--        }--%>
+    <%--            .table-btn {--%>
+    <%--                text-align: center;--%>
+    <%--                float: none;--%>
+    <%--            }--%>
+    <%--        }--%>
 
-<%--        .default-tab__ul.cnt8 li {--%>
-<%--            width: 12.5%;--%>
-<%--        }--%>
+    <%--        .default-tab__ul.cnt8 li {--%>
+    <%--            width: 12.5%;--%>
+    <%--        }--%>
 
-<%--        .wp70 {--%>
-<%--            width: 70%;--%>
-<%--        }--%>
+    <%--        .wp70 {--%>
+    <%--            width: 70%;--%>
+    <%--        }--%>
 
-<%--        .wp90 {--%>
-<%--            width: 90%;--%>
-<%--        }--%>
+    <%--        .wp90 {--%>
+    <%--            width: 90%;--%>
+    <%--        }--%>
 
-<%--        @media screen and (min-width: 1025px) {--%>
-<%--            .onlyMobileFunction {--%>
-<%--                display: none;--%>
-<%--            }--%>
+    <%--        @media screen and (min-width: 1025px) {--%>
+    <%--            .onlyMobileFunction {--%>
+    <%--                display: none;--%>
+    <%--            }--%>
 
-<%--        }--%>
+    <%--        }--%>
 
-<%--        @media screen and (max-width: 1024px) {--%>
-<%--            .workplan_select {--%>
-<%--                width: 23px;--%>
-<%--                position: absolute;--%>
-<%--                top: 0;--%>
-<%--                right: 0;--%>
-<%--                border-left: none;--%>
-<%--                padding-left: 0;--%>
-<%--            }--%>
+    <%--        @media screen and (max-width: 1024px) {--%>
+    <%--            .workplan_select {--%>
+    <%--                width: 23px;--%>
+    <%--                position: absolute;--%>
+    <%--                top: 0;--%>
+    <%--                right: 0;--%>
+    <%--                border-left: none;--%>
+    <%--                padding-left: 0;--%>
+    <%--            }--%>
 
-<%--            .search-form-details label {--%>
-<%--                position: absolute;--%>
-<%--                left: 0;--%>
-<%--                font-size: 13px;--%>
-<%--                width: 35%;--%>
-<%--            }--%>
+    <%--            .search-form-details label {--%>
+    <%--                position: absolute;--%>
+    <%--                left: 0;--%>
+    <%--                font-size: 13px;--%>
+    <%--                width: 35%;--%>
+    <%--            }--%>
 
-<%--            .search-form-details li {--%>
-<%--                width: 100%;--%>
-<%--                float: none;--%>
-<%--                margin-right: 0;--%>
-<%--                position: relative;--%>
-<%--                padding-bottom: 10px;--%>
-<%--            }--%>
+    <%--            .search-form-details li {--%>
+    <%--                width: 100%;--%>
+    <%--                float: none;--%>
+    <%--                margin-right: 0;--%>
+    <%--                position: relative;--%>
+    <%--                padding-bottom: 10px;--%>
+    <%--            }--%>
 
-<%--            .search-form-details .input-group {--%>
-<%--                width: 100%;--%>
-<%--                padding-left: 120px;--%>
-<%--            }--%>
-<%--        }--%>
+    <%--            .search-form-details .input-group {--%>
+    <%--                width: 100%;--%>
+    <%--                padding-left: 120px;--%>
+    <%--            }--%>
+    <%--        }--%>
 
-<%--        .po-re {--%>
-<%--            position: relative;--%>
-<%--        }--%>
+    <%--        .po-re {--%>
+    <%--            position: relative;--%>
+    <%--        }--%>
 
-<%--        .po-ab {--%>
-<%--            position: absolute;--%>
-<%--            top: 0;--%>
-<%--            right: 30px;--%>
-<%--        }--%>
+    <%--        .po-ab {--%>
+    <%--            position: absolute;--%>
+    <%--            top: 0;--%>
+    <%--            right: 30px;--%>
+    <%--        }--%>
 
-<%--        .table_text_word {--%>
-<%--            word-break: break-all;--%>
-<%--            wrap: hard;--%>
-<%--        }--%>
+    <%--        .table_text_word {--%>
+    <%--            word-break: break-all;--%>
+    <%--            wrap: hard;--%>
+    <%--        }--%>
 
-<%--        .table_text_word_keep {--%>
-<%--            word-break: break-word;--%>
-<%--            wrap: hard;--%>
-<%--        }--%>
+    <%--        .table_text_word_keep {--%>
+    <%--            word-break: break-word;--%>
+    <%--            wrap: hard;--%>
+    <%--        }--%>
 
-<%--        .pre_text_word {--%>
-<%--            white-space: pre-wrap; /* CSS3*/--%>
-<%--            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */--%>
-<%--            white-space: -pre-wrap; /* Opera 4-6 */--%>
-<%--            white-space: -o-pre-wrap; /* Opera 7 */--%>
-<%--            word-wrap: break-all; /* Internet Explorer 5.5+ */--%>
-<%--        }--%>
+    <%--        .pre_text_word {--%>
+    <%--            white-space: pre-wrap; /* CSS3*/--%>
+    <%--            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */--%>
+    <%--            white-space: -pre-wrap; /* Opera 4-6 */--%>
+    <%--            white-space: -o-pre-wrap; /* Opera 7 */--%>
+    <%--            word-wrap: break-all; /* Internet Explorer 5.5+ */--%>
+    <%--        }--%>
 
-<%--        .mobile_helpBox_list {--%>
-<%--            position: relative;--%>
-<%--            z-index: 1--%>
-<%--        }--%>
+    <%--        .mobile_helpBox_list {--%>
+    <%--            position: relative;--%>
+    <%--            z-index: 1--%>
+    <%--        }--%>
 
-<%--        .opacity_0_5 {--%>
-<%--            opacity: 0.5;--%>
-<%--        }--%>
+    <%--        .opacity_0_5 {--%>
+    <%--            opacity: 0.5;--%>
+    <%--        }--%>
 
-<%--        .ui-datepicker {--%>
-<%--            font-size: 12px;--%>
-<%--            width: 250px--%>
-<%--        }--%>
+    <%--        .ui-datepicker {--%>
+    <%--            font-size: 12px;--%>
+    <%--            width: 250px--%>
+    <%--        }--%>
 
-<%--        .ui-datepicker select.ui-datepicker-month {--%>
-<%--            width: 30%;--%>
-<%--            font-size: 11px;--%>
-<%--            margin-left: 5%;--%>
-<%--            height: 20px--%>
-<%--        }--%>
+    <%--        .ui-datepicker select.ui-datepicker-month {--%>
+    <%--            width: 30%;--%>
+    <%--            font-size: 11px;--%>
+    <%--            margin-left: 5%;--%>
+    <%--            height: 20px--%>
+    <%--        }--%>
 
-<%--        .ui-datepicker select.ui-datepicker-year {--%>
-<%--            width: 40%;--%>
-<%--            font-size: 11px;--%>
-<%--            height: 20px--%>
-<%--        }--%>
+    <%--        .ui-datepicker select.ui-datepicker-year {--%>
+    <%--            width: 40%;--%>
+    <%--            font-size: 11px;--%>
+    <%--            height: 20px--%>
+    <%--        }--%>
 
-<%--        #banner_wrap {--%>
-<%--            margin: 0 auto;--%>
-<%--            text-align: center;--%>
-<%--        }--%>
+    <%--        #banner_wrap {--%>
+    <%--            margin: 0 auto;--%>
+    <%--            text-align: center;--%>
+    <%--        }--%>
 
-<%--        #banner_quick_bg {--%>
-<%--            margin: 0 auto;--%>
-<%--            text-align: center;--%>
-<%--            width: 1000px;--%>
-<%--            position: relative;--%>
-<%--        }--%>
+    <%--        #banner_quick_bg {--%>
+    <%--            margin: 0 auto;--%>
+    <%--            text-align: center;--%>
+    <%--            width: 1000px;--%>
+    <%--            position: relative;--%>
+    <%--        }--%>
 
-<%--        #banner_quick {--%>
-<%--            position: absolute;--%>
-<%--            z-index: 2;--%>
-<%--            top: 15px;--%>
-<%--            width: 150px;--%>
-<%--            height: 30px;--%>
-<%--            right: -270px;--%>
-<%--            border: 1px solid rgba(51, 86, 123, 0.8);--%>
-<%--            border-width: 5px;--%>
-<%--            background-color: #002c5a--%>
-<%--        }--%>
+    <%--        #banner_quick {--%>
+    <%--            position: absolute;--%>
+    <%--            z-index: 2;--%>
+    <%--            top: 15px;--%>
+    <%--            width: 150px;--%>
+    <%--            height: 30px;--%>
+    <%--            right: -270px;--%>
+    <%--            border: 1px solid rgba(51, 86, 123, 0.8);--%>
+    <%--            border-width: 5px;--%>
+    <%--            background-color: #002c5a--%>
+    <%--        }--%>
 
-<%--        #banner_quick a {--%>
-<%--            color: white;--%>
-<%--        }--%>
+    <%--        #banner_quick a {--%>
+    <%--            color: white;--%>
+    <%--        }--%>
 
-<%--        #banner_container {--%>
-<%--            position: relative;--%>
-<%--        }--%>
+    <%--        #banner_container {--%>
+    <%--            position: relative;--%>
+    <%--        }--%>
 
-<%--        .lineFirstBold:first-line {--%>
-<%--            color: #6f1111;--%>
-<%--            font-weight: bold;--%>
-<%--        }--%>
+    <%--        .lineFirstBold:first-line {--%>
+    <%--            color: #6f1111;--%>
+    <%--            font-weight: bold;--%>
+    <%--        }--%>
 
-<%--        .comp-name-mode {--%>
-<%--            max-width: 310px;--%>
-<%--            position: absolute;--%>
-<%--            top: 80%;--%>
-<%--            left: 50%;--%>
-<%--            transform: translate(-50%, -50%);--%>
-<%--            font-weight: 600;--%>
-<%--        }--%>
+    <%--        .comp-name-mode {--%>
+    <%--            max-width: 310px;--%>
+    <%--            position: absolute;--%>
+    <%--            top: 80%;--%>
+    <%--            left: 50%;--%>
+    <%--            transform: translate(-50%, -50%);--%>
+    <%--            font-weight: 600;--%>
+    <%--        }--%>
 
-<%--        .comp-name-mode-question {--%>
-<%--            max-width: 310px;--%>
-<%--            position: absolute;--%>
-<%--            top: 80%;--%>
-<%--            left: 52%;--%>
-<%--            transform: translate(-50%, -50%);--%>
-<%--            font-weight: 600;--%>
-<%--        }--%>
+    <%--        .comp-name-mode-question {--%>
+    <%--            max-width: 310px;--%>
+    <%--            position: absolute;--%>
+    <%--            top: 80%;--%>
+    <%--            left: 52%;--%>
+    <%--            transform: translate(-50%, -50%);--%>
+    <%--            font-weight: 600;--%>
+    <%--        }--%>
 
 
-<%--        @media screen and (max-width: 1024px) {--%>
-<%--            .onlyPCFunction {--%>
-<%--                display: none;--%>
-<%--            }--%>
+    <%--        @media screen and (max-width: 1024px) {--%>
+    <%--            .onlyPCFunction {--%>
+    <%--                display: none;--%>
+    <%--            }--%>
 
-<%--            .mobile-fw-300 {--%>
-<%--                font-weight: 300;--%>
-<%--            }--%>
-<%--        }--%>
+    <%--            .mobile-fw-300 {--%>
+    <%--                font-weight: 300;--%>
+    <%--            }--%>
+    <%--        }--%>
 
-<%--        #graph_donut_title {--%>
-<%--            width: 40%;--%>
-<%--            text-align: center;--%>
-<%--            font-size: 22px;--%>
-<%--            font-weight: bold;--%>
-<%--        }--%>
+    <%--        #graph_donut_title {--%>
+    <%--            width: 40%;--%>
+    <%--            text-align: center;--%>
+    <%--            font-size: 22px;--%>
+    <%--            font-weight: bold;--%>
+    <%--        }--%>
 
-<%--        .schedule-bg {--%>
-<%--            color: rgb(0, 104, 183);--%>
-<%--            font-weight: bold;--%>
-<%--            border: 1px solid rgb(0, 104, 183);--%>
-<%--        }--%>
+    <%--        .schedule-bg {--%>
+    <%--            color: rgb(0, 104, 183);--%>
+    <%--            font-weight: bold;--%>
+    <%--            border: 1px solid rgb(0, 104, 183);--%>
+    <%--        }--%>
 
-<%--        /* LINE :: focus mouse change */--%>
-<%--        .pointer {--%>
-<%--            cursor: pointer;--%>
-<%--        }--%>
+    <%--        /* LINE :: focus mouse change */--%>
+    <%--        .pointer {--%>
+    <%--            cursor: pointer;--%>
+    <%--        }--%>
 
-<%--        /* LINE :: th align center */--%>
-<%--        .list-table th.center {--%>
-<%--            text-align: center;--%>
-<%--        }--%>
+    <%--        /* LINE :: th align center */--%>
+    <%--        .list-table th.center {--%>
+    <%--            text-align: center;--%>
+    <%--        }--%>
 
-<%--        .closeMask {--%>
-<%--            position: fixed;--%>
-<%--            z-index: 99;--%>
-<%--            width: 100%;--%>
-<%--            height: 100%;--%>
-<%--            background: rgba(0, 0, 0, 0.5);--%>
-<%--        }--%>
+    <%--        .closeMask {--%>
+    <%--            position: fixed;--%>
+    <%--            z-index: 99;--%>
+    <%--            width: 100%;--%>
+    <%--            height: 100%;--%>
+    <%--            background: rgba(0, 0, 0, 0.5);--%>
+    <%--        }--%>
 
-<%--        @media screen and (max-width: 280px) {--%>
-<%--            .search-form-major .date-wrap {--%>
-<%--                margin-top: initial;--%>
-<%--                margin-left: initial;--%>
-<%--            }--%>
+    <%--        @media screen and (max-width: 280px) {--%>
+    <%--            .search-form-major .date-wrap {--%>
+    <%--                margin-top: initial;--%>
+    <%--                margin-left: initial;--%>
+    <%--            }--%>
 
-<%--            .list-table {--%>
-<%--                table-layout: initial;--%>
-<%--            }--%>
+    <%--            .list-table {--%>
+    <%--                table-layout: initial;--%>
+    <%--            }--%>
 
-<%--            .list-table td {--%>
-<%--                padding: 10px 1px;--%>
-<%--            }--%>
-<%--        }--%>
+    <%--            .list-table td {--%>
+    <%--                padding: 10px 1px;--%>
+    <%--            }--%>
+    <%--        }--%>
 
-<%--        @media screen and (max-width: 425px) {--%>
-<%--            .list-table th {--%>
-<%--                padding: 10px 4px;--%>
-<%--            }--%>
+    <%--        @media screen and (max-width: 425px) {--%>
+    <%--            .list-table th {--%>
+    <%--                padding: 10px 4px;--%>
+    <%--            }--%>
 
-<%--            .table-btn {--%>
-<%--                width: 60%;--%>
-<%--            }--%>
-<%--        }--%>
+    <%--            .table-btn {--%>
+    <%--                width: 60%;--%>
+    <%--            }--%>
+    <%--        }--%>
 
-<%--        @media screen and (max-width: 280px) {--%>
-<%--            .list-table th {--%>
-<%--                padding: 1px 10px;--%>
-<%--            }--%>
+    <%--        @media screen and (max-width: 280px) {--%>
+    <%--            .list-table th {--%>
+    <%--                padding: 1px 10px;--%>
+    <%--            }--%>
 
-<%--            .btn {--%>
-<%--                margin-bottom: 5px;--%>
-<%--            }--%>
-<%--        }--%>
+    <%--            .btn {--%>
+    <%--                margin-bottom: 5px;--%>
+    <%--            }--%>
+    <%--        }--%>
 
-<%--        @media screen and (max-width: 1024px) {--%>
-<%--            .search-form-major .date-wrap .unit {--%>
-<%--                margin-top: 5px;--%>
-<%--                margin-left: -1px;--%>
-<%--            }--%>
-<%--        }--%>
+    <%--        @media screen and (max-width: 1024px) {--%>
+    <%--            .search-form-major .date-wrap .unit {--%>
+    <%--                margin-top: 5px;--%>
+    <%--                margin-left: -1px;--%>
+    <%--            }--%>
+    <%--        }--%>
 
-<%--        @media screen and (max-width: 1024px) {--%>
-<%--            .search-form-major .date-wrap .fst {--%>
-<%--                font-size: 13px;--%>
-<%--            }--%>
+    <%--        @media screen and (max-width: 1024px) {--%>
+    <%--            .search-form-major .date-wrap .fst {--%>
+    <%--                font-size: 13px;--%>
+    <%--            }--%>
 
-<%--            .search-form-major .date-wrap .last {--%>
-<%--                font-size: 13px;--%>
-<%--            }--%>
-<%--        }--%>
+    <%--            .search-form-major .date-wrap .last {--%>
+    <%--                font-size: 13px;--%>
+    <%--            }--%>
+    <%--        }--%>
 
-<%--        @media screen and (max-width: 425px) {--%>
-<%--            .jack {--%>
-<%--                margin: 0 auto;--%>
-<%--                display: inline-grid;--%>
-<%--                border: 1px solid #0068b7;--%>
-<%--                width: 110px;--%>
-<%--            }--%>
+    <%--        @media screen and (max-width: 425px) {--%>
+    <%--            .jack {--%>
+    <%--                margin: 0 auto;--%>
+    <%--                display: inline-grid;--%>
+    <%--                border: 1px solid #0068b7;--%>
+    <%--                width: 110px;--%>
+    <%--            }--%>
 
-<%--            .area {--%>
-<%--                display: flex;--%>
-<%--                align-items: center;--%>
-<%--            }--%>
+    <%--            .area {--%>
+    <%--                display: flex;--%>
+    <%--                align-items: center;--%>
+    <%--            }--%>
 
-<%--            #button1 {--%>
-<%--                width: 80px;--%>
-<%--                margin: 0 10px;--%>
-<%--            }--%>
+    <%--            #button1 {--%>
+    <%--                width: 80px;--%>
+    <%--                margin: 0 10px;--%>
+    <%--            }--%>
 
-<%--            #button2 {--%>
-<%--                width: 70px;--%>
-<%--                margin: 0 1px;--%>
-<%--            }--%>
-<%--        }--%>
+    <%--            #button2 {--%>
+    <%--                width: 70px;--%>
+    <%--                margin: 0 1px;--%>
+    <%--            }--%>
+    <%--        }--%>
 
-<%--        @media screen and (max-width: 768px) {--%>
-<%--            .btn {--%>
-<%--                margin-top: initial;--%>
-<%--            }--%>
-<%--        }--%>
-<%--    </style>--%>
+    <%--        @media screen and (max-width: 768px) {--%>
+    <%--            .btn {--%>
+    <%--                margin-top: initial;--%>
+    <%--            }--%>
+    <%--        }--%>
+    <%--    </style>--%>
 </head>
 <body>
 <script type="text/javascript"
@@ -642,6 +644,7 @@
     });
 </script>
 
+
 <script>
     //총대수 cnt
     var totalQty = 0;
@@ -681,9 +684,9 @@
 
     <div class="sub-title">
         <h1 class="sub-title__h1">
-				<span class="v-mid">
+            <span class="v-mid">
                         제출처 전표 조회
-				</span>
+            </span>
             <img src="/resources/image/icons/ico_que.png" alt="" class="que-dis-mn"
                  onclick="$.openLayerHelpMsgPopUp(this, 'W05');">
         </h1>
@@ -691,11 +694,11 @@
         <ul class="location__ul">
             <li><span class="offscreen">홈</span></li>
             <li>
-					<span>
+               <span>
 
                                제출처 전표 조회
 
-					</span>
+               </span>
             </li>
         </ul>
     </div>
@@ -710,7 +713,7 @@
         <input type="hidden" name="item" value=""/>
         <input type="hidden" name="currStatus" value=""/>
         <input type="hidden" name="sheetID"/>
-<%--        <input type="hidden" name="searchType" value="car"/>--%>
+        <%--        <input type="hidden" name="searchType" value="car"/>--%>
         <input type="hidden" name="searchDetailChk" value="0">
     </form>
 
@@ -722,7 +725,7 @@
         <input type="hidden" name="fromsite" value=""/>
         <input type="hidden" name="tosite" value=""/>
         <input type="hidden" name="item" value=""/>
-<%--        <input type="hidden" name="searchType" value="car"/>--%>
+        <%--        <input type="hidden" name="searchType" value="car"/>--%>
         <input type="hidden" name="club" value=""/>
         <input type="hidden" name="CarNo" value=""/>
         <input type="hidden" name="allChk2Result" value="0">
@@ -864,21 +867,21 @@
 
 
 
-<%--            <div class="area">--%>
-<%--                <div class="jack"--%>
-<%--                     style="font-size: 14px; color: #0064c1; font-weight: 600; margin-bottom: 10px; text-align: center">--%>
-<%--                    <label>운반금액(원)</label>--%>
-<%--                    <label>999,999,999</label>--%>
-<%--                </div>--%>
-<%--                <div class="table-btn" style="margin-bottom: 10px;">--%>
-<%--                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(1);"--%>
-<%--                           style="background-image: none !important; text-indent: 0px !important; height: 42px; width: 100px; line-height: 33px;"--%>
-<%--                           value="일괄결재">--%>
-<%--                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(0);"--%>
-<%--                           style="background-image: none !important; text-indent: 0px !important; height: 42px; width: 100px; line-height: 33px;"--%>
-<%--                           value="취소">--%>
-<%--                </div>--%>
-<%--            </div>--%>
+            <%--            <div class="area">--%>
+            <%--                <div class="jack"--%>
+            <%--                     style="font-size: 14px; color: #0064c1; font-weight: 600; margin-bottom: 10px; text-align: center">--%>
+            <%--                    <label>운반금액(원)</label>--%>
+            <%--                    <label>999,999,999</label>--%>
+            <%--                </div>--%>
+            <%--                <div class="table-btn" style="margin-bottom: 10px;">--%>
+            <%--                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(1);"--%>
+            <%--                           style="background-image: none !important; text-indent: 0px !important; height: 42px; width: 100px; line-height: 33px;"--%>
+            <%--                           value="일괄결재">--%>
+            <%--                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(0);"--%>
+            <%--                           style="background-image: none !important; text-indent: 0px !important; height: 42px; width: 100px; line-height: 33px;"--%>
+            <%--                           value="취소">--%>
+            <%--                </div>--%>
+            <%--            </div>--%>
             <table class="list-table" id="tableOrderByDate" style="display:<%= "orderByDate".equals(searchType) ? "block" : "none" %>">
                 <colgroup>
                     <col style="width: 3%">
@@ -905,7 +908,7 @@
                 <tbody id="receiptsResultBodyOrderByDate">
                 <tr>
                     <td>1</td>
-                    <td>09.09</td>
+                    <td>09-01</td>
                     <td>구디</td>
                     <td>지밸리</td>
                     <td>모래</td>
@@ -915,7 +918,7 @@
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>09.10</td>
+                    <td>09-01</td>
                     <td>구디</td>
                     <td>지밸리</td>
                     <td>자갈</td>
@@ -987,22 +990,6 @@
                     <td>1</td>
                     <td><span style="color: #000080; font-weight: bold;">하차</span></td>
                 </tr>
-<%--                <c:forEach items="${receiptsList}" var="receipt" varStatus="No">--%>
-<%--                    <tr>--%>
-<%--                        <td>${No.index + 1}</td>--%>
-<%--                        <td>${receipt.carNo}</td>--%>
-<%--                        <td>${receipt.fromsite}</td>--%>
-<%--                        <td>${receipt.tosite}</td>--%>
-<%--                        <td>${receipt.item}</td>--%>
-<%--                        <td>${receipt.date}</td>--%>
-<%--                        <td>${receipt.qty}</td>--%>
-<%--                        <td>--%>
-<%--                        <span style="color: #000080; font-weight: bold;">--%>
-<%--                                ${receipt.qty}--%>
-<%--                        </span>--%>
-<%--                        </td>--%>
-<%--                    </tr>--%>
-<%--                </c:forEach>--%>
                 </tbody>
             </table>
         </div>
@@ -1039,6 +1026,36 @@
         padding-top: 10px;
     }
 </style>
+
+
+<script>
+    //메인 테이블 빨간줄 긋는 함수
+    function highlightRows() {
+        var table = document.getElementById("tableOrderByDate"); // 테이블 가져오기
+        var rows = table.getElementsByTagName("tr"); // 모든 행 (tr) 가져오기
+        var prevDate = rows[1].cells[1].innerText;
+
+        for (var i = 2; i < rows.length; i++) { // 첫 번째 행은 thead니까 무시하고 두 번째 행부터 첫 번째 행이랑 비교하도록
+            var currentRow = rows[i];
+            currentRow.style.borderBottom = 'none';
+
+            var currentDateCell = currentRow.cells[1]; // 운행일이 있는 셀 (두 번째 셀)
+            var currentDate = currentDateCell.innerText;
+
+            console.log("prevDate?" + prevDate)
+            console.log("currentDate?" + currentDate)
+
+            if (currentDate !== prevDate) {
+                currentRow.style.borderTop = "2px solid red";
+            }else {
+                currentRow.style.borderTop = "none";
+            }
+            prevDate = currentDate;
+        }
+    }
+    // 페이지 로드 시 빨간색 줄 추가 함수 호출
+    highlightRows();
+</script>
 
 <div class="layerMask dis-n pop-wrap" id="pop-integrateform" tabindex="0">
     <div class="layerMask__inner" style="height: auto; width: 90%">
