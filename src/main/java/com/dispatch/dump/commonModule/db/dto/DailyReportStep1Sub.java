@@ -23,4 +23,7 @@ public class DailyReportStep1Sub {
     int totalQty;                   //Line :: 총운행대수
 
 
+
+
+
 }
