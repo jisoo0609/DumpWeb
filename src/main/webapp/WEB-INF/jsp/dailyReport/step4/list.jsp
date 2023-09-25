@@ -1,3 +1,7 @@
+<%@ page import="com.dispatch.dump.commonModule.db.dto.DailyReportStep4" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.Set" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
@@ -30,10 +34,18 @@
         });
 
         //초기값을 오늘 날짜로 설정해줘야 합니다.
-        $("#datepicker1, #datepicker2").datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+        $("#datepicker2").datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+
+        // datepicker1을 매달 1일로 설정
+        $("#datepicker1").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth(), 1));
     });
 </script>
 
+<%
+    // 모델로부터 받은 데이터를 변수에 저장
+    List<DailyReportStep4> tSheet = (List<DailyReportStep4>) request.getAttribute("tSheet");
+    List<DailyReportStep4> totalAmount = (List<DailyReportStep4>) request.getAttribute("totalAmount");
+%>
 <section class="sub-contents-wrap maxwrap">
     <div>
         <h1 class="subtitle" >
@@ -41,19 +53,15 @@
             <img src="/resources/image/icons/ico_que.png" alt="" class="que-dis-mn" onclick="">
         </h1>
     </div>
-    <form>
+    <form name="data_frm">
         <div class="search_form">
+            <input type="hidden" name="carNo" value="${sessionScope.loginInfo.userId}">
             <div class="data_Area">
                 <div>
                     <label style="font-size: 13px; font-weight: 600;">▪운행기간</label>
-                    <input class="fromDate" id="datepicker1" readonly>
+                    <input class="fromDate" id="datepicker1" name="fromDate" readonly>
                     <span style="font-weight: 600; margin:0 30px 0 30px; padding-top: 5px;">~</span>
-                    <input class="toDate" id="datepicker2" readonly>
-                    <!--                        input에 오늘 날짜 세팅을 위한 스크립트-->
-                    <script>
-                        $('.fromDate').attr("value",new Date().toISOString().substring(0,10))
-                        $('.toDate').attr("value",new Date().toISOString().substring(0,10))
-                    </script>
+                    <input class="toDate" id="datepicker2" name="toDate" readonly>
                 </div>
                 <button type="button" class="adsearch_btn">상세검색 열기 ▼</button>
                 <!--                    상세검색 열고 닫는 스크립트-->
@@ -70,19 +78,33 @@
             </div>
             <ul class="search_ul" hidden>
                 <li>
+                    <%
+                        Set<String> carSubmitValue = new HashSet();
+
+                        for(DailyReportStep4 data : tSheet)
+                            carSubmitValue.add(data.getCarSubmit());
+                    %>
                     <label for=""></label>
                     <div class="input_select">
                         <input type="text" placeholder="제출처" name="club" class="club_input">
-                        <select class="club_slect"
+                        <select class="club_slect" id="club_select"
                                 onchange="document.querySelector('.club_input').value=
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="운반">운반</option>
+                            <option value="전체" selected>전체</option>
+                            <c:forEach var="carSubmit" items="<%=carSubmitValue%>">
+                                <option value="${carSubmit}">${carSubmit}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
                 <li>
+                    <%
+                        Set<String> fromSiteValue = new HashSet();
+
+                        for(DailyReportStep4 data : tSheet)
+                            fromSiteValue.add(data.getFromsite());
+                    %>
                     <label for=""></label>
                     <div class="input_select">
                         <input type="text" placeholder="상차지" name="fromSite" class="fromSite_input">
@@ -90,12 +112,20 @@
                                 onchange="document.querySelector('.fromSite_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="출퇴근">출퇴근</option>
+                            <option value="전체" selected>전체</option>
+                            <c:forEach var="fromSite" items="<%=fromSiteValue%>">
+                                <option value="${fromSite}">${fromSite}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
                 <li>
+                    <%
+                        Set<String> toSiteValue = new HashSet();
+
+                        for(DailyReportStep4 data : tSheet)
+                            toSiteValue.add(data.getTosite());
+                    %>
                     <label for=""></label>
                     <div class="input_select">
                         <input type="text" placeholder="하차지" name="toSite" class="toSite_input">
@@ -103,25 +133,41 @@
                                 onchange="document.querySelector('.toSite_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="자차">자차</option>
+                            <option value="전체" selected>전체</option>
+                            <c:forEach var="toSite" items="<%=toSiteValue%>">
+                                <option value="${toSite}">${toSite}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
                 <li>
+                    <%
+                        Set<String> itemValue = new HashSet();
+
+                        for(DailyReportStep4 data : tSheet)
+                            itemValue.add(data.getItem());
+                    %>
                     <label for=""></label>
                     <div class="input_select">
-                        <input type="text" placeholder="품목" name="things" class="things_input">
+                        <input type="text" placeholder="품목" name="item" class="things_input">
                         <select class="club_slect"
                                 onchange="document.querySelector('.things_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="운반">운반</option>
+                            <option value="전체" selected>전체</option>
+                            <c:forEach var="item" items="<%=itemValue%>">
+                                <option value="${item}">${item}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
                 <li>
+                    <%
+                        Set<String> carSumitTelValue = new HashSet();
+
+                        for(DailyReportStep4 data : tSheet)
+                            carSumitTelValue.add(data.getCarSubmitTel());
+                    %>
                     <label for=""></label>
                     <div class="input_select">
                         <input type="tel" placeholder="휴대폰 번호" name="tel" class="tel_input">
@@ -129,8 +175,10 @@
                                 onchange="document.querySelector('.tel_input').value=
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="구디">구디</option>
+                            <option value="전체" selected>전체</option>
+                            <c:forEach var="carSubmitTel" items="<%=carSumitTelValue%>">
+                                <option value="${carSubmitTel}">${carSubmitTel}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -142,8 +190,9 @@
                                 onchange="document.querySelector('.state_input').value =
                                     this.options[this.selectedIndex].value"
                         >
-                            <option value="전체">전체</option>
-                            <option value="지밸리">지밸리</option>
+                            <option value="전체" selected>전체</option>
+                            <option value="true">결재O</option>
+                            <option value="false">결재X</option>
                         </select>
                     </div>
                 </li>
@@ -176,20 +225,45 @@
                     <input type="radio" name="searchType" value="4">
                     품목 기준
                 </label>
+                <br>
+                <label for="searchType">
+                    <input type="radio" name="searchType" value="4">
+                    운반비 기준
+                </label>
             </div>
         </div>
-    </form>
         <div class="btn_area">
-            <a href="/dailyReport/step4/getDailyReportList" id="link2Get">
-                <input type="button" value="검색">
-            </a>
+            <%--            <a href="/dailyReport/list" id="link2Get">--%>
+            <input type="button" value="검색" onclick="getList()">
+            <%--            </a>--%>
         </div>
+    </form>
     <div class="bottom_table">
+<%--        총 대수를 계산하는 코드--%>
+        <%
+            int totalQty = 0;
+            for(DailyReportStep4 data: tSheet){
+                totalQty += data.getQty();
+            }
+        %>
         <div class="table_top" style="margin: 10px 0;">
-            <p class="total">데이터 <span>2</span>건(총대수: <span>2</span>대)이 검색되었습니다.</p>
+            <p class="total">
+                데이터
+                <span><%= tSheet.size() %></span>건(총대수:
+                <span>
+                    <%= totalQty %>
+                </span>대)이 검색되었습니다.
+            </p>
         </div>
         <div class="cashNbtns">
-            <p>운반금액: 999,999,999 원</p>
+            <%--            금액 단위 표시 스크립트--%>
+            <script>
+                const elementDiv = document.querySelector('.cashNbtns');
+                const totalAmount = ${totalAmount[0]};
+                const formattedAmount = new Intl.NumberFormat('ko-KR').format(totalAmount);
+
+                elementDiv.innerHTML = "<p>운반금액(원)<br>" + formattedAmount + "</p>";
+            </script>
             <input type="button" value="일괄결재">
             <input type="button" value="취소" id="cancelBtn">
         </div>
@@ -201,49 +275,46 @@
         <div>
             <table class="list-table">
                 <colgroup>
-                    <col width="10%">
                     <col width="19%">
                     <col width="15%">
                     <col width="15%">
-                    <col width="22%">
-                    <col width="22%">
-                    <col width="12%">
+                    <col width="20%">
+                    <col width="20%">
+                    <col width="10%">
+                    <col width="16%">
                 </colgroup>
                 <thead>
-                <tr>
-                    <th>No</th>
-                    <th>제출처</th>
-                    <th>운행일</th>
-                    <th>품목</th>
-                    <th>상차지</th>
-                    <th>하차지</th>
-                    <th>대수</th>
-                </tr>
+                    <tr>
+                        <th>제출처</th>
+                        <th>운행일</th>
+                        <th>품목</th>
+                        <th>상차지</th>
+                        <th>하차지</th>
+                        <th>대수</th>
+                        <th>운반단가</th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>오이 농장</td>
-                    <td>09.05</td>
-                    <td>오이</td>
-                    <td>강원도</td>
-                    <td>너네집</td>
-                    <td>141</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>강원도 햇감자 판매</td>
-                    <td>09.04</td>
-                    <td>감자</td>
-                    <td>강원도</td>
-                    <td>너네집</td>
-                    <td>140</td>
-                </tr>
+<%--                <c:forEach var="listMain" items="${tSheet}">--%>
+<%--                <tr>--%>
+<%--                    <td>${listMain.carSubmit}</td>--%>
+<%--                    <td>${listMain.date}</td>--%>
+<%--                    <td>${listMain.item}</td>--%>
+<%--                    <td>${listMain.fromsite}</td>--%>
+<%--                    <td>${listMain.tosite}</td>--%>
+<%--                    <td>${listMain.qty}</td>--%>
+<%--                    <td style="text-align: right">--%>
+<%--&lt;%&ndash;                        운반단가 쉼표 표시 코드&ndash;%&gt;--%>
+<%--                        <fmt:formatNumber value="${listMain.qtyup}" type="number"/>--%>
+<%--                    </td>--%>
+<%--                </tr>--%>
+<%--                </c:forEach>--%>
                 </tbody>
             </table>
         </div>
     </div>
 </section>
 
-
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
+
+<script src="/resources/js/dailyReport/step4/step4.js"></script>

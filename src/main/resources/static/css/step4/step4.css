@@ -40,7 +40,7 @@ img[alt = calling_img]{
 .search_form_bottom_detail{
     text-align: center;
     padding-top: 20px;
-    padding-bottom: 33px;
+    padding-bottom: 10px;
     border: 1px solid #ddd;
     margin: 0 0 10px;
 }
@@ -55,16 +55,18 @@ label[for = searchType]{
 
 .data_Area > div{
     display: flex;
+    justify-content: space-between;
     margin-bottom: 10px;
 }
 
 .data_Area > div > label{
     white-space: nowrap;
-    padding-top: 5px;
+    padding-top: 16px;
     margin-right: 10%;
 }
 
 .fromDate, .toDate{
+    text-align: center;
     border: 1px solid #ddd;
     width: 25%;
     height: 35px;
@@ -91,6 +93,14 @@ input[type = text]{
 .ui-datepicker-trigger{
         display: none;
 }
+
+.ui-datepicker-title select{
+    text-align: center;
+}
+
+/*.ui-datepicker-year option::after{*/
+/*    content: "년";*/
+/*}*/
 
 .input_select{
     position: relative;
@@ -121,13 +131,17 @@ input[type = text]{
 
 .cashNbtns{
     display: flex;
-    align-items: center;
+    justify-content: center;
     margin: 25px 0;
     padding-left: 2%;
 }
 
 .cashNbtns > p{
-    margin-right: 28%;
+    border: 1px solid #0068b7;
+    color: #0068b7;
+    padding: 0 25px;
+    line-height: 19px;
+    margin-right: 10%;
 }
 
 input[value="일괄결재"]{
@@ -141,7 +155,7 @@ input[value="일괄결재"]{
 input[type = button]{
     background-color: #fff;
     font-weight: 600;
-    width: 60px;
+    width: 80px;
     height: 40px;
     color: #0068b7;
     border: 1px solid #0068b7;
@@ -168,14 +182,11 @@ input[value="검색"]{
     color: #0068b7;
 }
 
-.list-table{
-    border-top: 2px solid #0068b7;
-    width: 100%;
-    border-collapse: collapse;
-    word-break: keep-all;
-}
-
 thead{
     display: table-header-group;
     vertical-align: middle;
+}
+
+.bottom_table td{
+    height: 50px;
 }

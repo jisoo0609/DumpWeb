@@ -3,11 +3,55 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep4Mapper">
-    <select id="getDailyReportByCarNo" resultType="DailyReportStep4Main">
-        select sheetID, DATE_FORMAT(date, '%y-%m-%d') as date, CarNo, carSubmit, date from tSheet where CarNo = #{carNo}
+
+
+    <select id="getDailyReportByCarNo" resultType="DailyReportStep4">
+        SELECT t.sheetID,
+               DATE_FORMAT(t.date, '%m.%d') as date,
+                t.CarNo, t.carSubmit, t.carSubmitTel, t.chk1,
+                s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup
+            FROM tsheet t
+                JOIN tSheet_sub s
+            ON t.sheetID = s.sheetID2
+            WHERE t.carNo = #{CarNo}
     </select>
 
-    <select id="getDailyReportMainBySheetID2" resultType="DailyReportStep4Sub">
-        select fromsite, tosite, item, Qty, sheetID2, sheetsubID from tSheet_sub where sheetID2 = #{sheetID2}
+    <select id="getTotalTransportAmount" resultType="int">
+        SELECT IF(sum(s.Qty * s.Qtyup) IS NULL, 0, sum(s.Qty * s.Qtyup))
+        FROM tSheet t
+            JOIN tsheet_sub s
+        ON t.sheetID = s.sheetID2
+        WHERE t.carNo = #{CarNo}
     </select>
+
+    <select id="findCarListByOption" parameterType="DailyReportStep4OptionForm" resultType="DailyReportStep4">
+        SELECT t.sheetID,
+            DATE_FORMAT(t.date, '%m.%d') AS date,
+            t.CarNo, t.carSubmit, t.carSubmitTel, t.chk1,
+            s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup,
+            IF(t.date IS NULL, '1999-01-01', t.date) AS date
+        FROM tsheet t
+        JOIN tSheet_sub s ON t.sheetID = s.sheetID2
+        WHERE t.carNo = #{carNo}
+        AND t.date BETWEEN #{fromDate} AND #{toDate}
+        <if test="club != '' and club != '전체'">
+            AND t.carSubmit = #{club}
+        </if>
+        <if test="fromSite != '' and fromSite != '전체'">
+            AND s.fromsite = #{fromSite}
+        </if>
+        <if test="toSite != '' and toSite != '전체'">
+            AND s.tosite = #{toSite}
+        </if>
+        <if test="item != '' and item != '전체'">
+            AND s.item = #{item}
+        </if>
+        <if test="tel != '' and tel != '전체'">
+            AND t.carSubmitTel = #{tel}
+        </if>
+        <if test="state != null">
+            AND t.chk1 = #{state}
+        </if>
+    </select>
+
 </mapper>

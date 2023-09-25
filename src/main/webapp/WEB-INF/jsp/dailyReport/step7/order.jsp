@@ -3,6 +3,7 @@
 
 <link rel="stylesheet" type="text/css" href="/resources/css/step7/order.css">
 <script src="/resources/js/dailyReport/step7/pop.js"></script>
+<script src="/resources/js/dailyReport/step7/order.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
 <script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
@@ -11,8 +12,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script>
         function dvFristbtn() {
@@ -49,45 +48,47 @@
 
 <section class="GolSection">
 <h2>제출처 주문 등록</h2>
-    <form method="post">
-      <fieldset>
-        <ul>
-          <li>
-            <label class="golLabel" for="datepicker">주문일</label>
-            <span class="golInputSpan"><input id="datepicker"></span>
-						<input class="golSearch" type="button" value="조회">
-            <label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-            <input id="check67" type="checkbox">
-          </li>
-          <li>
-            <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
-            <span class="golInputSpan"><input class="golIn" id="loadPoint" type="text" placeholder="상차지"></span>
-          </li>
-          <li>
-            <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
-            <span class="golInputSpan"><input class="golIn" id="unloadPoint" type="text" placeholder="하차지"></span>
-          </li>
-          <li>
-            <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
-            <span class="golInputSpan"><input class="golIn" id="golItems" type="text" placeholder="품목"></span>
-          </li>
-          <li>
-            <label class="golLabel" for="golCount">대수</label>
-            <span class="golInputSpan">
-              <input class="golIn" id="golCount" type="number" pattern="[0-9]" inputmode="numeric" placeholder="대수">
-            </span>
-          </li>
-          <li>
-            <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="./resources/static/image/icons/ico_mic.png" alt="음성인식 버튼"></span> </label>
-            <span class="golInputSpan"><input class="golIn" id="carNumb" type="text" placeholder="차량번호"></span>
-          </li>
-        </ul>
-      </fieldset>
-    </form>
-    <script src="/resources/js/voice.js"></script>
+    <form method="post" name="golForm">
+        <fieldset>
+          <ul>
+            <li>
+              <label class="golLabel" for="datepicker">주문일</label>
+              <span class="golInputSpan"><input id="datepicker"></span>
+              <input class="golSearch" type="button" value="조회">
+              <div class="checkbox">
+                <label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+                <input id="check67" type="checkbox">
+              </div>
+            </li>
+            <li>
+              <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <span class="golInputSpan"><input class="golIn" id="loadPoint" name="loadPoint" type="text" placeholder="상차지"></span>
+            </li>
+            <li>
+              <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <span class="golInputSpan"><input class="golIn" id="unloadPoint" name="unloadPoint" type="text" placeholder="하차지"></span>
+            </li>
+            <li>
+              <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <span class="golInputSpan"><input class="golIn" id="golItems" name="golItems" type="text" placeholder="품목"></span>
+            </li>
+            <li>
+              <label class="golLabel" for="golCount">대수</label>
+              <span class="golInputSpan">
+                <input class="golIn" id="golCount" name="golCount" type="number" pattern="[0-9]" inputmode="numeric" placeholder="대수">
+              </span>
+            </li>
+            <li>
+              <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <span class="golInputSpan"><input class="golIn" id="carNumb" name="carNumb" type="text" placeholder="미지정 또는 차량번호"></span>
+            </li>
+          </ul>
+        </fieldset>
+    		</form>
+    <script src="/resources/js/dailyReport/step7/voice.js"></script>
     <div>
       <button class="opBtn" data-popName="golPop1">삭제</button>
-      <button class="opBtn" data-popName="golPop2">수정</button>
+      <button class="opBtn" data-popName="golPop2">취소</button>
       <button class="opBtn" data-popName="golPop3">저장</button>
       <button class="opBtn" data-popName="golPop4">이전화면</button>
     </div>
@@ -96,58 +97,62 @@
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
 				<p>정말 <span style="font-weight: bold;">삭제</span>하시겠습니까?</p>
-				<input type="button" value="확인">
-				<input type="button" value="취소">
+				<input class="confirmBtn" type="button" value="확인">
+				<input class="clBtn" type="button" value="취소">
 			</div>
 		</div>
 
 		<div id="golPop2" class="golPopup2">
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
-				<p>정말 <span style="font-weight: bold;">수정</span>하시겠습니까?</p>
-				<input type="button" value="확인">
-				<input type="button" value="취소">
+				<p>정말 <span style="font-weight: bold;">취소</span>하시겠습니까?</p>
+				<input class="confirmBtn" type="button" value="확인">
+				<input class="clBtn" type="button" value="취소">
 			</div>
 		</div>
 
 		<div id="golPop3" class="golPopup3">
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
-				<p>정말 <span style="font-weight: bold;">저장</span>를하시겠습니까?</p>
-				<input type="button" value="확인">
-				<input type="button" value="취소">
+				<p>정말 <span style="font-weight: bold;">저장</span>하시겠습니까?</p>
+				<input class="confirmBtn" type="button" value="확인" onClick="clickConfirmButton()">
+				<input class="clBtn" type="button" value="취소">
 			</div>
 		</div>
 
 		<div id="golPop4" class="golPopup4">
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
-				<p>이전 <span style="font-weight: bold;">화면</span>으로 돌아가시겠습니까?</p>
-				<input type="button" value="확인" onClick="history.go(-1)">
-				<input type="button" value="취소">
+				<p>정말 <span style="font-weight: bold;">이전화면</span>으로 돌아가시겠습니까?</p>
+				<input class="confirmBtn" type="button" value="확인" onClick="history.go(-1)">
+				<input class="clBtn" type="button" value="취소">
 			</div>
 		</div>
 
     <table>
       <thead>
         <tr>
-          <th>상차지</th>
-          <th>하차지</th>
-          <th>품목</th>
-          <th>대수</th>
-          <th>차량번호</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>강남</td>
-          <td>구로</td>
-          <td>모래, 자갈</td>
-          <td>100</td>
-          <td>675가8989</td>
-        </tr>
+				<tr>
+					<th>No.</th>
+					<th>상차지</th>
+					<th>하차지</th>
+					<th>품목</th>
+					<th>대수</th>
+					<th>차량번호 <br> <span style="font-weight: normal;">(일괄배차)</span></th>
+				</tr>
+			</thead>
+			<tbody id="tBody">
+				<tr onclick="openPopupTest('dispatchform');">
+					<td>1</td>
+					<td>강남</td>
+					<td>구로</td>
+					<td>모래, 자갈</td>
+					<td>100</td>
+					<td>미지정</td>
+				</tr>
       </tbody>
     </table>
 </section>
 
+<%@ include file="popup/layer_popup.jsp" %>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

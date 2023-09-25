@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep7Mapper">
+
+    <!-- 차량번호 등록 -->
+    <insert id="insertCarData" parameterType="DailyReportStep7CarNo">
+        INSERT INTO tSheet_carno(carNoKey, carNoFull, carNoHp, carNoName, carNoSS2) VALUES (#{carNoKey}, #{carNoFull}, #{carNoHp}, #{carNoName}, #{carNoSS2})
+    </insert>
+
+    <select id="findCarNoList" resultType="String">
+        SELECT userId FROM tsitepw WHERE userPosition = 'driver'
+    </select>
+
+    <select id="findCarNoByLoginData" parameterType="DailyReportStep7CarNo" resultType="DailyReportStep7CarNo">
+        SELECT * FROM tsheet_carno WHERE carNoSS2 = #{carNoSS2}
+    </select>
+</mapper>

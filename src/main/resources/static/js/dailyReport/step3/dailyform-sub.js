@@ -1,76 +1,86 @@
-/* function :   open/close search popup */
-function openPop() {
-    document.getElementById('popup').style.display = 'flex';
-}
-function closePop() {
-    document.getElementById('popup').style.display = 'none';
-}
-function openPopSearch() {
-    document.getElementById('popSearch').style.display = 'flex';
-}
-function closePopSearch() {
-    resultDiv.empty(); // 이전 결과 지우기
-    $("#search-input").val(""); //input box 비우기
-
-    document.getElementById('popSearch').style.display = 'none';
-
-}
+const canvas = document.getElementById("canvas");
+var openable1 = false;
+var openable2 = false;
+var openable3 = false;
+var openable4 = true; //기본적으로 오늘 날자를 세팅해 놓으므로 true로 둠
 
 
 /* function : 결재버튼을 통해서만 체크박스를 체크하거나 해제할 수 있다.  */
-const dateDisplay = document.getElementById('dateDisplay');
-const currentDate = document.getElementById('currentDate');
-currentDate.textContent = '연도- 월- 일';
+/* function: 오늘 날자로 인풋 자동 채우기 */
+const dateInput = document.getElementById('date');
+const todayDate = new Date();
+dateInput.value = todayDate.toISOString().slice(0, 10);
 
-function checkBox() {
-     const checkbox = document.getElementById('checkbox');
-     checkbox.checked = !checkbox.checked;
-
-     if (checkbox.checked) {
-         const today = new Date();
-         const year = today.getFullYear();
-         const month = String(today.getMonth() + 1).padStart(2, '0');
-         const day = String(today.getDate()).padStart(2, '0');
-         currentDate.textContent = year % 100 +'-'+month+'-'+day;
-         checkbox.disabled = true;
-     } else {
-         currentDate.textContent = '연도- 월- 일';
-     }
-}
 
 /* function : onfocus시 자동으로 010을 채워준다*/
+var phoneNumberPattern = /^010[0-9]{8}$/;
 function fill010() {
     const telInput = document.getElementById('carSubmitTel');
-    telInput.value = "010";
+    if (phoneNumberPattern.test(telInput.value)) {
+        openable3 = true;
+    } else {
+        telInput.value = "010";
+    }
+}
+
+function validateInput1(input) {
+    if(!input.value) {
+        openable1 = false;
+    } else {
+        openable1 = true;
+    }
+}
+
+function validateInput2(input) {
+    if(!input.value) {
+        openable2 = false;
+    } else {
+        openable2 = true;
+    }
+}
+
+/* function : oninput 인풋이 바르지 않으면 보더컬러를 red로 바꿈 */
+function validateInput3(input) {
+    if (phoneNumberPattern.test(input.value)) {
+        input.style.borderColor = '';
+        openable3 = true;
+    } else {
+        input.style.borderColor = 'red';
+        openable3 = false;
+    }
 }
 
 
-/* function: -,+로 날자 조정 */
-const dateInput = document.getElementById('date');
 
-function prevday(){
-    const currentDate = new Date(dateInput.value);
-    currentDate.setDate(currentDate.getDate() - 1);
-    const formattedDate = currentDate.toISOString().split('T')[0];
-    dateInput.value = formattedDate;
+
+/* function : open/close popup */
+function openPop() {
+    if(dateInput === '') { // 데이트 기록이 없으면
+        openable4 = false;
+    } else {
+        openable4 = true;
+    }
+    if(openable1 & openable2& openable3 & openable4 === true) {
+        document.getElementById('popup').style.display = 'flex';
+    } else {
+        alert("입력된 정보를 다시 확인해주세요");
+    }
 }
 
-function nextday(){
-    const currentDate = new Date(dateInput.value);
-    currentDate.setDate(currentDate.getDate() + 1);
-    const formattedDate = currentDate.toISOString().split('T')[0];
-    dateInput.value = formattedDate;
+
+function closePop() {
+    document.getElementById('popup').style.display = 'none';
 }
+
+
+
 
 /* 비고 사이즈 자동변경 */
-const lineheight = 25;
-const freetext = document.querySelector('.Rem');
-
+const freetext = document.getElementById('Rem');
 freetext.oninput = event => {
-    const $target = event.target;
-
-    $target.style.height = 0
-    $target.style.height = lineheight + $target.scrollHeight + 'px';
+    const inputValue = event.target;
+    freetext.style.height = 0
+    freetext.style.height = 22 + inputValue.scrollHeight + 'px';
 };
 
 
@@ -117,10 +127,56 @@ popCheckbox.addEventListener("change", function() {
 
 /* 전체 삭제 버튼 누르면 인풋 비우기 */
 function clearInputs() {
-    const form = document.getElementById("canvas");
-    const inputs = form.getElementsByTagName("input");
+    const inputs = canvas.getElementsByTagName("input");
 
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = ""; // Set the value of each input field to an empty string
     }
 }
+
+
+/* 결재 체크박스 체크되면 밸류 바꾸기 */
+/* 결재 체크박스 체크되면 인풋 수정 불가 */
+
+function approved() {
+    const chk = document.getElementById('checkbox');
+    const mtable = document.getElementById('main-table');
+    const inputElements = mtable.querySelectorAll('.input');
+
+    if (chk.checked) {
+        chk.value = '1';
+        console.log(chk.value);
+
+        // 거래처정보 인풋 비활성화
+        inputElements.forEach(function(input) {
+            input.disabled = true;
+            input.style.backgroundColor = "#F2F2F2";
+            input.style.color = "333"
+        });
+    } else {
+        chk.value = '0';
+        console.log(chk.value);
+
+        // 결재 취소하면 다시 활성화
+        inputElements.forEach(function(input) {
+            input.disabled = false;
+            input.style.backgroundColor = "#fff";
+        });
+    }
+}
+
+
+
+
+/* 제출하기 버튼을 클릭하면 결재 체크되고 제출체크가 체크하면되 결재도 체크됨*/
+function submitCheck() {
+    const dropdown = document.getElementById('dropdown')
+    const chk1 = document.getElementById('checkbox');
+    //chk1.disabled = true;
+    chk1.checked = true;
+    dropdown.textContent = "제출";
+    dropdown.style.color = "#0068b7";
+    dropdown.style.border = "1px solid #0068b778";
+    approved();
+}
+

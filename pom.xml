@@ -122,6 +122,14 @@
 			<version>6.0.53</version>
 		</dependency>
 
+		<!--FCM-->
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>9.2.0</version>
+		</dependency>
+
+
 
 	</dependencies>
 

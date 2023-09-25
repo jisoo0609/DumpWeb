@@ -4,7 +4,6 @@
 
 <style>
     .homescreen {
-        background-color: #cce0f7;
         padding: 5px;
     }
     #datepicker1,
@@ -23,6 +22,8 @@
         border: 1px solid #0068b7;
         font-size: 16px;
         font-weight: bold;
+        width: -webkit-fill-available;
+        margin-right: 15px;
     }
     ul.basic-menu {
         display: grid;
@@ -84,14 +85,7 @@
     .basic-menu li {
         display: flex;
     }
-    .today-recruitment-menu th, .today-menu th:nth-child(2) {
-        border-left: 1px solid;
-        border-right: 1px solid;
-    }
-    .today-recruitment-menu th, .today-menu th:nth-child(4) {
-        border-left: 1px solid;
-        border-right: 1px solid;
-    }
+
     .today-recruitment-menu, .car-menu, .today-menu{
         font-size : 14px;
         font-weight : 600;
@@ -128,6 +122,16 @@
         border-collapse: collapse;
         width: 100%;
     }
+    .today-menu th, .car-menu th{
+            border: 1px solid black;
+        }
+        .today-graph td, .car-graph td{
+             border: 1px solid black;
+             text-align: center;
+        }
+    .today-graph td:nth-child(6){
+        display: none;
+        }
     .car-menu th:nth-child(2) {
         border-left: 1px solid;
         border-right: 1px solid;
@@ -138,6 +142,7 @@
     .race-write-link {
         text-decoration-line: none;
     }
+
     @media (min-width: 551px) {
         .start-text {
             font-size: 18px;
@@ -181,125 +186,28 @@
     }
 </style>
 
-
 <script type="text/javascript"
         src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
-<section class="sub-contents-wrap maxwrap">
-
-
-
-    <script>
-        // 달력 옵션 추가 코드
-        $(function () {
-            //input을 datepicker로 선언
-            $("#datepicker1,#datepicker2").datepicker({
-                dateFormat: "yy-mm-dd", //달력 날짜 형태
-                showOtherMonths: true, //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-                showMonthAfterYear: true, // 월- 년 순서가아닌 년도 - 월 순서
-                changeYear: true, //option값 년 선택 가능
-                changeMonth: true, //option값  월 선택 가능
-                showOn: "both", //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
-                buttonImage:
-                    "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-                buttonImageOnly: true, //버튼 이미지만 깔끔하게 보이게함
-                buttonText: "선택", //버튼 호버 텍스트
-                yearSuffix: "년", //달력의 년도 부분 뒤 텍스트
-                monthNamesShort: [
-                    "1월",
-                    "2월",
-                    "3월",
-                    "4월",
-                    "5월",
-                    "6월",
-                    "7월",
-                    "8월",
-                    "9월",
-                    "10월",
-                    "11월",
-                    "12월",
-                ], //달력의 월 부분 텍스트
-                monthNames: [
-                    "1월",
-                    "2월",
-                    "3월",
-                    "4월",
-                    "5월",
-                    "6월",
-                    "7월",
-                    "8월",
-                    "9월",
-                    "10월",
-                    "11월",
-                    "12월",
-                ], //달력의 월 부분 Tooltip
-                dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"], //달력의 요일 텍스트
-                dayNames: [
-                    "일요일",
-                    "월요일",
-                    "화요일",
-                    "수요일",
-                    "목요일",
-                    "금요일",
-                    "토요일",
-                ], //달력의 요일 Tooltip
-                minDate: "-5Y", //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-                maxDate: "+5y", //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
-            });
-
-            //초기값을 오늘 날짜로 설정해줘야 합니다.
-            $("#datepicker2").datepicker("setDate", "today"); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const updateButton = document.getElementById("update-button");
-            const startDateInput = document.getElementById("datepicker1");
-
-            // 시작 날짜를 당월 1일로 설정
-            const today = new Date();
-            const firstDayOfMonth = new Date(
-                today.getFullYear(),
-                today.getMonth(),
-                1
-            );
-            const formattedFirstDay = firstDayOfMonth
-                .toISOString()
-                .split("T")[0];
-            startDateInput.value = formattedFirstDay;
-
-            // 종료 날짜를 오늘로 설정
-            // const formattedToday = today.toISOString().split("T")[0];
-            // endDateInput.value = formattedToday;
-
-            // updateButton.addEventListener("click", function () {
-            //     const startDate = startDateInput.value;
-            //     const endDate = endDateInput.value;
-
-            //     console.log("시작 날짜:", startDate);
-            //     console.log("종료 날짜:", endDate);
-            // });
-        });
-    </script>
-
+<section class="sub-contents-wrap maxwrap" style="background-color: #cce0f7">
 
     <article class="homescreen">
         <div class="date-container">
             <div class="date-picker">
                 <label class="start-text" for="start-date"
                 >운행일
-                    <input id="datepicker1" readonly/>
+                    <input id="datepicker1" name="startDate" readonly/>
                     <span>~</span>
-                    <input id="datepicker2" readonly/>
+                    <input id="datepicker2" name="endDate" readonly/>
                 </label>
                 <button id="update-button">조회</button>
                 <ul class="basic-menu">
                     <li>
                         총 운반 금액 :
-                        <div class="carrying-money">원</div>
+                        <div class="carrying-money"> <%= request.getAttribute("totalTransportationCost") %>원</div>
                     </li>
                     <li>
                         총 운행대 수 :
-                        <div class="carrying-car">대</div>
+                        <div class="carrying-car"><%= request.getAttribute("totalQty") %> 대</div>
                     </li>
                     <li>
                         총 비용 금액 :
@@ -377,13 +285,14 @@
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
-                <c:forEach var="item" items="${driverList}">
+                <c:forEach var="item" items="${list}">
                     <tr>
-                        <td>${item.fromsite}</td>
+                        <td>${item.carSubmit}</td>
                         <td>${item.fromsite}</td>
                         <td>${item.tosite}</td>
                         <td>${item.item}</td>
                         <td>${item.qty}</td>
+                        <td>${item.date}</td>
 
                     </tr>
                 </c:forEach>
@@ -405,10 +314,68 @@
                                 <th>품목</th>
                                 <th>대수</th>
                             </tr>
-
                         </table>
         </section>
     </article>
 
 </section>
+<script>
+    var tableRows = document.querySelectorAll("table tr");
+
+    tableRows.forEach(function(row) {
+        var qtyCell = row.querySelector("td:nth-child(5)");
+
+        if (qtyCell) {
+            var cellText = qtyCell.textContent;
+            var intValue = parseInt(cellText);
+
+            if (!isNaN(intValue)) {
+                qtyCell.textContent = intValue;
+            }
+        }
+    });
+</script>
+<script>
+$("#datepicker1, #datepicker2").datepicker({
+    dateFormat: 'yy-mm-dd' //달력 날짜 형태
+    ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+    ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
+    ,changeYear: true //option값 년 선택 가능
+    ,changeMonth: true //option값  월 선택 가능
+    ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
+    ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+    ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
+    ,buttonText: "선택" //버튼 호버 텍스트
+    ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+    ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
+    ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
+    ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
+    ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
+    ,minDate: "-5Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+    ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
+});
+
+// start-date을 매달 1일로 설정
+$("#datepicker1").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth(), 1));
+
+// end-date를 오늘 날짜로 설정
+$("#datepicker2").datepicker('setDate', 'today');
+</script>
+
+<script>
+var currentDate = new Date();
+var tableRows = document.querySelectorAll(".today-graph tr");
+
+tableRows.forEach(function(row) {
+  var dateCell = row.querySelector("td:nth-child(6)"); // 날짜 정보를 포함한 <td>의 클래스를 지정해주세요.
+  if (dateCell) {
+    var rowDate = new Date(dateCell.textContent); // 날짜 정보를 Date 객체로 파싱 (예: "2023-09-19")
+    if (rowDate.toDateString() === currentDate.toDateString()) {
+      row.style.display = "table-row"; // 현재 날짜와 일치하는 경우 표시
+    } else {
+      row.style.display = "none"; // 일치하지 않는 경우 숨김
+    }
+  }
+});
+</script>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

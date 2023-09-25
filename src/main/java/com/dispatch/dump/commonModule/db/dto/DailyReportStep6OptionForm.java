@@ -5,9 +5,10 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class DailyReportStep6SelectForm {
+public class DailyReportStep6OptionForm {
     String carNo;
     String startDate;
     String endDate;
     String selectOption;
+    String searchType;
 }
