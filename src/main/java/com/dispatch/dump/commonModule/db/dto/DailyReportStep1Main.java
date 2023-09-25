@@ -12,4 +12,6 @@ public class DailyReportStep1Main {
     private Boolean chk1;           // LINE :: 결재여부
     private String date;            // LINE :: 운행일
     private String salesman;        // LINE :: 제출처 담당자
+    private int sheetSS;            // LINE :: 회원 idx
+
 }

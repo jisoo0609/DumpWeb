@@ -4,7 +4,7 @@
 <%@ taglib prefix="e" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<table class="popSearch-list list33" style="font-size: 14px;">
+<table class="popSearch-list list33" style="font-size: 12px;">
     <colgroup>
         <col style="width: 8%">
         <col style="width: 18%">
@@ -39,7 +39,7 @@
     <tr>
 
         <td class="a-center"><input type="checkbox" class="enableYN" onchange="$.selectCarNo(this, '4444')"></td>
-        <td class="a-center">4444</td>
+        <td class="a-left">4444</td>
         <td class="a-center">43테4444</td>
         <td class="a-center">010-0000-0000</td>
         <td class="a-center">김준형</td>

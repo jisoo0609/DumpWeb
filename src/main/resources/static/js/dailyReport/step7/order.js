@@ -1,66 +1,105 @@
-$(document).ready(function() {
-    // 클라이언트 측에서 표의 순번을 관리할 변수
-    var orderNumber = 1;
+/* 삭제 버튼 클릭 이벤트를 처리 */
+document.querySelector(".opBtn[data-popName='golPop1']").addEventListener("click", () => {
+  // 테이블 본문 요소를 찾습니다.
+  const tableBody = document.querySelector("table tbody");
 
-    // 저장 버튼 클릭 이벤트 리스너
-    $("#golPop3 input[value='확인']").click(function() {
-        // 입력 필드에서 데이터 가져오기
-        var loadPoint = $("#loadPoint").val();
-        var unloadPoint = $("#unloadPoint").val();
-        var golItems = $("#golItems").val();
-        var golCount = $("#golCount").val();
-        var carNumb = $("#carNumb").val(); // 차량번호 입력값
+  // 테이블 본문 내용을 초기화합니다.
+  tableBody.innerHTML = "";
 
-        // 차량번호가 입력되지 않았을 때 "(일괄배차) 미지정"으로 설정
-        if (!carNumb) {
-            carNumb = "(일괄배차) 미지정";
-        }
-
-        // AJAX 요청 보내기
-        $.ajax({
-            url: '/dailyReport/oldform',
-            method: 'POST',
-            data: {
-                loadPoint: loadPoint,
-                unloadPoint: unloadPoint,
-                golItems: golItems,
-                golCount: golCount,
-                carNumb: carNumb
-            },
-            success: function(response) {
-                // 서버 응답 처리
-                if (response.success) {
-                    // 서버에서 성공 응답을 받았을 때 표에 행 추가
-
-                    // No. 증가
-                    var orderNo = orderCount++;
-
-                    var newRow = "<tr><td>" + orderNo + "</td><td>"+ loadPoint +
-                    "</td><td>" + unloadPoint + "</td><td>" + golItems + "</td><td>" + golCount +
-                      "</td><td>" + carNumb + "</td></tr>";
-                    $("table tbody").append(newRow);
-
-                    // 입력 필드 초기화
-                    $("#loadPoint, #unloadPoint, #golItems, #golCount").val("");
-
-                    // 팝업창 닫기
-                    $("#golPop3").hide();
-                } else {
-                    // 서버에서 실패 응답을 받았을 때 처리
-                    alert("서버에서 저장 중 오류가 발생했습니다.");
-                }
-            },
-            error: function() {
-                // AJAX 요청 자체에 실패한 경우 처리
-                alert("서버에 연결할 수 없습니다.");
-            }
-        });
-        // 취소 버튼 클릭 이벤트 리스너
-        $("#golPop3 input[value='취소']").click(function() {
-            // 팝업창 닫기
-            $("#golPop3").hide();
-
-            // 입력 필드 초기화
-            $("#loadPoint, #unloadPoint, #golItems, #golCount, #carNumb").val("");
-    });
+  // 검색 결과 텍스트 초기화
+  // const resultSearch = document.querySelector(".result_search");
+  // resultSearch.innerHTML = "";
 });
+
+// 저장 버튼 클릭 이벤트 처리
+document.querySelector(".opBtn[data-popName='golPop3']").addEventListener("click", () => {
+  // 팝업 창을 띄우는 코드
+  const golPop3 = document.querySelector("#golPop3");
+  golPop3.style.display = "block";
+});
+
+/* js에서 confirmBtn(확인)이 눌릴 수 있도록 처리 */
+function clickConfirmButton(){
+  const confirmButton = document.querySelector("#golPop3 input[value='확인']");
+  bindList();
+}
+
+/* 선택한 옵션을 통해 데이터를 받아올 수 있도록 ajax POST 처리. */
+function bindList() {
+  $.ajax({
+      url: "/dailyReport/ajax/orderform",
+      type: "POST",
+      data: $("[name=golForm]").serialize(),
+      success: function (data) {
+          addTableRow(data);
+      }
+  })
+}
+
+function bindList() {
+    $.ajax({
+        url: "/dailyReport/orderform/ajax/datelist",
+        type: "POST",
+        data: {date : $("#datepicker").val()},
+        success: function (data) {
+            printList(data);
+        }
+    })
+}
+
+
+function insertFirstHeader(arr,idx) {
+  //삭제 -> 삽입하여 header td를 제일 앞으로 옮김.
+  const firstHeader = arr.splice(idx,1)[0];
+  arr.splice(0,0,firstHeader);
+}
+
+// 저장 버튼 클릭 이벤트를 처리합니다.
+function addTableRow(tableBody, data, isUndefined, rowNumber) {
+  const newRow = document.createElement("tr");
+
+//  let rowNumber = 2;
+
+  if (isUndefined) {
+    newRow.innerHTML = `
+          <td>${rowNumber}</td>
+          <td>${data.loadPoint}</td>
+          <td>${data.unloadPoint}</td>
+          <td>${data.golItems}</td>
+          <td>${data.golCount}</td>
+          <td><button class="undefined-button">미지정</button></td>
+      `;
+  } else {
+      newRow.innerHTML = `
+          <td>${rowNumber}</td>
+          <td>${data.loadPoint}</td>
+          <td>${data.unloadPoint}</td>
+          <td>${data.golItems}</td>
+          <td>${data.golCount}</td>
+          <td>${data.carNumb}</td>
+      `;
+  }
+
+  let end = order[0];
+
+  if (start !== end) {
+      start = end;
+      row.classList.add("red-line-divider")
+  }
+
+  tableBody.appendChild(row);
+}
+
+// 데이터를 가져와서 테이블에 표시
+function fetchAndDisplayData() {
+  // ...
+  let rowNumber = 1;
+  dataArray.forEach((data) => {
+      if (!data.carNumb || data.carNumb === "미지정") {
+          addTableRow(tableBody, data, true, rowNumber);
+      } else {
+          addTableRow(tableBody, data, false, rowNumber);
+      }
+      rowNumber++;
+  });
+}

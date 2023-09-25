@@ -140,6 +140,7 @@ input[type = text]{
     border: 1px solid #0068b7;
     color: #0068b7;
     padding: 0 25px;
+    line-height: 19px;
     margin-right: 10%;
 }
 
@@ -186,6 +187,6 @@ thead{
     vertical-align: middle;
 }
 
-td{
+.bottom_table td{
     height: 50px;
 }

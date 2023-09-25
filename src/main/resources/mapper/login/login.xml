@@ -4,6 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.LoginMapper">
 
+    <sql id="queryByPosition">
+        <choose>
+            <when test="userPosition == 'driver'.toString()">
+                AND CarNo = #{userId}
+            </when>
+            <otherwise>
+                AND carSubmitTel = #{userId}
+            </otherwise>
+        </choose>
+    </sql>
+
     <!--  신규 사용자 등록  -->
     <insert id="insertUserInfo" parameterType="Login">
         INSERT INTO tsitepw(userId, userPW, userTel, userName, joinDate, userPosition <if test="userPosition == 'manager'.toString()">, userSS</if>) VALUES(#{userId}, SHA2(#{userPw}, 256), #{userTel}, #{userName}, NOW(), #{userPosition} <if test="userPosition == 'manager'.toString()">, #{userSS} </if>)
@@ -31,6 +42,46 @@
 
     <update id="updateUserPassword">
         UPDATE tsitepw SET userPW = SHA2(#{userPw}, 256) WHERE uuserID = #{uuserID}
+    </update>
+
+    <insert id="insertDefaultCarData" parameterType="Login">
+        INSERT INTO tsheet_carno(carNoKey, carNoFull, carNoHp, carNoName, carNoSS2) VALUES ('미지정', '미지정', '-', '-', #{uuserID})
+    </insert>
+
+    <select id="countDefaultCarData" parameterType="Login" resultType="int">
+        SELECT COUNT(*) FROM tsheet_carno WHERE carNoSS2 = #{uuserID}
+    </select>
+    
+    <update id="updateSheetSsByUserId" parameterType="Login">
+        UPDATE tsheet SET
+        <choose>
+          <when test="userPosition == 'driver'.toString()">
+              sheetSS = #{uuserID}
+          </when>
+          <otherwise>
+              sheetSS2 = #{uuserID}
+          </otherwise>
+        </choose>
+        WHERE 1=1
+        <include refid="queryByPosition"></include>
+    </update>
+
+    <update id="updateSheetSubSsByUserId" parameterType="Login">
+        UPDATE tsheet_sub SET sheetsubSS = #{uuserID} WHERE sheetID2 IN (select distinct(sheetID) from tsheet where sheetSS = #{uuserID})
+    </update>
+
+    <update id="updateCarNoSsByUserId" parameterType="Login">
+        UPDATE tsheet_carno SET
+        <choose>
+            <when test="userPosition == 'driver'.toString()">
+                carnoSS = #{uuserID}
+            </when>
+            <otherwise>
+                carnoSS2 = #{uuserID}
+            </otherwise>
+        </choose>
+        WHERE 1=1
+        AND carnoFull = #{userId}
     </update>
 </mapper>
 

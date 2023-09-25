@@ -18,9 +18,10 @@
         grid-template-columns: repeat(2, 1fr);
         justify-content: left;
 
-        margin-bottom: 5%;
+
         margin-top: 5%;
-        margin-left: 12%;
+        margin-bottom: -2%;
+
 
     }
     .ui-datepicker-trigger {
@@ -43,6 +44,7 @@
         }
     .basic-menu li {
         display: flex;
+
     }
     .race-write,
     .race-search,
@@ -67,6 +69,7 @@
 
     .management {
         display: flex;
+        margin-bottom: -5%;
 
     }
 
@@ -146,6 +149,7 @@
                 }
                 .management {
                     justify-content: center;
+                    margin-bottom: 5%;
                 }
                 #start-date,
                 #end-date {
@@ -168,10 +172,11 @@
                     height: 30px;
                 }
 
-                .basic-menu {
-                    place-items: center;
-                }
-                .date-container {
+               .basic-menu {
+                   place-items: center;
+
+              }
+               .date-container {
                     margin-top: 50px;
                     position: relative;
                     left: 50%;
@@ -293,14 +298,14 @@
                <ul class="basic-menu">
                    <li >
                        총 운반 금액 :
-                       <div class="carrying-money" style="margin: 0 0 5% 0">
+                       <div class="carrying-money" >
                            <!-- 값을 표시하기 위한 div -->
                            <div id="ttamount">${totalCarryingAmount}원</div>
                        </div>
                    </li>
                    <li>
                        총 운행대 수 :
-                       <div class="carrying-car" style="margin: 0 0 5% 0" id="tnumber">
+                       <div class="carrying-car"  id="tnumber">
                            <!-- 값을 표시하기 위한 div -->
                            <div id="tncars">${totalCarryingCars}대</div>
                        </div>
@@ -323,7 +328,7 @@
 
                     </div>
                        </a>
-                       <a href="/dailyReport/oldform">
+                       <a href="/dailyReport/olderform">
                     <div class="car-bundle">
                         <div >
                             <div class="car-registration">

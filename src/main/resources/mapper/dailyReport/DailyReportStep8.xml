@@ -19,28 +19,97 @@
             JOIN tSheet_sub s
         ON t.sheetID = s.sheetID2
         WHERE t.carSubmitTel = #{carSubmitTel}
+        order by date desc;
 
     </select>
 
 
-    <select id="receiptsSearchCondition" parameterType="DailyReportStep8" resultType="DailyReportStep8">
+    <select id="receiptsSearchOrderByDate" parameterType="DailyReportStep8OptionForm"
+            resultType="DailyReportStep8">
         SELECT t.sheetID,
-               DATE_FORMAT(t.date, '%m-%d') as date,
-            t.CarNo,
-            s.fromsite,
-            s.tosite,
-            s.Qty,
-            s.Qtyup
+        DATE_FORMAT(t.date, '%m-%d') as date,
+        t.CarNo,
+        s.fromsite,
+        s.tosite,
+        s.item,
+        s.Qty,
+        s.Qtyup
         FROM tsheet t
-            JOIN tSheet_sub s
+        JOIN tSheet_sub s
         ON t.sheetID = s.sheetID2
-        WHERE t.carSubmitTel = #{carSubmitTel}
-          and t.CarNo = #{CarNo}
-          and s.fromsite = #{fromsite}
-          and s.tosite = #{tosite}
-          and s.item= #{item}
-
+        WHERE 1=1
+        AND
+        t.carSubmitTel = #{carSubmitTel}
+        AND
+        date BETWEEN #{searchStartDate} and #{searchEndDate}
+        <if test="CarNo != ''">
+            AND t.CarNo = #{CarNo}
+        </if>
+        <if test="fromsite != ''">
+            AND s.fromsite = #{fromsite}
+        </if>
+        <if test="tosite != ''">
+            AND s.tosite = #{tosite}
+        </if>
+        <if test="item != ''">
+            AND s.item = #{item}
+        </if>
+        order by date desc, t.CarNo asc;
     </select>
+
+
+    <select id="receiptsSearchOrderByCarNo" parameterType="DailyReportStep8OptionForm"
+            resultType="DailyReportStep8">
+        SELECT t.sheetID,
+        DATE_FORMAT(t.date, '%m-%d') as date,
+        t.CarNo,
+        s.fromsite,
+        s.tosite,
+        s.item,
+        s.Qty,
+        s.Qtyup
+        FROM tsheet t
+        JOIN tSheet_sub s
+        ON t.sheetID = s.sheetID2
+        WHERE 1=1
+        AND
+        t.carSubmitTel = #{carSubmitTel}
+        AND
+        date BETWEEN #{searchStartDate} and #{searchEndDate}
+        <if test="CarNo != ''">
+            AND t.CarNo = #{CarNo}
+        </if>
+        <if test="fromsite != ''">
+            AND s.fromsite = #{fromsite}
+        </if>
+        <if test="tosite != ''">
+            AND s.tosite = #{tosite}
+        </if>
+        <if test="item != ''">
+            AND s.item = #{item}
+        </if>
+        order by t.CarNo asc, date asc;
+    </select>
+
+    <!--기존꺼-->
+    <!--    <select id="receiptsSearchCondition" parameterType="DailyReportStep8" resultType="DailyReportStep8">-->
+    <!--        SELECT t.sheetID,-->
+    <!--               DATE_FORMAT(t.date, '%m-%d') as date,-->
+    <!--            t.CarNo,-->
+    <!--            s.fromsite,-->
+    <!--            s.tosite,-->
+    <!--            s.Qty,-->
+    <!--            s.Qtyup-->
+    <!--        FROM tsheet t-->
+    <!--            JOIN tSheet_sub s-->
+    <!--        ON t.sheetID = s.sheetID2-->
+    <!--        WHERE t.carSubmitTel = #{carSubmitTel}-->
+    <!--          and t.CarNo = #{CarNo}-->
+    <!--          and s.fromsite = #{fromsite}-->
+    <!--          and s.tosite = #{tosite}-->
+    <!--          and s.item= #{item}-->
+
+    <!--    </select>-->
 
     <select id="getAllReceiptsWithCnt" resultType="DailyReportStep8">
         SELECT t.sheetID,
@@ -81,8 +150,6 @@
           AND s.item = #{item};
 
     </select>
-
-
 
 
     <select id="searchReceipts" resultType="DailyReportStep8">
