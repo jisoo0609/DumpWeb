@@ -573,7 +573,7 @@
                 <tbody id="receiptsResultBodyOrderByDate">
                 <tr>
                     <td>1</td>
-                    <td>09-01</td>
+                    <td>09.01</td>
                     <td>구디</td>
                     <td>지밸리</td>
                     <td>모래</td>
@@ -583,7 +583,7 @@
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>09-01</td>
+                    <td>09.01</td>
                     <td>구디</td>
                     <td>지밸리</td>
                     <td>자갈</td>
