@@ -35,15 +35,15 @@
                 </li>
                 <li>
                     <label class="drvLabel" for="lastKm">최종 주행거리 km</label>
-                    <span class="drvInputSpan"><input id="lastKm" name="lastKm" type="text" pattern="[0-9]*" inputmode="numeric" placeholder="차량계기판의 최종 주행거리" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"></span>
+                    <span class="drvInputSpan"><input id="lastKm" name="lastKm" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="차량계기판의 최종 주행거리"></span>
                 </li>
                 <li>
                     <label class="drvLabel" for="useAmt">사용금액</label>
-                    <span class="drvInputSpan"><input id="useAmt" name="useAmt" type="text" pattern="[0-9]*" inputmode="numeric" placeholder="사용금액" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"></span>
+                    <span class="drvInputSpan"><input id="useAmt" name="useAmt" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="사용금액"></span>
                 </li>
                 <li>
                     <label class="drvLabel" for="useOil">주유량 L</label>
-                    <span class="drvInputSpan"><input id="useOil" name="useOil" type="text" pattern="[0-9]*" inputmode="numeric" placeholder="주유량" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"></span>
+                    <span class="drvInputSpan"><input id="useOil" name="useOil" type="number" pattern="[0-9]*" inputmode="numeric" placeholder="주유량"></span>
                 </li>
                 <li>
                     <label class="drvLabel">기타(설명) <span><img class="drvVoiceImg" src="/resources/image/step5/ico_mic.png" alt="음성인식 버튼"></span> </label>
@@ -61,7 +61,7 @@
                 </li>
                 <li>
                     <label class="drvLabel" for="nextlastkm">교환 주행거리</label>
-                    <span class="drvInputSpan"><input name="repaddkm" id="nextlastkm" type="text" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\d(?=(?:\d{3})+$)/g, '$&,')"></span>
+                    <span class="drvInputSpan"><input name="repaddkm" id="nextlastkm" type="number" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리"></span>
                 </li>
                 <li>
                     <label for="rependchk">교환 확인</label>
