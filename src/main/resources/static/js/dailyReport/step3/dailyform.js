@@ -6,7 +6,7 @@ $.save = function() {
     $.ajax({
         url: "/dailyReport/workspace/ajax/save",
         type: "POST",
-        data: $("[name=frm]").serialize(),
+        data: $("[name=entry_form]").serialize(),
         success: function (data) {
             alert("저장이 완료되었습니다.");
 
