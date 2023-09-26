@@ -14,5 +14,5 @@ public class DailyReportStep4OptionForm {
     private String toSite;    // 하차지
     private String item;      // 품목
     private String tel;       // 전화번호
-    private Boolean state;    // 결재여부
+    private String state;    // 진행상태
 }
