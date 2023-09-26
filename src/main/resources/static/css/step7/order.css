@@ -31,7 +31,7 @@ menu, nav, section {
 	display: block;
 }
 
-.ui-datepicker-trigger {
+.ui-date-trigger {
 	display: none;
 }
 
@@ -171,7 +171,6 @@ textarea {
 
 	.GolSection li {
 		width: 100%;
-		font-size: 13px;
 		font-weight: bold;
 		display: flex;
 		margin-bottom: 4px;
@@ -180,17 +179,12 @@ textarea {
 		justify-content: space-between;
 	}
 
-	.golLabel {
-		position: absolute;
-		width: 30%;
-	}
-
 	.GolSection li:first-child{
 		/* justify-content: start; */
 		gap: 5px;
 	}
 
-	input#datepicker {
+	input#date {
 		height: 25px;
 		width: 85%;
 	}
@@ -205,6 +199,12 @@ textarea {
 		/* display: flex; */
 		align-items: center;
 		gap: 5px;
+	}
+
+	.golLabel {
+		font-size: 13px;
+		position: absolute;
+		width: 30%;
 	}
 
 	.golVoiceImg {
@@ -231,6 +231,17 @@ textarea {
 		height: 28px;
 		width: 100%;
 	}
+
+  /* style.css 204번째 줄 font-size 충돌로 사이즈가 바뀌지 않아서 가져옴 */
+	input[type=text], input[type=password], input[type=number], input[type=file], input[type=tel], textarea {
+    padding-left: 10px;
+    height: 35px; }
+  @media screen and (max-width: 425px){
+      input[type=text], input[type=password], input[type=number], input[type=file], input[type=tel], textarea {
+        padding-left: 5px;
+        height: 28px !important;
+        font-size: 12px;}
+  }
 
 	.GolSection>div:first-of-type {
 		text-align: center;
@@ -432,7 +443,6 @@ textarea {
 
 	.GolSection li {
 		/* width: 100%; */
-		font-size: 13px;
 		font-weight: bold;
 		display: flex;
 		margin-bottom: 4px;
@@ -446,7 +456,7 @@ textarea {
 		gap: 5px;
 	}
 
-	input#datepicker {
+	input#date {
 		height: 25px;
 		width: 80%;
 	}
@@ -469,6 +479,7 @@ textarea {
 	}
 
 	.golLabel {
+		font-size: 13px;
 		position: absolute;
 		width: 30%;
 	}
@@ -497,6 +508,17 @@ textarea {
 		height: 28px;
 		width: 100%;
 	}
+
+  /* style.css 204번째 줄 font-size 충돌로 사이즈가 바뀌지 않아서 가져옴 */
+	input[type=text], input[type=password], input[type=number], input[type=file], input[type=tel], textarea {
+    padding-left: 10px;
+    height: 35px; }
+  @media screen and (max-width: 425px){
+      input[type=text], input[type=password], input[type=number], input[type=file], input[type=tel], textarea {
+        padding-left: 5px;
+        height: 28px !important;
+        font-size: 12px;}
+  }
 
 	.GolSection>div:first-of-type {
 		text-align: center;
@@ -973,7 +995,8 @@ textarea {
 		gap: 5px;
 	}
 
-	input#datepicker {
+	input#date
+	 {
 		height: 25px;
 		width: 85%;
 	}

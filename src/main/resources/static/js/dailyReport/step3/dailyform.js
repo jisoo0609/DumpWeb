@@ -10,7 +10,7 @@ $.save = function() {
         success: function (data) {
             alert("저장이 완료되었습니다.");
 
-            $.list();
+            //$.list();
 
             const popup = document.getElementById("popup");
             const popinputs = popup.querySelectorAll('.input');
@@ -38,24 +38,33 @@ $.list = function() {
     })
 }
 
+
 function showTransportList(data){
         // 서버에서 반환된 데이터를 이용하여 테이블 형태로 생성
         var html = '<table>';
         for (var i = 0; i < data.dailyReportStep3SubList.length; i++) {
             var subData = data.dailyReportStep3SubList[i];
-            html += '<tr>';
-            html += '<td>' + subData.fromsite + '</td>';
-            html += '<td>' + subData.tosite + '</td>';
-            html += '<td>' + subData.item + '</td>';
-            html += '<td>' + subData.qty + '</td>';
-            html += '<td>' + subData.rem + '</td>';
+            var rowId = 'row' + i;
+            html += '<tr id="' + rowId + '" onclick="fillPop(event)">';
+            html += '   <td>' + subData.fromsite + '</td>';
+            html += '   <td>' + subData.tosite + '</td>';
+            html += '   <td>' + subData.item + '</td>';
+            html += '   <td>' + subData.qty + '</td>';
+            html += '   <td>' + subData.rem + '</td>';
+            html += '   <td style="display: none;">' + subData.sheetsubID + '</td>';
+            //sheetsubID = subData.sheetsubID;
             html += '</tr>';
+
         }
         html += '</table>';
+        //document.getElementById('sheetsubID').value = subData.sheetsubID;
 
         // 데이터를 표시할 위치에 추가
         $('#transportContainer').html(html);
 }
+
+
+
 
 //카테고리 생성용 1,2,3
 function searchByCarsubmit(inputData) {
@@ -77,7 +86,6 @@ function searchByCarsubmit(inputData) {
    });
 }
 
-//아래 2개는 oninput 함수랑 충돌 나는듯, 상의할 것
 function searchBySalesman(inputData) {
     var salesman = $("#salesman").val();
 
@@ -114,25 +122,7 @@ function searchByCarsubmitTel(inputData) {
    });
 }
 
-function displayResults(searchResults) {
-    // 결과 데이터를 동적으로 추가
-    for (var i = 0; i < results.length; i++) {
-        var result = results[i];
-        var resultHtml =
-         '<tr style="width: 80%; scroll-y: auto;">' +
-         '<td>' + result.fromsite + '</td>' +
-         '<td>' + result.tosite + '</td>' +
-         '<td>' + result.item + '</td>' +
-         '<td>' + result.Qty + '</td>' +
-         '<td>' + result.Rem + '</td>' +
-         '<td>' +
-         '</tr>';
 
-        resultDiv.append(resultHtml);
-    }
-    salesSubmit.style.display = 'none';
-    salesEdit.style.display = 'flex';
-}
 
 /*tSheet만 insert*/
 $.saveCarSubmit = function() {
@@ -142,8 +132,6 @@ $.saveCarSubmit = function() {
         data: $("[name=frm]").serialize(),
         success: function (data) {
             var json = $.parseJSON(data);
-            console.log("test-JJYY");
-            console.log(json)
             if(json.httpCode == 200) {
                 alert("제출처 저장이 완료되었습니다.");
                 $.list();
@@ -153,8 +141,6 @@ $.saveCarSubmit = function() {
         }
     })
 }
-
-
 
 
 /*제출처 검색*/
@@ -183,8 +169,6 @@ $.search = function() {
            }
        })
    }
-
-
 
 
 
@@ -229,7 +213,26 @@ $.updateData = function (idx) {
 
 $.deleteRow = function() {
     alert("정말 삭제하시겠습니까?")
-    document.getElementById('salesEdit').style.display = 'none';
-    document.getElementById('salesSubmit').salesEdit.style.display = 'flex';
+    console.log("ㄱㄷㅁ초");
+   var sheetsubID = $("#sheetsubID").val();
+   console.log("sheetsubID는?"+sheetsubID);
+      $.ajax({
+          url: "/dailyReport/workspace/ajax/delete",
+          type: "GET",
+          data: { sheetsubID: sheetsubID },
+          success: function (data) {
+              var json = $.parseJSON(data);
+
+              console.log(json)
+              if(json.httpCode == 200) {
+                  alert("삭제에 성공했습니다.");
+
+                  displayResults(json.searchList);
+              } else {
+                  alert("삭제를 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
+              }
+          }
+      })
+
 }
 
