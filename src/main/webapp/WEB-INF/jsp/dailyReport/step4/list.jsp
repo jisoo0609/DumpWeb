@@ -170,33 +170,33 @@
         <div class="search_form_bottom_detail">
             <div style="width: 50%; float: left;">
                 <label for="searchType">
-                    <input type="radio" name="searchType" value="제출처" checked>
+                    <input type="radio" name="searchType" value="0-submit" checked>
                     제출처 기준
                 </label>
                 <br>
                 <label for="searchType">
-                    <input type="radio" name="searchType" value="운행일">
+                    <input type="radio" name="searchType" value="1-date">
                     운행일 기준
                 </label>
                 <br>
                 <label for="searchType">
-                    <input type="radio" name="searchType" value="상차지">
+                    <input type="radio" name="searchType" value="2-fromSite">
                     상차지 기준
                 </label>
             </div>
             <div style="margin-left: 50%;">
                 <label for="searchType">
-                    <input type="radio" name="searchType" value="하차지">
+                    <input type="radio" name="searchType" value="3-toSite">
                     하차지 기준
                 </label>
                 <br>
                 <label for="searchType">
-                    <input type="radio" name="searchType" value="품목">
+                    <input type="radio" name="searchType" value="4-item">
                     품목 기준
                 </label>
                 <br>
                 <label for="searchType">
-                    <input type="radio" name="searchType" value="운반비">
+                    <input type="radio" name="searchType" value="5-cost">
                     운반비 기준
                 </label>
             </div>
@@ -233,13 +233,13 @@
                 </colgroup>
                 <thead>
                     <tr>
-                        <th>제출처</th>
-                        <th>운행일</th>
-                        <th>품목</th>
-                        <th>상차지</th>
-                        <th>하차지</th>
-                        <th>대수</th>
-                        <th>운반단가</th>
+                        <th class="th_header">제출처</th>
+                        <th class="th_header">운행일</th>
+                        <th class="th_header">품목</th>
+                        <th class="th_header">상차지</th>
+                        <th class="th_header">하차지</th>
+                        <th class="th_header">대수</th>
+                        <th class="th_header">운반단가</th>
                     </tr>
                 </thead>
                 <tbody>
