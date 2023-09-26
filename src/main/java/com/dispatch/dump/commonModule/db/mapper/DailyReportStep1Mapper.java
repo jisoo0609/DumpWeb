@@ -2,8 +2,9 @@ package com.dispatch.dump.commonModule.db.mapper;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Main;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Sub;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep2Sub;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Tdrive;
 
+import java.util.Date;
 import java.util.List;
 
 public interface DailyReportStep1Mapper {
@@ -17,5 +18,5 @@ public interface DailyReportStep1Mapper {
     int findJoinDailyReportForTotalTransportationCost(String uuserID);
 
 
-
+    List<DailyReportStep1Tdrive> findJoinTdrive(String uuserID);
 }
