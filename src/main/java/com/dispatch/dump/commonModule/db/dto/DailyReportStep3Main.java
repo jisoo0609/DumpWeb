@@ -1,6 +1,7 @@
 package com.dispatch.dump.commonModule.db.dto;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class DailyReportStep3Main {
     private int sheetSS;            // LINE :: 회원 idx
 
     private List<DailyReportStep3Sub> dailyReportStep3SubList;//mybatis의 collection에 사용
+    
+    private MultipartFile imageFile;    // LINE :: 전표이미지 파일
 
     // VO
     //private long idx;
