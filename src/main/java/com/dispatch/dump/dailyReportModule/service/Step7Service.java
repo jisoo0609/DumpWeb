@@ -38,27 +38,15 @@ public class Step7Service {
             dailyReportStep7Main.setCarNo(loginData.getUserId());
             dailyReportStep7Main.setSheetSS2(Integer.parseInt(loginData.getUuserID()));
 
-            //제출처, date 확인
-            DailyReportStep7Main result=dailyReportStep7MainMapper.findDailyReportMainList(dailyReportStep7Main);
-            System.out.println(result);
-            if(result != null){
-                //제출처 정보가 있을때
-                dailyReportStep7Sub.setSheetID2(result.getSheetID());
-                dailyReportStep7Sub.setSheetsubSS2(Integer.parseInt(loginData.getUuserID()));
+            dailyReportStep7MainMapper.insertDailyReportStep7(dailyReportStep7Main);
 
-                dailyReportStep7SubMapper.insertDailyReportSub(dailyReportStep7Sub);
+            dailyReportStep7Sub.setSheetID2(dailyReportStep7Main.getSheetID());
+            System.out.println("외래키는?"+dailyReportStep7Sub.getSheetID2());
+            dailyReportStep7Sub.setSheetsubSS2(Integer.parseInt(loginData.getUuserID()));
+
+            dailyReportStep7SubMapper.insertDailyReportStep7sub(dailyReportStep7Sub);
                 rtnMap.put("httpCode", 200);
-            }else{
 
-                dailyReportStep7Main.setSheetSS2(Integer.parseInt(loginData.getUuserID()));
-                dailyReportStep7MainMapper.insertDailyReportMain(dailyReportStep7Main);
-
-                dailyReportStep7Sub.setSheetID2(dailyReportStep7Main.getSheetID());
-                dailyReportStep7Sub.setSheetsubSS2(Integer.parseInt(loginData.getUuserID()));
-
-                dailyReportStep7SubMapper.insertDailyReportSub(dailyReportStep7Sub);
-                rtnMap.put("httpCode", 200);
-            }
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");
         }
@@ -89,10 +77,4 @@ public class Step7Service {
         model.addAttribute("carNoList", step7Mapper.findCarNoList());
     }
 
-    //제출처 주문 정보 저장
-//    public String save(DailyReportStep7Main dailyReportStep7Main, DailyReportStep7Sub dailyReportStep7Sub){
-//
-//
-//
-//    }
 }

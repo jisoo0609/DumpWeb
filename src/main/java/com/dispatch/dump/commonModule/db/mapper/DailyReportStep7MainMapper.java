@@ -9,7 +9,7 @@ import java.util.List;
 public interface DailyReportStep7MainMapper {
 
     /* FUNCTION ::  등록 */
-    int insertDailyReportMain(DailyReportStep7Main dailyReportStep7Main);
+    int insertDailyReportStep7(DailyReportStep7Main dailyReportStep7Main);
 
     /* FUNCTION :: 일보 리스트 조회(전체조건) */
     DailyReportStep7Main findDailyReportMainList(DailyReportStep7Main dailyReportStep7Main);

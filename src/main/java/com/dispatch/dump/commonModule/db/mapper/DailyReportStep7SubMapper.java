@@ -7,6 +7,6 @@ import com.dispatch.dump.commonModule.db.dto.DailyReportStep7Sub;
 public interface DailyReportStep7SubMapper {
 
     /* FUNCTION ::  등록 */
-    int insertDailyReportSub(DailyReportStep7Sub DailyReportStep7Sub);
+    int insertDailyReportStep7sub(DailyReportStep7Sub DailyReportStep7Sub);
 
 }
