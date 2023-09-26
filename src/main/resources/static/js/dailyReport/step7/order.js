@@ -36,18 +36,6 @@ function bindList() {
   })
 }
 
-function bindList() {
-    $.ajax({
-        url: "/dailyReport/orderform/ajax/datelist",
-        type: "POST",
-        data: {date : $("#datepicker").val()},
-        success: function (data) {
-            printList(data);
-        }
-    })
-}
-
-
 function insertFirstHeader(arr,idx) {
   //삭제 -> 삽입하여 header td를 제일 앞으로 옮김.
   const firstHeader = arr.splice(idx,1)[0];
@@ -58,11 +46,9 @@ function insertFirstHeader(arr,idx) {
 function addTableRow(tableBody, data, isUndefined, rowNumber) {
   const newRow = document.createElement("tr");
 
-//  let rowNumber = 2;
-
   if (isUndefined) {
     newRow.innerHTML = `
-          <td>${rowNumber}</td>
+          <td>${rowNumberForUndefined}</td>
           <td>${data.loadPoint}</td>
           <td>${data.unloadPoint}</td>
           <td>${data.golItems}</td>
@@ -71,7 +57,7 @@ function addTableRow(tableBody, data, isUndefined, rowNumber) {
       `;
   } else {
       newRow.innerHTML = `
-          <td>${rowNumber}</td>
+          <td>${rowNumberForCarNumb}</td>
           <td>${data.loadPoint}</td>
           <td>${data.unloadPoint}</td>
           <td>${data.golItems}</td>
@@ -92,14 +78,15 @@ function addTableRow(tableBody, data, isUndefined, rowNumber) {
 
 // 데이터를 가져와서 테이블에 표시
 function fetchAndDisplayData() {
-  // ...
-  let rowNumber = 1;
-  dataArray.forEach((data) => {
+  let rowNumberForUndefined = 1; // 미지정인 경우의 rowNumber 초기화
+  let rowNumberForCarNumb = 1; // 차량번호인 경우의 rowNumber 초기화
+  datalist.forEach((data) => {
       if (!data.carNumb || data.carNumb === "미지정") {
-          addTableRow(tableBody, data, true, rowNumber);
+          addTableRow(tableBody, data, true, rowNumberForUndefined);
+          rowNumberForUndefined++; // 미지정인 경우의 rowNumber 증가
       } else {
-          addTableRow(tableBody, data, false, rowNumber);
+          addTableRow(tableBody, data, false, rowNumberForCarNumb);
+          rowNumberForCarNumb++; // 차량번호인 경우의 rowNumber 증가
       }
-      rowNumber++;
   });
 }

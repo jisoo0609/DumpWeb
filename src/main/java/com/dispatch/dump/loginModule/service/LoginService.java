@@ -54,9 +54,7 @@ public class LoginService {
                             rtnUrl = "/dailyReport/manager";
                         }
                     }
-//                    loginMapper.updateSheetSsByUserId(loginInfo);
-//                    loginMapper.updateSheetSubSsByUserId(loginInfo); 추가 조건 필요
-//                    loginMapper.updateCarNoSsByUserId(loginInfo);
+//                    updateSS(loginInfo); 추가조건필요
                     rtnMap.put("rtnUrl", rtnUrl);
                     rtnMap.put("httpCode", 200);
                 } else {
@@ -155,9 +153,7 @@ public class LoginService {
                 loginData.setTestUserChk(true);
                 HttpSession session = request.getSession();
                 session.setAttribute("loginInfo", loginData);
-                loginMapper.updateSheetSsByUserId(loginData);
-//                loginMapper.updateSheetSubSsByUserId(loginData); // 추가 조건 필요
-                loginMapper.updateCarNoSsByUserId(loginData);
+//                updateSS(loginData); 추가 조건 필요
                 rtnMap.put("rtnUrl", rtnUrl);
                 rtnMap.put("httpCode", 200);
             }
@@ -169,5 +165,11 @@ public class LoginService {
 
 
         return commonUtil.jsonFormatTransfer(rtnMap);
+    }
+
+    public void updateSS(Login loginInfo) {
+        loginMapper.updateSheetSsByUserId(loginInfo);
+        loginMapper.updateSheetSubSsByUserId(loginInfo);
+        loginMapper.updateCarNoSsByUserId(loginInfo);
     }
 }
