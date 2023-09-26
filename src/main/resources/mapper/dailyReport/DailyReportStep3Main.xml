@@ -94,28 +94,9 @@
         order by salesman asc;
     </select>
 
-    <!--제출처 정보 수정-->
-    <!--조회한 정보가 과거 정보일 때, 수정 But 기존정보와 동일하다면 수정 불가능(and가 아닌 or조건) -->
-    <update id="editByCarSubmit" parameterType="DailyReportStep3Main">
-        update tSheet
-        <set>
-            <if test="carSubmit !=null and carSubmit != carSubmit">
-                carSubmit=#{carSubmit},
-            </if>
-            <if test="carSubmitTel !=null and carSubmitTel != carSubmitTel">
-                carSubmitTel=#{carSubmitTel},
-            </if>
-            <if test="salesman !=null and salesman != salesman">
-                salesman=#{salesman}
-            </if>
-        </set>
-        where carSubmitTel=#{carSubmitTel}
-        and (carSubmit != carSubmit or carSubmitTel != carSubmitTel or salesman != salesman)
-    </update>
-
     <!--삭제 관련-->
     <!--sheetID로 조회-->
-    <select id="findBySheetID" parameterType="int">
+    <select id="findBySheetID" parameterType="int" resultType="boolean">
         select chk1 from tSheet where sheetID=#{sheetID}
     </select>
 </mapper>

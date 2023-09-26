@@ -59,6 +59,12 @@ public class Step3Controller {
         return step3Service.searchBySalesman(dailyReportStep3Main);
     }
 
+    @RequestMapping(value = "/workspace/ajax/edit", method = RequestMethod.POST)
+    @ResponseBody
+    public void edit(DailyReportStep3Sub dailyReportStep3Sub){
+        step3Service.edit(dailyReportStep3Sub);
+    }
+
     @RequestMapping(value = "/workspace/ajax/delete", method = RequestMethod.GET)
     @ResponseBody
     public void delete(int sheetsubID){

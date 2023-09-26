@@ -99,7 +99,7 @@
                                 <label class="t10">운행일</label>
                                 <span class="content">
                                     <input type="text" class="datepicker input" id="date" name="date" style="width: 80px; margin-left: 75px; text-align: center; padding-left: 0;"
-                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="on" oninput="validateInput4(this)">
+                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="on" oninput="validateInput4(this)" onchange="listData()">
                                 </span>
                             </div>
                             <div class="haveTwo">
