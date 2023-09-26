@@ -12,7 +12,6 @@
 <%
     // 모델로부터 받은 데이터를 변수에 저장
     List<DailyReportStep4> tSheet = (List<DailyReportStep4>) request.getAttribute("tSheet");
-    List<DailyReportStep4> totalAmount = (List<DailyReportStep4>) request.getAttribute("totalAmount");
 %>
 <section class="sub-contents-wrap maxwrap">
     <div>
@@ -169,34 +168,34 @@
         </div>
         <div class="search_form_bottom_detail">
             <div style="width: 50%; float: left;">
-                <label for="searchType">
+                <label>
                     <input type="radio" name="searchType" value="0-submit" checked>
                     제출처 기준
                 </label>
                 <br>
-                <label for="searchType">
+                <label>
                     <input type="radio" name="searchType" value="1-date">
                     운행일 기준
                 </label>
                 <br>
-                <label for="searchType">
-                    <input type="radio" name="searchType" value="2-fromSite">
-                    상차지 기준
+                <label>
+                    <input type="radio" name="searchType" value="2-item">
+                    품목 기준
                 </label>
             </div>
             <div style="margin-left: 50%;">
-                <label for="searchType">
-                    <input type="radio" name="searchType" value="3-toSite">
+                <label>
+                    <input type="radio" name="searchType" value="3-fromSite">
+                    상차지 기준
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="searchType" value="4-toSite">
                     하차지 기준
                 </label>
                 <br>
-                <label for="searchType">
-                    <input type="radio" name="searchType" value="4-item">
-                    품목 기준
-                </label>
-                <br>
-                <label for="searchType">
-                    <input type="radio" name="searchType" value="5-cost">
+                <label>
+                    <input type="radio" name="searchType" value="6-cost">
                     운반비 기준
                 </label>
             </div>
@@ -223,13 +222,13 @@
         <div>
             <table class="list-table">
                 <colgroup>
-                    <col width="19%">
+                    <col width="16%">
                     <col width="15%">
                     <col width="15%">
                     <col width="20%">
                     <col width="20%">
                     <col width="10%">
-                    <col width="16%">
+                    <col width="19%">
                 </colgroup>
                 <thead>
                     <tr>
