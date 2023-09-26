@@ -33,9 +33,33 @@ function getList(){
         type: "POST",
         data: $("[name=data_frm]").serialize(),
         success: function(data){
+           // tableSort();
            printTable(data)//서버에서 받은 데이터 처리할 함수 입력
         }
     });
+}
+
+// 테이블 헤더 정렬 함수
+function tableSort(){
+    const searchTypedRadio = document.querySelectorAll('input[name=searchType]:checked');
+    const header = Array.from(document.querySelectorAll(".th_header"));
+
+    const searchType = searchTypedRadio[0].value().split("-");
+    const firstThFlag = parseInt(searchType[0]);
+
+    let order = ["제출처", "운행일", "품목", "상차지", "하차지", "대수", "운반단가"];
+    insertTitleThInfront(order, firstThFlag);
+
+    for(let i=0; i<header.length; i++)
+        header[i].textContent = order[i];
+
+    return firstThFlag;
+}
+
+// 테이블 헤더 정렬 함수2
+function insertTitleThInfront(arr, idx){
+    const firstTh = arr.splice(idx, 1)[0];
+    arr.splice(0,0,firstTh);
 }
 
 // 테이블 데이터 출력 함수

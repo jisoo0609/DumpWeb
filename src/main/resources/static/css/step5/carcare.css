@@ -3,7 +3,7 @@
     display: none;
 }
 .DrvSection form fieldset .bdnUl{
-        border: none; padding-top: 0;
+        border: none; padding-top: 0; display: none;
     }
 /* ! galaxy fold size */
 @media screen and (max-width: 280px){
@@ -50,10 +50,9 @@
     .DrvSection form fieldset ul li .drvLabel{
         position: absolute;
     }
-    .DrvSection form fieldset ul li input#datepicker,
-    .DrvSection form fieldset ul li input#datepicker1,
-    .DrvSection form fieldset ul li input#datepicker2{
-        width: 90px; height: 25px; font-size: 16px;
+    .DrvSection form fieldset ul li input#reg-date,
+    .DrvSection form fieldset ul li input#exchange-date{
+        width: 90px; height: 25px; font-size: 12px;
     }
     .drvVoiceImg{
         width: 20px; vertical-align: middle; border-radius: 25px;
@@ -75,7 +74,7 @@
         padding-left: 52px
     }
     .DrvSection form fieldset ul li textarea{
-        width: 58%; font-size: 12px;
+        width: 57.5%; font-size: 12px;
     }
     .DrvSection > div:first-of-type{
         text-align: center; margin-bottom: 30px;
@@ -84,16 +83,12 @@
         font-size: 12px; border: 1px solid #000; cursor: pointer;
         height: 30px;
     }
-    .DrvSection > div:first-of-type button:nth-child(3){
-        width: 28%;
-    }
     .DrvSection > div:first-of-type button:nth-child(2){
         background-color: #0068b7; color: #fff;
     }
     .DrvSection > div:first-of-type button:not(:nth-child(2)){
         background-color: #fff;
     }
-
     .DrvSection  [class ^='drvPopup']{
         position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
         box-sizing: border-box; flex-shrink: 0; display: none;
@@ -120,8 +115,6 @@
     .DrvSection  [class ^='drvPopup'] input:hover{
         background-color: #0068b7; color: #fff;
     }
-
-
     .DrvSection table{
         max-width: 1200px; width: 100%; margin: 0 auto 40px;
         border-top: 2px solid #0068b7; box-sizing: border-box;
@@ -130,7 +123,7 @@
         background-color: #f2f2f2;
     }
     .DrvSection table thead tr th{
-        font-size: 14px; padding: 2px; text-align: center; height: 20px;
+        font-size: 12px; padding: 10px 2px; text-align: center; height: 20px; font-weight: var(--weight-bold);
         vertical-align : middle;
     }
     .DrvSection table tbody tr{
@@ -212,9 +205,9 @@
     .DrvSection form fieldset ul li .drvLabel{
         position: absolute;
     }
-    .DrvSection form fieldset ul li input#datepicker1,
-    .DrvSection form fieldset ul li input#datepicker2{
-        width: 130px; height: 25px; font-size: 14px;
+    .DrvSection form fieldset ul li input#reg-date,
+    .DrvSection form fieldset ul li input#exchange-date{
+        width: 130px; height: 25px; font-size: 12px;
     }
     .drvVoiceImg{
         width: 18%;
@@ -257,9 +250,6 @@
     .DrvSection > div:first-of-type button:not(:nth-child(2)){
         background-color: #fff;
     }
-    .DrvSection > div:first-of-type button:last-child{
-        width: 30%;
-    }
 
     .DrvSection  [class ^='drvPopup']{
         position: fixed; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);
@@ -295,7 +285,7 @@
         background-color: #f2f2f2;
     }
     .DrvSection table thead tr th{
-        font-size: 14px; padding: 2px; text-align: center; height: 20px;
+        font-size: 12px; padding: 10px 8px; text-align: center; height: 20px; font-weight: var(--weight-bold);;
         vertical-align : middle;
     }
     .DrvSection table tbody tr{
@@ -377,9 +367,8 @@
     .DrvSection form fieldset ul li .drvLabel{
         position: absolute; font-weight: bold;
     }
-    .DrvSection form fieldset ul li input#datepicker,
-    .DrvSection form fieldset ul li input#datepicker1,
-    .DrvSection form fieldset ul li input#datepicker2{
+    .DrvSection form fieldset ul li input#reg-date,
+    .DrvSection form fieldset ul li input#exchange-date{
         width: 50%; height: 25px; font-size: 16px;
     }
     .DrvSection form fieldset ul li:first-of-type .chk2{
@@ -539,9 +528,8 @@
     .DrvSection form fieldset ul li .drvLabel{
         position: absolute; font-weight: bold;
     }
-    .DrvSection form fieldset ul li input#datepicker,
-    .DrvSection form fieldset ul li input#datepicker1,
-    .DrvSection form fieldset ul li input#datepicker2{
+    .DrvSection form fieldset ul li input#reg-date,
+    .DrvSection form fieldset ul li input#exchange-date{
         width: 30%; height: 25px; font-size: 16px;
     }
     .DrvSection form fieldset ul li:first-of-type .chk2{
