@@ -251,3 +251,5 @@
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
 
 <script src="/resources/js/dailyReport/step4/step4.js"></script>
+<script src="/resources/js/dailyReport/step4/calendar.js"></script>
+<script src="/resources/js/dailyReport/step4/DOMContentLoaded.js"></script>
