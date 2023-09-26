@@ -25,10 +25,13 @@ $.save = function() {
 }
 
 $.list = function() {
+    var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
         url: "/dailyReport/workspace/ajax/list",
         type: "POST",
-        data: $("[name=frm]").serialize(),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function (data) {
             showTransportList(data);
         },
