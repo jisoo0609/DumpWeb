@@ -18,7 +18,7 @@
 
 
                      </label>
-                    <button  id="update-button" type="submit" onclick="bindSummary()">조회</button>
+                    <button  id="update-button" type="button" onclick="bindSummary()">조회</button>
 
                 </div>
 
