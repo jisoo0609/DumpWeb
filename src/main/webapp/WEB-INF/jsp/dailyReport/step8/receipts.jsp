@@ -19,14 +19,7 @@
     <meta name="msapplication-TileImage" content="/resources/image/favicon/favicon.png">
     <link rel="shortcut icon" href="/resources/image/favicon/favicon.png">
 
-    <%--    <!-- Style-->--%>
-    <%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.css?version=1.2&20230831191239" type="text/css"--%>
-    <%--          rel="stylesheet"/>--%>
-    <%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.theme-xenon.css?version=1.2&20230831191239"--%>
-    <%--          type="text/css" rel="stylesheet"/>--%>
-    <%--    <link href="/resources/js/jquery.modal-master/css/jquery.modal.theme-atlant.css?version=1.2&20230831191239"--%>
-    <%--          type="text/css" rel="stylesheet"/>--%>
-
+    <!-- Style-->
     <link href="/resources/css/step8/style.css?jsVerType=20230831191239" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/loading.css">
     <style>
@@ -235,41 +228,12 @@
             .search-form-major .date-wrap .last {
                 font-size: 13px;
             }
-
-
         }
     </style>
 </head>
 <body>
 <script type="text/javascript"
         src="/resources/js/dailyReport/step8/list.js?jsVerType=2020230831191239"></script>
-<script>
-    // 페이지 로드 시 실행
-    // $(document).ready(function () {
-    //     // 체크박스 요소와 테이블 요소 가져오기
-    //     const toggleTableCheckbox1 = $("#toggleTableCheckbox1");
-    //     const toggleTableCheckbox2 = $("#toggleTableCheckbox2");
-    //     const dataTable = $("#dataTable");
-    //
-    //     // // 체크박스 클릭 이벤트 처리
-    //     // toggleTableCheckbox1.click(function () {
-    //     //     if (toggleTableCheckbox1.is(":checked")) {
-    //     //         // 운행일 기준 테이블을 보이도록 설정
-    //     //         dataTable.html('<tr><th>운행일</th><th>상차지</th><th>하차지</th><th>차량번호</th><th>대수</th><th>진행</th></tr><tr><td>09.09</td><td>구디 </td> <td>지밸리 </td> <td>37우2598 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
-    //     //         toggleTableCheckbox2.prop("checked", false); // 다른 체크박스 해제
-    //     //     }
-    //     // });
-    //
-    //     toggleTableCheckbox2.click(function () {
-    //         if (toggleTableCheckbox2.is(":checked")) {
-    //             // 차량 기준 테이블을 보이도록 설정
-    //             dataTable.html('<tr><th>차량번호</th><th>상차지</th><th>하차지</th><th>운행일</th><th>대수</th><th>진행</th></tr>  <tr> <td>37우2598</td> <td>구디 </td> <td>지밸리 </td> <td>09.17 </td> <td>1 </td> <td> <span style="color: #000080; font-weight: bold;">하차</span> </td> </tr>');
-    //             toggleTableCheckbox1.prop("checked", false); // 다른 체크박스 해제
-    //         }
-    //     });
-    // });
-</script>
-
 <script>
     // 달력 옵션 추가 코드
     $(function () {
@@ -367,7 +331,6 @@
     });
 </script>
 
-
 <section class="sub-contents-wrap maxwrap">
 
     <div class="sub-title">
@@ -449,9 +412,7 @@
                                autocomplete="off">
                         <select class="club " id="clubBox" onchange="$.selectBoxChange(this.value, 'club')">
                             <option value="전체">전체</option>
-                            <option value="운반"
-                            >운반
-                            </option>
+                            <option value="운반">운반</option>
                         </select>
                     </div>
                 </li>
@@ -462,11 +423,19 @@
                                id="fromsite" autocomplete="off" value="${!empty view ? view.fromsite : ''}">
                         <select class="fromsite " id="fromsiteBox" onchange="$.selectBoxChange(this.value, 'fromsite')">
                             <option value="">전체</option>
+                            <option value="구디">구디</option>
+                            <c:forEach items="${receiptsList}" var="receipt">
+                                <c:set var="fromsite" value="${receipt.fromsite}" />
 
-                            <option value="구디"
-                            >구디
-                            </option>
-
+                                <script>   //옵션에 중복값 제거
+                                if (!document.querySelector('#fromsiteBox option[value="${fromsite}"]')) {
+                                    var option = document.createElement('option');
+                                    option.value = "${fromsite}";
+                                    option.text = "${fromsite}";
+                                    document.querySelector('#fromsiteBox').appendChild(option);
+                                }
+                                </script>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -477,10 +446,20 @@
                                id="tosite" autocomplete="off" value="${!empty view ? view.tosite : ''}">
                         <select class="tosite " id="tositeBox" onchange="$.selectBoxChange(this.value, 'tosite')">
                             <option value="">전체</option>
-
                             <option value="지밸리">지밸리</option>
+                            <c:forEach items="${receiptsList}" var="receipt">
+                                <c:set var="tosite" value="${receipt.tosite}" />
 
-                        </select>
+                                <script>   //옵션에 중복값 제거
+                                if (!document.querySelector('#tositeBox option[value="${tosite}"]')) {
+                                    var option = document.createElement('option');
+                                    option.value = "${tosite}";
+                                    option.text = "${tosite}";
+                                    document.querySelector('#tositeBox').appendChild(option);
+                                }
+                                </script>
+                            </c:forEach>
+    </select>
                     </div>
                 </li>
                 <li>
@@ -490,11 +469,19 @@
                                value="${!empty view ? view.item : ''}" autocomplete="off">
                         <select class="item " id="itemBox" onchange="$.selectBoxChange(this.value, 'item')">
                             <option value="">전체</option>
+                            <option value="출퇴근">출퇴근</option>
 
-                            <option value="출퇴근"
-                            >출퇴근
-                            </option>
-
+                            <c:forEach items="${receiptsList}" var="receipt">
+                                <c:set var="item" value="${receipt.item}" />
+                                <script>   //옵션에 중복값 제거
+                                if (!document.querySelector('#itemBox option[value="${item}"]')) {
+                                    var option = document.createElement('option');
+                                    option.value = "${item}";
+                                    option.text = "${item}";
+                                    document.querySelector('#itemBox').appendChild(option);
+                                }
+                                </script>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -504,13 +491,20 @@
                         <input type="text" class="wp100 CarNoAuto complete trn" placeholder="차량번호"
                                name="CarNo" id="CarNo" value="${!empty view ? view.CarNo : ''}"
                                autocomplete="off">
-                        <select class="CarNo " id="CarNoBox"
-                                onchange="$.selectBoxChange(this.value, 'CarNo')">
+                        <select class="CarNo " id="CarNoBox" onchange="$.selectBoxChange(this.value, 'CarNo')">
                             <option value="">전체</option>
-
-                            <option value="자차"
-                            >자차
-                            </option>
+                            <option value="자차">자차</option>
+                            <c:forEach items="${receiptsList}" var="receipt">
+                                <c:set var="carNo" value="${receipt.carNo}" />
+                                <script>   //옵션에 중복값 제거
+                                    if (!document.querySelector('#CarNoBox option[value="${carNo}"]')) {
+                                        var option = document.createElement('option');
+                                        option.value = "${carNo}";
+                                        option.text = "${carNo}";
+                                        document.querySelector('#CarNoBox').appendChild(option);
+                                    }
+                                </script>
+                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -549,27 +543,10 @@
                 </button>
                 <div class="btnWraaper">
                     <button class="common_btn" onclick="$.allChkChange(1);">일괄결재</button>
-                    <button class="common_btn" onclick="$.allChkChange(0);">취소</button>
+                    <button class="common_btn" onclick="$.allChkChange(0);">일괄취소</button>
                 </div>
             </div>
 
-
-
-            <%--            <div class="area">--%>
-            <%--                <div class="jack"--%>
-            <%--                     style="font-size: 14px; color: #0064c1; font-weight: 600; margin-bottom: 10px; text-align: center">--%>
-            <%--                    <label>운반금액(원)</label>--%>
-            <%--                    <label>999,999,999</label>--%>
-            <%--                </div>--%>
-            <%--                <div class="table-btn" style="margin-bottom: 10px;">--%>
-            <%--                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(1);"--%>
-            <%--                           style="background-image: none !important; text-indent: 0px !important; height: 42px; width: 100px; line-height: 33px;"--%>
-            <%--                           value="일괄결재">--%>
-            <%--                    <input type="button" class="btn btn-search btn-search__line" onclick="$.allChkChange(0);"--%>
-            <%--                           style="background-image: none !important; text-indent: 0px !important; height: 42px; width: 100px; line-height: 33px;"--%>
-            <%--                           value="취소">--%>
-            <%--                </div>--%>
-            <%--            </div>--%>
             <table class="list-table" id="tableOrderByDate" style="display:<%= "orderByDate".equals(searchType) ? "block" : "none" %>">
                 <colgroup>
                     <col style="width: 3%">
@@ -596,7 +573,7 @@
                 <tbody id="receiptsResultBodyOrderByDate">
                 <tr>
                     <td>1</td>
-                    <td>09-01</td>
+                    <td>09.01</td>
                     <td>구디</td>
                     <td>지밸리</td>
                     <td>모래</td>
@@ -606,7 +583,7 @@
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>09-01</td>
+                    <td>09.01</td>
                     <td>구디</td>
                     <td>지밸리</td>
                     <td>자갈</td>
