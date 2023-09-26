@@ -7,18 +7,18 @@
     <insert id="insertTDrive" parameterType="DailyReportStep5">
         INSERT INTO tdrive
         (
-         carno,
-         drvdate,
-         lastkm,
-         drvclub,
-         useamt,
-         useoil,
-         drvrem,
-         chk2,
-         rependdate,
-         repaddkm,
-         rependchk,
-         drivess)
+        carno,
+        drvdate,
+        lastkm,
+        drvclub,
+        useamt,
+        useoil,
+        drvrem,
+        chk2,
+        rependdate,
+        repaddkm,
+        rependchk,
+        drivess)
         VALUES      (
                       #{carNo},
                       #{drvDate},
