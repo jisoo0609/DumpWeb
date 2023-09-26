@@ -4,7 +4,7 @@
     <div class="popup-content">
         <div class="mt10">
             <form method="post" name="frm">
-                <input type="hidden" name="sheetsubID" id="sheetsubID" >
+                <input type="hidden" id="sheetsubID" >
 
                 <div class="mtable">
                     <ul class="mtable__ul" style="border-bottom: 1px solid transparent !important;">
@@ -79,12 +79,21 @@
             </form>
         </div>
         <div class="btn-area">
-            <button class="btn btn-white btn-popup" onclick="$.deleteRow()">
-                삭제
+            <%-- 신규저장--%>
+            <button class="btn btn-white btn-popup emptyInput" onclick="$.emptyRow()" >
+                비움
             </button>
-            <button class="btn btn-blue btn-popup" onclick="$.save()" onkeydown="if(event.keyCode == 13) return false;" method="">
+            <button class="btn btn-blue btn-popup emptyInput" onclick="$.save()" onkeydown="if(event.keyCode == 13) return false;">
                 저장
             </button>
+            <%-- 불러온 데이터 일때  --%>
+            <button class="btn btn-white btn-popup filledInput" onclick="$.deleteRow()">
+                삭제
+            </button>
+            <button class="btn btn-blue btn-popup filledInput" onclick="$.editRow()" >
+                수정
+            </button>
+            <%-- 공통 --%>
             <button id="closePopupButton" class="btn btn-white btn-popup" onclick="closePop()">
                 닫기
             </button>
