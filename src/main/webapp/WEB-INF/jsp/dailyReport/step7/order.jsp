@@ -22,7 +22,7 @@
 <script>  // 달력 옵션 추가 코드
     $(function () {
         //input을 datepicker로 선언
-        $("#datepicker").datepicker({
+        $("#date").datepicker({
             dateFormat: 'yy-mm-dd' //달력 날짜 형태
             , showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
             , showMonthAfterYear: true // 월- 년 순서가아닌 년도 - 월 순서
@@ -41,8 +41,8 @@
             , maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
         });
 
-        //초기값을 오늘 날짜로 설정해줘야 합니다.
-        $('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+        //초기값을 오늘 날짜로 설정
+        $('#date').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
     });
 </script>
 
@@ -52,35 +52,35 @@
         <fieldset>
           <ul>
             <li>
-              <label class="golLabel" for="datepicker">주문일</label>
-              <span class="golInputSpan"><input id="datepicker"></span>
+              <label class="golLabel" for="date">주문일</label>
+              <span class="golInputSpan"><input id="date"></span>
               <input class="golSearch" type="button" value="조회">
               <div class="checkbox">
-                <label class="check67" for="check67">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-                <input id="check67" type="checkbox">
+                <label class="check67" for="chk1">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+                <input id="chk1" type="checkbox">
               </div>
             </li>
             <li>
-              <label class="golLabel" for="loadPoint"> 상차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="loadPoint" name="loadPoint" type="text" placeholder="상차지"></span>
+              <label class="golLabel" for="fromSite"> 상차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <span class="golInputSpan"><input class="golIn" id="fromSite" name="fromSite" type="text" placeholder="상차지"></span>
             </li>
             <li>
-              <label class="golLabel" for="unloadPoint"> 하차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="unloadPoint" name="unloadPoint" type="text" placeholder="하차지"></span>
+              <label class="golLabel" for="toSite"> 하차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <span class="golInputSpan"><input class="golIn" id="toSite" name="toSite" type="text" placeholder="하차지"></span>
             </li>
             <li>
-              <label class="golLabel" for="golItems"> 품목 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="golItems" name="golItems" type="text" placeholder="품목"></span>
+              <label class="golLabel" for="item"> 품목 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <span class="golInputSpan"><input class="golIn" id="item" name="item" type="text" placeholder="품목"></span>
             </li>
             <li>
-              <label class="golLabel" for="golCount">대수</label>
+              <label class="golLabel" for="Qty">대수</label>
               <span class="golInputSpan">
-                <input class="golIn" id="golCount" name="golCount" type="number" pattern="[0-9]" inputmode="numeric" placeholder="대수">
+                <input class="golIn" id="Qty" name="Qty" type="number" pattern="[0-9]" inputmode="numeric" placeholder="대수">
               </span>
             </li>
             <li>
-              <label class="golLabel" for="carNumb"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="carNumb" name="carNumb" type="text" placeholder="미지정 또는 차량번호"></span>
+              <label class="golLabel" for="carNo"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호"></span>
             </li>
           </ul>
         </fieldset>
