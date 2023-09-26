@@ -85,7 +85,7 @@
         <button class="common_btn" style="width: 110px;">비용금액(원)<br/><span class="resultPrice">0</span></button>
         <div class="btnWraaper">
             <button class="common_btn">일괄결재</button>
-            <button class="common_btn">취소</button>
+            <button class="common_btn">일괄취소</button>
         </div>
     </div>
     <div class="line"></div>
@@ -97,10 +97,10 @@
             <tr class="th_title">
                 <th class="th_header" id="date-header">날짜</th>
                 <th class="th_header" id="item-header">품목</th>
-                <th>최종주행(km)</th>
-                <th>사용금액(원)</th>
-                <th>기타 (설명)</th>
-                <th>교환 주기</th>
+                <th>최종주행<br/>(km)</th>
+                <th>사용금액<br/>(원)</th>
+                <th>기타 <br/>(설명)</th>
+                <th>교환 <br/>주기</th>
             </tr>
             </thead>
             <tbody id="table-body">
