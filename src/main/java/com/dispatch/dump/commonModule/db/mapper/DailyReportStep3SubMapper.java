@@ -8,10 +8,10 @@ import java.util.List;
 public interface DailyReportStep3SubMapper {
 
     /* FUNCTION ::  등록 */
-    int insertDailyReportSub(DailyReportStep3Sub DailyReportStep3Sub);
+    int insertTransportInfo(DailyReportStep3Sub DailyReportStep3Sub);
 
     /* FUNCTION ::  삭제를 위한 sheetID2 조회 */
-    int selectBySheetSubID(int sheetsubID);
+    int findBySheetsubID(int sheetsubID);
 
     /* FUNCTION ::  삭제 */
     int deleteByOne(int sheetsubID);

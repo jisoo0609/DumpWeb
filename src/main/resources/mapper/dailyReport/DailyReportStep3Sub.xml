@@ -5,14 +5,14 @@
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep3SubMapper">
 
     <!--운행정보 조회-->
-    <select id="findDailyReportSubList" parameterType="int" resultType="DailyReportStep3Sub">
+    <select id="findByTransportInfo" parameterType="int" resultType="DailyReportStep3Sub">
         select * from tSheet_sub
         where
         sheetID2=#{sheetID2}
     </select>
 
     <!--운행 정보 저장-->
-    <insert id="insertDailyReportSub" parameterType="DailyReportStep3Sub">
+    <insert id="insertTransportInfo" parameterType="DailyReportStep3Sub">
         <!--idx 자동->따로 작성 X-->
         insert into
         tSheet_sub
@@ -38,7 +38,7 @@
     
     <!--삭제 관련-->
     <!--sheetsubID로 조회-->
-    <select id="selectBySheetSubID" parameterType="int">
+    <select id="findBySheetsubID" parameterType="int" resultType="int">
         select sheetID2 from tSheet_sub where sheetsubID=#{sheetsubID}
     </select>
 
@@ -46,5 +46,21 @@
     <delete id="deleteByOne" parameterType="int">
         delete from tSheet_sub where sheetsubID = #{sheetsubID}
     </delete>
+
+    <!--운행정보 수정(1건)-->
+    <update id="editByTransportInfo" parameterType="int">
+
+        <!--
+        1. 수정할 내용 정리
+        1) 컬럼 전부 수정 X, 컬럼 중에서 일부만 수정해도 되도록
+        2) 변경된 내용이 있을때만, 수정
+        2. 조건 정리
+        로그인 ID : 조회된 내용이 본인 정보를 기준으로 했기 때문에 조건에 따로 넣을 필요X
+        sheetsubID : table에서 선택할때 hidden으로 가져오게 하기->idx를 기준으로 수정
+        결재 : 0이면 삭제 가능, 1이면 삭제 불가능
+
+        *
+        -->
+    </update>
 
 </mapper>

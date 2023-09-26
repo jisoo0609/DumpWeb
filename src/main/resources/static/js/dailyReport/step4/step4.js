@@ -28,6 +28,7 @@ $(function() {
 
 // 검색 버튼의 Form 데이터 AJAX POST 함수
 function getList(){
+    tableSort();
     $.ajax({
        url: "/dailyReport/ajax/list",
         type: "POST",
@@ -36,6 +37,12 @@ function getList(){
            printTable(data)//서버에서 받은 데이터 처리할 함수 입력
         }
     });
+}
+
+// 테이블 헤더 정렬 함수
+function tableSort(){
+    const searchTypedRadio = document.querySelectorAll('input[name=searchType]:checked');
+    const header = Array.from(document.querySelectorAll());
 }
 
 // 테이블 데이터 출력 함수
