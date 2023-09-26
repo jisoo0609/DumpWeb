@@ -27,7 +27,7 @@
     <select id="findCarListByOption" parameterType="DailyReportStep4OptionForm" resultType="DailyReportStep4">
         SELECT t.sheetID,
             DATE_FORMAT(t.date, '%m.%d') AS date,
-            t.CarNo, t.carSubmit, t.carSubmitTel, t.chk1,
+            t.CarNo, t.carSubmit, t.carSubmitTel, t.chk1, t.CurrStatus,
             s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup,
             IF(t.date IS NULL, '1999-01-01', t.date) AS date
         FROM tsheet t
@@ -49,8 +49,8 @@
         <if test="tel != '' and tel != '전체'">
             AND t.carSubmitTel = #{tel}
         </if>
-        <if test="state != null">
-            AND t.chk1 = #{state}
+        <if test="state != '' and state != '전체'">
+            AND t.CurrStatus = #{CurrStatus}
         </if>
     </select>
 

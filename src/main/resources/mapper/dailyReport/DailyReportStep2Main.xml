@@ -4,48 +4,47 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep2Mapper">
-
-    <select id="findDailyReportMainByCarSubmitTel" resultType="DailyReportStep2Main">
-        select sheetID, DATE_FORMAT(date, '%y-%m-%d') as date, carSubmit, salesman from tSheet where carSubmitTel = #{userId}
-    </select>
-
-    <select id="findDailyReportMainBySheetID2"  resultType="DailyReportStep2Sub">
-        select fromsite, tosite, item, Qty,Qtyup from tSheet_sub where sheetID2=#{sheetID2}
-    </select>
-
-
     <sql id="res_table">
-        with r1 as (select sheetID
-                    from tSheet
-                    where carSubmitTel =  ${userId}),
-             r2 as (select sheetID2
-                    from tSheet_sub)
+        WITH r1 AS
+                 (
+                 SELECT sheetid, carNo
+                  FROM tsheet
+                  WHERE carsubmittel = ${userId}
+                    AND date BETWEEN ${startDate} AND ${endDate}
+                    ),
+            r2 AS
+            (
+        SELECT *
+        FROM tsheet_sub
+        ),r3 AS(
+        SELECT *
+        FROM r1
+            INNER JOIN r2
+        ON r1.sheetid = r2.sheetid2
+            )
     </sql>
 
-    <select id="findJoinDailyReport" resultType="DailyReportStep2Sub">
-        <include refid="res_table">
-            <property name="userId" value="#{userId}" />
-        </include>
-
-        select tSheet_sub.*, tSheet.CarNo
-        from tSheet_sub
-        inner join tSheet on tSheet_sub.sheetID2 = tSheet.sheetID
-        where tSheet_sub.sheetID2 in (
-        select sheetID2
-        from r1 inner join r2
-        on r1.sheetID = r2.sheetID2
-        )
-    </select>
-
-    <select id="findJoinDailyReportForTotalTransportationCost"  resultType="int">
+    <select id="selectCalSummary" parameterType="DailyReportStep2Option" resultType="DailyReportStep2Summary">
         <include refid="res_table">
             <property name="userId" value="#{userId}"/>
+            <property name="startDate" value="#{option.startDate}"/>
+            <property name="endDate" value="#{option.endDate}"/>
         </include>
-        select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup))
+
+        select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup)) as 'totalTransportationCost',
+        SUM(Qty) as 'totalTrips'
         from tSheet_sub
-        where sheetID2 in ( select sheetID2 from r1 inner join r2
-        on r1.sheetID = r2.sheetID2
-        )
+        where sheetID2 in (select sheetid2 from r3)
+    </select>
+
+    <select id="selectDispatchStatusList" resultType="DailyReportStep2Sub">
+        <include refid="res_table">
+            <property name="userId" value="#{userId}"/>
+            <property name="startDate" value="#{today}"/>
+            <property name="endDate" value="#{today}"/>
+        </include>
+
+        select * from r3
     </select>
 
 </mapper>

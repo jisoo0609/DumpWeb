@@ -2,6 +2,7 @@ package com.dispatch.dump.dailyReportModule.controller;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReport;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep8;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep8OptionForm;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step8Service;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,8 @@ public class Step8Controller {
     }
     @RequestMapping(value = "/receipts", method = RequestMethod.POST)
     @ResponseBody
-    public String searchReceipts(DailyReportStep8 dailyReportStep8){
-        return step8Service.searchReceipts(dailyReportStep8);
+    public String searchReceipts(DailyReportStep8OptionForm dailyReportStep8OptionForm){
+        return step8Service.searchReceipts(dailyReportStep8OptionForm);
     }
 
 
