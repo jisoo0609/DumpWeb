@@ -67,6 +67,7 @@ label[for = searchType]{
 
 .fromDate, .toDate{
     text-align: center;
+    cursor:pointer;
     border: 1px solid #ddd;
     width: 25%;
     height: 35px;
