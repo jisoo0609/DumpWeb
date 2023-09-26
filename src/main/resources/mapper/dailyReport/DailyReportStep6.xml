@@ -6,16 +6,16 @@
 
     <select id="findCarListByOption" parameterType="DailyReportStep6OptionForm" resultType="DailyReportStep6">
         SELECT driveID,
-               drvclub,
-               DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
-               chk2,
-               lastkm,
-               useamt,
-               useOil,
-               drvrem,
-               rependchk,
-               IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
-               repaddkm
+        drvclub,
+        DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
+        chk2,
+        lastkm,
+        useamt,
+        useOil,
+        drvrem,
+        rependchk,
+        IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
+        repaddkm
         FROM   tdrive
         WHERE  carno = #{carNo}
         AND drvdate BETWEEN #{startDate} AND #{endDate}
@@ -31,4 +31,29 @@
             </otherwise>
         </choose>
     </select>
+
+    <update id="cancelCarListByOption">
+        UPDATE tdrive
+        SET chk2 = 0
+        WHERE carno = #{carNo}
+        AND drvdate BETWEEN #{startDate} AND #{endDate}
+        <if test="selectOption != '전체'">
+            AND drvclub = #{selectOption}
+        </if>
+        AND chk2 = 1 <!-- 추가: chk2가 1인 항목만 업데이트 -->
+    </update>
+
+    <update id="PayCarListByOption">
+        UPDATE tdrive
+        SET chk2 = 1
+        WHERE carno = #{carNo}
+        AND drvdate BETWEEN #{startDate} AND #{endDate}
+        <if test="selectOption != '전체'">
+            AND drvclub = #{selectOption}
+        </if>
+        AND chk2 = 0 <!-- 추가: chk2가 1인 항목만 업데이트 -->
+    </update>
+
+
+
 </mapper>

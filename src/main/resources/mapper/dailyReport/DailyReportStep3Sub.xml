@@ -42,25 +42,24 @@
         select sheetID2 from tSheet_sub where sheetsubID=#{sheetsubID}
     </select>
 
+    <!--운행 정보 수정-->
+    <!--조회한 정보가 과거 정보일 때, 수정 But 기존정보와 동일하다면 수정 불가능(and가 아닌 or조건) -->
+    <update id="editByTransportInfo" parameterType="DailyReportStep3Sub">
+        update tSheet_sub
+        <set>
+            fromsite=#{fromsite},
+            tosite=#{tosite},
+            item=#{item},
+            Qty=#{Qty},
+            Rem=#{Rem},
+            Qtyup=#{Qtyup}
+        </set>
+        where sheetsubID=#{sheetsubID}
+    </update>
+
     <!--운행정보 삭제(1건)-->
-    <delete id="deleteByOne" parameterType="int">
+    <delete id="deleteByOne" parameterType="int" >
         delete from tSheet_sub where sheetsubID = #{sheetsubID}
     </delete>
-
-    <!--운행정보 수정(1건)-->
-    <update id="editByTransportInfo" parameterType="int">
-
-        <!--
-        1. 수정할 내용 정리
-        1) 컬럼 전부 수정 X, 컬럼 중에서 일부만 수정해도 되도록
-        2) 변경된 내용이 있을때만, 수정
-        2. 조건 정리
-        로그인 ID : 조회된 내용이 본인 정보를 기준으로 했기 때문에 조건에 따로 넣을 필요X
-        sheetsubID : table에서 선택할때 hidden으로 가져오게 하기->idx를 기준으로 수정
-        결재 : 0이면 삭제 가능, 1이면 삭제 불가능
-
-        *
-        -->
-    </update>
 
 </mapper>
