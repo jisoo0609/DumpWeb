@@ -45,7 +45,7 @@ img[alt = calling_img]{
     margin: 0 0 10px;
 }
 
-label[for = searchType]{
+.search_form_bottom_detail div label{
     display: inline-flex;
     align-items: center;
     justify-content: flex-start;
@@ -67,6 +67,7 @@ label[for = searchType]{
 
 .fromDate, .toDate{
     text-align: center;
+    cursor:pointer;
     border: 1px solid #ddd;
     width: 25%;
     height: 35px;
@@ -98,9 +99,6 @@ input[type = text]{
     text-align: center;
 }
 
-/*.ui-datepicker-year option::after{*/
-/*    content: "년";*/
-/*}*/
 
 .input_select{
     position: relative;
@@ -189,4 +187,9 @@ thead{
 
 .bottom_table td{
     height: 50px;
+}
+
+.red-line-divider{
+    border-top: 2px solid red;
+    border-bottom: 1px solid #ddd;
 }
