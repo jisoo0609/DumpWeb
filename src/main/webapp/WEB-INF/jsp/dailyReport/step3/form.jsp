@@ -99,7 +99,7 @@
                                 <label class="t10">운행일</label>
                                 <span class="content">
                                     <input type="text" class="datepicker input" id="date" name="date" style="width: 80px; margin-left: 75px; text-align: center; padding-left: 0;"
-                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="on" oninput="validateInput4(this)">
+                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="on" oninput="validateInput4(this)" onchange="listData()">
                                 </span>
                             </div>
                             <div class="haveTwo">
@@ -117,22 +117,21 @@
                         </li>
                     </ul>
                 </div>
-            </form>
-        </div>
-
-        <div class="mt10">
-            <div class="title adjustMax359" style="border-bottom: 2px solid #0068b7;">
-                <p class="caption-like">
-                    <span class="v-mid" data-trn-key="TR_MENU_KEY_375">운송 정보 등록</span>
-                </p>
-                <div class="haveTwo">
-                    <button class="btn addBtn" type="button" style="margin: 0 5px 0 auto; width: 100px;" onclick="openPop()">
-                        운송 신규등록
-                    </button>
-                    <%@ include file="popupInput.jsp" %>
-                    <%@ include file="camera.jsp" %>
+                <div class="mt10">
+                    <div class="title adjustMax359" style="border-bottom: 2px solid #0068b7;">
+                        <p class="caption-like">
+                            <span class="v-mid" data-trn-key="TR_MENU_KEY_375">운송 정보 등록</span>
+                        </p>
+                        <div class="haveTwo">
+                            <button class="btn addBtn" type="button" style="margin: 0 5px 0 auto; width: 100px;" onclick="openPop()">
+                                운송 신규등록
+                            </button>
+                            <%@ include file="popupInput.jsp" %>
+                            <%@ include file="camera.jsp" %>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
 
 
