@@ -12,4 +12,8 @@ public interface DailyReportStep4Mapper {
     List<DailyReportStep4> getTotalTransportAmount(String carNo);
 
     List<DailyReportStep4> findCarListByOption(DailyReportStep4OptionForm optionForm);
+
+    void submitOptionM(DailyReportStep4OptionForm optionForm);
+
+    void cancelOptionM(DailyReportStep4OptionForm optionForm);
 }
