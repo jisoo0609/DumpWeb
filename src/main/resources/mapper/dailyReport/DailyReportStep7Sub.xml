@@ -6,12 +6,12 @@
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep7SubMapper">
 
     <!-- 제출처 정보 저장-->
-    <insert id="insertDailyReportStep7" parameterType="DailyReportStep7Sub">
+    <insert id="insertDailyReportStep7sub" parameterType="DailyReportStep7Sub">
         insert into
-        tSheet
-        (fromsite, tosite, item, Qty)
+        tSheet_sub
+        (fromsite, tosite, item, Qty, sheetsubSS2)
         values
-        (#{fromsite}, #{tosite}, #{item}, #{Qty})
+        (#{fromsite}, #{tosite}, #{item}, #{Qty}, #{sheetsubSS2})
 
     </insert>
 

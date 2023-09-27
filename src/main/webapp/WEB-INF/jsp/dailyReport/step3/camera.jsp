@@ -59,6 +59,7 @@
     <input
             id="cameraFileInput"
             type="file"
+            name="imageFile"
             accept="image/*"
             capture="environment"
             style="display: none;"

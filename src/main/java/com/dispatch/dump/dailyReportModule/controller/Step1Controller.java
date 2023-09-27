@@ -1,10 +1,7 @@
 package com.dispatch.dump.dailyReportModule.controller;
 
 
-import com.dispatch.dump.commonModule.db.dto.DailyReport;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Main;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Sub;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep2Sub;
+import com.dispatch.dump.commonModule.db.dto.*;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step1Service;
 import lombok.RequiredArgsConstructor;
@@ -20,72 +17,89 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Step1Controller {
 
-    private final DailyReportService dailyReportService;
+
     private final Step1Service step1Service;
 
-    //tsheet_sub 조회
     @RequestMapping(value = "/driver", method = RequestMethod.GET)
-    public String step1(Model model, DailyReport dailyReport) {
-
-        List<DailyReportStep1Sub> subList = step1Service.getSub();
-        model.addAttribute("subList", subList);
-
-
-
-
-        // 총 운반 금액을 모델에 추가
-        double totalTransportationCost = subList.stream()
-                .mapToDouble(sub -> sub.getQty() * sub.getQtyup())
-                .sum();
-        model.addAttribute("totalTransportationCost", totalTransportationCost);
-        // 총 운행 대수를 계산하고 모델에 추가
-        int totalQty = subList.stream()
-                .mapToInt(sub -> (int) sub.getQty())
-                .sum();
-        model.addAttribute("totalQty", totalQty);
-
-        List<DailyReportStep1Sub> mainList = step1Service.getMain();
-        model.addAttribute("list", mainList);
-
-        return "/dailyReport/step1/driver";
-
-    }
-
-
-
-/*    @GetMapping("/driver")
-    public ModelAndView listMain(){
-        ModelAndView modelAndView = new ModelAndView ("/dailyReport/step1/driver");
-        modelAndView.addObject("list",step1Service.getMain());
-        return modelAndView;
-    }
-    //tsheet 조회*/
-
-    @GetMapping("/driver/main")
-    public ModelAndView listMain(){
-        ModelAndView modelAndView = new ModelAndView ("/dailyReport/step1/driver");
-        modelAndView.addObject("list",step1Service.getMain());
-        return modelAndView;
-    }
-
-/*
-    @RequestMapping(value = "/step1/getList", method = RequestMethod.GET)
-    @ModelAttribute("list")
-    public List<DailyReportStep1Sub> getList() {
-        List<DailyReportStep1Sub> list = step1Service.getSub();
-        return list;
-    }
-
-*/
-
-
-
-   /* @RequestMapping(value = "/driver", method = RequestMethod.GET)
-    public String step1(Model model, DailyReport dailyReport) {
-        dailyReportService.list(model, dailyReport);
+    public String step1() {
         return "/dailyReport/step1/driver";
     }
-*/
+
+    @RequestMapping(value = "/driver/ajax/total", method = RequestMethod.POST)
+    @ResponseBody
+    public DailyReportStep1Total tSheetSubTotal(DailyReportStep1Option option) {
+        return step1Service.findCalTotal(option);
+    }
+
+    @RequestMapping(value = "/driver/ajax/submitlist", method = RequestMethod.GET)
+    @ResponseBody
+    public List<DailyReportStep1Sub> dispatchSubmitList() {
+        return step1Service.findDispatchSubmitList();
+    }
+
+    @RequestMapping(value = "/driver/ajax/tdrivelist", method = RequestMethod.GET)
+    @ResponseBody
+    public List<DailyReportStep1Tdrive> dispatchTdriveList() {
+
+        return step1Service.findDispatchTdriveList();
+    }
+
+
+
+
+
+
+//    @RequestMapping(value = "/driver", method = RequestMethod.GET)
+//
+//    public String step1(Model model, DailyReport dailyReport) {
+//        //tsheet_sub 조회
+//
+//        List<DailyReportStep1Sub> subList = step1Service.getSub();
+//        model.addAttribute("subList", subList);
+//
+//
+//
+//
+//        // 총 운반 금액을 모델에 추가
+//        double totalTransportationCost = subList.stream()
+//                .mapToDouble(sub -> sub.getQty() * sub.getQtyup())
+//                .sum();
+//        model.addAttribute("totalTransportationCost", totalTransportationCost);
+//        // 총 운행 대수를 계산하고 모델에 추가
+//        int totalQty = subList.stream()
+//                .mapToInt(sub -> (int) sub.getQty())
+//                .sum();
+//        model.addAttribute("totalQty", totalQty);
+//        //tsheet조회
+//
+//        List<DailyReportStep1Sub> mainList = step1Service.getMain();
+//        model.addAttribute("mainList", mainList);
+//
+//        List<DailyReportStep1Tdrive> tdriveList = step1Service.getTdrive();
+//        model.addAttribute("tdriveList", tdriveList);
+//
+//        return "/dailyReport/step1/driver";
+//
+//    }
+//
+//
+//
+//
+//    //tsheet 조회*/
+//
+//    @GetMapping("/driver/main")
+//    public ModelAndView listMain(){
+//        ModelAndView modelAndView = new ModelAndView ("/dailyReport/step1/driver");
+//        modelAndView.addObject("mainList",step1Service.getMain());
+//        return modelAndView;
+//    }
+//    @GetMapping("/driver/tdrive")
+//    public ModelAndView getTdrive(){
+//        ModelAndView modelAndView = new ModelAndView ("/dailyReport/step1/driver");
+//        modelAndView.addObject("tdriveList",step1Service.getTdrive());
+//        return modelAndView;
+//    }
+
 
 
 
@@ -94,3 +108,6 @@ public class Step1Controller {
 
 
 }
+
+
+
