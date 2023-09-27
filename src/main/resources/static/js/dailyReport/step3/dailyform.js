@@ -8,6 +8,7 @@ $.emptyRow = function() {
 
 /*제출처, 운송정보 저장*/
 $.save = function() {
+
     var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
         url: "/dailyReport/workspace/ajax/save",
