@@ -67,14 +67,35 @@ function openPop() {
     }
     if(openable1 & openable2& openable3 & openable4 === true) {
         popup.style.display = 'flex';
+        saved.forEach(function(elem){
+            elem.classList.add('hidden');
+        })
+        unsaved.forEach(function(elem) {
+            initialize(elem)
+        });
     } else {
         alert("입력된 정보를 다시 확인해주세요");
     }
 }
 
+const saved = popup.querySelectorAll('.saved')
+const unsaved = popup.querySelectorAll('.unsaved') //신규저장
+
+function initialize(element) {
+    if (element.classList.contains('hidden')) {
+        element.classList.remove('hidden');
+    }
+}
 
 function closePop() {
+    $.emptyRow();
     popup.style.display = 'none';
+    saved.forEach(function(elem) {
+        initialize(elem)
+    });
+    unsaved.forEach(function(elem) {
+        initialize(elem)
+    });
 }
 
 
@@ -198,7 +219,6 @@ function fillPop(event) {
     var td4 = clickedRow.querySelector('td:nth-child(4)').textContent;
     var td5 = clickedRow.querySelector('td:nth-child(5)').textContent;
     var td6 = clickedRow.querySelector('td:nth-child(6)').textContent;
-
     // Fill the input fields in the popup with these values
     document.getElementById('fromsite').value = td1;
     document.getElementById('tosite').value = td2;
@@ -210,6 +230,12 @@ function fillPop(event) {
 
     // Open the popup
     openPop();
+    unsaved.forEach(function(elem){
+        elem.classList.add('hidden');
+    })
+    saved.forEach(function(elem) {
+        initialize(elem)
+    });
 }
 
 
