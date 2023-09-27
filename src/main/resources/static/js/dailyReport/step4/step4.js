@@ -118,7 +118,8 @@ function clickListRedirect(){
         let sheetID = event.target.parentElement.getAttribute("data-sheetID");
 
         // GET방식의 단순한 데이터 전달 방법
-        let url = `/dailyReport/form?id=${sheetID}`;
+        let url = "/dailyReport/form" + "?sheetID=" + sheetID;
+
 
         window.location.href = url;
     });
