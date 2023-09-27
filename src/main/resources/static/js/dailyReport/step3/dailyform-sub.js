@@ -185,6 +185,10 @@ function submitCheck() {
     approved();
 }
 
+
+/* fillPop으로 인풋팝업이 뜰때는 버튼이 바뀌어야 한다. */
+const filledInput = document.querySelectorAll('.filledInput');
+const newInput = document.querySelectorAll('.emptyInput');
 function fillPop(event) {
     var clicked = event.currentTarget.id;
     const clickedRow = document.getElementById(clicked);
