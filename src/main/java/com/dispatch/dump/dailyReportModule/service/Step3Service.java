@@ -46,10 +46,16 @@ public class Step3Service {
             System.out.println("find main Data.");
             dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
             saveTransPortInfo(dailyReportStep3Sub);
+
         }else{
             System.out.println("not found main Data.");
             dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+            System.out.println("도달.");
             dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
+            System.out.println("carsubmit는?"+dailyReportStep3Main.getCarSubmit());
+            System.out.println("carsubmitTel는?"+dailyReportStep3Main.getCarSubmitTel());
+            System.out.println("salesman는?"+dailyReportStep3Main.getSalesman());
+
 
             if (dailyReportStep3Main.getImageFile() != null) {
                 fileUtil.fileUpload(dailyReportStep3Main.getImageFile());
