@@ -184,7 +184,7 @@ textarea {
 		gap: 5px;
 	}
 
-	input#datepicker {
+	input#date {
 		height: 25px;
 		width: 85%;
 	}
@@ -456,7 +456,7 @@ textarea {
 		gap: 5px;
 	}
 
-	input#datepicker {
+	input#date {
 		height: 25px;
 		width: 80%;
 	}
@@ -995,7 +995,8 @@ textarea {
 		gap: 5px;
 	}
 
-	input#datepicker {
+	input#date
+	 {
 		height: 25px;
 		width: 85%;
 	}

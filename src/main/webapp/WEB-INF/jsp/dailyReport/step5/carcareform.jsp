@@ -73,9 +73,9 @@
 
     <div>
         <button class="openBtn" data-popName="drvpop1">삭제</button>
-        <button class="openBtn" data-popName="drvpop2">저장</button>
-        <button class="openBtn" data-popName="drvpop3">입력취소</button>
-        <button class="openBtn" data-popName="drvpop4">이전화면</button>
+        <button onclick="save()">저장</button>
+        <button class="openBtn" data-popName="drvpop2">입력취소</button>
+        <button class="openBtn" data-popName="drvpop3">이전화면</button>
     </div>
 
     <div id="drvpop1" class="drvPopup1">
@@ -86,15 +86,7 @@
         </div>
     </div>
 
-    <div id="drvpop2" class="drvPopup2">
-        <div>
-            <span class="material-symbols-outlined closeBtn">close</span>
-            <p>저장 하시겠습니까?</p>
-            <input type="button" value="확인" onclick="save()">
-        </div>
-    </div>
-
-    <div id="drvpop3" class="drvPopup3">
+    <div id="drvpop2" class="drvPopup3">
         <div>
             <span class="material-symbols-outlined closeBtn">close</span>
             <p>입력값을 초기화 하시겠습니까?</p>
@@ -102,7 +94,7 @@
         </div>
     </div>
 
-    <div id="drvpop4" class="drvPopup4">
+    <div id="drvpop3" class="drvPopup3">
             <div>
                 <span class="material-symbols-outlined closeBtn">close</span>
                 <p>이전 화면으로 돌아가시겠습니까?</p>

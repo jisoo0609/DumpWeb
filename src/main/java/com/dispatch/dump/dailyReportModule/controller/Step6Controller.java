@@ -6,11 +6,14 @@ import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step6Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/dailyReport")
@@ -29,4 +32,17 @@ public class Step6Controller {
     public List<DailyReportStep6> searchDailyReport(DailyReportStep6OptionForm optionForm) {
         return step6Service.getCarListByOption(optionForm);
     }
+
+    @RequestMapping(value = "/ajax/cancelcarlist", method = RequestMethod.POST)
+    @ResponseBody
+    public void cancelCarList(@RequestBody DailyReportStep6OptionForm optionForm) {
+        step6Service.cancelCarListByOption(optionForm);
+    }
+
+    @RequestMapping(value = "/ajax/Paycarlist", method = RequestMethod.POST)
+    @ResponseBody
+    public void PayCarList(@RequestBody DailyReportStep6OptionForm optionForm) {
+        step6Service.PayCarListByOption(optionForm);
+    }
+
 }

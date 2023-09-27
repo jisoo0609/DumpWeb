@@ -15,12 +15,10 @@ public class DailyReportStep1Sub {
     private String tosite;          // LINE :: 하차지
     private int sheetsubSS;          // LINE :: 회원 idx
 
-    //tSheet 테이블
 
-    public String carSubmit;      //Line :: 제출처
-    private String date;          //Line :: 운행일
-    double totalTransportationCost; //Line :: 운행일
-    int totalQty;                   //Line :: 총운행대수
+    // tSheet테이블 : 차량번호
+    public String CarNo;
+
 
 
 }
