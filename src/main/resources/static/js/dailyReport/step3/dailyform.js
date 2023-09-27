@@ -1,3 +1,35 @@
+
+document.addEventListener("DOMContentLoaded", function () {
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+
+    let sheetID = params.get("sheetID");
+    console.log(sheetID);
+
+    if (sheetID !== null) {
+        getSheetIDDataByParams(sheetID);
+    }
+
+    //clickListThAndRedirect();//step4에 있음
+});
+
+
+function getSheetIDDataByParams(sheetID) {
+    $.ajax({
+        url: "/dailyReport/form/ajax/details",
+        type: "POST",
+        data: {sheetID: sheetID},
+        success: function (data) {
+
+            document.getElementById('carSubmit').value=data.carSubmit;
+            document.getElementById('carSubmitTel').value=data.carSubmitTel;
+            document.getElementById('salesman').value=data.salesman;
+            $.list();
+        }
+    })
+}
+
+
 $.emptyRow = function() {
     const popup = document.getElementById("popup");
     const popinputs = popup.querySelectorAll('.input');
@@ -62,11 +94,10 @@ function showTransportList(data){
             html += '   <td>' + subData.qty + '</td>';
             html += '   <td>' + subData.rem + '</td>';
             html += '   <td style="display: none;">' + subData.sheetsubID + '</td>';
-            //sheetsubID = subData.sheetsubID;
+            html += '   <td style="display: none;">' + subData. qtyup + '</td>';
             html += '</tr>';
         }
         html += '</table>';
-            //document.getElementById('sheetsubID').value = subData.sheetsubID;
     }
         // 데이터를 표시할 위치에 추가
         $('#transportContainer').html(html);

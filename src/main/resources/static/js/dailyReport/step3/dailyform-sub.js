@@ -154,7 +154,6 @@ popCheckbox.addEventListener("change", function() {
 /* 전체 삭제 버튼 누르면 인풋 비우기 */
 function clearInputs() {
     const inputs = canvas.getElementsByTagName("input");
-
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = ""; // Set the value of each input field to an empty string
     }
@@ -219,6 +218,8 @@ function fillPop(event) {
     var td4 = clickedRow.querySelector('td:nth-child(4)').textContent;
     var td5 = clickedRow.querySelector('td:nth-child(5)').textContent;
     var td6 = clickedRow.querySelector('td:nth-child(6)').textContent;
+    var td7 = clickedRow.querySelector('td:nth-child(7)').textContent;
+
     // Fill the input fields in the popup with these values
     document.getElementById('fromsite').value = td1;
     document.getElementById('tosite').value = td2;
@@ -226,7 +227,7 @@ function fillPop(event) {
     document.getElementById('Qty').value = td4;
     document.getElementById('Rem').value = td5;
     document.getElementById('sheetsubID').value = td6;
-
+    document.getElementById('Qtyup').value = td7;
 
     // Open the popup
     openPop();
