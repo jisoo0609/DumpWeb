@@ -3,10 +3,13 @@ var results;
 
 /*제출처, 운송정보 저장*/
 $.save = function() {
+    var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
         url: "/dailyReport/workspace/ajax/save",
         type: "POST",
-        data: $("[name=frm]").serialize(),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function (data) {
             alert("저장이 완료되었습니다.");
 
@@ -25,10 +28,13 @@ $.save = function() {
 }
 
 $.list = function() {
+    var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
         url: "/dailyReport/workspace/ajax/list",
         type: "POST",
-        data: $("[name=frm]").serialize(),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function (data) {
             showTransportList(data);
         },
@@ -55,9 +61,11 @@ function showTransportList(data){
             html += '   <td>' + subData.qty + '</td>';
             html += '   <td>' + subData.rem + '</td>';
             html += '   <td style="display: none;">' + subData.sheetsubID + '</td>';
+            //sheetsubID = subData.sheetsubID;
             html += '</tr>';
         }
         html += '</table>';
+            //document.getElementById('sheetsubID').value = subData.sheetsubID;
     }
         // 데이터를 표시할 위치에 추가
         $('#transportContainer').html(html);
