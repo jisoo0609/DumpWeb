@@ -38,7 +38,7 @@ function printList(searchResultData) {
         const row = document.createElement("tr");
         let order = [
             data.drvDate, data.drvClub, // 정렬 기준.
-            data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem, (data.rependchk === true ? 'O' : 'X'),
+            data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem, (data.rependchk === true ? 'X' : 'O'),
             data.chk2, data.useOil, data.rependdate, data.repaddkm // hidden data
         ];
 

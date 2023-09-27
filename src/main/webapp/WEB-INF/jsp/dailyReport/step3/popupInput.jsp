@@ -79,7 +79,9 @@
             </form>
         </div>
         <div class="btn-area">
+
             <%-- 신규저장 --%>
+
             <button class="btn btn-white btn-popup unsaved" type="button" onclick="$.emptyRow();" >
                 취소
             </button>

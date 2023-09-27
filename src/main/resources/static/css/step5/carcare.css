@@ -3,7 +3,7 @@
     display: none;
 }
 .DrvSection form fieldset .bdnUl{
-        border: none; padding-top: 0; display: none;
+        border: none; padding-top: 0; display: block;
     }
 /* ! galaxy fold size */
 @media screen and (max-width: 280px){
@@ -71,7 +71,7 @@
         padding-left: 0px;
     }
     .DrvSection form fieldset ul li .drvInputSpan3{
-        padding-left: 52px
+        padding-left: 23px
     }
     .DrvSection form fieldset ul li textarea{
         width: 57.5%; font-size: 12px;
@@ -229,7 +229,7 @@
         padding-left: 10px;
     }
     .DrvSection form fieldset ul li .drvInputSpan3{
-        padding-left: 65px
+        padding-left: 37px
     }
     .DrvSection form fieldset ul li textarea{
         width: 96%; font-size: 12px;

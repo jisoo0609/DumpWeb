@@ -219,6 +219,7 @@ function fillPop(event) {
     var td5 = clickedRow.querySelector('td:nth-child(5)').textContent;
     var td6 = clickedRow.querySelector('td:nth-child(6)').textContent;
     var td7 = clickedRow.querySelector('td:nth-child(7)').textContent;
+
     // Fill the input fields in the popup with these values
     document.getElementById('fromsite').value = td1;
     document.getElementById('tosite').value = td2;

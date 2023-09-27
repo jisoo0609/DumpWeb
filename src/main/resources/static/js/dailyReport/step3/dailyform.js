@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
@@ -28,6 +29,7 @@ function getSheetIDDataByParams(sheetID) {
     })
 }
 
+
 $.emptyRow = function() {
     const popup = document.getElementById("popup");
     const popinputs = popup.querySelectorAll('.input');
@@ -38,6 +40,7 @@ $.emptyRow = function() {
 
 /*제출처, 운송정보 저장*/
 $.save = function() {
+
     var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
         url: "/dailyReport/workspace/ajax/save",
@@ -235,6 +238,7 @@ $.deleteRow = function() {
       type: "GET",
       data: { sheetsubID: sheetsubID },
       success: function (data) {
+        $.emptyRow();
         $.list();
       },
       error: function(error) {
