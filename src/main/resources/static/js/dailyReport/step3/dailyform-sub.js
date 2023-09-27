@@ -28,6 +28,7 @@ function validateInput1(input) {
         openable1 = false;
     } else {
         openable1 = true;
+        listData()
     }
 }
 
@@ -36,6 +37,7 @@ function validateInput2(input) {
         openable2 = false;
     } else {
         openable2 = true;
+        listData()
     }
 }
 
@@ -44,6 +46,7 @@ function validateInput3(input) {
     if (phoneNumberPattern.test(input.value)) {
         input.style.borderColor = '';
         openable3 = true;
+        listData()
     } else {
         input.style.borderColor = 'red';
         openable3 = false;
@@ -60,6 +63,7 @@ function openPop() {
         openable4 = false;
     } else {
         openable4 = true;
+        listData()
     }
     if(openable1 & openable2& openable3 & openable4 === true) {
         popup.style.display = 'flex';
@@ -203,3 +207,12 @@ function fillPop(event) {
     // Open the popup
     openPop();
 }
+
+
+function listData() {
+    if(openable1 & openable2& openable3 & openable4 === true) {
+        $.list();
+    }
+}
+
+
