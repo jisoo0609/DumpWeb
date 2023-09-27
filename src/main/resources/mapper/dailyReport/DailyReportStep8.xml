@@ -5,89 +5,72 @@
 
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep8Mapper">
 
+    <sql id="res_table">
+        WITH r1 AS
+            (
+                SELECT *
+                FROM tsheet
+                WHERE carsubmittel = ${userId}
+                  AND date BETWEEN ${startDate} AND ${endDate}
+            ),
+            r2 AS
+           (
+        SELECT *
+        FROM tsheet_sub
+            ),r3 AS(
+        SELECT *
+        FROM r1
+            INNER JOIN r2
+        ON r1.sheetid = r2.sheetid2
+            )
+    </sql>
 
-    <select id="getAllReceipts" resultType="DailyReportStep8">
-        SELECT t.sheetID,
-               DATE_FORMAT(t.date, '%m.%d') as date,
-    t.CarNo,
-    s.fromsite,
-    s.tosite,
-    s.item,
-    s.Qty,
-    s.Qtyup
-        FROM tsheet t
-            JOIN tSheet_sub s
-        ON t.sheetID = s.sheetID2
-        WHERE t.carSubmitTel = #{carSubmitTel}
-        order by date desc;
 
+    <select id="selectCarListByOption" parameterType="DailyReportStep8OptionForm" resultType="DailyReportStep8">
+        <include refid="res_table">
+            <property name="userId" value="#{carSubmitTel}"/>
+            <property name="startDate" value="#{startDate}"/>
+            <property name="endDate" value="#{endDate}"/>
+        </include>
+
+        select
+        sheetsubID,
+        DATE_FORMAT(date,'%m.%d') as 'date',
+        fromsite,
+        tosite,
+        CarNo,
+        item,
+        Qty,
+        Qtyup
+        from r3
+        <choose>
+            <when test="fromsite !='' ">
+                WHERE fromesite = #{fromesite}
+            </when>
+            <when test="tosite!= '' ">
+                WHERE tosite = #{tosite}
+            </when>
+            <when test="item != '' ">
+                WHERE item = #{item}
+            </when>
+            <when test="carNo !='' ">
+                WHERE carNo = #{carNo}
+            </when>
+        </choose>
+        <choose>
+            <when test="sortingCriteria == '0-date'">
+                ORDER BY date DESC
+            </when>
+            <when test="sortingCriteria == '1-carNo'">
+                ORDER BY carNo ASC
+            </when>
+            <when test="sortingCriteria == '2-item'">
+                ORDER BY item ASC
+            </when>
+            <when test="sortingCriteria == '3-qtyup'">
+                ORDER BY Qtyup ASC
+            </when>
+        </choose>
     </select>
 
-
-    <select id="receiptsSearchOrderByDate" parameterType="DailyReportStep8OptionForm"
-            resultType="DailyReportStep8">
-        SELECT t.sheetID,
-        DATE_FORMAT(t.date, '%m.%d') as date,
-        t.CarNo,
-        s.fromsite,
-        s.tosite,
-        s.item,
-        s.Qty,
-        s.Qtyup
-        FROM tsheet t
-        JOIN tSheet_sub s
-        ON t.sheetID = s.sheetID2
-        WHERE 1=1
-        AND
-        t.carSubmitTel = #{carSubmitTel}
-        AND
-        date BETWEEN #{searchStartDate} and #{searchEndDate}
-        <if test="CarNo != ''">
-            AND t.CarNo = #{CarNo}
-        </if>
-        <if test="fromsite != ''">
-            AND s.fromsite = #{fromsite}
-        </if>
-        <if test="tosite != ''">
-            AND s.tosite = #{tosite}
-        </if>
-        <if test="item != ''">
-            AND s.item = #{item}
-        </if>
-        order by date desc, t.CarNo asc;
-    </select>
-
-
-    <select id="receiptsSearchOrderByCarNo" parameterType="DailyReportStep8OptionForm"
-            resultType="DailyReportStep8">
-        SELECT t.sheetID,
-        DATE_FORMAT(t.date, '%m.%d') as date,
-        t.CarNo,
-        s.fromsite,
-        s.tosite,
-        s.item,
-        s.Qty,
-        s.Qtyup
-        FROM tsheet t
-        JOIN tSheet_sub s
-        ON t.sheetID = s.sheetID2
-        WHERE 1=1
-        AND
-        t.carSubmitTel = #{carSubmitTel}
-        AND
-        date BETWEEN #{searchStartDate} and #{searchEndDate}
-        <if test="CarNo != ''">
-            AND t.CarNo = #{CarNo}
-        </if>
-        <if test="fromsite != ''">
-            AND s.fromsite = #{fromsite}
-        </if>
-        <if test="tosite != ''">
-            AND s.tosite = #{tosite}
-        </if>
-        <if test="item != ''">
-            AND s.item = #{item}
-        </if>
-        order by t.CarNo asc, date asc;
-    </select>
 </mapper>

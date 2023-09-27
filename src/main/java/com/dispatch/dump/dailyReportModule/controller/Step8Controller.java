@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/dailyReport")
 @RequiredArgsConstructor
@@ -19,34 +21,14 @@ public class Step8Controller {
 
 
     @RequestMapping(value = "/receipts", method = RequestMethod.GET)
-    public String step8(Model model, DailyReportStep8 dailyReportStep8) {
-        model.addAttribute("receiptsList", step8Service.getAllReceipts());
+    public String step8() {
         return "/dailyReport/step8/receipts";
     }
-    @RequestMapping(value = "/receipts", method = RequestMethod.POST)
+    @RequestMapping(value = "/receipts/ajax/list", method = RequestMethod.POST)
     @ResponseBody
-    public String searchReceipts(DailyReportStep8OptionForm dailyReportStep8OptionForm){
-        return step8Service.searchReceipts(dailyReportStep8OptionForm);
+    public List<DailyReportStep8> receiptsList(DailyReportStep8OptionForm option){
+        return step8Service.searchReceiptList(option);
     }
-
-
-
-
-    //    @GetMapping("/receipts")
-//    public ModelAndView getAllReceipts(DailyReportStep8 dailyReportStep8) {
-//        ModelAndView modelAndView = new ModelAndView("/dailyReport/step8/receipts");
-////        List<DailyReportStep8> receiptsList = step8Service.getReceipts();
-//
-//        modelAndView.addObject("receiptsList", step8Service.getAllReceipts(dailyReportStep8));
-//        return modelAndView;
-//    }
-
-//    @RequestMapping(value = "/receipts", method = RequestMethod.GET)
-//    @ModelAttribute("receiptsList")
-//    public List<DailyReportStep8Sub> getReceiptsList() {
-//        List<DailyReportStep8Sub> receiptsList = step8Service.getSummary();
-//        return receiptsList;
-//    }
 
 
 }
