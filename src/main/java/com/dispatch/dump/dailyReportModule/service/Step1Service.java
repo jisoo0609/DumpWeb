@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,39 @@ import java.util.List;
 public class Step1Service {
     private final DailyReportStep1Mapper dailyReportStep1Mapper;
     private final CommonUtil commonUtil;
+
+
+    //login 정보 가져오기
+    public Login getSessionLoginData() {
+        return (Login) commonUtil.getSession().getAttribute("loginInfo");
+    }
+
+    public String getToday(){
+        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+
+        return formatter.format(date);
+    }
+
+    public DailyReportStep1Total findCalTotal(DailyReportStep1Option option) {
+        return dailyReportStep1Mapper.selectCalTotal(option, getSessionLoginData().getUserId());
+    }
+
+    public List<DailyReportStep1Sub> findDispatchSubmitList() {
+        System.out.println( dailyReportStep1Mapper.selectDispatchSubmitList(getSessionLoginData().getUserId(),getToday()));
+        return dailyReportStep1Mapper.selectDispatchSubmitList(getSessionLoginData().getUserId(),getToday());
+    }
+
+    public List<DailyReportStep1Tdrive> findDispatchTdriveList() {
+        System.out.println( dailyReportStep1Mapper.selectDispatchTdriveList(getSessionLoginData().getUserId(),getToday()));
+        return dailyReportStep1Mapper.selectDispatchTdriveList(getSessionLoginData().getUserId(),getToday());
+    }
+
+
+
+
+
+/*
 
     public List<DailyReportStep1Sub> getSub(){
         //login 정보 받아오기
@@ -72,6 +106,7 @@ public class Step1Service {
 
         return tDrive;
     }
+*/
 
 }
 
