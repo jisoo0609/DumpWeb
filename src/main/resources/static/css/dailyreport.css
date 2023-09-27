@@ -283,3 +283,7 @@
 .select ul li:hover {
   background: #ddd;
 }
+
+#hiddenPart{
+    display: none;
+}
