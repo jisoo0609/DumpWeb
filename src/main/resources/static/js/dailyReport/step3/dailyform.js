@@ -6,17 +6,17 @@ $.save = function() {
     $.ajax({
         url: "/dailyReport/workspace/ajax/save",
         type: "POST",
-        data: $("[name=frm]").serialize(),
+        data: $("[name=entry_form]").serialize(),
         success: function (data) {
             alert("저장이 완료되었습니다.");
 
             $.list();
 
-            const popup = document.getElementById("popup");
-            const popinputs = popup.querySelectorAll('.input');
-            for (let i = 0; i < popinputs.length; i++) {
-                popinputs[i].value = ""; // Set the value of each input field to an empty string
-            }
+//            const popup = document.getElementById("popup");
+//            const popinputs = popup.querySelectorAll('.input');
+//            for (let i = 0; i < popinputs.length; i++) {
+//                popinputs[i].value = ""; // Set the value of each input field to an empty string
+//            }
         },
         error: function(xhr, status, error) {
              alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
@@ -25,10 +25,13 @@ $.save = function() {
 }
 
 $.list = function() {
+    var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
         url: "/dailyReport/workspace/ajax/list",
         type: "POST",
-        data: $("[name=frm]").serialize(),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function (data) {
             showTransportList(data);
         },

@@ -14,7 +14,7 @@ public class DailyReportStep7Sub {
     private double Qty;              // LINE :: 대수
     private double Qtyup;            // LINE :: 단가
     private String Rem;              // LINE :: 비고
-    //private int sheetsubSS2;          // LINE :: 회원 idx
+    private int sheetsubSS2;          // LINE :: 회원 idx
 
 
 }

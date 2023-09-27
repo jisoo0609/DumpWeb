@@ -1,26 +1,20 @@
-/* 삭제 버튼 클릭 이벤트를 처리 */
-document.querySelector(".opBtn[data-popName='golPop1']").addEventListener("click", () => {
-  // 테이블 본문 요소를 찾습니다.
-  const tableBody = document.querySelector("table tbody");
-
-  // 테이블 본문 내용을 초기화합니다.
-  tableBody.innerHTML = "";
-
-  // 검색 결과 텍스트 초기화
-  // const resultSearch = document.querySelector(".result_search");
-  // resultSearch.innerHTML = "";
-});
-
 // 저장 버튼 클릭 이벤트 처리
-document.querySelector(".opBtn[data-popName='golPop3']").addEventListener("click", () => {
-  // 팝업 창을 띄우는 코드
-  const golPop3 = document.querySelector("#golPop3");
-  golPop3.style.display = "block";
-});
+//document.querySelector(".opBtn[data-popName='golPop3']").addEventListener("click", () => {
+//  // 팝업 창을 띄우는 코드
+//  const golPop3 = document.querySelector("#golPop3");
+//  golPop3.style.display = "block";
+//});
+
+function clickSaveBtn(){
+  const golPop = document.querySelector("#golPop3");
+  golPop.style.display = "flex";
+}
 
 /* js에서 confirmBtn(확인)이 눌릴 수 있도록 처리 */
 function clickConfirmButton(){
-  const confirmButton = document.querySelector("#golPop3 input[value='확인']");
+  // 팝업 창을 숨기는 코드
+  const golPop3 = document.querySelector("#golPop3");
+  golPop3.style.display = "none";
   bindList();
 }
 
@@ -31,7 +25,8 @@ function bindList() {
       type: "POST",
       data: $("[name=golForm]").serialize(),
       success: function (data) {
-          addTableRow(data);
+//          addTableRow(data);
+          alert("저장이 완료되었습니다.");
       }
   })
 }
@@ -90,3 +85,17 @@ function fetchAndDisplayData() {
       }
   });
 }
+//
+//const checkbox = document.getElementById("chk1");
+//
+//// 체크박스 클릭 이벤트 리스너 추가
+//checkbox.addEventListener("change", function () {
+//    var resultElement = document.getElementById("result");
+//    if (checkbox.checked) {
+//        resultElement.textContent = "1";
+//        console.log('1'); // 체크됐을 때 1 출력
+//    } else {
+//        resultElement.textContent = "0";
+//        console.log('0'); // 체크 해제됐을 때 0 출력
+//    }
+//});

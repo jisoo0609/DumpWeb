@@ -7,6 +7,8 @@ import com.dispatch.dump.commonModule.db.mapper.DailyReportStep3MainMapper;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep3SubMapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
 import javax.servlet.http.HttpSession;
+
+import com.dispatch.dump.commonModule.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +25,7 @@ public class Step3Service {
     private final DailyReportStep3MainMapper dailyReportStep3MainMapper;
     private final DailyReportStep3SubMapper dailyReportStep3SubMapper;
     private final CommonUtil commonUtil;
+    private final FileUtil fileUtil;
 
     public Login getSessionLoginData() {
         return (Login) commonUtil.getSession().getAttribute("loginInfo");
@@ -40,12 +43,17 @@ public class Step3Service {
 
         DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
         if(null != carSubmitResult){
+            System.out.println("find main Data.");
             dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
             saveTransPortInfo(dailyReportStep3Sub);
         }else{
+            System.out.println("not found main Data.");
             dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
             dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
 
+            if (dailyReportStep3Main.getImageFile() != null) {
+                fileUtil.fileUpload(dailyReportStep3Main.getImageFile());
+            }
             dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
             saveTransPortInfo(dailyReportStep3Sub);
         }
