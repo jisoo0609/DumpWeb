@@ -28,6 +28,7 @@ function validateInput1(input) {
         openable1 = false;
     } else {
         openable1 = true;
+        listData()
     }
 }
 
@@ -36,6 +37,7 @@ function validateInput2(input) {
         openable2 = false;
     } else {
         openable2 = true;
+        listData()
     }
 }
 
@@ -44,6 +46,7 @@ function validateInput3(input) {
     if (phoneNumberPattern.test(input.value)) {
         input.style.borderColor = '';
         openable3 = true;
+        listData()
     } else {
         input.style.borderColor = 'red';
         openable3 = false;
@@ -60,6 +63,7 @@ function openPop() {
         openable4 = false;
     } else {
         openable4 = true;
+        listData()
     }
     if(openable1 & openable2& openable3 & openable4 === true) {
         popup.style.display = 'flex';
@@ -181,6 +185,10 @@ function submitCheck() {
     approved();
 }
 
+
+/* fillPop으로 인풋팝업이 뜰때는 버튼이 바뀌어야 한다. */
+const filledInput = document.querySelectorAll('.filledInput');
+const newInput = document.querySelectorAll('.emptyInput');
 function fillPop(event) {
     var clicked = event.currentTarget.id;
     const clickedRow = document.getElementById(clicked);
@@ -203,3 +211,12 @@ function fillPop(event) {
     // Open the popup
     openPop();
 }
+
+
+function listData() {
+    if(openable1 & openable2& openable3 & openable4 === true) {
+        $.list();
+    }
+}
+
+
