@@ -53,7 +53,7 @@
           <ul>
             <li>
               <label class="golLabel" for="date">주문일</label>
-              <span class="golInputSpan"><input id="date"></span>
+              <span class="golInputSpan"><input id="date" name="date"></span>
               <input class="golSearch" type="button" value="조회">
               <div class="checkbox">
                 <label class="check67" for="chk1">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
@@ -61,12 +61,12 @@
               </div>
             </li>
             <li>
-              <label class="golLabel" for="fromSite"> 상차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="fromSite" name="fromSite" type="text" placeholder="상차지"></span>
+              <label class="golLabel" for="fromsite"> 상차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <span class="golInputSpan"><input class="golIn" id="fromsite" name="fromsite" type="text" placeholder="상차지"></span>
             </li>
             <li>
-              <label class="golLabel" for="toSite"> 하차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="toSite" name="toSite" type="text" placeholder="하차지"></span>
+              <label class="golLabel" for="tosite"> 하차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
+              <span class="golInputSpan"><input class="golIn" id="tosite" name="tosite" type="text" placeholder="하차지"></span>
             </li>
             <li>
               <label class="golLabel" for="item"> 품목 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
@@ -89,7 +89,7 @@
     <div>
       <button class="opBtn" data-popName="golPop1">삭제</button>
       <button class="opBtn" data-popName="golPop2">취소</button>
-      <button class="opBtn" data-popName="golPop3">저장</button>
+      <button class="opBtn" data-popName="golPop3" onClick="clickSaveBtn()">저장</button>
       <button class="opBtn" data-popName="golPop4">이전화면</button>
     </div>
 
