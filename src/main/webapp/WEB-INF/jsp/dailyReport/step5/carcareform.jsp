@@ -71,6 +71,9 @@
         </fieldset>
     </form>
 
+
+
+
     <div>
         <button class="openBtn" data-popName="drvpop1">삭제</button>
         <button onclick="save()">저장</button>
