@@ -8,7 +8,7 @@
 
     <select id="getAllReceipts" resultType="DailyReportStep8">
         SELECT t.sheetID,
-               DATE_FORMAT(t.date, '%m-%d') as date,
+               DATE_FORMAT(t.date, '%m.%d') as date,
     t.CarNo,
     s.fromsite,
     s.tosite,
@@ -27,7 +27,7 @@
     <select id="receiptsSearchOrderByDate" parameterType="DailyReportStep8OptionForm"
             resultType="DailyReportStep8">
         SELECT t.sheetID,
-        DATE_FORMAT(t.date, '%m-%d') as date,
+        DATE_FORMAT(t.date, '%m.%d') as date,
         t.CarNo,
         s.fromsite,
         s.tosite,
@@ -61,7 +61,7 @@
     <select id="receiptsSearchOrderByCarNo" parameterType="DailyReportStep8OptionForm"
             resultType="DailyReportStep8">
         SELECT t.sheetID,
-        DATE_FORMAT(t.date, '%m-%d') as date,
+        DATE_FORMAT(t.date, '%m.%d') as date,
         t.CarNo,
         s.fromsite,
         s.tosite,
@@ -90,82 +90,4 @@
         </if>
         order by t.CarNo asc, date asc;
     </select>
-
-    <!--기존꺼-->
-    <!--    <select id="receiptsSearchCondition" parameterType="DailyReportStep8" resultType="DailyReportStep8">-->
-    <!--        SELECT t.sheetID,-->
-    <!--               DATE_FORMAT(t.date, '%m-%d') as date,-->
-    <!--            t.CarNo,-->
-    <!--            s.fromsite,-->
-    <!--            s.tosite,-->
-    <!--            s.Qty,-->
-    <!--            s.Qtyup-->
-    <!--        FROM tsheet t-->
-    <!--            JOIN tSheet_sub s-->
-    <!--        ON t.sheetID = s.sheetID2-->
-    <!--        WHERE t.carSubmitTel = #{carSubmitTel}-->
-    <!--          and t.CarNo = #{CarNo}-->
-    <!--          and s.fromsite = #{fromsite}-->
-    <!--          and s.tosite = #{tosite}-->
-    <!--          and s.item= #{item}-->
-
-    <!--    </select>-->
-
-    <select id="getAllReceiptsWithCnt" resultType="DailyReportStep8">
-        SELECT t.sheetID,
-               DATE_FORMAT(t.date, '%m-%d') as date,
-    t.CarNo,
-    s.fromsite,
-    s.tosite,
-    s.item,
-    s.Qty,
-    s.Qtyup,
-    (SELECT COUNT(*) FROM tsheet t2 WHERE t2.carSubmitTel = #{carSubmitTel}) as totalData
-        FROM tsheet t
-            JOIN tSheet_sub s
-        ON t.sheetID = s.sheetID2
-        WHERE t.carSubmitTel = #{carSubmitTel}
-
-    </select>
-
-
-    <select id="receiptsSearchConditionWithCnt" parameterType="DailyReportStep8" resultType="DailyReportStep8">
-        SELECT t.sheetID,
-               DATE_FORMAT(t.date, '%m-%d') as date,
-    t.CarNo,
-    s.fromsite,
-    s.tosite,
-    s.Qty,
-    s.Qtyup,
-    (SELECT COUNT(*) FROM tsheet t2
-       JOIN tSheet_sub s2 ON t2.sheetID = s2.sheetID2
-       WHERE t2.carSubmitTel = #{carSubmitTel} AND t2.CarNo = t.CarNo AND s2.fromsite = s.fromsite AND s2.tosite = s.tosite AND s2.item = s.item) as totalData
-        FROM tsheet t
-            JOIN tSheet_sub s
-        ON t.sheetID = s.sheetID2
-        WHERE t.carSubmitTel = #{carSubmitTel}
-          AND t.CarNo = #{CarNo}
-          AND s.fromsite = #{fromsite}
-          AND s.tosite = #{tosite}
-          AND s.item = #{item};
-
-    </select>
-
-
-    <select id="searchReceipts" resultType="DailyReportStep8">
-        SELECT t.sheetID,
-               DATE_FORMAT(t.date, '%y-%m-%d') as date,
-            t.CarNo,
-            s.fromsite,
-            s.tosite,
-            s.item,
-            s.Qty,
-            s.Qtyup
-        FROM tsheet t
-            JOIN tSheet_sub s
-        ON t.sheetID = s.sheetID2
-        WHERE t.carSubmitTel = #{userId}
-    </select>
-
-
 </mapper>

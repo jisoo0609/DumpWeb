@@ -9,56 +9,66 @@
         <div class="date-container">
             <form name="option_frm">
                 <div class="date-picker">
+
                     <label class="start-text" for="start-date">운행일
                         <input id="start-date" name="startDate"/>
+
                         <span>~</span>
                         <input id="end-date" name="endDate"/>
-                    </label>
+
+
+                     </label>
+                    <button  id="update-button" type="button" onclick="bindSummary()">조회</button>
+
                 </div>
+
             </form>
-            <button id="update-button" type="submit" onclick="bindSummary()">조회</button>
+
             <ul class="basic-menu">
                 <li>
                     총 운반 금액 :
                     <div class="carrying-money">
                         <!-- 값을 표시하기 위한 div -->
-                        <div id="ttamount"></div>
+                        <div id="ttamount"> 원</div>
+
                     </div>
                 </li>
                 <li>
                     총 운행대 수 :
                     <div class="carrying-car" id="tnumber">
                         <!-- 값을 표시하기 위한 div -->
-                        <div id="tncars"></div>
+                        <div id="tncars"> 원</div>
                     </div>
                 </li>
             </ul>
         </div>
         <section class="management">
 
-            <div>
+
+
                 <a href="/dailyReport/receipts">
-                    <div style="display: flex; align-items: center">
-                        <div>
+                   <div>
+                        <div class="">
                             <div class="race-check">
                                 <img class="race-search" src="/resources/image/ico_check.png" alt="거래처전표조회"/>
                             </div>
-                            <span>거래처전표조회</span>
+                            <span class="btn_middle">거래처전표조회</span>
                         </div>
                     </div>
                 </a>
-                <a href="/dailyReport/orderform">
+                <a href="/dailyReport/orderform" >
                     <div class="car-bundle">
                         <div>
                             <div class="car-registration">
                                 <img class="car-repair" src="/resources/image/ico_carrepair.png" alt="주문배차등록"/>
                             </div>
-                            <span>주문배차등록</span>
+                            <span class="btn_middle2">주문배차등록</span>
                         </div>
                     </div>
                 </a>
 
-            </div>
+
+
         </section>
 
 
