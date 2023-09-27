@@ -67,14 +67,35 @@ function openPop() {
     }
     if(openable1 & openable2& openable3 & openable4 === true) {
         popup.style.display = 'flex';
+        saved.forEach(function(elem){
+            elem.classList.add('hidden');
+        })
+        unsaved.forEach(function(elem) {
+            initialize(elem)
+        });
     } else {
         alert("입력된 정보를 다시 확인해주세요");
     }
 }
 
+const saved = popup.querySelectorAll('.saved')
+const unsaved = popup.querySelectorAll('.unsaved') //신규저장
+
+function initialize(element) {
+    if (element.classList.contains('hidden')) {
+        element.classList.remove('hidden');
+    }
+}
 
 function closePop() {
+    $.emptyRow();
     popup.style.display = 'none';
+    saved.forEach(function(elem) {
+        initialize(elem)
+    });
+    unsaved.forEach(function(elem) {
+        initialize(elem)
+    });
 }
 
 
@@ -133,7 +154,6 @@ popCheckbox.addEventListener("change", function() {
 /* 전체 삭제 버튼 누르면 인풋 비우기 */
 function clearInputs() {
     const inputs = canvas.getElementsByTagName("input");
-
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = ""; // Set the value of each input field to an empty string
     }
@@ -198,6 +218,7 @@ function fillPop(event) {
     var td4 = clickedRow.querySelector('td:nth-child(4)').textContent;
     var td5 = clickedRow.querySelector('td:nth-child(5)').textContent;
     var td6 = clickedRow.querySelector('td:nth-child(6)').textContent;
+    var td7 = clickedRow.querySelector('td:nth-child(7)').textContent;
 
     // Fill the input fields in the popup with these values
     document.getElementById('fromsite').value = td1;
@@ -206,10 +227,16 @@ function fillPop(event) {
     document.getElementById('Qty').value = td4;
     document.getElementById('Rem').value = td5;
     document.getElementById('sheetsubID').value = td6;
-
+    document.getElementById('Qtyup').value = td7;
 
     // Open the popup
     openPop();
+    unsaved.forEach(function(elem){
+        elem.classList.add('hidden');
+    })
+    saved.forEach(function(elem) {
+        initialize(elem)
+    });
 }
 
 

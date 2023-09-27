@@ -79,18 +79,20 @@
             </form>
         </div>
         <div class="btn-area">
-            <%-- 신규저장--%>
-            <button class="btn btn-white btn-popup emptyInput" type="button" onclick="$.emptyRow();" >
-                비움
+
+            <%-- 신규저장 --%>
+
+            <button class="btn btn-white btn-popup unsaved" type="button" onclick="$.emptyRow();" >
+                취소
             </button>
-            <button class="btn btn-blue btn-popup emptyInput" type="button" onclick="$.save();" onkeydown="if(event.keyCode == 13) return false;">
+            <button class="btn btn-blue btn-popup unsaved" type="button" onclick="$.save();" onkeydown="if(event.keyCode == 13) return false;">
                 저장
             </button>
             <%-- 불러온 데이터 일때  --%>
-            <button class="btn btn-white btn-popup filledInput" type="button" onclick="$.deleteRow();">
+            <button class="btn btn-white btn-popup saved" type="button" onclick="$.deleteRow();">
                 삭제
             </button>
-            <button class="btn btn-blue btn-popup filledInput" type="button" onclick="$.editRow();" >
+            <button class="btn btn-blue btn-popup saved" type="button" onclick="$.editRow();" >
                 수정
             </button>
             <%-- 공통 --%>
