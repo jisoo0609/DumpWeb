@@ -1,5 +1,10 @@
-var resultDiv = $("#searchResult");
-var results;
+$.emptyRow = function() {
+    const popup = document.getElementById("popup");
+    const popinputs = popup.querySelectorAll('.input');
+    for (let i = 0; i < popinputs.length; i++) {
+        popinputs[i].value = ""; // Set the value of each input field to an empty string
+    }
+}
 
 /*제출처, 운송정보 저장*/
 $.save = function() {
@@ -11,12 +16,7 @@ $.save = function() {
             alert("저장이 완료되었습니다.");
 
             $.list();
-
-            const popup = document.getElementById("popup");
-            const popinputs = popup.querySelectorAll('.input');
-            for (let i = 0; i < popinputs.length; i++) {
-                popinputs[i].value = ""; // Set the value of each input field to an empty string
-            }
+            $.emptyRow();
         },
         error: function(xhr, status, error) {
              alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
@@ -198,6 +198,7 @@ $.deleteRow = function() {
       type: "GET",
       data: { sheetsubID: sheetsubID },
       success: function (data) {
+        $.emptyRow();
         $.list();
       },
       error: function(error) {
