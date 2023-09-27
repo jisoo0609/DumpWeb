@@ -1,14 +1,19 @@
 package com.dispatch.dump.commonModule.db.mapper;
 
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Main;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Sub;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep2Sub;
+import com.dispatch.dump.commonModule.db.dto.*;
 
+import java.util.Date;
 import java.util.List;
 
 public interface DailyReportStep1Mapper {
 
-    List<DailyReportStep1Main> findDailyReportMainByCarSubmitTel(String uuserID);
+    DailyReportStep1Total selectCalTotal(DailyReportStep1Option option, String userId);
+
+    List<DailyReportStep1Sub> selectDispatchSubmitList(String userId,String today);
+
+    List<DailyReportStep1Tdrive> selectDispatchTdriveList(String userId, String today);
+
+    /*List<DailyReportStep1Main> findDailyReportMainByCarSubmitTel(String uuserID);
     DailyReportStep1Sub findDailyReportMainBySheetID2(long sheetID2);
 
 
@@ -17,5 +22,5 @@ public interface DailyReportStep1Mapper {
     int findJoinDailyReportForTotalTransportationCost(String uuserID);
 
 
-
+    List<DailyReportStep1Tdrive> findJoinTdrive(String uuserID);*/
 }

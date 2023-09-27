@@ -1,19 +1,63 @@
+// 일괄취소 버튼 클릭 시 실행되는 함수
+function cancelCarList() {
+    var optionForm = {
+        carNo: document.select_frm.carNo.value,
+        startDate: document.select_frm.startDate.value,
+        endDate: document.select_frm.endDate.value,
+        selectOption: document.select_frm.selectOption.value,
+        searchType: document.querySelector('input[name="searchType"]:checked').value
+    };
 
-/* 일괄취소 버튼 클릭 이벤트를 처리 */
-document.querySelector(".common_btn:nth-of-type(2)").addEventListener("click", () => {
+    // AJAX 요청을 사용하여 서버에 일괄취소를 요청
+    $.ajax({
+        url: "/dailyReport/ajax/cancelcarlist",
+        type: "POST",
+        data: JSON.stringify(optionForm), // 데이터를 JSON 문자열로 변환
+        contentType: "application/json", // Content-Type 설정
+        success: function (data) {
+            alert("일괄취소가 완료되었습니다.");
+        },
+        error: function (error) {
+            console.error("오류 발생: " + error);
+            alert("오류가 발생했습니다.");
+        }
+    });
+}
 
-   const costButton = document.querySelector(".agreement_container .resultPrice");
-   costButton.innerHTML = "0";
-    
-   const tableBody = document.querySelector("table tbody");
+// 일괄결제 버튼 클릭 시 실행되는 함수
+function PayCarList() {
+    var optionForm = {
+        carNo: document.select_frm.carNo.value,
+        startDate: document.select_frm.startDate.value,
+        endDate: document.select_frm.endDate.value,
+        selectOption: document.select_frm.selectOption.value,
+        searchType: document.querySelector('input[name="searchType"]:checked').value
+    };
 
-    // 테이블 본문 내용을 초기화. (데이터 삭제)
-    tableBody.innerHTML = "";
+    // AJAX 요청을 사용하여 서버에 일괄취소를 요청
+    $.ajax({
+        url: "/dailyReport/ajax/Paycarlist",
+        type: "POST",
+        data: JSON.stringify(optionForm), // 데이터를 JSON 문자열로 변환
+        contentType: "application/json", // Content-Type 설정
+        success: function (data) {
+            alert("일괄결제가 완료되었습니다.");
+        },
+        error: function (error) {
+            console.error("오류 발생: " + error);
+            alert("오류가 발생했습니다.");
+        }
+    });
+}
 
-    // 검색 결과 텍스트 초기화.
-    const resultSearch = document.querySelector(".result_search");
-    resultSearch.innerHTML = "";
-});
+
+
+
+
+
+
+
+
 
 /* js를 통해 search_btn이 눌릴 수 있도록 처리 */
 function clickSearchButton(){
@@ -46,3 +90,8 @@ function bindList() {
         }
     })
 }
+
+//test
+
+
+
