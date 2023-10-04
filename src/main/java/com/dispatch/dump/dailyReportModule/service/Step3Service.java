@@ -46,6 +46,7 @@ public class Step3Service {
             System.out.println("find main Data.");
             dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
             saveTransPortInfo(dailyReportStep3Sub);
+
         }else{
             System.out.println("not found main Data.");
             dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
@@ -78,17 +79,18 @@ public class Step3Service {
     public List<DailyReportStep3Main> searchBySalesman(DailyReportStep3Main dailyReportStep3Main) {
         return dailyReportStep3MainMapper.findBySalesman(dailyReportStep3Main);
     }
-    
+
+    public DailyReportStep3Main findTCarSubmitDetails(int sheetID){
+        return dailyReportStep3MainMapper.findBySheetIDForStep4(sheetID);
+    }
+
     /*운송정보 수정*/
-    @Transactional
+    
     public void edit(DailyReportStep3Sub dailyReportStep3Sub){
         Map<String, Object> rtnMap = commonUtil.returnMap();
-        //유지보수를 위해 단계적으로 작성하기로 함, But 여러 쿼리 조회로 성능 저하가 발생할 수 있음.
+        //유지보수를 위해 단계적으로 작성->리팩토링 예정
         int sheetsubID=dailyReportStep3Sub.getSheetsubID();
-        System.out.println("fromsite는?"+dailyReportStep3Sub.getFromsite());
-        System.out.println("tosite는?"+dailyReportStep3Sub.getTosite());
 
-        
         int sheetID=dailyReportStep3SubMapper.findBySheetsubID(sheetsubID);
         boolean chk1=dailyReportStep3MainMapper.findBySheetID(sheetID);
 
@@ -101,13 +103,16 @@ public class Step3Service {
 
     /*운송정보 삭제*/
     public void delete(int sheetsubID){
-        Map<String, Object> rtnMap = commonUtil.returnMap();//실패시 메세지 전송용?
-        //유지보수를 위해 단계적으로 작성하기로 함, But 여러 쿼리 조회로 성능 저하가 발생할 수 있음.
+        //유지보수를 위해 단계적으로 작성->리팩토링 예정
+        Map<String, Object> rtnMap = commonUtil.returnMap();//실패시 메세지 전송용
         int sheetID=dailyReportStep3SubMapper.findBySheetsubID(sheetsubID);
         boolean chk1=dailyReportStep3MainMapper.findBySheetID(sheetID);
 
         if(chk1==false){
             dailyReportStep3SubMapper.deleteByOne(sheetsubID);
+        }else{
+            rtnMap.put("httpcode", 500);
+            rtnMap.put("httpcode", 500);
         }
     }
 }

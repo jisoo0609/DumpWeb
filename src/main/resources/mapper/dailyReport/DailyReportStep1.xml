@@ -3,13 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep1Mapper">
+
+
     <sql id="res_table">
         WITH r1 AS
             (
-                SELECT *
+                SELECT sheetID, CarNo,carSubmit
                 FROM tsheet
-                WHERE sheetSS = #{uuserID}
+                WHERE CarNo = #{userId}
                   AND date BETWEEN ${startDate} AND ${endDate}
             ),
             r2 AS
@@ -20,7 +23,7 @@
         SELECT *
         FROM r1
             INNER JOIN r2
-        ON r1.sheetid = r2.sheetid2
+        ON r1.sheetID = r2.sheetID2
             )
     </sql>
 
@@ -34,7 +37,7 @@
         select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup)) as 'totalTransportationCost',
         SUM(Qty) as 'totalQty'
         from tSheet_sub
-        where sheetID2 in (select sheetid2 from r3)
+        where sheetID2 in (select sheetID2 from r3)
     </select>
 
     <select id="selectDispatchSubmitList" resultType="DailyReportStep1Sub">
@@ -44,7 +47,15 @@
             <property name="endDate" value="#{today}"/>
         </include>
 
-        select * from r3
+
+        select tSheet_sub.*, tSheet.carSubmit, tSheet.date
+        from tSheet_sub
+        inner join tSheet on tSheet_sub.sheetID2 = tSheet.sheetID
+        where tSheet_sub.sheetID2 in (
+        select sheetID2
+        from r1 inner join r2
+        on r1.sheetID = r2.sheetID2
+        )
     </select>
 
     <select id="selectDispatchTdriveList" resultType="DailyReportStep1Tdrive">
@@ -57,10 +68,11 @@
                useOil,
                drvrem,
                rependchk,
+               driveSS,
                IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
                 repaddkm
         FROM   tDrive
-        where driveSS = #{uuserID}
+        where carno = #{userId}
 
        /* WHERE  carno = #{userID}
           AND drvdate LIKE CONCAT(#{date}, '%')
@@ -88,7 +100,7 @@
 
     <select id="findJoinTdrive" resultType="DailyReportStep1Tdrive">
         select repaddkm, IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
-               rependchk,
+               rependchk
                drvClub,
                driveSS
 

@@ -7,13 +7,17 @@ import lombok.Data;
 @AllArgsConstructor
 public class DailyReportStep8OptionForm {
 
-    private String carSubmitTel;
-    private String searchStartDate;
-    private String searchEndDate;
+
+    private String startDate;
+    private String endDate;
+
     private String fromsite;
     private String tosite;
     private String item;
-    private  String CarNo;
-    private  String searchType;
+    private String carNo;
 
+    private String sortingCriteria;
+
+    //VO
+    private String carSubmitTel;
 }
