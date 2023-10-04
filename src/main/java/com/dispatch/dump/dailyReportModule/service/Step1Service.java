@@ -42,8 +42,8 @@ public class Step1Service {
     }
 
     public List<DailyReportStep1Tdrive> findDispatchTdriveList() {
-        System.out.println( dailyReportStep1Mapper.selectDispatchTdriveList(getSessionLoginData().getUserId(),getToday()));
-        return dailyReportStep1Mapper.selectDispatchTdriveList(getSessionLoginData().getUserId(),getToday());
+        System.out.println( dailyReportStep1Mapper.selectDispatchTdriveList(getSessionLoginData().getUserId()));
+        return dailyReportStep1Mapper.selectDispatchTdriveList(getSessionLoginData().getUserId());
     }
 
 
