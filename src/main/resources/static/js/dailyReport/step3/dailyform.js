@@ -1,3 +1,35 @@
+
+document.addEventListener("DOMContentLoaded", function () {
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+
+    let sheetID = params.get("sheetID");
+    console.log(sheetID);
+
+    if (sheetID !== null) {
+        getSheetIDDataByParams(sheetID);
+    }
+
+    //clickListThAndRedirect();//step4에 있음
+});
+
+
+function getSheetIDDataByParams(sheetID) {
+    $.ajax({
+        url: "/dailyReport/form/ajax/details",
+        type: "POST",
+        data: {sheetID: sheetID},
+        success: function (data) {
+
+            document.getElementById('carSubmit').value=data.carSubmit;
+            document.getElementById('carSubmitTel').value=data.carSubmitTel;
+            document.getElementById('salesman').value=data.salesman;
+            $.list();
+        }
+    })
+}
+
+
 $.emptyRow = function() {
     const popup = document.getElementById("popup");
     const popinputs = popup.querySelectorAll('.input');
@@ -8,10 +40,14 @@ $.emptyRow = function() {
 
 /*제출처, 운송정보 저장*/
 $.save = function() {
+
+    var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
         url: "/dailyReport/workspace/ajax/save",
         type: "POST",
-        data: $("[name=frm]").serialize(),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function (data) {
             alert("저장이 완료되었습니다.");
 
@@ -25,10 +61,13 @@ $.save = function() {
 }
 
 $.list = function() {
+    var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
         url: "/dailyReport/workspace/ajax/list",
         type: "POST",
-        data: $("[name=frm]").serialize(),
+        data: formData,
+        processData: false,
+        contentType: false,
         success: function (data) {
             showTransportList(data);
         },
@@ -55,6 +94,7 @@ function showTransportList(data){
             html += '   <td>' + subData.qty + '</td>';
             html += '   <td>' + subData.rem + '</td>';
             html += '   <td style="display: none;">' + subData.sheetsubID + '</td>';
+            html += '   <td style="display: none;">' + subData. qtyup + '</td>';
             html += '</tr>';
         }
         html += '</table>';

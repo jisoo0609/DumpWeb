@@ -23,45 +23,35 @@ public class Step4Service {
     private final DailyReportStep4Mapper dailyReportStep4Mapper;
     private final CommonUtil commonUtil;
 
+//    login 정보
+    public Login getSessionLoginData() {
+        return (Login) commonUtil.getSession().getAttribute("loginInfo");
+    }
+
+//
     public List<DailyReportStep4> getSummary() {
-        // 1. login 정보 받아오기
-        HttpSession session = commonUtil.getSession();
-        Login loginData = (Login) session.getAttribute("loginInfo");
-
-        // 2. login id와 tSheet의 CarNo가 똑같은 tuple값을 tSheet에서 가져옴.
-        List<DailyReportStep4> tSheet = dailyReportStep4Mapper.getDailyReportByCarNo(loginData.getUserId());
-
-        // 로그로 DB 조회 결과 출력 (System.out.println 사용)
-//        System.out.println("DailyReport List tSheet: " + tSheet);
+        // login id와 tSheet의 CarNo가 똑같은 tuple값을 tSheet에서 가져옴.
+        List<DailyReportStep4> tSheet = dailyReportStep4Mapper.getDailyReportByCarNo(getSessionLoginData().getUserId());
 
         return tSheet;
     }
 
+//    상세 조건이 설정된 검색의 서비스
+    public List<DailyReportStep4> getCarListByOption(DailyReportStep4OptionForm optionForm) {
+        optionForm.setCarNo(getSessionLoginData().getUserId());
 
-    public List<DailyReportStep4> getTotalTransportAmount() {
-        // 1. login 정보 받아오기
-        HttpSession session = commonUtil.getSession();
-        Login loginData = (Login) session.getAttribute("loginInfo");
-
-        // 2. 총 운반금액을 가져오는 메서드 호출
-        List<DailyReportStep4> totalAmount = dailyReportStep4Mapper.getTotalTransportAmount(loginData.getUserId());
-
-        // 로그로 DB 조회 결과 출력 (System.out.println 사용)
-//        System.out.println("total: " + totalAmount);
-
-        return totalAmount;
+        return dailyReportStep4Mapper.findCarListByOption(optionForm);
     }
 
-    public List<DailyReportStep4> getCarListByOption(DailyReportStep4OptionForm optionForm) {
-        // 1. login 정보 받아오기
-        HttpSession session = commonUtil.getSession();
-        Login loginData = (Login) session.getAttribute("loginInfo");
+//    일괄결재 기능의 서비스
+    public void submitOption(DailyReportStep4OptionForm optionForm) {
+        optionForm.setCarNo(getSessionLoginData().getUserId());
+        dailyReportStep4Mapper.submitOptionM(optionForm);
+    }
 
-        optionForm.setCarNo(loginData.getUserId());
-
-        System.out.println("List"+dailyReportStep4Mapper.findCarListByOption(optionForm));
-
-        //Mapper에 해당 메소드 추가해야함
-        return dailyReportStep4Mapper.findCarListByOption(optionForm);
+//    일괄취소 기능의 서비스
+    public void cancelOption(DailyReportStep4OptionForm optionForm) {
+        optionForm.setCarNo(getSessionLoginData().getUserId());
+        dailyReportStep4Mapper.cancelOptionM(optionForm);
     }
 }

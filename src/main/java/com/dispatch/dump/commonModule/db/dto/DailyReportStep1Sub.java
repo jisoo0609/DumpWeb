@@ -18,6 +18,7 @@ public class DailyReportStep1Sub {
 
     // tSheet테이블 : 차량번호
     public String CarNo;
+    private String carSubmit;
 
 
 
