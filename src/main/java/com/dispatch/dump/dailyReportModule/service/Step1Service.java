@@ -3,15 +3,12 @@ package com.dispatch.dump.dailyReportModule.service;
 import com.dispatch.dump.commonModule.db.dto.*;
 import com.dispatch.dump.commonModule.util.CommonUtil;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep1Mapper;
-import javax.servlet.http.HttpSession;
 
-import com.sun.org.apache.xml.internal.serializer.AttributesImplSerializer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +34,7 @@ public class Step1Service {
     public DailyReportStep1Total findCalTotal(DailyReportStep1Option option) {
         return dailyReportStep1Mapper.selectCalTotal(option, getSessionLoginData().getUserId());
     }
+
 
     public List<DailyReportStep1Sub> findDispatchSubmitList() {
         System.out.println( dailyReportStep1Mapper.selectDispatchSubmitList(getSessionLoginData().getUserId(),getToday()));
