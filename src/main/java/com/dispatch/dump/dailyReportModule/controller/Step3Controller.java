@@ -3,15 +3,13 @@ package com.dispatch.dump.dailyReportModule.controller;
 import com.dispatch.dump.commonModule.db.dto.DailyReport;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep3Main;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep3Sub;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -28,6 +26,14 @@ public class Step3Controller {
     public String step3() {
         return "/dailyReport/step3/form";
     }
+
+    /*step4요청 : sheetID로 조회 후 제출처정보 반영*/
+    @RequestMapping(value = "/form/ajax/details", method = RequestMethod.POST)
+    @ResponseBody
+    public DailyReportStep3Main carSubmitDetails(int sheetID) {
+        return step3Service.findTCarSubmitDetails(sheetID);
+    }
+
 
     /*제출처, 운송정보 저장*/
     @RequestMapping(value = "/workspace/ajax/save", method = RequestMethod.POST)
