@@ -24,28 +24,34 @@ function fill010() {
 }
 
 function validateInput1(input) {
-    if(!input.value) {
+    const carSubmit = input.value
+    if(!carSubmit) {
         openable1 = false;
     } else {
         openable1 = true;
+        localStorage.setItem('recentCarSubmit', carSubmit);
         listData()
     }
 }
 
 function validateInput2(input) {
-    if(!input.value) {
+    const salesman = input.value;
+    if(!salesman) {
         openable2 = false;
     } else {
         openable2 = true;
+        localStorage.setItem('recentSalesman', salesman);
         listData()
     }
 }
 
 /* function : oninput 인풋이 바르지 않으면 보더컬러를 red로 바꿈 */
 function validateInput3(input) {
-    if (phoneNumberPattern.test(input.value)) {
+    const carSubmitTel = input.value;
+    if (phoneNumberPattern.test(carSubmitTel)) {
         input.style.borderColor = '';
         openable3 = true;
+         localStorage.setItem('recentCarSubmitTel', carSubmitTel);
         listData()
     } else {
         input.style.borderColor = 'red';
@@ -53,6 +59,32 @@ function validateInput3(input) {
     }
 }
 
+// Function to load input values from localStorage
+function loadInputValues() {
+    const recentCarSubmit = localStorage.getItem('recentCarSubmit');
+    const recentSalesman = localStorage.getItem('recentSalesman');
+    const recentCarSubmitTel = localStorage.getItem('recentCarSubmitTel');
+
+    // Set input values if they exist in localStorage
+    if (recentCarSubmit !== null) {
+        document.getElementById('carSubmit').value = recentCarSubmit;
+    }
+    if (recentSalesman !== null) {
+        document.getElementById('salesman').value = recentSalesman;
+    }
+    if (recentCarSubmitTel !== null) {
+        document.getElementById('carSubmitTel').value = recentCarSubmitTel;
+    }
+}
+
+// Call the loadInputValues function when the page loads
+window.onload = function () {
+    loadInputValues();
+    openable1 = true;
+    openable2 = true;
+    openable3 = true;
+    listData();
+};
 
 
 
@@ -245,5 +277,7 @@ function listData() {
         $.list();
     }
 }
+
+
 
 
