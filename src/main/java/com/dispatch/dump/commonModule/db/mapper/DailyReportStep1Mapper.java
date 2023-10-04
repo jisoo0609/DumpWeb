@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface DailyReportStep1Mapper {
 
-    DailyReportStep1Total selectCalTotal(DailyReportStep1Option option, String userId);
+    DailyReportStep1Total selectCalTotal(DailyReportStep1Option option, String uuserID);
 
-    List<DailyReportStep1Sub> selectDispatchSubmitList(String userId,String today);
+    List<DailyReportStep1Sub> selectDispatchSubmitList(String uuserID,String today);
 
     List<DailyReportStep1Tdrive> selectDispatchTdriveList(String userId);
 

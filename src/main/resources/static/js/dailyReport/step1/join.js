@@ -83,8 +83,7 @@ function printFindList(searchResultData) {
                     <td>${order[0]}</td>
                     <td>${order[1]}</td>
                     <td>${order[2]}</td>
-                    <td>${order[3]}</td>
-                    <td>${order[4]}</td>
+                   
                  `;
 
         tableBody.appendChild(row);
