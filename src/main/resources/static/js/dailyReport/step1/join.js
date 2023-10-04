@@ -80,16 +80,22 @@ function printFindList(searchResultData) {
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.forEach((data, index) => {
         const row = document.createElement("tr");
-        let order = [
-            data.rependchk , data.rependdate, data.repaddkm];
+        const rependdate = new Date(data.rependdate);
+                // 년, 월, 일 추출
+                const year = rependdate.getFullYear();
+                const month = rependdate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
+                const day = rependdate.getDate();
 
-        row.innerHTML = `
-                    <td>${order[0]}</td>
-                    <td>${order[1]}</td>
-                    <td>${order[2]}</td>
-                   
-                 `;
 
+                // 날짜를 원하는 형식으로 표시
+                const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
+
+                row.innerHTML = `
+                    <td>${data.drvClub}</td>
+                    <td>${formattedDate}</td>
+                    <td>${data.repaddkm}</td>
+                `;
         tableBody.appendChild(row);
     });
 
