@@ -31,7 +31,7 @@ public class Step1Controller {
         return step1Service.findCalTotal(option);
     }
 
-    @RequestMapping(value = "/driver/ajax/submitlist", method = RequestMethod.GET)
+    @RequestMapping(value ="/driver/ajax/submitlist", method = RequestMethod.GET)
     @ResponseBody
     public List<DailyReportStep1Sub> dispatchSubmitList() {
         return step1Service.findDispatchSubmitList();
@@ -41,8 +41,10 @@ public class Step1Controller {
     @ResponseBody
     public List<DailyReportStep1Tdrive> dispatchTdriveList() {
 
-        return step1Service.findDispatchTdriveList();
+                    return step1Service.findDispatchTdriveList();
     }
+
+
 
 
 

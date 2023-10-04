@@ -92,6 +92,7 @@
 
     <!-- 결과를 표시할 테이블 -->
     <div class="table_container">
+
         <table>
             <thead>
             <tr class="th_title">

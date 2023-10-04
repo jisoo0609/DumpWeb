@@ -94,6 +94,11 @@
         order by salesman asc;
     </select>
 
+    <!--step4관련: 페이지 이동시 조회-->
+    <select id="findBySheetIDForStep4" parameterType="int" resultType="DailyReportStep3Main">
+        select * from tSheet where sheetID=#{sheetID}
+    </select>
+
     <!--삭제 관련-->
     <!--sheetID로 조회-->
     <select id="findBySheetID" parameterType="int" resultType="boolean">
