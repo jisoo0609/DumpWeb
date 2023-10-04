@@ -7,7 +7,7 @@ public class DailyReportStep1Tdrive {
 
     private int driveID;
     private String carNo;           // LINE :: 차량번호
-    private String drvDate;         // LINE :: 날짜
+    private String drvDate;         // LINE :: 날짜, 등록일
     private String drvClub;         // LINE :: 등록물품 , 분류
     private int lastKm;             // LINE :: 최종주행거리
     private int useAmt;             // LINE :: 사용금액
