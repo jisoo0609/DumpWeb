@@ -44,30 +44,16 @@
         Qtyup
         from r3
         <choose>
-            <when test="fromsite !='' ">
-                WHERE fromesite = #{fromesite}
-            </when>
-            <when test="tosite!= '' ">
-                WHERE tosite = #{tosite}
-            </when>
-            <when test="item != '' ">
-                WHERE item = #{item}
-            </when>
-            <when test="carNo !='' ">
-                WHERE carNo = #{carNo}
-            </when>
-        </choose>
-        <choose>
-            <when test="sortingCriteria == '0-date'">
+            <when test="sortingCriteria.equals('date')">
                 ORDER BY date DESC
             </when>
-            <when test="sortingCriteria == '1-carNo'">
+            <when test="sortingCriteria.equals('carNo')">
                 ORDER BY carNo ASC
             </when>
-            <when test="sortingCriteria == '2-item'">
+            <when test="sortingCriteria.equals('item')">
                 ORDER BY item ASC
             </when>
-            <when test="sortingCriteria == '3-qtyup'">
+            <when test="sortingCriteria.equals('qtyup')">
                 ORDER BY Qtyup ASC
             </when>
         </choose>
