@@ -6,24 +6,20 @@ function insertTitleThInFront(arr, idx) {
 
 // radio 버튼에 따라 테이블 열 순서 변경 함수
 function changeTableColumnOrder() {
-    const searchTypeRadio = document.querySelectorAll('input[name="sortingCriteria"]:checked');
+    const searchTypeRadio = document.querySelectorAll('input[name="sortingCriteria"]');
     const header = Array.from(document.querySelectorAll(".th_header"));
 
-    const searchType = searchTypeRadio[0].value.split("-"); // 젤 앞으로
-    const firstThFlag = parseInt(searchType[0]);
+    let firstThFlag;
 
+    for (let i = 0; i < searchTypeRadio.length; i++) {
+        if (searchTypeRadio[i].checked) {
+            firstThFlag = i;
+            break;
+        }
+    }
 
-    let order = ["운행일", "상차지", "하차지", "차량", "품목", "대수", "운반비"]; // 1.정렬 기준을 바꿀 때 항목 추가할 것.
+    let order = ["운행일", "차량", "품목", "운반비"];
     insertTitleThInFront(order, firstThFlag);
-
-  /*  console.log(firstThFlag);
-
-    const searchTypeRadioAll = document.querySelectorAll('input[name="sortingCriteria"]');
-    searchTypeRadioAll[0].value =  + "0-" + searchType[1];
-
-    const searchType2 = searchTypeRadioAll[0].value.split("-");
-    searchTypeRadioAll[firstThFlag].value = (firstThFlag).toString() + "-" + searchType[1];*/
-
 
     for (let i = 0; i < header.length; i++) {
         header[i].textContent = order[i];
@@ -42,34 +38,38 @@ function printList(searchResultData) {
     const firstThFlag = changeTableColumnOrder();
 
     let start = new Array(searchResultData[0].date
-        , searchResultData[0].fromstie
-        , searchResultData[0].tosite
         , searchResultData[0].carNo
         , searchResultData[0].item
-        , searchResultData[0].qty
-        , searchResultData[0].qtyup)[firstThFlag]; // 1.정렬 기준을 바꿀 때 항목 추가할 것.
+        , searchResultData[0].qtyup)[firstThFlag];
 
     let no = 1;
+
+    let orderMap = {
+        0: 0,
+        1: 3,
+        2: 4,
+        3: 6
+    };
 
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.forEach((data, index) => {
         const row = document.createElement("tr");
         let order = [
             data.date, data.fromsite, // 정렬 기준.
-            data.tosite, data.item, data.carNo, data.qty, data.qtyup.toLocaleString()
+            data.tosite, data.carNo, data.item, data.qty, data.qtyup
         ];
 
-        insertTitleThInFront(order, firstThFlag);
+        insertTitleThInFront(order, orderMap[firstThFlag]);
 
         row.innerHTML = ` 
                     <td>${no}</td>
-                    <td>${order[0]}</td>
+                    <td>${orderMap[firstThFlag] === 6 ? order[0].toLocaleString() : order[0]}</td>
                     <td>${order[1]}</td> 
                     <td>${order[2]}</td>
                     <td>${order[3]}</td> 
                     <td>${order[4]}</td>
                     <td>${order[5]}</td>
-                    <td>${order[6]}</td>
+                    <td>${order[6].toLocaleString()}</td>
                  `;
 
         no++;
