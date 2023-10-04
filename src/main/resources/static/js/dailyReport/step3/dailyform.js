@@ -1,8 +1,46 @@
-var resultDiv = $("#searchResult");
-var results;
+
+document.addEventListener("DOMContentLoaded", function () {
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+
+    let sheetID = params.get("sheetID");
+    console.log(sheetID);
+
+    if (sheetID !== null) {
+        getSheetIDDataByParams(sheetID);
+    }
+
+    //clickListThAndRedirect();//step4에 있음
+});
+
+
+function getSheetIDDataByParams(sheetID) {
+    $.ajax({
+        url: "/dailyReport/form/ajax/details",
+        type: "POST",
+        data: {sheetID: sheetID},
+        success: function (data) {
+
+            document.getElementById('carSubmit').value=data.carSubmit;
+            document.getElementById('carSubmitTel').value=data.carSubmitTel;
+            document.getElementById('salesman').value=data.salesman;
+            $.list();
+        }
+    })
+}
+
+
+$.emptyRow = function() {
+    const popup = document.getElementById("popup");
+    const popinputs = popup.querySelectorAll('.input');
+    for (let i = 0; i < popinputs.length; i++) {
+        popinputs[i].value = ""; // Set the value of each input field to an empty string
+    }
+}
 
 /*제출처, 운송정보 저장*/
 $.save = function() {
+
     var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
         url: "/dailyReport/workspace/ajax/save",
@@ -14,12 +52,7 @@ $.save = function() {
             alert("저장이 완료되었습니다.");
 
             $.list();
-
-            const popup = document.getElementById("popup");
-            const popinputs = popup.querySelectorAll('.input');
-            for (let i = 0; i < popinputs.length; i++) {
-                popinputs[i].value = ""; // Set the value of each input field to an empty string
-            }
+            $.emptyRow();
         },
         error: function(xhr, status, error) {
              alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
@@ -61,11 +94,10 @@ function showTransportList(data){
             html += '   <td>' + subData.qty + '</td>';
             html += '   <td>' + subData.rem + '</td>';
             html += '   <td style="display: none;">' + subData.sheetsubID + '</td>';
-            //sheetsubID = subData.sheetsubID;
+            html += '   <td style="display: none;">' + subData. qtyup + '</td>';
             html += '</tr>';
         }
         html += '</table>';
-            //document.getElementById('sheetsubID').value = subData.sheetsubID;
     }
         // 데이터를 표시할 위치에 추가
         $('#transportContainer').html(html);
@@ -206,6 +238,7 @@ $.deleteRow = function() {
       type: "GET",
       data: { sheetsubID: sheetsubID },
       success: function (data) {
+        $.emptyRow();
         $.list();
       },
       error: function(error) {

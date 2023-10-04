@@ -54,4 +54,56 @@
         </if>
     </select>
 
+    <update id="submitOptionM">
+        UPDATE tsheet
+        SET chk1 = 1
+        WHERE CarNo = #{carNo}
+        AND date BETWEEN #{fromDate} AND #{toDate}
+        <if test="club != '' and club != '전체'">
+            AND t.carSubmit = #{club}
+        </if>
+        <if test="fromSite != '' and fromSite != '전체'">
+            AND s.fromsite = #{fromSite}
+        </if>
+        <if test="toSite != '' and toSite != '전체'">
+            AND s.tosite = #{toSite}
+        </if>
+        <if test="item != '' and item != '전체'">
+            AND s.item = #{item}
+        </if>
+        <if test="tel != '' and tel != '전체'">
+            AND t.carSubmitTel = #{tel}
+        </if>
+        <if test="state != '' and state != '전체'">
+            AND t.CurrStatus = #{CurrStatus}
+        </if>
+        AND chk1 = 0
+    </update>
+
+    <update id="cancelOptionM">
+        UPDATE tsheet
+        SET chk1 = 0
+        WHERE CarNo = #{carNo}
+          AND date BETWEEN #{fromDate} AND #{toDate}
+        <if test="club != '' and club != '전체'">
+            AND t.carSubmit = #{club}
+        </if>
+        <if test="fromSite != '' and fromSite != '전체'">
+            AND s.fromsite = #{fromSite}
+        </if>
+        <if test="toSite != '' and toSite != '전체'">
+            AND s.tosite = #{toSite}
+        </if>
+        <if test="item != '' and item != '전체'">
+            AND s.item = #{item}
+        </if>
+        <if test="tel != '' and tel != '전체'">
+            AND t.carSubmitTel = #{tel}
+        </if>
+        <if test="state != '' and state != '전체'">
+            AND t.CurrStatus = #{CurrStatus}
+        </if>
+          AND chk1 = 1
+    </update>
+
 </mapper>
