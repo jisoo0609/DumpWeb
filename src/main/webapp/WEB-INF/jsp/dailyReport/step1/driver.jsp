@@ -192,6 +192,7 @@
 
     <article class="homescreen">
         <div class="date-container">
+            <form name="option_frm">
             <div class="date-picker">
                 <label class="start-text" for="start-date"
                 >운행일
