@@ -51,14 +51,6 @@ function PayCarList() {
 }
 
 
-
-
-
-
-
-
-
-
 /* js를 통해 search_btn이 눌릴 수 있도록 처리 */
 function clickSearchButton(){
     document.querySelector(".search_btn").onclick();
@@ -77,21 +69,16 @@ function clickListThAndRedirect(){
 
 /* 선택한 옵션을 통해 데이터를 받아올 수 있도록 ajax POST 처리. */
 function bindList() {
-
-    console.log($("[name=select_frm]").serialize());
-
     $.ajax({
-        url: "/dailyReport/ajax/carcarelist",
+        url: "/dailyReport/receipts/ajax/list",
         type: "POST",
-        data: $("[name=select_frm]").serialize(),
+        data: $("[name=search_frm]").serialize(),
         success: function (data) {
             printList(data);
             printSummary(data);
         }
     })
 }
-
-//test
 
 
 
