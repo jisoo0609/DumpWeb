@@ -40,9 +40,13 @@ function printSummary(data) {
 
     const boutmoney = document.getElementById("boutmoney");
     const boutcar = document.getElementById("boutcar");
+    const boutdate = document.getElementById("boutdate");
+    const boutuseamt = document.getElementById("boutuseamt");
 
     boutmoney.innerHTML = data.totalTransportationCost.toLocaleString();
     boutcar.innerHTML = data.totalQty.toLocaleString();
+    boutdate.innerHTML = data.drvDate.toLocaleString();
+    boutuseamt.innerHTML = data.totalUseAmt.toLocaleString();
 }
 
 function printDispatchList(searchResultData) {
