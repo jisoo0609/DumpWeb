@@ -212,9 +212,11 @@
                     </li>
                     <li>
                         총 비용 금액 :
-                        <div class="expense-money">원</div>
+                        <div class="total-useamt" id="boutuseamt">원</div>
                     </li>
-                    <li>마지막 등록일 :</li>
+                    <li>마지막 등록일 :
+                        <div class="expense-date"  id="boutdate">원</div>
+                    </li>
                 </ul>
             </div>
         </div>
