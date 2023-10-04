@@ -199,15 +199,15 @@
                     <span>~</span>
                     <input id="datepicker2" name="endDate" readonly/>
                 </label>
-                <button id="update-button">조회</button>
+                <button id="update-button" type="button" onclick="bindSummary()">조회</button>
                 <ul class="basic-menu">
                     <li>
                         총 운반 금액 :
-                        <div class="carrying-money"> <%--<%= request.getAttribute("totalTransportationCost") %>--%>원</div>
+                        <div class="carrying-money" id="boutmoney">원</div>
                     </li>
                     <li>
                         총 운행대 수 :
-                        <div class="carrying-car"><%--<%= request.getAttribute("totalQty") %>--%> 대</div>
+                        <div class="carrying-car" id="boutcar"> 대</div>
                     </li>
                     <li>
                         총 비용 금액 :
@@ -278,6 +278,7 @@
         <section>
             <p class="today-car">금일 배차 현황</p>
             <table class="today-graph">
+            <thead>
                 <tr class="today-menu">
                     <th>제출처</th>
                     <th>상차지</th>
@@ -285,34 +286,21 @@
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
-                <c:forEach var="item" items="${mainList}">
-                    <tr>
-                        <td>${item.carSubmit}</td>
-                        <td>${item.fromsite}</td>
-                        <td>${item.tosite}</td>
-                        <td>${item.item}</td>
-                        <td>${item.qty}</td>
-                        <td>${item.date}</td>
-
-                    </tr>
-                </c:forEach>
+                </thead>
+                <tbody id="menusub">
+                </tbody>
             </table>
             <p class="car-care">차량 관리</p>
             <table class="car-graph">
+            <thead>
                 <tr class="car-menu">
                     <th>분류</th>
                     <th>교환 예정일</th>
                     <th>교환 주행거리</th>
                 </tr>
-                <c:forEach var="item" items="${tdriveList}">
-                    <tr>
-                        <td>${item.drvClub}</td>
-                        <td>${item.rependdate}</td>
-                        <td>${item.repaddkm}</td>
-                        <td>${item.rependchk}</td>
-
-                    </tr>
-                </c:forEach>
+                </thead>
+                <tbody id="carsub">
+                </tbody>
             </table>
             <p class="today-recruitment">금일 차량 모집 공고</p>
             <table class="today-car-recruitment">
@@ -328,22 +316,7 @@
     </article>
 
 </section>
-<script>
-    var tableRows = document.querySelectorAll("table tr");
 
-    tableRows.forEach(function(row) {
-        var qtyCell = row.querySelector("td:nth-child(5)");
-
-        if (qtyCell) {
-            var cellText = qtyCell.textContent;
-            var intValue = parseInt(cellText);
-
-            if (!isNaN(intValue)) {
-                qtyCell.textContent = intValue;
-            }
-        }
-    });
-</script>
 <script>
     $("#datepicker1, #datepicker2").datepicker({
         dateFormat: 'yy-mm-dd' //달력 날짜 형태
@@ -371,22 +344,6 @@
     $("#datepicker2").datepicker('setDate', 'today');
 </script>
 
-<script>
-    var currentDate = new Date();
-    var tableRows = document.querySelectorAll(".today-graph tr");
-
-    tableRows.forEach(function(row) {
-        var dateCell = row.querySelector("td:nth-child(6)"); // 날짜 정보를 포함한 <td>의 클래스를 지정해주세요.
-        if (dateCell) {
-            var rowDate = new Date(dateCell.textContent); // 날짜 정보를 Date 객체로 파싱 (예: "2023-09-19")
-            if (rowDate.toDateString() === currentDate.toDateString()) {
-                row.style.display = "table-row"; // 현재 날짜와 일치하는 경우 표시
-            } else {
-                row.style.display = "none"; // 일치하지 않는 경우 숨김
-            }
-        }
-    });
-</script>
-
+<script src="/resources/js/dailyReport/step1/join.js"></script>
 
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

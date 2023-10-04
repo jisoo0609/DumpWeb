@@ -216,8 +216,8 @@
         </div>
         <div class="cashNbtns">
             <p>운반금액(원)<br>0</p>
-            <input type="button" value="일괄결재">
-            <input type="button" value="일괄취소" id="cancelBtn">
+            <input type="button" value="일괄결재" onclick="submitBtn()">
+            <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
         </div>
         <div>
             <table class="list-table">
@@ -252,4 +252,5 @@
 
 <script src="/resources/js/dailyReport/step4/step4.js"></script>
 <script src="/resources/js/dailyReport/step4/calendar.js"></script>
+<script src="/resources/js/dailyReport/step4/AJAX.js"></script>
 <script src="/resources/js/dailyReport/step4/DOMContentLoaded.js"></script>

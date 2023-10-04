@@ -16,11 +16,39 @@ function bindList() {
 
 
 function save() {
-    //fetch 코드도 고민해볼 것.
 
+    //fetch 코드도 고민해볼 것.
     const checkBoxID = ["chk2","rependchk"];
 
-    let checkData = "";
+//    let checkData = "";
+//    String drvClub = request.getParameter("drvClub");
+//    String drvDate = request.getParameter("drvDate");
+//    int lastKm = request.getParameter("lastKm");
+//    int useAmt = request.getParameter("useAmt");
+//    int useOil = request.getParameter("useOil");
+//    String drvRem = request.getParameter("drvRem");
+//    String exchange-date = request.getParameter("exchange-date");
+//    int nextlastkm = request.getParameter("nextlastkm");
+//
+//    // 빈 값 처리
+//    if (drvClub == null || drvClub.isEmpty()) {
+//        drvClub = "";
+//    }
+//    if (drvDate == null || drvDate.isEmpty()) {
+//        drvDate = "";
+//    }
+//    if (lastKm == null || lastKm.isEmpty()) {
+//        lastKm = "";
+//    }
+//    if (useAmt == null || useAmt.isEmpty()) {
+//        useAmt = "";
+//    }
+//    if (useOil == null || useOil.isEmpty()) {
+//        useOil = "";
+//    }
+//    if (drvRem == null || drvRem.isEmpty()) {
+//        drvRem = "";
+//    }
 
     checkBoxID.forEach(id => checkData += getCheckParam(id));
 
