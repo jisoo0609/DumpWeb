@@ -1,15 +1,3 @@
-// 검색 버튼의 Form 데이터 AJAX POST
-function getList(){
-    $.ajax({
-       url: "/dailyReport/ajax/list",
-        type: "POST",
-        data: $("[name=data_frm]").serialize(),
-        success: function(data){
-           printTable(data)//서버에서 받은 데이터 처리할 함수 입력
-        }
-    });
-}
-
 // 테이블 헤더 정렬
 function tableSort(){
     // 라디오 버튼, 테이블 헤더 요소
@@ -49,6 +37,7 @@ function printTable(datas){
 
     let cost = 0;
     let totalQty = 0;
+    let end = 0;
 
     // 첫 번째 데이터의 선택된 라디오 버튼 항목 값
     let start = new Array(
@@ -73,7 +62,9 @@ function printTable(datas){
         ];
 
         // 데이터 항목, 선택된 라디오 버튼 idx 전달 -> 데이터 항목 순서 변경
-        insertTitleThInFront(order, firstFlag);
+        if (firstFlag !== 6)
+            insertTitleThInFront(order, firstFlag);
+
 
         // 운반단가 및 총액 계산
         cost += data.qtyup * data.qty;
@@ -91,7 +82,10 @@ function printTable(datas){
         `;
 
         // 끝 값 설정
-        let end = order[0];
+        if (firstFlag == 6)
+            end = order[6];
+        else
+            end = order[0];
 
         if(start !== end){
             start = end;
@@ -111,7 +105,7 @@ function printTable(datas){
 
     totalAmt.innerHTML = `
                     <p>운반금액(원)<br>${cost.toLocaleString()}</p>
-                    <input type="button" value="일괄결재">
+                    <input type="button" value="일괄결재" onclick="submitBtn()">
                     <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
     `;
 }
@@ -124,8 +118,10 @@ function clickListRedirect(){
         let sheetID = event.target.parentElement.getAttribute("data-sheetID");
 
         // GET방식의 단순한 데이터 전달 방법
-        let url = `/dailyReport/form?id=${sheetID}`;
+        let url = "/dailyReport/form" + "?sheetID=" + sheetID;
+
 
         window.location.href = url;
     });
 }
+

@@ -51,7 +51,7 @@
                 </li>
                 <li class="tabBtn" data-tab="hiddenPart">
                     <label for="showHideCheckbox">다음 교환 주기 입력</label>
-                    <span class="drvInputSpan2"><input id="showHideCheckbox" type="checkbox"></span>
+                    <span class="drvInputSpan2"><input id="showHideCheckbox" type="checkbox" checked></span>
                 </li>
             </ul>
             <ul class="bdnUl" id="hiddenPart">
@@ -64,12 +64,15 @@
                     <span class="drvInputSpan"><input name="repaddkm" id="nextlastkm" type="number" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리"></span>
                 </li>
                 <li>
-                    <label for="rependchk">교환 확인</label>
+                    <label for="rependchk">교환 완료 확인</label>
                     <span class="drvInputSpan3"><input id="rependchk" type="checkbox"></span>
                 </li>
             </ul>
         </fieldset>
     </form>
+
+
+
 
     <div>
         <button class="openBtn" data-popName="drvpop1">삭제</button>
