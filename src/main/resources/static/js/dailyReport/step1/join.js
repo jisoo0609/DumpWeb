@@ -40,9 +40,13 @@ function printSummary(data) {
 
     const boutmoney = document.getElementById("boutmoney");
     const boutcar = document.getElementById("boutcar");
+    const boutdate = document.getElementById("boutdate");
+    const boutuseamt = document.getElementById("boutuseamt");
 
     boutmoney.innerHTML = data.totalTransportationCost.toLocaleString();
     boutcar.innerHTML = data.totalQty.toLocaleString();
+    boutdate.innerHTML = data.drvDate.toLocaleString();
+    boutuseamt.innerHTML = data.totalUseAmt.toLocaleString();
 }
 
 function printDispatchList(searchResultData) {
@@ -82,8 +86,10 @@ function printFindList(searchResultData) {
                 const month = rependdate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
                 const day = rependdate.getDate();
 
+
                 // 날짜를 원하는 형식으로 표시
                 const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
 
                 row.innerHTML = `
                     <td>${data.drvClub}</td>
