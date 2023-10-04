@@ -84,7 +84,7 @@
                             <option value="">전체</option>
                             <option value="구디">구디</option>
                             <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="fromsite" value="${receipt.fromsite}" />
+                                <c:set var="fromsite" value="${receipt.fromsite}"/>
 
                                 <script>   //옵션에 중복값 제거
                                 if (!document.querySelector('#fromsiteBox option[value="${fromsite}"]')) {
@@ -107,7 +107,7 @@
                             <option value="">전체</option>
                             <option value="지밸리">지밸리</option>
                             <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="tosite" value="${receipt.tosite}" />
+                                <c:set var="tosite" value="${receipt.tosite}"/>
 
                                 <script>   //옵션에 중복값 제거
                                 if (!document.querySelector('#tositeBox option[value="${tosite}"]')) {
@@ -118,7 +118,7 @@
                                 }
                                 </script>
                             </c:forEach>
-    </select>
+                        </select>
                     </div>
                 </li>
                 <li>
@@ -131,7 +131,7 @@
                             <option value="출퇴근">출퇴근</option>
 
                             <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="item" value="${receipt.item}" />
+                                <c:set var="item" value="${receipt.item}"/>
                                 <script>   //옵션에 중복값 제거
                                 if (!document.querySelector('#itemBox option[value="${item}"]')) {
                                     var option = document.createElement('option');
@@ -154,14 +154,14 @@
                             <option value="">전체</option>
                             <option value="자차">자차</option>
                             <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="carNo" value="${receipt.carNo}" />
+                                <c:set var="carNo" value="${receipt.carNo}"/>
                                 <script>   //옵션에 중복값 제거
-                                    if (!document.querySelector('#CarNoBox option[value="${carNo}"]')) {
-                                        var option = document.createElement('option');
-                                        option.value = "${carNo}";
-                                        option.text = "${carNo}";
-                                        document.querySelector('#CarNoBox').appendChild(option);
-                                    }
+                                if (!document.querySelector('#CarNoBox option[value="${carNo}"]')) {
+                                    var option = document.createElement('option');
+                                    option.value = "${carNo}";
+                                    option.text = "${carNo}";
+                                    document.querySelector('#CarNoBox').appendChild(option);
+                                }
                                 </script>
                             </c:forEach>
                         </select>
@@ -174,31 +174,19 @@
         <div style="text-align: center;padding-top: 30px;border: 1px solid #ddd;padding-bottom: 30px; margin: 0 0 10px;">
             <div style="width: 50%;  float: left;">
                 <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
-                        type="radio" name="sortingCriteria" value="0-date" checked/>운행일 기준</label>
-            </div>
-            <div style="width: 50%;  float: left;">
-                <label style="display:none"><input
-                        type="radio" name="sortingCriteria" value="1-t"/></label>
-            </div>
-            <div style="display:none">
-                <label style="display:none"><input
-                        type="radio" name="sortingCriteria" value="2-t"/></label>
+                        type="radio" name="sortingCriteria" value="date" checked/>운행일 기준</label>
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="sortingCriteria" value="3-carNo"/>차량 기준</label>
+                        type="radio" name="sortingCriteria" value="carNo"/>차량 기준</label>
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="sortingCriteria" value="4-item"/>품목 기준</label>
+                        type="radio" name="sortingCriteria" value="item"/>품목 기준</label>
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="sortingCriteria" value="5-qtyup"/>운반비 기준</label>
-            </div>
-            <div style="display:none">
-                <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
-                        type="radio" name="sortingCriteria" value="6-t"/></label>
+                        type="radio" name="sortingCriteria" value="qtyup"/>운반비 기준</label>
             </div>
         </div>
     </form>
@@ -240,13 +228,13 @@
                 <tr>
                     <th>No</th>
                     <th class="th_header">운행일</th>
-                    <th class="th_header">상차지</th>
-                    <th class="th_header">하차지</th>
+                    <th>상차지</th>
+                    <th>하차지</th>
                     <th class="th_header">차량번호</th>
                     <th class="th_header">품목</th>
-                    <th class="th_header">대수</th>
+                    <th>대수</th>
                     <th class="th_header">운반비</th>
-                    <th class="th_header">진행</th>
+                    <th>진행</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -279,7 +267,6 @@
         </div>
     </div>
 </section>
-
 
 
 <div class="layerMask dis-n pop-wrap" id="pop-integrateform" tabindex="0">

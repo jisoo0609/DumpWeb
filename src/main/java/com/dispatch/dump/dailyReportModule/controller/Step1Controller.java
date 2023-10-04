@@ -1,7 +1,10 @@
 package com.dispatch.dump.dailyReportModule.controller;
 
 
-import com.dispatch.dump.commonModule.db.dto.*;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Option;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Sub;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Tdrive;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Total;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step1Service;
 import lombok.RequiredArgsConstructor;
@@ -40,8 +43,7 @@ public class Step1Controller {
     @RequestMapping(value = "/driver/ajax/tdrivelist", method = RequestMethod.GET)
     @ResponseBody
     public List<DailyReportStep1Tdrive> dispatchTdriveList() {
-
-                    return step1Service.findDispatchTdriveList();
+        return step1Service.findDispatchTdriveList();
     }
 
 
