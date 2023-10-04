@@ -11,8 +11,8 @@
         width: 100px;
     }
     .ui-datepicker-trigger {
-                    display: none;
-                }
+        display: none;
+    }
     #update-button {
         padding: 3px;
         border-radius: 10px;
@@ -89,20 +89,20 @@
     .today-recruitment-menu, .car-menu, .today-menu{
         font-size : 14px;
         font-weight : 600;
-        }
+    }
     .today-car,
     .car-care,
     .today-recruitment {
         margin-top: 30px;
     }
     .search-race{
-    margin-left : -5px
+        margin-left : -5px
     }
     .write-race{
-    margin-left : -8px
+        margin-left : -8px
     }
     .check-car, .registration-car{
-    margin-left : 6px
+        margin-left : 6px
     }
     .today-car,
     .car-care,
@@ -123,15 +123,15 @@
         width: 100%;
     }
     .today-menu th, .car-menu th{
-            border: 1px solid black;
-        }
-        .today-graph td, .car-graph td{
-             border: 1px solid black;
-             text-align: center;
-        }
+        border: 1px solid black;
+    }
+    .today-graph td, .car-graph td{
+        border: 1px solid black;
+        text-align: center;
+    }
     .today-graph td:nth-child(6){
         display: none;
-        }
+    }
     .car-menu th:nth-child(2) {
         border-left: 1px solid;
         border-right: 1px solid;
@@ -199,15 +199,15 @@
                     <span>~</span>
                     <input id="datepicker2" name="endDate" readonly/>
                 </label>
-                <button id="update-button">조회</button>
+                <button id="update-button" type="button" onclick="bindSummary()">조회</button>
                 <ul class="basic-menu">
                     <li>
                         총 운반 금액 :
-                        <div class="carrying-money"> <%= request.getAttribute("totalTransportationCost") %>원</div>
+                        <div class="carrying-money" id="boutmoney">원</div>
                     </li>
                     <li>
                         총 운행대 수 :
-                        <div class="carrying-car"><%= request.getAttribute("totalQty") %> 대</div>
+                        <div class="carrying-car" id="boutcar"> 대</div>
                     </li>
                     <li>
                         총 비용 금액 :
@@ -278,6 +278,7 @@
         <section>
             <p class="today-car">금일 배차 현황</p>
             <table class="today-graph">
+            <thead>
                 <tr class="today-menu">
                     <th>제출처</th>
                     <th>상차지</th>
@@ -285,97 +286,64 @@
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
-                <c:forEach var="item" items="${list}">
-                    <tr>
-                        <td>${item.carSubmit}</td>
-                        <td>${item.fromsite}</td>
-                        <td>${item.tosite}</td>
-                        <td>${item.item}</td>
-                        <td>${item.qty}</td>
-                        <td>${item.date}</td>
-
-                    </tr>
-                </c:forEach>
+                </thead>
+                <tbody id="menusub">
+                </tbody>
             </table>
             <p class="car-care">차량 관리</p>
             <table class="car-graph">
+            <thead>
                 <tr class="car-menu">
                     <th>분류</th>
                     <th>교환 예정일</th>
                     <th>교환 주행거리</th>
                 </tr>
+                </thead>
+                <tbody id="carsub">
+                </tbody>
             </table>
             <p class="today-recruitment">금일 차량 모집 공고</p>
             <table class="today-car-recruitment">
-                            <tr class="today-recruitment-menu">
-                                <th>제출처</th>
-                                <th>상차지</th>
-                                <th>하차지</th>
-                                <th>품목</th>
-                                <th>대수</th>
-                            </tr>
-                        </table>
+                <tr class="today-recruitment-menu">
+                    <th>제출처</th>
+                    <th>상차지</th>
+                    <th>하차지</th>
+                    <th>품목</th>
+                    <th>대수</th>
+                </tr>
+            </table>
         </section>
     </article>
 
 </section>
+
 <script>
-    var tableRows = document.querySelectorAll("table tr");
-
-    tableRows.forEach(function(row) {
-        var qtyCell = row.querySelector("td:nth-child(5)");
-
-        if (qtyCell) {
-            var cellText = qtyCell.textContent;
-            var intValue = parseInt(cellText);
-
-            if (!isNaN(intValue)) {
-                qtyCell.textContent = intValue;
-            }
-        }
+    $("#datepicker1, #datepicker2").datepicker({
+        dateFormat: 'yy-mm-dd' //달력 날짜 형태
+        ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+        ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
+        ,changeYear: true //option값 년 선택 가능
+        ,changeMonth: true //option값  월 선택 가능
+        ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
+        ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+        ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
+        ,buttonText: "선택" //버튼 호버 텍스트
+        ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+        ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
+        ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
+        ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
+        ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
+        ,minDate: "-5Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+        ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
     });
-</script>
-<script>
-$("#datepicker1, #datepicker2").datepicker({
-    dateFormat: 'yy-mm-dd' //달력 날짜 형태
-    ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
-    ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
-    ,changeYear: true //option값 년 선택 가능
-    ,changeMonth: true //option값  월 선택 가능
-    ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시
-    ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
-    ,buttonImageOnly: true //버튼 이미지만 깔끔하게 보이게함
-    ,buttonText: "선택" //버튼 호버 텍스트
-    ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
-    ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
-    ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
-    ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
-    ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
-    ,minDate: "-5Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-    ,maxDate: "+5y" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)
-});
 
-// start-date을 매달 1일로 설정
-$("#datepicker1").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth(), 1));
+    // start-date을 매달 1일로 설정
+    $("#datepicker1").datepicker('setDate', new Date(new Date().getFullYear(), new Date().getMonth(), 1));
 
-// end-date를 오늘 날짜로 설정
-$("#datepicker2").datepicker('setDate', 'today');
+    // end-date를 오늘 날짜로 설정
+    $("#datepicker2").datepicker('setDate', 'today');
 </script>
 
-<script>
-var currentDate = new Date();
-var tableRows = document.querySelectorAll(".today-graph tr");
+<script src="/resources/js/dailyReport/step1/join.js"></script>
 
-tableRows.forEach(function(row) {
-  var dateCell = row.querySelector("td:nth-child(6)"); // 날짜 정보를 포함한 <td>의 클래스를 지정해주세요.
-  if (dateCell) {
-    var rowDate = new Date(dateCell.textContent); // 날짜 정보를 Date 객체로 파싱 (예: "2023-09-19")
-    if (rowDate.toDateString() === currentDate.toDateString()) {
-      row.style.display = "table-row"; // 현재 날짜와 일치하는 경우 표시
-    } else {
-      row.style.display = "none"; // 일치하지 않는 경우 숨김
-    }
-  }
-});
-</script>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

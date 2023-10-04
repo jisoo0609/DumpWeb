@@ -4,6 +4,8 @@ import com.dispatch.dump.commonModule.db.dto.DailyReport;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep7CarNo;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step7Service;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep7Main;
+import com.dispatch.dump.commonModule.db.dto.DailyReportStep7Sub;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,14 @@ public class Step7Controller {
 
     private final DailyReportService dailyReportService;
     private final Step7Service step7Service;
+
+    /*제출처 주문 등록*/
+    @ResponseBody
+    @RequestMapping(value = "/ajax/orderform", method = RequestMethod.POST)
+    public String saveOrder(DailyReportStep7Main dailyReportStep7Main, DailyReportStep7Sub dailyReportStep7Sub) {
+        return step7Service.saveOrder(dailyReportStep7Main, dailyReportStep7Sub);
+    }
+
 
     @RequestMapping(value = "/orderform", method = RequestMethod.GET)
     public String step7(Model model, DailyReport dailyReport) {
