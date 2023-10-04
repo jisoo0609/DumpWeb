@@ -18,6 +18,9 @@ public interface DailyReportStep3MainMapper {
     /* FUNCTION ::  제출처 정보 수정 */
     int editByCarSubmit(DailyReportStep3Main dailyReportStep3Main);
 
+    /* FUNCTION ::  step4를 위한 조회 */
+    DailyReportStep3Main findBySheetIDForStep4(int sheetID);
+
     /* FUNCTION ::  삭제를 위한 chk1 조회 */
     Boolean findBySheetID(int sheetID);
 
