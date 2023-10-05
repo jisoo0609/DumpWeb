@@ -25,8 +25,10 @@ public class Step5Service {
 
 
     public String saveTDrive(DailyReportStep5 dailyReportStep5) {
-
         Map<String, Object> rtnMap = commonUtil.returnMap();
+
+        System.out.println(dailyReportStep5);
+
 
         try {
             dailyReportStep5.setCarNo(getSessionLoginData().getUserId());
