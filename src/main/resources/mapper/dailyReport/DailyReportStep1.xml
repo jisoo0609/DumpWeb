@@ -26,11 +26,11 @@
         FROM r1
             INNER JOIN r2 ON r1.sheetID = r2.sheetID2
             ),
-            tdrive_table AS -- 가상 테이블로 tdrive 테이블을 추가합니다.
+            tdrive_table AS
             (
-        SELECT drvDate, useAmt
+        SELECT *
         FROM tdrive
-        WHERE drvDate BETWEEN ${startDate} AND ${endDate} -- startDate와 endDate 사이의 drvDate를 조회합니다.
+        WHERE drvDate BETWEEN ${startDate} AND ${endDate}
           AND driveSS = #{uuserID}
             )
     </sql>
@@ -44,13 +44,16 @@
 
         SELECT
         IF(SUM(Qty * Qtyup) IS NULL, 0, SUM(Qty * Qtyup)) AS 'totalTransportationCost',
-        IF(SUM(Qty) IS NULL, 0, SUM(Qty)) AS 'totalTrips',
+        IF(SUM(Qty) IS NULL, 0, SUM(Qty)) AS 'totalQty',
+        IFNULL(
         (
-        SELECT MAX(drvDate) -- tdrive_table에서 drvDate의 최대값을 조회합니다.
+        SELECT MAX(drvDate)
         FROM tdrive_table
+        ),
+        NULL
         ) AS 'finalDrvDate',
         (
-        SELECT IF(SUM(useAmt) IS NULL, 0, SUM(useAmt)) -- tdrive_table의 useAmt의 합계를 조회합니다.
+        SELECT IF(SUM(useAmt) IS NULL, 0, SUM(useAmt))
         FROM tdrive_table
         ) AS 'totalUseAmt'
         FROM tSheet_sub
@@ -88,7 +91,7 @@
 
 
 
-    
+
 
 
 
