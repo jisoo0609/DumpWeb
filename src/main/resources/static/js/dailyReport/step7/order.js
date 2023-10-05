@@ -10,11 +10,30 @@ function clickSaveBtn(){
   golPop.style.display = "flex";
 }
 
+/* 저장&확인 버튼을 눌렀을 때, input 필드에 있는 값 초기화 */
+function emptyRow() {
+  const fromsiteInput = document.querySelector("#fromsite");
+  const tositeInput = document.querySelector("#tosite");
+  const itemInput = document.querySelector("#item");
+  const QtyInput = document.querySelector("#Qty");
+  const carNobInput = document.querySelector("#carNo");
+  const QtyupInput = document.querySelector("#Qtyup");
+
+  fromsiteInput.value = "";
+  tositeInput.value = "";
+  itemInput.value = "";
+  QtyInput.value = "";
+  carNobInput.value = "";
+  QtyupInput.value = "";
+}
+
 /* js에서 confirmBtn(확인)이 눌릴 수 있도록 처리 */
 function clickConfirmButton(){
   // 팝업 창을 숨기는 코드
   const golPop3 = document.querySelector("#golPop3");
   golPop3.style.display = "none";
+
+  emptyRow();
   bindList();
 }
 
@@ -25,8 +44,8 @@ function bindList() {
       type: "POST",
       data: $("[name=golForm]").serialize(),
       success: function (data) {
-//          addTableRow(data);
           alert("저장이 완료되었습니다.");
+          addTableRow(data);
       }
   })
 }
@@ -44,20 +63,22 @@ function addTableRow(tableBody, data, isUndefined, rowNumber) {
   if (isUndefined) {
     newRow.innerHTML = `
           <td>${rowNumberForUndefined}</td>
-          <td>${data.loadPoint}</td>
-          <td>${data.unloadPoint}</td>
-          <td>${data.golItems}</td>
-          <td>${data.golCount}</td>
+          <td>${data.fromsite}</td>
+          <td>${data.tosite}</td>
+          <td>${data.item}</td>
+          <td>${data.Qty}</td>
           <td><button class="undefined-button">미지정</button></td>
+          <td>${data.Qtyup}</td>
       `;
   } else {
       newRow.innerHTML = `
           <td>${rowNumberForCarNumb}</td>
-          <td>${data.loadPoint}</td>
-          <td>${data.unloadPoint}</td>
-          <td>${data.golItems}</td>
-          <td>${data.golCount}</td>
-          <td>${data.carNumb}</td>
+          <td>${data.fromsite}</td>
+          <td>${data.tosite}</td>
+          <td>${data.item}</td>
+          <td>${data.Qty}</td>
+          <td>${data.carNo}</td>
+          <td>${data.Qtyup}</td>
       `;
   }
 
@@ -72,30 +93,16 @@ function addTableRow(tableBody, data, isUndefined, rowNumber) {
 }
 
 // 데이터를 가져와서 테이블에 표시
-function fetchAndDisplayData() {
-  let rowNumberForUndefined = 1; // 미지정인 경우의 rowNumber 초기화
-  let rowNumberForCarNumb = 1; // 차량번호인 경우의 rowNumber 초기화
-  datalist.forEach((data) => {
-      if (!data.carNumb || data.carNumb === "미지정") {
-          addTableRow(tableBody, data, true, rowNumberForUndefined);
-          rowNumberForUndefined++; // 미지정인 경우의 rowNumber 증가
-      } else {
-          addTableRow(tableBody, data, false, rowNumberForCarNumb);
-          rowNumberForCarNumb++; // 차량번호인 경우의 rowNumber 증가
-      }
-  });
-}
-//
-//const checkbox = document.getElementById("chk1");
-//
-//// 체크박스 클릭 이벤트 리스너 추가
-//checkbox.addEventListener("change", function () {
-//    var resultElement = document.getElementById("result");
-//    if (checkbox.checked) {
-//        resultElement.textContent = "1";
-//        console.log('1'); // 체크됐을 때 1 출력
-//    } else {
-//        resultElement.textContent = "0";
-//        console.log('0'); // 체크 해제됐을 때 0 출력
-//    }
-//});
+//function fetchAndDisplayData() {
+//  let rowNumberForUndefined = 1; // 미지정인 경우의 rowNumber 초기화
+//  let rowNumberForCarNumb = 1; // 차량번호인 경우의 rowNumber 초기화
+//  datalist.forEach((data) => {
+//      if (!data.carNumb || data.carNumb === "미지정") {
+//          addTableRow(tableBody, data, true, rowNumberForUndefined);
+//          rowNumberForUndefined++; // 미지정인 경우의 rowNumber 증가
+//      } else {
+//          addTableRow(tableBody, data, false, rowNumberForCarNumb);
+//          rowNumberForCarNumb++; // 차량번호인 경우의 rowNumber 증가
+//      }
+//  });
+//}
