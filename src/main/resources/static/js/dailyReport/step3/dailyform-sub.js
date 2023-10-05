@@ -4,11 +4,13 @@ var openable2 = false;
 var openable3 = false;
 var openable4 = true; //기본적으로 오늘 날자를 세팅해 놓으므로 true로 둠
 
+
 /* function : 결재버튼을 통해서만 체크박스를 체크하거나 해제할 수 있다.  */
 /* function: 오늘 날자로 인풋 자동 채우기 */
 const dateInput = document.getElementById('date');
 const todayDate = new Date();
 dateInput.value = todayDate.toISOString().slice(0, 10);
+
 
 /* function : onfocus시 자동으로 010을 채워준다*/
 var phoneNumberPattern = /^010[0-9]{8}$/;
@@ -28,10 +30,7 @@ function validateInput1(input) {
     } else {
         openable1 = true;
         localStorage.setItem('recentCarSubmit', carSubmit);
-<<<<<<< HEAD
         listData()
-=======
->>>>>>> 6ebc248aa324f267ed7a244adaee6a9fc71fbacd
     }
 }
 
@@ -42,13 +41,9 @@ function validateInput2(input) {
     } else {
         openable2 = true;
         localStorage.setItem('recentSalesman', salesman);
-<<<<<<< HEAD
         listData()
-=======
->>>>>>> 6ebc248aa324f267ed7a244adaee6a9fc71fbacd
     }
 }
-
 
 /* function : oninput 인풋이 바르지 않으면 보더컬러를 red로 바꿈 */
 function validateInput3(input) {
@@ -69,7 +64,6 @@ function loadInputValues() {
     const recentCarSubmit = localStorage.getItem('recentCarSubmit');
     const recentSalesman = localStorage.getItem('recentSalesman');
     const recentCarSubmitTel = localStorage.getItem('recentCarSubmitTel');
-<<<<<<< HEAD
 
     // Set input values if they exist in localStorage
     if (recentCarSubmit !== null) {
@@ -91,29 +85,7 @@ window.onload = function () {
     openable3 = true;
     listData();
 };
-=======
->>>>>>> 6ebc248aa324f267ed7a244adaee6a9fc71fbacd
 
-    // Set input values if they exist in localStorage
-    if (recentCarSubmit !== null) {
-        document.getElementById('carSubmit').value = recentCarSubmit;
-    }
-    if (recentSalesman !== null) {
-        document.getElementById('salesman').value = recentSalesman;
-    }
-    if (recentCarSubmitTel !== null) {
-        document.getElementById('carSubmitTel').value = recentCarSubmitTel;
-    }
-}
-
-// Call the loadInputValues function when the page loads
-window.onload = function () {
-    loadInputValues();
-    openable1 = true;
-    openable2 = true;
-    openable3 = true;
-    listData();
-};
 
 
 /* function : open/close popup */
@@ -301,7 +273,7 @@ function fillPop(event) {
 
 
 function listData() {
-    if(openable3 & openable4 === true) {
+    if(openable1 & openable2& openable3 & openable4 === true) {
         $.list();
     }
 }

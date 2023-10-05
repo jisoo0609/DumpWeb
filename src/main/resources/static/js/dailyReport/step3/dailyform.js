@@ -96,7 +96,7 @@ function showTransportList(data){
         for (var i = 0; i < data.dailyReportStep3SubList.length; i++) {
             var subData = data.dailyReportStep3SubList[i];
             var rowId = 'row' + i;
-            html += '<tr id="' + rowId + '" onclick="fillPop(event)">';
+            html += '<tr id="' + rowId + '" onclick="fillPop(event); selected('+ rowId + ');">';
             html += '   <td>' + subData.fromsite + '</td>';
             html += '   <td>' + subData.tosite + '</td>';
             html += '   <td>' + subData.item + '</td>';
