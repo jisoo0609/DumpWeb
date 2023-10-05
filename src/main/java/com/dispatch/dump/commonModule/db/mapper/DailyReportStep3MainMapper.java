@@ -22,7 +22,7 @@ public interface DailyReportStep3MainMapper {
     DailyReportStep3Main findBySheetIDForStep4(int sheetID);
 
     /* FUNCTION ::  삭제를 위한 chk1 조회 */
-    Boolean findBySheetID(int sheetID);
+    boolean findBySheetID(int sheetID);
 
     /* FUNCTION :: 일보 리스트 조회(전체조건) */
     DailyReportStep3Main findCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
