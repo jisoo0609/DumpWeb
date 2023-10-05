@@ -1,4 +1,5 @@
 const canvas = document.getElementById("canvas");
+const popup = document.getElementById('popup');
 var openable1 = false;
 var openable2 = false;
 var openable3 = false;
@@ -80,7 +81,6 @@ function loadInputValues() {
 
 
 /* function : open/close popup */
-const popup = document.getElementById('popup');
 function openPop() {
     if(dateInput === '') { // 데이트 기록이 없으면
         openable4 = false;
@@ -90,6 +90,7 @@ function openPop() {
     }
     if(openable1 & openable2& openable3 & openable4 === true) {
         popup.style.display = 'flex';
+        updateTotalAmount();
         saved.forEach(function(elem){
             elem.classList.add('hidden');
         })
@@ -282,6 +283,10 @@ function listData() {
     if(openable1 & openable2& openable3 & openable4 === true) {
         $.list();
     }
+}
+
+function selected(row) {
+    console.log(row.id)
 }
 
 
