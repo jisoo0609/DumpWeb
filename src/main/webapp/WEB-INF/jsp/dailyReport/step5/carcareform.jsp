@@ -105,14 +105,14 @@
 
     <table>
         <thead>
-        <tr>
-            <th>날짜</th>
-            <th>분류</th>
-            <th class="Drvth2">최종주행(km)</th>
-            <th class="Drvth2">사용금액</th>
-            <th>기타(설명)</th>
-            <th>교환 주기</th>
-        </tr>
+            <tr>
+                <th>날짜</th>
+                <th>분류</th>
+                <th class="Drvth2">최종주행(km)</th>
+                <th class="Drvth2">사용금액</th>
+                <th>기타(설명)</th>
+                <th>교환 주기</th>
+            </tr>
         </thead>
         <tbody>
 
