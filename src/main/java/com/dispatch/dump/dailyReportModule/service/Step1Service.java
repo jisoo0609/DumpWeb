@@ -32,18 +32,18 @@ public class Step1Service {
     }
 
     public DailyReportStep1Total findCalTotal(DailyReportStep1Option option) {
-        return dailyReportStep1Mapper.selectCalTotal(option, getSessionLoginData().getUserId());
+        return dailyReportStep1Mapper.selectCalTotal(option, getSessionLoginData().getUuserID());
     }
 
 
     public List<DailyReportStep1Sub> findDispatchSubmitList() {
-        System.out.println( dailyReportStep1Mapper.selectDispatchSubmitList(getSessionLoginData().getUserId(),getToday()));
-        return dailyReportStep1Mapper.selectDispatchSubmitList(getSessionLoginData().getUserId(),getToday());
+        System.out.println( dailyReportStep1Mapper.selectDispatchSubmitList(getSessionLoginData().getUuserID(),getToday()));
+        return dailyReportStep1Mapper.selectDispatchSubmitList(getSessionLoginData().getUuserID(),getToday());
     }
 
     public List<DailyReportStep1Tdrive> findDispatchTdriveList() {
-        System.out.println( dailyReportStep1Mapper.selectDispatchTdriveList(getSessionLoginData().getUserId(),getToday()));
-        return dailyReportStep1Mapper.selectDispatchTdriveList(getSessionLoginData().getUserId(),getToday());
+        System.out.println( dailyReportStep1Mapper.selectDispatchTdriveList(getSessionLoginData().getUserId()));
+        return dailyReportStep1Mapper.selectDispatchTdriveList(getSessionLoginData().getUserId());
     }
 
 

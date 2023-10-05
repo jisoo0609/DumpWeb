@@ -234,9 +234,9 @@
                     <tr>
                         <th class="th_header">제출처</th>
                         <th class="th_header">운행일</th>
-                        <th class="th_header">품목</th>
                         <th class="th_header">상차지</th>
                         <th class="th_header">하차지</th>
+                        <th class="th_header">품목</th>
                         <th class="th_header">대수</th>
                         <th class="th_header">운반단가</th>
                     </tr>

@@ -30,9 +30,9 @@ public class AOPConfig {
         String method_name = pjp.getSignature().getName();
         Object result;
         log.info("----- AOP Check -----");
-//        log.info(method_name);
+        log.info(method_name);
         log.info("---------------------");
-        if (className.equals("LoginController") && !method_name.equals("pwchangeForm")) {
+        if ((className.equals("LoginController") && !method_name.equals("pwchangeForm")) || className.equals("CommonController")) {
             return pjp.proceed();
         } else {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
