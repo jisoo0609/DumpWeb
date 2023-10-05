@@ -51,7 +51,7 @@
         <if test="selectOption != '전체'">
             AND drvclub = #{selectOption}
         </if>
-        AND chk2 = 0 <!-- 추가: chk2가 1인 항목만 업데이트 -->
+        AND chk2 = 0 <!-- 추가: chk2가 0인 항목만 업데이트 -->
     </update>
 
 
