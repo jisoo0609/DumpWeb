@@ -179,18 +179,18 @@
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="searchType" value="2-item">
+                    <input type="radio" name="searchType" value="4-item">
                     품목 기준
                 </label>
             </div>
             <div style="margin-left: 50%;">
                 <label>
-                    <input type="radio" name="searchType" value="3-fromSite">
+                    <input type="radio" name="searchType" value="2-fromSite">
                     상차지 기준
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="searchType" value="4-toSite">
+                    <input type="radio" name="searchType" value="3-toSite">
                     하차지 기준
                 </label>
                 <br>

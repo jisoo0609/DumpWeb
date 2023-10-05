@@ -1,14 +1,17 @@
 const canvas = document.getElementById("canvas");
+const popup = document.getElementById('popup');
 var openable1 = false;
 var openable2 = false;
 var openable3 = false;
 var openable4 = true; //기본적으로 오늘 날자를 세팅해 놓으므로 true로 둠
+
 
 /* function : 결재버튼을 통해서만 체크박스를 체크하거나 해제할 수 있다.  */
 /* function: 오늘 날자로 인풋 자동 채우기 */
 const dateInput = document.getElementById('date');
 const todayDate = new Date();
 dateInput.value = todayDate.toISOString().slice(0, 10);
+
 
 /* function : onfocus시 자동으로 010을 채워준다*/
 var phoneNumberPattern = /^010[0-9]{8}$/;
@@ -40,7 +43,6 @@ function validateInput2(input) {
         localStorage.setItem('recentSalesman', salesman);
     }
 }
-
 
 /* function : oninput 인풋이 바르지 않으면 보더컬러를 red로 바꿈 */
 function validateInput3(input) {
@@ -74,18 +76,11 @@ function loadInputValues() {
     }
 }
 
-// Call the loadInputValues function when the page loads
-window.onload = function () {
-    loadInputValues();
-    openable1 = true;
-    openable2 = true;
-    openable3 = true;
-    listData();
-};
+
+
 
 
 /* function : open/close popup */
-const popup = document.getElementById('popup');
 function openPop() {
     if(dateInput === '') { // 데이트 기록이 없으면
         openable4 = false;
@@ -95,6 +90,7 @@ function openPop() {
     }
     if(openable1 & openable2& openable3 & openable4 === true) {
         popup.style.display = 'flex';
+        updateTotalAmount();
         saved.forEach(function(elem){
             elem.classList.add('hidden');
         })
@@ -150,13 +146,11 @@ QtyupInput.addEventListener('input', updateTotalAmount);
 
     //<!-- 합계 업데이트 함수 -->
 function updateTotalAmount() {
-    <!-- "대수"와 "운반 단가" 값을 가져옴 -->
     const Qty = parseFloat(QtyInput.value);
     const unitPrice = parseFloat(QtyupInput.value);
 
     //<!--값이 유효한 경우에만 합계 계산 및 표시-->
     if (!isNaN(Qty) && !isNaN(unitPrice)) {
-        <!-- "대수"와 "운반 단가"를 곱하여 소수점 이하 2자리까지 표시 -->
         totalAmountInput.value = Qty * unitPrice;
     } else {
         //<!-- 값이 유효하지 않은 경우 합계 입력 상자를 비움 -->
@@ -168,16 +162,30 @@ function updateTotalAmount() {
 const popCheckbox = document.getElementById("showHideCheckbox");
 const hiddenPart = document.getElementById("hiddenPart");
 const checkboxLabel = document.getElementById("checkboxLabel");
+const savedState = localStorage.getItem('checkboxState');
 
-popCheckbox.addEventListener("change", function() {
+function recoverState() {
+    if (savedState === "on") {
+        popCheckbox.checked = true;
+    } else {
+        popCheckbox.checked = false;
+    }
+    showOrHide();
+    updateTotalAmount();
+}
+
+
+function showOrHide() {
     if (popCheckbox.checked) {
         hiddenPart.style.display = "block";
         checkboxLabel.style.color = "#333";
+        localStorage.setItem('checkboxState', "on");
     } else {
         hiddenPart.style.display = "none";
         checkboxLabel.style.color = "#aaa";
+        localStorage.setItem('checkboxState', "off");
     }
-});
+}
 
 /* 전체 삭제 버튼 누르면 인풋 비우기 */
 function clearInputs() {
@@ -255,7 +263,10 @@ function fillPop(event) {
     document.getElementById('Qty').value = td4;
     document.getElementById('Rem').value = td5;
     document.getElementById('sheetsubID').value = td6;
-    document.getElementById('Qtyup').value = td7;
+    if (td7 !== "0") {
+        document.getElementById('Qtyup').value = td7;
+    }
+
 
     // Open the popup
     openPop();
@@ -269,9 +280,23 @@ function fillPop(event) {
 
 
 function listData() {
-    if(openable3 & openable4 === true) {
+    if(openable1 & openable2& openable3 & openable4 === true) {
         $.list();
     }
 }
 
+function selected(row) {
+    console.log(row.id)
+}
 
+
+
+// Call functions when the page loads
+window.onload = function () {
+    loadInputValues();
+    openable1 = true;
+    openable2 = true;
+    openable3 = true;
+    listData();
+    recoverState();
+};
