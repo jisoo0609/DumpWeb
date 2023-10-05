@@ -73,7 +73,7 @@
               <span class="golInputSpan"><input class="golIn" id="item" name="item" type="text" placeholder="품목"></span>
             </li>
             <li>
-              <label class="golLabel" for="Qty">대수</label>
+              <label class="golLabel" for="Qty"> 대수 </label>
               <span class="golInputSpan">
                 <input class="golIn" id="Qty" name="Qty" type="number" pattern="[0-9]" inputmode="numeric" placeholder="대수">
               </span>
@@ -81,6 +81,10 @@
             <li>
               <label class="golLabel" for="carNo"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
               <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호"></span>
+            </li>
+            <li>
+              <label class="golLabel" for="Qtyup"> 운반비 </label>
+              <span class="golInputSpan"><input class="golIn" id="Qtyup" name="Qtyup" type="text" placeholder="운반비"></span>
             </li>
           </ul>
         </fieldset>
@@ -153,6 +157,8 @@
       </tbody>
     </table>
 </section>
+
+<script src="/resources/js/dailyReport/step7/CheckDisabled.js"></script>
 
 <%@ include file="popup/layer_popup.jsp" %>
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
