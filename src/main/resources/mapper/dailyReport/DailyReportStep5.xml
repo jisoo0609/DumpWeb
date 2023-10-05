@@ -6,8 +6,7 @@
 
     <insert id="insertTDrive" parameterType="DailyReportStep5">
         INSERT INTO tdrive
-        (
-        carno,
+        (carno,
         drvdate,
         lastkm,
         drvclub,
@@ -15,25 +14,32 @@
         useoil,
         drvrem,
         chk2,
-        rependdate,
-        repaddkm,
+        <if test="rependdate != '-1'">
+            rependdate,
+        </if>
+        <if test="repaddkm != -1">
+            repaddkm,
+        </if>
         rependchk,
         drivess)
-        VALUES      (
-                      #{carNo},
-                      #{drvDate},
-                      #{lastKm},
-                      #{drvClub},
-                      #{useAmt},
-                      #{useOil},
-                      #{drvRem},
-                      #{chk2},
-                      #{rependdate},
-                      #{repaddkm},
-                      #{rependchk},
-                      (SELECT uuserid
-                       FROM   tsitepw
-                       WHERE  userid = #{carNo}))
+        VALUES (#{carNo},
+        #{drvDate},
+        #{lastKm},
+        #{drvClub},
+        #{useAmt},
+        #{useOil},
+        #{drvRem},
+        #{chk2},
+        <if test="rependdate != '-1'">
+            #{rependdate},
+        </if>
+        <if test="repaddkm != -1">
+            #{repaddkm},
+        </if>
+        #{rependchk},
+        (SELECT uuserid
+        FROM tsitepw
+        WHERE userid = #{carNo}))
     </insert>
 
 

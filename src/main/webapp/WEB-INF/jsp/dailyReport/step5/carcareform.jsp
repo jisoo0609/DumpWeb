@@ -58,11 +58,11 @@
             <ul class="bdnUl" id="hiddenPart">
                 <li>
                     <label class="drvLabel" for="exchange-date">교환 예정일</label>
-                    <span class="drvInputSpan"><input id="exchange-date" inputmode="none" name="rependdate"></span>
+                    <span class="drvInputSpan"><input id="exchange-date" inputmode="none" name="rependdate" value=""></span>
                 </li>
                 <li>
                     <label class="drvLabel" for="nextlastkm">교환 주행거리</label>
-                    <span class="drvInputSpan"><input name="repaddkm" id="nextlastkm" type="number" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리"></span>
+                    <span class="drvInputSpan"><input name="repaddkm" id="nextlastkm" type="number" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리" value=""></span>
                 </li>
                 <li>
                     <label for="rependchk">교환 완료 확인</label>
