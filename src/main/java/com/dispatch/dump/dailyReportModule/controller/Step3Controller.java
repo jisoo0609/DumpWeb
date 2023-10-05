@@ -68,7 +68,7 @@ public class Step3Controller {
 
     @RequestMapping(value = "/workspace/ajax/edit/carSubmit", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<String> editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
+    public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
         return step3Service.editByCarSubmit(dailyReportStep3Main);
     }
 
