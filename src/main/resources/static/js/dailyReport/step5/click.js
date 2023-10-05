@@ -49,14 +49,14 @@ function save() {
     checkBoxID.forEach(id => checkData += getCheckParam(id));
 
    // const rependdate = $("#exchange-date").val() || "";
-//const repaddkm = $("#nextlastkm").val() || "";
+   // const repaddkm = $("#nextlastkm").val() || "";
 
     console.log($("[name=entry_form]").serialize() + checkData);
 
     $.ajax({
         url: "/dailyReport/carcareform/ajax/save",
         type: "POST",
-        data: $("[name=entry_form]").serialize() + checkData //+ "&rependdate=" + rependdate + "&repaddkm=" + repaddkm,
+        data: $("[name=entry_form]").serialize() + checkData, //+ "&rependdate=" + rependdate + "&repaddkm=" + repaddkm,
         success: function (data) {
             alert('저장 되었습니다.');
             bindList();

@@ -44,7 +44,18 @@
             <property name="endDate" value="#{today}"/>
         </include>
 
-        select * from r3
+        SELECT
+        r3.fromsite,
+        r3.item,
+        SUM(r3.Qty) as Qty,
+        r3.tosite,
+        r3.CarNo
+        FROM r3
+        GROUP BY
+        r3.fromsite,
+        r3.item,
+        r3.tosite,
+        r3.CarNo
     </select>
 
 </mapper>
