@@ -49,6 +49,7 @@ $.save = function() {
         data: formData,
         processData: false,
         contentType: false,
+        cache: false,
         success: function (data) {
             alert("저장이 완료되었습니다.");
 
@@ -69,6 +70,7 @@ $.list = function() {
         data: formData,
         processData: false,
         contentType: false,
+        cache: false,
         success: function (data) {
             console.log(data);
             console.log("sheetID는?"+ data.sheetID);
