@@ -11,6 +11,7 @@
         <input type="hidden" name="driveID" type="number" value = "0">
         <fieldset>
             <div class="item" name="item">
+                <p style="margin-bottom: 10px; color: red;">* 품목을 선택해 주세요</p>
                 <input type="radio" name="drvClub" id="rdOli" value="주유">
                 <label for="rdOli" class="active">주유</label>
 
@@ -71,12 +72,9 @@
         </fieldset>
     </form>
 
-
-
-
     <div>
         <button class="openBtn" data-popName="drvpop1">삭제</button>
-        <button onclick="save()">저장</button>
+        <button onClick="save()">저장</button>
         <button class="openBtn" data-popName="drvpop2">입력취소</button>
         <button class="openBtn" data-popName="drvpop3">이전화면</button>
     </div>

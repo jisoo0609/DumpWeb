@@ -12,6 +12,8 @@ import com.dispatch.dump.commonModule.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -53,7 +55,7 @@ public class Step3Service {
             dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
 
             if (dailyReportStep3Main.getImageFile() != null) {
-                fileUtil.fileUpload(dailyReportStep3Main.getImageFile());
+                fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
             }
             dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
             saveTransPortInfo(dailyReportStep3Sub);
@@ -62,7 +64,7 @@ public class Step3Service {
 
     //전체목록 조회
     public DailyReportStep3Main list(DailyReportStep3Main dailyReportStep3Main) {
-        dailyReportStep3Main.setCarNo(getSessionLoginData().getUuserID());
+        dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
         return dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
     }
 
@@ -84,8 +86,22 @@ public class Step3Service {
         return dailyReportStep3MainMapper.findBySheetIDForStep4(sheetID);
     }
 
+    /*제출처 정보 수정*/
+    public ResponseEntity<String> editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
+        dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+        int result=dailyReportStep3MainMapper.editByCarSubmit(dailyReportStep3Main);
+
+        if (result > 0) {
+            // 성공적으로 수정됨
+            return ResponseEntity.ok("{'status': 'success'}");
+        } else {
+            // 수정 실패
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{'status': 'error', 'message': '제출처 정보 수정에 실패했습니다.'}");
+        }
+    }
+
+
     /*운송정보 수정*/
-    
     public void edit(DailyReportStep3Sub dailyReportStep3Sub){
         Map<String, Object> rtnMap = commonUtil.returnMap();
         //유지보수를 위해 단계적으로 작성->리팩토링 예정
@@ -95,9 +111,9 @@ public class Step3Service {
         boolean chk1=dailyReportStep3MainMapper.findBySheetID(sheetID);
 
         if(chk1==false){
-            System.out.println("chk1은?"+chk1);
-            int result=dailyReportStep3SubMapper.editByTransportInfo(dailyReportStep3Sub);
-            System.out.println("result는?"+result);
+            dailyReportStep3SubMapper.editByTransportInfo(dailyReportStep3Sub);
+        }else{
+            rtnMap.put("httpcode",422);
         }
     }
 
@@ -111,8 +127,7 @@ public class Step3Service {
         if(chk1==false){
             dailyReportStep3SubMapper.deleteByOne(sheetsubID);
         }else{
-            rtnMap.put("httpcode", 500);
-            rtnMap.put("httpcode", 500);
+            rtnMap.put("httpcode", 422);
         }
     }
 }

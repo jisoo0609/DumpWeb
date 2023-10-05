@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.FileMapper">
+
+    <insert id="insertFileInfoBySheetID" parameterType="FileDTO">
+        INSERT INTO tFile(file_name, t_idx, uuid, file_ext) VALUES (#{fileName}, #{sheetID}, #{uuid}, #{ext})
+    </insert>
+
+    <select id="findFileInfoBySheetID" resultType="FileDTO" parameterType="Integer">
+        SELECT file_name as fileName, file_ext as ext, uuid, t_idx as sheetID FROM tFile WHERE t_idx = #{sheetID}
+    </select>
+
+</mapper>
