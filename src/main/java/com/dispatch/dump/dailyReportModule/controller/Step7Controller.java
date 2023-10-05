@@ -31,10 +31,10 @@ public class Step7Controller {
     }
 
     /*제출처 주문 조회*/
-    @RequestMapping(value = "/ajax/orderlist", method = RequestMethod.GET)
+    @RequestMapping(value = "/ajax/orderlist", method = RequestMethod.POST)
     @ResponseBody
-    public List<DailyReportStep7Sub> dispatchOrderList(){
-        return step7Service.searchOrderList();
+    public List<DailyReportStep7Sub> dispatchOrderList(DailyReportStep7Main dailyReportStep7Main){
+        return step7Service.searchOrderList(dailyReportStep7Main);
     }
 
     @RequestMapping(value = "/orderform", method = RequestMethod.GET)
