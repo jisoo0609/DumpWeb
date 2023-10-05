@@ -8,10 +8,11 @@ function tableSort(){
     const searchType = searchTypedRadio[0].value.split("-");
     const firstThFlag = parseInt(searchType[0]);
 
-    let order = ["제출처", "운행일", "품목", "상차지", "하차지", "대수", "운반단가"];
+    // 테이블 헤더 순서
+    let order = ["제출처", "운행일", "상차지", "하차지", "품목", "대수", "운반단가"];
 
     // 배열순서 변경
-    insertTitleThInFront(order, firstThFlag);
+    // insertTitleThInFront(order, firstThFlag);
 
     // 테이블 헤더에 변경된 배열요소 순서 적용
     for(let i=0; i<header.length; i++)
@@ -62,8 +63,8 @@ function printTable(datas){
         ];
 
         // 데이터 항목, 선택된 라디오 버튼 idx 전달 -> 데이터 항목 순서 변경
-        if (firstFlag !== 6)
-            insertTitleThInFront(order, firstFlag);
+        // if (firstFlag !== 6)
+        //     insertTitleThInFront(order, firstFlag);
 
 
         // 운반단가 및 총액 계산
@@ -81,11 +82,13 @@ function printTable(datas){
                     <td style="text-align: right;">${order[6]}</td>
         `;
 
+        end = order[firstFlag];
+
         // 끝 값 설정
-        if (firstFlag == 6)
-            end = order[6];
-        else
-            end = order[0];
+        // if (firstFlag == 6)
+        //     end = order[6];
+        // else
+        //     end = order[0];
 
         if(start !== end){
             start = end;
