@@ -14,50 +14,49 @@ function bindList() {
     })
 }
 
-
 function save() {
+
+    theForm = document.entry_form;
+
+    if(theForm.drvClub.value==="" || theForm.drvDate.value==="" || theForm.lastKm.value==="" || theForm.useAmt.value==="" || theForm.useOil.value===""){
+        if(theForm.drvClub.value==""){
+            alert("품목을 선택해 주세요.")
+        }else if(theForm.drvDate.value==""){
+            alert("날짜를 선택해 주세요.")
+            return theForm.drvDate.focus();
+        }else if(theForm.lastKm.value==""){
+            alert("최종 주행 거리를 입력해 주세요.")
+            return theForm.lastKm.focus();
+        }else if(theForm.useAmt.value==""){
+            alert("사용 금액을 입력해 주세요.")
+            return theForm.useAmt.focus();
+        }else if(theForm.useOil.value==""){
+            alert("주유량을 입력해 주세요.")
+            return theForm.useOil.focus();
+        }else if(theForm.rependdate.value==""){
+            alert("교환 예정일을 선택해 주세요.")
+            return theForm.rependdate.focus();
+        }else if(theForm.rependchk.value==""){
+            alert("교환완료 체크를 해주세요")
+        }
+    }
 
     //fetch 코드도 고민해볼 것.
     const checkBoxID = ["chk2","rependchk"];
 
-//    let checkData = "";
-//    String drvClub = request.getParameter("drvClub");
-//    String drvDate = request.getParameter("drvDate");
-//    int lastKm = request.getParameter("lastKm");
-//    int useAmt = request.getParameter("useAmt");
-//    int useOil = request.getParameter("useOil");
-//    String drvRem = request.getParameter("drvRem");
-//    String exchange-date = request.getParameter("exchange-date");
-//    int nextlastkm = request.getParameter("nextlastkm");
-//
-//    // 빈 값 처리
-//    if (drvClub == null || drvClub.isEmpty()) {
-//        drvClub = "";
-//    }
-//    if (drvDate == null || drvDate.isEmpty()) {
-//        drvDate = "";
-//    }
-//    if (lastKm == null || lastKm.isEmpty()) {
-//        lastKm = "";
-//    }
-//    if (useAmt == null || useAmt.isEmpty()) {
-//        useAmt = "";
-//    }
-//    if (useOil == null || useOil.isEmpty()) {
-//        useOil = "";
-//    }
-//    if (drvRem == null || drvRem.isEmpty()) {
-//        drvRem = "";
-//    }
+    let checkData = "";
 
     checkBoxID.forEach(id => checkData += getCheckParam(id));
+
+   // const rependdate = $("#exchange-date").val() || "";
+//const repaddkm = $("#nextlastkm").val() || "";
 
     console.log($("[name=entry_form]").serialize() + checkData);
 
     $.ajax({
         url: "/dailyReport/carcareform/ajax/save",
         type: "POST",
-        data: $("[name=entry_form]").serialize() + checkData,
+        data: $("[name=entry_form]").serialize() + checkData //+ "&rependdate=" + rependdate + "&repaddkm=" + repaddkm,
         success: function (data) {
             alert('저장 되었습니다.');
             bindList();

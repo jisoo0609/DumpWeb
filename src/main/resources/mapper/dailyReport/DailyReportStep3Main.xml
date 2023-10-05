@@ -24,10 +24,15 @@
     <select id="findCarSubmitInfo"  resultMap="DailyReportStep3MainMapper" parameterType="DailyReportStep3Main">
         select * from tSheet
         where
-        date = #{date} and
-        carSubmit = #{carSubmit} and
-        carSubmitTel = #{carSubmitTel} and
+        date = #{date}
+        and
+        carSubmit = #{carSubmit}
+        and
+        carSubmitTel = #{carSubmitTel}
+        and
         salesman = #{salesman}
+        and
+        sheetSS=#{sheetSS}
         order by carSubmit asc
     </select>
 
@@ -96,8 +101,32 @@
 
     <!--step4관련: 페이지 이동시 조회-->
     <select id="findBySheetIDForStep4" parameterType="int" resultType="DailyReportStep3Main">
-        select * from tSheet where sheetID=#{sheetID}
+        select
+        CarNo,
+        DATE_FORMAT(date, '%Y-%m-%d') as date,
+        carSubmit,
+        carSubmitTel,
+        salesman,
+        chk1,
+        sheetSS
+        from tSheet
+        where sheetID=#{sheetID}
     </select>
+
+    <!--수정 관련-->
+    <!--제출처정보 수정-->
+    <update id="editByCarSubmit" parameterType="DailyReportStep3Main">
+        update tSheet
+        set
+        carSubmit=#{carSubmit},
+        carSubmitTel=#{carSubmitTel},
+        salesman=#{salesman}
+        where
+        sheetSS=#{sheetSS}
+        and
+        sheetID=#{sheetID}
+    </update>
+
 
     <!--삭제 관련-->
     <!--sheetID로 조회-->
