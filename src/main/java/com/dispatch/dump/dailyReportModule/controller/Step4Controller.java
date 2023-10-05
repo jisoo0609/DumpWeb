@@ -27,6 +27,9 @@ public class Step4Controller {
     public String step4(Model model, DailyReport dailyReport) {
         dailyReportService.list(model, dailyReport);
         model.addAttribute("tSheet", step4Service.getSummary());
+//        10.05 테이블 초기 데이터
+        model.addAttribute("todayList", step4Service.getTodayList());
+//        System.out.println(step4Service.getTodayList());
         return "/dailyReport/step4/list";
     }
 
