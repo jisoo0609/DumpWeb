@@ -52,8 +52,26 @@
         <if test="state != '' and state != '전체'">
             AND t.CurrStatus = #{CurrStatus}
         </if>
+        <choose>
+            <when test="searchType == '0-submit'">
+                ORDER BY t.carSubmit ASC
+            </when>
+            <when test="searchType == '4-item'">
+                ORDER BY s.item ASC
+            </when>
+            <when test="searchType == '2-fromSite'">
+                ORDER BY s.fromsite ASC
+            </when>
+            <when test="searchType == '3-toSite'">
+                ORDER BY s.tosite ASC
+            </when>
+            <when test="searchType == '6-cost'">
+                ORDER BY s.Qtyup ASC
+            </when>
+        </choose>
     </select>
 
+<!--    일괄결재-->
     <update id="submitOptionM">
         UPDATE tsheet
         SET chk1 = 1
@@ -80,6 +98,7 @@
         AND chk1 = 0
     </update>
 
+<!--    일괄취소-->
     <update id="cancelOptionM">
         UPDATE tsheet
         SET chk1 = 0
