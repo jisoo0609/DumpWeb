@@ -7,6 +7,7 @@ import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step3Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,6 +64,12 @@ public class Step3Controller {
     @ResponseBody
     public List<DailyReportStep3Main> salesmanList(DailyReportStep3Main dailyReportStep3Main){
         return step3Service.searchBySalesman(dailyReportStep3Main);
+    }
+
+    @RequestMapping(value = "/workspace/ajax/edit/carSubmit", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
+        return step3Service.editByCarSubmit(dailyReportStep3Main);
     }
 
     @RequestMapping(value = "/workspace/ajax/edit", method = RequestMethod.POST)
