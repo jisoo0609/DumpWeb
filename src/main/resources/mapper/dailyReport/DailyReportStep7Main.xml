@@ -44,7 +44,7 @@
         )
     </sql>
 
-    <select id="selectReceptionList" resultType="DailyReportStep7Sub">
+    <select id="selectReceptionList" parameterType="DailyReportStep7Main" resultType="DailyReportStep7Sub">
         <include refid="reception_table">
             <property name="userId" value="#{userId}"/>
             <property name="startDate" value="#{today}"/>

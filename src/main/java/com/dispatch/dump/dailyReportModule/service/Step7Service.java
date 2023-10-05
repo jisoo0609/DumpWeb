@@ -71,9 +71,11 @@ public class Step7Service {
     }
 
     //제출처 주문 정보 조회
-    public List<DailyReportStep7Sub> searchOrderList(){
-        System.out.println(dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUserId(),getToday()));
-        return dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUserId(), getToday());
+    public List<DailyReportStep7Sub> searchOrderList(DailyReportStep7Main dailyReportStep7Main){
+        System.out.println(dailyReportStep7Main);
+        System.out.println(getSessionLoginData().getUuserID());
+        System.out.println(dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUuserID(),dailyReportStep7Main.getDate()));
+        return dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUuserID(),dailyReportStep7Main.getDate());
     }
     public String saveCarData(DailyReportStep7CarNo dailyReportStep7CarNo) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
