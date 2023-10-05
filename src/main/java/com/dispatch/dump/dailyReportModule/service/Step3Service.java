@@ -101,7 +101,7 @@ public class Step3Service {
     }
 
     /*운송정보 수정*/
-    public void edit(DailyReportStep3Sub dailyReportStep3Sub){
+    public String edit(DailyReportStep3Sub dailyReportStep3Sub){
         Map<String, Object> rtnMap = commonUtil.returnMap();
         //유지보수를 위해 단계적으로 작성->리팩토링 예정
         int sheetsubID=dailyReportStep3Sub.getSheetsubID();
@@ -114,12 +114,13 @@ public class Step3Service {
         }else{
             rtnMap.put("httpcode",422);
         }
+        return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
     /*운송정보 삭제*/
-    public void delete(int sheetsubID){
+    public String delete(int sheetsubID){
+        Map<String, Object> rtnMap = commonUtil.returnMap();
         //유지보수를 위해 단계적으로 작성->리팩토링 예정
-        Map<String, Object> rtnMap = commonUtil.returnMap();//실패시 메세지 전송용
         int sheetID=dailyReportStep3SubMapper.findBySheetsubID(sheetsubID);
         boolean chk1=dailyReportStep3MainMapper.findBySheetID(sheetID);
 
@@ -128,5 +129,6 @@ public class Step3Service {
         }else{
             rtnMap.put("httpcode", 422);
         }
+        return commonUtil.jsonFormatTransfer(rtnMap);
     }
 }

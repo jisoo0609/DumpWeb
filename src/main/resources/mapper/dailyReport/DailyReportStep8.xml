@@ -45,16 +45,13 @@
         from r3
         <choose>
             <when test="sortingCriteria.equals('date')">
-                ORDER BY date DESC
+                ORDER BY date DESC, fromsite ASC, tosite ASC
             </when>
             <when test="sortingCriteria.equals('carNo')">
-                ORDER BY carNo ASC
+                ORDER BY carNo ASC, date ASC, fromsite ASC, tosite ASC
             </when>
             <when test="sortingCriteria.equals('item')">
-                ORDER BY item ASC
-            </when>
-            <when test="sortingCriteria.equals('qtyup')">
-                ORDER BY Qtyup ASC
+                ORDER BY item ASC, date ASC, fromsite ASC, tosite ASC
             </when>
         </choose>
     </select>

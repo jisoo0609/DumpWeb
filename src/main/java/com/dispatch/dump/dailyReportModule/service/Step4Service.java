@@ -54,4 +54,13 @@ public class Step4Service {
         optionForm.setCarNo(getSessionLoginData().getUserId());
         dailyReportStep4Mapper.cancelOptionM(optionForm);
     }
+
+//    오늘 데이터 출력하는 서비스
+    public List<DailyReportStep4> getTodayList() {
+        List<DailyReportStep4> todayList = dailyReportStep4Mapper.getTodayList(
+                getSessionLoginData().getUserId()
+        );
+
+        return todayList;
+    }
 }
