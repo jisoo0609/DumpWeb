@@ -16,14 +16,15 @@
             WHERE t.carNo = #{CarNo}
     </select>
 
-    <select id="getTotalTransportAmount" resultType="int">
-        SELECT IF(sum(s.Qty * s.Qtyup) IS NULL, 0, sum(s.Qty * s.Qtyup))
-        FROM tSheet t
-            JOIN tsheet_sub s
-        ON t.sheetID = s.sheetID2
-        WHERE t.carNo = #{CarNo}
-    </select>
+<!--    <select id="getTotalTransportAmount" resultType="int">-->
+<!--        SELECT IF(sum(s.Qty * s.Qtyup) IS NULL, 0, sum(s.Qty * s.Qtyup))-->
+<!--        FROM tSheet t-->
+<!--            JOIN tsheet_sub s-->
+<!--        ON t.sheetID = s.sheetID2-->
+<!--        WHERE t.carNo = #{CarNo}-->
+<!--    </select>-->
 
+<!--    조건에 따른 검색-->
     <select id="findCarListByOption" parameterType="DailyReportStep4OptionForm" resultType="DailyReportStep4">
         SELECT t.sheetID,
             DATE_FORMAT(t.date, '%m.%d') AS date,
@@ -54,20 +55,20 @@
         </if>
         <choose>
             <when test="searchType == '0-submit'">
-                ORDER BY t.carSubmit ASC
+                ORDER BY t.carSubmit ASC, t.date ASC
             </when>
             <when test="searchType == '4-item'">
-                ORDER BY s.item ASC
+                ORDER BY s.item ASC, t.date ASC
             </when>
             <when test="searchType == '2-fromSite'">
-                ORDER BY s.fromsite ASC
+                ORDER BY s.fromsite ASC, t.date ASC
             </when>
             <when test="searchType == '3-toSite'">
-                ORDER BY s.tosite ASC
+                ORDER BY s.tosite ASC, t.date ASC
             </when>
-            <when test="searchType == '6-cost'">
-                ORDER BY s.Qtyup ASC
-            </when>
+<!--            <when test="searchType == '6-cost'">-->
+<!--                ORDER BY s.Qtyup ASC, t.date ASC-->
+<!--            </when>-->
         </choose>
     </select>
 
