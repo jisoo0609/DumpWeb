@@ -10,16 +10,17 @@
     <sql id="res_table">
         WITH r1 AS
             (
-                SELECT sheetID, CarNo,carSubmit
+                SELECT *
                 FROM tsheet
-                WHERE CarNo = #{userId}
+                WHERE sheetSS = #{uuserID}
                   AND date BETWEEN ${startDate} AND ${endDate}
             ),
             r2 AS
            (
         SELECT *
         FROM tsheet_sub
-            ),r3 AS(
+            ),
+            r3 AS(
         SELECT *
         FROM r1
             INNER JOIN r2
@@ -29,35 +30,34 @@
 
     <select id="selectCalTotal" parameterType="DailyReportStep1Option" resultType="DailyReportStep1Total">
         <include refid="res_table">
-            <property name="userId" value="#{userId}"/>
+            <property name="uuserID" value="#{uuserID}"/>
             <property name="startDate" value="#{option.startDate}"/>
             <property name="endDate" value="#{option.endDate}"/>
         </include>
 
-        select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup)) as 'totalTransportationCost',
-        SUM(Qty) as 'totalQty'
+        select IF(sum(Qty * Qtyup) IS NULL , 0.0 , sum(Qty * Qtyup)) as 'totalTransportationCost',
+        IF(SUM(Qty) IS NULL, 0.0, SUM(Qty)) as 'totalQty',
+        tdrive.drvDate as 'drvDate',
+        SUM(tdrive.useAmt) as 'totalUseAmt'
         from tSheet_sub
-        where sheetID2 in (select sheetID2 from r3)
-    </select>
-<!--    <select id="findJoinDailyReportForTotalTransportationCost"  resultType="int">
-        <include refid="res_table">
-            <property name="userId" value="#{userId}"/>
-        </include>
-        select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup)) as 'totalTransportationCost',
-        SUM(Qty) as 'totalQty'
+        INNER JOIN tdrive ON tSheet_sub.sheetsubSS = tdrive.driveSS
+        where tSheet_sub.sheetID2 in (select sheetID2 from r3)
+
+
+      /*  select IF(sum(Qty * Qtyup) IS NULL , 0.0 , sum(Qty * Qtyup)) as 'totalTransportationCost',
+        IF(SUM(Qty) IS NULL, 0.0, SUM(Qty)) as 'totalQty'
         from tSheet_sub
-        where sheetID2 in ( select sheetID2 from r1 inner join r2
+        where sheetID2 in ( select sheetid2 from r1 inner join r2
         on r1.sheetID = r2.sheetID2
         )  AND tSheet_sub.sheetID2 in (
         select sheetID2
-        from tSheet
-
-    </select>-->
+        from tSheet*/
+    </select>
 
 
     <select id="selectDispatchSubmitList" resultType="DailyReportStep1Sub">
         <include refid="res_table">
-            <property name="userId" value="#{userId}"/>
+            <property name="uuserID" value="#{uuserID}"/>
             <property name="startDate" value="#{today}"/>
             <property name="endDate" value="#{today}"/>
         </include>
@@ -84,7 +84,9 @@
         FROM   tDrive
         where carNo = #{carNo} AND rependchk = false
 
-
+--         WHERE  carno = #{userID}
+--           AND drvdate LIKE CONCAT(#{date}, '%')
+--         ORDER BY drvclub ASC
     </select>
 
 

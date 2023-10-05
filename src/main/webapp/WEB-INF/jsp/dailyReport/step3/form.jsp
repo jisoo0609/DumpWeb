@@ -59,7 +59,7 @@
             </div>
 
             <form method="post" name="frm">
-                <input type="hidden" name="sheetID" value="${!empty view ? view.sheetID : 0}">
+                <input type="hidden" name="sheetID" id="sheetID" value="${!empty view ? view.sheetID : 0}">
 
                 <div class="mtable" id="main-table" style="border-top: 2px solid #0068b7; ">
                     <ul class="mtable__ul" style="padding-top: 5px !important;">
@@ -161,7 +161,7 @@
         <div class="btn-area">
             <button type="button" class="btn btn-white" onclick="clearInputs()">전체삭제</button>
             <button type="button" class="btn btn-blue" id="submitBtn" onClick="submitCheck()">제출하기</button>
-            <button type="button" class="btn btn-blue " onClick="$.list()">저장하기</button>
+            <button type="button" class="btn btn-blue " onClick="$.editSales()">저장하기</button>
             <button type="button" class="btn btn-white " onClick="history.go(-1)">이전화면</button>
         </div>
     </div>
