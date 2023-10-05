@@ -12,6 +12,7 @@ import com.dispatch.dump.commonModule.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,7 +55,7 @@ public class Step3Service {
             dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
 
             if (dailyReportStep3Main.getImageFile() != null) {
-                fileUtil.fileUpload(dailyReportStep3Main.getImageFile());
+                fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
             }
             dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
             saveTransPortInfo(dailyReportStep3Sub);
@@ -95,7 +96,7 @@ public class Step3Service {
             return ResponseEntity.ok("{'status': 'success'}");
         } else {
             // 수정 실패
-            return ResponseEntity.badRequest().body("{'status': 'error', 'message': '제출처 정보 수정에 실패했습니다.'}");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{'status': 'error', 'message': '제출처 정보 수정에 실패했습니다.'}");
         }
     }
 
