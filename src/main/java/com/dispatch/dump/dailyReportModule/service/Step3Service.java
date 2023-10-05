@@ -87,19 +87,18 @@ public class Step3Service {
     }
 
     /*제출처 정보 수정*/
-    public ResponseEntity<String> editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
+    public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
+        Map<String, Object> rtnMap = commonUtil.returnMap();
         dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
         int result=dailyReportStep3MainMapper.editByCarSubmit(dailyReportStep3Main);
 
         if (result > 0) {
-            // 성공적으로 수정됨
-            return ResponseEntity.ok("{'status': 'success'}");
+            rtnMap.put("httpCode", 200);
         } else {
-            // 수정 실패
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("{'status': 'error', 'message': '제출처 정보 수정에 실패했습니다.'}");
+            rtnMap.put("httpCode", 422);
         }
+        return commonUtil.jsonFormatTransfer(rtnMap);
     }
-
 
     /*운송정보 수정*/
     public void edit(DailyReportStep3Sub dailyReportStep3Sub){
