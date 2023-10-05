@@ -12,6 +12,8 @@ function tableSort(){
     let order = ["제출처", "운행일", "상차지", "하차지", "품목", "대수", "운반단가"];
 
     // 배열순서 변경
+    if (firstThFlag !== 0)
+        insertTitleThInFront(order, 1);
     // insertTitleThInFront(order, firstThFlag);
 
     // 테이블 헤더에 변경된 배열요소 순서 적용
@@ -44,9 +46,9 @@ function printTable(datas){
     let start = new Array(
         datas[0].carSubmit,
         datas[0].date,
-        datas[0].item,
         datas[0].fromsite,
         datas[0].tosite,
+        datas[0].item,
         datas[0].Qty,
         datas[0].Qtyup
     )[firstFlag];
@@ -59,10 +61,12 @@ function printTable(datas){
         const row = document.createElement("tr");
         let order = [
             data.carSubmit, data.date,
-            data.item, data.fromsite, data.tosite, data.qty, data.qtyup.toLocaleString(),
+            data.fromsite, data.tosite, data.item, data.qty, data.qtyup.toLocaleString(),
         ];
 
         // 데이터 항목, 선택된 라디오 버튼 idx 전달 -> 데이터 항목 순서 변경
+        if (firstFlag !== 0)
+            insertTitleThInFront(order, 1);
         // if (firstFlag !== 6)
         //     insertTitleThInFront(order, firstFlag);
 
@@ -82,7 +86,12 @@ function printTable(datas){
                     <td style="text-align: right;">${order[6]}</td>
         `;
 
-        end = order[firstFlag];
+        if (firstFlag === 0 || firstFlag === 1)
+            end = order[0];
+        else
+            end = order[firstFlag];
+
+        // end = order[firstFlag];
 
         // 끝 값 설정
         // if (firstFlag == 6)
