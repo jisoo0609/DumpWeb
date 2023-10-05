@@ -24,10 +24,7 @@ public class Step5Controller {
     /* click.js */
     @RequestMapping(value = "/carcareform/ajax/save", method = RequestMethod.POST)
     @ResponseBody
-    public String tDriveSave(DailyReportStep5 dailyReportStep5){
-        if (dailyReportStep5.getRependdate() == null || dailyReportStep5.getRependdate().isEmpty()){
-            dailyReportStep5.setRependdate(null);
-        }
+    public String tDriveSave(DailyReportStep5 dailyReportStep5) {
         return step5Service.saveTDrive(dailyReportStep5);
     }
 
