@@ -30,7 +30,6 @@ function validateInput1(input) {
     } else {
         openable1 = true;
         localStorage.setItem('recentCarSubmit', carSubmit);
-        listData()
     }
 }
 
@@ -41,7 +40,6 @@ function validateInput2(input) {
     } else {
         openable2 = true;
         localStorage.setItem('recentSalesman', salesman);
-        listData()
     }
 }
 
@@ -77,14 +75,7 @@ function loadInputValues() {
     }
 }
 
-// Call the loadInputValues function when the page loads
-window.onload = function () {
-    loadInputValues();
-    openable1 = true;
-    openable2 = true;
-    openable3 = true;
-    listData();
-};
+
 
 
 
@@ -154,13 +145,11 @@ QtyupInput.addEventListener('input', updateTotalAmount);
 
     //<!-- 합계 업데이트 함수 -->
 function updateTotalAmount() {
-    <!-- "대수"와 "운반 단가" 값을 가져옴 -->
     const Qty = parseFloat(QtyInput.value);
     const unitPrice = parseFloat(QtyupInput.value);
 
     //<!--값이 유효한 경우에만 합계 계산 및 표시-->
     if (!isNaN(Qty) && !isNaN(unitPrice)) {
-        <!-- "대수"와 "운반 단가"를 곱하여 소수점 이하 2자리까지 표시 -->
         totalAmountInput.value = Qty * unitPrice;
     } else {
         //<!-- 값이 유효하지 않은 경우 합계 입력 상자를 비움 -->
@@ -172,16 +161,30 @@ function updateTotalAmount() {
 const popCheckbox = document.getElementById("showHideCheckbox");
 const hiddenPart = document.getElementById("hiddenPart");
 const checkboxLabel = document.getElementById("checkboxLabel");
+const savedState = localStorage.getItem('checkboxState');
 
-popCheckbox.addEventListener("change", function() {
+function recoverState() {
+    if (savedState === "on") {
+        popCheckbox.checked = true;
+    } else {
+        popCheckbox.checked = false;
+    }
+    showOrHide();
+    updateTotalAmount();
+}
+
+
+function showOrHide() {
     if (popCheckbox.checked) {
         hiddenPart.style.display = "block";
         checkboxLabel.style.color = "#333";
+        localStorage.setItem('checkboxState', "on");
     } else {
         hiddenPart.style.display = "none";
         checkboxLabel.style.color = "#aaa";
+        localStorage.setItem('checkboxState', "off");
     }
-});
+}
 
 /* 전체 삭제 버튼 누르면 인풋 비우기 */
 function clearInputs() {
@@ -259,7 +262,10 @@ function fillPop(event) {
     document.getElementById('Qty').value = td4;
     document.getElementById('Rem').value = td5;
     document.getElementById('sheetsubID').value = td6;
-    document.getElementById('Qtyup').value = td7;
+    if (td7 !== "0") {
+        document.getElementById('Qtyup').value = td7;
+    }
+
 
     // Open the popup
     openPop();
@@ -280,4 +286,12 @@ function listData() {
 
 
 
-
+// Call functions when the page loads
+window.onload = function () {
+    loadInputValues();
+    openable1 = true;
+    openable2 = true;
+    openable3 = true;
+    listData();
+    recoverState();
+};

@@ -51,7 +51,7 @@
 
                         <div style="display: block; height: 30px; padding-top: 3px;">
                             <label for="checkbox" id="checkboxLabel" style="height: 15px; font-size: var( --main-font-size);">운반 금액 표시:</label>
-                            <input type="checkbox" id="showHideCheckbox" style="margin-left: 50%; width: 14px; height: 14px;">
+                            <input type="checkbox" id="showHideCheckbox" onchange="showOrHide()" style="margin-left: 50%; width: 14px; height: 14px;">
                         </div>
                         <div class="" id="hiddenPart">
                             <form method="post" name="frm">
