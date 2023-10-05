@@ -94,8 +94,8 @@ function printSummary(searchResultData) {
     const totalCount = searchResultData.reduce((total, data) => total + (data.qty * data.qtyup), 0);
 
     // 비용금액 버튼 내용 변경
-    const costButton = document.querySelector("#receiptsCnt");
-    costButton.innerHTML = `${totalCount.toLocaleString()}`;
+    // const costButton = document.querySelector("#receiptsCnt");
+    // costButton.innerHTML = `${totalCount.toLocaleString()}`;
     // ...
 
     // 결과를 result_search 요소에 출력

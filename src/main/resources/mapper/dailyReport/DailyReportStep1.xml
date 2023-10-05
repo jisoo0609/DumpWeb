@@ -84,7 +84,9 @@
         FROM   tDrive
         where carNo = #{carNo} AND rependchk = false
 
-
+--         WHERE  carno = #{userID}
+--           AND drvdate LIKE CONCAT(#{date}, '%')
+--         ORDER BY drvclub ASC
     </select>
 
 
