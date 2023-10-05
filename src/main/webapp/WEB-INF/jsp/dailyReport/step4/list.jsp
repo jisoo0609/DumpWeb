@@ -12,6 +12,7 @@
 <%
     // 모델로부터 받은 데이터를 변수에 저장
     List<DailyReportStep4> tSheet = (List<DailyReportStep4>) request.getAttribute("tSheet");
+
 %>
 <section class="sub-contents-wrap maxwrap">
     <div>
@@ -179,24 +180,19 @@
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="searchType" value="2-item">
+                    <input type="radio" name="searchType" value="4-item">
                     품목 기준
                 </label>
             </div>
             <div style="margin-left: 50%;">
                 <label>
-                    <input type="radio" name="searchType" value="3-fromSite">
+                    <input type="radio" name="searchType" value="2-fromSite">
                     상차지 기준
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="searchType" value="4-toSite">
+                    <input type="radio" name="searchType" value="3-toSite">
                     하차지 기준
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="searchType" value="6-cost">
-                    운반비 기준
                 </label>
             </div>
         </div>
