@@ -9,4 +9,5 @@ public class DailyReportStep1Option {
     String sheetSS;
     String startDate;
     String endDate;
+
 }

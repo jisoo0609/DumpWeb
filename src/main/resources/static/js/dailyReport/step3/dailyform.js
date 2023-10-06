@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
     //clickListThAndRedirect();//step4에 있음
 });
 
-
 function getSheetIDDataByParams(sheetID) {
     $.ajax({
         url: "/dailyReport/form/ajax/details",
@@ -58,6 +57,7 @@ $.save = function() {
     })
 }
 
+
 $.list = function() {
     var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
@@ -71,12 +71,20 @@ $.list = function() {
             if(undefined!==data.sheetID){
                 $.saveSheetID(data);
             }
+            $.showChk1(data);
             showTransportList(data);
                  },
         error: function(xhr, status, error) {
             alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
         }
     })
+}
+//chk정보를 불러오기 위한 함수
+$.showChk1 = function(data) {
+    //to. 지영 : 값이 채워질때, input이 비활성화 되도록해주세요.
+    if (data.chk1 == 1) {
+        document.getElementById("checkbox").checked = 1;
+    }
 }
 
 //제출처 정보 수정을 위한 sheetID 저장
@@ -156,7 +164,6 @@ function searchByCarsubmitTel(inputData) {
         data: { "carSubmitTel": carSubmitTel },
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
-
         },
         error: function(error) {
             console.error('Ajax 요청 실패:', error);
@@ -205,7 +212,14 @@ $.editRow = function() {
         processData: false,
         contentType: false,
         success: function (data) {
-            $.list();
+            var json = $.parseJSON(data);
+            if(json.httpCode == 422){
+                //문구는 추후 수정
+                alert("test 용 : 수정 실패");
+            }else{
+                alert("test 용 : 수정 성공");
+                $.list();
+            }
         },
         error: function(error) {
             console.error('수정 실패:', error);
@@ -222,9 +236,15 @@ $.deleteRow = function() {
       type: "GET",
       data: { sheetsubID: sheetsubID },
       success: function (data) {
-        //alert("결재된 정보로 삭제가 불가능합니다.")//문구는 추후 수정
-        $.emptyRow();
-        $.list();
+        var json = $.parseJSON(data);
+        if(json.httpCode == 422){
+            //문구는 추후 수정
+            alert("test 용 : 삭제 실패");
+        }else{
+            $.emptyRow();
+            $.list();
+        }
+
       },
       error: function(error) {
          console.error('삭제 실패:', error);
@@ -249,6 +269,7 @@ $.editSales = function(){
         success : function (data) {
             var json = $.parseJSON(data);
             if(json.httpCode == 200){
+                //문구는 추후 수정
                 alert("test 용 : 수정 성공");
                 location.href="/dailyReport/driver";
             }else{

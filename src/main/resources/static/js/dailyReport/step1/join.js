@@ -37,17 +37,23 @@ function carFindList() {
 }
 
 function printSummary(data) {
-
     const boutmoney = document.getElementById("boutmoney");
     const boutcar = document.getElementById("boutcar");
     const boutdate = document.getElementById("boutdate");
     const boutuseamt = document.getElementById("boutuseamt");
 
-    boutmoney.innerHTML = data.totalTransportationCost.toLocaleString();
-    boutcar.innerHTML = data.totalQty.toLocaleString();
-    boutdate.innerHTML = data.drvDate.toLocaleString();
-    boutuseamt.innerHTML = data.totalUseAmt.toLocaleString();
+    boutmoney.innerHTML = `${data.totalTransportationCost.toLocaleString()}원`;
+    boutcar.innerHTML = `${data.totalQty.toLocaleString()}대`;
+
+    const drvDate = new Date(data.finalDrvDate);
+    const year = drvDate.getFullYear();
+    const month = drvDate.getMonth() + 1;
+    const day = drvDate.getDate();
+
+    boutdate.innerHTML = `${year}-${month}-${day}`;
+    boutuseamt.innerHTML = `${data.totalUseAmt.toLocaleString()}원`;
 }
+
 
 function printDispatchList(searchResultData) {
     // 테이블 본문 내용 초기화

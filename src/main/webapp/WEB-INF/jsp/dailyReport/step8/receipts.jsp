@@ -171,14 +171,14 @@
         <div style="text-align: center;padding-top: 30px;border: 1px solid #ddd;padding-bottom: 60px; margin: 0 0 10px;">
             <div style="width: 50%;  float: left;">
                 <label style="display: inline-flex;align-items: center;justify-content: flex-start;width: 90px;"><input
-                        type="radio" name="sortingCriteria" value="0-date" checked>운행일 기준</label> <br>
+                        type="radio" name="sortingCriteria" value="date" checked>운행일 기준</label> <br>
                 <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 90px;"><input
-                        type="radio" name="sortingCriteria" value="4-item">품목 기준</label>
+                        type="radio" name="sortingCriteria" value="item">품목 기준</label>
                 <br>
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="sortingCriteria" value="3-carNo">차량 기준</label>
+                        type="radio" name="sortingCriteria" value="carNo">차량 기준</label>
                 <br>
             </div>
         </div>
@@ -223,11 +223,11 @@
                     <th class="th_header">운행일</th>
                     <th>상차지</th>
                     <th>하차지</th>
-                    <th class="th_header">차량번호</th>
                     <th class="th_header">품목</th>
+                    <th class="th_header">차량번호</th>
                     <th>대수</th>
-                    <th class="th_header">운반비</th>
-                </tr>
+                    <th class="th_header">운반단가</th>
+                </tr>ㅇ
                 </thead>
                 <tbody>
                 </tbody>
