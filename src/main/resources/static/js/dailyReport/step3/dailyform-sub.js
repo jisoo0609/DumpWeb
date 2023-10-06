@@ -6,11 +6,27 @@ var openable3 = false;
 var openable4 = true; //기본적으로 오늘 날자를 세팅해 놓으므로 true로 둠
 
 
-/* function : 결재버튼을 통해서만 체크박스를 체크하거나 해제할 수 있다.  */
-/* function: 오늘 날자로 인풋 자동 채우기 */
+/* DATE */
 const dateInput = document.getElementById('date');
-const todayDate = new Date();
-dateInput.value = todayDate.toISOString().slice(0, 10);
+const thisDay = new Date();
+/* function: 오늘 날자로 인풋 자동 채우기 */
+dateInput.value = thisDay.toISOString().slice(0, 10);;
+
+// Function to set the date to the previous day
+function prevDay() {
+    event.preventDefault();
+    thisDay.setDate(thisDay.getDate() - 1);
+    dateInput.value =  thisDay.toISOString().slice(0, 10);
+    listData();
+}
+
+// Function to set the date to the next day
+function nextDay() {
+    event.preventDefault();
+    thisDay.setDate(thisDay.getDate() + 1);
+    dateInput.value = thisDay.toISOString().slice(0, 10);
+    listData();
+}
 
 
 /* function : onfocus시 자동으로 010을 채워준다*/
@@ -88,7 +104,7 @@ function openPop() {
         openable4 = true;
         listData()
     }
-    if(openable1 & openable2& openable3 & openable4 === true) {
+    if(openable1 & openable2 & openable3 & openable4 === true) {
         popup.style.display = 'flex';
         updateTotalAmount();
         saved.forEach(function(elem){
@@ -232,7 +248,7 @@ function approved() {
 /* 제출하기 버튼을 클릭하면 결재 체크되고 제출체크가 체크하면되 결재도 체크됨*/
 function submitCheck() {
     const dropdown = document.getElementById('dropdown')
-    const chk1 = document.getElementById('checkbox');
+    const chk1 = document.getElementById('checkbox')
     //chk1.disabled = true;
     chk1.checked = true;
     dropdown.textContent = "제출";
@@ -243,11 +259,13 @@ function submitCheck() {
 
 
 /* fillPop으로 인풋팝업이 뜰때는 버튼이 바뀌어야 한다. */
+let thisRow;
 const filledInput = document.querySelectorAll('.filledInput');
 const newInput = document.querySelectorAll('.emptyInput');
 function fillPop(event) {
     var clicked = event.currentTarget.id;
     const clickedRow = document.getElementById(clicked);
+    clickedRow.classList.add('selected-row');
     var td1 = clickedRow.querySelector('td:nth-child(1)').textContent;
     var td2 = clickedRow.querySelector('td:nth-child(2)').textContent;
     var td3 = clickedRow.querySelector('td:nth-child(3)').textContent;
@@ -285,11 +303,9 @@ function listData() {
     }
 }
 
-function selected(row) {
-    console.log(row.id)
+function mutallyApproved() {
+
 }
-
-
 
 // Call functions when the page loads
 window.onload = function () {

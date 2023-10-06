@@ -36,6 +36,7 @@
 #dailyreport {
     --main-font-size: 13px;
     --main-height: 28px;
+    --line-height: 25px;
     --main-blue: #0068B7;
     --sub-blue: #0068b778;
 }
@@ -195,7 +196,7 @@
 
 }
 
-#chk1 input{
+#approval input{
     margin-left: 30px;
     margin-top: 6px;
 }
@@ -204,7 +205,7 @@
     color: red;
 }
 
-#chk1 {
+#approval {
     margin-left: 30px;
     height: var(--main-height);
 }
@@ -220,7 +221,7 @@
     .haveTwo {
         margin-top: 4px;
     }
-    #chk1 {
+    #approval {
         margin-left: 0px;
     }
     #chk2 {
@@ -249,7 +250,7 @@
     justify-content: space-evenly;
 }
 
-.select {
+#select {
   display: flex;
   justify-content: center;
   width: 50px;
@@ -257,33 +258,35 @@
   font-size: var(--main-font-size);
 }
 
-.select ul {
-  font-size: var(--main-font-size);
-  border: 1px solid #ddd;
-  display: none;
-  position: absolute;
-  background: #fff;
-  border-top: none;
-  cursor: pointer;
-  width: 50px;
-  list-style-type: none;
-  padding-left: 0px;
-}
-
-.select.active ul {
-  display: initial;
-}
-
-.select ul li {
-  height: 23px;
-  display: flex;
-  justify-content: center;
-}
-
-.select ul li:hover {
-  background: #ddd;
-}
 
 #hiddenPart{
     display: none;
+}
+
+.selected-row {
+    border: 2px dotted;
+}
+
+#progress {
+    height: var(--main-height);
+    line-height: var(--line-height);
+    font-size : var(--main-font-size);
+}
+
+.dateBtn {
+    height: var(--main-height);
+    width: var(--main-height);
+  background-color: #FAFBFC;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 20px;
+  line-height: var(--line-height);
+  vertical-align: middle;
+}
+
+.dateBtn:last-child {
+    margin-left: -10px;
 }

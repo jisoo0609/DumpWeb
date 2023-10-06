@@ -94,27 +94,41 @@
                             </span>
                         </li>
 
-                        <li class="adjustMax359" style="display: flex; justify-content: space-between;">
+                        <li style="display: flex; justify-content: space-between;">
                             <div class="datediv">
                                 <label class="t10">운행일</label>
                                 <span class="content">
                                     <input type="text" class="datepicker input" id="date" name="date" style="width: 80px; margin-left: 75px; text-align: center; padding-left: 0;"
-                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="on" oninput="validateInput4(this)" onchange="listData()">
+                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="on" onchange="listData()">
                                 </span>
                             </div>
-                            <div class="haveTwo">
-                                <div id="chk1">
-                                    <label>결재</label>
-                                    <input type="checkbox" id="checkbox" name="chk1" value="0" onChange="approved()">
-                                </div>
-                                <div id="chk2">
-                                    <label>진행</label>
-                                    <div class="select" id="dropdown">
-                                        배차
-                                    </div>
-                                </div>
+                            <div>
+                                 <button><span class="dateBtn" style="margin-left:69px" onclick="prevDay()">&lt;</span></button>
+                                 <button><span class="dateBtn" onclick="nextDay()">&gt;</span></button>
+                            </div>
+                            <div>
+                                <label >진행</label>
+                                <select id="progress" style="width:60px; margin-left: 30px;">
+                                    <option value="배차">배차</option>
+                                    <option value="상차">상차</option>
+                                    <option value="하차">하차</option>
+                                    <option value="제출">제출</option>
+                                </select>
                             </div>
                         </li>
+
+                        <li>
+
+                            <div id="approval">
+                                <label>결재</label>
+                                <input type="checkbox" class="chkbx" id="checkbox" name="chk1" value="0" onChange="approved()">
+                            </div>
+                            <div id="mutualApproval">
+                                <label>결제처 제출 확인</label>
+                                <input type="checkbox" class="chkbx" name="chk0" value="0" onChange="mutallyApproved()">
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
                 <div class="mt10">
