@@ -10,6 +10,7 @@ function save() {
       data: $("[name=golForm]").serialize(),
       success: function (data) {
        console.log(data);
+          clickConfirmButton();
           alert("저장이 완료되었습니다.");
           bindList();
       }
@@ -62,8 +63,8 @@ function addTableRow(data) {
     html = '<tr><td colspan="6" style="text-align: center;">입력된 정보가 없습니다.</td></tr>';
   } else {
     html = '<table>';
-    for (var i = 01; i < data.length; i++) {
-      var subData = data[i-1];
+    for (var i = 1; i < data.length; i++) {
+      var subData = data[i];
       var rowId = 'row' + i;
 //      var count = i;
       html += '<tr>';
