@@ -26,7 +26,7 @@
     </sql>
 
 
-    <select id="selectCarListByOption" parameterType="DailyReportStep8OptionForm" resultType="DailyReportStep8">
+    <select id="selectReceiptsByOption" parameterType="DailyReportStep8OptionForm" resultType="DailyReportStep8">
         <include refid="res_table">
             <property name="userId" value="#{carSubmitTel}"/>
             <property name="startDate" value="#{startDate}"/>
@@ -54,6 +54,20 @@
                 ORDER BY item ASC, date ASC, fromsite ASC, tosite ASC
             </when>
         </choose>
+    </select>
+
+    <select id="getSelectBoxData" resultType="DailyReportStep8">
+        SELECT distinct t.sheetID,
+               t.CarNo,
+               s.fromsite,
+               s.tosite,
+               s.item
+        FROM tsheet t
+                 JOIN tSheet_sub s
+                      ON t.sheetID = s.sheetID2
+        WHERE t.carSubmitTel = #{carSubmitTel}
+        order by date desc;
+
     </select>
 
 </mapper>
