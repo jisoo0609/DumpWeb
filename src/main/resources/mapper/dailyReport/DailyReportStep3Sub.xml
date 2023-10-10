@@ -24,7 +24,8 @@
         sheetID2,
         tosite,
         sheetsubSS,
-        sheetsubSS2
+        sheetsubSS2,
+        writeridx2
         )
         values
         (
@@ -36,7 +37,9 @@
         #{sheetID2},
         #{tosite},
         #{sheetsubSS},
-        #{sheetsubSS2})
+        #{sheetsubSS2},
+        #{writeridx2}
+        )
     </insert>
     
     <!--삭제 관련-->
