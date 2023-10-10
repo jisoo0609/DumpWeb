@@ -67,7 +67,7 @@ function groupAndSumData(searchResultData) {
 
     // 데이터를 그룹화하고 qty 값을 합산
     searchResultData.forEach(data => {
-        const key = `${data.carSubmit}-${data.fromsite}-${data.tosite}-${data.item}-${data.carSubmitTel}`;
+        const key = `${data.carSubmit}-${data.fromsite}-${data.tosite}-${data.item}`;
 
         if (!groupedData[key]) {
             groupedData[key] = {
@@ -75,7 +75,6 @@ function groupAndSumData(searchResultData) {
                 fromsite: data.fromsite,
                 tosite: data.tosite,
                 item: data.item,
-                carSubmitTel: data.carSubmitTel,
                 qty: 0,
             };
         }
@@ -105,11 +104,15 @@ function printDispatchList(searchResultData) {
             <td>${data.tosite}</td> 
             <td>${data.item}</td>
             <td>${data.qty}</td> 
+            
          `;
+        row.setAttribute("data-sheet-id", data.sheetID);
 
         tableBody.appendChild(row);
     });
 }
+
+
 function printFindList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#carsub");
@@ -137,7 +140,43 @@ function printFindList(searchResultData) {
         <td>${formattedDate}</td>
         <td>${formattedRepaddkm}</td>
     `;
+        row.setAttribute("data-drive-id", data.driveID);
         tableBody.appendChild(row);
     });
 
-};
+}
+
+
+
+function clickListStep5Redirect() {
+    const tableBody = document.querySelector("#carsub");
+
+    tableBody.addEventListener("click", (event) => {
+        // 클릭한 요소가 td 인지 확인
+        if (event.target.tagName === 'TD') {
+            let driveID = event.target.parentElement.getAttribute("data-drive-id");
+            let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
+            window.location.href = url;
+        }
+    });
+}
+function clickListStep3Redirect() {
+    const tableBody = document.querySelector("#menusub");
+
+    tableBody.addEventListener("click", (event) => {
+        // 클릭한 요소가 td 인지 확인
+        if (event.target.tagName === 'TD') {
+            let sheetID = event.target.parentElement.getAttribute("data-sheet-id");
+            let url = "/dailyReport/form" + "?sheetID=" + sheetID;
+            window.location.href = url;
+        }
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // 리다이렉트
+    clickListStep5Redirect();
+    clickListStep3Redirect();
+});
+
+
