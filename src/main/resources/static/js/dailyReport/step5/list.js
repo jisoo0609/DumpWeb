@@ -8,16 +8,16 @@ function printList(searchResultData) {
         const row = document.createElement("tr");
         let order = [
             data.drvDate, data.drvClub, // 정렬 기준.
-            data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem, (data.rependchk === true ? 'O' : 'X'),
+            data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem, (data.rependchk === true ? 'x' : 'o'),
             data.chk2, data.useOil, data.rependdate, data.repaddkm // hidden data
         ];
 
         row.innerHTML = ` 
                     <td>${order[0]}</td>
-                    <td>${order[1]}</td>
-                    <td style="text-align: right">${order[2]}</td>
+                    <td style="width: 55px;">${order[1]}</td>
+                    <td class="Drvtd2" style="text-align: right">${order[2]}</td>
                     <td style="text-align: right">${order[3]}</td>
-                    <td style="word-break:break-all">${order[4]}</td>
+                    <td>${order[4]}</td>
                     <td>${order[5]}</td>
                     <td style="display: none">${order[6]}</td>
                     <td style="display: none">${order[7]}</td>
