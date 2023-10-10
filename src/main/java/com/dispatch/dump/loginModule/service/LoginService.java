@@ -88,7 +88,7 @@ public class LoginService {
 
         try {
             if (loginData.getUserPosition().equals("manager")) {
-                loginData.setUserTel("010" + loginData.getUserId());
+                loginData.setUserTel(loginData.getUserId());
             }
             if (loginMapper.userIdDuplicateChk(loginData) > 0) {
                 rtnMap.put("httpCode", 409);
@@ -142,7 +142,7 @@ public class LoginService {
                 login.setUserId("08호7313");
                 rtnUrl = "/dailyReport/driver";
             } else {
-                login.setUserId("010-3717-7406");
+                login.setUserId("01037177406");
                 rtnUrl = "/dailyReport/manager";
 
             }

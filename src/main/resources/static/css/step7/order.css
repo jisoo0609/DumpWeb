@@ -13,14 +13,12 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	outline: 0;
-	font-size: 100%;
 	vertical-align: baseline;
 	background: transparent;
 
 }
 
 body {
-	line-height: 1;
 	font-family: 'Noto Sans KR';
 	box-sizing: border-box;
 }
@@ -50,6 +48,10 @@ q:before,
 q:after {
 	content: '';
 	content: none;
+}
+
+.header-top .comp-name::after{
+	line-height: 1;
 }
 
 a {
@@ -642,11 +644,30 @@ textarea {
 
 	.GolSection table tbody tr td:nth-child(2),
 	.GolSection table tbody tr td:nth-child(3) {
-		width: 18%;
+		width: 15%;
 	}
 
 	.GolSection table tbody tr td:nth-child(4) {
+		width: 17%;
+	}
+
+	.GolSection table tbody tr td:nth-child(1),
+	.GolSection table tbody tr td:nth-child(5) {
+		width: 8%;
+	}
+
+	.GolSection table tbody tr td:nth-child(6) {
 		width: 18%;
+	}
+
+/* 운반단가가 포함된 css 코드 */
+/* .GolSection table tbody tr td:nth-child(2),
+	.GolSection table tbody tr td:nth-child(3) {
+		width: 14%;
+	}
+
+	.GolSection table tbody tr td:nth-child(4) {
+		width: 17%;
 	}
 
 	.GolSection table tbody tr td:nth-child(1),
@@ -657,6 +678,10 @@ textarea {
 	.GolSection table tbody tr td:nth-child(6) {
 		width: 17%;
 	}
+
+	.GolSection table tbody tr td:nth-child(7) {
+		width: 15%;
+	} */
 }
 
 /* ! tablet */
