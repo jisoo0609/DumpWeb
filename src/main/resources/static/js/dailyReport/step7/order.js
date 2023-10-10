@@ -8,9 +8,9 @@ function save() {
       url: "/dailyReport/ajax/orderform",
       type: "POST",
       data: $("[name=golForm]").serialize(),
-      async : false,
       success: function (data) {
        console.log(data);
+          clickConfirmButton();
           alert("저장이 완료되었습니다.");
           bindList();
       }
@@ -54,7 +54,6 @@ function clickConfirmButton(){
   const golPop3 = document.querySelector("#golPop3");
   golPop3.style.display = "none";
 
-  save();
   bindList();
 }
 
@@ -65,7 +64,7 @@ function addTableRow(data) {
   } else {
     html = '<table>';
     for (var i = 1; i < data.length; i++) {
-      var subData = data[i-1];
+      var subData = data[i];
       var rowId = 'row' + i;
 //      var count = i;
       html += '<tr>';
