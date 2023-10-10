@@ -1,6 +1,12 @@
 var clBtn = null;
 var opBtn = null;
 
+document.addEventListener("DOMContentLoaded", function () {
+    let clBtn = document.querySelectorAll(".clBtn");
+    let opBtn = document.querySelectorAll(".opBtn");
+    popJS(opBtn, clBtn);
+});
+
 $(document).ready(function(){
     var agent = navigator.userAgent.toLowerCase(); // 인터넷 익스플로러 체크 후 예외 처리
     if ((navigator.appName == 'Netscape' && agent.indexOf('trident') != -1) || (agent.indexOf("msie") != -1) || (agent.indexOf("edge") != -1)) {

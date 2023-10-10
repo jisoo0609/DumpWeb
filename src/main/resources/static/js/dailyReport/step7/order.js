@@ -8,6 +8,7 @@ function save() {
       url: "/dailyReport/ajax/orderform",
       type: "POST",
       data: $("[name=golForm]").serialize(),
+      async : false,
       success: function (data) {
        console.log(data);
           alert("저장이 완료되었습니다.");
@@ -53,6 +54,7 @@ function clickConfirmButton(){
   const golPop3 = document.querySelector("#golPop3");
   golPop3.style.display = "none";
 
+  save();
   bindList();
 }
 
@@ -62,7 +64,7 @@ function addTableRow(data) {
     html = '<tr><td colspan="6" style="text-align: center;">입력된 정보가 없습니다.</td></tr>';
   } else {
     html = '<table>';
-    for (var i = 01; i < data.length; i++) {
+    for (var i = 1; i < data.length; i++) {
       var subData = data[i-1];
       var rowId = 'row' + i;
 //      var count = i;
