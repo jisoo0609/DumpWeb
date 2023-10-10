@@ -6,7 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class DailyReportStep1Option {
-    String carNo;
+    String sheetSS;
     String startDate;
     String endDate;
+
 }

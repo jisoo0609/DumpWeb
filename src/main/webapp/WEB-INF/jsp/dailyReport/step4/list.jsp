@@ -12,6 +12,8 @@
 <%
     // 모델로부터 받은 데이터를 변수에 저장
     List<DailyReportStep4> tSheet = (List<DailyReportStep4>) request.getAttribute("tSheet");
+    List<DailyReportStep4> todayList = (List<DailyReportStep4>) request.getAttribute("todayList");
+
 %>
 <section class="sub-contents-wrap maxwrap">
     <div>
@@ -179,24 +181,19 @@
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="searchType" value="2-item">
+                    <input type="radio" name="searchType" value="4-item">
                     품목 기준
                 </label>
             </div>
             <div style="margin-left: 50%;">
                 <label>
-                    <input type="radio" name="searchType" value="3-fromSite">
+                    <input type="radio" name="searchType" value="2-fromSite">
                     상차지 기준
                 </label>
                 <br>
                 <label>
-                    <input type="radio" name="searchType" value="4-toSite">
+                    <input type="radio" name="searchType" value="3-toSite">
                     하차지 기준
-                </label>
-                <br>
-                <label>
-                    <input type="radio" name="searchType" value="6-cost">
-                    운반비 기준
                 </label>
             </div>
         </div>
@@ -234,14 +231,25 @@
                     <tr>
                         <th class="th_header">제출처</th>
                         <th class="th_header">운행일</th>
-                        <th class="th_header">품목</th>
                         <th class="th_header">상차지</th>
                         <th class="th_header">하차지</th>
+                        <th class="th_header">품목</th>
                         <th class="th_header">대수</th>
                         <th class="th_header">운반단가</th>
                     </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="today" items="<%=todayList%>">
+                        <tr>
+                            <td>${today.carSubmit}</td>
+                            <td>${today.date}</td>
+                            <td>${today.fromsite}</td>
+                            <td>${today.tosite}</td>
+                            <td>${today.item}</td>
+                            <td>${today.qty}</td>
+                            <td>${today.qtyup}</td>
+                        </tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>

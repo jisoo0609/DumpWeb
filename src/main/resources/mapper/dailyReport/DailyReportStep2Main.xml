@@ -32,7 +32,7 @@
         </include>
 
         select IF(sum(Qty * Qtyup) IS NULL , 0 , sum(Qty * Qtyup)) as 'totalTransportationCost',
-        SUM(Qty) as 'totalTrips'
+        IF(SUM(Qty) IS NULL, 0, SUM(Qty)) as 'totalTrips'
         from tSheet_sub
         where sheetID2 in (select sheetid2 from r3)
     </select>
@@ -44,7 +44,18 @@
             <property name="endDate" value="#{today}"/>
         </include>
 
-        select * from r3
+        SELECT
+        r3.fromsite,
+        r3.item,
+        SUM(r3.Qty) as Qty,
+        r3.tosite,
+        r3.CarNo
+        FROM r3
+        GROUP BY
+        r3.fromsite,
+        r3.item,
+        r3.tosite,
+        r3.CarNo
     </select>
 
 </mapper>

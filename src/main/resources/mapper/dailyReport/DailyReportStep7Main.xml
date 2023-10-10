@@ -9,9 +9,9 @@
     <insert id="insertDailyReportStep7" parameterType="DailyReportStep7Main">
         insert into
         tSheet
-        (date, CarNo, chk1, sheetSS2)
+        (date, carNo, chk1, sheetSS2)
         values
-        (#{date}, #{CarNo}, #{chk1}, #{sheetSS2})
+        (#{date}, #{carNo}, 0, #{sheetSS2})
 
         <selectKey
                 keyColumn="sheetID"
@@ -21,8 +21,38 @@
         >
             select last_insert_id() as sheetID
         </selectKey>
-
     </insert>
+
+    <!-- 제출처 정보 조회-->
+    <sql id="reception_table">
+        WITH r1 AS
+        (
+        SELECT sheetID, carNo
+        FROM tsheet
+        WHERE sheetSS2 = ${userId}
+        AND date BETWEEN ${startDate} AND ${endDate}
+        ),
+        r2 AS
+        (
+        SELECT *
+        FROM tsheet_sub
+        ),r3 AS(
+        SELECT *
+        FROM r1
+        INNER JOIN r2
+        ON r1.sheetid = r2.sheetid2
+        )
+    </sql>
+
+    <select id="selectReceptionList" parameterType="DailyReportStep7Main" resultType="DailyReportStep7Sub">
+        <include refid="reception_table">
+            <property name="userId" value="#{userId}"/>
+            <property name="startDate" value="#{today}"/>
+            <property name="endDate" value="#{today}"/>
+        </include>
+
+        select * from r3
+    </select>
 
     <!-- 차량번호 등록 -->
     <insert id="insertCarData" parameterType="DailyReportStep7CarNo">
