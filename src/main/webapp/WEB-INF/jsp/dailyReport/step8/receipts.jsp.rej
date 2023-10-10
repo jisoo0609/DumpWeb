@@ -1,0 +1,34 @@
+diff a/src/main/webapp/WEB-INF/jsp/dailyReport/step8/receipts.jsp b/src/main/webapp/WEB-INF/jsp/dailyReport/step8/receipts.jsp	(rejected hunks)
+@@ -168,24 +168,18 @@
+                 </li>
+             </ul>
+         </div>
+-
+-
+-        <div style="text-align: center;padding-top: 30px;border: 1px solid #ddd;padding-bottom: 30px; margin: 0 0 10px;">
++        <div style="text-align: center;padding-top: 30px;border: 1px solid #ddd;padding-bottom: 60px; margin: 0 0 10px;">
+             <div style="width: 50%;  float: left;">
+-                <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
+-                        type="radio" name="sortingCriteria" value="date" checked/>운행일 기준</label>
++                <label style="display: inline-flex;align-items: center;justify-content: flex-start;width: 90px;"><input
++                        type="radio" name="sortingCriteria" value="0-date" checked>운행일 기준</label> <br>
++                <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 90px;"><input
++                        type="radio" name="sortingCriteria" value="4-item">품목 기준</label>
++                <br>
+             </div>
+             <div style="margin-left: 50%;">
+                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
+-                        type="radio" name="sortingCriteria" value="carNo"/>차량 기준</label>
+-            </div>
+-            <div style="margin-left: 50%;">
+-                <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
+-                        type="radio" name="sortingCriteria" value="item"/>품목 기준</label>
+-            </div>
+-            <div style="margin-left: 50%;">
+-                <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
+-                        type="radio" name="sortingCriteria" value="qtyup"/>운반비 기준</label>
++                        type="radio" name="sortingCriteria" value="3-carNo">차량 기준</label>
++                <br>
+             </div>
+         </div>
+     </form>
