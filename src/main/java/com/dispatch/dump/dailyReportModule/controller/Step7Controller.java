@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/dailyReport")
 @RequiredArgsConstructor
@@ -28,6 +30,12 @@ public class Step7Controller {
         return step7Service.saveOrder(dailyReportStep7Main, dailyReportStep7Sub);
     }
 
+    /*제출처 주문 조회*/
+    @RequestMapping(value = "/ajax/orderlist", method = RequestMethod.POST)
+    @ResponseBody
+    public List<DailyReportStep7Sub> dispatchOrderList(DailyReportStep7Main dailyReportStep7Main){
+        return step7Service.searchOrderList(dailyReportStep7Main);
+    }
 
     @RequestMapping(value = "/orderform", method = RequestMethod.GET)
     public String step7(Model model, DailyReport dailyReport) {
