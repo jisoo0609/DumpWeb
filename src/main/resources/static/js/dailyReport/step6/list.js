@@ -38,7 +38,8 @@ function printList(searchResultData) {
         const row = document.createElement("tr");
         let order = [
             data.drvDate, data.drvClub, // 정렬 기준.
-            data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem, (data.rependchk === true ? 'X' : 'O'),
+            data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem,
+            (data.rependchk === true ? 'X' : (data.repaddkm && data.rependdate ? 'O' : 'X')),
             data.chk2, data.useOil, data.rependdate, data.repaddkm // hidden data
         ];
 
@@ -49,7 +50,7 @@ function printList(searchResultData) {
                     <td>${order[1]}</td>
                     <td>${order[2]}</td> 
                     <td>${order[3]}</td>
-                    <td>${order[4]}</td> 
+                    <td><span class="TextClamp">${order[4]}</span></td>
                     <td>${order[5]}</td>
                     <td style="display: none">${order[6]}</td>
                     <td style="display: none">${order[7]}</td>
