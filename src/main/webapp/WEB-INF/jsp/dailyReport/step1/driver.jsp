@@ -319,6 +319,7 @@
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
+
             </table>
         </section>
     </article>
