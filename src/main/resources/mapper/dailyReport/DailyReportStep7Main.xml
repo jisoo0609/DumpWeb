@@ -9,9 +9,9 @@
     <insert id="insertDailyReportStep7" parameterType="DailyReportStep7Main">
         insert into
         tSheet
-        (date, CarNo, chk1, sheetSS2)
+        (date, carNo, chk1, sheetSS2)
         values
-        (#{date}, #{CarNo}, 0, #{sheetSS2})
+        (#{date}, #{carNo}, 0, #{sheetSS2})
 
         <selectKey
                 keyColumn="sheetID"
@@ -44,7 +44,7 @@
         )
     </sql>
 
-    <select id="selectReceptionList" resultType="DailyReportStep7Sub">
+    <select id="selectReceptionList" parameterType="DailyReportStep7Main" resultType="DailyReportStep7Sub">
         <include refid="reception_table">
             <property name="userId" value="#{userId}"/>
             <property name="startDate" value="#{today}"/>

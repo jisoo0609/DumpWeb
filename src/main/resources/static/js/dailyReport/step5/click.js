@@ -1,7 +1,10 @@
+
 function getCheckParam(id){
     const checkBox = document.getElementById(id);
     return  "&" + id + "=" + checkBox.checked;
 }
+
+
 
 function bindList() {
     $.ajax({
@@ -41,6 +44,15 @@ function save() {
         }
     }
 
+    if(document.querySelector('input[name="rependdate"]').value.length === 0){
+        document.querySelector('input[name="rependdate"]').value = '-1';
+    }
+
+    if(document.querySelector('input[name="repaddkm"]').value.length === 0){
+        document.querySelector('input[name="repaddkm"]').value = '-1';
+    }
+
+
     //fetch 코드도 고민해볼 것.
     const checkBoxID = ["chk2","rependchk"];
 
@@ -48,15 +60,21 @@ function save() {
 
     checkBoxID.forEach(id => checkData += getCheckParam(id));
 
-   // const rependdate = $("#exchange-date").val() || "";
-   // const repaddkm = $("#nextlastkm").val() || "";
 
-    console.log($("[name=entry_form]").serialize() + checkData);
+    const formData = $("[name=entry_form]").serialize() + checkData;
+
+    if(document.querySelector('input[name="rependdate"]').value === '-1'){
+        document.querySelector('input[name="rependdate"]').value = '';
+    }
+
+    if(document.querySelector('input[name="repaddkm"]').value === '-1'){
+        document.querySelector('input[name="repaddkm"]').value = '';
+    }
 
     $.ajax({
         url: "/dailyReport/carcareform/ajax/save",
         type: "POST",
-        data: $("[name=entry_form]").serialize() + checkData, //+ "&rependdate=" + rependdate + "&repaddkm=" + repaddkm,
+        data: formData,
         success: function (data) {
             alert('저장 되었습니다.');
             bindList();

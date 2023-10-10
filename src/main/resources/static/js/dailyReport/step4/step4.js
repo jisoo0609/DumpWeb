@@ -86,6 +86,7 @@ function printTable(datas){
                     <td style="text-align: right;">${order[6]}</td>
         `;
 
+        // 끝 값 설정
         if (firstFlag === 0 || firstFlag === 1)
             end = order[0];
         else
