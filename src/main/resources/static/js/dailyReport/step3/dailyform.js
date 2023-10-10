@@ -9,10 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (sheetID !== null) {
         getSheetIDDataByParams(sheetID);
     }
-
     //clickListThAndRedirect();//step4에 있음
 });
-
 
 function getSheetIDDataByParams(sheetID) {
     $.ajax({
@@ -20,15 +18,15 @@ function getSheetIDDataByParams(sheetID) {
         type: "POST",
         data: {sheetID: sheetID},
         success: function (data) {
-
+            //이 부분 추후 정리할 것
             document.getElementById('carSubmit').value=data.carSubmit;
             document.getElementById('carSubmitTel').value=data.carSubmitTel;
             document.getElementById('salesman').value=data.salesman;
+            document.getElementById('date').value=data.date;
             $.list();
         }
     })
 }
-
 
 $.emptyRow = function() {
     const popup = document.getElementById("popup");
@@ -40,7 +38,6 @@ $.emptyRow = function() {
 
 /*제출처, 운송정보 저장*/
 $.save = function() {
-
     var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
         url: "/dailyReport/workspace/ajax/save",
@@ -48,9 +45,9 @@ $.save = function() {
         data: formData,
         processData: false,
         contentType: false,
+        cache: false,
         success: function (data) {
             alert("저장이 완료되었습니다.");
-
             $.list();
             $.emptyRow();
         },
@@ -60,6 +57,7 @@ $.save = function() {
     })
 }
 
+
 $.list = function() {
     var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
@@ -68,13 +66,30 @@ $.list = function() {
         data: formData,
         processData: false,
         contentType: false,
+        cache: false,
         success: function (data) {
+            if(undefined!==data.sheetID){
+                $.saveSheetID(data);
+            }
+            $.showChk1(data);
             showTransportList(data);
-        },
+                 },
         error: function(xhr, status, error) {
             alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
         }
     })
+}
+//chk정보를 불러오기 위한 함수
+$.showChk1 = function(data) {
+    //to. 지영 : 값이 채워질때, input이 비활성화 되도록해주세요.
+    if (data.chk1 == 1) {
+        document.getElementById("checkbox").checked = 1;
+    }
+}
+
+//제출처 정보 수정을 위한 sheetID 저장
+$.saveSheetID = function(data){
+    document.getElementById("sheetID").value=data.sheetID;
 }
 
 function showTransportList(data){
@@ -87,7 +102,7 @@ function showTransportList(data){
         for (var i = 0; i < data.dailyReportStep3SubList.length; i++) {
             var subData = data.dailyReportStep3SubList[i];
             var rowId = 'row' + i;
-            html += '<tr id="' + rowId + '" onclick="fillPop(event)">';
+            html += '<tr id="' + rowId + '" onclick="fillPop(event); selected('+ rowId + ');">';
             html += '   <td>' + subData.fromsite + '</td>';
             html += '   <td>' + subData.tosite + '</td>';
             html += '   <td>' + subData.item + '</td>';
@@ -102,7 +117,6 @@ function showTransportList(data){
         // 데이터를 표시할 위치에 추가
         $('#transportContainer').html(html);
 }
-
 
 //카테고리 생성용 1,2,3
 function searchByCarsubmit(inputData) {
@@ -149,9 +163,7 @@ function searchByCarsubmitTel(inputData) {
         method: "GET",
         data: { "carSubmitTel": carSubmitTel },
         success: function(data) {
-
             console.log('Ajax 요청 성공:', data);
-
         },
         error: function(error) {
             console.error('Ajax 요청 실패:', error);
@@ -173,11 +185,8 @@ $.search = function() {
            data: searchData,
            success: function (data) {
                var json = $.parseJSON(data);
-
-               console.log(json)
                if(json.httpCode == 200) {
                    alert("조회에 성공했습니다.");
-
                    displayResults(json.searchList);
                } else {
                    alert("조회를 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
@@ -192,39 +201,28 @@ $.backMove = function () {
 
 /*수정*/
 $.editRow = function() {
-    /*혜미 : $("[name=frm]").serialize()로 전송시 data가
-    null값으로 전달되는 문제가 있어 우선 하드 코딩함, 추후 수정 예정*/
+    var formData = new FormData($("[name=frm]")[0]);
     var sheetsubID = $("#sheetsubID").val();
-    var fromsite = $("#fromsite").val();
-    var tosite = $("#tosite").val();
-    var item = $("#item").val();
-    var Qty = $("#Qty").val();
-    var Rem = $("#Rem").val();
-    var Qtyup = $("#Qtyup").val();
 
-    console.log("sheetsubID는?" + sheetsubID);
-
-    var formData = new FormData();
     formData.append("sheetsubID", sheetsubID);
-    formData.append("fromsite", fromsite);
-    formData.append("tosite", tosite);
-    formData.append("item", item);
-    formData.append("Qty", Qty);
-    formData.append("Rem", Rem);
-    formData.append("Qtyup", Qtyup);
-
-    alert("수정하시겠습니까?");
     $.ajax({
         url: "/dailyReport/workspace/ajax/edit",
         type: "POST",
         data: formData,
-        processData: false,  // 데이터 처리 방식 설정
-        contentType: false,  // 컨텐츠 타입 설정
+        processData: false,
+        contentType: false,
         success: function (data) {
-            $.list();
+            var json = $.parseJSON(data);
+            if(json.httpCode == 422){
+                //문구는 추후 수정
+                alert("test 용 : 수정 실패");
+            }else{
+                alert("test 용 : 수정 성공");
+                $.list();
+            }
         },
         error: function(error) {
-            console.error('삭제 실패:', error);
+            console.error('수정 실패:', error);
         }
     });
 }
@@ -238,12 +236,49 @@ $.deleteRow = function() {
       type: "GET",
       data: { sheetsubID: sheetsubID },
       success: function (data) {
-        $.emptyRow();
-        $.list();
+        var json = $.parseJSON(data);
+        if(json.httpCode == 422){
+            //문구는 추후 수정
+            alert("test 용 : 삭제 실패");
+        }else{
+            $.emptyRow();
+            $.list();
+        }
+
       },
       error: function(error) {
          console.error('삭제 실패:', error);
       }
   })
+}
+
+$.editSales = function(){
+    var sheetID = $("#sheetID").val();
+    var salesman = $("#salesman").val();
+    var carSubmit = $("#carSubmit").val();
+    var carSubmitTel = $("#carSubmitTel").val();
+    $.ajax({
+        url:"/dailyReport/workspace/ajax/edit/carSubmit",
+        type:"POST",
+        data:{
+            "sheetID":sheetID,
+            "salesman":salesman,
+            "carSubmit":carSubmit,
+            "carSubmitTel":carSubmitTel
+        },
+        success : function (data) {
+            var json = $.parseJSON(data);
+            if(json.httpCode == 200){
+                //문구는 추후 수정
+                alert("test 용 : 수정 성공");
+                location.href="/dailyReport/driver";
+            }else{
+                alert("test 용 : 수정 실패");
+            }
+        },
+        error: function(error) {
+             console.error('수정 실패:', error);
+        }
+    })
 }
 

@@ -1,4 +1,5 @@
 const canvas = document.getElementById("canvas");
+const popup = document.getElementById('popup');
 var openable1 = false;
 var openable2 = false;
 var openable3 = false;
@@ -24,28 +25,32 @@ function fill010() {
 }
 
 function validateInput1(input) {
-    if(!input.value) {
+    const carSubmit = input.value
+    if(!carSubmit) {
         openable1 = false;
     } else {
         openable1 = true;
-        listData()
+        localStorage.setItem('recentCarSubmit', carSubmit);
     }
 }
 
 function validateInput2(input) {
-    if(!input.value) {
+    const salesman = input.value;
+    if(!salesman) {
         openable2 = false;
     } else {
         openable2 = true;
-        listData()
+        localStorage.setItem('recentSalesman', salesman);
     }
 }
 
 /* function : oninput 인풋이 바르지 않으면 보더컬러를 red로 바꿈 */
 function validateInput3(input) {
-    if (phoneNumberPattern.test(input.value)) {
+    const carSubmitTel = input.value;
+    if (phoneNumberPattern.test(carSubmitTel)) {
         input.style.borderColor = '';
         openable3 = true;
+         localStorage.setItem('recentCarSubmitTel', carSubmitTel);
         listData()
     } else {
         input.style.borderColor = 'red';
@@ -53,11 +58,29 @@ function validateInput3(input) {
     }
 }
 
+// Function to load input values from localStorage
+function loadInputValues() {
+    const recentCarSubmit = localStorage.getItem('recentCarSubmit');
+    const recentSalesman = localStorage.getItem('recentSalesman');
+    const recentCarSubmitTel = localStorage.getItem('recentCarSubmitTel');
+
+    // Set input values if they exist in localStorage
+    if (recentCarSubmit !== null) {
+        document.getElementById('carSubmit').value = recentCarSubmit;
+    }
+    if (recentSalesman !== null) {
+        document.getElementById('salesman').value = recentSalesman;
+    }
+    if (recentCarSubmitTel !== null) {
+        document.getElementById('carSubmitTel').value = recentCarSubmitTel;
+    }
+}
+
+
 
 
 
 /* function : open/close popup */
-const popup = document.getElementById('popup');
 function openPop() {
     if(dateInput === '') { // 데이트 기록이 없으면
         openable4 = false;
@@ -67,6 +90,7 @@ function openPop() {
     }
     if(openable1 & openable2& openable3 & openable4 === true) {
         popup.style.display = 'flex';
+        updateTotalAmount();
         saved.forEach(function(elem){
             elem.classList.add('hidden');
         })
@@ -122,13 +146,11 @@ QtyupInput.addEventListener('input', updateTotalAmount);
 
     //<!-- 합계 업데이트 함수 -->
 function updateTotalAmount() {
-    <!-- "대수"와 "운반 단가" 값을 가져옴 -->
     const Qty = parseFloat(QtyInput.value);
     const unitPrice = parseFloat(QtyupInput.value);
 
     //<!--값이 유효한 경우에만 합계 계산 및 표시-->
     if (!isNaN(Qty) && !isNaN(unitPrice)) {
-        <!-- "대수"와 "운반 단가"를 곱하여 소수점 이하 2자리까지 표시 -->
         totalAmountInput.value = Qty * unitPrice;
     } else {
         //<!-- 값이 유효하지 않은 경우 합계 입력 상자를 비움 -->
@@ -140,16 +162,30 @@ function updateTotalAmount() {
 const popCheckbox = document.getElementById("showHideCheckbox");
 const hiddenPart = document.getElementById("hiddenPart");
 const checkboxLabel = document.getElementById("checkboxLabel");
+const savedState = localStorage.getItem('checkboxState');
 
-popCheckbox.addEventListener("change", function() {
+function recoverState() {
+    if (savedState === "on") {
+        popCheckbox.checked = true;
+    } else {
+        popCheckbox.checked = false;
+    }
+    showOrHide();
+    updateTotalAmount();
+}
+
+
+function showOrHide() {
     if (popCheckbox.checked) {
         hiddenPart.style.display = "block";
         checkboxLabel.style.color = "#333";
+        localStorage.setItem('checkboxState', "on");
     } else {
         hiddenPart.style.display = "none";
         checkboxLabel.style.color = "#aaa";
+        localStorage.setItem('checkboxState', "off");
     }
-});
+}
 
 /* 전체 삭제 버튼 누르면 인풋 비우기 */
 function clearInputs() {
@@ -227,7 +263,10 @@ function fillPop(event) {
     document.getElementById('Qty').value = td4;
     document.getElementById('Rem').value = td5;
     document.getElementById('sheetsubID').value = td6;
-    document.getElementById('Qtyup').value = td7;
+    if (td7 !== "0") {
+        document.getElementById('Qtyup').value = td7;
+    }
+
 
     // Open the popup
     openPop();
@@ -246,4 +285,18 @@ function listData() {
     }
 }
 
+function selected(row) {
+    console.log(row.id)
+}
 
+
+
+// Call functions when the page loads
+window.onload = function () {
+    loadInputValues();
+    openable1 = true;
+    openable2 = true;
+    openable3 = true;
+    listData();
+    recoverState();
+};

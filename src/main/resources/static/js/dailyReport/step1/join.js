@@ -37,13 +37,23 @@ function carFindList() {
 }
 
 function printSummary(data) {
-
     const boutmoney = document.getElementById("boutmoney");
     const boutcar = document.getElementById("boutcar");
+    const boutdate = document.getElementById("boutdate");
+    const boutuseamt = document.getElementById("boutuseamt");
 
-    boutmoney.innerHTML = data.totalTransportationCost.toLocaleString();
-    boutcar.innerHTML = data.totalQty.toLocaleString();
+    boutmoney.innerHTML = `${data.totalTransportationCost.toLocaleString()}원`;
+    boutcar.innerHTML = `${data.totalQty.toLocaleString()}대`;
+
+    const drvDate = new Date(data.finalDrvDate);
+    const year = drvDate.getFullYear();
+    const month = drvDate.getMonth() + 1;
+    const day = drvDate.getDate();
+
+    boutdate.innerHTML = `${year}-${month}-${day}`;
+    boutuseamt.innerHTML = `${data.totalUseAmt.toLocaleString()}원`;
 }
+
 
 function printDispatchList(searchResultData) {
     // 테이블 본문 내용 초기화
@@ -76,17 +86,22 @@ function printFindList(searchResultData) {
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.forEach((data, index) => {
         const row = document.createElement("tr");
-        let order = [
-            data.rependchk , data.rependdate, data.repaddkm];
+        const rependdate = new Date(data.rependdate);
+                // 년, 월, 일 추출
+                const year = rependdate.getFullYear();
+                const month = rependdate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
+                const day = rependdate.getDate();
 
-        row.innerHTML = `
-                    <td>${order[0]}</td>
-                    <td>${order[1]}</td>
-                    <td>${order[2]}</td>
-                    <td>${order[3]}</td>
-                    <td>${order[4]}</td>
-                 `;
 
+                // 날짜를 원하는 형식으로 표시
+                const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+
+
+                row.innerHTML = `
+                    <td>${data.drvClub}</td>
+                    <td>${formattedDate}</td>
+                    <td>${data.repaddkm}</td>
+                `;
         tableBody.appendChild(row);
     });
 

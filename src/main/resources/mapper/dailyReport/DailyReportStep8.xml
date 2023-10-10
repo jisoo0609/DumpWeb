@@ -26,7 +26,7 @@
     </sql>
 
 
-    <select id="selectCarListByOption" parameterType="DailyReportStep8OptionForm" resultType="DailyReportStep8">
+    <select id="selectReceiptsByOption" parameterType="DailyReportStep8OptionForm" resultType="DailyReportStep8">
         <include refid="res_table">
             <property name="userId" value="#{carSubmitTel}"/>
             <property name="startDate" value="#{startDate}"/>
@@ -44,33 +44,30 @@
         Qtyup
         from r3
         <choose>
-            <when test="fromsite !='' ">
-                WHERE fromesite = #{fromesite}
+            <when test="sortingCriteria.equals('date')">
+                ORDER BY date DESC, fromsite ASC, tosite ASC
             </when>
-            <when test="tosite!= '' ">
-                WHERE tosite = #{tosite}
+            <when test="sortingCriteria.equals('carNo')">
+                ORDER BY carNo ASC, date ASC, fromsite ASC, tosite ASC
             </when>
-            <when test="item != '' ">
-                WHERE item = #{item}
-            </when>
-            <when test="carNo !='' ">
-                WHERE carNo = #{carNo}
+            <when test="sortingCriteria.equals('item')">
+                ORDER BY item ASC, date ASC, fromsite ASC, tosite ASC
             </when>
         </choose>
-        <choose>
-            <when test="sortingCriteria == '0-date'">
-                ORDER BY date DESC
-            </when>
-            <when test="sortingCriteria == '1-carNo'">
-                ORDER BY carNo ASC
-            </when>
-            <when test="sortingCriteria == '2-item'">
-                ORDER BY item ASC
-            </when>
-            <when test="sortingCriteria == '3-qtyup'">
-                ORDER BY Qtyup ASC
-            </when>
-        </choose>
+    </select>
+
+    <select id="getSelectBoxData" resultType="DailyReportStep8">
+        SELECT distinct t.sheetID,
+               t.CarNo,
+               s.fromsite,
+               s.tosite,
+               s.item
+        FROM tsheet t
+                 JOIN tSheet_sub s
+                      ON t.sheetID = s.sheetID2
+        WHERE t.carSubmitTel = #{carSubmitTel}
+        order by date desc;
+
     </select>
 
 </mapper>

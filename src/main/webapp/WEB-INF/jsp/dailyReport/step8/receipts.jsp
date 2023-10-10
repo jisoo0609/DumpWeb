@@ -12,9 +12,8 @@
     <link rel="shortcut icon" href="/resources/image/favicon/favicon.png">
 
     <!-- Style-->
-    <link href="/resources/css/step8/style.css?" rel="stylesheet" type="text/css">
+    <link href="/resources/css/step8/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" type="text/css" href="/resources/css/loading.css">
-    <link rel="stylesheet" type="text/css" href="/resources/css/step8/index.css">
 
 </head>
 
@@ -83,18 +82,6 @@
                         <select class="fromsite " id="fromsiteBox" onchange="$.selectBoxChange(this.value, 'fromsite')">
                             <option value="">전체</option>
                             <option value="구디">구디</option>
-                            <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="fromsite" value="${receipt.fromsite}" />
-
-                                <script>   //옵션에 중복값 제거
-                                if (!document.querySelector('#fromsiteBox option[value="${fromsite}"]')) {
-                                    var option = document.createElement('option');
-                                    option.value = "${fromsite}";
-                                    option.text = "${fromsite}";
-                                    document.querySelector('#fromsiteBox').appendChild(option);
-                                }
-                                </script>
-                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -106,19 +93,7 @@
                         <select class="tosite " id="tositeBox" onchange="$.selectBoxChange(this.value, 'tosite')">
                             <option value="">전체</option>
                             <option value="지밸리">지밸리</option>
-                            <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="tosite" value="${receipt.tosite}" />
-
-                                <script>   //옵션에 중복값 제거
-                                if (!document.querySelector('#tositeBox option[value="${tosite}"]')) {
-                                    var option = document.createElement('option');
-                                    option.value = "${tosite}";
-                                    option.text = "${tosite}";
-                                    document.querySelector('#tositeBox').appendChild(option);
-                                }
-                                </script>
-                            </c:forEach>
-    </select>
+                        </select>
                     </div>
                 </li>
                 <li>
@@ -129,18 +104,6 @@
                         <select class="item " id="itemBox" onchange="$.selectBoxChange(this.value, 'item')">
                             <option value="">전체</option>
                             <option value="출퇴근">출퇴근</option>
-
-                            <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="item" value="${receipt.item}" />
-                                <script>   //옵션에 중복값 제거
-                                if (!document.querySelector('#itemBox option[value="${item}"]')) {
-                                    var option = document.createElement('option');
-                                    option.value = "${item}";
-                                    option.text = "${item}";
-                                    document.querySelector('#itemBox').appendChild(option);
-                                }
-                                </script>
-                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -153,52 +116,23 @@
                         <select class="CarNo " id="CarNoBox" onchange="$.selectBoxChange(this.value, 'CarNo')">
                             <option value="">전체</option>
                             <option value="자차">자차</option>
-                            <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="carNo" value="${receipt.carNo}" />
-                                <script>   //옵션에 중복값 제거
-                                    if (!document.querySelector('#CarNoBox option[value="${carNo}"]')) {
-                                        var option = document.createElement('option');
-                                        option.value = "${carNo}";
-                                        option.text = "${carNo}";
-                                        document.querySelector('#CarNoBox').appendChild(option);
-                                    }
-                                </script>
-                            </c:forEach>
                         </select>
                     </div>
                 </li>
             </ul>
         </div>
-
-
-        <div style="text-align: center;padding-top: 30px;border: 1px solid #ddd;padding-bottom: 30px; margin: 0 0 10px;">
+        <div style="text-align: center;padding-top: 30px;border: 1px solid #ddd;padding-bottom: 60px; margin: 0 0 10px;">
             <div style="width: 50%;  float: left;">
-                <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
-                        type="radio" name="sortingCriteria" value="0-date" checked/>운행일 기준</label>
-            </div>
-            <div style="width: 50%;  float: left;">
-                <label style="display:none"><input
-                        type="radio" name="sortingCriteria" value="1-t"/></label>
-            </div>
-            <div style="display:none">
-                <label style="display:none"><input
-                        type="radio" name="sortingCriteria" value="2-t"/></label>
+                <label style="display: inline-flex;align-items: center;justify-content: flex-start;width: 90px;"><input
+                        type="radio" name="sortingCriteria" value="date" checked>운행일 기준</label> <br>
+                <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 90px;"><input
+                        type="radio" name="sortingCriteria" value="item">품목 기준</label>
+                <br>
             </div>
             <div style="margin-left: 50%;">
                 <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="sortingCriteria" value="3-carNo"/>차량 기준</label>
-            </div>
-            <div style="margin-left: 50%;">
-                <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="sortingCriteria" value="4-item"/>품목 기준</label>
-            </div>
-            <div style="margin-left: 50%;">
-                <label style="display: inline-flex;align-items: center; justify-content: flex-start;width: 155px;"><input
-                        type="radio" name="sortingCriteria" value="5-qtyup"/>운반비 기준</label>
-            </div>
-            <div style="display:none">
-                <label style="display: inline-flex;align-items: center;justify-content: flex-start;"><input
-                        type="radio" name="sortingCriteria" value="6-t"/></label>
+                        type="radio" name="sortingCriteria" value="carNo">차량 기준</label>
+                <br>
             </div>
         </div>
     </form>
@@ -210,14 +144,14 @@
     <div id="tableshow">
         <div class="table-top" style="height: auto; display:  block; text-align: center">
             <p class="total">
-                <span>데이터</span> <span class="cnt default-blue" id="receiptsCnt"></span>
+<%--                <span>데이터</span><span class="cnt default-blue" id="receiptsCnt"></span>--%>
                 <span class="cnt default-blue" id="total"></span>
             </p>
         </div>
 
         <div style="width: 100%; overflow-x: auto; overflow-y: hidden;">
             <div class="agreement_container">
-                <button class="common_btn" style="width: 110px;">운반금액<br><span class="resultPrice">50,000</span>
+                <button class="common_btn" style="width: 110px;">운반금액<br><span class="transportCost"></span>
                 </button>
                 <div class="btnWraaper">
                     <button class="common_btn" onclick="$.allChkChange(1);">일괄결재</button>
@@ -240,60 +174,21 @@
                 <tr>
                     <th>No</th>
                     <th class="th_header">운행일</th>
-                    <th class="th_header">상차지</th>
-                    <th class="th_header">하차지</th>
-                    <th class="th_header">차량번호</th>
+                    <th>상차지</th>
+                    <th>하차지</th>
                     <th class="th_header">품목</th>
-                    <th class="th_header">대수</th>
-                    <th class="th_header">운반비</th>
-                    <th class="th_header">진행</th>
+                    <th class="th_header">차량번호</th>
+                    <th>대수</th>
+                    <th class="th_header">운반단가</th>
                 </tr>
                 </thead>
                 <tbody>
-
                 </tbody>
             </table>
-        </div>
-
-        <div>
-            <section class="paging">
-                <ul class="paging__ul" id="page-div">
-
-                    <li><a style="cursor: pointer;" onclick="$.valuePg(1)"><img
-                            src="/resources/image/icons/ico_prev.png" alt="이전"></a></li>
-
-                    <li class="pageNum">
-
-
-                        <a style="cursor: pointer;"
-                           onclick="$.valuePg(1)"
-                           class="active" @media screen and (min-width: 280px) and (max-width: 1024px) {>1</a>
-
-
-                    </li>
-
-                    <li><a style="cursor: pointer;" onclick="$.valuePg(1);"><img
-                            src="/resources/image/icons/ico_next.png" alt="다음"></a></li>
-                </ul>
-            </section>
         </div>
     </div>
 </section>
 
-
-
-<div class="layerMask dis-n pop-wrap" id="pop-integrateform" tabindex="0">
-    <div class="layerMask__inner" style="height: auto; width: 90%">
-
-
-        <section class="layer-popup" style="height: 100%;">
-            <div class="popSearch-listWrap integrateFromArea">
-
-            </div>
-
-        </section>
-    </div>
-</div>
 
 <button class="screen_top up-btn">
     <img src="/resources/image/icons/ico-top.png" style="width: 40px; height: 40px;">
