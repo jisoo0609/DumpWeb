@@ -13,29 +13,25 @@ const thisDay = new Date();
 dateInput.value = thisDay.toISOString().slice(0, 10);
 
 $(document).ready(function() {
+            // Initialize datepicker on the date input
     $("#date").datepicker({
-        dateFormat: 'yy-mm-dd', // Date format
-        showOtherMonths: true,
-        showMonthAfterYear: true,
-        changeYear: true,
-        changeMonth: true,
-        yearSuffix: '년',
-        monthNamesShort: MONTH_NAME_FORMAT,
-        monthNames: MONTH_NAME_FORMAT,
-        dayNamesMin: DAY_FORMAT,
-        dayNames: DAY_FORMAT,
-        yearRange: '-5:+1'
+            dateFormat: 'yy-mm-dd', // Date format
+            showOtherMonths: true,
+            showMonthAfterYear: true,
+            changeYear: true,
+            changeMonth: true,
+            yearSuffix: '년'
+            ,monthNamesShort: MONTH_FORMAT
+            ,monthNames: MONTH_NAME_FORMAT
+            ,dayNamesMin: DAY_FORMAT
+            ,dayNames: DAY_FORMAT
+            ,yearRange: '-5:+1'
     });
 
-    // Open the datepicker when the input is clicked
-    $("#date").click(function() {
-        //event.preventDefault();
-        $("#date").datepicker("show");
-    });
 
     let currentDate = $("#date").datepicker("getDate");
+    // Button to set the date to the previous day
     $("#prevDay").click(function() {
-        event.preventDefault();
         currentDate.setDate(currentDate.getDate() - 1);
         $("#date").datepicker("setDate", currentDate);
         listData();
@@ -43,30 +39,12 @@ $(document).ready(function() {
 
     // Button to set the date to the next day
     $("#nextDay").click(function() {
-        event.preventDefault();
         currentDate.setDate(currentDate.getDate() + 1);
         $("#date").datepicker("setDate", currentDate);
         listData();
     });
+});
 
-    /* Function to set the date to the previous day
-    function prevDay(event) {
-        event.preventDefault();
-        thisDay.setDate(thisDay.getDate() - 1);
-        dateInput.value =  thisDay.toISOString().slice(0, 10);
-        listData();
-        event.preventDefault();
-    }
-
-    // Function to set the date to the next day
-    function nextDay(event) {
-        event.preventDefault();
-        thisDay.setDate(thisDay.getDate() + 1);
-        dateInput.value = thisDay.toISOString().slice(0, 10);
-        listData();
-        event.preventDefault();
-    } */
-})
 
 /* function : onfocus시 자동으로 010을 채워준다*/
 var phoneNumberPattern = /^010[0-9]{8}$/;
