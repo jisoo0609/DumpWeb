@@ -6,28 +6,67 @@ var openable3 = false;
 var openable4 = true; //기본적으로 오늘 날자를 세팅해 놓으므로 true로 둠
 
 
-/* DATE */
+/* DDDDDD-DATE-EEEEEE */
 const dateInput = document.getElementById('date');
 const thisDay = new Date();
 /* function: 오늘 날자로 인풋 자동 채우기 */
-dateInput.value = thisDay.toISOString().slice(0, 10);;
+dateInput.value = thisDay.toISOString().slice(0, 10);
 
-// Function to set the date to the previous day
-function prevDay() {
-    event.preventDefault();
-    thisDay.setDate(thisDay.getDate() - 1);
-    dateInput.value =  thisDay.toISOString().slice(0, 10);
-    listData();
-}
+$(document).ready(function() {
+    $("#date").datepicker({
+        dateFormat: 'yy-mm-dd', // Date format
+        showOtherMonths: true,
+        showMonthAfterYear: true,
+        changeYear: true,
+        changeMonth: true,
+        yearSuffix: '년',
+        monthNamesShort: MONTH_NAME_FORMAT,
+        monthNames: MONTH_NAME_FORMAT,
+        dayNamesMin: DAY_FORMAT,
+        dayNames: DAY_FORMAT,
+        yearRange: '-5:+1'
+    });
 
-// Function to set the date to the next day
-function nextDay() {
-    event.preventDefault();
-    thisDay.setDate(thisDay.getDate() + 1);
-    dateInput.value = thisDay.toISOString().slice(0, 10);
-    listData();
-}
+    // Open the datepicker when the input is clicked
+    $("#date").click(function() {
+        //event.preventDefault();
+        $("#date").datepicker("show");
+    });
 
+    let currentDate = $("#date").datepicker("getDate");
+    $("#prevDay").click(function() {
+        event.preventDefault();
+        currentDate.setDate(currentDate.getDate() - 1);
+        $("#date").datepicker("setDate", currentDate);
+        listData();
+    });
+
+    // Button to set the date to the next day
+    $("#nextDay").click(function() {
+        event.preventDefault();
+        currentDate.setDate(currentDate.getDate() + 1);
+        $("#date").datepicker("setDate", currentDate);
+        listData();
+    });
+
+    /* Function to set the date to the previous day
+    function prevDay(event) {
+        event.preventDefault();
+        thisDay.setDate(thisDay.getDate() - 1);
+        dateInput.value =  thisDay.toISOString().slice(0, 10);
+        listData();
+        event.preventDefault();
+    }
+
+    // Function to set the date to the next day
+    function nextDay(event) {
+        event.preventDefault();
+        thisDay.setDate(thisDay.getDate() + 1);
+        dateInput.value = thisDay.toISOString().slice(0, 10);
+        listData();
+        event.preventDefault();
+    } */
+})
 
 /* function : onfocus시 자동으로 010을 채워준다*/
 var phoneNumberPattern = /^010[0-9]{8}$/;

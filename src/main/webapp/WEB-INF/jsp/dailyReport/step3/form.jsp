@@ -3,8 +3,6 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/dailyreport.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
-<script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
-
 
 <section id="canvas" style="">
     <div id="dailyreport">
@@ -98,14 +96,16 @@
                             <div class="datediv">
                                 <label class="t10">운행일</label>
                                 <span class="content">
-                                    <input type="text" class="datepicker input" id="date" name="date" style="width: 80px; margin-left: 75px; text-align: center; padding-left: 0;"
-                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="on" onchange="listData()">
+                                    <input type="text" class="input" id="date" name="date" style="width: 80px; margin-left: 75px; text-align: center; padding-left: 0;"
+                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="off" onchange="listData()">
                                 </span>
                             </div>
+
                             <div>
-                                 <button><span class="dateBtn" style="margin-left:69px" onclick="prevDay()">&lt;</span></button>
-                                 <button><span class="dateBtn" onclick="nextDay()">&gt;</span></button>
+                                 <button id="prevDay" class="dateBtn" style="margin-left:69px">&lt;</button>
+                                 <button id="nextDay" class="dateBtn">&gt;</button>
                             </div>
+
                             <div>
                                 <label >진행</label>
                                 <select id="progress" style="width:60px; margin-left: 30px;">
@@ -118,15 +118,16 @@
                         </li>
 
                         <li>
+                            <div id="mutualApproval">
+                                <label>결제처 제출 확인</label>
+                                <input type="checkbox" class="chkbx" name="chk0" value="0" onChange="mutallyApproved()">
+                            </div>
 
                             <div id="approval">
                                 <label>결재</label>
                                 <input type="checkbox" class="chkbx" id="checkbox" name="chk1" value="0" onChange="approved()">
                             </div>
-                            <div id="mutualApproval">
-                                <label>결제처 제출 확인</label>
-                                <input type="checkbox" class="chkbx" name="chk0" value="0" onChange="mutallyApproved()">
-                            </div>
+
                         </li>
 
                     </ul>
@@ -137,7 +138,7 @@
                             <span class="v-mid" data-trn-key="TR_MENU_KEY_375">운송 정보 등록</span>
                         </p>
                         <div class="haveTwo">
-                            <button class="btn addBtn" type="button" style="margin: 0 5px 0 auto; width: 100px;" onclick="openPop()">
+                            <button class="btn addBtn" type="button" style="margin: -1px 5px 0 auto; width: 100px;" onclick="openPop()">
                                 운송 신규등록
                             </button>
                             <%@ include file="popupInput.jsp" %>

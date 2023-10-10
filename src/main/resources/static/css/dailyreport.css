@@ -58,7 +58,7 @@
 #canvas th{
     height: var(--main-height);
     font-size: var( --main-font-size);
-    text-align: left;
+    text-align: center;
     padding-left: 5px;
     padding-right: 5px;
 }
@@ -201,17 +201,24 @@
     margin-top: 6px;
 }
 
+#mutualapproval input{
+    margin-left: 100px;
+    margin-top: 6px;
+}
+
 .chk::last-child{
     color: red;
 }
 
-#approval {
-    margin-left: 30px;
+#mutalapproval {
     height: var(--main-height);
+    width: 50%
 }
 
-#chk2 {
-    margin-left: 5px;
+#approval {
+    height: var(--main-height);
+    width: 50%;
+    margin-left: 15px;
 }
 
 @media screen and (max-width: 359px) {
@@ -224,10 +231,6 @@
     #approval {
         margin-left: 0px;
     }
-    #chk2 {
-        margin-left: 25%;
-    }
-
 }
 
 .datediv {
@@ -276,17 +279,13 @@
 .dateBtn {
     height: var(--main-height);
     width: var(--main-height);
-  background-color: #FAFBFC;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  color: #24292E;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 20px;
-  line-height: var(--line-height);
-  vertical-align: middle;
-}
-
-.dateBtn:last-child {
-    margin-left: -10px;
+    background-color: #FAFBFC;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    color: #24292E;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 20px;
+    line-height: var(--line-height);
+    vertical-align: middle;
 }
