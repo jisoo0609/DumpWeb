@@ -30,10 +30,5 @@ public class Step8Controller {
         return step8Service.searchReceiptList(option);
     }
 
-    @RequestMapping(value = "/receipts/ajax/selectboxlist", method = RequestMethod.POST)
-    @ResponseBody
-    public List<DailyReportStep8> getSelectBoxList() {
-        return step8Service.getSelectBoxData();
-    }
-}
 
+}

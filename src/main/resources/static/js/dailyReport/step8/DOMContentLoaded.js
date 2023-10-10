@@ -8,6 +8,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //리스트를 통한 페이지 이동 처리.
     clickListThAndRedirect();
-
-    getSelectBoxData()
 });
