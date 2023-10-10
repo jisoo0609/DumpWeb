@@ -32,7 +32,16 @@ public class Step8Service {
 
     public List<DailyReportStep8> searchReceiptList(DailyReportStep8OptionForm option) {
         option.setCarSubmitTel(getSessionLoginData().getUserId());
-        System.out.println(step8Mapper.selectCarListByOption(option));
-        return step8Mapper.selectCarListByOption(option);
+        System.out.println("option: " + step8Mapper.selectReceiptsByOption(option));
+        return step8Mapper.selectReceiptsByOption(option);
+        }
+
+    public List<DailyReportStep8> getSelectBoxData() {
+        List<DailyReportStep8> selectBoxDataList = step8Mapper.getSelectBoxData(getSessionLoginData().getUserId());
+
+        for (DailyReportStep8 x : selectBoxDataList) {
+            System.out.println("셀렉트박스" + x);
+        }
+        return selectBoxDataList;
     }
 }
