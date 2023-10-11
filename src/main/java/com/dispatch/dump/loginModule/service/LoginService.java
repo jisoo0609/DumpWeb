@@ -54,7 +54,7 @@ public class LoginService {
                             rtnUrl = "/dailyReport/manager";
                         }
                     }
-//                    updateSS(loginInfo); 추가조건필요
+                    updateSS(loginInfo);
                     rtnMap.put("rtnUrl", rtnUrl);
                     rtnMap.put("httpCode", 200);
                 } else {
@@ -169,7 +169,9 @@ public class LoginService {
 
     public void updateSS(Login loginInfo) {
         loginMapper.updateSheetSsByUserId(loginInfo);
-        loginMapper.updateSheetSubSsByUserId(loginInfo);
-        loginMapper.updateCarNoSsByUserId(loginInfo);
+//        loginMapper.updateSheetSubSsByUserId(loginInfo);
+//        if (loginInfo.getUserPosition().equals("driver")) {
+//            loginMapper.updateCarNoSsByUserId(loginInfo);
+//        }
     }
 }

@@ -119,7 +119,7 @@
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
 				<p>정말 <span style="font-weight: bold;">저장</span>하시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인" onClick="clickConfirmButton()">
+				<input class="confirmBtn" type="button" value="확인" onClick="save()">
 				<input class="clBtn" type="button" value="취소">
 			</div>
 		</div>

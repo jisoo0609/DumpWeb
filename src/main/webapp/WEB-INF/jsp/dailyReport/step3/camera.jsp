@@ -41,7 +41,7 @@
 
 <div>
 
-    <button id="cameraBtn" class="btn addBtn" type="button" style="width: 100px;" onclick="handleCameraButtonClick()">전표 사진촬영</button>
+    <button id="cameraBtn" class="btn addBtn" type="button" style="margin: -1px 5px 0 auto; width: 100px;" onclick="handleCameraButtonClick()">전표 사진촬영</button>
 
     <div id="modal" class="modal" style="display: none;">
         <div class="modal-content">
