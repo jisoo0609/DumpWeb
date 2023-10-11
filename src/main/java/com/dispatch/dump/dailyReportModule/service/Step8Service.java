@@ -32,7 +32,7 @@ public class Step8Service {
 
     public List<DailyReportStep8> searchReceiptList(DailyReportStep8OptionForm option) {
         option.setCarSubmitTel(getSessionLoginData().getUserId());
-        System.out.println("option: " + step8Mapper.selectReceiptsByOption(option));
+        System.out.println("검색결과 : " + step8Mapper.selectReceiptsByOption(option));
         return step8Mapper.selectReceiptsByOption(option);
         }
 

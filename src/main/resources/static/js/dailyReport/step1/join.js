@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     bindDispatchList();
 });
 document.addEventListener("DOMContentLoaded", function () {
+    bindSummary();
     carFindList();
 });
 
@@ -22,7 +23,11 @@ function bindDispatchList() {
         url: "/dailyReport/driver/ajax/submitlist",
         type: "GET",
         success: function (data) {
-            printDispatchList(data);
+// 데이터를 먼저 저장
+            sharedData = data;
+            // 그 후에 두 함수를 호출
+            printDispatchList();
+            printCarRecruitmentList();
         }
     });
 }
@@ -61,12 +66,12 @@ function printSummary(data) {
     boutuseamt.innerHTML = `${data.totalUseAmt.toLocaleString()}원`;
 }
 
-
-function groupAndSumData(searchResultData) {
+//대수 합치기
+function groupAndSumData(sharedData) {
     const groupedData = {};
 
     // 데이터를 그룹화하고 qty 값을 합산
-    searchResultData.forEach(data => {
+    sharedData.forEach(data => {
         const key = `${data.carSubmit}-${data.fromsite}-${data.tosite}-${data.item}`;
 
         if (!groupedData[key]) {
@@ -86,13 +91,13 @@ function groupAndSumData(searchResultData) {
 }
 
 // ...
-
-function printDispatchList(searchResultData) {
+//금일 차량 배차 현황
+function printDispatchList() {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#menusub");
 
     // 데이터를 그룹화하고 합산
-    const groupedData = groupAndSumData(searchResultData);
+    const groupedData = groupAndSumData(sharedData);
 
     // 검색 결과 데이터를 테이블 본문에 추가.
     groupedData.forEach(data => {
@@ -112,7 +117,27 @@ function printDispatchList(searchResultData) {
     });
 }
 
+//금일 차량 모집 공고
+function printCarRecruitmentList() {
+    const tableBody = document.querySelector(".today-car-recruitment");
 
+    // 금일 차량 모집에 carNo가 "공고"인 경우에만 데이터를 표시.
+    sharedData.forEach(data => {
+        if (data.carNo === "공고") {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${data.carSubmit}</td>
+                <td>${data.fromsite}</td>
+                <td>${data.tosite}</td> 
+                <td>${data.item}</td>
+                <td>${data.qty}</td> 
+            `;
+
+            tableBody.appendChild(row);
+        }
+    });
+}
 function printFindList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#carsub");
@@ -139,6 +164,7 @@ function printFindList(searchResultData) {
         <td>${data.drvClub}</td>
         <td>${formattedDate}</td>
         <td>${formattedRepaddkm}</td>
+         <td>${data.drvRem}</td>
     `;
         row.setAttribute("data-drive-id", data.driveID);
         tableBody.appendChild(row);
