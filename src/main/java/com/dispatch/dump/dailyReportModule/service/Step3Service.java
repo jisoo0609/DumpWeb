@@ -54,10 +54,9 @@ public class Step3Service {
     public void saveTransPortInfo(DailyReportStep3Sub dailyReportStep3Sub){
         dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(getSessionLoginData().getUuserID()));
         dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
-        //System.out.println(); 추후 확인
+        System.out.println("Writeridx2는?"+dailyReportStep3Sub.getWriteridx2());
         dailyReportStep3SubMapper.insertTransportInfo(dailyReportStep3Sub);
     };
-
 
     //회원정보 검증
     //user id에 DailyReportStep3Main의 carsubmitTel 등록해서 사용
@@ -111,8 +110,8 @@ public class Step3Service {
 
         }else{
             //회원 정보가 존재 하지 않는 경우(ss2와 subSS2 등록 시 Data 없음)
-            dailyReportStep3Main.setSheetSS2(Integer.parseInt(userInfo.getUuserID()));
-            dailyReportStep3Sub.setSheetsubSS2(Integer.parseInt(userInfo.getUuserID()));
+            //dailyReportStep3Main.setSheetSS2(Integer.parseInt(userInfo.getUuserID()));
+            //dailyReportStep3Sub.setSheetsubSS2(Integer.parseInt(userInfo.getUuserID()));
 
             //내가 등록한 제출처 정보가 있다면
             DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
