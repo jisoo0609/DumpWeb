@@ -128,10 +128,15 @@
     .today-graph td, .car-graph td{
         border: 1px solid black;
         text-align: center;
+        font-size: 14px;
+    }
+    .car-graph td:nth-child(3) {
+        text-align: right;
     }
     .today-graph td:nth-child(6){
         display: none;
     }
+
     .car-menu th:nth-child(2) {
         border-left: 1px solid;
         border-right: 1px solid;
@@ -215,7 +220,7 @@
                         <div class="total-useamt" id="boutuseamt">원</div>
                     </li>
                     <li>마지막 등록일 :
-                        <div class="expense-date"  id="boutdate">원</div>
+                        <div class="expense-date"  id="boutdate">일</div>
                     </li>
                 </ul>
             </div>
@@ -314,6 +319,7 @@
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
+
             </table>
         </section>
     </article>

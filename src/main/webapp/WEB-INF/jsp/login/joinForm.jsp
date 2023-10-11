@@ -74,42 +74,28 @@
 			}
 
 			// LINE :: 아이디 확인
-			if ($("[name=userId]").val() == 0) {
+			if ($("[name=userId]").val().length == 0) {
 				alert("아이디를 입력해주세요.");
 				$("[name=userId]").focus();
 				return false;
 			}
 
 			// LINE :: 비밀번호 확인
-			if ($("[name=userPw]").val() == 0) {
+			if ($("[name=userPw]").val().length == 0) {
 				alert("비밀번호를 입력해주세요.");
 				$("[name=userPw]").focus();
 				return false;
 			}
 
 			// LINE :: 비밀번호 확인
-			if ($("#userPwChk2").val() == 0) {
+			if ($("#userPwChk2").val().length == 0) {
 				alert("비밀번호확인을 입력해주세요.");
 				$("#userPwChk2").focus();
 				return false;
 			}
 
-
-			// LINE :: 핸드폰번호 확인
-			if ($("[name=userTel]").val() == 0) {
-				alert("핸드폰번호를 입력해주세요.");
-				$("[name=userTel]").focus();
-				return false;
-			}
-
-			if ($("[name=userSS]").val() == 0) {
-				alert("회사명을 입력해주세요.");
-				$("[name=userSS]").focus();
-				return false;
-			}
-
 			// LINE :: 기사이름 확인
-			if ($("[name=userName]").val() == 0) {
+			if ($("[name=userName]").val().length == 0) {
 				alert("기사이름을 입력해주세요.");
 				$("[name=userName]").focus();
 				return false;
@@ -126,6 +112,27 @@
 				alert("비밀번호가 서로 다릅니다.\n확인 후 다시 입력해주세요.");
 				$("[name=userName]").focus();
 				return false;
+			}
+
+			if ($("[name=userPosition]").val() == 'manager') {
+				if ($("[name=userSS]").val().length == 0) {
+					alert("회사명을 입력해주세요.");
+					$("[name=userSS]").focus();
+					return false;
+				}
+
+				var phoneChk = phoneNumChk($("[name=userId]").val());
+
+				if (!phoneChk) {
+					return phoneChk;
+				}
+			} else {
+				// LINE :: 핸드폰번호 확인
+				if ($("[name=userTel]").val().length == 0) {
+					alert("핸드폰번호를 입력해주세요.");
+					$("[name=userTel]").focus();
+					return false;
+				}
 			}
 
 
@@ -199,6 +206,33 @@
 			if (_focus.length > 0) {
 				_focus.focus();
 			}
+		}
+
+		function numberChk(obj) {
+
+			var testValue = $(obj).val();
+
+			if(testValue.length === 0) {
+				$(obj).val("010");
+			}
+
+
+
+			testValue = testValue.replace(/([^0-9])/g, '');
+			$(obj).val(testValue);
+
+		}
+
+		function phoneNumChk(testValue) {
+			let phonenumberPattern = /^(010)?([0-9]{4})?([0-9]{4})$/g;
+
+			var phoneChk = phonenumberPattern.test(testValue);
+
+			if(!phoneChk) {
+				alert("올바른 전화번호 형식이 아닙니다.");
+			}
+
+			return phoneChk;
 		}
 
 		function setCookie(cookieName, value, exdays){
@@ -282,23 +316,23 @@
 					<%--					</div>--%>
 					<div class="b-loginM__input">
 						<label>아이디</label>
-						<input type="text" placeholder="차량번호 전체" name="userId" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
+						<input type="text" placeholder="차량번호 전체" name="userId" autocomplete="off">
 					</div>
 					<div class="b-loginM__input">
 						<label>비밀번호</label>
-						<input type="password" placeholder="4자리 이상" id="userPwChk1" name="userPw" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
+						<input type="password" placeholder="4자리 이상" id="userPwChk1" name="userPw"  autocomplete="off">
 					</div>
 					<div class="b-loginM__input">
 						<label>비밀번호<br/>확인</label>
-						<input type="password" placeholder="4자리 이상" id="userPwChk2" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
+						<input type="password" placeholder="4자리 이상" id="userPwChk2" autocomplete="off">
 					</div>
 					<div class="b-loginM__input">
 						<label>휴대폰번호</label>
-						<input type="text" name="userTel" value="010-" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
+						<input type="text" name="userTel" value="010-" autocomplete="off">
 					</div>
 					<div class="b-loginM__input">
 						<label>기사이름</label>
-						<input type="text" name="userName" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
+						<input type="text" name="userName" autocomplete="off">
 					</div>
 				</div>
 				<div class="b-loginM__form manager <c:if test="${type == 'driver'}">dis-n</c:if>">
@@ -319,23 +353,23 @@
 					<%--					</div>--%>
 					<div class="b-loginM__input">
 						<label>아이디</label>
-						<input type="text" placeholder="휴대폰번호 ex) 01012341234" name="userId" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
+						<input type="text" placeholder="휴대폰번호 ex) 01012341234" name="userId" autocomplete="off" onkeyup="numberChk(this);" onfocusout="numberChk(this);" onfocus="numberChk(this);">
 					</div>
 					<div class="b-loginM__input">
 						<label>비밀번호</label>
-						<input type="password" placeholder="4자리 이상" id="userPwChk1" name="userPw" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
+						<input type="password" placeholder="4자리 이상" id="userPwChk1" name="userPw"  autocomplete="off">
 					</div>
 					<div class="b-loginM__input">
 						<label>비밀번호<br/>확인</label>
-						<input type="password" placeholder="4자리 이상" id="userPwChk2" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
+						<input type="password" placeholder="4자리 이상" id="userPwChk2" autocomplete="off">
 					</div>
 					<div class="b-loginM__input">
 						<label>회사명</label>
-						<input type="text" name="userSS" value="" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
+						<input type="text" name="userSS" value="" autocomplete="off">
 					</div>
 					<div class="b-loginM__input">
 						<label>관리자명</label>
-						<input type="text" name="userName" onkeydown="if(event.keyCode == 13) $.join();" autocomplete="off">
+						<input type="text" name="userName" autocomplete="off">
 					</div>
 				</div>
 
@@ -347,7 +381,7 @@
 							<span>개인정보 수집 및 이용에 동의합니다.</span>
 						</div>
 
-						<button onclick="$.openLayerPrivaryPopUp('pop-personal', this);">
+						<button onclick="$.openLayerPrivaryPopUp('pop-personal', this);" onkeydown="if (event.keyCode == 13) return false;">
 							<a>
 								[ 개인정보취급방침 보기 ]
 							</a>

@@ -9,9 +9,9 @@
     <insert id="insertDailyReportStep7sub" parameterType="DailyReportStep7Sub">
         insert into
         tSheet_sub
-        (sheetID2, fromsite, tosite, item, Qty, sheetsubSS2, Qtyup)
+        (sheetID2, fromsite, tosite, item, Qty, Qtyup, sheetsubSS, sheetsubSS2, writerIDX)
         values
-        (#{sheetID2}, #{fromsite}, #{tosite}, #{item}, #{Qty}, #{sheetsubSS2}, #{Qtyup})
+        (#{sheetID2}, #{fromsite}, #{tosite}, #{item}, #{Qty}, #{Qtyup}, #{sheetsubSS}, #{sheetsubSS2}, #{writerIDX})
 
     </insert>
 

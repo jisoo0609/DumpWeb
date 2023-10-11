@@ -45,16 +45,14 @@
         SELECT
         IF(SUM(Qty * Qtyup) IS NULL, 0, SUM(Qty * Qtyup)) AS 'totalTransportationCost',
         IF(SUM(Qty) IS NULL, 0, SUM(Qty)) AS 'totalQty',
-        IFNULL(
         (
-        SELECT MAX(drvDate)
+        SELECT CASE WHEN MAX(drvDate) IS NULL THEN NULL ELSE MAX(drvDate) END
         FROM tdrive_table
-        ),
-        NULL
         ) AS 'finalDrvDate',
         (
         SELECT IF(SUM(useAmt) IS NULL, 0, SUM(useAmt))
         FROM tdrive_table
+
         ) AS 'totalUseAmt'
         FROM tSheet_sub
         WHERE sheetID2 IN (SELECT sheetid2 FROM r3)
@@ -74,12 +72,17 @@
     </select>
 
     <select id="selectDispatchTdriveList" resultType="DailyReportStep1Tdrive">
-        SELECT rependchk,
-               driveSS,
-               carNo,
+        SELECT driveID,
+               drvclub,
+               DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
+                chk2,
+               lastkm,
+               useamt,
+               useOil,
+               drvrem,
+               rependchk,
                IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
-                repaddkm,
-               drvClub
+                repaddkm
         FROM   tDrive
         where carNo = #{carNo} AND rependchk = false
 

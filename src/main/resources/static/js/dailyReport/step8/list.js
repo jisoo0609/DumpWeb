@@ -1,4 +1,4 @@
-// radio 버튼에 따라 테이블 열 순서 변경 함수
+//몇번째 radio 버튼이 눌렸는지를 리턴해줌
 function changeTableColumnOrder() {
     const searchTypeRadio = document.querySelectorAll('input[name="sortingCriteria"]');
     let checkedNumber;
@@ -20,7 +20,7 @@ function printList(searchResultData) {
     
     //라디오 선택 값 얻어옴
     const checkedNumber = changeTableColumnOrder();
-    let prevOrderValue;
+    let prevCriteria;
     let no = 1;
 
     // 검색 결과 데이터를 테이블 본문에 추가.
@@ -43,29 +43,90 @@ function printList(searchResultData) {
 
         no++;
         // 라디오 버튼의 선택값에 따라서 현재 기준 값을 설정
-        let currentOrderValue;
+        let currentCriteria;
 
         if (checkedNumber === 0) {
-            currentOrderValue = order[0]; // 운행일 기준
+            currentCriteria = order[0]; // 운행일 기준
         } else if (checkedNumber === 1) {
-            currentOrderValue = order[3]; // 품목 기준
+            currentCriteria = order[3]; // 품목 기준
         } else if (checkedNumber === 2) {
-            currentOrderValue = order[4]; // 차량 기준
+            currentCriteria = order[4]; // 차량 기준
         }
-        console.log("prevOrderValue : " + prevOrderValue)
+        console.log("prevCriteria : " + prevCriteria)
 
         //빨간 기준선 추가
-        if (index > 0 && prevOrderValue !== currentOrderValue) {
+        if (index > 0 && prevCriteria !== currentCriteria) {
             row.classList.add("red-line-divider");
         }
-        prevOrderValue = currentOrderValue;
-        console.log("currentOrderValue : " + currentOrderValue)
+        prevCriteria = currentCriteria;
+        console.log("currentCriteria : " + currentCriteria)
 
         row.setAttribute("data-manager-id", data.sheetsubID);
         tableBody.appendChild(row);
     });
 
 };
+
+
+//셀렉트 박스 값들 중복 제거
+function getUniqueSelectBoxData(data, key) {
+    const uniqueValues = new Set();
+    data.forEach(function (item) {
+        uniqueValues.add(item[key]);
+    });
+    return Array.from(uniqueValues);
+}
+
+// 중복이 제거된 값을 <option>으로 추가
+function populateSelectOptions(selectElement, values) {
+    values.forEach(function (value) {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        selectElement.appendChild(option);
+    });
+}
+
+//셀렉트 박스 데이터 얻어오고 화면에 출력
+function getSelectBoxData() {
+    $.ajax({
+        url: "/dailyReport/receipts/ajax/selectboxlist",
+        type: "POST",
+        success: function (data) {
+
+            const uniqueFromsiteValues = getUniqueSelectBoxData(data, "fromsite");
+            const uniqueTositeValues = getUniqueSelectBoxData(data, "tosite");
+            const uniqueItemValues = getUniqueSelectBoxData(data, "item");
+            const uniqueCarNoValues = getUniqueSelectBoxData(data, "carNo");
+
+            // 각 필드에 대한 <select> 요소를 선택
+            const fromsiteSelect = document.getElementById("fromsiteBox");
+            const tositeSelect = document.getElementById("tositeBox");
+            const itemSelect = document.getElementById("itemBox");
+            const carNoSelect = document.getElementById("CarNoBox");
+
+            // 각 필드에 대한 <select> 요소에 중복이 제거된 값들을 추가
+            populateSelectOptions(fromsiteSelect, uniqueFromsiteValues);
+            populateSelectOptions(tositeSelect, uniqueTositeValues);
+            populateSelectOptions(itemSelect, uniqueItemValues);
+            populateSelectOptions(carNoSelect, uniqueCarNoValues);
+        }
+    });
+}
+
+function printSummary(searchResultData) {
+    // 검색 결과 텍스트 생성
+    const dataCount = searchResultData.length;
+    const totalCount = searchResultData.reduce((total, data) => total + (data.qty * data.qtyup), 0);
+
+    //비용금액 버튼 내용 변경
+    const costButton = document.querySelector(".agreement_container .transportCost");
+    costButton.innerHTML = `${totalCount.toLocaleString()}`;
+
+    // 결과를 result_search 요소에 출력
+    const resultSearch = document.querySelector("#total");
+    resultSearch.innerHTML = `<h1>데이터 <span class="blue">${dataCount}</span>건이 검색되었습니다.</h1>`;
+}
 
 //라디오 정렬값에 따라 테이블 헤더&바디 순서 변경하는 코드 -> 후에 대표님 요청사항이 또 바뀌면 그때 사용하기
 // function insertTitleThInFront(arr, idx) {
@@ -158,17 +219,3 @@ function printList(searchResultData) {
 //
 // };
 
-function printSummary(searchResultData) {
-    // 검색 결과 텍스트 생성
-    const dataCount = searchResultData.length;
-    const totalCount = searchResultData.reduce((total, data) => total + (data.qty * data.qtyup), 0);
-
-    // 비용금액 버튼 내용 변경
-    // const costButton = document.querySelector("#receiptsCnt");
-    // costButton.innerHTML = `${totalCount.toLocaleString()}`;
-    // ...
-
-    // 결과를 result_search 요소에 출력
-    const resultSearch = document.querySelector("#total");
-    resultSearch.innerHTML = `<h1>데이터 <span class="blue">${dataCount}</span>건이 검색되었습니다.</h1>`;
-}
