@@ -18,11 +18,11 @@
     <insert id="insertDailyReportStep7" parameterType="DailyReportStep7Main">
         insert into
         tSheet
-        (carNo, date, carSubmit, carSubmitTel, salesman, chk1, sheetSS, sheetSS2, writerIDX)
+        (carNo, date, carSubmit, carSubmitTel, salesman, chk1, sheetSS, sheetSS2, currStatus, writerIDX)
         values
         (#{carNo}, #{date}, #{carSubmit}, #{carSubmitTel}, #{salesman}, 0, (SELECT uuserID
         FROM tsitepw
-        WHERE userId = #{carNo}), #{sheetSS2}, #{writerIDX})
+        WHERE userId = #{carNo}), #{sheetSS2}, "배차", #{writerIDX})
 
         <selectKey
                 keyColumn="sheetID"
@@ -54,7 +54,7 @@
         ON r1.sheetid = r2.sheetid2
         )
     </sql>
-
+    
     <select id="selectReceptionList" parameterType="DailyReportStep7Main" resultType="DailyReportStep7Sub">
         <include refid="reception_table">
             <property name="userId" value="#{userId}"/>
