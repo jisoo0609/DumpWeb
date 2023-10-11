@@ -88,10 +88,10 @@ $.failRemoval = function() {
     });
 }
 
-$.failRemoval = function() {
+$.successRemoval = function() {
     modal({
-        title: '주의',
+        title: '알림',
         type: 'alert',
-        text: '삭제실패'
+        text: '삭제성공'
     });
 }
