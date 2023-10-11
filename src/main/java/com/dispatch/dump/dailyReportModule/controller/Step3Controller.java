@@ -69,20 +69,18 @@ public class Step3Controller {
     @RequestMapping(value = "/workspace/ajax/edit/carSubmit", method = RequestMethod.POST)
     @ResponseBody
     public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
-        return step3Service.editByCarSubmit(dailyReportStep3Main);
+         return step3Service.editByCarSubmit(dailyReportStep3Main);
     }
 
     @RequestMapping(value = "/workspace/ajax/edit", method = RequestMethod.POST)
     @ResponseBody
-    public void edit(DailyReportStep3Sub dailyReportStep3Sub){
-        step3Service.edit(dailyReportStep3Sub);
+    public String edit(DailyReportStep3Sub dailyReportStep3Sub){
+        return step3Service.edit(dailyReportStep3Sub);
     }
 
     @RequestMapping(value = "/workspace/ajax/delete", method = RequestMethod.GET)
     @ResponseBody
-    public void delete(int sheetsubID){
-        step3Service.delete(sheetsubID);
+    public String delete(int sheetsubID){
+        return step3Service.delete(sheetsubID);
     }
-
-
 }

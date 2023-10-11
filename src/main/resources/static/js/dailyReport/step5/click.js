@@ -1,7 +1,10 @@
+
 function getCheckParam(id){
     const checkBox = document.getElementById(id);
     return  "&" + id + "=" + checkBox.checked;
 }
+
+
 
 function bindList() {
     $.ajax({
@@ -30,16 +33,20 @@ function save() {
         }else if(theForm.useAmt.value==""){
             alert("사용 금액을 입력해 주세요.")
             return theForm.useAmt.focus();
-        }else if(theForm.useOil.value==""){
-            alert("주유량을 입력해 주세요.")
-            return theForm.useOil.focus();
-        }else if(theForm.rependdate.value==""){
-            alert("교환 예정일을 선택해 주세요.")
-            return theForm.rependdate.focus();
-        }else if(theForm.rependchk.value==""){
-            alert("교환완료 체크를 해주세요")
         }
     }
+    if(document.querySelector('input[name="useOil"]').value.length === 0){
+        document.querySelector('input[name="useOil"]').value = '';
+    }
+
+    if(document.querySelector('input[name="rependdate"]').value.length === 0){
+        document.querySelector('input[name="rependdate"]').value = '';
+    }
+
+    if(document.querySelector('input[name="repaddkm"]').value.length === 0){
+        document.querySelector('input[name="repaddkm"]').value = '';
+    }
+
 
     //fetch 코드도 고민해볼 것.
     const checkBoxID = ["chk2","rependchk"];
@@ -48,18 +55,25 @@ function save() {
 
     checkBoxID.forEach(id => checkData += getCheckParam(id));
 
-   // const rependdate = $("#exchange-date").val() || "";
-//const repaddkm = $("#nextlastkm").val() || "";
 
-    console.log($("[name=entry_form]").serialize() + checkData);
+    const formData = $("[name=entry_form]").serialize() + checkData;
+
+    if(document.querySelector('input[name="rependdate"]').value === '-1'){
+        document.querySelector('input[name="rependdate"]').value = '';
+    }
+
+    if(document.querySelector('input[name="repaddkm"]').value === '-1'){
+        document.querySelector('input[name="repaddkm"]').value = '';
+    }
 
     $.ajax({
         url: "/dailyReport/carcareform/ajax/save",
         type: "POST",
-        data: $("[name=entry_form]").serialize() + checkData //+ "&rependdate=" + rependdate + "&repaddkm=" + repaddkm,
+        data: formData,
         success: function (data) {
             alert('저장 되었습니다.');
             bindList();
+            location.reload();
         }
     })
 }
@@ -73,6 +87,7 @@ function deleteData(){
         success: function (data) {
             alert('삭제 되었습니다.');
             bindList();
+            location.reload();
         }
     })
 }

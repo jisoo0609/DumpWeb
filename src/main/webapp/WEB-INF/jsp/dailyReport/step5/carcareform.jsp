@@ -58,11 +58,11 @@
             <ul class="bdnUl" id="hiddenPart">
                 <li>
                     <label class="drvLabel" for="exchange-date">교환 예정일</label>
-                    <span class="drvInputSpan"><input id="exchange-date" inputmode="none" name="rependdate"></span>
+                    <span class="drvInputSpan"><input id="exchange-date" inputmode="none" name="rependdate" value=""></span>
                 </li>
                 <li>
                     <label class="drvLabel" for="nextlastkm">교환 주행거리</label>
-                    <span class="drvInputSpan"><input name="repaddkm" id="nextlastkm" type="number" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리"></span>
+                    <span class="drvInputSpan"><input name="repaddkm" id="nextlastkm" type="number" pattern=”\d*” placeholder="다음 차량계기판의 최종 주행거리" value=""></span>
                 </li>
                 <li>
                     <label for="rependchk">교환 완료 확인</label>
@@ -74,7 +74,7 @@
 
     <div>
         <button class="openBtn" data-popName="drvpop1">삭제</button>
-        <button onClick="save()">저장</button>
+        <button onclick="save()">저장</button>
         <button class="openBtn" data-popName="drvpop2">입력취소</button>
         <button class="openBtn" data-popName="drvpop3">이전화면</button>
     </div>
@@ -105,17 +105,16 @@
 
     <table>
         <thead>
-        <tr>
-            <th>날짜</th>
-            <th>분류</th>
-            <th class="Drvth2">최종주행(km)</th>
-            <th class="Drvth2">사용금액</th>
-            <th>기타(설명)</th>
-            <th>교환 주기</th>
-        </tr>
+            <tr>
+                <th>날짜</th>
+                <th>분류</th>
+                <th class="Drvth2">최종주행(km)</th>
+                <th class="Drvth2">사용금액</th>
+                <th>기타(설명)</th>
+                <th>교환 주기</th>
+            </tr>
         </thead>
         <tbody>
-
         </tbody>
     </table>
 </section>

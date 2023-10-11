@@ -136,8 +136,8 @@
     .DrvSection table thead tr .Drvth2{
         width: 17%;
     }
-    .DrvSection table thead tr th:last-child,
-    .DrvSection table tbody tr td:last-child{
+    .DrvSection table thead tr th:nth-child(6),
+    .DrvSection table tbody tr td:nth-child(6){
         border-right: 1px solid #ddd; width: 10%;
     }
     .DrvSection table tbody tr td{
@@ -152,10 +152,10 @@
     .DrvSection table tbody tr .Drvtd2{
         width: 17%; border-right: 1px solid #ddd;
     }
-    .DrvSection table tbody tr td:nth-child(4){
-        max-width: 167px; white-space: normal; display: -webkit-box;
-        -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-        margin: 3px;
+    .DrvSection table tbody tr td:nth-child(5){
+        display: block; width: 50px; overflow: hidden; text-overflow: ellipsis; white-space: normal;
+        text-align: left; word-wrap: break-word; display: -webkit-box; -webkit-line-clamp: 2 ;
+        -webkit-box-orient: vertical; text-align: left; padding: 4px;
     }
 }
 
@@ -285,7 +285,7 @@
         background-color: #f2f2f2;
     }
     .DrvSection table thead tr th{
-        font-size: 12px; padding: 10px 8px; text-align: center; height: 20px; font-weight: var(--weight-bold);;
+        font-size: 12px; padding: 10px 7px; text-align: center; height: 20px; font-weight: var(--weight-bold);;
         vertical-align : middle;
     }
     .DrvSection table tbody tr{
@@ -296,28 +296,38 @@
         border-left: 1px solid #ddd;
     }
     .DrvSection table thead tr .Drvth2{
-        width: 17%;
-    }
-    .DrvSection table thead tr th:last-child,
-    .DrvSection table tbody tr td:last-child{
-        border-right: 1px solid #ddd; width: 10%;
+        width: 14%;
     }
     .DrvSection table tbody tr td{
-        font-size: 11px; text-align: center; vertical-align : middle;
+        box-sizing: border-box; font-size: 11px; vertical-align: middle
+    }
+    .DrvSection table thead tr th:nth-child(6),
+    .DrvSection table tbody tr td:nth-child(6){
+        border-right: 1px solid #ddd; width: 10%; box-sizing: border-box;
+    }
+    .DrvSection table tbody tr td:nth-child(3){
+        width: 45px;
+    }
+    .DrvSection table tbody tr td:nth-child(4){
+        width: 50px;
+    }
+    .DrvSection table tbody tr td:not(:nth-child(3)),
+    .DrvSection table tbody tr td:not(:nth-child(4)){
+        text-align: center;
     }
     .DrvSection table tbody tr td:not(:nth-child(4)){
         padding: 3px
     }
     .DrvSection table tbody tr td:first-child{
-        width: 12%;
+        width: 8%;
     }
     .DrvSection table tbody tr .Drvtd2{
-        width: 17%; border-right: 1px solid #ddd;
+        width: 5%; border-right: 1px solid #ddd;
     }
-    .DrvSection table tbody tr td:nth-child(4){
-        max-width: 167px; white-space: normal; display: -webkit-box;
-        -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-        margin: 3px;
+    .DrvSection table tbody tr td:nth-child(5){
+        max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: normal;
+        text-align: left; word-wrap: break-word; display: -webkit-box; -webkit-line-clamp: 2 ;
+        -webkit-box-orient: vertical; padding: 0 5px;
     }
 }
 
@@ -388,7 +398,7 @@
         padding-left: 40px;
     }
     .DrvSection form fieldset ul li .drvInputSpan3{
-        padding-left: 95px
+        padding-left: 67px
     }
     .DrvSection form fieldset ul li textarea{
         width: 100%; font-size: 16px;
@@ -475,9 +485,9 @@
             width: 20%; border-right: 1px solid #ddd;
         }
     .DrvSection table tbody tr td:nth-child(4){
-        max-width: 370px; white-space: normal; display: -webkit-box;
-        -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-        margin: 20px auto;
+        max-width: 370px; overflow: hidden; text-overflow: ellipsis; white-space: normal;
+        text-align: left; word-wrap: break-word; display: -webkit-box; -webkit-line-clamp: 2 ;
+        -webkit-box-orient: vertical; padding: 0 5px;
     }
 }
 
