@@ -157,16 +157,19 @@ function searchBySalesman(inputData) {
 
 function searchByCarsubmitTel(inputData) {
     var carSubmitTel = $("#carSubmitTel").val();
-
+    let isMember = $("#isMember");
     $.ajax({
         url: "/dailyReport/search/carSubmitTel",
         method: "GET",
         data: { "carSubmitTel": carSubmitTel },
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
+            isMember.style.backgroundColor = "blue";
         },
         error: function(error) {
             console.error('Ajax 요청 실패:', error);
+            isMember.style.backgroundColor = "red";
+
         }
    });
 }
