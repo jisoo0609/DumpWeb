@@ -35,22 +35,6 @@ public class Step3Service {
         return (Login) commonUtil.getSession().getAttribute("loginInfo");
     }
 
-    public void saveData2(DailyReportStep3Main dailyReportStep3Main, DailyReportStep3Sub dailyReportStep3Sub){
-        dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
-
-        if (dailyReportStep3Main.getImageFile() != null) {
-            fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
-        }
-        dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
-        dailyReportStep3SubMapper.insertTransportInfo(dailyReportStep3Sub);
-    };
-
-    public void saveData(DailyReportStep3Main dailyReportStep3Main, DailyReportStep3Sub dailyReportStep3Sub) {
-        dailyReportStep3Main.setCarNo(getSessionLoginData().getUserId());
-        dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
-        dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
-    }
-
     public void saveTransPortInfo(DailyReportStep3Sub dailyReportStep3Sub){
         dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(getSessionLoginData().getUuserID()));
         dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
@@ -58,8 +42,6 @@ public class Step3Service {
         dailyReportStep3SubMapper.insertTransportInfo(dailyReportStep3Sub);
     };
 
-    //회원정보 검증
-    //user id에 DailyReportStep3Main의 carsubmitTel 등록해서 사용
     public Login findByUserInfo(Login login) {
         return loginMapper.findAdvUserInfo(login);
     }
@@ -72,18 +54,14 @@ public class Step3Service {
         dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(getSessionLoginData().getUuserID()));
         dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
 
-        //회원가입 기록 검증
         Login login=new Login();
         login.setUserId(dailyReportStep3Main.getCarSubmitTel());
         
-        //다중 if문 나중에 수정할 것
         Login userInfo=findByUserInfo(login);
         if(userInfo!=null){
-            //회원정보가 존재하는 경우(ss2와 subSS2 등록 시 Data 있음)
             dailyReportStep3Main.setSheetSS2(Integer.parseInt(userInfo.getUuserID()));
             dailyReportStep3Sub.setSheetsubSS2(Integer.parseInt(userInfo.getUuserID()));
             
-            //내가 등록한 제출처 정보가 있다면
             DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
             if(carSubmitResult!=null){
                 //sheetSS2와 sheetsubSS2 update-> 회원가입할때 SS2를 update하는 과정을 거친다면 필요없음
@@ -92,11 +70,8 @@ public class Step3Service {
 
                 System.out.println("find main Data.");
                 dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
-
                 saveTransPortInfo(dailyReportStep3Sub);
             }else{
-                //내가 등록한 제출처 정보가 없다면
-                //sheetSS2, sheetsubSS2 와 함께 insert
                 System.out.println("not found main Data.");
                 dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
                 dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
@@ -107,22 +82,13 @@ public class Step3Service {
                 dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
                 saveTransPortInfo(dailyReportStep3Sub);
             }
-
         }else{
-            //회원 정보가 존재 하지 않는 경우(ss2와 subSS2 등록 시 Data 없음)
-            //dailyReportStep3Main.setSheetSS2(Integer.parseInt(userInfo.getUuserID()));
-            //dailyReportStep3Sub.setSheetsubSS2(Integer.parseInt(userInfo.getUuserID()));
-
-            //내가 등록한 제출처 정보가 있다면
             DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
             if(carSubmitResult!=null){
-                //하위 테이블만 추가
                 System.out.println("find main Data.");
                 dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
-
                 saveTransPortInfo(dailyReportStep3Sub);
             }else{
-                //상, 하위 테이블 모두 추가
                 System.out.println("not found main Data.");
                 dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
                 dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
@@ -142,7 +108,6 @@ public class Step3Service {
         return dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
     }
 
-    //Q.3개를 따로 만들 필요없나..?고민할것
     //제출처 카테고리 생성용
     public List<DailyReportStep3Main> searchByCarSubmit(DailyReportStep3Main dailyReportStep3Main) {
         return dailyReportStep3MainMapper.findByCarSubmit(dailyReportStep3Main);
@@ -175,33 +140,36 @@ public class Step3Service {
     }
 
     /*운송정보 수정*/
+    //조건 : 삭제시 작성자와 로그인 idx가 같은 것만 삭제
     public String edit(DailyReportStep3Sub dailyReportStep3Sub){
         Map<String, Object> rtnMap = commonUtil.returnMap();
-        //유지보수를 위해 단계적으로 작성->리팩토링 예정
         int sheetsubID=dailyReportStep3Sub.getSheetsubID();
 
         int sheetID=dailyReportStep3SubMapper.findBySheetsubID(sheetsubID);
         boolean chk1=dailyReportStep3MainMapper.findBySheetID(sheetID);
 
         if(chk1==false){
+            dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
             dailyReportStep3SubMapper.editByTransportInfo(dailyReportStep3Sub);
+            rtnMap.put("httpCode", 200);
         }else{
-            rtnMap.put("httpcode",422);
+            rtnMap.put("httpCode",422);
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
-    /*운송정보 삭제*/
+    /*운송정보 삭제- 조건 수정 예정*/
     public String delete(int sheetsubID){
         Map<String, Object> rtnMap = commonUtil.returnMap();
-        //유지보수를 위해 단계적으로 작성->리팩토링 예정
         int sheetID=dailyReportStep3SubMapper.findBySheetsubID(sheetsubID);
         boolean chk1=dailyReportStep3MainMapper.findBySheetID(sheetID);
 
         if(chk1==false){
+            //dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
             dailyReportStep3SubMapper.deleteByOne(sheetsubID);
+            rtnMap.put("httpCode", 200);
         }else{
-            rtnMap.put("httpcode", 422);
+            rtnMap.put("httpCode", 422);
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
