@@ -129,7 +129,8 @@
         set
         carSubmit=#{carSubmit},
         carSubmitTel=#{carSubmitTel},
-        salesman=#{salesman}
+        salesman=#{salesman},
+        chk1=#{chk1}
         where
         sheetSS=#{sheetSS}
         and
