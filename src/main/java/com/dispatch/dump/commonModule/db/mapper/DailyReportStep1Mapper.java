@@ -1,10 +1,7 @@
 package com.dispatch.dump.commonModule.db.mapper;
 
 
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Sub;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Option;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Tdrive;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep1Total;
+import com.dispatch.dump.commonModule.db.dto.*;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +13,8 @@ public interface DailyReportStep1Mapper {
     List<DailyReportStep1Sub> selectDispatchSubmitList(String uuserID,String today);
 
     List<DailyReportStep1Tdrive> selectDispatchTdriveList(String userId);
+
+    List<DailyReportStep1Recruit>selectCarRecruitmentList(String today);
 
 
 
