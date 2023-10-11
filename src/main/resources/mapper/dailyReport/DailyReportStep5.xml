@@ -31,7 +31,7 @@
         #{drvRem},
         #{chk2},
         <if test="rependdate != '-1'">
-            #{rependdate},
+            STR_TO_DATE(#{rependdate}, '%Y-%m-%d'),
         </if>
         <if test="repaddkm != -1">
             #{repaddkm},
@@ -70,7 +70,7 @@
         useOil,
         drvrem,
         rependchk,
-        IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
+        IF(rependdate IS NULL, '',rependdate) AS 'rependdate',
         repaddkm
         FROM   tdrive
         WHERE  carno = #{userID}
@@ -96,7 +96,7 @@
                useamt,
                useOil,
                drvrem,
-               IF(rependdate IS NULL, '1999-01-01', DATE_FORMAT(rependdate, '%Y-%m-%d')) AS 'rependdate',
+               IF(rependdate IS NULL, '', DATE_FORMAT(rependdate, '%Y-%m-%d')) AS 'rependdate',
                repaddkm,
                rependchk
         FROM   tdrive
