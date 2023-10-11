@@ -219,16 +219,13 @@ $.editRow = function() {
         contentType: false,
         success: function (data) {
             var json = $.parseJSON(data);
-            if(json.httpCode == 422){
-                //문구는 추후 수정
-                $.failEdit();
-            }else{
-                $.successRowEdit();
-              if(json.httpCode == 200){
+            if(json.httpCode == 200){
+                  $.successRowEdit();
                   $.list();
-              }else{
-                  alert("결재된 정보로 수정이 불가능합니다.");
-              }
+            }else{
+                  $.failEdit();
+                  //alert("결재된 정보로 수정이 불가능합니다.");
+            }
           },
           error: function(error) {
             $.error();
@@ -247,15 +244,12 @@ $.deleteRow = function() {
       data: { sheetsubID: sheetsubID },
       success: function (data) {
         var json = $.parseJSON(data);
-        if(json.httpCode == 422){
-            $.failRemoval();
-        }else{
         if(json.httpCode == 200){
             alert("test 용 : 삭제 성공");
             $.emptyRow();
             $.list();
         }else{
-            alert("결재된 정보로 수정이 불가능합니다.");
+            $.failRemoval();
         }
 
       },
