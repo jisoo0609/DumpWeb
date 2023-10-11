@@ -89,19 +89,19 @@
 
     <select id="selectTDriveDetails" resultType="DailyReportStep5">
         SELECT driveID,
-               DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
-               drvclub,
-               chk2,
-               lastkm,
-               useamt,
-               useOil,
-               drvrem,
-               IF(rependdate IS NULL, '', DATE_FORMAT(rependdate, '%Y-%m-%d')) AS 'rependdate',
-               repaddkm,
-               rependchk
+        DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
+        drvclub,
+        chk2,
+        lastkm,
+        useamt,
+        useOil,
+        drvrem,
+        IF(rependdate IS NULL OR rependdate = '0000-00-00', '', DATE_FORMAT(rependdate, '%Y-%m-%d')) AS 'rependdate',
+        repaddkm,
+        rependchk
         FROM   tdrive
         WHERE  carno = #{userID}
-          AND driveID = #{driveID}
+        AND driveID = #{driveID}
     </select>
 
 </mapper>
