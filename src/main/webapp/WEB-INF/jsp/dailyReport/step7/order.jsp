@@ -55,9 +55,9 @@
               <label class="golLabel" for="date">주문일</label>
               <span class="golInputSpan"><input id="date" name="date"></span>
               <input class="golSearch" type="button" value="조회" onClick="bindList()">
-              <div class="checkbox">
-                <label class="check67" for="chk1">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+              <div class="checkbox1">
                 <input id="chk1" type="checkbox">
+                <label class="check67" for="chk1">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
               </div>
             </li>
             <li>
@@ -81,10 +81,14 @@
             <li>
               <label class="golLabel" for="carNo"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
               <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호"></span>
+              <div class="checkbox2">
+                <input id="check67" type="checkbox">
+                <label class="check67" for="check67">모집공고</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+              </div>
             </li>
             <li>
               <label class="golLabel" for="Qtyup"> 운반비 </label>
-              <span class="golInputSpan"><input class="golIn" id="Qtyup" name="Qtyup" type="text" placeholder="운반비"></span>
+              <span class="golInputSpan"><input class="golIn" id="Qtyup" name="Qtyup" type="number" pattern="[0-9]" inputmode="numeric" placeholder="운반비"></span>
             </li>
           </ul>
         </fieldset>
@@ -119,7 +123,7 @@
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
 				<p>정말 <span style="font-weight: bold;">저장</span>하시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인" onClick="save()">
+				<input class="confirmBtn" type="button" value="확인" onClick="clickConfirmButton()">
 				<input class="clBtn" type="button" value="취소">
 			</div>
 		</div>
