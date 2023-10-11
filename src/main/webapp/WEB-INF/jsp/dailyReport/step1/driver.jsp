@@ -335,7 +335,7 @@
                     <th>대수</th>
                 </tr>
                 <thead>
-                <tbody id=".today-car-recruitment">
+                <tbody id="today-car-recruitment">
                 </tbody>
 
             </table>
