@@ -102,7 +102,7 @@ function showTransportList(data){
         for (var i = 0; i < data.dailyReportStep3SubList.length; i++) {
             var subData = data.dailyReportStep3SubList[i];
             var rowId = 'row' + i;
-            html += '<tr id="' + rowId + '" onclick="fillPop(event); selected('+ rowId + ');">';
+            html += '<tr id="' + rowId + '" onclick="fillPop(event)">';
             html += '   <td>' + subData.fromsite + '</td>';
             html += '   <td>' + subData.tosite + '</td>';
             html += '   <td>' + subData.item + '</td>';
@@ -157,16 +157,19 @@ function searchBySalesman(inputData) {
 
 function searchByCarsubmitTel(inputData) {
     var carSubmitTel = $("#carSubmitTel").val();
-
+    let isMember = $("#isMember");
     $.ajax({
         url: "/dailyReport/search/carSubmitTel",
         method: "GET",
         data: { "carSubmitTel": carSubmitTel },
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
+            isMember.style.backgroundColor = "blue";
         },
         error: function(error) {
             console.error('Ajax 요청 실패:', error);
+            isMember.style.backgroundColor = "red";
+
         }
    });
 }

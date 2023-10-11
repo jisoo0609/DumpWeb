@@ -38,17 +38,29 @@ public class Step7Service {
         HttpSession session = commonUtil.getSession();
 
         try {
+
+            System.out.println(dailyReportStep7Main);
+            System.out.println(dailyReportStep7Sub);
             Login loginData = (Login) session.getAttribute("loginInfo");
+
+            //System.out.println(loginData);
+            dailyReportStep7Main.setCarSubmit(String.valueOf(getSessionLoginData().getUserSS()));
+            dailyReportStep7Main.setCarSubmitTel(String.valueOf(getSessionLoginData().getUserTel()));
+            dailyReportStep7Main.setSalesman(String.valueOf(getSessionLoginData().getUserName()));
+            //결재 체크 값
+            dailyReportStep7Main.setSheetSS(Integer.parseInt(loginData.getUserId()));
             dailyReportStep7Main.setSheetSS2(Integer.parseInt(loginData.getUuserID()));
+            dailyReportStep7Main.setWriterIDX(Integer.parseInt(loginData.getUuserID()));
+            //writerIDX
 
             dailyReportStep7MainMapper.insertDailyReportStep7(dailyReportStep7Main);
 
             dailyReportStep7Sub.setSheetID2(dailyReportStep7Main.getSheetID());
-            System.out.println("외래키는?"+dailyReportStep7Sub.getSheetID2());
             dailyReportStep7Sub.setSheetsubSS2(Integer.parseInt(loginData.getUuserID()));
+            dailyReportStep7Sub.setWriteridx2(Integer.parseInt(loginData.getUuserID()));
 
             dailyReportStep7SubMapper.insertDailyReportStep7sub(dailyReportStep7Sub);
-                rtnMap.put("httpCode", 200);
+            rtnMap.put("httpCode", 200);
 
         } catch (Exception e) {
             log.error("Exception["+ e.getMessage() +"]");

@@ -21,6 +21,9 @@ public interface DailyReportStep3MainMapper {
     /* FUNCTION ::  step4를 위한 조회 */
     DailyReportStep3Main findBySheetIDForStep4(int sheetID);
 
+    /* FUNCTION ::  sheetSS2 수정 */
+    int editBySheetSS2(DailyReportStep3Main dailyReportStep3Main);
+    
     /* FUNCTION ::  삭제를 위한 chk1 조회 */
     boolean findBySheetID(int sheetID);
 
