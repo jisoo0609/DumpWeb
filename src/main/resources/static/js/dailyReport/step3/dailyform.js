@@ -52,7 +52,7 @@ $.save = function() {
             $.emptyRow();
         },
         error: function(xhr, status, error) {
-             alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.");
+             alert("필수 정보를 입력해주세요.");
          }
     })
 }
@@ -216,16 +216,14 @@ $.editRow = function() {
         contentType: false,
         success: function (data) {
             var json = $.parseJSON(data);
-            if(json.httpCode == 422){
-                //문구는 추후 수정
-                alert("test 용 : 수정 실패");
-            }else{
-                alert("test 용 : 수정 성공");
+            if(json.httpCode == 200){
                 $.list();
+            }else{
+                alert("결재된 정보로 수정이 불가능합니다.");
             }
         },
         error: function(error) {
-            console.error('수정 실패:', error);
+            alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.")
         }
     });
 }
@@ -240,26 +238,29 @@ $.deleteRow = function() {
       data: { sheetsubID: sheetsubID },
       success: function (data) {
         var json = $.parseJSON(data);
-        if(json.httpCode == 422){
-            //문구는 추후 수정
-            alert("test 용 : 삭제 실패");
-        }else{
+        if(json.httpCode == 200){
+            alert("test 용 : 삭제 성공");
             $.emptyRow();
             $.list();
+        }else{
+            alert("결재된 정보로 수정이 불가능합니다.");
         }
 
       },
       error: function(error) {
+         alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.")
          console.error('삭제 실패:', error);
       }
   })
 }
 
+//제출처 정보 수정
 $.editSales = function(){
     var sheetID = $("#sheetID").val();
     var salesman = $("#salesman").val();
     var carSubmit = $("#carSubmit").val();
     var carSubmitTel = $("#carSubmitTel").val();
+    var chk1= $("#chk1").val();
     $.ajax({
         url:"/dailyReport/workspace/ajax/edit/carSubmit",
         type:"POST",
@@ -267,7 +268,8 @@ $.editSales = function(){
             "sheetID":sheetID,
             "salesman":salesman,
             "carSubmit":carSubmit,
-            "carSubmitTel":carSubmitTel
+            "carSubmitTel":carSubmitTel,
+            "chk1":chk1
         },
         success : function (data) {
             var json = $.parseJSON(data);
