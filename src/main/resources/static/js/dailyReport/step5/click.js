@@ -6,16 +6,7 @@ function getCheckParam(id){
 
 
 
-function bindList() {
-    $.ajax({
-        url: "/dailyReport/carcareform/ajax/list",
-        type: "POST",
-        data: {date : $("#reg-date").val()},
-        success: function (data) {
-            printList(data);
-        }
-    })
-}
+
 
 function save() {
 
@@ -73,7 +64,19 @@ function save() {
         success: function (data) {
             alert('저장 되었습니다.');
             bindList();
-            location.reload();
+
+        }
+    })
+    theForm.reset();
+}
+
+function bindList() {
+    $.ajax({
+        url: "/dailyReport/carcareform/ajax/list",
+        type: "POST",
+        data: {date : $("#reg-date").val()},
+        success: function (data) {
+            printList(data);
         }
     })
 }
