@@ -224,12 +224,16 @@ $.editRow = function() {
                 $.failEdit();
             }else{
                 $.successRowEdit();
-                $.list();
-            }
-        },
-        error: function(error) {
+              if(json.httpCode == 200){
+                  $.list();
+              }else{
+                  alert("결재된 정보로 수정이 불가능합니다.");
+              }
+          },
+          error: function(error) {
             $.error();
             console.error('수정 실패:', error);
+            alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.")
         }
     });
 }
@@ -246,8 +250,12 @@ $.deleteRow = function() {
         if(json.httpCode == 422){
             $.failRemoval();
         }else{
+        if(json.httpCode == 200){
+            alert("test 용 : 삭제 성공");
             $.emptyRow();
             $.list();
+        }else{
+            alert("결재된 정보로 수정이 불가능합니다.");
         }
 
       },
@@ -258,6 +266,7 @@ $.deleteRow = function() {
   })
 }
 
+//제출처 정보 수정
 $.editSales = function(){
     var sheetID = $("#sheetID").val();
     var salesman = $("#salesman").val();

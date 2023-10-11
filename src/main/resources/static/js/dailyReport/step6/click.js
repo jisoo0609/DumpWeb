@@ -38,10 +38,12 @@ function PayCarList() {
     $.ajax({
         url: "/dailyReport/ajax/Paycarlist",
         type: "POST",
-        data: JSON.stringify(optionForm), // 데이터를 JSON 문자열로 변환
-        contentType: "application/json", // Content-Type 설정
+        data: JSON.stringify(optionForm),
+        contentType: "application/json",
         success: function (data) {
             alert("일괄결제가 완료되었습니다.");
+            // 데이터 처리 후, 검색 결과를 갱신하고 검색 버튼을 클릭
+            bindList();
         },
         error: function (error) {
             console.error("오류 발생: " + error);
@@ -65,13 +67,18 @@ function clickSearchButton(){
 }
 
 /* 리스트의 행 클릭시, 파라미터와 함께 step5로 이동하도록 처리. */
-function clickListThAndRedirect(){
-    const listRow = document.querySelector("table tbody");
+function clickListThAndRedirect() {
+    const tableBody = document.querySelector("table tbody");
 
-    listRow.addEventListener("click", (event) => {
-        let driveID = event.target.parentElement.getAttribute("data-drive-id")
-        let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
-        window.location.href = url;
+    tableBody.addEventListener("click", (event) => {
+        const parentRow = event.target.closest("tr");
+        if (parentRow) {
+            const driveID = parentRow.getAttribute("data-drive-id");
+            if (driveID) {
+                const url = `/dailyReport/carcareform?driveID=${driveID}`;
+                window.location.href = url;
+            }
+        }
     });
 }
 
@@ -91,7 +98,7 @@ function bindList() {
     })
 }
 
-//test
+
 
 
 
