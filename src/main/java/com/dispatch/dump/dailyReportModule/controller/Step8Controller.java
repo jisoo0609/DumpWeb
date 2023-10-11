@@ -27,6 +27,7 @@ public class Step8Controller {
     @RequestMapping(value = "/receipts/ajax/list", method = RequestMethod.POST)
     @ResponseBody
     public List<DailyReportStep8> receiptsList(DailyReportStep8OptionForm option){
+        System.out.println("검색조건 : " + option);
         return step8Service.searchReceiptList(option);
     }
 
