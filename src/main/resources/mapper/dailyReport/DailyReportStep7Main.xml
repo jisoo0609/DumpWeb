@@ -5,13 +5,24 @@
 
 <mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep7MainMapper">
 
+    <sql id="reception_ss_table">
+        WITH r1 AS
+        (
+        SELECT uuserID
+        FROM tsitepw
+        WHERE userId= ${carNo}
+        )
+    </sql>
+
     <!-- 제출처 정보 저장-->
     <insert id="insertDailyReportStep7" parameterType="DailyReportStep7Main">
         insert into
         tSheet
-        (date, carNo, chk1, sheetSS2)
+        (carNo, date, carSubmit, carSubmitTel, salesman, chk1, sheetSS, sheetSS2, currStatus, writerIDX)
         values
-        (#{date}, #{carNo}, 0, #{sheetSS2})
+        (#{carNo}, #{date}, #{carSubmit}, #{carSubmitTel}, #{salesman}, 0, (SELECT uuserID
+        FROM tsitepw
+        WHERE userId = #{carNo}), #{sheetSS2}, "배차", #{writerIDX})
 
         <selectKey
                 keyColumn="sheetID"
@@ -43,7 +54,7 @@
         ON r1.sheetid = r2.sheetid2
         )
     </sql>
-
+    
     <select id="selectReceptionList" parameterType="DailyReportStep7Main" resultType="DailyReportStep7Sub">
         <include refid="reception_table">
             <property name="userId" value="#{userId}"/>

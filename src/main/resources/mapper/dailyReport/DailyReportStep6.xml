@@ -36,7 +36,7 @@
         UPDATE tdrive
         SET chk2 = 0
         WHERE carno = #{carNo}
-        AND drvdate BETWEEN #{startDate} AND #{endDate}
+<!--        AND drvdate BETWEEN #{startDate} AND #{endDate}-->
         <if test="selectOption != '전체'">
             AND drvclub = #{selectOption}
         </if>
@@ -47,7 +47,7 @@
         UPDATE tdrive
         SET chk2 = 1
         WHERE carno = #{carNo}
-        AND drvdate BETWEEN #{startDate} AND #{endDate}
+<!--        AND drvdate BETWEEN #{startDate} AND #{endDate}-->
         <if test="selectOption != '전체'">
             AND drvclub = #{selectOption}
         </if>

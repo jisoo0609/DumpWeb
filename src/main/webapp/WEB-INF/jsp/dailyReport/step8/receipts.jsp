@@ -111,7 +111,7 @@
                     <label>차량번호</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 CarNoAuto complete trn" placeholder="차량번호"
-                               name="carNo" id="CarNo" value="${!empty view ? view.CarNo : ''}"
+                               name="CarNo" id="CarNo" value="${!empty view ? view.CarNo : ''}"
                                autocomplete="off">
                         <select class="CarNo " id="CarNoBox" onchange="$.selectBoxChange(this.value, 'CarNo')">
                             <option value="">전체</option>

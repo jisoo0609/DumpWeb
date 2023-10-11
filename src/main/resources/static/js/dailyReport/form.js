@@ -10,7 +10,6 @@ $(document).ready(function () {
         ,monthNames: MONTH_NAME_FORMAT
         ,dayNamesMin: DAY_FORMAT
         ,dayNames: DAY_FORMAT
-        ,setDate: 'today'
         ,yearRange: '-5:+1'
     })
 })

@@ -7,11 +7,12 @@
 
     <!-- 제출처 정보 저장-->
     <insert id="insertDailyReportStep7sub" parameterType="DailyReportStep7Sub">
-        insert into
-        tSheet_sub
-        (sheetID2, fromsite, tosite, item, Qty, sheetsubSS2, Qtyup)
-        values
-        (#{sheetID2}, #{fromsite}, #{tosite}, #{item}, #{Qty}, #{sheetsubSS2}, #{Qtyup})
+        insert into tSheet_sub
+        (sheetID2, fromsite, tosite, item, Qty, Qtyup, sheetsubSS, sheetsubSS2, writeridx2)
+        values (#{sheetID2}, #{fromsite}, #{tosite}, #{item}, #{Qty}, #{Qtyup}, (SELECT sheetSS
+                                                                                 FROM tSheet
+                                                                                 WHERE sheetID = #{sheetID2}),
+                #{sheetsubSS2}, #{writeridx2})
 
     </insert>
 
