@@ -23,7 +23,10 @@
         <if test="Rem != null">Rem,</if>
         sheetID2,
         tosite,
-        sheetsubSS)
+        sheetsubSS,
+        sheetsubSS2,
+        writeridx2
+        )
         values
         (
         #{fromsite},
@@ -33,7 +36,10 @@
         <if test="Rem != null">#{Rem},</if>
         #{sheetID2},
         #{tosite},
-        #{sheetsubSS})
+        #{sheetsubSS},
+        #{sheetsubSS2},
+        #{writeridx2}
+        )
     </insert>
     
     <!--삭제 관련-->
@@ -43,6 +49,17 @@
     </select>
 
     <!--운행 정보 수정-->
+    <!--sheetsubSS2 수정-->
+    <update id="editBySheetsubSS2" parameterType="DailyReportStep3Sub">
+        update tSheet_sub
+        set
+        sheetsubSS2=#{sheetsubSS2}
+        where
+        sheetsubSS=#{sheetsubSS}
+        and
+        sheetID2=#{sheetID2}
+    </update>
+
     <!--조회한 정보가 과거 정보일 때, 수정 But 기존정보와 동일하다면 수정 불가능(and가 아닌 or조건) -->
     <update id="editByTransportInfo" parameterType="DailyReportStep3Sub">
         update tSheet_sub

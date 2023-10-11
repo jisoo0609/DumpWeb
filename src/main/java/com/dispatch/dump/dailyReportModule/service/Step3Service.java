@@ -5,6 +5,7 @@ import com.dispatch.dump.commonModule.db.dto.DailyReportStep3Sub;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep3MainMapper;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep3SubMapper;
+import com.dispatch.dump.commonModule.db.mapper.LoginMapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +27,7 @@ import java.util.Map;
 public class Step3Service {
     private final DailyReportStep3MainMapper dailyReportStep3MainMapper;
     private final DailyReportStep3SubMapper dailyReportStep3SubMapper;
+    private final LoginMapper loginMapper;
     private final CommonUtil commonUtil;
     private final FileUtil fileUtil;
 
@@ -33,32 +35,104 @@ public class Step3Service {
         return (Login) commonUtil.getSession().getAttribute("loginInfo");
     }
 
-    public void saveTransPortInfo(DailyReportStep3Sub dailyReportStep3Sub){
-        dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+    public void saveData2(DailyReportStep3Main dailyReportStep3Main, DailyReportStep3Sub dailyReportStep3Sub){
+        dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
+
+        if (dailyReportStep3Main.getImageFile() != null) {
+            fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+        }
+        dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
         dailyReportStep3SubMapper.insertTransportInfo(dailyReportStep3Sub);
     };
 
+    public void saveData(DailyReportStep3Main dailyReportStep3Main, DailyReportStep3Sub dailyReportStep3Sub) {
+        dailyReportStep3Main.setCarNo(getSessionLoginData().getUserId());
+        dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+        dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
+    }
+
+    public void saveTransPortInfo(DailyReportStep3Sub dailyReportStep3Sub){
+        dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+        dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
+        System.out.println("Writeridx2는?"+dailyReportStep3Sub.getWriteridx2());
+        dailyReportStep3SubMapper.insertTransportInfo(dailyReportStep3Sub);
+    };
+
+    //회원정보 검증
+    //user id에 DailyReportStep3Main의 carsubmitTel 등록해서 사용
+    public Login findByUserInfo(Login login) {
+        return loginMapper.findAdvUserInfo(login);
+    }
+    
     //제출처, 운송정보 저장
     public void save(DailyReportStep3Main dailyReportStep3Main, DailyReportStep3Sub dailyReportStep3Sub) {
         dailyReportStep3Main.setCarNo(getSessionLoginData().getUserId());
         dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+        dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
+        dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+        dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
 
-        DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
-        if(null != carSubmitResult){
-            System.out.println("find main Data.");
-            dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
-            saveTransPortInfo(dailyReportStep3Sub);
+        //회원가입 기록 검증
+        Login login=new Login();
+        login.setUserId(dailyReportStep3Main.getCarSubmitTel());
+        
+        //다중 if문 나중에 수정할 것
+        Login userInfo=findByUserInfo(login);
+        if(userInfo!=null){
+            //회원정보가 존재하는 경우(ss2와 subSS2 등록 시 Data 있음)
+            dailyReportStep3Main.setSheetSS2(Integer.parseInt(userInfo.getUuserID()));
+            dailyReportStep3Sub.setSheetsubSS2(Integer.parseInt(userInfo.getUuserID()));
+            
+            //내가 등록한 제출처 정보가 있다면
+            DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
+            if(carSubmitResult!=null){
+                //sheetSS2와 sheetsubSS2 update-> 회원가입할때 SS2를 update하는 과정을 거친다면 필요없음
+                dailyReportStep3MainMapper.editBySheetSS2(dailyReportStep3Main);
+                dailyReportStep3SubMapper.editBySheetsubSS2(dailyReportStep3Sub);
+
+                System.out.println("find main Data.");
+                dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
+
+                saveTransPortInfo(dailyReportStep3Sub);
+            }else{
+                //내가 등록한 제출처 정보가 없다면
+                //sheetSS2, sheetsubSS2 와 함께 insert
+                System.out.println("not found main Data.");
+                dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+                dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
+
+                if (dailyReportStep3Main.getImageFile() != null) {
+                    fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                }
+                dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
+                saveTransPortInfo(dailyReportStep3Sub);
+            }
 
         }else{
-            System.out.println("not found main Data.");
-            dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
-            dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
+            //회원 정보가 존재 하지 않는 경우(ss2와 subSS2 등록 시 Data 없음)
+            //dailyReportStep3Main.setSheetSS2(Integer.parseInt(userInfo.getUuserID()));
+            //dailyReportStep3Sub.setSheetsubSS2(Integer.parseInt(userInfo.getUuserID()));
 
-            if (dailyReportStep3Main.getImageFile() != null) {
-                fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+            //내가 등록한 제출처 정보가 있다면
+            DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
+            if(carSubmitResult!=null){
+                //하위 테이블만 추가
+                System.out.println("find main Data.");
+                dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
+
+                saveTransPortInfo(dailyReportStep3Sub);
+            }else{
+                //상, 하위 테이블 모두 추가
+                System.out.println("not found main Data.");
+                dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+                dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
+
+                if (dailyReportStep3Main.getImageFile() != null) {
+                    fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                }
+                dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
+                saveTransPortInfo(dailyReportStep3Sub);
             }
-            dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
-            saveTransPortInfo(dailyReportStep3Sub);
         }
     }
 

@@ -18,7 +18,10 @@ public class DailyReportStep3Main {
     private String date;            // LINE :: 운행일
     private String salesman;        // LINE :: 제출처 담당자
     private int sheetSS;            // LINE :: 회원 idx
-
+    private int sheetSS2;           // LINE :: 제출처 idx
+    private int writerIDX;          // LINE :: 작성자 idx
+    private String CurrStatus;      // LINE :: 배차상태
+    
     private List<DailyReportStep3Sub> dailyReportStep3SubList;//mybatis의 collection에 사용
     
     private MultipartFile imageFile;    // LINE :: 전표이미지 파일
