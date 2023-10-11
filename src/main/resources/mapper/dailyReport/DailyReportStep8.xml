@@ -43,6 +43,20 @@
         Qty,
         Qtyup
         from r3
+        <where>
+            <if test="CarNo != ''">
+                AND CarNo = #{CarNo}
+            </if>
+            <if test="fromsite != ''">
+                AND fromsite = #{fromsite}
+            </if>
+            <if test="tosite != ''">
+                AND tosite = #{tosite}
+            </if>
+            <if test="item != ''">
+                AND item = #{item}
+            </if>
+        </where>
         <choose>
             <when test="sortingCriteria.equals('date')">
                 ORDER BY date DESC, fromsite ASC, tosite ASC

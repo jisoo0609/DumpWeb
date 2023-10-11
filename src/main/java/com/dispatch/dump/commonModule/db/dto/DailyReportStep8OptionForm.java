@@ -14,7 +14,7 @@ public class DailyReportStep8OptionForm {
     private String fromsite;
     private String tosite;
     private String item;
-    private String carNo;
+    private String CarNo;
 
     private String sortingCriteria;
 
