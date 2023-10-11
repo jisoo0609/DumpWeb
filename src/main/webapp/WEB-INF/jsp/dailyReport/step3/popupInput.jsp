@@ -89,7 +89,7 @@
                 저장
             </button>
             <%-- 불러온 데이터 일때  --%>
-            <button class="btn btn-white btn-popup saved" type="button" onclick="$.deleteRow();">
+            <button class="btn btn-white btn-popup saved" type="button" onclick="$.confirmRemoval();">
                 삭제
             </button>
             <button class="btn btn-blue btn-popup saved" type="button" onclick="$.editRow();" >
