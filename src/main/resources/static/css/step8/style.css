@@ -221,6 +221,9 @@ input::placeholder {
     .input-group.select .select-input {
         width: 100%;
     }
+    .input-group.select select {
+        height: 28px;
+    }
 }
 
 .input-group.select .input-group-clear {
@@ -228,7 +231,7 @@ input::placeholder {
 }
 
 .input-group.select select {
-    width: 23px;
+    width: 22px;
     position: absolute;
     top: 0;
     right: 0;
@@ -619,7 +622,7 @@ input[type="text"].readonly {
     padding: 10px;
     height: 20px;
     background: #f2f2f2;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
 }
 
@@ -806,11 +809,30 @@ input[type="text"].readonly {
 
 @media screen and (max-width: 425px) {
     .list-table th {
-        padding: 10px 4px;
+        padding: 10px 0;
     }
 
     .table-btn {
         width: 60%;
+    }
+
+    .list-table th:nth-child(1),
+    .list-table th:nth-child(5),
+    .list-table th:nth-child(7),
+    .list-table th:nth-child(9){
+      width: 30px;
+    }
+
+    .list-table th:nth-child(2),
+    .list-table th:nth-child(3),
+    .list-table th:nth-child(4){
+      width: 42px;
+    }
+}
+
+@media screen and (max-width: 320px){
+    .th_header {
+      overflow-wrap: anywhere;
     }
 }
 

@@ -50,7 +50,7 @@ function printList(searchResultData) {
         let order = [
             data.drvDate, data.drvClub,
             data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem,
-            (data.rependchk === true ? 'X' : (data.repaddkm && data.rependdate ? 'O' : 'X')),
+            (data.rependchk === true ? 'X' : (data.repaddkm || data.rependdate ? 'O' : 'X')),
             data.chk2, data.useOil, data.rependdate, data.repaddkm
         ];
 
