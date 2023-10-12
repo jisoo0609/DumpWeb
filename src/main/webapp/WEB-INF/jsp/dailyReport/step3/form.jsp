@@ -87,7 +87,7 @@
                                 <span class="content">
                                     <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
                                            list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" oninput="validateInput3(this)" onkeyup="searchByCarsubmitTel(this)"}
+                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" oninput="validateInput3(this)" onkeyup="searchByCarsubmitTel(this); checkByUserInfo(this)"}
                                     >
                                 </span>
                             </div>
@@ -127,7 +127,7 @@
 
                         <li>
                             <div id="mutualApproval">
-                                <label>재출처 제출 확인</label>
+                                <label>제출처 제출 확인</label>
                                 <input type="checkbox" class="chkbx" name="chk0" value="0" onChange="mutallyApproved()">
                             </div>
 
@@ -181,7 +181,7 @@
 
         <div class="btn-area">
             <button type="button" class="btn btn-white" onclick="clearInputs()">전체삭제</button>
-            <button type="button" class="btn btn-blue" id="submitBtn" onClick="submitConfirmation()">제출하기</button>
+            <button type="button" class="btn btn-blue" id="submitBtn" onClick="$.editSales() submitConfirmation()">제출하기</button>
             <button type="button" class="btn btn-blue " onClick="$.editSales()">저장하기</button>
             <button type="button" class="btn btn-white " onClick="history.go(-1)">이전화면</button>
         </div>

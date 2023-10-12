@@ -168,23 +168,31 @@ function searchByCarsubmitTel(inputData) {
     var carSubmitTel = $("#carSubmitTel").val();
     let isMember = $("#isMember");
     let inviteBtn = $("#inviteBtn");
+
     $.ajax({
         url: "/dailyReport/search/carSubmitTel",
         method: "GET",
         data: { "carSubmitTel": carSubmitTel },
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
-            if (data.length !== 0) {
+            if(data.list!=null){ //드롭다운 카테고리
+                console.log("list는?", data.list);
+            }else{
+                console.log("list data 없음");
+            }
+
+            if(data.checkData!=null){ //거래처입니다
                 isMember.text("가입된 거래처 입니다");
                 $("#inviteBtn").css("margin-left", "5000px");
-            } else {
+                console.log("checkData는?", data.checkData);
+            }else{
+                console.log("checkData 없음");
                 isMember.text("");
-                $("#inviteBtn").css("margin-left", "0");
+                $("#inviteBtn").css("margin-left", "0px");
             }
             listData();
         },
         error: function(error) {
-            $.error();
             console.error('Ajax 요청 실패:', error);
         }
    });
@@ -268,7 +276,8 @@ $.deleteRow = function() {
   })
 }
 
-//제출처 정보 수정
+// 제출처 정보 수정
+// 기사가 결재 체크햇으면 해재해놓고 다시
 $.editSales = function(){
     var sheetID = $("#sheetID").val();
     var salesman = $("#salesman").val();
@@ -300,3 +309,6 @@ $.editSales = function(){
     })
 }
 
+$.invite = function () {
+    console.log("문자를 보내 초대를 해보자.")
+}
