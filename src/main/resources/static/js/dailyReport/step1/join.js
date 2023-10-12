@@ -28,6 +28,7 @@ function bindDispatchList() {
         }
     });
 }
+//금일 차량 모집 공고
 function bindCarRecruitList() {
     $.ajax({
         url: "/dailyReport/driver/ajax/recruitlist",
@@ -78,11 +79,11 @@ function groupAndSumData(searchResultData) {
 
     // 데이터를 그룹화하고 qty 값을 합산
     searchResultData.forEach(data => {
-        const key = `${data.carSubmit}-${data.fromsite}-${data.tosite}-${data.item}`;
+        const key = `${data.sheetID}-${data.fromsite}-${data.tosite}-${data.item}`;
 
         if (!groupedData[key]) {
             groupedData[key] = {
-                carSubmit: data.carSubmit,
+                sheetID: data.sheetID,
                 fromsite: data.fromsite,
                 tosite: data.tosite,
                 item: data.item,
@@ -110,14 +111,14 @@ function printDispatchList(searchResultData) {
         const row = document.createElement("tr");
 
         row.innerHTML = ` 
-            <td>${data.carSubmit}</td>
+            <td>${data.sheetID}</td>
             <td>${data.fromsite}</td>
             <td>${data.tosite}</td> 
             <td>${data.item}</td>
             <td>${data.qty}</td> 
             
          `;
-        row.setAttribute("data-sheet-id", data.sheetID);
+        row.setAttribute("data-sheetID", data.sheetID);
 
         tableBody.appendChild(row);
     });
@@ -139,6 +140,7 @@ function printCarRecruitmentList(searchResultData) {
                 <td>${data.item}</td>
                 <td>${data.qty}</td> 
             `;
+
 
             tableBody.appendChild(row);
 
@@ -196,12 +198,11 @@ function clickListStep3Redirect() {
     const tableBody = document.querySelector("#menusub");
 
     tableBody.addEventListener("click", (event) => {
-        // 클릭한 요소가 td 인지 확인
-        if (event.target.tagName === 'TD') {
-            let sheetID = event.target.parentElement.getAttribute("data-sheet-id");
-            let url = "/dailyReport/form" + "?sheetID=" + sheetID;
-            window.location.href = url;
-        }
+        let sheetID = event.target.parentElement.getAttribute("data-sheetID");
+        let url = "/dailyReport/form" + "?sheetID=" + sheetID;
+
+
+        window.location.href = url;
     });
 }
 

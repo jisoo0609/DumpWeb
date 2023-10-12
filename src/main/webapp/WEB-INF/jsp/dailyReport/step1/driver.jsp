@@ -328,7 +328,6 @@
                 <thead>
                 <tr class="today-recruitment-menu">
                     <th>제출처</th>
-                    <th>번호</th>
                     <th>상차지</th>
                     <th>하차지</th>
                     <th>품목</th>
