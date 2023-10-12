@@ -122,10 +122,10 @@
         border-collapse: collapse;
         width: 100%;
     }
-    .today-menu th, .car-menu th{
+    .today-menu th, .car-menu th, .today-recruitment-menu th{
         border: 1px solid black;
     }
-    .today-graph td, .car-graph td{
+    .today-graph td, .car-graph td, .today-car-recruitment td{
         border: 1px solid black;
         text-align: center;
         font-size: 14px;
@@ -328,7 +328,6 @@
                 <thead>
                 <tr class="today-recruitment-menu">
                     <th>제출처</th>
-                    <th>번호</th>
                     <th>상차지</th>
                     <th>하차지</th>
                     <th>품목</th>
