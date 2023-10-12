@@ -17,7 +17,7 @@
 $(document).ready(function() {
     // DOM 요소를 jQuery로 선택합니다.
     var chk2Checkbox = $("#chk2");
-    var allInputs = $("input[type='text'], input[type='number'], textarea");
+    var allInputs = $("input[type='text'], input[type='number'], input[type='radio'], textarea");
     var regDateInput = $("#reg-date");
     var exchangeDateInput = $("#exchange-date");
 
