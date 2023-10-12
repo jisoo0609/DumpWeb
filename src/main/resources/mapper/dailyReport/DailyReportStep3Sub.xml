@@ -84,7 +84,20 @@
         delete from tSheet_sub
         where
         sheetsubID = #{sheetsubID}
-        and writeridx2=#{writeridx2}
+        and writeridx2 = #{writeridx2}
     </delete>
 
+    <!--전체삭제-->
+    <delete id="deleteByTransInfo" parameterType="DailyReportStep3Main, int">
+        delete from tSheet_sub
+        where sheetID2 IN (
+        select sheetID
+        from tSheet
+        where carSubmitTel = #{carSubmitTel}
+        and date = #{date}
+        and chk1 = 0
+        )
+        and
+        writeridx2=#{writeridx2}
+    </delete>
 </mapper>

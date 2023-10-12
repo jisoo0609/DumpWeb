@@ -4,10 +4,6 @@ function getCheckParam(id){
     return  "&" + id + "=" + checkBox.checked;
 }
 
-
-
-
-
 function save() {
 
     theForm = document.entry_form;
@@ -15,7 +11,8 @@ function save() {
     if(theForm.drvClub.value==="" || theForm.drvDate.value==="" || theForm.lastKm.value==="" || theForm.useAmt.value==="" || theForm.useOil.value===""){
         if(theForm.drvClub.value==""){
             alert("품목을 선택해 주세요.")
-        }else if(theForm.drvDate.value==""){
+            return theForm.drvDate.focus();
+        }else if(theForm.drvClub.value==""){
             alert("날짜를 선택해 주세요.")
             return theForm.drvDate.focus();
         }else if(theForm.lastKm.value==""){
@@ -96,11 +93,27 @@ function deleteData(){
 }
 
 function clickListThAndRedirect(){
-    const listRow = document.querySelector("table tbody");
+    const tableBody = document.querySelector("table tbody");
 
-    listRow.addEventListener("click", (event) => {
-        let driveID = event.target.parentElement.getAttribute("data-drive-id")
-        let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
-        window.location.href = url;
+     tableBody.addEventListener("click", (event) => {
+         const parentRow = event.target.closest("tr");
+         if (parentRow) {
+             const driveID = parentRow.getAttribute("data-drive-id");
+             if (driveID) {
+                 const url = `/dailyReport/carcareform?driveID=${driveID}`;
+                 window.location.href = url;
+             }
+         }
     });
 }
+
+document.addEventListener("DOMContentLoaded", () =>{
+     $.ajax({
+            url: "/dailyReport/carcareform/ajax/firstList",
+            type: "GET",
+            success: function (data) {
+                console.log(data);
+                printList(data);
+            }
+        })
+})
