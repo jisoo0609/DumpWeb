@@ -65,7 +65,7 @@ function validateInput1(input) {
         openable1 = false;
     } else {
         openable1 = true;
-        localStorage.setItem('recentCarSubmit', carSubmit);
+        //localStorage.setItem('recentCarSubmit', carSubmit);
     }
 }
 
@@ -75,7 +75,7 @@ function validateInput2(input) {
         openable2 = false;
     } else {
         openable2 = true;
-        localStorage.setItem('recentSalesman', salesman);
+        //localStorage.setItem('recentSalesman', salesman);
     }
 }
 
@@ -85,7 +85,7 @@ function validateInput3(input) {
     if (phoneNumberPattern.test(carSubmitTel)) {
         input.style.borderColor = '';
         openable3 = true;
-         localStorage.setItem('recentCarSubmitTel', carSubmitTel);
+         //localStorage.setItem('recentCarSubmitTel', carSubmitTel);
         listData()
     } else {
         input.style.borderColor = 'red';
@@ -93,7 +93,7 @@ function validateInput3(input) {
     }
 }
 
-// Function to load input values from localStorage
+/* Function to load input values from localStorage
 function loadInputValues() {
     const recentCarSubmit = localStorage.getItem('recentCarSubmit');
     const recentSalesman = localStorage.getItem('recentSalesman');
@@ -110,7 +110,7 @@ function loadInputValues() {
         document.getElementById('carSubmitTel').value = recentCarSubmitTel;
     }
 }
-
+*/
 
 /* function : open popup */
 function openPop() {
