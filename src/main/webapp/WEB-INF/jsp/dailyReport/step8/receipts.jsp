@@ -82,18 +82,6 @@
                         <select class="fromsite " id="fromsiteBox" onchange="$.selectBoxChange(this.value, 'fromsite')">
                             <option value="">전체</option>
                             <option value="구디">구디</option>
-                            <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="fromsite" value="${receipt.fromsite}"/>
-
-                                <script>   //옵션에 중복값 제거
-                                if (!document.querySelector('#fromsiteBox option[value="${fromsite}"]')) {
-                                    var option = document.createElement('option');
-                                    option.value = "${fromsite}";
-                                    option.text = "${fromsite}";
-                                    document.querySelector('#fromsiteBox').appendChild(option);
-                                }
-                                </script>
-                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -105,18 +93,6 @@
                         <select class="tosite " id="tositeBox" onchange="$.selectBoxChange(this.value, 'tosite')">
                             <option value="">전체</option>
                             <option value="지밸리">지밸리</option>
-                            <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="tosite" value="${receipt.tosite}"/>
-
-                                <script>   //옵션에 중복값 제거
-                                if (!document.querySelector('#tositeBox option[value="${tosite}"]')) {
-                                    var option = document.createElement('option');
-                                    option.value = "${tosite}";
-                                    option.text = "${tosite}";
-                                    document.querySelector('#tositeBox').appendChild(option);
-                                }
-                                </script>
-                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -128,18 +104,6 @@
                         <select class="item " id="itemBox" onchange="$.selectBoxChange(this.value, 'item')">
                             <option value="">전체</option>
                             <option value="출퇴근">출퇴근</option>
-
-                            <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="item" value="${receipt.item}"/>
-                                <script>   //옵션에 중복값 제거
-                                if (!document.querySelector('#itemBox option[value="${item}"]')) {
-                                    var option = document.createElement('option');
-                                    option.value = "${item}";
-                                    option.text = "${item}";
-                                    document.querySelector('#itemBox').appendChild(option);
-                                }
-                                </script>
-                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -147,22 +111,11 @@
                     <label>차량번호</label>
                     <div class="input-group select">
                         <input type="text" class="wp100 CarNoAuto complete trn" placeholder="차량번호"
-                               name="carNo" id="CarNo" value="${!empty view ? view.CarNo : ''}"
+                               name="CarNo" id="CarNo" value="${!empty view ? view.CarNo : ''}"
                                autocomplete="off">
                         <select class="CarNo " id="CarNoBox" onchange="$.selectBoxChange(this.value, 'CarNo')">
                             <option value="">전체</option>
                             <option value="자차">자차</option>
-                            <c:forEach items="${receiptsList}" var="receipt">
-                                <c:set var="carNo" value="${receipt.carNo}"/>
-                                <script>   //옵션에 중복값 제거
-                                if (!document.querySelector('#CarNoBox option[value="${carNo}"]')) {
-                                    var option = document.createElement('option');
-                                    option.value = "${carNo}";
-                                    option.text = "${carNo}";
-                                    document.querySelector('#CarNoBox').appendChild(option);
-                                }
-                                </script>
-                            </c:forEach>
                         </select>
                     </div>
                 </li>
@@ -198,7 +151,7 @@
 
         <div style="width: 100%; overflow-x: auto; overflow-y: hidden;">
             <div class="agreement_container">
-                <button class="common_btn" style="width: 110px;">운반금액<br><span class="resultPrice">50,000</span>
+                <button class="common_btn" style="width: 110px;">운반금액<br><span class="transportCost"></span>
                 </button>
                 <div class="btnWraaper">
                     <button class="common_btn" onclick="$.allChkChange(1);">일괄결재</button>
@@ -227,7 +180,7 @@
                     <th class="th_header">차량번호</th>
                     <th>대수</th>
                     <th class="th_header">운반단가</th>
-                </tr>ㅇ
+                </tr>
                 </thead>
                 <tbody>
                 </tbody>

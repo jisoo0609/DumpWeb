@@ -72,14 +72,7 @@
 
     <update id="updateCarNoSsByUserId" parameterType="Login">
         UPDATE tsheet_carno SET
-        <choose>
-            <when test="userPosition == 'driver'.toString()">
-                carnoSS = #{uuserID}
-            </when>
-            <otherwise>
-                carnoSS2 = #{uuserID}
-            </otherwise>
-        </choose>
+        carnoSS = #{uuserID}
         WHERE 1=1
         AND carnoFull = #{userId}
     </update>

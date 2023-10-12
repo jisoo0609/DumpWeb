@@ -45,16 +45,14 @@
         SELECT
         IF(SUM(Qty * Qtyup) IS NULL, 0, SUM(Qty * Qtyup)) AS 'totalTransportationCost',
         IF(SUM(Qty) IS NULL, 0, SUM(Qty)) AS 'totalQty',
-        IFNULL(
         (
-        SELECT MAX(drvDate)
+        SELECT CASE WHEN MAX(drvDate) IS NULL THEN NULL ELSE MAX(drvDate) END
         FROM tdrive_table
-        ),
-        NULL
         ) AS 'finalDrvDate',
         (
         SELECT IF(SUM(useAmt) IS NULL, 0, SUM(useAmt))
         FROM tdrive_table
+
         ) AS 'totalUseAmt'
         FROM tSheet_sub
         WHERE sheetID2 IN (SELECT sheetid2 FROM r3)
@@ -74,12 +72,17 @@
     </select>
 
     <select id="selectDispatchTdriveList" resultType="DailyReportStep1Tdrive">
-        SELECT rependchk,
-               driveSS,
-               carNo,
+        SELECT driveID,
+               drvclub,
+               DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
+                chk2,
+               lastkm,
+               useamt,
+               useOil,
+               drvrem,
+               rependchk,
                IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
-                repaddkm,
-               drvClub
+                repaddkm
         FROM   tDrive
         where carNo = #{carNo} AND rependchk = false
 
@@ -87,8 +90,37 @@
     </select>
 
 
+    <sql id="sub_table">
+        WITH r1 AS
+            (
+                SELECT *
+                FROM tsheet
+                WHERE date BETWEEN ${startDate} AND ${endDate}
+            ),
+            r2 AS
+           (
+        SELECT *
+        FROM tsheet_sub
+            ),
+            r3 AS
+            (
+        SELECT *
+        FROM r1
+            INNER JOIN r2 ON r1.sheetID = r2.sheetID2
+            )
+    </sql>
+
+    <select id="selectCarRecruitmentList" resultType="DailyReportStep1Recruit">
+        <include refid="sub_table">
+            <property name="startDate" value="#{today}"/>
+            <property name="endDate" value="#{today}"/>
+        </include>
+        select * from r3
 
 
+
+
+    </select>
 
 
 
