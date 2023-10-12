@@ -14,11 +14,14 @@ public class DailyReportStep1Sub {
     private int sheetID2;            // LINE :: tSheet FK
     private String tosite;          // LINE :: 하차지
     private int sheetsubSS;          // LINE :: 회원 idx
+    private int sheetsubSS2;         // LINE :: 제출처 idx
+    private int writeridx2;          // LINE :: 작성자 idx
 
 
     // tSheet테이블 : 차량번호
     public String CarNo;
     private String carSubmit;
+    private int sheetID;
 
 /*
 
