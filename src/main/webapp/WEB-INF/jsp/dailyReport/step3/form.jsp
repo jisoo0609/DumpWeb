@@ -87,12 +87,13 @@
                                 <span class="content">
                                     <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
                                            list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" oninput="validateInput3(this) listData()" onkeyup="searchByCarsubmitTel(this)"}
+                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" oninput="validateInput3(this)" onkeyup="searchByCarsubmitTel(this)"}
                                     >
                                 </span>
                             </div>
-                            <div id="isMember" style="width: 35%; height: var(--main-height)">
-                                <label>거래처 상태</label>
+                            <div id="invite">
+                                <span id="isMember">거래처 상태</span>
+                                <button type="button" class="btn addBtn" id ="inviteBtn" onclick="$.invite()">초대하기</button>
                             </div>
                         </li>
 

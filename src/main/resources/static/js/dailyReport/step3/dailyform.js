@@ -92,15 +92,15 @@ $.saveSheetID = function(data){
 }
 
 function showTransportList(data){
-    var html;
+    let html;
     if (!data) {
         html = '   <td colspan="5" style="text-align: center;">저장된 운송 정보가 없습니다</td>';
     } else {
         // 서버에서 반환된 데이터를 이용하여 테이블 형태로 생성
         html = '<table>';
-        for (var i = 0; i < data.dailyReportStep3SubList.length; i++) {
-            var subData = data.dailyReportStep3SubList[i];
-            var rowId = 'row' + i;
+        for (let i = 0; i < data.dailyReportStep3SubList.length; i++) {
+            let subData = data.dailyReportStep3SubList[i];
+            let rowId = 'row' + i;
             html += '<tr id="' + rowId + '" onclick="fillPop(event)">';
             html += '   <td>' + subData.fromsite + '</td>';
             html += '   <td>' + subData.tosite + '</td>';
@@ -116,6 +116,16 @@ function showTransportList(data){
         // 데이터를 표시할 위치에 추가
         $('#transportContainer').html(html);
 }
+
+
+
+function addInviteBtn() {
+    let inviteBtn;
+    inviteBtn += '<button type="button">초대하기</button>'
+
+    $('#invite').html(inviteBtn);
+}
+
 
 //카테고리 생성용 1,2,3
 function searchByCarsubmit(inputData) {
@@ -157,7 +167,7 @@ function searchBySalesman(inputData) {
 function searchByCarsubmitTel(inputData) {
     var carSubmitTel = $("#carSubmitTel").val();
     let isMember = $("#isMember");
-
+    let inviteBtn = $("#inviteBtn");
     $.ajax({
         url: "/dailyReport/search/carSubmitTel",
         method: "GET",
@@ -165,13 +175,16 @@ function searchByCarsubmitTel(inputData) {
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
             if (data.length !== 0) {
-                isMember.text("기존회원");
+                isMember.text("가입된 거래처 입니다");
+                $("#inviteBtn").css("margin-left", "5000px");
             } else {
-                isMember.text("신규회원");
+                isMember.text("");
+                $("#inviteBtn").css("margin-left", "0");
             }
-
+            listData();
         },
         error: function(error) {
+            $.error();
             console.error('Ajax 요청 실패:', error);
         }
    });
