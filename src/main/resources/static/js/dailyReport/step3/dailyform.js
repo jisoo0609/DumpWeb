@@ -201,9 +201,6 @@ $.search = function() {
        })
    }
 
-$.backMove = function () {
-    location.href="/dailyReport/list";
-}
 
 /*수정*/
 $.editRow = function() {
@@ -224,14 +221,12 @@ $.editRow = function() {
                   $.list();
             }else{
                   $.failEdit();
-                  //alert("결재된 정보로 수정이 불가능합니다.");
             }
           },
           error: function(error) {
             $.error();
             console.error('수정 실패:', error);
-            alert("요청을 처리하는 도중 에러가 발생하였습니다. 관리자에게 문의 부탁드립니다.")
-        }
+          }
     });
 }
 
@@ -245,7 +240,7 @@ $.deleteRow = function() {
       success: function (data) {
         var json = $.parseJSON(data);
         if(json.httpCode == 200){
-            alert("test 용 : 삭제 성공");
+            $.successRemoval();
             $.emptyRow();
             $.list();
         }else{
@@ -280,7 +275,6 @@ $.editSales = function(){
         success : function (data) {
             var json = $.parseJSON(data);
             if(json.httpCode == 200){
-                //문구는 추후 수정
                 $.successEdit();
             }else{
                 $.failEdit();
