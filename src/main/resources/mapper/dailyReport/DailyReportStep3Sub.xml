@@ -16,13 +16,13 @@
         <!--idx 자동->따로 작성 X-->
         insert into
         tSheet_sub
-        (fromsite,
-        item,
-        Qty,
+        (<if test="fromsite != null">fromsite,</if>
+        <if test="item != null">item,</if>
+        <if test="Qty != null">Qty,</if>
         <if test="Qtyup != null">Qtyup,</if>
         <if test="Rem != null">Rem,</if>
         sheetID2,
-        tosite,
+        <if test="tosite != null">tosite,</if>
         sheetsubSS,
         sheetsubSS2,
         writeridx2
@@ -43,9 +43,14 @@
     </insert>
     
     <!--삭제 관련-->
-    <!--sheetsubID로 조회-->
+    <!--sheetID2 조회-->
     <select id="findBySheetsubID" parameterType="int" resultType="int">
         select sheetID2 from tSheet_sub where sheetsubID=#{sheetsubID}
+    </select>
+
+    <!--All 조회-->
+    <select id="findBySheetsubIDAll" parameterType="int" resultType="DailyReportStep3Sub">
+        select * from tSheet_sub where sheetsubID=#{sheetsubID}
     </select>
 
     <!--운행 정보 수정-->
@@ -60,7 +65,6 @@
         sheetID2=#{sheetID2}
     </update>
 
-    <!--조회한 정보가 과거 정보일 때, 수정 But 기존정보와 동일하다면 수정 불가능(and가 아닌 or조건) -->
     <update id="editByTransportInfo" parameterType="DailyReportStep3Sub">
         update tSheet_sub
         <set>
@@ -72,11 +76,15 @@
             Qtyup=#{Qtyup}
         </set>
         where sheetsubID=#{sheetsubID}
+        and writeridx2=#{writeridx2}
     </update>
 
     <!--운행정보 삭제(1건)-->
     <delete id="deleteByOne" parameterType="int" >
-        delete from tSheet_sub where sheetsubID = #{sheetsubID}
+        delete from tSheet_sub
+        where
+        sheetsubID = #{sheetsubID}
+        and writeridx2=#{writeridx2}
     </delete>
 
 </mapper>
