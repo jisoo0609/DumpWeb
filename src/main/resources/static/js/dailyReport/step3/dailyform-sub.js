@@ -1,5 +1,7 @@
 const canvas = document.getElementById("canvas");
 const popup = document.getElementById('popup');
+const chk = document.getElementById('checkbox');
+const progress = document.getElementById('progress');
 var openable1 = false;
 var openable2 = false;
 var openable3 = false;
@@ -110,28 +112,28 @@ function loadInputValues() {
 }
 
 
-
-
-
 /* function : open/close popup */
 function openPop() {
-    if(dateInput === '') { // 데이트 기록이 없으면
+    if(dateInput === '') { // 데이트 기록이 없으면 운송정보를 추가할 수 없다.
         openable4 = false;
     } else {
         openable4 = true;
-        listData()
     }
-    if(openable1 & openable2 & openable3 & openable4 === true) {
-        popup.style.display = 'flex';
-        updateTotalAmount();
-        saved.forEach(function(elem){
-            elem.classList.add('hidden');
-        })
-        unsaved.forEach(function(elem) {
-            initialize(elem)
-        });
+    if(chk.value === '0') {
+        if(openable1 & openable2 & openable3 & openable4 === true) {
+            popup.style.display = 'flex';
+            updateTotalAmount();
+            saved.forEach(function(elem){
+                elem.classList.add('hidden');
+            })
+            unsaved.forEach(function(elem) {
+                initialize(elem)
+            });
+        } else {
+            $.inputInvalid();
+        }
     } else {
-        alert("입력된 정보를 다시 확인해주세요");
+        $.checkedAlert();
     }
 }
 
@@ -146,6 +148,7 @@ function initialize(element) {
 
 function closePop() {
     $.emptyRow();
+    //onChk1();
     popup.style.display = 'none';
     saved.forEach(function(elem) {
         initialize(elem)
@@ -226,6 +229,9 @@ function clearInputs() {
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = ""; // Set the value of each input field to an empty string
     }
+    chk.checked = false;
+    approved();
+    list();
 }
 
 
@@ -233,24 +239,21 @@ function clearInputs() {
 /* 결재 체크박스 체크되면 인풋 수정 불가 */
 
 function approved() {
-    const chk = document.getElementById('checkbox');
     const mtable = document.getElementById('main-table');
     const inputElements = mtable.querySelectorAll('.input');
-
     if (chk.checked) {
         chk.value = '1';
-        console.log(chk.value);
+        console.log("value1 : "+chk.value);
 
         // 거래처정보 인풋 비활성화
         inputElements.forEach(function(input) {
             input.disabled = true;
             input.style.backgroundColor = "#F2F2F2";
-            input.style.color = "333"
+            input.style.color = "black"
         });
     } else {
         chk.value = '0';
-        console.log(chk.value);
-
+        console.log("value0 : "+chk.value);
         // 결재 취소하면 다시 활성화
         inputElements.forEach(function(input) {
             input.disabled = false;
@@ -260,18 +263,26 @@ function approved() {
 }
 
 
-
-
 /* 제출하기 버튼을 클릭하면 결재 체크되고 제출체크가 체크하면되 결재도 체크됨*/
 function submitCheck() {
-    const dropdown = document.getElementById('dropdown')
-    const chk1 = document.getElementById('checkbox')
-    //chk1.disabled = true;
-    chk1.checked = true;
-    dropdown.textContent = "제출";
-    dropdown.style.color = "#0068b7";
-    dropdown.style.border = "1px solid #0068b778";
+    //const chk1 = document.getElementById('checkbox')
+    chk.checked = true;
+    chk.disabled = true;
+    progress.options[3].selected = true;
+    progress.disabled = true;
     approved();
+}
+
+function submitConfirmation() {
+    const message = "제출 시 더 이상 추가, 수정, 삭제를 할 수 없습니다. 제출 하시겠습니까?";
+    // Display the confirmation dialog and store the result (true for Yes, false for No)
+    const userConfirmed = window.confirm(message);
+    // Check the user's choice and take action
+    if (userConfirmed) {
+        submitCheck();
+    } else {
+        console.log("No");
+    }
 }
 
 
@@ -332,4 +343,5 @@ window.onload = function () {
     openable3 = true;
     listData();
     recoverState();
+    approved();
 };
