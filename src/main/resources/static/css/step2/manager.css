@@ -138,10 +138,12 @@
     }
     .today-menu th, .car-menu th{
             border: 1px solid black;
+
         }
         .today-graph td, .car-graph td{
              border: 1px solid black;
              text-align: center;
+             font-size:14px
         }
     .today-graph td:nth-child(6){
         display: none;
@@ -198,4 +200,6 @@
             top: 50%;
             text-align: center;
         }
+
+
     }

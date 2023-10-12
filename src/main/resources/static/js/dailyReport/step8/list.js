@@ -28,7 +28,7 @@ function printList(searchResultData) {
         const row = document.createElement("tr");
         let order = [
             data.date, data.fromsite, // 정렬 기준.
-            data.tosite, data.item, data.carNo, data.qty, data.qtyup
+            data.tosite, data.item, data.carNo, data.qty, data.qtyup, data.currStatus
         ];
         row.innerHTML = ` 
                     <td>${no}</td>
@@ -39,6 +39,7 @@ function printList(searchResultData) {
                     <td>${order[4]}</td>
                     <td>${order[5]}</td>
                     <td>${order[6].toLocaleString()}</td>
+                    <td>${order[7]}</td>
                  `;
 
         no++;
@@ -125,7 +126,7 @@ function printSummary(searchResultData) {
 
     // 결과를 result_search 요소에 출력
     const resultSearch = document.querySelector("#total");
-    resultSearch.innerHTML = `<h1>데이터 <span class="blue">${dataCount}</span>건이 검색되었습니다.</h1>`;
+    resultSearch.innerHTML = `<h1 style="color:#333">데이터 <span class="blue" style="color:#0068b7">${dataCount}</span>건이 검색되었습니다.</h1>`;
 }
 
 //라디오 정렬값에 따라 테이블 헤더&바디 순서 변경하는 코드 -> 후에 대표님 요청사항이 또 바뀌면 그때 사용하기
