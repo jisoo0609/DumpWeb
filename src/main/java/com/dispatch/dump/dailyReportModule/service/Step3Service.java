@@ -116,6 +116,7 @@ public class Step3Service {
     public List<DailyReportStep3Main> searchByCarSubmitTel(DailyReportStep3Main dailyReportStep3Main) {
         return dailyReportStep3MainMapper.findByCarSubmitTel(dailyReportStep3Main);
     }
+
     //영업사원 카테고리 생성용
     public List<DailyReportStep3Main> searchBySalesman(DailyReportStep3Main dailyReportStep3Main) {
         return dailyReportStep3MainMapper.findBySalesman(dailyReportStep3Main);
@@ -173,4 +174,18 @@ public class Step3Service {
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
+
+    /*전체삭제*/
+    public void deleteAll(DailyReportStep3Main dailyReportStep3Main){
+         int result=dailyReportStep3SubMapper.deleteByTransInfo(dailyReportStep3Main);
+            if(result>0){
+                dailyReportStep3MainMapper.deleteByCarsubmitInfo(dailyReportStep3Main);
+
+            }
+    }
+    
+    
+    
 }
+
+

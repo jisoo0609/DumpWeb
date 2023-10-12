@@ -24,6 +24,7 @@ function getSheetIDDataByParams(sheetID) {
             document.getElementById('carSubmitTel').value=data.carSubmitTel;
             document.getElementById('salesman').value=data.salesman;
             document.getElementById('date').value=data.date;
+            document.getElementById('chk1').value=data.chk1;//이 부분 확인
             $.list();
         }
     })
@@ -164,12 +165,20 @@ function searchByCarsubmitTel(inputData) {
         data: { "carSubmitTel": carSubmitTel },
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
-            if (data.length !== 0) {
-                isMember.text("기존회원");
-            } else {
-                isMember.text("신규회원");
+            if(data.list!=null){
+                console.log("list data 있음");
+                console.log("list는?", data.list);
+            }else{
+                console.log("list data 없음");
             }
 
+            if(data.checkData!=null){
+                console.log("checkData 있음");
+                console.log("checkData는?", data.checkData);
+            }else{
+                console.log("checkData 없음");
+            }
+            listData();
         },
         error: function(error) {
             console.error('Ajax 요청 실패:', error);
@@ -262,15 +271,17 @@ $.editSales = function(){
     var carSubmit = $("#carSubmit").val();
     var carSubmitTel = $("#carSubmitTel").val();
     var chk1 = $("#checkbox").val();
+    var CurrStatus = $("CurrStatus").val();
     $.ajax({
         url:"/dailyReport/workspace/ajax/edit/carSubmit",
         type:"POST",
         data:{
-            "sheetID":sheetID,
-            "salesman":salesman,
-            "carSubmit":carSubmit,
-            "carSubmitTel":carSubmitTel,
-            "chk1": chk1
+            "sheetID" : sheetID,
+            "salesman" : salesman,
+            "carSubmit" : carSubmit,
+            "carSubmitTel" : carSubmitTel,
+            "chk1" : chk1,
+            "CurrStatus" : CurrStatus
         },
         success : function (data) {
             var json = $.parseJSON(data);
@@ -285,5 +296,28 @@ $.editSales = function(){
             console.error('수정 실패:', error);
         }
     })
+}
+
+/*전체 삭제*/
+//$.deleteByAll = function(){
+    //var carSubmitTel = $("#carSubmitTel").val();
+    //var date = $("#date").val();
+    //var chk1 = $("#chk1").val();
+
+
+    //ajax({
+        //url : /dailyReport/workspace/ajax/deleteAll,
+        //type : "POST",
+        //data : {
+            //"sheetID" : sheetID
+        //},
+        //success : function (data){
+            //console.log();
+        //},
+        //error: function(error) {
+            //console.error('삭제 실패:', error);
+        //}
+    //})
+
 }
 
