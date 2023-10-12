@@ -87,7 +87,8 @@
                                 <span class="content">
                                     <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
                                            list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" oninput="validateInput3(this)" onkeyup="searchByCarsubmitTel(this); checkByUserInfo(this)"}
+                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" oninput="validateInput3(this) listData()" onkeyup="searchByCarsubmitTel(this);"}
+
                                     >
                                 </span>
                             </div>
@@ -114,7 +115,7 @@
                             <div style="width: 35%; height: var(--main-height)">
                                 <label >진행</label>
                                 <span class="content">
-                                    <select id="progress" style="width:60px; margin-left: 30px;">
+                                    <select id="CurrStatus" name="CurrStatus" style="width:60px; margin-left: 30px;">
                                         <option value="배차">배차</option>
                                         <option value="상차">상차</option>
                                         <option value="하차">하차</option>
@@ -180,8 +181,9 @@
         </div>
 
         <div class="btn-area">
-            <button type="button" class="btn btn-white" onclick="clearInputs()">전체삭제</button>
-            <button type="button" class="btn btn-blue" id="submitBtn" onClick="$.editSales() submitConfirmation()">제출하기</button>
+            <button type="button" class="btn btn-white" onclick="deleteByAll()">전체삭제</button>
+            <button type="button" class="btn btn-blue" id="submitBtn" onClick="submitConfirmation()">제출하기</button>
+
             <button type="button" class="btn btn-blue " onClick="$.editSales()">저장하기</button>
             <button type="button" class="btn btn-white " onClick="history.go(-1)">이전화면</button>
         </div>

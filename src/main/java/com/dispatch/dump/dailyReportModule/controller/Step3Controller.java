@@ -51,7 +51,7 @@ public class Step3Controller {
 
     @RequestMapping(value = "/search/carSubmit", method = RequestMethod.GET)
     @ResponseBody
-    public List<DailyReportStep3Main> carSubmitList(DailyReportStep3Main dailyReportStep3Main){
+    public List<DailyReportStep3Main> carSubmitList(DailyReportStep3Main dailyReportStep3Main) {
         return step3Service.searchByCarSubmit(dailyReportStep3Main);
     }
 
@@ -64,7 +64,8 @@ public class Step3Controller {
         Login login = new Login();
         login.setUserId(dailyReportStep3Main.getCarSubmitTel());
 
-        Login checkData=step3Service.findByUserInfo(login);
+
+        Login checkData = step3Service.findByUserInfo(login);
 
         resultMap.put("list", list);
         resultMap.put("checkData", checkData);
@@ -73,25 +74,35 @@ public class Step3Controller {
 
     @RequestMapping(value = "/search/salesman", method = RequestMethod.GET)
     @ResponseBody
-    public List<DailyReportStep3Main> salesmanList(DailyReportStep3Main dailyReportStep3Main){
+    public List<DailyReportStep3Main> salesmanList(DailyReportStep3Main dailyReportStep3Main) {
         return step3Service.searchBySalesman(dailyReportStep3Main);
     }
 
     @RequestMapping(value = "/workspace/ajax/edit/carSubmit", method = RequestMethod.POST)
     @ResponseBody
-    public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
+
+    public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main) {
         return step3Service.editByCarSubmit(dailyReportStep3Main);
     }
 
     @RequestMapping(value = "/workspace/ajax/edit", method = RequestMethod.POST)
     @ResponseBody
-    public String edit(DailyReportStep3Sub dailyReportStep3Sub){
+    public String edit(DailyReportStep3Sub dailyReportStep3Sub) {
         return step3Service.edit(dailyReportStep3Sub);
     }
 
     @RequestMapping(value = "/workspace/ajax/delete", method = RequestMethod.GET)
     @ResponseBody
-    public String delete(int sheetsubID){
+    public String delete(int sheetsubID) {
         return step3Service.delete(sheetsubID);
     }
+
+
+    /*전체삭제*/
+    @RequestMapping(value = "/workspace/ajax/deleteAll", method = RequestMethod.POST)
+    @ResponseBody
+    public void delete(DailyReportStep3Main dailyReportStep3Main) {
+        step3Service.deleteAll(dailyReportStep3Main);
+    }
 }
+

@@ -225,7 +225,7 @@ function showOrHide() {
     }
 }
 
-/* 전체 삭제 버튼 누르면 인풋 비우기 */
+/* 전체 삭제 버튼 누르면 인풋 비우기-> DB 삭제후 사용 */
 function clearInputs() {
     const inputs = canvas.getElementsByTagName("input");
     for (let i = 0; i < inputs.length; i++) {
