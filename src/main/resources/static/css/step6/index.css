@@ -297,11 +297,20 @@ body {
 .table_container table thead tr th:nth-child(3),
 .table_container table thead tr th:nth-child(4) {
   text-align: center;
+  width:60px
 }
 
 .table_container table tbody tr td:nth-child(1) {
   padding: 0 10px;
   word-break: keep-all;
+}
+
+#date-header {
+    width:50px;
+}
+
+#item-header {
+    width:50px;
 }
 
 .table_container table tbody tr td:nth-child(2) {
@@ -321,7 +330,7 @@ body {
   max-width: 100px; /* 원하는 최대 너비 설정 */
 }
 
-.th_title th {s
+.th_title th {
   font-weight: var(--weight-bold);
   font-size: 14px;
 }
@@ -391,7 +400,7 @@ body {
   }
 
   .content h1 {
-    justify-jcontent: center;
+    justify-content: center;
   }
   .conbox {
     width: 80%;
