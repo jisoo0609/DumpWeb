@@ -15,8 +15,8 @@
                  (SELECT *
                   FROM tsheet_sub
                   where sheetsubSS2 = ${sheetsubSS2}),
-             r3 AS (SELECT *
-                    FROM r1 inner join r2 ON r1.sheetid = r2.sheetid2)
+             r3 AS (SELECT * FROM r1
+                             inner join r2 ON r1.sheetid = r2.sheetid2)
     </sql>
 
 
@@ -76,9 +76,8 @@
         FROM tsheet t
                  JOIN tSheet_sub s
                       ON t.sheetID = s.sheetID2
-        WHERE t.carSubmitTel = #{carSubmitTel}
-        order by date desc;
-
+        WHERE t.sheetSS2 = #{sheetSS2}
+          AND s.sheetsubSS2 = #{sheetsubSS2}
     </select>
 
     <!--기존꺼-->
@@ -108,7 +107,6 @@
     <!--            <property name="startDate" value="#{startDate}"/>-->
     <!--            <property name="endDate" value="#{endDate}"/>-->
     <!--        </include>-->
-
 
 
     <!--        select-->
@@ -149,18 +147,17 @@
     <!--    </select>-->
 
 
+    <!--    <select id="getSelectBoxData" resultType="DailyReportStep8">-->
+    <!--        SELECT distinct t.sheetID,-->
+    <!--                        t.CarNo,-->
+    <!--                        s.fromsite,-->
+    <!--                        s.tosite,-->
+    <!--                        s.item-->
+    <!--        FROM tsheet t-->
+    <!--                 JOIN tSheet_sub s-->
+    <!--                      ON t.sheetID = s.sheetID2-->
+    <!--        WHERE t.carSubmitTel = #{carSubmitTel}-->
+    <!--        order by date desc;-->
 
-<!--    <select id="getSelectBoxData" resultType="DailyReportStep8">-->
-<!--        SELECT distinct t.sheetID,-->
-<!--                        t.CarNo,-->
-<!--                        s.fromsite,-->
-<!--                        s.tosite,-->
-<!--                        s.item-->
-<!--        FROM tsheet t-->
-<!--                 JOIN tSheet_sub s-->
-<!--                      ON t.sheetID = s.sheetID2-->
-<!--        WHERE t.carSubmitTel = #{carSubmitTel}-->
-<!--        order by date desc;-->
-
-<!--    </select>-->
+    <!--    </select>-->
 </mapper>
