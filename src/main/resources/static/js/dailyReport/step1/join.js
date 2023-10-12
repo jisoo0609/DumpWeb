@@ -1,6 +1,7 @@
 /* DOMContentLoaded */
 document.addEventListener("DOMContentLoaded", function () {
     bindDispatchList();
+    bindCarRecruitList();
 });
 document.addEventListener("DOMContentLoaded", function () {
     bindSummary();
@@ -23,11 +24,16 @@ function bindDispatchList() {
         url: "/dailyReport/driver/ajax/submitlist",
         type: "GET",
         success: function (data) {
-// 데이터를 먼저 저장
-            sharedData = data;
-            // 그 후에 두 함수를 호출
-            printDispatchList();
-            printCarRecruitmentList();
+            printDispatchList(data);
+        }
+    });
+}
+function bindCarRecruitList() {
+    $.ajax({
+        url: "/dailyReport/driver/ajax/recruitlist",
+        type: "GET",
+        success: function (data) {
+            printCarRecruitmentList(data);
         }
     });
 }
@@ -67,11 +73,11 @@ function printSummary(data) {
 }
 
 //대수 합치기
-function groupAndSumData(sharedData) {
+function groupAndSumData(searchResultData) {
     const groupedData = {};
 
     // 데이터를 그룹화하고 qty 값을 합산
-    sharedData.forEach(data => {
+    searchResultData.forEach(data => {
         const key = `${data.carSubmit}-${data.fromsite}-${data.tosite}-${data.item}`;
 
         if (!groupedData[key]) {
@@ -92,12 +98,12 @@ function groupAndSumData(sharedData) {
 
 // ...
 //금일 차량 배차 현황
-function printDispatchList() {
+function printDispatchList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#menusub");
 
     // 데이터를 그룹화하고 합산
-    const groupedData = groupAndSumData(sharedData);
+    const groupedData = groupAndSumData(searchResultData);
 
     // 검색 결과 데이터를 테이블 본문에 추가.
     groupedData.forEach(data => {
@@ -118,12 +124,12 @@ function printDispatchList() {
 }
 
 //금일 차량 모집 공고
-function printCarRecruitmentList() {
-    const tableBody = document.querySelector(".today-car-recruitment");
+function printCarRecruitmentList(searchResultData) {
+    const tableBody = document.querySelector("#today-car-recruitment");
 
-    // 금일 차량 모집에 carNo가 "공고"인 경우에만 데이터를 표시.
-    sharedData.forEach(data => {
-        if (data.carNo === "공고") {
+//일단은 다 뜨게 한번 해보기
+    searchResultData.forEach(data => {
+
             const row = document.createElement("tr");
 
             row.innerHTML = `
@@ -135,7 +141,7 @@ function printCarRecruitmentList() {
             `;
 
             tableBody.appendChild(row);
-        }
+
     });
 }
 function printFindList(searchResultData) {

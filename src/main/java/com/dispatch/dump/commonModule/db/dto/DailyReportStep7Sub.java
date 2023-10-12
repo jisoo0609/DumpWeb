@@ -18,4 +18,6 @@ public class DailyReportStep7Sub {
     private int sheetsubSS2;         // LINE :: 회원 idx
     private int writeridx2;           // LINE :: 작성자 idx
 
+    //thseet 테이블 (차량배차 정보)
+    private String carNo;           // LINE :: 차량번호
 }
