@@ -53,7 +53,37 @@ function printDispatchList(searchResultData) {
                     <td>${order[4]}</td> 
                  `;
 
+         row.setAttribute("data-user-position", data.userPosition);
+         row.setAttribute("data-sheet-id", data.sheetID);
         tableBody.appendChild(row);
     });
 
 };
+
+/* DOMContentLoaded */
+document.addEventListener("DOMContentLoaded", function () {
+    clickListThAndRedirect();
+});
+
+/* 리스트의 행 클릭시, 파라미터와 함께 step5로 이동하도록 처리. */
+function clickListThAndRedirect() {
+    const tableBody = document.querySelector("table tbody");
+
+    tableBody.addEventListener("click", (event) => {
+        const parentRow = event.target.closest("tr");
+        if (parentRow) {
+            const userPosition = parentRow.getAttribute("data-user-position");
+            const sheetID = parentRow.getAttribute("data-sheet-id");
+
+            if (sheetID === null) {
+                 return;
+            }
+
+            if(userPosition==='manager'){
+                const url = `/dailyReport/orderform?sheetID=${sheetID}`;
+                 window.location.href = url;
+            }
+       }
+    });
+}
+

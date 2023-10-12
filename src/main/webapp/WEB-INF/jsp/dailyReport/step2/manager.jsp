@@ -75,9 +75,9 @@
         <section>
 
             <p class="today-car">금일 배차 현황</p>
-
-            <table class="today-graph">
             <a href="/dailyReport/form">
+            <table class="today-graph">
+
                 <thead>
                 <tr class="car-menu">
                     <th>차량번호</th>
@@ -91,12 +91,14 @@
                 <tbody>
                 <!-- 작업 -->
                 </tbody>
-                </a>
+
             </table>
+                </a>
 
             <p class="car-care">제출 받은 일보</p>
-
+    <a href="/dailyReport/receipts">
             <table class="car-graph">
+
                 <thead>
                 <tr class="car-menu">
                     <th>차량번호</th>
@@ -106,12 +108,24 @@
                     <th>대수</th>
                 </tr>
                 </thead>
-            <a href="/dailyReport/list">
+
                 <tbody>
                 <!-- 작업 -->
                 </tbody>
             </table>
                </a>
+
+                    <p class="today-recruitment">금일 차량 모집 공고</p>
+                           <table class="car-graph">
+                               <tr class="car-menu">
+
+                                   <th>상차지</th>
+                                   <th>하차지</th>
+                                   <th>품목</th>
+                                   <th>대수</th>
+                               </tr>
+                           </table>
+
         </section>
     </article>
 

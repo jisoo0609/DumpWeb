@@ -12,6 +12,7 @@ public class DailyReportStep8 {
     private Boolean chk1;           // LINE :: 결재여부
     private String date;            // LINE :: 운행일
     private String salesman;        // LINE :: 제출처 담당자
+    private String CurrStatus;      // LINE :: 배차상태
 
     //tSheet_sub테이블
     private int sheetsubID;

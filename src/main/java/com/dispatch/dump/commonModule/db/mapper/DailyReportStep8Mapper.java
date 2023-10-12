@@ -14,5 +14,5 @@ public interface DailyReportStep8Mapper {
 
     List<DailyReportStep8> selectReceiptsByOption(DailyReportStep8OptionForm option);
 
-    List<DailyReportStep8> getSelectBoxData(String carSubmitTel);
+    List<DailyReportStep8> getSelectBoxData(DailyReportStep8OptionForm option);
 }
