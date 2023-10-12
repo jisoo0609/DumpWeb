@@ -1,8 +1,10 @@
 /* DOMContentLoaded */
 document.addEventListener("DOMContentLoaded", function () {
     bindDispatchList();
+    bindCarRecruitList();
 });
 document.addEventListener("DOMContentLoaded", function () {
+    bindSummary();
     carFindList();
 });
 
@@ -23,6 +25,15 @@ function bindDispatchList() {
         type: "GET",
         success: function (data) {
             printDispatchList(data);
+        }
+    });
+}
+function bindCarRecruitList() {
+    $.ajax({
+        url: "/dailyReport/driver/ajax/recruitlist",
+        type: "GET",
+        success: function (data) {
+            printCarRecruitmentList(data);
         }
     });
 }
@@ -61,7 +72,7 @@ function printSummary(data) {
     boutuseamt.innerHTML = `${data.totalUseAmt.toLocaleString()}원`;
 }
 
-
+//대수 합치기
 function groupAndSumData(searchResultData) {
     const groupedData = {};
 
@@ -86,7 +97,7 @@ function groupAndSumData(searchResultData) {
 }
 
 // ...
-
+//금일 차량 배차 현황
 function printDispatchList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#menusub");
@@ -112,7 +123,27 @@ function printDispatchList(searchResultData) {
     });
 }
 
+//금일 차량 모집 공고
+function printCarRecruitmentList(searchResultData) {
+    const tableBody = document.querySelector("#today-car-recruitment");
 
+//일단은 다 뜨게 한번 해보기
+    searchResultData.forEach(data => {
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${data.carSubmit}</td>
+                <td>${data.fromsite}</td>
+                <td>${data.tosite}</td> 
+                <td>${data.item}</td>
+                <td>${data.qty}</td> 
+            `;
+
+            tableBody.appendChild(row);
+
+    });
+}
 function printFindList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#carsub");
@@ -139,6 +170,7 @@ function printFindList(searchResultData) {
         <td>${data.drvClub}</td>
         <td>${formattedDate}</td>
         <td>${formattedRepaddkm}</td>
+         <td>${data.drvRem}</td>
     `;
         row.setAttribute("data-drive-id", data.driveID);
         tableBody.appendChild(row);
