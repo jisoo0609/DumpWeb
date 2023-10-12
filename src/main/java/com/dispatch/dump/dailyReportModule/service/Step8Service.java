@@ -31,8 +31,13 @@ public class Step8Service {
     }
 
     public List<DailyReportStep8> searchReceiptList(DailyReportStep8OptionForm option) {
-        option.setCarSubmitTel(getSessionLoginData().getUserId());
-        System.out.println("option: " + step8Mapper.selectReceiptsByOption(option));
+//        option.setCarSubmitTel(getSessionLoginData().getUserId());
+
+        option.setSheetSS2(Integer.parseInt(getSessionLoginData().getUuserID()));
+        option.setSheetsubSS2(Integer.parseInt(getSessionLoginData().getUuserID()));
+
+        System.out.println("제출처 인덱스 : " + option.getSheetSS2());
+        System.out.println("검색결과 : " + step8Mapper.selectReceiptsByOption(option));
         return step8Mapper.selectReceiptsByOption(option);
         }
 

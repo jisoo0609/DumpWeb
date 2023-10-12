@@ -34,7 +34,7 @@
                     </div>
                 </li>
                 <li>
-                    총 운행대 수 :
+                    총 운행 대수 :
                     <div class="carrying-car" id="tnumber">
                         <!-- 값을 표시하기 위한 div -->
                         <div id="tncars"> 원</div>
@@ -73,8 +73,11 @@
 
 
         <section>
+
             <p class="today-car">금일 배차 현황</p>
+            <a href="/dailyReport/form">
             <table class="today-graph">
+
                 <thead>
                 <tr class="car-menu">
                     <th>차량번호</th>
@@ -84,14 +87,18 @@
                     <th>대수</th>
                 </tr>
                 </thead>
+
                 <tbody>
                 <!-- 작업 -->
                 </tbody>
+
             </table>
+                </a>
 
             <p class="car-care">제출 받은 일보</p>
-
+    <a href="/dailyReport/receipts">
             <table class="car-graph">
+
                 <thead>
                 <tr class="car-menu">
                     <th>차량번호</th>
@@ -101,20 +108,24 @@
                     <th>대수</th>
                 </tr>
                 </thead>
+
                 <tbody>
                 <!-- 작업 -->
                 </tbody>
             </table>
-            <p class="today-recruitment">금일 차량 모집 공고</p>
-            <table class="car-graph">
-                <tr class="car-menu">
-                    <th>차량번호</th>
-                    <th>상차지</th>
-                    <th>하차지</th>
-                    <th>품목</th>
-                    <th>대수</th>
-                </tr>
-            </table>
+               </a>
+
+                    <p class="today-recruitment">금일 차량 모집 공고</p>
+                           <table class="car-graph">
+                               <tr class="car-menu">
+
+                                   <th>상차지</th>
+                                   <th>하차지</th>
+                                   <th>품목</th>
+                                   <th>대수</th>
+                               </tr>
+                           </table>
+
         </section>
     </article>
 

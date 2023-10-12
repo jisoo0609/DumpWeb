@@ -8,13 +8,13 @@
                     display: none;
                 }
     #update-button {
-        padding: 3px;
+        padding: 0 3px 0 3px ;
         border-radius: 10px;
         position: absolute;
         background-color: #ffffff;
         margin-left: 10px;
         border: 1px solid #0068b7;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: bold;
         width: -webkit-fill-available;
         margin-right: 15px;
@@ -138,10 +138,12 @@
     }
     .today-menu th, .car-menu th{
             border: 1px solid black;
+
         }
         .today-graph td, .car-graph td{
              border: 1px solid black;
              text-align: center;
+             font-size:14px
         }
     .today-graph td:nth-child(6){
         display: none;
@@ -170,7 +172,7 @@
             font-size: 18px;
         }
         #update-button {
-            font-size: 18px;
+            font-size: 20px;
             position:center;
         }
         .race-text,
@@ -198,4 +200,6 @@
             top: 50%;
             text-align: center;
         }
+
+
     }
