@@ -51,6 +51,10 @@ public class Step5Service {
         return dailyReportStep5Mapper.selectTDriveList(getSessionLoginData().getUserId(), date);
     }
 
+    public List<DailyReportStep5> findFirstTDriveList() {
+        return dailyReportStep5Mapper.selectFirstTDriveList(getSessionLoginData().getUserId());
+    }
+
     public void removeTDrive(int driveID) {
         dailyReportStep5Mapper.deleteTDrive(getSessionLoginData().getUserId(), driveID);
     }

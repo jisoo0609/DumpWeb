@@ -62,7 +62,7 @@
 
     <select id="selectTDriveList" resultType="DailyReportStep5">
         SELECT driveID,
-        DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
+        DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
         drvclub,
         chk2,
         lastkm,
@@ -75,7 +75,25 @@
         FROM   tdrive
         WHERE  carno = #{userID}
         AND drvdate LIKE CONCAT(#{date}, '%')
-        ORDER BY drvclub ASC
+        ORDER BY drvdate DESC
+    </select>
+
+    <select id="selectFirstTDriveList" resultType="DailyReportStep5">
+        SELECT driveID,
+        DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
+        drvclub,
+        chk2,
+        lastkm,
+        useamt,
+        useOil,
+        drvrem,
+        rependchk,
+        IF(rependdate IS NULL, '',rependdate) AS 'rependdate',
+        repaddkm
+        FROM   tdrive
+        WHERE  carno = #{userID}
+        ORDER BY driveId DESC
+        LIMIT 10
     </select>
 
 

@@ -392,6 +392,10 @@ textarea {
 	.GolSection table tbody tr td:nth-child(6) {
 		width: 22%;
 	}
+
+  .miJeongButton {
+    border: 1px solid #000;
+  }
 }
 
 /* ! mobile */
@@ -472,7 +476,9 @@ textarea {
 	}
 
 	.golSearch {
-		margin-left: -10%;
+		margin-left: -8%;
+		border: 1px solid #000;
+		width: 18%;
 	}
 
 	.checkbox1{
@@ -675,28 +681,9 @@ textarea {
 		width: 18%;
 	}
 
-/* 운반단가가 포함된 css 코드 */
-/* .GolSection table tbody tr td:nth-child(2),
-	.GolSection table tbody tr td:nth-child(3) {
-		width: 14%;
-	}
-
-	.GolSection table tbody tr td:nth-child(4) {
-		width: 17%;
-	}
-
-	.GolSection table tbody tr td:nth-child(1),
-	.GolSection table tbody tr td:nth-child(5) {
-		width: 8%;
-	}
-
-	.GolSection table tbody tr td:nth-child(6) {
-		width: 17%;
-	}
-
-	.GolSection table tbody tr td:nth-child(7) {
-		width: 15%;
-	} */
+  .miJeongButton {
+    border: 1px solid #000;
+  }
 }
 
 /* ! tablet */
@@ -950,6 +937,10 @@ textarea {
 	.GolSection table tbody tr td:nth-child(4) {
 		width: 5%;
 	}
+
+  .miJeongButton {
+    border: 1px solid #000;
+  }
 }
 
 /* ! desktop */
@@ -1206,4 +1197,8 @@ textarea {
 	.GolSection table tbody tr td:nth-child(4) {
 		width: 5%;
 	}
+
+  .miJeongButton {
+    border: 1px solid #000;
+  }
 }

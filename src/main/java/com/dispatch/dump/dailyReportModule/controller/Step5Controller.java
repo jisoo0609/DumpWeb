@@ -35,6 +35,12 @@ public class Step5Controller {
         return step5Service.findTDriveList(date);
     }
 
+    @RequestMapping(value = "/carcareform/ajax/firstList", method = RequestMethod.GET)
+    @ResponseBody
+    public List<DailyReportStep5> tDriveList() {
+        return step5Service.findFirstTDriveList();
+    }
+
     @RequestMapping(value = "/carcareform/ajax/delete", method = RequestMethod.DELETE)
     @ResponseBody
     public void tDriveRemove(int driveID) {
