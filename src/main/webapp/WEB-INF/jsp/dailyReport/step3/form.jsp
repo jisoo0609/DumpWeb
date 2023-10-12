@@ -87,7 +87,7 @@
                                 <span class="content">
                                     <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
                                            list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" oninput="validateInput3(this) listData()" onkeyup="searchByCarsubmitTel(this);"}
+                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" oninput="validateInput3(this) listData()" onkeyup="searchByCarsubmitTel(this);"
 
                                     >
                                 </span>
