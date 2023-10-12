@@ -24,4 +24,7 @@ public interface DailyReportStep3SubMapper {
 
     /* FUNCTION ::  삭제 */
     int deleteByOne(int sheetsubID);
+
+    /* FUNCTION ::  전체삭제 */
+    int deleteByTransInfo(DailyReportStep3Main dailyReportStep3Main);
 }

@@ -1,7 +1,7 @@
 const canvas = document.getElementById("canvas");
 const popup = document.getElementById('popup');
 const chk = document.getElementById('checkbox');
-const progress = document.getElementById('progress');
+const CurrStatus = document.getElementById('CurrStatus');
 var openable1 = false;
 var openable2 = false;
 var openable3 = false;
@@ -65,7 +65,7 @@ function validateInput1(input) {
         openable1 = false;
     } else {
         openable1 = true;
-        localStorage.setItem('recentCarSubmit', carSubmit);
+        //localStorage.setItem('recentCarSubmit', carSubmit);
     }
 }
 
@@ -75,7 +75,7 @@ function validateInput2(input) {
         openable2 = false;
     } else {
         openable2 = true;
-        localStorage.setItem('recentSalesman', salesman);
+        //localStorage.setItem('recentSalesman', salesman);
     }
 }
 
@@ -85,7 +85,7 @@ function validateInput3(input) {
     if (phoneNumberPattern.test(carSubmitTel)) {
         input.style.borderColor = '';
         openable3 = true;
-         localStorage.setItem('recentCarSubmitTel', carSubmitTel);
+         //localStorage.setItem('recentCarSubmitTel', carSubmitTel);
         listData()
     } else {
         input.style.borderColor = 'red';
@@ -93,7 +93,7 @@ function validateInput3(input) {
     }
 }
 
-// Function to load input values from localStorage
+/* Function to load input values from localStorage
 function loadInputValues() {
     const recentCarSubmit = localStorage.getItem('recentCarSubmit');
     const recentSalesman = localStorage.getItem('recentSalesman');
@@ -110,7 +110,7 @@ function loadInputValues() {
         document.getElementById('carSubmitTel').value = recentCarSubmitTel;
     }
 }
-
+*/
 
 /* function : open popup */
 function openPop() {
@@ -148,7 +148,9 @@ function initialize(element) {
 
 function closePop() {
     $.emptyRow();
-    clickedRow.classList.remove('selected-row');
+    if(clickedRow) {
+        clickedRow.classList.remove('selected-row');
+    }
     popup.style.display = 'none';
     saved.forEach(function(elem) {
         initialize(elem)
@@ -223,7 +225,7 @@ function showOrHide() {
     }
 }
 
-/* 전체 삭제 버튼 누르면 인풋 비우기 */
+/* 전체 삭제 버튼 누르면 인풋 비우기-> DB 삭제후 사용 */
 function clearInputs() {
     const inputs = canvas.getElementsByTagName("input");
     for (let i = 0; i < inputs.length; i++) {
@@ -264,12 +266,12 @@ function approved() {
 
 
 /* 제출하기 버튼을 클릭하면 결재 체크되고 제출체크가 체크하면되 결재도 체크됨*/
-function submitCheck() {
+function submitCheck() {치
     //const chk1 = document.getElementById('checkbox')
     chk.checked = true;
     chk.disabled = true;
-    progress.options[3].selected = true;
-    progress.disabled = true;
+    CurrStatus.options[3].selected = true;
+    CurrStatus.disabled = true;
     approved();
 }
 
