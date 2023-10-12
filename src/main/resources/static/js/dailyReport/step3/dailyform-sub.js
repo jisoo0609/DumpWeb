@@ -112,7 +112,7 @@ function loadInputValues() {
 }
 
 
-/* function : open/close popup */
+/* function : open popup */
 function openPop() {
     if(dateInput === '') { // 데이트 기록이 없으면 운송정보를 추가할 수 없다.
         openable4 = false;
@@ -148,7 +148,7 @@ function initialize(element) {
 
 function closePop() {
     $.emptyRow();
-    //onChk1();
+    clickedRow.classList.remove('selected-row');
     popup.style.display = 'none';
     saved.forEach(function(elem) {
         initialize(elem)
@@ -287,12 +287,12 @@ function submitConfirmation() {
 
 
 /* fillPop으로 인풋팝업이 뜰때는 버튼이 바뀌어야 한다. */
-let thisRow;
+let clickedRow;
 const filledInput = document.querySelectorAll('.filledInput');
 const newInput = document.querySelectorAll('.emptyInput');
 function fillPop(event) {
     var clicked = event.currentTarget.id;
-    const clickedRow = document.getElementById(clicked);
+    clickedRow = document.getElementById(clicked);
     clickedRow.classList.add('selected-row');
     var td1 = clickedRow.querySelector('td:nth-child(1)').textContent;
     var td2 = clickedRow.querySelector('td:nth-child(2)').textContent;

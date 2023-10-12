@@ -169,6 +169,7 @@
                     <col style="width: 13%">
                     <col style="width: 13%">
                     <col style="width: 13%">
+                    <col style="width: 13%">
                 </colgroup>
                 <thead>
                 <tr>
@@ -180,6 +181,7 @@
                     <th class="th_header">차량번호</th>
                     <th>대수</th>
                     <th class="th_header">운반단가</th>
+                    <th>상태</th>
                 </tr>
                 </thead>
                 <tbody>

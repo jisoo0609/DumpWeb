@@ -28,7 +28,7 @@ function printList(searchResultData) {
         const row = document.createElement("tr");
         let order = [
             data.date, data.fromsite, // 정렬 기준.
-            data.tosite, data.item, data.carNo, data.qty, data.qtyup
+            data.tosite, data.item, data.carNo, data.qty, data.qtyup, data.currStatus
         ];
         row.innerHTML = ` 
                     <td>${no}</td>
@@ -39,6 +39,7 @@ function printList(searchResultData) {
                     <td>${order[4]}</td>
                     <td>${order[5]}</td>
                     <td>${order[6].toLocaleString()}</td>
+                    <td>${order[7]}</td>
                  `;
 
         no++;
