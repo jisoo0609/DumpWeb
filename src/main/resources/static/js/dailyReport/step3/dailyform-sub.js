@@ -1,7 +1,7 @@
 const canvas = document.getElementById("canvas");
 const popup = document.getElementById('popup');
 const chk = document.getElementById('checkbox');
-const progress = document.getElementById('progress');
+const CurrStatus = document.getElementById('CurrStatus');
 var openable1 = false;
 var openable2 = false;
 var openable3 = false;
@@ -112,7 +112,7 @@ function loadInputValues() {
 }
 
 
-/* function : open/close popup */
+/* function : open popup */
 function openPop() {
     if(dateInput === '') { // 데이트 기록이 없으면 운송정보를 추가할 수 없다.
         openable4 = false;
@@ -148,7 +148,9 @@ function initialize(element) {
 
 function closePop() {
     $.emptyRow();
-    //onChk1();
+    if(clickedRow) {
+        clickedRow.classList.remove('selected-row');
+    }
     popup.style.display = 'none';
     saved.forEach(function(elem) {
         initialize(elem)
@@ -223,7 +225,7 @@ function showOrHide() {
     }
 }
 
-/* 전체 삭제 버튼 누르면 인풋 비우기 */
+/* 전체 삭제 버튼 누르면 인풋 비우기-> DB 삭제후 사용 */
 function clearInputs() {
     const inputs = canvas.getElementsByTagName("input");
     for (let i = 0; i < inputs.length; i++) {
@@ -264,12 +266,12 @@ function approved() {
 
 
 /* 제출하기 버튼을 클릭하면 결재 체크되고 제출체크가 체크하면되 결재도 체크됨*/
-function submitCheck() {
+function submitCheck() {치
     //const chk1 = document.getElementById('checkbox')
     chk.checked = true;
     chk.disabled = true;
-    progress.options[3].selected = true;
-    progress.disabled = true;
+    CurrStatus.options[3].selected = true;
+    CurrStatus.disabled = true;
     approved();
 }
 
@@ -287,12 +289,12 @@ function submitConfirmation() {
 
 
 /* fillPop으로 인풋팝업이 뜰때는 버튼이 바뀌어야 한다. */
-let thisRow;
+let clickedRow;
 const filledInput = document.querySelectorAll('.filledInput');
 const newInput = document.querySelectorAll('.emptyInput');
 function fillPop(event) {
     var clicked = event.currentTarget.id;
-    const clickedRow = document.getElementById(clicked);
+    clickedRow = document.getElementById(clicked);
     clickedRow.classList.add('selected-row');
     var td1 = clickedRow.querySelector('td:nth-child(1)').textContent;
     var td2 = clickedRow.querySelector('td:nth-child(2)').textContent;

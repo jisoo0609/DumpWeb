@@ -1,9 +1,6 @@
 package com.dispatch.dump.dailyReportModule.controller;
 
-import com.dispatch.dump.commonModule.db.dto.DailyReport;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep3Main;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep3Sub;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
+import com.dispatch.dump.commonModule.db.dto.*;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step3Service;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/dailyReport")
@@ -52,35 +51,58 @@ public class Step3Controller {
 
     @RequestMapping(value = "/search/carSubmit", method = RequestMethod.GET)
     @ResponseBody
-    public List<DailyReportStep3Main> carSubmitList(DailyReportStep3Main dailyReportStep3Main){
+    public List<DailyReportStep3Main> carSubmitList(DailyReportStep3Main dailyReportStep3Main) {
         return step3Service.searchByCarSubmit(dailyReportStep3Main);
     }
+
     @RequestMapping(value = "/search/carSubmitTel", method = RequestMethod.GET)
     @ResponseBody
-    public List<DailyReportStep3Main> carSubmitTelList(DailyReportStep3Main dailyReportStep3Main){
-        return step3Service.searchByCarSubmitTel(dailyReportStep3Main);
+    public Map<String, Object> carSubmitTelList(DailyReportStep3Main dailyReportStep3Main) {
+        Map<String, Object> resultMap = new HashMap<>();
+        List<DailyReportStep3Main> list = step3Service.searchByCarSubmitTel(dailyReportStep3Main);
+
+        Login login = new Login();
+        login.setUserId(dailyReportStep3Main.getCarSubmitTel());
+
+
+        Login checkData = step3Service.findByUserInfo(login);
+
+        resultMap.put("list", list);
+        resultMap.put("checkData", checkData);
+        return resultMap;
     }
+
     @RequestMapping(value = "/search/salesman", method = RequestMethod.GET)
     @ResponseBody
-    public List<DailyReportStep3Main> salesmanList(DailyReportStep3Main dailyReportStep3Main){
+    public List<DailyReportStep3Main> salesmanList(DailyReportStep3Main dailyReportStep3Main) {
         return step3Service.searchBySalesman(dailyReportStep3Main);
     }
 
     @RequestMapping(value = "/workspace/ajax/edit/carSubmit", method = RequestMethod.POST)
     @ResponseBody
-    public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
-         return step3Service.editByCarSubmit(dailyReportStep3Main);
+
+    public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main) {
+        return step3Service.editByCarSubmit(dailyReportStep3Main);
     }
 
     @RequestMapping(value = "/workspace/ajax/edit", method = RequestMethod.POST)
     @ResponseBody
-    public String edit(DailyReportStep3Sub dailyReportStep3Sub){
+    public String edit(DailyReportStep3Sub dailyReportStep3Sub) {
         return step3Service.edit(dailyReportStep3Sub);
     }
 
     @RequestMapping(value = "/workspace/ajax/delete", method = RequestMethod.GET)
     @ResponseBody
-    public String delete(int sheetsubID){
+    public String delete(int sheetsubID) {
         return step3Service.delete(sheetsubID);
     }
+
+
+    /*전체삭제*/
+    @RequestMapping(value = "/workspace/ajax/deleteAll", method = RequestMethod.POST)
+    @ResponseBody
+    public void delete(DailyReportStep3Main dailyReportStep3Main) {
+        step3Service.deleteAll(dailyReportStep3Main);
+    }
 }
+

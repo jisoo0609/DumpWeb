@@ -30,5 +30,7 @@ public interface DailyReportStep3MainMapper {
     /* FUNCTION :: 일보 리스트 조회(전체조건) */
     DailyReportStep3Main findCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
 
+    /* 전체 삭제 */
+    int deleteByCarsubmitInfo(DailyReportStep3Main dailyReportStep3Main);
 
 }
