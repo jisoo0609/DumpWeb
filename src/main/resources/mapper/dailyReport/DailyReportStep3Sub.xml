@@ -41,7 +41,7 @@
         #{writeridx2}
         )
     </insert>
-    
+
     <!--삭제 관련-->
     <!--sheetID2 조회-->
     <select id="findBySheetsubID" parameterType="int" resultType="int">
