@@ -24,6 +24,7 @@ function getSheetIDDataByParams(sheetID) {
             document.getElementById('carSubmitTel').value=data.carSubmitTel;
             document.getElementById('salesman').value=data.salesman;
             document.getElementById('date').value=data.date;
+            document.getElementById('chk1').value=data.chk1;//이 부분 확인
             $.list();
         }
     })
@@ -175,6 +176,7 @@ function searchByCarsubmitTel(inputData) {
         data: { "carSubmitTel": carSubmitTel },
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
+
             if(data.list!=null){ //드롭다운 카테고리
                 console.log("list는?", data.list);
             }else{
@@ -284,15 +286,17 @@ $.editSales = function(){
     var carSubmit = $("#carSubmit").val();
     var carSubmitTel = $("#carSubmitTel").val();
     var chk1 = $("#checkbox").val();
+    var CurrStatus = $("CurrStatus").val();
     $.ajax({
         url:"/dailyReport/workspace/ajax/edit/carSubmit",
         type:"POST",
         data:{
-            "sheetID":sheetID,
-            "salesman":salesman,
-            "carSubmit":carSubmit,
-            "carSubmitTel":carSubmitTel,
-            "chk1": chk1
+            "sheetID" : sheetID,
+            "salesman" : salesman,
+            "carSubmit" : carSubmit,
+            "carSubmitTel" : carSubmitTel,
+            "chk1" : chk1,
+            "CurrStatus" : CurrStatus
         },
         success : function (data) {
             var json = $.parseJSON(data);
@@ -309,6 +313,31 @@ $.editSales = function(){
     })
 }
 
+
+/*전체 삭제*/
+//$.deleteByAll = function(){
+    //var carSubmitTel = $("#carSubmitTel").val();
+    //var date = $("#date").val();
+    //var chk1 = $("#chk1").val();
+
+
+    //ajax({
+        //url : /dailyReport/workspace/ajax/deleteAll,
+        //type : "POST",
+        //data : {
+            //"sheetID" : sheetID
+        //},
+        //success : function (data){
+            //console.log();
+        //},
+        //error: function(error) {
+            //console.error('삭제 실패:', error);
+        //}
+    //})
+
+}
+
 $.invite = function () {
     console.log("문자를 보내 초대를 해보자.")
 }
+

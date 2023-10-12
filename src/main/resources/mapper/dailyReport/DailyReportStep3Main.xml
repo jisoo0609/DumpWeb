@@ -39,7 +39,7 @@
         tSheet
         (CarNo, carSubmit, carSubmitTel, salesman, chk1, date, sheetSS, sheetSS2, writerIDX, CurrStatus)
         values
-        (#{CarNo}, #{carSubmit}, #{carSubmitTel}, #{salesman}, #{chk1}, #{date}, #{sheetSS}, #{sheetSS2}, #{writerIDX}, "배차")
+        (#{CarNo}, #{carSubmit}, #{carSubmitTel}, #{salesman}, #{chk1}, #{date}, #{sheetSS}, #{sheetSS2}, #{writerIDX}, #{CurrStatus})
         <!--CurrStatus는 프론트 디자인 완성되면 적용예정-->
 
         <selectKey
@@ -125,7 +125,8 @@
         carSubmit=#{carSubmit},
         carSubmitTel=#{carSubmitTel},
         salesman=#{salesman},
-        chk1=#{chk1}
+        chk1=#{chk1},
+        CurrStatus=#{CurrStatus}
         where
         sheetSS=#{sheetSS}
         and
@@ -137,4 +138,14 @@
     <select id="findBySheetID" parameterType="int" resultType="boolean">
         select chk1 from tSheet where sheetID=#{sheetID}
     </select>
+
+    <!--전체삭제-->
+    <delete id="deleteByCarsubmitInfo" parameterType="DailyReportStep3Main">
+        delete from tSheet
+        where carSubmitTel = #{carSubmitTel}
+        and date = #{date}
+        and chk1 = 0
+        and writerIDX = #{writerIDX}
+    </delete>
+
 </mapper>
