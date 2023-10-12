@@ -88,7 +88,7 @@
     </delete>
 
     <!--전체삭제-->
-    <delete id="deleteByTransInfo" parameterType="DailyReportStep3Main, int">
+    <delete id="deleteByTransInfo" parameterType="DailyReportStep3Main">
         delete from tSheet_sub
         where sheetID2 IN (
         select sheetID
