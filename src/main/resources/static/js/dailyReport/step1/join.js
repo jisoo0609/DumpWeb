@@ -14,7 +14,7 @@ function bindSummary() {
         type: "POST",
         data: $("[name=option_frm]").serialize(),
         success: function (data) {
-            printSummary(data);
+            printbindSummary(data);
         }
     });
 }
@@ -48,7 +48,7 @@ function carFindList() {
     });
 }
 
-function printSummary(data) {
+function printbindSummary(data) {
     const boutmoney = document.getElementById("boutmoney");
     const boutcar = document.getElementById("boutcar");
     const boutdate = document.getElementById("boutdate");
