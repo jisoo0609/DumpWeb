@@ -187,7 +187,9 @@ function searchByCarsubmitTel(inputData) {
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
             if(data.list!=null){ //드롭다운 카테고리
-                console.log("list는?", data.list);
+                /* 진행상황 표시 */
+                console.log("HERE SHOW : "+ data.list[0].currStatus);
+                document.getElementById('CurrStatus').options[data.list[0].currStatus].selected = true;
                 openDrop();
             }else{
                 console.log("list data 없음");
@@ -297,7 +299,6 @@ $.editSales = function(){
     var carSubmitTel = $("#carSubmitTel").val();
     var CurrStatus = $("#CurrStatus").val();
     var chk1 = $("#checkbox").val();
-
     if (checkInputs() === 1) {
         $.ajax({
             url:"/dailyReport/workspace/ajax/edit/carSubmit",

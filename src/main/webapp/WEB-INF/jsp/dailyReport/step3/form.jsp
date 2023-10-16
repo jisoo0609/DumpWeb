@@ -116,10 +116,10 @@
                                 <label>진행</label>
                                 <span class="content">
                                     <select id="CurrStatus" name="CurrStatus" style="width: 70px; margin-left: auto;">
-                                        <option value="배차">배차</option>
-                                        <option value="상차">상차</option>
-                                        <option value="하차">하차</option>
-                                        <option value="제출" disabled>제출</option>
+                                        <option value="0">배차</option>
+                                        <option value="1">상차</option>
+                                        <option value="2">하차</option>
+                                        <option value="3" disabled>제출</option>
                                         <%-- 제출하기 버튼을 통해서만 제출을 선택 할 수 있다--%>
                                     </select>
                                 </span>
