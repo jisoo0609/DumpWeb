@@ -58,9 +58,6 @@
             <when test="searchType == '3-toSite'">
                 ORDER BY s.tosite ASC, t.date ASC
             </when>
-<!--            <when test="searchType == '6-cost'">-->
-<!--                ORDER BY s.Qtyup ASC, t.date ASC-->
-<!--            </when>-->
         </choose>
     </select>
 

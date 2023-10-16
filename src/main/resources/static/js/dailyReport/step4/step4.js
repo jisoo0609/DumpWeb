@@ -42,6 +42,9 @@ function printTable(datas){
     let totalQty = 0;
     let end = 0;
 
+    tableBody.innerHTML = "";
+    comment.innerHTML = "";
+
     // 첫 번째 데이터의 선택된 라디오 버튼 항목 값
     let start = new Array(
         datas[0].carSubmit,
@@ -58,9 +61,6 @@ function printTable(datas){
         colGroup.style.width = "12%";
     else
         colGroup.style.width = "18%";
-
-    tableBody.innerHTML = "";
-    comment.innerHTML = "";
 
     // 데이터 개수 만큼 반복
     datas.forEach((data, idx) => {
