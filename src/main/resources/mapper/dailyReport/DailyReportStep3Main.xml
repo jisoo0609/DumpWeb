@@ -22,6 +22,17 @@
         />
     </resultMap>
 
+    <!--모든 정보 조회-->
+    <select id="findAllCarSubmitInfo"  resultMap="DailyReportStep3MainMapper" parameterType="DailyReportStep3Main">
+        select * from tSheet
+        where
+        date = #{date}
+        and
+        carSubmitTel = #{carSubmitTel}
+        order by carSubmit asc
+    </select>
+
+    <!--검증용-->
     <select id="findCarSubmitInfo"  resultMap="DailyReportStep3MainMapper" parameterType="DailyReportStep3Main">
         select * from tSheet
         where

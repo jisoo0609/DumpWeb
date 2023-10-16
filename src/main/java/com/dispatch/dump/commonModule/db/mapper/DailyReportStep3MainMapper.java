@@ -28,6 +28,9 @@ public interface DailyReportStep3MainMapper {
     boolean findBySheetID(int sheetID);
 
     /* FUNCTION :: 일보 리스트 조회(전체조건) */
+    DailyReportStep3Main findAllCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
+
+    /* FUNCTION :: 검증용 */
     DailyReportStep3Main findCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
 
     /* 전체 삭제 */
