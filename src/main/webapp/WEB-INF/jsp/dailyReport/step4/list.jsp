@@ -12,7 +12,6 @@
 <%
     // 모델로부터 받은 데이터를 변수에 저장
     List<DailyReportStep4> tSheet = (List<DailyReportStep4>) request.getAttribute("tSheet");
-    List<DailyReportStep4> todayList = (List<DailyReportStep4>) request.getAttribute("todayList");
 
 %>
 <section class="sub-contents-wrap maxwrap">
@@ -220,12 +219,12 @@
             <table class="list-table">
                 <colgroup>
                     <col width="16%">
-                    <col width="15%">
-                    <col width="15%">
+                    <col width="18%">
                     <col width="20%">
+                    <col width="21%">
                     <col width="20%">
                     <col width="10%">
-                    <col width="19%">
+                    <col class="lastCol" width="18%">
                 </colgroup>
                 <thead>
                     <tr>
@@ -235,21 +234,10 @@
                         <th class="th_header">하차지</th>
                         <th class="th_header">품목</th>
                         <th class="th_header">대수</th>
-                        <th class="th_header">운반단가</th>
+                        <th class="th_header">진행</th>
                     </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="today" items="<%=todayList%>">
-                        <tr>
-                            <td>${today.carSubmit}</td>
-                            <td>${today.date}</td>
-                            <td>${today.fromsite}</td>
-                            <td>${today.tosite}</td>
-                            <td>${today.item}</td>
-                            <td>${today.qty}</td>
-                            <td>${today.qtyup}</td>
-                        </tr>
-                    </c:forEach>
                 </tbody>
             </table>
         </div>

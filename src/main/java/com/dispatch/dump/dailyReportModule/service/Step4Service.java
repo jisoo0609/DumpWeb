@@ -2,17 +2,12 @@ package com.dispatch.dump.dailyReportModule.service;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep4;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep4OptionForm;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep6OptionForm;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep4Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
-import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.log.Log;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 import java.util.List;
 
@@ -53,14 +48,5 @@ public class Step4Service {
     public void cancelOption(DailyReportStep4OptionForm optionForm) {
         optionForm.setCarNo(getSessionLoginData().getUserId());
         dailyReportStep4Mapper.cancelOptionM(optionForm);
-    }
-
-//    오늘 데이터 출력하는 서비스
-    public List<DailyReportStep4> getTodayList() {
-        List<DailyReportStep4> todayList = dailyReportStep4Mapper.getTodayList(
-                getSessionLoginData().getUserId()
-        );
-
-        return todayList;
     }
 }

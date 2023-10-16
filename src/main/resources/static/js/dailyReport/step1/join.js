@@ -127,7 +127,7 @@ function printDispatchList(searchResultData) {
 
 //금일 차량 모집 공고
 function printCarRecruitmentList(searchResultData) {
-    const tableBody = document.querySelector("#today-car-recruitment");
+    const tableBody = document.querySelector("#recruitment");
 
 //일단은 다 뜨게 한번 해보기
     searchResultData.forEach(data => {
