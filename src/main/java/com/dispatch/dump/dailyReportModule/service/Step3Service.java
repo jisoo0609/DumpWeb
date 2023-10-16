@@ -130,6 +130,7 @@ public class Step3Service {
     public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
         Map<String, Object> rtnMap = commonUtil.returnMap();
         dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+        System.out.print("Curr은?"+dailyReportStep3Main.getCurrStatus());
         int result=dailyReportStep3MainMapper.editByCarSubmit(dailyReportStep3Main);
 
         if (result > 0) {
