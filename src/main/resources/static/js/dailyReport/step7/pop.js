@@ -1,10 +1,7 @@
-var clBtn = null;
-var opBtn = null;
-
 document.addEventListener("DOMContentLoaded", function () {
     let clBtn = document.querySelectorAll(".clBtn");
     let opBtn = document.querySelectorAll(".opBtn");
-    popJS(opBtn, clBtn);
+    popupJS(opBtn, clBtn);
 });
 
 $(document).ready(function(){
@@ -32,8 +29,8 @@ $(document).ready(function(){
         });
     }
 
-    init();
-    popJS(opBtn,clBtn);
+//    init();
+//    popJS(opBtn,clBtn);
 
     // /*
     // 2023-09-18 김준형
@@ -42,19 +39,20 @@ $(document).ready(function(){
     // $("#carNoFullBox").select2();
 });
 
-function init(){
-    clBtn = $(".clBtn");
-    opBtn = $(".opBtn");
-}
+function popupJS(openBtn, closeBtn) {
+    let openTarget;
 
-function popJS(opBtn,clBtn){
-    var opTarget;
-    $(opBtn).click(function(){
-        opTarget = "#"+ $(this).attr("data-popName");
-        $(opTarget).addClass('active');
+    openBtn.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            openTarget = "#" + this.getAttribute("data-popName");
+            document.querySelector(openTarget).classList.add('active');
+        });
     });
-    $(clBtn).click(function(){
-       $(opTarget).removeClass("active")
+
+    closeBtn.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+            document.querySelector(openTarget).classList.remove("active");
+        });
     });
 }
 
