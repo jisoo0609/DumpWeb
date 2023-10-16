@@ -1,6 +1,8 @@
 package com.dispatch.dump.dailyReportModule.service;
 
 import com.dispatch.dump.commonModule.db.dto.*;
+import com.dispatch.dump.commonModule.db.mapper.DailyReportStep1SubMapper;
+import com.dispatch.dump.commonModule.db.mapper.DailyReportStep3SubMapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep1Mapper;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class Step1Service {
     private final DailyReportStep1Mapper dailyReportStep1Mapper;
+    private final DailyReportStep1SubMapper dailyReportStep1SubMapper;
     private final CommonUtil commonUtil;
 
 
@@ -47,8 +50,8 @@ public class Step1Service {
     }
 
     public List<DailyReportStep1Recruit> findCarRecruitmentList() {
-        System.out.println( dailyReportStep1Mapper.selectCarRecruitmentList(getToday()));
-        return dailyReportStep1Mapper.selectCarRecruitmentList(getToday());
+        System.out.println( dailyReportStep1SubMapper.selectCarRecruitmentList(getToday()));
+        return dailyReportStep1SubMapper.selectCarRecruitmentList(getToday());
     }
 
 
