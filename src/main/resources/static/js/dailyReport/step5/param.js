@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
     let driveID = params.get("driveID");
-
     if (driveID !== null) {
         getDriveIDDataByParams(driveID);
     }

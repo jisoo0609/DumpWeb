@@ -10,7 +10,7 @@
     <sql id="res_table">
         WITH r1 AS
             (
-                SELECT *
+                SELECT sheetID,carSubmit,sheetSS,CarNo,carSubmitTel
                 FROM tsheet
                 WHERE sheetSS = #{uuserID}
                   AND date BETWEEN ${startDate} AND ${endDate}
@@ -115,7 +115,12 @@
             <property name="startDate" value="#{today}"/>
             <property name="endDate" value="#{today}"/>
         </include>
-        select * from r3
+        select carSubmit,
+               fromsite,
+               tosite,
+               item,
+               qty
+               from r3
 
 
 
