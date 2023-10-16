@@ -9,12 +9,11 @@ function tableSort(){
     const firstThFlag = parseInt(searchType[0]);
 
     // 테이블 헤더 순서
-    let order = ["제출처", "운행일", "상차지", "하차지", "품목", "대수", "운반단가"];
+    let order = ["제출처", "운행일", "상차지", "하차지", "품목", "대수", firstThFlag===0 ? "진행":"운반단가"];
 
     // 배열순서 변경
     if (firstThFlag !== 0)
         insertTitleThInFront(order, 1);
-    // insertTitleThInFront(order, firstThFlag);
 
     // 테이블 헤더에 변경된 배열요소 순서 적용
     for(let i=0; i<header.length; i++)
@@ -33,6 +32,7 @@ function insertTitleThInFront(arr, idx){
 // 테이블 데이터 출력 함수
 function printTable(datas){
     // 테이블, 데이터 검색 텍스트, 테이블 헤더 정렬 태그 및 플래그
+    const colGroup = document.querySelector(".lastCol");
     const tableBody = document.querySelector(".list-table tbody");
     const comment = document.querySelector(".total");
     const totalAmt = document.querySelector(".cashNbtns");
@@ -41,6 +41,9 @@ function printTable(datas){
     let cost = 0;
     let totalQty = 0;
     let end = 0;
+
+    tableBody.innerHTML = "";
+    comment.innerHTML = "";
 
     // 첫 번째 데이터의 선택된 라디오 버튼 항목 값
     let start = new Array(
@@ -53,23 +56,23 @@ function printTable(datas){
         datas[0].Qtyup
     )[firstFlag];
 
-    tableBody.innerHTML = "";
-    comment.innerHTML = "";
+    // 제출처 기준일 때, 진행 항목 크기 설정
+    if (firstFlag === 0)
+        colGroup.style.width = "12%";
+    else
+        colGroup.style.width = "18%";
 
     // 데이터 개수 만큼 반복
     datas.forEach((data, idx) => {
         const row = document.createElement("tr");
         let order = [
             data.carSubmit, data.date,
-            data.fromsite, data.tosite, data.item, data.qty, data.qtyup.toLocaleString(),
+            data.fromsite, data.tosite, data.item, data.qty, data.qtyup.toLocaleString(), data.currStatus
         ];
 
         // 데이터 항목, 선택된 라디오 버튼 idx 전달 -> 데이터 항목 순서 변경
         if (firstFlag !== 0)
             insertTitleThInFront(order, 1);
-        // if (firstFlag !== 6)
-        //     insertTitleThInFront(order, firstFlag);
-
 
         // 운반단가 및 총액 계산
         cost += data.qtyup * data.qty;
@@ -83,7 +86,13 @@ function printTable(datas){
                     <td>${order[3]}</td>
                     <td>${order[4]}</td>
                     <td>${order[5]}</td>
-                    <td style="text-align: right;">${order[6]}</td>
+<!--                    제출처 기준 버튼이 선택되었는지 여부 확인 후 알맞게 출력-->
+                    ${
+                        firstFlag===0 ? 
+                            `<td>${order[7]}</td>` 
+                            :
+                            ` <td style="text-align: right;">${order[6]}</td>`
+                    }
         `;
 
         // 끝 값 설정
@@ -91,14 +100,6 @@ function printTable(datas){
             end = order[0];
         else
             end = order[firstFlag];
-
-        // end = order[firstFlag];
-
-        // 끝 값 설정
-        // if (firstFlag == 6)
-        //     end = order[6];
-        // else
-        //     end = order[0];
 
         if(start !== end){
             start = end;

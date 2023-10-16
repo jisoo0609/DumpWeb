@@ -11,9 +11,8 @@ public class DailyReportStep4 {
     private String carSubmit;       // LINE :: 제출처
     private String carSubmitTel;    // LINE :: 제출처 연락처
     private String date;            // LINE :: 운행일
-    private String CurrStatus;      // LINE :: 진행상태
+    private String CurrStatus;     // LINE :: 진행상태
     private Boolean chk1;           // LINE :: 결재여부
-
 
     // tSheet_sub
     private int sheetsubID;
