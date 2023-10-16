@@ -32,11 +32,22 @@ const drvClubList = {
 
 function inputDataByParams(data) {
 
+    if(data.rependdate === '0000-00-00'){
+       data.rependdate = '';
+        }
+
+     if(data.repaddkm === 0){
+          data.repaddkm = ''
+          }
+
     for (const key in data) {
 
         if (data[key] == null) {
             continue;
         }
+
+
+
 
         if (key === "drvClub") {
             const itemList = document.querySelectorAll('input[name="drvClub"]');

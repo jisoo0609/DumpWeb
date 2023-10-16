@@ -83,7 +83,7 @@
                         </li>
 
                         <li>
-                            <div style="width: 65%; height: var(--main-height)">
+                            <div style="width: 60%; height: var(--main-height)">
                                 <label class="t10">휴대폰</label>
                                 <span class="content">
                                     <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
@@ -99,7 +99,7 @@
                         </li>
 
                         <li style="display: flex; justify-content: space-between;">
-                            <div class="datediv" style="width: 65%; height: var(--main-height)">
+                            <div class="datediv" style="width: 59%; height: var(--main-height)">
                                 <label class="t10">운행일</label>
                                 <span class="content">
                                     <input type="text" class="datepicker input" id="date" name="date" style="width: 90px; margin-left: 75px; text-align: left; padding-left: 5px;"
@@ -112,10 +112,10 @@
                                  <button type="button" class="dateBtn" id="nextDay" >&gt;</button>
                             </div>
                             --%>
-                            <div style="width: 50%; height: var(--main-height)">
-                                <label style="margin-left: 10px;">진행</label>
+                            <div style="width: 41%; height: var(--main-height)">
+                                <label>진행</label>
                                 <span class="content">
-                                    <select id="CurrStatus" name="CurrStatus" style="width:60px; margin-left: 75px;">
+                                    <select id="CurrStatus" name="CurrStatus" style="width: 70px; margin-left: auto;">
                                         <option value="배차">배차</option>
                                         <option value="상차">상차</option>
                                         <option value="하차">하차</option>
