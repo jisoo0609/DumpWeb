@@ -32,6 +32,7 @@ function insertTitleThInFront(arr, idx){
 // 테이블 데이터 출력 함수
 function printTable(datas){
     // 테이블, 데이터 검색 텍스트, 테이블 헤더 정렬 태그 및 플래그
+    const colGroup = document.querySelector(".lastCol");
     const tableBody = document.querySelector(".list-table tbody");
     const comment = document.querySelector(".total");
     const totalAmt = document.querySelector(".cashNbtns");
@@ -51,6 +52,12 @@ function printTable(datas){
         datas[0].Qty,
         datas[0].Qtyup
     )[firstFlag];
+
+    // 제출처 기준일 때, 진행 항목 크기 설정
+    if (firstFlag === 0)
+        colGroup.style.width = "12%";
+    else
+        colGroup.style.width = "18%";
 
     tableBody.innerHTML = "";
     comment.innerHTML = "";
@@ -79,7 +86,13 @@ function printTable(datas){
                     <td>${order[3]}</td>
                     <td>${order[4]}</td>
                     <td>${order[5]}</td>
-                    <td style="text-align: right;">${firstFlag===0 ? order[7] : order[6]}</td>
+<!--                    제출처 기준 버튼이 선택되었는지 여부 확인 후 알맞게 출력-->
+                    ${
+                        firstFlag===0 ? 
+                            `<td>${order[7]}</td>` 
+                            :
+                            ` <td style="text-align: right;">${order[6]}</td>`
+                    }
         `;
 
         // 끝 값 설정

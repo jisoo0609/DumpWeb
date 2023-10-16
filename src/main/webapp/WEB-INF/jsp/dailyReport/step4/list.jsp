@@ -219,12 +219,12 @@
             <table class="list-table">
                 <colgroup>
                     <col width="16%">
-                    <col width="15%">
+                    <col width="18%">
                     <col width="20%">
                     <col width="21%">
                     <col width="20%">
                     <col width="10%">
-                    <col width="18%">
+                    <col class="lastCol" width="18%">
                 </colgroup>
                 <thead>
                     <tr>

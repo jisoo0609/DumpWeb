@@ -27,6 +27,7 @@ public class Step4Controller {
     public String step4(Model model, DailyReport dailyReport) {
         dailyReportService.list(model, dailyReport);
         model.addAttribute("tSheet", step4Service.getSummary());
+
         return "/dailyReport/step4/list";
     }
 

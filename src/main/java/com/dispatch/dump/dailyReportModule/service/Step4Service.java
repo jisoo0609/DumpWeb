@@ -2,17 +2,12 @@ package com.dispatch.dump.dailyReportModule.service;
 
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep4;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep4OptionForm;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep6OptionForm;
 import com.dispatch.dump.commonModule.db.dto.Login;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep4Mapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
-import javax.servlet.http.HttpSession;
 
-import com.mysql.cj.log.Log;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 
 import java.util.List;
 
