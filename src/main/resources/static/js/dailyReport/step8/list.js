@@ -39,7 +39,7 @@ function printList(searchResultData) {
                     <td>${order[4]}</td>
                     <td>${order[5]}</td>
                     <td>${order[6].toLocaleString()}</td>
-                    <td>${order[7]}</td>
+                    <td class="currStatus">${order[7]}</td>
                  `;
 
         no++;
@@ -62,7 +62,9 @@ function printList(searchResultData) {
         prevCriteria = currentCriteria;
         console.log("currentCriteria : " + currentCriteria)
 
-        row.setAttribute("data-manager-id", data.sheetsubID);
+        row.setAttribute("receipt-subID", data.sheetsubID);
+        row.setAttribute("receipt-sheetID", data.sheetID);
+        row.setAttribute("receipt-writerIDX", data.writerIDX);
         tableBody.appendChild(row);
     });
 

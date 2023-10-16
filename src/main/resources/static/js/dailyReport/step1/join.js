@@ -111,13 +111,13 @@ function printDispatchList(searchResultData) {
     groupedData.forEach(data => {
         const row = document.createElement("tr");
 
-        row.innerHTML = ` 
+        row.innerHTML = `
             <td>${data.carSubmit}</td>
             <td>${data.fromsite}</td>
-            <td>${data.tosite}</td> 
+            <td>${data.tosite}</td>
             <td>${data.item}</td>
-            <td>${data.qty}</td> 
-            
+            <td>${data.qty}</td>
+
          `;
         row.setAttribute("data-sheetID", data.sheetID);
 
@@ -137,9 +137,9 @@ function printCarRecruitmentList(searchResultData) {
             row.innerHTML = `
                 <td>${data.carSubmit}</td>
                 <td>${data.fromsite}</td>
-                <td>${data.tosite}</td> 
+                <td>${data.tosite}</td>
                 <td>${data.item}</td>
-                <td>${data.qty}</td> 
+                <td>${data.qty}</td>
             `;
 
 
@@ -150,7 +150,13 @@ function printCarRecruitmentList(searchResultData) {
 function printFindList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#carsub");
-    //tableBody.innerHTML = "";
+    tableBody.innerHTML = "";
+
+    searchResultData.sort((a, b) => {
+            const dateA = new Date(a.rependdate);
+            const dateB = new Date(b.rependdate);
+            return dateA - dateB;
+        });
 
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.forEach((data, index) => {
@@ -173,12 +179,11 @@ function printFindList(searchResultData) {
         <td>${data.drvClub}</td>
         <td>${formattedDate}</td>
         <td>${formattedRepaddkm}</td>
-         <td>${data.drvRem}</td>
+        <td>${data.drvRem}</td>
     `;
         row.setAttribute("data-drive-id", data.driveID);
         tableBody.appendChild(row);
     });
-
 }
 
 
@@ -212,5 +217,4 @@ document.addEventListener("DOMContentLoaded", function () {
     clickListStep5Redirect();
     clickListStep3Redirect();
 });
-
 
