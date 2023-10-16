@@ -14,13 +14,13 @@
         display: none;
     }
     #update-button {
-        padding: 3px;
+        padding: 0 3px 0 3px;
         border-radius: 10px;
         position: absolute;
         background-color: #ffffff;
         margin-left: 10px;
         border: 1px solid #0068b7;
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         width: -webkit-fill-available;
         margin-right: 15px;
@@ -122,19 +122,36 @@
         border-collapse: collapse;
         width: 100%;
     }
-    .today-menu th, .car-menu th{
+    .today-menu th, .car-menu th, .today-recruitment-menu th{
         border: 1px solid black;
     }
-    .today-graph td, .car-graph td{
+    .today-graph td, .car-graph td, .today-car-recruitment td{
         border: 1px solid black;
         text-align: center;
+        font-size: 14px;
+    }
+
+    .car-menu th:nth-child(1) {
+        width: 100px;
+    }
+    .car-graph td:nth-child(3) {
+        text-align: right;
     }
     .today-graph td:nth-child(6){
         display: none;
     }
+
+
     .car-menu th:nth-child(2) {
         border-left: 1px solid;
         border-right: 1px solid;
+        width: 120px;
+    }
+    .car-menu th:nth-child(3) {
+        width: 140px;
+    }
+    .car-menu th:nth-child(4) {
+        width: 140px;
     }
     .car-search-link,
     .car-repair-link,
@@ -207,7 +224,7 @@
                         <div class="carrying-money" id="boutmoney">원</div>
                     </li>
                     <li>
-                        총 운행대 수 :
+                        총 운행 대수 :
                         <div class="carrying-car" id="boutcar"> 대</div>
                     </li>
                     <li>
@@ -215,7 +232,7 @@
                         <div class="total-useamt" id="boutuseamt">원</div>
                     </li>
                     <li>마지막 등록일 :
-                        <div class="expense-date"  id="boutdate">원</div>
+                        <div class="expense-date"  id="boutdate">일</div>
                     </li>
                 </ul>
             </div>
@@ -300,6 +317,7 @@
                     <th>분류</th>
                     <th>교환 예정일</th>
                     <th>교환 주행거리</th>
+                    <th>비고</th>
                 </tr>
                 </thead>
                 <tbody id="carsub">
@@ -307,6 +325,7 @@
             </table>
             <p class="today-recruitment">금일 차량 모집 공고</p>
             <table class="today-car-recruitment">
+                <thead>
                 <tr class="today-recruitment-menu">
                     <th>제출처</th>
                     <th>상차지</th>
@@ -314,6 +333,10 @@
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
+                <thead>
+                <tbody id="today-car-recruitment">
+                </tbody>
+
             </table>
         </section>
     </article>

@@ -3,8 +3,6 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/dailyreport.css">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.9/js/select2.min.js"></script>
-<script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
-
 
 <section id="canvas" style="">
     <div id="dailyreport">
@@ -72,6 +70,7 @@
                                 <input type="text" class="wp100 voice input" name="carSubmit" id="carSubmit" oninput="validateInput1(this)"
                                     autocomplete="on" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}" onkeyup="searchByCarsubmit(this)">
                             </span>
+                            <div id="searchDrop"></div>
                         </li>
 
                         <li >
@@ -84,35 +83,58 @@
                         </li>
 
                         <li>
-                            <label class="t10">휴대폰</label>
-                            <div class="empty"></div>
-                            <span class="content">
-                                <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
-                                       list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                       style="margin-left: 75px;" onfocus="fill010()" oninput="validateInput3(this)" onkeyup="searchByCarsubmitTel(this)"}
-                                >
-                            </span>
-                        </li>
-
-                        <li class="adjustMax359" style="display: flex; justify-content: space-between;">
-                            <div class="datediv">
-                                <label class="t10">운행일</label>
+                            <div style="width: 65%; height: var(--main-height)">
+                                <label class="t10">휴대폰</label>
                                 <span class="content">
-                                    <input type="text" class="datepicker input" id="date" name="date" style="width: 80px; margin-left: 75px; text-align: center; padding-left: 0;"
-                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="on" oninput="validateInput4(this)" onchange="listData()">
+                                    <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
+                                           list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
+                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" oninput="validateInput3(this)" onkeyup="searchByCarsubmitTel(this)"
+                                    >
                                 </span>
                             </div>
-                            <div class="haveTwo">
-                                <div id="chk1">
-                                    <label>결재</label>
-                                    <input type="checkbox" id="checkbox" name="chk1" value="0" onChange="approved()">
-                                </div>
-                                <div id="chk2">
-                                    <label>진행</label>
-                                    <div class="select" id="dropdown">
-                                        배차
-                                    </div>
-                                </div>
+                            <div id="invite">
+                                <span id="isMember">거래처 상태</span>
+                                <button type="button" class="btn addBtn" id ="inviteBtn" onclick="$.invite()">초대하기</button>
+                            </div>
+                        </li>
+
+                        <li style="display: flex; justify-content: space-between;">
+                            <div class="datediv" style="width: 65%; height: var(--main-height)">
+                                <label class="t10">운행일</label>
+                                <span class="content">
+                                    <input type="text" class="datepicker input" id="date" name="date" style="width: 100px; margin-left: 75px; text-align: left; padding-left: 5px;"
+                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="off" onclick="pickDate()" onchange="listData()">
+                                </span>
+                            </div>
+                            <%--
+                            <div>
+                                 <button type="button" class="dateBtn" style="margin-left:69px" id="prevDay" >&lt;</button>
+                                 <button type="button" class="dateBtn" id="nextDay" >&gt;</button>
+                            </div>
+                            --%>
+                            <div style="width: 50%; height: var(--main-height)">
+                                <label style="margin-left: 10px;">진행</label>
+                                <span class="content">
+                                    <select id="progress" style="width:60px; margin-left: 75px;">
+                                        <option value="배차">배차</option>
+                                        <option value="상차">상차</option>
+                                        <option value="하차">하차</option>
+                                        <option value="제출" disabled>제출</option>
+                                        <%-- 제출하기 버튼을 통해서만 제출을 선택 할 수 있다--%>
+                                    </select>
+                                </span>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div id="mutualApproval">
+                                <label>제출처 제출 확인</label>
+                                <input type="checkbox" class="chkbx" name="chk0" value="0" onChange="mutallyApproved()">
+                            </div>
+
+                            <div id="approval">
+                                <label>결재</label>
+                                <input type="checkbox" class="chkbx" id="checkbox" name="chk1" value="0" onChange="approved()">
                             </div>
                         </li>
                     </ul>
@@ -123,7 +145,7 @@
                             <span class="v-mid" data-trn-key="TR_MENU_KEY_375">운송 정보 등록</span>
                         </p>
                         <div class="haveTwo">
-                            <button class="btn addBtn" type="button" style="margin: 0 5px 0 auto; width: 100px;" onclick="openPop()">
+                            <button class="btn addBtn" type="button" style="margin: -1px 5px 0 auto; width: 100px;" onclick="openPop()">
                                 운송 신규등록
                             </button>
                             <%@ include file="popupInput.jsp" %>
@@ -160,7 +182,7 @@
 
         <div class="btn-area">
             <button type="button" class="btn btn-white" onclick="clearInputs()">전체삭제</button>
-            <button type="button" class="btn btn-blue" id="submitBtn" onClick="submitCheck()">제출하기</button>
+            <button type="button" class="btn btn-blue" id="submitBtn" onClick="$.editSales() submitConfirmation()">제출하기</button>
             <button type="button" class="btn btn-blue " onClick="$.editSales()">저장하기</button>
             <button type="button" class="btn btn-white " onClick="history.go(-1)">이전화면</button>
         </div>
@@ -173,4 +195,5 @@
 
 <script src="/resources/js/dailyReport/step3/dailyform-sub.js"></script>
 <script src="/resources/js/dailyReport/step3/dailyform.js"></script>
+<script src="/resources/js/dailyReport/step3/messages.js"></script>
 <script src="/resources/js/dailyReport/step3/voicememo.js"></script>

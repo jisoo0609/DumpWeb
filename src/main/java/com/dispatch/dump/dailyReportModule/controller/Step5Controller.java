@@ -4,6 +4,7 @@ import com.dispatch.dump.commonModule.db.dto.DailyReportStep5;
 import com.dispatch.dump.dailyReportModule.service.Step5Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,9 +26,6 @@ public class Step5Controller {
     @RequestMapping(value = "/carcareform/ajax/save", method = RequestMethod.POST)
     @ResponseBody
     public String tDriveSave(DailyReportStep5 dailyReportStep5){
-        if (dailyReportStep5.getRependdate() == null || dailyReportStep5.getRependdate().isEmpty()){
-            dailyReportStep5.setRependdate(null);
-        }
         return step5Service.saveTDrive(dailyReportStep5);
     }
 
@@ -35,6 +33,12 @@ public class Step5Controller {
     @ResponseBody
     public List<DailyReportStep5> tDriveList(String date) {
         return step5Service.findTDriveList(date);
+    }
+
+    @RequestMapping(value = "/carcareform/ajax/firstList", method = RequestMethod.GET)
+    @ResponseBody
+    public List<DailyReportStep5> tDriveList() {
+        return step5Service.findFirstTDriveList();
     }
 
     @RequestMapping(value = "/carcareform/ajax/delete", method = RequestMethod.DELETE)

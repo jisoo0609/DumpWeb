@@ -48,43 +48,47 @@
 
 <section class="GolSection">
 <h2>제출처 주문 등록</h2>
-    <form method="post" name="golForm">
+    <form method="post" name="golForm" id="golForm">
         <fieldset>
           <ul>
             <li>
               <label class="golLabel" for="date">주문일</label>
               <span class="golInputSpan"><input id="date" name="date"></span>
-              <input class="golSearch" type="button" value="조회">
-              <div class="checkbox">
-                <label class="check67" for="chk1">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+              <button class="golSearch searchBtn" onClick="bindList()">조회</button>
+              <div class="checkbox1">
                 <input id="chk1" type="checkbox">
+                <label class="check67" for="chk1">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
               </div>
             </li>
             <li>
               <label class="golLabel" for="fromsite"> 상차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="fromsite" name="fromsite" type="text" placeholder="상차지"></span>
+              <span class="golInputSpan"><input class="golIn" id="fromsite" name="fromsite" type="text" placeholder="상차지" required></span>
             </li>
             <li>
               <label class="golLabel" for="tosite"> 하차지 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="tosite" name="tosite" type="text" placeholder="하차지"></span>
+              <span class="golInputSpan"><input class="golIn" id="tosite" name="tosite" type="text" placeholder="하차지" required></span>
             </li>
             <li>
               <label class="golLabel" for="item"> 품목 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="item" name="item" type="text" placeholder="품목"></span>
+              <span class="golInputSpan"><input class="golIn" id="item" name="item" type="text" placeholder="품목" required></span>
             </li>
             <li>
               <label class="golLabel" for="Qty"> 대수 </label>
               <span class="golInputSpan">
-                <input class="golIn" id="Qty" name="Qty" type="number" pattern="[0-9]" inputmode="numeric" placeholder="대수">
+                <input class="golIn" id="Qty" name="Qty" type="number" pattern="[0-9]" inputmode="numeric" placeholder="대수" required>
               </span>
             </li>
             <li>
               <label class="golLabel" for="carNo"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
               <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호"></span>
+              <div class="checkbox2">
+                <input id="check67" type="checkbox">
+                <label class="check67" for="check67">모집공고</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
+              </div>
             </li>
             <li>
               <label class="golLabel" for="Qtyup"> 운반비 </label>
-              <span class="golInputSpan"><input class="golIn" id="Qtyup" name="Qtyup" type="text" placeholder="운반비"></span>
+              <span class="golInputSpan"><input class="golIn" id="Qtyup" name="Qtyup" type="number" pattern="[0-9]" inputmode="numeric" placeholder="운반비"></span>
             </li>
           </ul>
         </fieldset>
@@ -110,7 +114,7 @@
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
 				<p>정말 <span style="font-weight: bold;">취소</span>하시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인">
+				<input class="confirmBtn" type="button" value="확인" onClick="cancelBtn()">
 				<input class="clBtn" type="button" value="취소">
 			</div>
 		</div>
@@ -135,7 +139,6 @@
 
     <table>
       <thead>
-        <tr>
 				<tr>
 					<th>No.</th>
 					<th>상차지</th>
@@ -146,14 +149,6 @@
 				</tr>
 			</thead>
 			<tbody id="tBody">
-				<tr onclick="openPopupTest('dispatchform');">
-					<td>1</td>
-					<td>강남</td>
-					<td>구로</td>
-					<td>모래, 자갈</td>
-					<td>100</td>
-					<td>미지정</td>
-				</tr>
       </tbody>
     </table>
 </section>

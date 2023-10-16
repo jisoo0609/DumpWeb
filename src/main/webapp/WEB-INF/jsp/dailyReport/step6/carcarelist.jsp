@@ -62,12 +62,12 @@
         <div class="inquiry_form section_check">
             <div class="operating_period content conChoice" id="flex_important">
                 <label>
-                    날짜 기준
                     <input type="radio" name="searchType" value="0-date" checked/>
+                    날짜 기준
                 </label>
                 <label>
-                    품목 기준
                     <input type="radio" name="searchType" value="1-item"/>
+                    품목 기준
                 </label>
             </div>
         </div>

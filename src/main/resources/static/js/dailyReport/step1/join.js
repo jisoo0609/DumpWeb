@@ -1,8 +1,10 @@
 /* DOMContentLoaded */
 document.addEventListener("DOMContentLoaded", function () {
     bindDispatchList();
+    bindCarRecruitList();
 });
 document.addEventListener("DOMContentLoaded", function () {
+    bindSummary();
     carFindList();
 });
 
@@ -26,6 +28,16 @@ function bindDispatchList() {
         }
     });
 }
+//금일 차량 모집 공고
+function bindCarRecruitList() {
+    $.ajax({
+        url: "/dailyReport/driver/ajax/recruitlist",
+        type: "GET",
+        success: function (data) {
+            printCarRecruitmentList(data);
+        }
+    });
+}
 function carFindList() {
     $.ajax({
         url: "/dailyReport/driver/ajax/tdrivelist",
@@ -45,39 +57,95 @@ function printSummary(data) {
     boutmoney.innerHTML = `${data.totalTransportationCost.toLocaleString()}원`;
     boutcar.innerHTML = `${data.totalQty.toLocaleString()}대`;
 
-    const drvDate = new Date(data.finalDrvDate);
-    const year = drvDate.getFullYear();
-    const month = drvDate.getMonth() + 1;
-    const day = drvDate.getDate();
+    if (data.finalDrvDate) {
+        // "0000-00-00 00:00:00" 형식을 "00-00-00" 형식으로 변경
+        const drvDateParts = data.finalDrvDate.split(" ")[0].split("-");
+        const year = drvDateParts[0].slice(2); // 앞의 2자리를 제외한 연도
+        const month = drvDateParts[1];
+        const day = drvDateParts[2];
 
-    boutdate.innerHTML = `${year}-${month}-${day}`;
+        boutdate.innerHTML = `${year}-${month}-${day}`;
+    } else {
+        // finalDrvDate가 null인 경우 아무것도 표시하지 않음
+        boutdate.innerHTML = "없음";
+    }
+
     boutuseamt.innerHTML = `${data.totalUseAmt.toLocaleString()}원`;
 }
 
+//대수 합치기
+function groupAndSumData(searchResultData) {
+    const groupedData = {};
 
+    // 데이터를 그룹화하고 qty 값을 합산
+    searchResultData.forEach(data => {
+        const key = `${data.sheetID}-${data.fromsite}-${data.tosite}-${data.item}`;
+
+        if (!groupedData[key]) {
+            groupedData[key] = {
+                sheetID: data.sheetID,
+                fromsite: data.fromsite,
+                tosite: data.tosite,
+                item: data.item,
+                qty: 0,
+            };
+        }
+
+        groupedData[key].qty += data.qty;
+    });
+
+    return Object.values(groupedData);
+}
+
+// ...
+//금일 차량 배차 현황
 function printDispatchList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#menusub");
-    //tableBody.innerHTML = "";
+
+    // 데이터를 그룹화하고 합산
+    const groupedData = groupAndSumData(searchResultData);
 
     // 검색 결과 데이터를 테이블 본문에 추가.
-    searchResultData.forEach((data, index) => {
+    groupedData.forEach(data => {
         const row = document.createElement("tr");
-        let order = [
-            data.carSubmit, data.fromsite, data.tosite, data.item, data.qty];
 
         row.innerHTML = ` 
-                    <td>${order[0]}</td>
-                    <td>${order[1]}</td>
-                    <td>${order[2]}</td> 
-                    <td>${order[3]}</td>
-                    <td>${order[4]}</td> 
-                 `;
+            <td>${data.sheetID}</td>
+            <td>${data.fromsite}</td>
+            <td>${data.tosite}</td> 
+            <td>${data.item}</td>
+            <td>${data.qty}</td> 
+            
+         `;
+        row.setAttribute("data-sheetID", data.sheetID);
 
         tableBody.appendChild(row);
     });
+}
 
-};
+//금일 차량 모집 공고
+function printCarRecruitmentList(searchResultData) {
+    const tableBody = document.querySelector("#today-car-recruitment");
+
+//일단은 다 뜨게 한번 해보기
+    searchResultData.forEach(data => {
+
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${data.carSubmit}</td>
+                <td>${data.fromsite}</td>
+                <td>${data.tosite}</td> 
+                <td>${data.item}</td>
+                <td>${data.qty}</td> 
+            `;
+
+
+            tableBody.appendChild(row);
+
+    });
+}
 function printFindList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#carsub");
@@ -87,22 +155,61 @@ function printFindList(searchResultData) {
     searchResultData.forEach((data, index) => {
         const row = document.createElement("tr");
         const rependdate = new Date(data.rependdate);
-                // 년, 월, 일 추출
-                const year = rependdate.getFullYear();
-                const month = rependdate.getMonth() + 1; // 월은 0부터 시작하므로 1을 더해줌
-                const day = rependdate.getDate();
+        // 월과 일을 두 자리 숫자로 표시하기 위해 패딩을 추가
+        const month = (rependdate.getMonth() + 1).toString().padStart(2, '0');
+        const day = rependdate.getDate().toString().padStart(2, '0');
 
+        // 년도는 뒤의 두 자리만 가져오기
+        const year = rependdate.getFullYear().toString().slice(-2);
 
-                // 날짜를 원하는 형식으로 표시
-                const formattedDate = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
+        // 날짜를 원하는 형식으로 표시
+        const formattedDate = `${year}-${month}-${day}`;
 
+        // 주행거리에 콤마를 추가한 값을 얻습니다.
+        const formattedRepaddkm = Number(data.repaddkm).toLocaleString();
 
-                row.innerHTML = `
-                    <td>${data.drvClub}</td>
-                    <td>${formattedDate}</td>
-                    <td>${data.repaddkm}</td>
-                `;
+        row.innerHTML = `
+        <td>${data.drvClub}</td>
+        <td>${formattedDate}</td>
+        <td>${formattedRepaddkm}</td>
+         <td>${data.drvRem}</td>
+    `;
+        row.setAttribute("data-drive-id", data.driveID);
         tableBody.appendChild(row);
     });
 
-};
+}
+
+
+
+function clickListStep5Redirect() {
+    const tableBody = document.querySelector("#carsub");
+
+    tableBody.addEventListener("click", (event) => {
+        // 클릭한 요소가 td 인지 확인
+        if (event.target.tagName === 'TD') {
+            let driveID = event.target.parentElement.getAttribute("data-drive-id");
+            let url = "/dailyReport/carcareform" + "?driveID=" + driveID;
+            window.location.href = url;
+        }
+    });
+}
+function clickListStep3Redirect() {
+    const tableBody = document.querySelector("#menusub");
+
+    tableBody.addEventListener("click", (event) => {
+        let sheetID = event.target.parentElement.getAttribute("data-sheetID");
+        let url = "/dailyReport/form" + "?sheetID=" + sheetID;
+
+
+        window.location.href = url;
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // 리다이렉트
+    clickListStep5Redirect();
+    clickListStep3Redirect();
+});
+
+

@@ -1,22 +1,58 @@
 const canvas = document.getElementById("canvas");
 const popup = document.getElementById('popup');
+const chk = document.getElementById('checkbox');
+const CurrStatus = document.getElementById('CurrStatus');
 var openable1 = false;
 var openable2 = false;
 var openable3 = false;
 var openable4 = true; //기본적으로 오늘 날자를 세팅해 놓으므로 true로 둠
 
 
-/* function : 결재버튼을 통해서만 체크박스를 체크하거나 해제할 수 있다.  */
-/* function: 오늘 날자로 인풋 자동 채우기 */
+
+/* DDDDDD-DATE-EEEEEE */
 const dateInput = document.getElementById('date');
-const todayDate = new Date();
-dateInput.value = todayDate.toISOString().slice(0, 10);
+const thisDay = new Date();
+/* function: 오늘 날자로 인풋 자동 채우기 */
+dateInput.value = thisDay.toISOString().slice(0, 10);
+
+$(document).ready(function() {
+            // Initialize datepicker on the date input
+    $("#date").datepicker({
+            dateFormat: 'yy-mm-dd', // Date format
+            showOtherMonths: true,
+            showMonthAfterYear: true,
+            changeYear: true,
+            changeMonth: true,
+            yearSuffix: '년'
+            ,monthNamesShort: MONTH_FORMAT
+            ,monthNames: MONTH_NAME_FORMAT
+            ,dayNamesMin: DAY_FORMAT
+            ,dayNames: DAY_FORMAT
+            ,yearRange: '-5:+1'
+    });
+
+
+    let currentDate = $("#date").datepicker("getDate");
+    // Button to set the date to the previous day
+    $("#prevDay").click(function() {
+        currentDate.setDate(currentDate.getDate() - 1);
+        $("#date").datepicker("setDate", currentDate);
+        listData();
+    });
+
+    // Button to set the date to the next day
+    $("#nextDay").click(function() {
+        currentDate.setDate(currentDate.getDate() + 1);
+        $("#date").datepicker("setDate", currentDate);
+        listData();
+    });
+});
 
 
 /* function : onfocus시 자동으로 010을 채워준다*/
 var phoneNumberPattern = /^010[0-9]{8}$/;
+const telInput = document.getElementById('carSubmitTel');
 function fill010() {
-    const telInput = document.getElementById('carSubmitTel');
     if (phoneNumberPattern.test(telInput.value)) {
         openable3 = true;
     } if(telInput.value.length <=3) {
@@ -24,33 +60,36 @@ function fill010() {
     }
 }
 
+let openValue1;
 function validateInput1(input) {
     const carSubmit = input.value
+    openValue1 = carSubmit;
     if(!carSubmit) {
         openable1 = false;
     } else {
         openable1 = true;
-        localStorage.setItem('recentCarSubmit', carSubmit);
     }
 }
 
+let openValue2;
 function validateInput2(input) {
     const salesman = input.value;
+    openValue2 =salesman
     if(!salesman) {
         openable2 = false;
     } else {
         openable2 = true;
-        localStorage.setItem('recentSalesman', salesman);
     }
 }
 
 /* function : oninput 인풋이 바르지 않으면 보더컬러를 red로 바꿈 */
+let openValue3;
 function validateInput3(input) {
     const carSubmitTel = input.value;
+    openValue3 = carSubmitTel
     if (phoneNumberPattern.test(carSubmitTel)) {
         input.style.borderColor = '';
         openable3 = true;
-         localStorage.setItem('recentCarSubmitTel', carSubmitTel);
         listData()
     } else {
         input.style.borderColor = 'red';
@@ -58,47 +97,51 @@ function validateInput3(input) {
     }
 }
 
-// Function to load input values from localStorage
-function loadInputValues() {
-    const recentCarSubmit = localStorage.getItem('recentCarSubmit');
-    const recentSalesman = localStorage.getItem('recentSalesman');
-    const recentCarSubmitTel = localStorage.getItem('recentCarSubmitTel');
 
-    // Set input values if they exist in localStorage
-    if (recentCarSubmit !== null) {
-        document.getElementById('carSubmit').value = recentCarSubmit;
+function loadInputValues() {
+    const sales1 = document.getElementById('carSubmit');
+    const sales2 = document.getElementById('salesman');
+    const sales3 = document.getElementById('carSubmitTel');
+    console.log(sales1.value);
+    console.log(sales2.value);
+    console.log(sales3.value);
+
+    if (sales1.value !== null) {
+        openable1 = true;
     }
-    if (recentSalesman !== null) {
-        document.getElementById('salesman').value = recentSalesman;
+    if (sales2.value !== null) {
+        openable2 = true;
     }
-    if (recentCarSubmitTel !== null) {
-        document.getElementById('carSubmitTel').value = recentCarSubmitTel;
+    if (sales3.value !== null) {
+        openable3 = true;
     }
+    searchByCarsubmitTel(sales3);
 }
 
 
 
-
-
-/* function : open/close popup */
+/* function : open popup */
 function openPop() {
-    if(dateInput === '') { // 데이트 기록이 없으면
+    if(dateInput === '') { // 데이트 기록이 없으면 운송정보를 추가할 수 없다.
         openable4 = false;
     } else {
         openable4 = true;
-        listData()
     }
-    if(openable1 & openable2& openable3 & openable4 === true) {
-        popup.style.display = 'flex';
-        updateTotalAmount();
-        saved.forEach(function(elem){
-            elem.classList.add('hidden');
-        })
-        unsaved.forEach(function(elem) {
-            initialize(elem)
-        });
+    if(chk.value === '0') {
+        if(openable1 & openable2 & openable3 & openable4 === true) {
+            popup.style.display = 'flex';
+            updateTotalAmount();
+            saved.forEach(function(elem){
+                elem.classList.add('hidden');
+            })
+            unsaved.forEach(function(elem) {
+                initialize(elem)
+            });
+        } else {
+            $.inputInvalid();
+        }
     } else {
-        alert("입력된 정보를 다시 확인해주세요");
+        $.checkedAlert();
     }
 }
 
@@ -113,6 +156,9 @@ function initialize(element) {
 
 function closePop() {
     $.emptyRow();
+    if(clickedRow) {
+        clickedRow.classList.remove('selected-row');
+    }
     popup.style.display = 'none';
     saved.forEach(function(elem) {
         initialize(elem)
@@ -170,6 +216,8 @@ function recoverState() {
     } else {
         popCheckbox.checked = false;
     }
+    //searchByCarsubmitTel()
+
     showOrHide();
     updateTotalAmount();
 }
@@ -193,31 +241,30 @@ function clearInputs() {
     for (let i = 0; i < inputs.length; i++) {
         inputs[i].value = ""; // Set the value of each input field to an empty string
     }
+    chk.checked = false;
+    approved();
+    list();
 }
 
 
 /* 결재 체크박스 체크되면 밸류 바꾸기 */
 /* 결재 체크박스 체크되면 인풋 수정 불가 */
-
 function approved() {
-    const chk = document.getElementById('checkbox');
     const mtable = document.getElementById('main-table');
     const inputElements = mtable.querySelectorAll('.input');
-
     if (chk.checked) {
         chk.value = '1';
-        console.log(chk.value);
+        console.log("value1 : "+chk.value);
 
         // 거래처정보 인풋 비활성화
         inputElements.forEach(function(input) {
             input.disabled = true;
             input.style.backgroundColor = "#F2F2F2";
-            input.style.color = "333"
+            input.style.color = "black"
         });
     } else {
         chk.value = '0';
-        console.log(chk.value);
-
+        console.log("value0 : "+chk.value);
         // 결재 취소하면 다시 활성화
         inputElements.forEach(function(input) {
             input.disabled = false;
@@ -227,27 +274,25 @@ function approved() {
 }
 
 
-
-
 /* 제출하기 버튼을 클릭하면 결재 체크되고 제출체크가 체크하면되 결재도 체크됨*/
-function submitCheck() {
-    const dropdown = document.getElementById('dropdown')
-    const chk1 = document.getElementById('checkbox');
-    //chk1.disabled = true;
-    chk1.checked = true;
-    dropdown.textContent = "제출";
-    dropdown.style.color = "#0068b7";
-    dropdown.style.border = "1px solid #0068b778";
+function submitCheck() {치
+    //const chk1 = document.getElementById('checkbox')
+    chk.checked = true;
+    chk.disabled = true;
+    CurrStatus.options[3].selected = true;
+    CurrStatus.disabled = true;
     approved();
 }
 
 
 /* fillPop으로 인풋팝업이 뜰때는 버튼이 바뀌어야 한다. */
+let clickedRow;
 const filledInput = document.querySelectorAll('.filledInput');
 const newInput = document.querySelectorAll('.emptyInput');
 function fillPop(event) {
     var clicked = event.currentTarget.id;
-    const clickedRow = document.getElementById(clicked);
+    clickedRow = document.getElementById(clicked);
+    clickedRow.classList.add('selected-row');
     var td1 = clickedRow.querySelector('td:nth-child(1)').textContent;
     var td2 = clickedRow.querySelector('td:nth-child(2)').textContent;
     var td3 = clickedRow.querySelector('td:nth-child(3)').textContent;
@@ -280,23 +325,24 @@ function fillPop(event) {
 
 
 function listData() {
-    if(openable1 & openable2& openable3 & openable4 === true) {
+    if(openable3 & openable4 === true) {
         $.list();
     }
 }
 
-function selected(row) {
-    console.log(row.id)
+function mutallyApproved() {
+
+}
+
+function openDrop() {
+
 }
 
 
-
 // Call functions when the page loads
-window.onload = function () {
-    loadInputValues();
-    openable1 = true;
-    openable2 = true;
-    openable3 = true;
-    listData();
-    recoverState();
-};
+//window.onload = function () {
+//    loadInputValues();
+//    listData();
+//    recoverState();
+//    approved();
+//};

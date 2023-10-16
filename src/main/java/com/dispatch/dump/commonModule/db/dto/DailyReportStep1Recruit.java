@@ -1,9 +1,10 @@
 package com.dispatch.dump.commonModule.db.dto;
-
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-public class DailyReportStep1Sub {
+@AllArgsConstructor
+public class DailyReportStep1Recruit {
     //tSheet_sub 테이블
     private int sheetsubID;
     private String fromsite;         // LINE :: 상차지
@@ -14,22 +15,9 @@ public class DailyReportStep1Sub {
     private int sheetID2;            // LINE :: tSheet FK
     private String tosite;          // LINE :: 하차지
     private int sheetsubSS;          // LINE :: 회원 idx
-    private int sheetsubSS2;         // LINE :: 제출처 idx
-    private int writeridx2;          // LINE :: 작성자 idx
 
 
     // tSheet테이블 : 차량번호
     public String CarNo;
     private String carSubmit;
-    private int sheetID;
-
-/*
-
-    double totalTransportationCost; //Line :: 총 운반 금액
-    double totalQty;                   //Line :: 총 운행 대수
-*/
-
-
-
-
 }

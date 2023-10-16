@@ -6,8 +6,7 @@
 
     <insert id="insertTDrive" parameterType="DailyReportStep5">
         INSERT INTO tdrive
-        (
-        carno,
+        (carno,
         drvdate,
         lastkm,
         drvclub,
@@ -15,25 +14,32 @@
         useoil,
         drvrem,
         chk2,
-        rependdate,
-        repaddkm,
+        <if test="rependdate != '-1'">
+            rependdate,
+        </if>
+        <if test="repaddkm != -1">
+            repaddkm,
+        </if>
         rependchk,
         drivess)
-        VALUES      (
-                      #{carNo},
-                      #{drvDate},
-                      #{lastKm},
-                      #{drvClub},
-                      #{useAmt},
-                      #{useOil},
-                      #{drvRem},
-                      #{chk2},
-                      #{rependdate},
-                      #{repaddkm},
-                      #{rependchk},
-                      (SELECT uuserid
-                       FROM   tsitepw
-                       WHERE  userid = #{carNo}))
+        VALUES (#{carNo},
+        #{drvDate},
+        #{lastKm},
+        #{drvClub},
+        #{useAmt},
+        #{useOil},
+        #{drvRem},
+        #{chk2},
+        <if test="rependdate != '-1'">
+            STR_TO_DATE(#{rependdate}, '%Y-%m-%d'),
+        </if>
+        <if test="repaddkm != -1">
+            #{repaddkm},
+        </if>
+        #{rependchk},
+        (SELECT uuserid
+        FROM tsitepw
+        WHERE userid = #{carNo}))
     </insert>
 
 
@@ -56,6 +62,24 @@
 
     <select id="selectTDriveList" resultType="DailyReportStep5">
         SELECT driveID,
+        DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
+        drvclub,
+        chk2,
+        lastkm,
+        useamt,
+        useOil,
+        drvrem,
+        rependchk,
+        IF(rependdate IS NULL, '',rependdate) AS 'rependdate',
+        repaddkm
+        FROM   tdrive
+        WHERE  carno = #{userID}
+        AND drvdate LIKE CONCAT(#{date}, '%')
+        ORDER BY drvdate DESC
+    </select>
+
+    <select id="selectFirstTDriveList" resultType="DailyReportStep5">
+        SELECT driveID,
         DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
         drvclub,
         chk2,
@@ -64,12 +88,12 @@
         useOil,
         drvrem,
         rependchk,
-        IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
+        IF(rependdate IS NULL, '',rependdate) AS 'rependdate',
         repaddkm
         FROM   tdrive
         WHERE  carno = #{userID}
-        AND drvdate LIKE CONCAT(#{date}, '%')
-        ORDER BY drvclub ASC
+        ORDER BY driveId DESC
+        LIMIT 10
     </select>
 
 
@@ -83,19 +107,19 @@
 
     <select id="selectTDriveDetails" resultType="DailyReportStep5">
         SELECT driveID,
-               DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
-               drvclub,
-               chk2,
-               lastkm,
-               useamt,
-               useOil,
-               drvrem,
-               IF(rependdate IS NULL, '1999-01-01', DATE_FORMAT(rependdate, '%Y-%m-%d')) AS 'rependdate',
-               repaddkm,
-               rependchk
+        DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
+        drvclub,
+        chk2,
+        lastkm,
+        useamt,
+        useOil,
+        drvrem,
+        IF(rependdate IS NULL OR rependdate = '0000-00-00', '', DATE_FORMAT(rependdate, '%Y-%m-%d')) AS 'rependdate',
+        repaddkm,
+        rependchk
         FROM   tdrive
         WHERE  carno = #{userID}
-          AND driveID = #{driveID}
+        AND driveID = #{driveID}
     </select>
 
 </mapper>

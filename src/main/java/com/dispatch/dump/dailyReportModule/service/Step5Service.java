@@ -25,8 +25,10 @@ public class Step5Service {
 
 
     public String saveTDrive(DailyReportStep5 dailyReportStep5) {
-
         Map<String, Object> rtnMap = commonUtil.returnMap();
+
+        System.out.println(dailyReportStep5);
+
 
         try {
             dailyReportStep5.setCarNo(getSessionLoginData().getUserId());
@@ -47,6 +49,10 @@ public class Step5Service {
 
     public List<DailyReportStep5> findTDriveList(String date) {
         return dailyReportStep5Mapper.selectTDriveList(getSessionLoginData().getUserId(), date);
+    }
+
+    public List<DailyReportStep5> findFirstTDriveList() {
+        return dailyReportStep5Mapper.selectFirstTDriveList(getSessionLoginData().getUserId());
     }
 
     public void removeTDrive(int driveID) {
