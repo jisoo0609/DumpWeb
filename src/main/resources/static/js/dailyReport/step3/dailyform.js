@@ -4,13 +4,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(queryString);
 
     let sheetID = params.get("sheetID");
-    console.log(sheetID);
+    //console.log(sheetID);
 
     if (sheetID !== null) {
         getSheetIDDataByParams(sheetID);
     }
     //clickListThAndRedirect();//step4에 있음
     $.showChk1;
+    recoverState();
+    approved();
 });
 
 function getSheetIDDataByParams(sheetID) {
@@ -21,8 +23,12 @@ function getSheetIDDataByParams(sheetID) {
         success: function (data) {
             //이 부분 추후 정리할 것
             document.getElementById('carSubmit').value=data.carSubmit;
+            openable1 = true;
             document.getElementById('carSubmitTel').value=data.carSubmitTel;
+            openable3 = true;
+            searchByCarsubmitTel(data.carSubmitTel);
             document.getElementById('salesman').value=data.salesman;
+            openable2 = true;
             document.getElementById('date').value=data.date;
             $.list();
         }
@@ -118,12 +124,15 @@ function showTransportList(data){
 }
 
 
-
-function addInviteBtn() {
-    let inviteBtn;
-    inviteBtn += '<button type="button">초대하기</button>'
-
-    $('#invite').html(inviteBtn);
+let see;
+function searchOptions(data) {
+    //console.log(data.carSubmit)
+    for (let i = 0; i < data.length; i++) {
+        let anOption = data[i]
+        let options = '<li>'+ anOption.carSubmit +'</li>'
+    }
+    let options = '<li>'+ data[0][0] +'</li>'
+    $('#searchDrop').html(options);
 }
 
 
@@ -136,7 +145,7 @@ function searchByCarsubmit(inputData) {
         method: "GET",
         data: { "carSubmit": carSubmit },
         success: function(data) {
-
+            searchOptions(data);
             console.log('Ajax 요청 성공:', data);
             //data가져오는데 성공했어요. console에서 확인가능합니다.
             //카테고리 생성해주세요.
@@ -164,8 +173,10 @@ function searchBySalesman(inputData) {
    });
 }
 
+const carsubmittel = $("#carSubmitTel")
 function searchByCarsubmitTel(inputData) {
-    var carSubmitTel = $("#carSubmitTel").val();
+    const carSubmitTel = carsubmittel.val();
+    console.log("carSubmitTel : "+carSubmitTel);
     let isMember = $("#isMember");
     let inviteBtn = $("#inviteBtn");
 
@@ -177,6 +188,7 @@ function searchByCarsubmitTel(inputData) {
             console.log('Ajax 요청 성공:', data);
             if(data.list!=null){ //드롭다운 카테고리
                 console.log("list는?", data.list);
+                openDrop();
             }else{
                 console.log("list data 없음");
             }

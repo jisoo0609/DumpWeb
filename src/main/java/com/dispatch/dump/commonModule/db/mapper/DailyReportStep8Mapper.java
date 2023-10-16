@@ -15,4 +15,6 @@ public interface DailyReportStep8Mapper {
     List<DailyReportStep8> selectReceiptsByOption(DailyReportStep8OptionForm option);
 
     List<DailyReportStep8> getSelectBoxData(DailyReportStep8OptionForm option);
+
+    DailyReportStep8 getReceiptsDetails(int sheetsubID, int sheetID);
 }

@@ -44,4 +44,9 @@ public class Step8Service {
         }
         return selectBoxDataList;
     }
+
+    public DailyReportStep8 getReceiptsDetails(int sheetsubID, int sheetID){
+        return step8Mapper.getReceiptsDetails(sheetsubID, sheetID);
+    }
+
 }
