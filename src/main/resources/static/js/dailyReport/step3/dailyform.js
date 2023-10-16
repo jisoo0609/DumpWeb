@@ -295,7 +295,7 @@ $.editSales = function(){
     var salesman = $("#salesman").val();
     var carSubmit = $("#carSubmit").val();
     var carSubmitTel = $("#carSubmitTel").val();
-    var CurrStatus = $("CurrStatus").val();
+    var CurrStatus = $("#CurrStatus").val();
     var chk1 = $("#checkbox").val();
     $.ajax({
         url:"/dailyReport/workspace/ajax/edit/carSubmit",
