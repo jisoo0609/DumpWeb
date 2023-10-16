@@ -29,6 +29,7 @@
         </include>
 
         select
+        sheetID,
         sheetsubID,
         DATE_FORMAT(date,'%m.%d') as 'date',
         fromsite,
@@ -37,7 +38,8 @@
         item,
         Qty,
         Qtyup,
-        CurrStatus
+        CurrStatus,
+        writerIDX
 
         from r3
         <where>
@@ -79,6 +81,21 @@
         WHERE t.sheetSS2 = #{sheetSS2}
           AND s.sheetsubSS2 = #{sheetsubSS2}
     </select>
+
+    <!--step7관련: 페이지 이동시 조회-->
+    <select id="getReceiptsDetails" parameterType="int" resultType="DailyReportStep8">
+        select
+            fromsite,
+            tosite,
+            item,
+            Qty,
+            Qtyup,
+            CarNo,
+            DATE_FORMAT(date,'%m.%d') as 'date'
+        from tsheet_sub, tsheet
+        where sheetsubID=#{sheetsubID} and sheetID =#{sheetID}
+    </select>
+
 
     <!--기존꺼-->
     <!--    <sql id="res_table">-->
