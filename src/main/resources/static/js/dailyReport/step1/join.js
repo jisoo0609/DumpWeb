@@ -79,11 +79,12 @@ function groupAndSumData(searchResultData) {
 
     // 데이터를 그룹화하고 qty 값을 합산
     searchResultData.forEach(data => {
-        const key = `${data.sheetID}-${data.fromsite}-${data.tosite}-${data.item}`;
+        const key = `${data.carSubmit}-${data.fromsite}-${data.tosite}-${data.item}`;
 
         if (!groupedData[key]) {
             groupedData[key] = {
                 sheetID: data.sheetID,
+                carSubmit:data.carSubmit,
                 fromsite: data.fromsite,
                 tosite: data.tosite,
                 item: data.item,
@@ -111,7 +112,7 @@ function printDispatchList(searchResultData) {
         const row = document.createElement("tr");
 
         row.innerHTML = ` 
-            <td>${data.sheetID}</td>
+            <td>${data.carSubmit}</td>
             <td>${data.fromsite}</td>
             <td>${data.tosite}</td> 
             <td>${data.item}</td>
@@ -126,7 +127,7 @@ function printDispatchList(searchResultData) {
 
 //금일 차량 모집 공고
 function printCarRecruitmentList(searchResultData) {
-    const tableBody = document.querySelector("#today-car-recruitment");
+    const tableBody = document.querySelector("#recruitment");
 
 //일단은 다 뜨게 한번 해보기
     searchResultData.forEach(data => {
