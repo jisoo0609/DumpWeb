@@ -80,7 +80,7 @@
 
     <select id="selectFirstTDriveList" resultType="DailyReportStep5">
         SELECT driveID,
-        DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
+        DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
         drvclub,
         chk2,
         lastkm,
