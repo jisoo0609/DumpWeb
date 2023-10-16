@@ -54,7 +54,7 @@ $.save = function() {
         contentType: false,
         cache: false,
         success: function (data) {
-            $.successSave();
+            //$.successSave();
             $.list();
             $.emptyRow();
         },
@@ -194,7 +194,7 @@ function searchByCarsubmitTel(inputData) {
             }
 
             if(data.checkData!=null){ //거래처입니다
-                isMember.text("가입된 거래처 입니다");
+                isMember.text("가입된 회원 입니다");
                 $("#inviteBtn").css("margin-left", "5000px");
                 console.log("checkData는?", data.checkData);
             }else{
