@@ -200,7 +200,7 @@ function searchByCarsubmitTel(inputData) {
             }else{
                 console.log("checkData 없음");
                 isMember.text("");
-                $("#inviteBtn").css("margin-left", "0px");
+                $("#inviteBtn").css("margin-left", "auto");
             }
             listData();
         },
@@ -296,29 +296,36 @@ $.editSales = function(){
     var carSubmit = $("#carSubmit").val();
     var carSubmitTel = $("#carSubmitTel").val();
     var chk1 = $("#checkbox").val();
-    $.ajax({
-        url:"/dailyReport/workspace/ajax/edit/carSubmit",
-        type:"POST",
-        data:{
-            "sheetID":sheetID,
-            "salesman":salesman,
-            "carSubmit":carSubmit,
-            "carSubmitTel":carSubmitTel,
-            "chk1": chk1
-        },
-        success : function (data) {
-            var json = $.parseJSON(data);
-            if(json.httpCode == 200){
-                $.successEdit();
-            }else{
+
+    if (checkInputs() === 1) {
+        $.ajax({
+            url:"/dailyReport/workspace/ajax/edit/carSubmit",
+            type:"POST",
+            data:{
+                "sheetID":sheetID,
+                "salesman":salesman,
+                "carSubmit":carSubmit,
+                "carSubmitTel":carSubmitTel,
+                "chk1": chk1
+            },
+            success : function (data) {
+                var json = $.parseJSON(data);
+                if(json.httpCode == 200){
+                    $.successSave();
+                }else{
+                    $.failEdit();
+                }
+            },
+            error: function(error) {
                 $.failEdit();
+                console.error('수정 실패:', error);
             }
-        },
-        error: function(error) {
-            $.failEdit();
-            console.error('수정 실패:', error);
-        }
-    })
+        })
+    } else {
+        $.inputInvalid();
+    }
+
+
 }
 
 $.invite = function () {

@@ -254,7 +254,6 @@ function approved() {
     const inputElements = mtable.querySelectorAll('.input');
     if (chk.checked) {
         chk.value = '1';
-        console.log("value1 : "+chk.value);
 
         // 거래처정보 인풋 비활성화
         inputElements.forEach(function(input) {
@@ -264,7 +263,6 @@ function approved() {
         });
     } else {
         chk.value = '0';
-        console.log("value0 : "+chk.value);
         // 결재 취소하면 다시 활성화
         inputElements.forEach(function(input) {
             input.disabled = false;
@@ -277,8 +275,8 @@ function approved() {
 /* 제출하기 버튼을 클릭하면 결재 체크되고 제출체크가 체크하면되 결재도 체크됨*/
 function submitCheck() {치
     //const chk1 = document.getElementById('checkbox')
-    chk.checked = true;
-    chk.disabled = true;
+    //chk.checked = true;
+    //chk.disabled = true;
     CurrStatus.options[3].selected = true;
     CurrStatus.disabled = true;
     approved();
@@ -325,9 +323,15 @@ function fillPop(event) {
 
 
 function listData() {
+    // 조회는 날자와 폰 번호 기준을 되므로 이 두 인풋이 차있으면 보여주도록 한다.
     if(openable3 & openable4 === true) {
         $.list();
     }
+}
+
+function checkInputs() {
+    // 거래처정보가 저장되거나 수정 될 때는 모든 인풋이 차있어야 한다.
+    return openable1 & openable2 & openable3 & openable4;
 }
 
 function mutallyApproved() {
