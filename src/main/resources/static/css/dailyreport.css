@@ -273,7 +273,7 @@
     border: 2px dotted;
 }
 
-#progress {
+#CurrStatus {
     height: var(--main-height);
     line-height: var(--line-height);
     font-size : var(--main-font-size);
@@ -309,4 +309,5 @@
     line-height: 20px;
     margin-top: 2px;
     margin-left: 5000px;
+    width: 110px;
 }
