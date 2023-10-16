@@ -1,3 +1,8 @@
+// 페이지 로드 후 자동으로 검색처리
+function clickButton(){
+    document.querySelector(".btn_area input").onclick();
+}
+
 // 검색 버튼의 Form 데이터 AJAX POST
 function getList(){
     $.ajax({
