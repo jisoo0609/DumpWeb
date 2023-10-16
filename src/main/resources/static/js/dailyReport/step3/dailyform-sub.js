@@ -1,11 +1,12 @@
 const canvas = document.getElementById("canvas");
 const popup = document.getElementById('popup');
 const chk = document.getElementById('checkbox');
-const progress = document.getElementById('progress');
+const CurrStatus = document.getElementById('CurrStatus');
 var openable1 = false;
 var openable2 = false;
 var openable3 = false;
 var openable4 = true; //기본적으로 오늘 날자를 세팅해 놓으므로 true로 둠
+
 
 
 /* DDDDDD-DATE-EEEEEE */
@@ -50,8 +51,8 @@ $(document).ready(function() {
 
 /* function : onfocus시 자동으로 010을 채워준다*/
 var phoneNumberPattern = /^010[0-9]{8}$/;
+const telInput = document.getElementById('carSubmitTel');
 function fill010() {
-    const telInput = document.getElementById('carSubmitTel');
     if (phoneNumberPattern.test(telInput.value)) {
         openable3 = true;
     } if(telInput.value.length <=3) {
@@ -59,33 +60,36 @@ function fill010() {
     }
 }
 
+let openValue1;
 function validateInput1(input) {
     const carSubmit = input.value
+    openValue1 = carSubmit;
     if(!carSubmit) {
         openable1 = false;
     } else {
         openable1 = true;
-        localStorage.setItem('recentCarSubmit', carSubmit);
     }
 }
 
+let openValue2;
 function validateInput2(input) {
     const salesman = input.value;
+    openValue2 =salesman
     if(!salesman) {
         openable2 = false;
     } else {
         openable2 = true;
-        localStorage.setItem('recentSalesman', salesman);
     }
 }
 
 /* function : oninput 인풋이 바르지 않으면 보더컬러를 red로 바꿈 */
+let openValue3;
 function validateInput3(input) {
     const carSubmitTel = input.value;
+    openValue3 = carSubmitTel
     if (phoneNumberPattern.test(carSubmitTel)) {
         input.style.borderColor = '';
         openable3 = true;
-         localStorage.setItem('recentCarSubmitTel', carSubmitTel);
         listData()
     } else {
         input.style.borderColor = 'red';
@@ -93,23 +97,27 @@ function validateInput3(input) {
     }
 }
 
-// Function to load input values from localStorage
-function loadInputValues() {
-    const recentCarSubmit = localStorage.getItem('recentCarSubmit');
-    const recentSalesman = localStorage.getItem('recentSalesman');
-    const recentCarSubmitTel = localStorage.getItem('recentCarSubmitTel');
 
-    // Set input values if they exist in localStorage
-    if (recentCarSubmit !== null) {
-        document.getElementById('carSubmit').value = recentCarSubmit;
+function loadInputValues() {
+    const sales1 = document.getElementById('carSubmit');
+    const sales2 = document.getElementById('salesman');
+    const sales3 = document.getElementById('carSubmitTel');
+    console.log(sales1.value);
+    console.log(sales2.value);
+    console.log(sales3.value);
+
+    if (sales1.value !== null) {
+        openable1 = true;
     }
-    if (recentSalesman !== null) {
-        document.getElementById('salesman').value = recentSalesman;
+    if (sales2.value !== null) {
+        openable2 = true;
     }
-    if (recentCarSubmitTel !== null) {
-        document.getElementById('carSubmitTel').value = recentCarSubmitTel;
+    if (sales3.value !== null) {
+        openable3 = true;
     }
+    searchByCarsubmitTel(sales3);
 }
+
 
 
 /* function : open popup */
@@ -148,7 +156,9 @@ function initialize(element) {
 
 function closePop() {
     $.emptyRow();
-    clickedRow.classList.remove('selected-row');
+    if(clickedRow) {
+        clickedRow.classList.remove('selected-row');
+    }
     popup.style.display = 'none';
     saved.forEach(function(elem) {
         initialize(elem)
@@ -206,6 +216,8 @@ function recoverState() {
     } else {
         popCheckbox.checked = false;
     }
+    //searchByCarsubmitTel()
+
     showOrHide();
     updateTotalAmount();
 }
@@ -237,7 +249,6 @@ function clearInputs() {
 
 /* 결재 체크박스 체크되면 밸류 바꾸기 */
 /* 결재 체크박스 체크되면 인풋 수정 불가 */
-
 function approved() {
     const mtable = document.getElementById('main-table');
     const inputElements = mtable.querySelectorAll('.input');
@@ -264,25 +275,13 @@ function approved() {
 
 
 /* 제출하기 버튼을 클릭하면 결재 체크되고 제출체크가 체크하면되 결재도 체크됨*/
-function submitCheck() {
+function submitCheck() {치
     //const chk1 = document.getElementById('checkbox')
     chk.checked = true;
     chk.disabled = true;
-    progress.options[3].selected = true;
-    progress.disabled = true;
+    CurrStatus.options[3].selected = true;
+    CurrStatus.disabled = true;
     approved();
-}
-
-function submitConfirmation() {
-    const message = "제출 시 더 이상 추가, 수정, 삭제를 할 수 없습니다. 제출 하시겠습니까?";
-    // Display the confirmation dialog and store the result (true for Yes, false for No)
-    const userConfirmed = window.confirm(message);
-    // Check the user's choice and take action
-    if (userConfirmed) {
-        submitCheck();
-    } else {
-        console.log("No");
-    }
 }
 
 
@@ -326,7 +325,7 @@ function fillPop(event) {
 
 
 function listData() {
-    if(openable1 & openable2& openable3 & openable4 === true) {
+    if(openable3 & openable4 === true) {
         $.list();
     }
 }
@@ -335,13 +334,15 @@ function mutallyApproved() {
 
 }
 
+function openDrop() {
+
+}
+
+
 // Call functions when the page loads
-window.onload = function () {
-    loadInputValues();
-    openable1 = true;
-    openable2 = true;
-    openable3 = true;
-    listData();
-    recoverState();
-    approved();
-};
+//window.onload = function () {
+//    loadInputValues();
+//    listData();
+//    recoverState();
+//    approved();
+//};

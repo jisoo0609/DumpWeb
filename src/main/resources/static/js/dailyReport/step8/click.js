@@ -56,14 +56,29 @@ function clickSearchButton(){
     document.querySelector(".search_btn").onclick();
 }
 
-/* 리스트의 행 클릭시, 파라미터와 함께 step7로 이동하도록 처리. */
+/* 리스트의 행 클릭시, 상태값에 따라 파라미터와 함께 step3 or step7로 이동하도록 처리. */
 function clickListThAndRedirect(){
     const listRow = document.querySelector("table tbody");
 
     listRow.addEventListener("click", (event) => {
-        let managerID = event.target.parentElement.getAttribute("data-manager-id")
-        let url = "/dailyReport/orderform" + "?managerID=" + managerID;
-        window.location.href = url;
+        const currStatus = event.target.parentElement.querySelector(".currStatus"); // 상태 열
+
+        if (currStatus) {
+            const status = currStatus.textContent;
+            console.log("Clicked Status:", status);
+            let subID = event.target.parentElement.getAttribute("receipt-subID")
+            let sheetID = event.target.parentElement.getAttribute("receipt-sheetID")
+            let writerIDX = event.target.parentElement.getAttribute("receipt-writerIDX") //작성자구별은 추후 구현
+            console.log("writerIDX?" + writerIDX)
+
+            if (status === "제출") {
+                // "제출" 상태일 때 form.jsp로 이동
+                window.location.href = "/dailyReport/form" + "?sheetID=" +  sheetID;
+            } else if (status === "배차") {
+                // "배차" 상태일 때 orderform.jsp로 이동
+                window.location.href = "/dailyReport/orderform" + "?subID=" +  subID + "&sheetID=" + sheetID;
+            }
+        }
     });
 }
 

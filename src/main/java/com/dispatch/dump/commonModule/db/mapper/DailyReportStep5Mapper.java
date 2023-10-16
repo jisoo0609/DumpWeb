@@ -11,6 +11,7 @@ public interface DailyReportStep5Mapper {
     void updateTDrive(DailyReportStep5 dailyReportStep5);
 
     List<DailyReportStep5> selectTDriveList(String userID, String date);
+    List<DailyReportStep5> selectFirstTDriveList(String userID);
 
     void deleteTDrive(String userID, int driveID);
 
