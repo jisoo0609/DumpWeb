@@ -36,5 +36,14 @@ public class Step8Controller {
     public List<DailyReportStep8> getSelectBoxList(DailyReportStep8OptionForm option) {
         return step8Service.getSelectBoxData(option);
     }
+
+
+    @RequestMapping(value = "/receipts/ajax/details", method = RequestMethod.POST)
+    @ResponseBody
+    public DailyReportStep8 getReceiptsDetails(int sheetsubID, int sheetID) {
+        System.out.println(sheetsubID);
+        return step8Service.getReceiptsDetails(sheetsubID, sheetID);
+    }
+
 }
 

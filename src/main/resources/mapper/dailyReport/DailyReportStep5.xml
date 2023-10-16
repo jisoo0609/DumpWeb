@@ -31,7 +31,7 @@
         #{drvRem},
         #{chk2},
         <if test="rependdate != '-1'">
-            STR_TO_DATE(#{rependdate}, '%Y-%m-%d'),
+            STR_TO_DATE(#{rependdate}, '%m-%d'),
         </if>
         <if test="repaddkm != -1">
             #{repaddkm},
@@ -80,7 +80,7 @@
 
     <select id="selectFirstTDriveList" resultType="DailyReportStep5">
         SELECT driveID,
-        DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
+        DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
         drvclub,
         chk2,
         lastkm,
@@ -114,7 +114,7 @@
         useamt,
         useOil,
         drvrem,
-        IF(rependdate IS NULL OR rependdate = '0000-00-00', '', DATE_FORMAT(rependdate, '%Y-%m-%d')) AS 'rependdate',
+        IF(rependdate IS NULL, '' , DATE_FORMAT(rependdate, '%m-%d')) AS 'rependdate',
         repaddkm,
         rependchk
         FROM   tdrive

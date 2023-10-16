@@ -14,8 +14,8 @@ public interface DailyReportStep1Mapper {
 
     List<DailyReportStep1Tdrive> selectDispatchTdriveList(String userId);
 
-    List<DailyReportStep1Recruit>selectCarRecruitmentList(String today);
 
+    /*List<DailyReportStep1Recruit>selectCarRecruitmentList(String uuserID,String today);*/
 
 
     /*List<DailyReportStep1Main> findDailyReportMainByCarSubmitTel(String uuserID);
