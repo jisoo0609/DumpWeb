@@ -33,7 +33,7 @@
             <property name="endDate" value="#{today}"/>
         </include>
         select * from r3
-                 where carNo = '123사4567'
+                 where carNo = '공고'
 
 
 
