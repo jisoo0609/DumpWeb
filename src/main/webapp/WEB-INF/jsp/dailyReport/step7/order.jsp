@@ -54,7 +54,7 @@
             <li>
               <label class="golLabel" for="date">주문일</label>
               <span class="golInputSpan"><input id="date" name="date"></span>
-              <input class="golSearch" type="button" value="조회" onClick="bindList()">
+              <button class="golSearch searchBtn" onClick="bindList()">조회</button>
               <div class="checkbox1">
                 <input id="chk1" type="checkbox">
                 <label class="check67" for="chk1">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
@@ -114,7 +114,7 @@
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
 				<p>정말 <span style="font-weight: bold;">취소</span>하시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인">
+				<input class="confirmBtn" type="button" value="확인" onClick="cancelBtn()">
 				<input class="clBtn" type="button" value="취소">
 			</div>
 		</div>

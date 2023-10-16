@@ -113,8 +113,11 @@
 .hidden {
     display: none;
 }
-.show {
+.showBlock {
     display: block;
+}
+.showFlex {
+    display: flex;
 }
 
 .icon_mic{
@@ -288,4 +291,22 @@
     font-size: 20px;
     line-height: var(--line-height);
     vertical-align: middle;
+}
+
+#invite {
+    width: 35%;
+    height: var(--main-height);
+    text-align:center;
+    line-height: var(--line-height);
+    vertical-align: middle;
+    font-size: var(--main-font-size)
+}
+
+#inviteBtn {
+    display: hidden;
+    height: 23px;
+    vertical-align: middle;
+    line-height: 20px;
+    margin-top: 2px;
+    margin-left: 5000px;
 }

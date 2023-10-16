@@ -123,7 +123,7 @@
         </div>
         <div style="text-align: center;padding-top: 30px;border: 1px solid #ddd;padding-bottom: 60px; margin: 0 0 10px;">
             <div style="width: 50%;  float: left;">
-                <label style="display: inline-flex;align-items: center;justify-content: flex-start;width: 90px;"><input
+                <label style="display: inline-flex;align-items: center;justify-content: flex-start;width: 90px; white-space: nowrap;"><input
                         type="radio" name="sortingCriteria" value="date" checked>운행일 기준</label> <br>
                 <label style="display: inline-flex;align-items: center;margin-top: 15px;justify-content: flex-start;width: 90px;"><input
                         type="radio" name="sortingCriteria" value="item">품목 기준</label>
@@ -151,7 +151,7 @@
 
         <div style="width: 100%; overflow-x: auto; overflow-y: hidden;">
             <div class="agreement_container">
-                <button class="common_btn" style="width: 110px;">운반금액<br><span class="transportCost"></span>
+                <button class="common_btn" style="width: 110px;">운반금액(원)<br><span class="transportCost"></span>
                 </button>
                 <div class="btnWraaper">
                     <button class="common_btn" onclick="$.allChkChange(1);">일괄결재</button>
@@ -160,16 +160,6 @@
             </div>
 
             <table class="list-table" id="tableOrderByDate">
-                <colgroup>
-                    <col style="width: 13%">
-                    <col style="width: 13%">
-                    <col style="width: 13%">
-                    <col style="width: 13%">
-                    <col style="width: 13%">
-                    <col style="width: 13%">
-                    <col style="width: 13%">
-                    <col style="width: 13%">
-                </colgroup>
                 <thead>
                 <tr>
                     <th>No</th>
@@ -180,6 +170,7 @@
                     <th class="th_header">차량번호</th>
                     <th>대수</th>
                     <th class="th_header">운반단가</th>
+                    <th>상태</th>
                 </tr>
                 </thead>
                 <tbody>
