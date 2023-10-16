@@ -40,12 +40,23 @@ function printList(searchResultData) {
     searchResultData.slice(0, 10).forEach((data, index) => {
 
         const row = document.createElement("tr");
-        let order = [
-            data.drvDate, data.drvClub, // 정렬 기준.
-            data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem,
-            (data.rependchk === true ? 'X' : (data.repaddkm && data.rependdate ? 'O' : 'X')),
-            data.chk2, data.useOil, data.rependdate, data.repaddkm // hidden data
-        ];
+
+       if(data.rependdate === '0000-00-00 00:00:00'){
+       data.rependdate = '';
+       }
+
+        if(data.repaddkm === 0){
+        data.repaddkm = ''
+        }
+
+         let order = [
+                    data.drvDate, data.drvClub,
+                    data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem,
+                    (data.rependchk === true ? 'X' : ((data.rependdate !== '' || data.repaddkm !== '') ? 'O' : 'X')),
+
+                    data.chk2, data.useOil, data.rependdate, data.repaddkm
+
+                ];
 
 
         row.innerHTML = `
