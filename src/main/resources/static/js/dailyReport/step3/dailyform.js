@@ -202,6 +202,7 @@ function searchByCarsubmitTel(inputData) {
             console.log('Ajax 요청 성공:', data);
             if(data.list!=null){ //드롭다운 카테고리
                 /* 진행상황 표시 */
+                document.getElementById('CurrStatus').options[valueToIndex(data.list[0].currStatus)].selected = true;
                 openDrop();
             }else{
                 console.log("list data 없음");
