@@ -273,7 +273,7 @@ function approved() {
 
 
 /* 제출하기 버튼을 클릭하면 결재 체크되고 제출체크가 체크하면되 결재도 체크됨*/
-function submitCheck() {치
+function submitCheck() {
     //const chk1 = document.getElementById('checkbox')
     //chk.checked = true;
     //chk.disabled = true;
@@ -341,12 +341,3 @@ function mutallyApproved() {
 function openDrop() {
 
 }
-
-
-// Call functions when the page loads
-//window.onload = function () {
-//    loadInputValues();
-//    listData();
-//    recoverState();
-//    approved();
-//};
