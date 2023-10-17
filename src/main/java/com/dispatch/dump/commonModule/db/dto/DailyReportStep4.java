@@ -13,6 +13,9 @@ public class DailyReportStep4 {
     private String date;            // LINE :: 운행일
     private String CurrStatus;     // LINE :: 진행상태
     private Boolean chk1;           // LINE :: 결재여부
+    private int sheetSS;            // 기사ID
+    private int sheetSS2;           // 제출처ID
+    private int writerIDX;          // 쓴사람ID
 
     // tSheet_sub
     private int sheetsubID;
