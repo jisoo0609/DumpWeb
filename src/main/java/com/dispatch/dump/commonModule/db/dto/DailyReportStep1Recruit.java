@@ -22,4 +22,5 @@ public class DailyReportStep1Recruit {
     private String carSubmit;
     private String date;
     private int sheetID;
+
 }

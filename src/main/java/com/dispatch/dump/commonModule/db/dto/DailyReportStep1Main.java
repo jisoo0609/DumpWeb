@@ -15,4 +15,6 @@ public class DailyReportStep1Main {
     private int sheetSS;            // LINE :: 회원 idx
     private int writerIDX;
 
+    private String CurrStatus;      // LINE :: 배차상태
+
 }
