@@ -31,7 +31,7 @@ $(document).ready(function() {
             console.log('1'); // 체크됐을 때 1 출력
         } else {
             // 결재 체크박스가 해제되었을 때 모든 input 요소를 활성화합니다.
-            carNoInput.val(""); // 차량번호 입력한 초기화
+//            carNoInput.val(""); // 차량번호 입력한 초기화
             carNoInput.prop("disabled", false).css("background-color", ""); // 원래 색상으로 복원 (빈 문자열)
             console.log('0'); // 체크 해제됐을 때 0 출력
         }
