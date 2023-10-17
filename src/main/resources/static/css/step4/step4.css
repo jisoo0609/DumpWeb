@@ -61,7 +61,7 @@ img[alt = calling_img]{
 
 .data_Area > div > label{
     white-space: nowrap;
-    padding-top: 9px;
+    padding-top: 7px;
     margin-right: 10%;
 }
 
@@ -129,7 +129,7 @@ input[type = text]{
 
 .cashNbtns{
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
     margin: 25px 0;
     padding-left: 2%;
 }
@@ -142,8 +142,9 @@ input[type = text]{
     margin-right: 10%;
 }
 
-input[value="일괄결재"]{
-    margin-right: 10px;
+input[value="이전화면"]{
+    color: #ffffff !important;
+    background: #0068b7 !important;
 }
 
 .btn_area{
@@ -153,9 +154,10 @@ input[value="일괄결재"]{
 input[type = button]{
     background-color: #fff;
     font-weight: 600;
-    width: 80px;
+    width: 70px;
     height: 40px;
     color: #0068b7;
+    margin-right: 5px;
     border: 1px solid #0068b7;
 }
 
@@ -192,8 +194,4 @@ thead{
 .red-line-divider{
     border-top: 2px solid red;
     border-bottom: 1px solid #ddd;
-}
-
-.backBtn {
-    margin-left: 10px;
 }
