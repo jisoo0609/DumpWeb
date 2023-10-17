@@ -30,6 +30,18 @@ function cancelApproval() {
     })
 }
 
+// 이전화면 버튼 클릭 시 실행되는 함수
+function goBack(){
+    let confirmation = confirm("이전화면으로 돌아가시겠습니까?");
+
+    if(confirmation){
+        window.history.back();
+    } else {
+        window.alert("취소되었습니다.");
+    }
+};
+
+
 /* js를 통해 search_btn이 눌릴 수 있도록 처리 */
 function clickSearchButton(){
     document.querySelector(".search_btn").onclick();
