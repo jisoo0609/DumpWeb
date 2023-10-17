@@ -61,7 +61,7 @@ img[alt = calling_img]{
 
 .data_Area > div > label{
     white-space: nowrap;
-    padding-top: 16px;
+    padding-top: 9px;
     margin-right: 10%;
 }
 
@@ -192,4 +192,8 @@ thead{
 .red-line-divider{
     border-top: 2px solid red;
     border-bottom: 1px solid #ddd;
+}
+
+.backBtn {
+    margin-left: 10px;
 }

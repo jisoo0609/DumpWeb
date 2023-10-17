@@ -13,5 +13,6 @@ public class DailyReportStep1Main {
     private String date;            // LINE :: 운행일
     private String salesman;        // LINE :: 제출처 담당자
     private int sheetSS;            // LINE :: 회원 idx
+    private int writerIDX;
 
 }

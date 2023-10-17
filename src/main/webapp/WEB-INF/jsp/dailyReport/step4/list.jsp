@@ -198,6 +198,7 @@
         </div>
         <div class="btn_area">
             <input type="button" value="검색" onclick="getList()">
+            <input type="button" value="이전화면" class="backBtn" onclick="history.go(-1)">
         </div>
     </form>
     <div class="bottom_table">

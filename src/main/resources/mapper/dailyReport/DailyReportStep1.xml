@@ -10,7 +10,7 @@
     <sql id="res_table">
         WITH r1 AS
             (
-                SELECT  t.sheetID,t.carSubmit,t.sheetSS,t.CarNo,t.carSubmitTel
+                SELECT  t.sheetID,t.carSubmit,t.sheetSS,t.CarNo,t.carSubmitTel,t.writerIDX
                 FROM tsheet t
                 WHERE sheetSS = #{uuserID}
                   AND date BETWEEN ${startDate} AND ${endDate}
