@@ -21,6 +21,7 @@
         SELECT t.sheetID,
             DATE_FORMAT(t.date, '%m.%d') AS date,
             t.CarNo, t.carSubmit, t.carSubmitTel, t.chk1, t.CurrStatus,
+            t.chk1, t.sheetSS, t.sheetSS2, writerIDX,
             s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup,
             IF(t.date IS NULL, '1999-01-01', t.date) AS date
         FROM tsheet t
