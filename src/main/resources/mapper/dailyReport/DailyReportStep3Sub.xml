@@ -80,7 +80,7 @@
     </update>
 
     <!--운행정보 삭제(1건)-->
-    <delete id="deleteByOne" parameterType="int" >
+    <delete id="deleteByOne" parameterType="DailyReportStep3Sub" >
         delete from tSheet_sub
         where
         sheetsubID = #{sheetsubID}
