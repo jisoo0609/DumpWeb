@@ -4,14 +4,29 @@ document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(queryString);
 
     let sheetID = params.get("sheetID");
-    console.log(sheetID);
+    //console.log(sheetID);
 
     if (sheetID !== null) {
         getSheetIDDataByParams(sheetID);
     }
     //clickListThAndRedirect();//step4에 있음
     $.showChk1;
+    recoverState();
+    approved();
 });
+
+function valueToIndex(value) {
+    switch (value) {
+      case '상차':
+        return 1;
+      case '하차':
+        return 2;
+      case '제출':
+        return 3;
+      default:
+        return 0;
+    }
+}
 
 function getSheetIDDataByParams(sheetID) {
     $.ajax({
@@ -21,10 +36,14 @@ function getSheetIDDataByParams(sheetID) {
         success: function (data) {
             //이 부분 추후 정리할 것
             document.getElementById('carSubmit').value=data.carSubmit;
+            openable1 = true;
             document.getElementById('carSubmitTel').value=data.carSubmitTel;
+            openable3 = true;
+            searchByCarsubmitTel(data.carSubmitTel);
             document.getElementById('salesman').value=data.salesman;
+            openable2 = true;
             document.getElementById('date').value=data.date;
-            document.getElementById('chk1').value=data.chk1;//이 부분 확인
+            document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
             $.list();
         }
     })
@@ -49,7 +68,7 @@ $.save = function() {
         contentType: false,
         cache: false,
         success: function (data) {
-            $.successSave();
+            //$.successSave();
             $.list();
             $.emptyRow();
         },
@@ -119,12 +138,15 @@ function showTransportList(data){
 }
 
 
-
-function addInviteBtn() {
-    let inviteBtn;
-    inviteBtn += '<button type="button">초대하기</button>'
-
-    $('#invite').html(inviteBtn);
+let see;
+function searchOptions(data) {
+    //console.log(data.carSubmit)
+    for (let i = 0; i < data.length; i++) {
+        let anOption = data[i]
+        let options = '<li>'+ anOption.carSubmit +'</li>'
+    }
+    let options = '<li>'+ data[0][0] +'</li>'
+    $('#searchDrop').html(options);
 }
 
 
@@ -137,7 +159,7 @@ function searchByCarsubmit(inputData) {
         method: "GET",
         data: { "carSubmit": carSubmit },
         success: function(data) {
-
+            searchOptions(data);
             console.log('Ajax 요청 성공:', data);
             //data가져오는데 성공했어요. console에서 확인가능합니다.
             //카테고리 생성해주세요.
@@ -165,8 +187,10 @@ function searchBySalesman(inputData) {
    });
 }
 
+const carsubmittel = $("#carSubmitTel")
 function searchByCarsubmitTel(inputData) {
-    var carSubmitTel = $("#carSubmitTel").val();
+    const carSubmitTel = carsubmittel.val();
+    console.log("carSubmitTel : "+carSubmitTel);
     let isMember = $("#isMember");
     let inviteBtn = $("#inviteBtn");
 
@@ -176,21 +200,22 @@ function searchByCarsubmitTel(inputData) {
         data: { "carSubmitTel": carSubmitTel },
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
-
             if(data.list!=null){ //드롭다운 카테고리
-                console.log("list는?", data.list);
+                /* 진행상황 표시 */
+                document.getElementById('CurrStatus').options[valueToIndex(data.list[0].currStatus)].selected = true;
+                openDrop();
             }else{
                 console.log("list data 없음");
             }
 
             if(data.checkData!=null){ //거래처입니다
-                isMember.text("가입된 거래처 입니다");
+                isMember.text("가입된 회원 입니다");
                 $("#inviteBtn").css("margin-left", "5000px");
                 console.log("checkData는?", data.checkData);
             }else{
                 console.log("checkData 없음");
                 isMember.text("");
-                $("#inviteBtn").css("margin-left", "0px");
+                $("#inviteBtn").css("margin-left", "auto");
             }
             listData();
         },
@@ -285,59 +310,40 @@ $.editSales = function(){
     var salesman = $("#salesman").val();
     var carSubmit = $("#carSubmit").val();
     var carSubmitTel = $("#carSubmitTel").val();
+    var CurrStatus = $("#CurrStatus").val();
     var chk1 = $("#checkbox").val();
-    var CurrStatus = $("CurrStatus").val();
-    $.ajax({
-        url:"/dailyReport/workspace/ajax/edit/carSubmit",
-        type:"POST",
-        data:{
-            "sheetID" : sheetID,
-            "salesman" : salesman,
-            "carSubmit" : carSubmit,
-            "carSubmitTel" : carSubmitTel,
-            "chk1" : chk1,
-            "CurrStatus" : CurrStatus
-        },
-        success : function (data) {
-            var json = $.parseJSON(data);
-            if(json.httpCode == 200){
-                $.successEdit();
-            }else{
+    if (checkInputs() === 1) {
+        $.ajax({
+            url:"/dailyReport/workspace/ajax/edit/carSubmit",
+            type:"POST",
+            data:{
+                "sheetID":sheetID,
+                "salesman":salesman,
+                "carSubmit":carSubmit,
+                "carSubmitTel":carSubmitTel,
+                "CurrStatus" : CurrStatus,
+                "chk1": chk1
+            },
+            success : function (data) {
+                var json = $.parseJSON(data);
+                if(json.httpCode == 200){
+                    $.successSave();
+                }else{
+                    $.failEdit();
+                }
+            },
+            error: function(error) {
                 $.failEdit();
+                console.error('수정 실패:', error);
             }
-        },
-        error: function(error) {
-            $.failEdit();
-            console.error('수정 실패:', error);
-        }
-    })
-}
+        })
+    } else {
+        $.inputInvalid();
+    }
 
-
-/*전체 삭제*/
-//$.deleteByAll = function(){
-    //var carSubmitTel = $("#carSubmitTel").val();
-    //var date = $("#date").val();
-    //var chk1 = $("#chk1").val();
-
-
-    //ajax({
-        //url : /dailyReport/workspace/ajax/deleteAll,
-        //type : "POST",
-        //data : {
-            //"sheetID" : sheetID
-        //},
-        //success : function (data){
-            //console.log();
-        //},
-        //error: function(error) {
-            //console.error('삭제 실패:', error);
-        //}
-    //})
 
 }
 
 $.invite = function () {
     console.log("문자를 보내 초대를 해보자.")
 }
-

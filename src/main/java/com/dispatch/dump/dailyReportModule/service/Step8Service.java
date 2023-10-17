@@ -44,4 +44,20 @@ public class Step8Service {
         }
         return selectBoxDataList;
     }
+
+    public DailyReportStep8 getReceiptsDetails(int sheetsubID, int sheetID){
+        return step8Mapper.getReceiptsDetails(sheetsubID, sheetID);
+    }
+
+    public void approveReceipts(DailyReportStep8OptionForm option){
+        option.setSheetSS2(Integer.parseInt(getSessionLoginData().getUuserID()));
+        option.setSheetsubSS2(Integer.parseInt(getSessionLoginData().getUuserID()));
+        step8Mapper.approveReceipts(option);
+    }
+
+    public void cancelApprove(DailyReportStep8OptionForm option) {
+        option.setSheetSS2(Integer.parseInt(getSessionLoginData().getUuserID()));
+        option.setSheetsubSS2(Integer.parseInt(getSessionLoginData().getUuserID()));
+        step8Mapper.cancelApproval(option);
+    }
 }
