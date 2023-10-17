@@ -14,7 +14,7 @@ function bindSummary() {
         type: "POST",
         data: $("[name=option_frm]").serialize(),
         success: function (data) {
-            printSummary(data);
+            printbindSummary(data);
         }
     });
 }
@@ -48,7 +48,7 @@ function carFindList() {
     });
 }
 
-function printSummary(data) {
+function printbindSummary(data) {
     const boutmoney = document.getElementById("boutmoney");
     const boutcar = document.getElementById("boutcar");
     const boutdate = document.getElementById("boutdate");
@@ -127,7 +127,7 @@ function printDispatchList(searchResultData) {
 
 //금일 차량 모집 공고
 function printCarRecruitmentList(searchResultData) {
-    const tableBody = document.querySelector("#today-car-recruitment");
+    const tableBody = document.querySelector("#recruitment");
 
 //일단은 다 뜨게 한번 해보기
     searchResultData.forEach(data => {

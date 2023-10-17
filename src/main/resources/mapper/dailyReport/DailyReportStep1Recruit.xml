@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.dispatch.dump.commonModule.db.mapper.DailyReportStep1SubMapper">
+    <sql id="sub_table">
+
+        WITH r1 AS
+            (
+                SELECT  t.sheetID,t.carSubmit,t.sheetSS,t.CarNo,t.carSubmitTel
+                FROM tsheet t
+                WHERE date BETWEEN ${startDate} AND ${endDate}
+
+            ),
+            r2 AS
+           (
+        SELECT *
+        FROM tsheet_sub
+            ),
+            r3 AS
+            (
+        SELECT *
+        FROM r1
+            INNER JOIN r2 ON r1.sheetID = r2.sheetID2
+            )
+    </sql>
+
+    <select id="selectCarRecruitmentList" resultType="DailyReportStep1Recruit">
+        <include refid="sub_table">
+            <property name="startDate" value="#{today}"/>
+            <property name="endDate" value="#{today}"/>
+        </include>
+        select * from r3
+                 where carNo = '공고'
+
+
+
+
+
+    </select>
+
+
+</mapper>

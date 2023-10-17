@@ -333,8 +333,8 @@
                     <th>품목</th>
                     <th>대수</th>
                 </tr>
-                <thead>
-                <tbody id="today-car-recruitment">
+                </thead>
+                <tbody id="recruitment">
                 </tbody>
 
             </table>
