@@ -14,12 +14,8 @@
         useoil,
         drvrem,
         chk2,
-        <if test="rependdate != '-1'">
-            rependdate,
-        </if>
-        <if test="repaddkm != -1">
-            repaddkm,
-        </if>
+        rependdate,
+        repaddkm,
         rependchk,
         drivess)
         VALUES (#{carNo},
@@ -27,15 +23,32 @@
         #{lastKm},
         #{drvClub},
         #{useAmt},
-        #{useOil},
+        <choose>
+            <when test="useOil == null">
+                NULL,
+            </when>
+            <otherwise>
+                #{useOil},
+            </otherwise>
+        </choose>
         #{drvRem},
         #{chk2},
-        <if test="rependdate != '-1'">
-            STR_TO_DATE(#{rependdate}, '%m-%d'),
-        </if>
-        <if test="repaddkm != -1">
-            #{repaddkm},
-        </if>
+        <choose>
+            <when test="rependdate == ''">
+                NULL,
+            </when>
+            <otherwise>
+                #{rependdate},
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="repaddkm == null">
+                NULL,
+            </when>
+            <otherwise>
+                #{repaddkm},
+            </otherwise>
+        </choose>
         #{rependchk},
         (SELECT uuserid
         FROM tsitepw
@@ -46,23 +59,44 @@
     <update id="updateTDrive" parameterType="DailyReportStep5">
         UPDATE tdrive
         SET drvdate = #{drvDate},
-            drvclub = #{drvClub},
-            lastkm = #{lastKm},
-            useAmt = #{useAmt},
-            useoil = #{useOil},
-            drvrem = #{drvRem},
-            chk2   = #{chk2},
-            rependdate = #{rependdate},
-            repaddkm = #{repaddkm},
-            rependchk = #{rependchk}
+        drvclub = #{drvClub},
+        lastkm = #{lastKm},
+        useAmt = #{useAmt},
+        <choose>
+            <when test="useOil == null">
+                useOil = NULL,
+            </when>
+            <otherwise>
+                useOil = #{useOil},
+            </otherwise>
+        </choose>
+        drvrem = #{drvRem},
+        chk2 = #{chk2},
+        <choose>
+            <when test="rependdate == ''">
+                rependdate = NULL,
+            </when>
+            <otherwise>
+                rependdate = #{rependdate},
+            </otherwise>
+        </choose>
+        <choose>
+            <when test="repaddkm == null">
+                repaddkm = NULL,
+            </when>
+            <otherwise>
+                repaddkm = #{repaddkm},
+            </otherwise>
+        </choose>
+        rependchk = #{rependchk}
         WHERE carno = #{carNo}
-          AND driveid = #{driveID}
+        AND driveid = #{driveID}
     </update>
 
 
     <select id="selectTDriveList" resultType="DailyReportStep5">
         SELECT driveID,
-        DATE_FORMAT(drvdate, '%Y-%m-%d') AS 'drvdate',
+        DATE_FORMAT(drvdate, '%m.%d') AS 'drvdate',
         drvclub,
         chk2,
         lastkm,
@@ -72,8 +106,8 @@
         rependchk,
         IF(rependdate IS NULL, '',rependdate) AS 'rependdate',
         repaddkm
-        FROM   tdrive
-        WHERE  carno = #{userID}
+        FROM tdrive
+        WHERE carno = #{userID}
         AND drvdate LIKE CONCAT(#{date}, '%')
         ORDER BY drvdate DESC
     </select>
@@ -90,8 +124,8 @@
         rependchk,
         IF(rependdate IS NULL, '',rependdate) AS 'rependdate',
         repaddkm
-        FROM   tdrive
-        WHERE  carno = #{userID}
+        FROM tdrive
+        WHERE carno = #{userID}
         ORDER BY driveId DESC
         LIMIT 10
     </select>
@@ -99,9 +133,9 @@
 
     <delete id="deleteTDrive">
         DELETE
-        FROM   tdrive
-        WHERE  carno = #{userID}
-          AND driveID = #{driveID}
+        FROM tdrive
+        WHERE carno = #{userID}
+        AND driveID = #{driveID}
     </delete>
 
 
@@ -114,11 +148,11 @@
         useamt,
         useOil,
         drvrem,
-        IF(rependdate IS NULL, '' , DATE_FORMAT(rependdate, '%m-%d')) AS 'rependdate',
+        DATE_FORMAT(rependdate, '%Y-%m-%d') AS 'rependdate',
         repaddkm,
         rependchk
-        FROM   tdrive
-        WHERE  carno = #{userID}
+        FROM tdrive
+        WHERE carno = #{userID}
         AND driveID = #{driveID}
     </select>
 
