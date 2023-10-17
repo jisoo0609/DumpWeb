@@ -58,7 +58,7 @@
             <ul class="bdnUl" id="hiddenPart">
                 <li>
                     <label class="drvLabel" for="exchange-date">교환 예정일</label>
-                    <span class="drvInputSpan"><input id="exchange-date" inputmode="none" name="rependdate" value=""></span>
+                    <span class="drvInputSpan"><input id="exchange-date" inputmode="none" name="rependdate"></span>
                 </li>
                 <li>
                     <label class="drvLabel" for="nextlastkm">교환 주행거리</label>

@@ -22,6 +22,9 @@ public class DailyReportStep1Sub {
     public String CarNo;
     private String carSubmit;
     private int sheetID;
+    private int sheetSS;            // LINE :: 회원 idx
+    private int writerIDX;
+
 
 /*
 

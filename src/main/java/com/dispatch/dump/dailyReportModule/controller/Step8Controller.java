@@ -45,5 +45,17 @@ public class Step8Controller {
         return step8Service.getReceiptsDetails(sheetsubID, sheetID);
     }
 
+    @RequestMapping(value = "/receipts/ajax/approve", method = RequestMethod.POST)
+    @ResponseBody
+    public void approveReceiptsList(DailyReportStep8OptionForm option) {
+        step8Service.approveReceipts(option);
+    }
+
+    @RequestMapping(value = "/receipts/ajax/cancel", method = RequestMethod.POST)
+    @ResponseBody
+    public void cancelApproveReceipts(DailyReportStep8OptionForm option) {
+        step8Service.cancelApprove(option);
+    }
+
 }
 
