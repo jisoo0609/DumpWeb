@@ -21,6 +21,11 @@ body {
   line-height: 38px;
 }
 
+.back_btn {
+    background: #0068b7;
+    color:white;
+}
+
 /* 전역 변수 및 상수 설정 */
 :root {
   /* 폰트 크기 */
@@ -372,9 +377,18 @@ body {
   .table_container table {
     word-break: inherit;
   }
+
+    .agreement_container button{
+      width:60px
+    }
 }
 
-@media (min-width: 321px) and (max-width: 375px) {
+@media (min-width: 321px) and (max-width: 380px) {
+
+  .agreement_container button{
+    width:60px
+  }
+
   .table_container table thead tr th {
     padding: 10px 8px;
   }
@@ -393,7 +407,7 @@ body {
   }
 }
 
-@media (min-width: 376px) and (max-width: 439px) {
+@media (min-width: 381px) and (max-width: 439px) {
   .conChoice {
     justify-content: center;
     gap: 20%;
