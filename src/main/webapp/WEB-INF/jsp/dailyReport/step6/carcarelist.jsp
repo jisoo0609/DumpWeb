@@ -82,10 +82,11 @@
         <h1></h1>
     </div>
     <div class="agreement_container">
-        <button class="common_btn" style="width: 110px;">비용금액(원)<br/><span class="resultPrice">0</span></button>
+        <button class="common_btn" style="width: 100px;">비용금액(원)<br/><span class="resultPrice">0</span></button>
         <div class="btnWraaper">
             <button class="common_btn" onclick="PayCarList()">일괄결재</button>
             <button class="common_btn" onclick="cancelCarList()">일괄취소</button>
+            <button class="common_btn back_btn" onclick="goBack()">이전화면</button>
         </div>
     </div>
     <div class="line"></div>
