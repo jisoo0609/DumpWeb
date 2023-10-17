@@ -23,7 +23,7 @@ public interface DailyReportStep3SubMapper {
     int editByTransportInfo(DailyReportStep3Sub dailyReportStep3Sub);
 
     /* FUNCTION ::  삭제 */
-    int deleteByOne(int sheetsubID);
+    int deleteByOne(DailyReportStep3Sub dailyReportStep3Sub);
 
     /* FUNCTION ::  전체삭제 */
     int deleteByTransInfo(DailyReportStep3Main dailyReportStep3Main);

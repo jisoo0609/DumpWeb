@@ -55,14 +55,16 @@ function PayCarList() {
 
 // 이전화면 버튼 클릭 시 실행되는 함수
 function goBack(){
-    let confirmation = confirm("이전화면으로 돌아가시겠습니까?");
+    window.history.back();
+};
+
+function confirmGoBack(){
+    let confirmation = confirm("이전 화면으로 돌아가시겠습니까?");
 
     if(confirmation){
-        window.history.back();
-    } else {
-        window.alert("취소되었습니다.");
+        goBack();
     }
-};
+}
 
 
 
