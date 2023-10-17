@@ -198,7 +198,6 @@
         </div>
         <div class="btn_area">
             <input type="button" value="검색" onclick="getList()">
-            <input type="button" value="이전화면" class="backBtn" onclick="history.go(-1)">
         </div>
     </form>
     <div class="bottom_table">
@@ -215,6 +214,7 @@
             <p>운반금액(원)<br>0</p>
             <input type="button" value="일괄결재" onclick="submitBtn()">
             <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
+            <input type="button" value="이전화면" id="backBtn" onclick="history.go(-1)">
         </div>
         <div>
             <table class="list-table">
@@ -245,9 +245,8 @@
     </div>
 </section>
 
-<%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
-
 <script src="/resources/js/dailyReport/step4/step4.js"></script>
 <script src="/resources/js/dailyReport/step4/calendar.js"></script>
 <script src="/resources/js/dailyReport/step4/AJAX.js"></script>
 <script src="/resources/js/dailyReport/step4/DOMContentLoaded.js"></script>
+<%@ include file="/WEB-INF/jsp/include/footer.jsp" %>

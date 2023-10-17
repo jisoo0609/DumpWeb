@@ -41,7 +41,6 @@ function printTable(datas){
     let end = 0;
 
     tableBody.innerHTML = "";
-    // comment.innerHTML = "";
 
     if (datas.length > 0) {
 
@@ -92,8 +91,8 @@ function printTable(datas){
                     `<td>${order[7]}</td>`
                     :
                     ` <td style="text-align: right;">${order[6]}</td>`
-            }
-        `;
+                }
+            `;
 
             // 끝 값 설정
             if (firstFlag === 0 || firstFlag === 1)
@@ -131,6 +130,7 @@ function printSummary(datas){
                     <p>운반금액(원)<br>${totalQtyup.toLocaleString()}</p>
                     <input type="button" value="일괄결재" onclick="submitBtn()">
                     <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
+                    <input type="button" value="이전화면" id="backBtn" onclick="history.go(-1)">
     `;
 }
 
@@ -138,14 +138,14 @@ function printSummary(datas){
 function clickListRedirect(){
     const listRow = document.querySelector('table tbody');
 
-    listRow.addEventListener('click', event => {
-        let sheetID = event.target.parentElement.getAttribute("data-sheetID");
+        listRow.addEventListener('click', event => {
+                let sheetID = event.target.parentElement.getAttribute("data-sheetID");
 
-        // GET방식의 단순한 데이터 전달 방법
-        let url = "/dailyReport/form" + "?sheetID=" + sheetID;
+                // GET방식의 단순한 데이터 전달 방법
+                let url = "/dailyReport/form" + "?sheetID=" + sheetID;
 
 
-        window.location.href = url;
-    });
+                window.location.href = url;
+        });
 }
 
