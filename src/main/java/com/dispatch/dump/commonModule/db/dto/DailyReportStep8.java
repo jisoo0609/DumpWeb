@@ -13,6 +13,7 @@ public class DailyReportStep8 {
     private String date;            // LINE :: 운행일
     private String salesman;        // LINE :: 제출처 담당자
     private String CurrStatus;      // LINE :: 배차상태
+    private int writerIDX;          // LINE :: 작성자 idx
 
     //tSheet_sub테이블
     private int sheetsubID;
