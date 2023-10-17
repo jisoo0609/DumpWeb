@@ -1,6 +1,25 @@
+//function delete() {
+//  $.ajax({
+//    url: "/dailyReprot/ajax/orderDelete",
+//    type: "POST",
+//    data: $("[name=golForm]").serialize(),
+//    async : false,
+//    success: function (data) {
+//
+//    }
+//  })
+//}
+
+function cancel() {
+  // 팝업 창을 숨기는 코드
+  const golPop2 = document.querySelector("#golPop2");
+  golPop2.classList.remove("active");
+  emptyRow();
+}
+
 function save() {
   $.ajax({
-      url: "/dailyReport/ajax/orderform",
+      url: "/dailyReport/ajax/orderSave",
       type: "POST",
       data: $("[name=golForm]").serialize(),
       async : false,
@@ -12,12 +31,10 @@ function save() {
   })
 }
 
-function
-
 /* 선택한 옵션을 통해 데이터를 받아올 수 있도록 ajax POST 처리. */
 function bindList() {
   $.ajax({
-      url: "/dailyReport/ajax/orderlist",
+      url: "/dailyReport/ajax/orderList",
       type: "POST",
       data: $("[name=golForm]").serialize(),
       success: function (data) {

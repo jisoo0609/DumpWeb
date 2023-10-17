@@ -15,6 +15,19 @@ document.addEventListener("DOMContentLoaded", function () {
     approved();
 });
 
+function valueToIndex(value) {
+    switch (value) {
+      case '상차':
+        return 1;
+      case '하차':
+        return 2;
+      case '제출':
+        return 3;
+      default:
+        return 0;
+    }
+}
+
 function getSheetIDDataByParams(sheetID) {
     $.ajax({
         url: "/dailyReport/form/ajax/details",
@@ -30,6 +43,7 @@ function getSheetIDDataByParams(sheetID) {
             document.getElementById('salesman').value=data.salesman;
             openable2 = true;
             document.getElementById('date').value=data.date;
+            document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
             $.list();
         }
     })
@@ -187,7 +201,8 @@ function searchByCarsubmitTel(inputData) {
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
             if(data.list!=null){ //드롭다운 카테고리
-                console.log("list는?", data.list);
+                /* 진행상황 표시 */
+                document.getElementById('CurrStatus').options[valueToIndex(data.list[0].currStatus)].selected = true;
                 openDrop();
             }else{
                 console.log("list data 없음");
@@ -297,7 +312,6 @@ $.editSales = function(){
     var carSubmitTel = $("#carSubmitTel").val();
     var CurrStatus = $("#CurrStatus").val();
     var chk1 = $("#checkbox").val();
-
     if (checkInputs() === 1) {
         $.ajax({
             url:"/dailyReport/workspace/ajax/edit/carSubmit",

@@ -10,7 +10,9 @@ function getList(){
         type: "POST",
         data: $("[name=data_frm]").serialize(),
         success: function(data){
+            console.log(data);
             printTable(data)//서버에서 받은 데이터 처리할 함수 입력
+            printSummary(data);
         },
         error: function(error){
             alert("오류가 발생했습니다.");
