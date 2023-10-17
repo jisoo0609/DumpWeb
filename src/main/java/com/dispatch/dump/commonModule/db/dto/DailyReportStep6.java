@@ -16,7 +16,7 @@ public class DailyReportStep6 {
     private String drvRem; // 비고
     private boolean chk2; // 결제체크
     private Date repDate; // 등록시간
-    private int repaddkm; // 교환주행거리
-    private Date rependdate; // 교환예정일
+    private Integer repaddkm; // 교환주행거리
+    private String rependdate; // 교환예정일
     private Boolean rependchk; // 교환확인체크
 }

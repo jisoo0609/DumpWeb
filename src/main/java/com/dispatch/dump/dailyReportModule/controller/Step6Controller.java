@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ public class Step6Controller {
     @RequestMapping(value = "/ajax/carcarelist", method = RequestMethod.POST)
     @ResponseBody
     public List<DailyReportStep6> searchDailyReport(DailyReportStep6OptionForm optionForm) {
+        System.out.println(step6Service.getCarListByOption(optionForm));
         return step6Service.getCarListByOption(optionForm);
     }
 
