@@ -73,8 +73,11 @@ $.confirmRemoval = function() {
         type: 'alert',
         text: '정말 삭제하시겠습니까?',
         callback : function(result){
-            if (result == true) {
+            console.log(result);
+            if (result == false) {
+                console.log(result);
                 $.deleteRow();
+                console.log("reached2");
             }
         }
     });
