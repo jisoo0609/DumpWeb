@@ -154,8 +154,8 @@
                 <button class="common_btn" style="width: 110px;">운반금액(원)<br><span class="transportCost"></span>
                 </button>
                 <div class="btnWraaper">
-                    <button class="common_btn" onclick="$.allChkChange(1);">일괄결재</button>
-                    <button class="common_btn" onclick="$.allChkChange(0);">일괄취소</button>
+                    <button class="common_btn" onclick="approveReceiptsList()">일괄결재</button>
+                    <button class="common_btn" onclick="cancelApproval()">일괄취소</button>
                 </div>
             </div>
 

@@ -294,7 +294,7 @@
 }
 
 #invite {
-    width: 35%;
+    width: 50%;
     height: var(--main-height);
     text-align:center;
     line-height: var(--line-height);
