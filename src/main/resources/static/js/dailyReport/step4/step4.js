@@ -34,8 +34,6 @@ function printTable(datas){
     // 테이블, 데이터 검색 텍스트, 테이블 헤더 정렬 태그 및 플래그
     const colGroup = document.querySelector(".lastCol");
     const tableBody = document.querySelector(".list-table tbody");
-    // const comment = document.querySelector(".total");
-    // const totalAmt = document.querySelector(".cashNbtns");
     const firstFlag = tableSort();
 
     let cost = 0;
@@ -112,19 +110,6 @@ function printTable(datas){
             tableBody.appendChild(row);
         })
     }
-
-    // // 텍스트 출력
-    // comment.innerHTML = `
-    //                 데이터
-    //                 <span>${datas.length}</span>건(총대수:
-    //                 <span>${totalQty}</span>대)이 검색되었습니다.
-    //     `;
-    //
-    // totalAmt.innerHTML = `
-    //                 <p>운반금액(원)<br>${cost.toLocaleString()}</p>
-    //                 <input type="button" value="일괄결재" onclick="submitBtn()">
-    //                 <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
-    // `;
 }
 
 // 텍스트 출력
