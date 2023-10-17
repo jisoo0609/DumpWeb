@@ -25,13 +25,13 @@ public class Step7Controller {
 
     /*제출처 주문 등록*/
     @ResponseBody
-    @RequestMapping(value = "/ajax/orderform", method = RequestMethod.POST)
+    @RequestMapping(value = "/ajax/orderSave", method = RequestMethod.POST)
     public String saveOrder(DailyReportStep7Main dailyReportStep7Main, DailyReportStep7Sub dailyReportStep7Sub) {
         return step7Service.saveOrder(dailyReportStep7Main, dailyReportStep7Sub);
     }
 
     /*제출처 주문 조회*/
-    @RequestMapping(value = "/ajax/orderlist", method = RequestMethod.POST)
+    @RequestMapping(value = "/ajax/orderList", method = RequestMethod.POST)
     @ResponseBody
     public List<DailyReportStep7Sub> dispatchOrderList(DailyReportStep7Main dailyReportStep7Main){
         return step7Service.searchOrderList(dailyReportStep7Main);
