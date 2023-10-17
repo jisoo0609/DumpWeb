@@ -149,15 +149,19 @@ public class Step3Service {
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
-    /*운송정보 삭제- 조건 수정 예정*/
-    public String delete(int sheetsubID){
+    /*운송정보 삭제 - 조건 수정 예정*/
+    public String delete(DailyReportStep3Sub dailyReportStep3Sub){
         Map<String, Object> rtnMap = commonUtil.returnMap();
-        int sheetID=dailyReportStep3SubMapper.findBySheetsubID(sheetsubID);
+
+        int sheetID=dailyReportStep3SubMapper.findBySheetsubID(dailyReportStep3Sub.getSheetsubID());
+        System.out.println("sheetID는?"+sheetID);
         boolean chk1=dailyReportStep3MainMapper.findBySheetID(sheetID);
+        System.out.println("chk1은?"+chk1);
 
         if(chk1==false){
-            //dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
-            dailyReportStep3SubMapper.deleteByOne(sheetsubID);
+            System.out.println("여기까지 도달");
+            dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
+            dailyReportStep3SubMapper.deleteByOne(dailyReportStep3Sub);
             rtnMap.put("httpCode", 200);
         }else{
             rtnMap.put("httpCode", 422);
