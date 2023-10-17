@@ -1,3 +1,8 @@
+// 페이지 로드 후 자동으로 검색처리
+function clickButton(){
+    document.querySelector(".btn_area input").onclick();
+}
+
 // 검색 버튼의 Form 데이터 AJAX POST
 function getList(){
     $.ajax({
@@ -5,7 +10,11 @@ function getList(){
         type: "POST",
         data: $("[name=data_frm]").serialize(),
         success: function(data){
-            printTable(data)//서버에서 받은 데이터 처리할 함수 입력
+            printTable(data);
+            printSummary(data);
+        },
+        error: function(error){
+            alert("오류가 발생했습니다.");
         }
     });
 }

@@ -36,5 +36,26 @@ public class Step8Controller {
     public List<DailyReportStep8> getSelectBoxList(DailyReportStep8OptionForm option) {
         return step8Service.getSelectBoxData(option);
     }
+
+
+    @RequestMapping(value = "/receipts/ajax/details", method = RequestMethod.POST)
+    @ResponseBody
+    public DailyReportStep8 getReceiptsDetails(int sheetsubID, int sheetID) {
+        System.out.println(sheetsubID);
+        return step8Service.getReceiptsDetails(sheetsubID, sheetID);
+    }
+
+    @RequestMapping(value = "/receipts/ajax/approve", method = RequestMethod.POST)
+    @ResponseBody
+    public void approveReceiptsList(DailyReportStep8OptionForm option) {
+        step8Service.approveReceipts(option);
+    }
+
+    @RequestMapping(value = "/receipts/ajax/cancel", method = RequestMethod.POST)
+    @ResponseBody
+    public void cancelApproveReceipts(DailyReportStep8OptionForm option) {
+        step8Service.cancelApprove(option);
+    }
+
 }
 

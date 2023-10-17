@@ -10,8 +10,8 @@
     <sql id="res_table">
         WITH r1 AS
             (
-                SELECT sheetID,carSubmit,sheetSS,CarNo,carSubmitTel
-                FROM tsheet
+                SELECT  t.sheetID,t.carSubmit,t.sheetSS,t.CarNo,t.carSubmitTel,t.writerIDX
+                FROM tsheet t
                 WHERE sheetSS = #{uuserID}
                   AND date BETWEEN ${startDate} AND ${endDate}
             ),
@@ -89,13 +89,15 @@
 
     </select>
 
-
+<!--
     <sql id="sub_table">
         WITH r1 AS
             (
-                SELECT *
-                FROM tsheet
-                WHERE date BETWEEN ${startDate} AND ${endDate}
+                SELECT  t.sheetID,t.carSubmit,t.sheetSS,t.CarNo,t.carSubmitTel
+        FROM tsheet t
+        WHERE sheetSS = #{uuserID}
+          AND date BETWEEN ${startDate} AND ${endDate}
+
             ),
             r2 AS
            (
@@ -112,10 +114,11 @@
 
     <select id="selectCarRecruitmentList" resultType="DailyReportStep1Recruit">
         <include refid="sub_table">
+            <property name="uuserID" value="#{uuserID}"/>
             <property name="startDate" value="#{today}"/>
             <property name="endDate" value="#{today}"/>
         </include>
-        select carSubmit,
+        select
                fromsite,
                tosite,
                item,
@@ -125,7 +128,7 @@
 
 
 
-    </select>
+    </select>-->
 
 
 

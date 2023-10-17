@@ -16,31 +16,12 @@
             WHERE t.carNo = #{CarNo}
     </select>
 
-    <!-- 오늘 날짜의 데이터 가져오는 쿼리   -->
-    <select id="getTodayList" resultType="DailyReportStep4">
-        SELECT t.sheetID,
-               DATE_FORMAT(t.date, '%m.%d') AS date,
-            t.CarNo, t.carSubmit, t.carSubmitTel, t.chk1, t.CurrStatus,
-            s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup,
-            IF(t.date IS NULL, '1999-01-01', t.date) AS date
-        FROM tsheet t
-            JOIN tSheet_sub s ON t.sheetID = s.sheetID2
-        WHERE t.carNo = #{CarNo}
-          AND t.date BETWEEN CURDATE() AND CURDATE()
-    </select>
-<!--    <select id="getTotalTransportAmount" resultType="int">-->
-<!--        SELECT IF(sum(s.Qty * s.Qtyup) IS NULL, 0, sum(s.Qty * s.Qtyup))-->
-<!--        FROM tSheet t-->
-<!--            JOIN tsheet_sub s-->
-<!--        ON t.sheetID = s.sheetID2-->
-<!--        WHERE t.carNo = #{CarNo}-->
-<!--    </select>-->
-
 <!--    조건에 따른 검색-->
     <select id="findCarListByOption" parameterType="DailyReportStep4OptionForm" resultType="DailyReportStep4">
         SELECT t.sheetID,
             DATE_FORMAT(t.date, '%m.%d') AS date,
             t.CarNo, t.carSubmit, t.carSubmitTel, t.chk1, t.CurrStatus,
+            t.chk1, t.sheetSS, t.sheetSS2, writerIDX,
             s.sheetsubID, s.fromsite, s.tosite, s.item, s.Qty, s.Qtyup,
             IF(t.date IS NULL, '1999-01-01', t.date) AS date
         FROM tsheet t
@@ -78,9 +59,6 @@
             <when test="searchType == '3-toSite'">
                 ORDER BY s.tosite ASC, t.date ASC
             </when>
-<!--            <when test="searchType == '6-cost'">-->
-<!--                ORDER BY s.Qtyup ASC, t.date ASC-->
-<!--            </when>-->
         </choose>
     </select>
 

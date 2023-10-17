@@ -1,11 +1,25 @@
-function clickSaveBtn(){
-  const golPop = document.querySelector("#golPop3");
-  golPop.style.display = "flex";
+//function delete() {
+//  $.ajax({
+//    url: "/dailyReprot/ajax/orderDelete",
+//    type: "POST",
+//    data: $("[name=golForm]").serialize(),
+//    async : false,
+//    success: function (data) {
+//
+//    }
+//  })
+//}
+
+function cancel() {
+  // 팝업 창을 숨기는 코드
+  const golPop2 = document.querySelector("#golPop2");
+  golPop2.classList.remove("active");
+  emptyRow();
 }
 
 function save() {
   $.ajax({
-      url: "/dailyReport/ajax/orderform",
+      url: "/dailyReport/ajax/orderSave",
       type: "POST",
       data: $("[name=golForm]").serialize(),
       async : false,
@@ -20,12 +34,17 @@ function save() {
 /* 선택한 옵션을 통해 데이터를 받아올 수 있도록 ajax POST 처리. */
 function bindList() {
   $.ajax({
-      url: "/dailyReport/ajax/orderlist",
+      url: "/dailyReport/ajax/orderList",
       type: "POST",
       data: $("[name=golForm]").serialize(),
       success: function (data) {
         console.log(data);
+        // 팝업 창을 숨기는 코드
+        const golPop3 = document.querySelector("#golPop3");
+        golPop3.classList.remove("active");
+        // 필드 값 초기화
         emptyRow();
+        // 표에 새 행을 추가
         addTableRow(data);
       }
   })
@@ -36,14 +55,14 @@ function bindList() {
 //  const orderDate = $('#date').val(); // 주문일 입력란의 값을 가져옵니다.
 //
 //  $.ajax({
-//    url: "/dailyReprot/ajax/orderDate",
+//    url: "/dailyReprot/ajax/orderlist",
 //    type: "post",
 //      data: $("[name=golForm]").serialize(),
 //      success: function (data) {
 //        console.log(data);
 //        emptyRow();
 //        addTableRow(data);
-//      }k
+//      }
 //  })
 //}
 
@@ -64,23 +83,7 @@ function emptyRow() {
   QtyupInput.value = "";
 }
 
-//function cancelBtn() {
-//  const golPop2 = document.querySelector("#golPop2");
-//  golPop2.style.display = "none";
-//
-//  emptyRow();
-//}
-
-/* js에서 confirmBtn(확인)이 눌릴 수 있도록 처리 */
-function clickConfirmButton(){
-  // 팝업 창을 숨기는 코드
-  const golPop3 = document.querySelector("#golPop3");
-  golPop3.style.display = "none";
-
-  save();
-  bindList();
-}
-
+/* 표에 새 행을 추가 */
 function addTableRow(data) {
   var html;
   if (!data) {
