@@ -666,10 +666,12 @@ textarea {
 	.GolSection table tbody tr td:nth-child(2),
 	.GolSection table tbody tr td:nth-child(3) {
 		width: 15%;
+    white-space: normal; /* 텍스트의 줄 바꿈 허용 */
 	}
 
 	.GolSection table tbody tr td:nth-child(4) {
 		width: 17%;
+    white-space: normal; /* 텍스트의 줄 바꿈 허용 */
 	}
 
 	.GolSection table tbody tr td:nth-child(1),

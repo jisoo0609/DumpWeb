@@ -15,6 +15,19 @@ document.addEventListener("DOMContentLoaded", function () {
     approved();
 });
 
+function valueToIndex(value) {
+    switch (value) {
+      case '상차':
+        return 1;
+      case '하차':
+        return 2;
+      case '제출':
+        return 3;
+      default:
+        return 0;
+    }
+}
+
 function getSheetIDDataByParams(sheetID) {
     $.ajax({
         url: "/dailyReport/form/ajax/details",
@@ -30,6 +43,7 @@ function getSheetIDDataByParams(sheetID) {
             document.getElementById('salesman').value=data.salesman;
             openable2 = true;
             document.getElementById('date').value=data.date;
+            document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
             $.list();
         }
     })
@@ -54,7 +68,7 @@ $.save = function() {
         contentType: false,
         cache: false,
         success: function (data) {
-            $.successSave();
+            //$.successSave();
             $.list();
             $.emptyRow();
         },
@@ -187,20 +201,21 @@ function searchByCarsubmitTel(inputData) {
         success: function(data) {
             console.log('Ajax 요청 성공:', data);
             if(data.list!=null){ //드롭다운 카테고리
-                console.log("list는?", data.list);
+                /* 진행상황 표시 */
+                document.getElementById('CurrStatus').options[valueToIndex(data.list[0].currStatus)].selected = true;
                 openDrop();
             }else{
                 console.log("list data 없음");
             }
 
             if(data.checkData!=null){ //거래처입니다
-                isMember.text("가입된 거래처 입니다");
+                isMember.text("가입된 회원 입니다");
                 $("#inviteBtn").css("margin-left", "5000px");
                 console.log("checkData는?", data.checkData);
             }else{
                 console.log("checkData 없음");
                 isMember.text("");
-                $("#inviteBtn").css("margin-left", "0px");
+                $("#inviteBtn").css("margin-left", "auto");
             }
             listData();
         },
@@ -295,30 +310,38 @@ $.editSales = function(){
     var salesman = $("#salesman").val();
     var carSubmit = $("#carSubmit").val();
     var carSubmitTel = $("#carSubmitTel").val();
+    var CurrStatus = $("#CurrStatus").val();
     var chk1 = $("#checkbox").val();
-    $.ajax({
-        url:"/dailyReport/workspace/ajax/edit/carSubmit",
-        type:"POST",
-        data:{
-            "sheetID":sheetID,
-            "salesman":salesman,
-            "carSubmit":carSubmit,
-            "carSubmitTel":carSubmitTel,
-            "chk1": chk1
-        },
-        success : function (data) {
-            var json = $.parseJSON(data);
-            if(json.httpCode == 200){
-                $.successEdit();
-            }else{
+    if (checkInputs() === 1) {
+        $.ajax({
+            url:"/dailyReport/workspace/ajax/edit/carSubmit",
+            type:"POST",
+            data:{
+                "sheetID":sheetID,
+                "salesman":salesman,
+                "carSubmit":carSubmit,
+                "carSubmitTel":carSubmitTel,
+                "CurrStatus" : CurrStatus,
+                "chk1": chk1
+            },
+            success : function (data) {
+                var json = $.parseJSON(data);
+                if(json.httpCode == 200){
+                    $.successSave();
+                }else{
+                    $.failEdit();
+                }
+            },
+            error: function(error) {
                 $.failEdit();
+                console.error('수정 실패:', error);
             }
-        },
-        error: function(error) {
-            $.failEdit();
-            console.error('수정 실패:', error);
-        }
-    })
+        })
+    } else {
+        $.inputInvalid();
+    }
+
+
 }
 
 $.invite = function () {

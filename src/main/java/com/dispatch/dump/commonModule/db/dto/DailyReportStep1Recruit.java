@@ -1,9 +1,9 @@
 package com.dispatch.dump.commonModule.db.dto;
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
+
 public class DailyReportStep1Recruit {
     //tSheet_sub 테이블
     private int sheetsubID;
@@ -20,4 +20,6 @@ public class DailyReportStep1Recruit {
     // tSheet테이블 : 차량번호
     public String CarNo;
     private String carSubmit;
+    private String date;
+    private int sheetID;
 }
