@@ -128,6 +128,7 @@ input[type = text]{
 
 .cashNbtns{
     display: flex;
+    justify-content: space-between;
     margin: 25px 0;
     padding-left: 2%;
 }

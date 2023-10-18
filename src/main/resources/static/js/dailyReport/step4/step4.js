@@ -128,9 +128,11 @@ function printSummary(datas){
 
     totalAmt.innerHTML = `
                     <p>운반금액(원)<br>${totalQtyup.toLocaleString()}</p>
-                    <input type="button" value="일괄결재" onclick="submitBtn()">
-                    <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
-                    <input type="button" value="이전화면" id="backBtn" onclick="history.go(-1)">
+                    <div>
+                        <input type="button" value="일괄결재" onclick="submitBtn()">
+                        <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
+                        <input type="button" value="이전화면" id="backBtn" onclick="history.go(-1)">
+                    </div>
     `;
 }
 
