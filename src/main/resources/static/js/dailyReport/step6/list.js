@@ -47,12 +47,12 @@ function printList(searchResultData) {
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.forEach((data, index) => {
         const row = document.createElement("tr");
-        let order = [
-            data.drvDate, data.drvClub,
-            data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem,
-            (data.rependchk === true ? 'X' : (data.repaddkm || data.rependdate ? 'O' : 'X')),
-            data.chk2, data.useOil, data.rependdate, data.repaddkm
-        ];
+       let order = [
+                    data.drvDate, data.drvClub,
+                    data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem,
+                    (data.rependchk === true ? 'X' : ((data.rependdate !== '' || data.repaddkm !== null) ? 'O' : 'X')),
+                    data.chk2, data.useOil, data.rependdate, data.repaddkm
+                ];
 
         insertTitleThInFront(order, firstThFlag);
 

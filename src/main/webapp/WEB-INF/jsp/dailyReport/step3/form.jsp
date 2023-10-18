@@ -88,7 +88,7 @@
                                 <span class="content">
                                     <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
                                            list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                           style="margin-left: 75px; width: 90px;" onfocus="fill010()" oninput="validateInput3(this)" onkeyup="searchByCarsubmitTel(this)"
+                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" oninput="validateInput3(this)" onkeyup="searchByCarsubmitTel(this)"
                                     >
                                 </span>
                             </div>
@@ -102,7 +102,7 @@
                             <div class="datediv" style="width: 59%; height: var(--main-height)">
                                 <label class="t10">운행일</label>
                                 <span class="content">
-                                    <input type="text" class="datepicker input" id="date" name="date" style="width: 90px; margin-left: 75px; text-align: left; padding-left: 5px;"
+                                    <input type="text" class="datepicker input" id="date" name="date" style="width: 100px; margin-left: 75px; text-align: left; padding-left: 5px;"
                                         value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="off" onclick="pickDate()" onchange="listData()">
                                 </span>
                             </div>
