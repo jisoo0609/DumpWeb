@@ -102,8 +102,6 @@ function groupAndSumData(searchResultData) {
 // ...
 //금일 차량 배차 현황
 function printDispatchList(searchResultData) {
-    // 데이터 소스 확인: AJAX 요청으로부터 받은 데이터에 CurrStatus 속성이 포함되어 있는지 확인
-    console.log(searchResultData);
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#menusub");
 
@@ -136,7 +134,15 @@ function printDispatchList(searchResultData) {
 function printCarRecruitmentList(searchResultData) {
     const tableBody = document.querySelector("#recruitment");
 
-//일단은 다 뜨게 한번 해보기
+    //팝업기능
+    const popupContainer = document.getElementById("popup-container");
+    const carSubmitSpan = document.querySelector(".car-submit");
+    const salesmanSpan = document.querySelector(".car-salesman");
+    const carSubmitTelSpan = document.querySelector(".car-submitTel");
+
+
+
+//리스트 출력 부분
     searchResultData.forEach(data => {
 
             const row = document.createElement("tr");
@@ -148,7 +154,15 @@ function printCarRecruitmentList(searchResultData) {
                 <td>${data.item}</td>
                 <td>${data.qty}</td>
             `;
+            //팝업기능
+        row.addEventListener("click", () => {
+            carSubmitSpan.textContent = data.carSubmit; //제출처
+            carSubmitTelSpan.textContent = data.carSubmitTel; //제출처 번호
+            carSubmitTelSpan.href = `tel:${data.carSubmitTel}`; // tel: 링크 설정
+            salesmanSpan.textContent = data.salesman; //담당자
 
+            popupContainer.style.display = "flex"; // 팝업 보이기
+        });
 
             tableBody.appendChild(row);
 
@@ -221,5 +235,30 @@ document.addEventListener("DOMContentLoaded", function () {
     // 리다이렉트
     clickListStep5Redirect();
     clickListStep3Redirect();
+  /*  chickList();*/
 });
 
+const popupContainer = document.getElementById("popup-container");
+const closePopupButton = document.getElementById("close-popup");
+
+closePopupButton.addEventListener("click", function() {
+    // 이벤트의 기본 동작(여기서는 링크를 클릭할 때의 기본 동작)을 막습니다.
+    event.preventDefault();
+    // 팝업 창을 숨기기
+    popupContainer.style.display = "none";
+
+});
+
+/*function chickList() {
+    const tableBody = document.querySelector("#recruitment");
+    // 초기에는 팝업을 숨기기
+    popupContainer.style.display = "none";
+
+    tableBody.addEventListener("click", (event) => {
+
+        popupContainer.style.display = "flex"
+
+
+    });
+
+}*/
