@@ -221,5 +221,30 @@ document.addEventListener("DOMContentLoaded", function () {
     // 리다이렉트
     clickListStep5Redirect();
     clickListStep3Redirect();
+    chickList();
 });
 
+const popupContainer = document.getElementById("popup-container");
+const closePopupButton = document.getElementById("close-popup");
+
+closePopupButton.addEventListener("click", function() {
+    // 이벤트의 기본 동작(여기서는 링크를 클릭할 때의 기본 동작)을 막습니다.
+    event.preventDefault();
+    // 팝업 창을 숨기기
+    popupContainer.style.display = "none";
+
+});
+
+function chickList() {
+    const tableBody = document.querySelector("#recruitment");
+    // 초기에는 팝업을 숨기기
+    popupContainer.style.display = "none";
+
+    tableBody.addEventListener("click", (event) => {
+
+        popupContainer.style.display = "flex"
+
+
+    });
+
+}
