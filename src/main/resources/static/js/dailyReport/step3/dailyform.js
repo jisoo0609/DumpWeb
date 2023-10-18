@@ -1,4 +1,4 @@
-
+const carsubmittel = $("#carSubmitTel")
 document.addEventListener("DOMContentLoaded", function () {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
@@ -13,7 +13,10 @@ document.addEventListener("DOMContentLoaded", function () {
     $.showChk1;
     recoverState();
     approved();
+    //searchByCarsubmitTel(carsubmittel.value); 여기서 이렇게 부르면 안됨!
 });
+
+
 
 function valueToIndex(value) {
     switch (value) {
@@ -37,12 +40,12 @@ function getSheetIDDataByParams(sheetID) {
             //이 부분 추후 정리할 것
             document.getElementById('carSubmit').value=data.carSubmit;
             openable1 = true;
+            document.getElementById('date').value=data.date;
             document.getElementById('carSubmitTel').value=data.carSubmitTel;
             openable3 = true;
             searchByCarsubmitTel(data.carSubmitTel);
             document.getElementById('salesman').value=data.salesman;
             openable2 = true;
-            document.getElementById('date').value=data.date;
             document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
             $.list();
         }
@@ -78,7 +81,6 @@ $.save = function() {
     })
 }
 
-
 $.list = function() {
     var formData = new FormData($("[name=frm]")[0]);
     $.ajax({
@@ -89,12 +91,14 @@ $.list = function() {
         contentType: false,
         cache: false,
         success: function (data) {
+            document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
+            console.log("$.list() data: ",data.currStatus)
             if(undefined!==data.sheetID){
                 $.saveSheetID(data);
             }
             $.showChk1(data);
             showTransportList(data);
-                 },
+        },
         error: function(xhr, status, error) {
             $.error();
         }
@@ -187,10 +191,9 @@ function searchBySalesman(inputData) {
    });
 }
 
-const carsubmittel = $("#carSubmitTel")
 function searchByCarsubmitTel(inputData) {
     const carSubmitTel = carsubmittel.val();
-    console.log("carSubmitTel : "+carSubmitTel);
+    //console.log("carSubmitTel : "+carSubmitTel);
     let isMember = $("#isMember");
     let inviteBtn = $("#inviteBtn");
 
@@ -202,27 +205,33 @@ function searchByCarsubmitTel(inputData) {
             console.log('Ajax 요청 성공:', data);
             if(data.list!=null){ //드롭다운 카테고리
                 /* 진행상황 표시 */
-                document.getElementById('CurrStatus').options[valueToIndex(data.list[0].currStatus)].selected = true;
+                //console.log("listData는?", data.list)
                 openDrop();
             }else{
                 console.log("list data 없음");
             }
 
-            if(data.checkData!=null){ //거래처입니다
+            if(data.checkData!=null){ // 가입된 거래처
+                //console.log("checkData는?",data.checkData);
                 isMember.text("가입된 회원 입니다");
                 $("#inviteBtn").css("margin-left", "5000px");
-                console.log("checkData는?", data.checkData);
+
             }else{
                 console.log("checkData 없음");
                 isMember.text("");
                 $("#inviteBtn").css("margin-left", "auto");
             }
+
             listData();
         },
         error: function(error) {
             console.error('Ajax 요청 실패:', error);
         }
    });
+}
+
+$.dateSearch = function () {
+    searchByCarsubmitTel(carSubmitTel);
 }
 
 /*제출처 검색*/
