@@ -156,7 +156,7 @@
                 <div class="btnWraaper">
                     <button class="common_btn" onclick="approveReceiptsList()">일괄결재</button>
                     <button class="common_btn" onclick="cancelApproval()">일괄취소</button>
-                    <button class="common_btn back_btn" onclick="confirmGoBack()" style="background:#0068b7; color:white;">이전화면</button>
+                    <button class="common_btn back_btn" onclick="goBack()" style="background:#0068b7; color:white;">이전화면</button>
                 </div>
             </div>
 
