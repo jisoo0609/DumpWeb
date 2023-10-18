@@ -40,7 +40,8 @@
         Qtyup,
         CurrStatus,
         writerIDX,
-        sheetSS2
+        sheetSS2,
+        chk2
 
         from r3
         <where>
