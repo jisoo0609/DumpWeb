@@ -29,20 +29,19 @@ function save() {
 //   console.log($("[name=golForm]").serialize());
 
     //fetch 코드도 고민해볼 것.
-    const checkBoxID = ["chk2","rependchk"];
-    const checkBoxID = ["chk67","rependchk"];
+    const checkBoxID = ["chk1"];
 
     let checkData = "";
 
     checkBoxID.forEach(id => checkData += getCheckParam(id));
-    const formData = $("[name=entry_form]").serialize() + checkData;
+    const formData = $("[name=golForm]").serialize() + checkData;
 
     console.log(formData);
 
   $.ajax({
       url: "/dailyReport/ajax/orderSave",
       type: "POST",
-      data: $("[name=golForm]").serialize(),
+      data: formData,
       async : false,
       success: function (data) {
        console.log("저장완료");
