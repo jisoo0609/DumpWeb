@@ -24,7 +24,12 @@ function cancel() {
 }
 
 function save() {
-   $("#chk67").prop("disabled", false);
+   $("#fromsite").prop("disabled", false);
+   $("#tosite").prop("disabled", false);
+   $("#item").prop("disabled", false);
+   $("#Qty").prop("disabled", false);
+   $("#carNo").prop("disabled", false);
+   $("#Qtyup").prop("disabled", false);
 
 //   console.log($("[name=golForm]").serialize());
 
@@ -124,6 +129,8 @@ function addTableRow(data) {
       // Check if carNo is empty or "미지정"
       if (subData.carNo === "" || subData.carNo === "미지정") {
         html += '<td><button class="miJeongButton">미지정</button></td>';
+      } else if (subData.carNo === "공고" || subData.carNo === "모집공고") {
+        html += '<td><button class="miJeongButton">공고</button></td>';
       } else {
         html += '<td>' + subData.carNo + '</td>';
       }
