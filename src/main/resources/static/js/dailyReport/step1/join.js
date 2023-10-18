@@ -210,15 +210,10 @@ function clickListStep3Redirect() {
     const tableBody = document.querySelector("#menusub");
 
     tableBody.addEventListener("click", (event) => {
-        const sheetSS = event.target.parentElement.getAttribute("data-sheetSS");
-        const writerIDX = event.target.parentElement.getAttribute("data-writerIDX");
+        let sheetID = event.target.parentElement.getAttribute("data-sheetID");
+        let url = "/dailyReport/form" + "?sheetID=" + sheetID;
+        window.location.href = url;
 
-        // sheetSS와 writerIDX가 일치하는 경우에만 리다이렉트
-        if (sheetSS && writerIDX && sheetSS === writerIDX) {
-            const sheetID = event.target.parentElement.getAttribute("data-sheetID");
-            const url = "/dailyReport/form" + "?sheetID=" + sheetID;
-            window.location.href = url;
-        }
     });
 }
 document.addEventListener("DOMContentLoaded", function () {

@@ -32,6 +32,7 @@ public class Step5Controller {
     @RequestMapping(value = "/carcareform/ajax/list", method = RequestMethod.POST)
     @ResponseBody
     public List<DailyReportStep5> tDriveList(String date) {
+        System.out.println(step5Service.findTDriveList(date));
         return step5Service.findTDriveList(date);
     }
 
