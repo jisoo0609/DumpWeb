@@ -14,6 +14,7 @@ public class DailyReportStep8 {
     private String salesman;        // LINE :: 제출처 담당자
     private String CurrStatus;      // LINE :: 배차상태
     private int writerIDX;          // LINE :: 작성자 idx
+    private Integer sheetSS2;       // LINE :: 제출처 idx
 
     //tSheet_sub테이블
     private int sheetsubID;
