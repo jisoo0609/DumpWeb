@@ -91,12 +91,15 @@ $.list = function() {
         contentType: false,
         cache: false,
         success: function (data) {
-            document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
-            console.log("$.list() data: ",data.currStatus)
+            //console.log(JSON.stringify(data, null, 2));
+            console.log("운송 DATA는?"+JSON.stringify(data));
+            //document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
+            //console.log("$.list() data: ",data.currStatus)
             if(undefined!==data.sheetID){
                 $.saveSheetID(data);
             }
-            $.showChk1(data);
+            //$.showChk1(data);
+
             showTransportList(data);
         },
         error: function(xhr, status, error) {
@@ -115,7 +118,7 @@ $.saveSheetID = function(data){
     document.getElementById("sheetID").value=data.sheetID;
 }
 
-function showTransportList(data){
+/*function showTransportList(data){
     let html;
     if (!data) {
         html = '   <td colspan="5" style="text-align: center;">저장된 운송 정보가 없습니다</td>';
@@ -124,6 +127,32 @@ function showTransportList(data){
         html = '<table>';
         for (let i = 0; i < data.dailyReportStep3SubList.length; i++) {
             let subData = data.dailyReportStep3SubList[i];
+            let rowId = 'row' + i;
+            html += '<tr id="' + rowId + '" onclick="fillPop(event)">';
+            html += '   <td>' + subData.fromsite + '</td>';
+            html += '   <td>' + subData.tosite + '</td>';
+            html += '   <td>' + subData.item + '</td>';
+            html += '   <td>' + subData.qty + '</td>';
+            html += '   <td>' + subData.rem + '</td>';
+            html += '   <td style="display: none;">' + subData.sheetsubID + '</td>';
+            html += '   <td style="display: none;">' + subData. qtyup + '</td>';
+            html += '</tr>';
+        }
+        html += '</table>';
+    }
+        // 데이터를 표시할 위치에 추가
+        $('#transportContainer').html(html);
+}*/
+
+function showTransportList(data){
+    let html;
+    if (!data) {
+        html = '   <td colspan="5" style="text-align: center;">저장된 운송 정보가 없습니다</td>';
+    } else {
+        // 서버에서 반환된 데이터를 이용하여 테이블 형태로 생성
+        html = '<table>';
+        for (let i = 0; i < data.length; i++) {
+            let subData = data[i];
             let rowId = 'row' + i;
             html += '<tr id="' + rowId + '" onclick="fillPop(event)">';
             html += '   <td>' + subData.fromsite + '</td>';

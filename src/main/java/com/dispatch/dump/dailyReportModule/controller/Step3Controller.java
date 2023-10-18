@@ -43,9 +43,15 @@ public class Step3Controller {
     }
 
     /*목록조회*/
-    @RequestMapping(value = "/workspace/ajax/list", method = RequestMethod.POST)
+    /*    @RequestMapping(value = "/workspace/ajax/list", method = RequestMethod.POST)
     @ResponseBody
     public DailyReportStep3Main list(DailyReportStep3Main dailyReportStep3Main) {
+        return step3Service.list(dailyReportStep3Main);
+    }*/
+
+    @RequestMapping(value = "/workspace/ajax/list", method = RequestMethod.POST)
+    @ResponseBody
+    public List<DailyReportStep3Sub> list(DailyReportStep3Main dailyReportStep3Main) {
         return step3Service.list(dailyReportStep3Main);
     }
 

@@ -19,6 +19,8 @@ public interface DailyReportStep3SubMapper {
 
     DailyReportStep3Sub findBySheetsubIDAll(int sheetsubID);
 
+    List<DailyReportStep3Sub> selectAll(DailyReportStep3Main dailyReportStep3Main);
+
     /* FUNCTION ::  수정 */
     int editByTransportInfo(DailyReportStep3Sub dailyReportStep3Sub);
 
