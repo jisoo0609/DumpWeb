@@ -9,11 +9,12 @@ public class DailyReportStep8 {
     private String CarNo;           // LINE :: 차량번호
     private String carSubmit;       // LINE :: 제출처
     private String carSubmitTel;    // LINE :: 제출처 연락처
-    private Boolean chk1;           // LINE :: 결재여부
+    private Boolean chk2;           // LINE :: 제출처 확인 여부
     private String date;            // LINE :: 운행일
     private String salesman;        // LINE :: 제출처 담당자
     private String CurrStatus;      // LINE :: 배차상태
     private int writerIDX;          // LINE :: 작성자 idx
+    private Integer sheetSS2;       // LINE :: 제출처 idx
 
     //tSheet_sub테이블
     private int sheetsubID;

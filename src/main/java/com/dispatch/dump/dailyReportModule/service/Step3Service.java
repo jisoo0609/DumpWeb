@@ -94,8 +94,15 @@ public class Step3Service {
     }
 
     //전체목록 조회
-    public DailyReportStep3Main list(DailyReportStep3Main dailyReportStep3Main) {
+    /*    public DailyReportStep3Main list(DailyReportStep3Main dailyReportStep3Main) {
         return dailyReportStep3MainMapper.findAllCarSubmitInfo(dailyReportStep3Main);
+    }*/
+
+    public List<DailyReportStep3Sub> list(DailyReportStep3Main dailyReportStep3Main) {
+        dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+        List<DailyReportStep3Sub> result=dailyReportStep3SubMapper.selectAll(dailyReportStep3Main);
+        System.out.println("result는?"+result);
+        return result;
     }
 
     //제출처 카테고리 생성용

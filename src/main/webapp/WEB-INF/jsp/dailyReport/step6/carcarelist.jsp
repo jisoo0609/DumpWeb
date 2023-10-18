@@ -86,7 +86,7 @@
         <div class="btnWraaper">
             <button class="common_btn" onclick="PayCarList()">일괄결재</button>
             <button class="common_btn" onclick="cancelCarList()">일괄취소</button>
-            <button class="common_btn back_btn" onclick="confirmGoBack()">이전화면</button>
+            <button class="common_btn back_btn" onclick="goBack()">이전화면</button>
         </div>
     </div>
     <div class="line"></div>
