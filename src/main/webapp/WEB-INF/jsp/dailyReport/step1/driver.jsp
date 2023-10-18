@@ -377,7 +377,10 @@
                 <p>제출처 : <span class="car-submit"></span></p>
             </div>
             <div>
-                <p>전화번호 :<span class="car-submitTel"></span></p>
+                <p>담당자 :<span class="car-salesman"></span></p>
+            </div>
+            <div>
+                <p>전화번호 :<a class="car-submitTel" href="#"></a></p>
             </div>
             <div>
                 <button id="close-popup">닫기</button>
