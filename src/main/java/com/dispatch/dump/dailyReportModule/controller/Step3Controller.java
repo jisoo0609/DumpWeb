@@ -55,15 +55,15 @@ public class Step3Controller {
         return step3Service.searchByCarSubmit(dailyReportStep3Main);
     }
 
+
     @RequestMapping(value = "/search/carSubmitTel", method = RequestMethod.GET)
     @ResponseBody
     public Map<String, Object> carSubmitTelList(DailyReportStep3Main dailyReportStep3Main) {
         Map<String, Object> resultMap = new HashMap<>();
         List<DailyReportStep3Main> list = step3Service.searchByCarSubmitTel(dailyReportStep3Main);
-
+        System.out.println("list는?"+list);
         Login login = new Login();
         login.setUserId(dailyReportStep3Main.getCarSubmitTel());
-
 
         Login checkData = step3Service.findByUserInfo(login);
 
@@ -93,8 +93,8 @@ public class Step3Controller {
 
     @RequestMapping(value = "/workspace/ajax/delete", method = RequestMethod.GET)
     @ResponseBody
-    public String delete(int sheetsubID) {
-        return step3Service.delete(sheetsubID);
+    public String delete(DailyReportStep3Sub dailyReportStep3Sub) {
+        return step3Service.delete(dailyReportStep3Sub);
     }
 
 

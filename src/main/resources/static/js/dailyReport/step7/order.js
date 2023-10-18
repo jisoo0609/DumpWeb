@@ -18,6 +18,8 @@ function cancel() {
 }
 
 function save() {
+   $("#chk67").prop("disabled", false);
+
   $.ajax({
       url: "/dailyReport/ajax/orderSave",
       type: "POST",
@@ -108,11 +110,11 @@ function addTableRow(data) {
         html += '<td>' + subData.carNo + '</td>';
       }
 
+
       html += '</tr>';
     }
     html += '</table>';
   }
     // 데이터를 표시할 위치에 추가
     $('#tBody').html(html);
-
 }
