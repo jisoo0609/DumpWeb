@@ -84,9 +84,7 @@ function groupAndSumData(searchResultData) {
         if (!groupedData[key]) {
             groupedData[key] = {
                 sheetID: data.sheetID,
-                sheetSS: data.sheetSS,
-                writerIDX: data.writerIDX,
-
+                currStatus: data.currStatus,
                 carSubmit:data.carSubmit,
                 fromsite: data.fromsite,
                 tosite: data.tosite,
@@ -104,6 +102,8 @@ function groupAndSumData(searchResultData) {
 // ...
 //금일 차량 배차 현황
 function printDispatchList(searchResultData) {
+    // 데이터 소스 확인: AJAX 요청으로부터 받은 데이터에 CurrStatus 속성이 포함되어 있는지 확인
+    console.log(searchResultData);
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#menusub");
 
@@ -114,18 +114,19 @@ function printDispatchList(searchResultData) {
     groupedData.forEach(data => {
         const row = document.createElement("tr");
 
+        // 'CurrStatus'가 '배차'인 경우 배경색 변경
+        if (data.currStatus === '배차') {
+            row.style.backgroundColor = '#84B8E8'; // 원하는 배경색으로 변경하세요.
+        }
+
         row.innerHTML = `
             <td>${data.carSubmit}</td>
             <td>${data.fromsite}</td>
             <td>${data.tosite}</td>
             <td>${data.item}</td>
             <td>${data.qty}</td>
-
-         `;
+        `;
         row.setAttribute("data-sheetID", data.sheetID);
-        row.setAttribute("data-sheetSS", data.sheetSS);
-        row.setAttribute("data-writerIDX",data.writerIDX);
-
 
         tableBody.appendChild(row);
     });
