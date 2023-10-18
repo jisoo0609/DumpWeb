@@ -53,8 +53,8 @@ function printDispatchList(searchResultData) {
                     <td>${order[4]}</td> 
                  `;
 
-         row.setAttribute("data-user-position", data.userPosition);
-         row.setAttribute("data-sheet-id", data.sheetID);
+        row.setAttribute("data-sheet-sub-ss2", data.sheetsubSS2);
+        row.setAttribute("data-sheet-id", data.sheetID);
         tableBody.appendChild(row);
     });
 
@@ -72,18 +72,30 @@ function clickListThAndRedirect() {
     tableBody.addEventListener("click", (event) => {
         const parentRow = event.target.closest("tr");
         if (parentRow) {
-            const userPosition = parentRow.getAttribute("data-user-position");
             const sheetID = parentRow.getAttribute("data-sheet-id");
 
             if (sheetID === null) {
-                 return;
+                return;
+            }
+console.log(sheetID)
+
+            const sheetSubSS2 = parentRow.getAttribute("data-sheet-sub-ss2");
+console.log(sheetSubSS2)
+            if (sheetSubSS2 !== null) {
+                const uuserID = document.querySelector('input[name="sheetSubSS2"]').value;
+console.log(uuseerID)
+                if(sheetSubSS2 ===  uuserID){
+                    const url = `/dailyReport/orderform?groupSheetID=${sheetID}`;
+                    window.location.href = url;
+                }
+
             }
 
-            if(userPosition==='manager'){
-                const url = `/dailyReport/orderform?sheetID=${sheetID}`;
-                 window.location.href = url;
-            }
-       }
+            // if (userPosition === 'manager') {
+            //     const url = `/dailyReport/orderform?sheetID=${sheetID}`;
+            //     window.location.href = url;
+            // }
+        }
     });
 }
 
