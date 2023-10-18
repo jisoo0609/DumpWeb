@@ -57,13 +57,11 @@ function clickListThAndRedirect(){
             console.log("writerIDX?" + writerIDX)
             console.log("sheetSS2?" + sheetSS2)
 
-            if (status === "제출") {
-                // "제출" 상태일 때 form.jsp로 이동
+            if (status === "제출") {  // "제출" 상태일 때는 무조건 step3로 이동
                 window.location.href = "/dailyReport/form" + "?sheetID=" +  sheetID;
-            } else if (status === "배차" && writerIDX === sheetSS2) {
-                // "배차" 상태일 때 orderform.jsp로 이동
+            } else if (status === "배차" && writerIDX === sheetSS2) { // "배차" 상태일 때 작성자가 나자신이면 step7로 이동
                 window.location.href = "/dailyReport/orderform" + "?subID=" +  subID + "&sheetID=" + sheetID;
-            }else if (status ==="배차" && writerIDX != sheetSS2) {
+            }else if (status ==="배차" && writerIDX != sheetSS2) { // "배차" 상태일 때 작성자가 기사면 알림 띄우고 이동은 x
                 console.log("기사가 등록한 전표입니다.")
                 alert("기사가 등록한 전표입니다.")
             }

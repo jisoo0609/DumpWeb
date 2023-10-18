@@ -78,11 +78,11 @@
             </li>
             <li>
               <label class="golLabel" for="carNo"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호"></span>
-              <div class="checkbox2">
-                <input id="chk67" type="checkbox">
-                <label class="check67" for="chk67">모집공고</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-              </div>
+              <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호 또는 모집공고"></span>
+<%--              <div class="checkbox2">--%>
+<%--                <input id="chk67" type="checkbox">--%>
+<%--                <label class="check67" for="chk67">모집공고</label> <!--? 결제 체크박스 클릭시 수정 불가 -->--%>
+<%--              </div>--%>
             </li>
             <li>
               <label class="golLabel" for="Qtyup"> 운반비 </label>
