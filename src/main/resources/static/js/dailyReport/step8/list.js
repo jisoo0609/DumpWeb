@@ -65,6 +65,7 @@ function printList(searchResultData) {
         row.setAttribute("receipt-subID", data.sheetsubID);
         row.setAttribute("receipt-sheetID", data.sheetID);
         row.setAttribute("receipt-writerIDX", data.writerIDX);
+        row.setAttribute("receipt-sheetSS2", data.sheetSS2);
         tableBody.appendChild(row);
     });
 
