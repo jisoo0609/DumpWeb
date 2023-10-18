@@ -9,4 +9,5 @@ public interface DailyReportStep7SubMapper {
     /* FUNCTION ::  등록 */
     int insertDailyReportStep7sub(DailyReportStep7Sub DailyReportStep7Sub);
 
+    DailyReportStep7Sub findSubInfoBySheetSubID(int sheetSubID);
 }

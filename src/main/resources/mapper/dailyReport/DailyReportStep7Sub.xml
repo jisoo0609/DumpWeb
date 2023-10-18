@@ -21,4 +21,9 @@
 
     </insert>
 
+    <!-- 제출처 상세정보 조회-->
+    <select id="findSubInfoBySheetSubID" parameterType="int" resultType="DailyReportStep7Sub">
+        SELECT * FROM tsheet_sub WHERE sheetSubID = #{sheetSubID}
+    </select>
+
 </mapper>

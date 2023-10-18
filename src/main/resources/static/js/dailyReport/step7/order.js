@@ -109,12 +109,14 @@ function addTableRow(data) {
   if (!data) {
     html = '<tr><td colspan="6" style="text-align: center;">입력된 정보가 없습니다.</td></tr>';
   } else {
-    html = '<table>';
+    // html = '<table>';
+    html = '';
+      console.log(data.length);
     for (var i = 0; i < data.length; i++) {
       var subData = data[i];
-      var rowId = 'row' + i;
+      var rowId = i+1;
       html += '<tr>';
-      html += '<td>' + (i+1) + '</td>';
+      html += '<td>' + rowId + '</td>';
       html += '<td>' + subData.fromsite + '</td>';
       html += '<td>' + subData.tosite + '</td>';
       html += '<td>' + subData.item + '</td>';
@@ -123,7 +125,7 @@ function addTableRow(data) {
 
       // Check if carNo is empty or "미지정"
       if (subData.carNo === "" || subData.carNo === "미지정") {
-        html += '<td><button class="miJeongButton">미지정</button></td>';
+        html += '<td><button type="button" class="miJeongButton" onclick="openPopupTest(\'dispatchform\', '+ subData.sheetsubID +');">미지정</button></td>';
       } else {
         html += '<td>' + subData.carNo + '</td>';
       }
@@ -132,7 +134,8 @@ function addTableRow(data) {
 
       html += '</tr>';
     }
-    html += '</table>';
+    console.log(html);
+    // html += '</table>';
   }
     // 데이터를 표시할 위치에 추가
     $('#tBody').html(html);
