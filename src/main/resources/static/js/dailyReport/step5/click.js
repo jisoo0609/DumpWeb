@@ -53,7 +53,11 @@ function save() {
 
         }
     })
+    const drvDateInput = document.getElementById("reg-date");
+    const drvDateValue = drvDateInput.value;
     theForm.reset();
+
+    drvDateInput.value = drvDateValue;
 }
 
 function bindList() {
