@@ -20,15 +20,13 @@ function getSheetsubIDDataByParams(sheetsubID, sheetID) {
         type: "POST",
         data: {sheetsubID: sheetsubID , sheetID: sheetID},
         success: function (data) {
-            //이 부분 추후 정리할 것
+            document.getElementById('date').value=data.date;
             document.getElementById('fromsite').value=data.fromsite;
             document.getElementById('tosite').value=data.tosite;
             document.getElementById('item').value=data.item;
             document.getElementById('Qty').value=data.qty;
             document.getElementById('carNo').value=data.carNo;
-
             document.getElementById('Qtyup').value=data.qtyup;
-            // $.list();
         }
     })
 }

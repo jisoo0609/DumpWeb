@@ -14,7 +14,7 @@
         useOil,
         drvrem,
         rependchk,
-        IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
+        IF(rependdate IS NULL, '',rependdate) AS 'rependdate',
         repaddkm
         FROM   tdrive
         WHERE  carno = #{carNo}

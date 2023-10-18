@@ -30,6 +30,20 @@ function cancelApproval() {
     })
 }
 
+// 이전화면 버튼 클릭 시 실행되는 함수
+function goBack(){
+    window.history.back();
+};
+
+function confirmGoBack(){
+    let confirmation = confirm("이전 화면으로 돌아가시겠습니까?");
+
+    if(confirmation){
+        goBack();
+    }
+}
+
+
 /* js를 통해 search_btn이 눌릴 수 있도록 처리 */
 function clickSearchButton(){
     document.querySelector(".search_btn").onclick();

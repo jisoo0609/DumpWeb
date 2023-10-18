@@ -84,6 +84,9 @@ function groupAndSumData(searchResultData) {
         if (!groupedData[key]) {
             groupedData[key] = {
                 sheetID: data.sheetID,
+                sheetSS: data.sheetSS,
+                writerIDX: data.writerIDX,
+
                 carSubmit:data.carSubmit,
                 fromsite: data.fromsite,
                 tosite: data.tosite,
@@ -120,6 +123,9 @@ function printDispatchList(searchResultData) {
 
          `;
         row.setAttribute("data-sheetID", data.sheetID);
+        row.setAttribute("data-sheetSS", data.sheetSS);
+        row.setAttribute("data-writerIDX",data.writerIDX);
+
 
         tableBody.appendChild(row);
     });
@@ -206,12 +212,10 @@ function clickListStep3Redirect() {
     tableBody.addEventListener("click", (event) => {
         let sheetID = event.target.parentElement.getAttribute("data-sheetID");
         let url = "/dailyReport/form" + "?sheetID=" + sheetID;
-
-
         window.location.href = url;
+
     });
 }
-
 document.addEventListener("DOMContentLoaded", function () {
     // 리다이렉트
     clickListStep5Redirect();

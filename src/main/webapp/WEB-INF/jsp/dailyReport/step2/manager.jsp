@@ -8,6 +8,7 @@
     <article class="homescreen">
         <div class="date-container">
             <form name="option_frm">
+                <input type="hidden" name="sheetsubSS2" value="${sessionScope.loginInfo.uuserID}"/>
                 <div class="date-picker">
 
                     <label class="start-text" for="start-date">운행일
@@ -75,7 +76,7 @@
         <section>
 
             <p class="today-car">금일 배차 현황</p>
-            <a href="/dailyReport/form">
+            <!-- <a href="/dailyReport/form"> -->
             <table class="today-graph">
 
                 <thead>
@@ -93,7 +94,7 @@
                 </tbody>
 
             </table>
-                </a>
+               <!--  </a> -->
 
             <p class="car-care">제출 받은 일보</p>
     <a href="/dailyReport/receipts">

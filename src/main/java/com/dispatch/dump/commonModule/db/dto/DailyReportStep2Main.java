@@ -5,14 +5,27 @@ import lombok.Data;
 @Data
 public class DailyReportStep2Main {
 
-    // tSheet 테이블
     private int sheetID;
+
     private String CarNo;           // LINE :: 차량번호
+
     private String carSubmit;       // LINE :: 제출처
+
     private String carSubmitTel;    // LINE :: 제출처 연락처
+
     private Boolean chk1;           // LINE :: 결재여부
+
     private String date;            // LINE :: 운행일
+
     private String salesman;        // LINE :: 제출처 담당자
+
+    private int sheetSS;            // LINE :: 운전자 idx
+
+    private int sheetSS2;           // LINE :: 제출처 idx
+
+    private Integer sheetsubSS;          // LINE :: 회원 idx
+
+    private Integer sheetsubSS2;         // LINE :: 제출처 idx
     
     // VO
     //private long idx;
