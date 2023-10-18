@@ -62,14 +62,19 @@ function clickListThAndRedirect(){
             let subID = event.target.parentElement.getAttribute("receipt-subID")
             let sheetID = event.target.parentElement.getAttribute("receipt-sheetID")
             let writerIDX = event.target.parentElement.getAttribute("receipt-writerIDX") //작성자구별은 추후 구현
+            let sheetSS2 = event.target.parentElement.getAttribute("receipt-sheetSS2")
             console.log("writerIDX?" + writerIDX)
+            console.log("sheetSS2?" + sheetSS2)
 
             if (status === "제출") {
                 // "제출" 상태일 때 form.jsp로 이동
                 window.location.href = "/dailyReport/form" + "?sheetID=" +  sheetID;
-            } else if (status === "배차") {
+            } else if (status === "배차" && writerIDX === sheetSS2) {
                 // "배차" 상태일 때 orderform.jsp로 이동
                 window.location.href = "/dailyReport/orderform" + "?subID=" +  subID + "&sheetID=" + sheetID;
+            }else if (status ==="배차" && writerIDX != sheetSS2) {
+                console.log("기사가 등록한 전표입니다.")
+                alert("기사가 등록한 전표입니다.")
             }
         }
     });
