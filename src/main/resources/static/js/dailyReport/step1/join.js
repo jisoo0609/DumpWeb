@@ -135,6 +135,9 @@ function printDispatchList(searchResultData) {
 //금일 차량 모집 공고
 function printCarRecruitmentList(searchResultData) {
     const tableBody = document.querySelector("#recruitment");
+    const popupContainer = document.getElementById("popup-container");
+    const carSubmitSpan = document.querySelector(".car-submit");
+    const carSubmitTelSpan = document.querySelector(".car-submitTel");
 
 //일단은 다 뜨게 한번 해보기
     searchResultData.forEach(data => {
@@ -148,7 +151,12 @@ function printCarRecruitmentList(searchResultData) {
                 <td>${data.item}</td>
                 <td>${data.qty}</td>
             `;
-
+        row.addEventListener("click", () => {
+            // When a row is clicked, show the popup and populate it with the data
+            carSubmitSpan.textContent = data.carSubmit; // Populate the '제출처' in the popup
+            carSubmitTelSpan.textContent = data.carSubmitTel;
+            popupContainer.style.display = "flex"; // Show the popup
+        });
 
             tableBody.appendChild(row);
 
@@ -221,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 리다이렉트
     clickListStep5Redirect();
     clickListStep3Redirect();
-    chickList();
+  /*  chickList();*/
 });
 
 const popupContainer = document.getElementById("popup-container");
@@ -235,7 +243,7 @@ closePopupButton.addEventListener("click", function() {
 
 });
 
-function chickList() {
+/*function chickList() {
     const tableBody = document.querySelector("#recruitment");
     // 초기에는 팝업을 숨기기
     popupContainer.style.display = "none";
@@ -247,4 +255,4 @@ function chickList() {
 
     });
 
-}
+}*/

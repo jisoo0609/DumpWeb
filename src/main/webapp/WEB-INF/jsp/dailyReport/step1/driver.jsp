@@ -377,7 +377,7 @@
                 <p>제출처 : <span class="car-submit"></span></p>
             </div>
             <div>
-                <p>전화번호 :</p>
+                <p>전화번호 :<span class="car-submitTel"></span></p>
             </div>
             <div>
                 <button id="close-popup">닫기</button>
