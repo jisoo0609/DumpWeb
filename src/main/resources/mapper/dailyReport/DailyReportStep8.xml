@@ -96,6 +96,55 @@
         where sheetsubID=#{sheetsubID} and sheetID =#{sheetID}
     </select>
 
+    <update id="approveReceipts" parameterType="DailyReportStep8OptionForm">
+        UPDATE tsheet
+        SET chk2 = 1
+        WHERE sheetid IN (
+        SELECT tsheet.sheetid
+        FROM tsheet
+        JOIN tsheet_sub ON tsheet.sheetid = tsheet_sub.sheetid2
+        WHERE tsheet.sheetSS2 = #{sheetSS2}
+        AND tsheet.date BETWEEN #{startDate} AND #{endDate}
+        AND tsheet_sub.sheetsubSS2 = #{sheetsubSS2}
+        <if test="CarNo != ''">
+            AND tsheet.CarNo = #{CarNo}
+        </if>
+        <if test="fromsite != ''">
+            AND tsheet_sub.fromsite = #{fromsite}
+        </if>
+        <if test="tosite != ''">
+            AND tsheet_sub.tosite = #{tosite}
+        </if>
+        <if test="item != ''">
+            AND tsheet_sub.item = #{item}
+        </if>
+        )
+    </update>
+
+    <update id="cancelApproval" parameterType="DailyReportStep8OptionForm">
+        UPDATE tsheet
+        SET chk2 = 0
+        WHERE sheetid IN (
+        SELECT tsheet.sheetid
+        FROM tsheet
+        JOIN tsheet_sub ON tsheet.sheetid = tsheet_sub.sheetid2
+        WHERE tsheet.sheetSS2 = #{sheetSS2}
+        AND tsheet.date BETWEEN #{startDate} AND #{endDate}
+        AND tsheet_sub.sheetsubSS2 = #{sheetsubSS2}
+        <if test="CarNo != ''">
+            AND tsheet.CarNo = #{CarNo}
+        </if>
+        <if test="fromsite != ''">
+            AND tsheet_sub.fromsite = #{fromsite}
+        </if>
+        <if test="tosite != ''">
+            AND tsheet_sub.tosite = #{tosite}
+        </if>
+        <if test="item != ''">
+            AND tsheet_sub.item = #{item}
+        </if>
+        )
+    </update>
 
     <!--기존꺼-->
     <!--    <sql id="res_table">-->

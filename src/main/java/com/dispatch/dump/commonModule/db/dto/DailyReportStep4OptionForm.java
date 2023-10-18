@@ -16,6 +16,5 @@ public class DailyReportStep4OptionForm {
     private String tel;       // 전화번호
     private String state;    // 진행상태
     private String selectOption; //검색조건
-//    10.05 추가
     private String searchType; //라디오버튼(정렬기준)
 }

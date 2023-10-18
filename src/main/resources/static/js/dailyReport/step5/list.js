@@ -39,16 +39,11 @@ function printList(searchResultData) {
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.slice(0, 10).forEach((data, index) => {
         const row = document.createElement("tr");
-        if(data.rependdate === '0000-00-00 00:00:00'){
-            data.rependdate = '';
-        }
-        if(data.repaddkm === 0){
-        data.repaddkm = ''
-        }
+
          let order = [
              data.drvDate, data.drvClub,
              data.lastKm.toLocaleString(), data.useAmt.toLocaleString(), data.drvRem,
-             (data.rependchk === true ? 'X' : ((data.rependdate !== '' || data.repaddkm !== '') ? 'O' : 'X')),
+             (data.rependchk === true ? 'X' : ((data.rependdate !== '' || data.repaddkm !== null) ? 'O' : 'X')),
              data.chk2, data.useOil, data.rependdate, data.repaddkm
          ];
 

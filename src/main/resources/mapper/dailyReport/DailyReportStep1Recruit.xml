@@ -9,8 +9,8 @@
 
         WITH r1 AS
             (
-                SELECT  t.sheetID,t.carSubmit,t.sheetSS,t.CarNo,t.carSubmitTel
-                FROM tsheet t
+                SELECT  *
+                FROM tsheet
                 WHERE date BETWEEN ${startDate} AND ${endDate}
 
             ),

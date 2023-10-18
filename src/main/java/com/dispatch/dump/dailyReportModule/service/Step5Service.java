@@ -27,7 +27,24 @@ public class Step5Service {
     public String saveTDrive(DailyReportStep5 dailyReportStep5) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
 
+        System.out.println(dailyReportStep5.getRependdate());
+
         System.out.println(dailyReportStep5);
+
+        // 필수 항목의 빈 값 체크
+        if (dailyReportStep5.getDrvClub() == null || dailyReportStep5.getDrvDate() == null ||
+                dailyReportStep5.getLastKm() == 0 || dailyReportStep5.getUseAmt() == 0) {
+            rtnMap.put("httpCode", 400); // 클라이언트 오류를 나타내는 HTTP 상태 코드 (Bad Request)
+            rtnMap.put("message", "모든 필수 항목을 입력해 주세요.");
+            return commonUtil.jsonFormatTransfer(rtnMap);
+        }
+//        if ("요소수".equals(dailyReportStep5.getDrvClub())) {
+//            if (dailyReportStep5.getRependdate() == null || dailyReportStep5.getRepaddkm() == 0) {
+//                rtnMap.put("httpCode", 400);
+//                rtnMap.put("message", "요소수 항목을 선택하면 교환 예정일과 교환 주행거리를 입력해야 합니다.");
+//                return commonUtil.jsonFormatTransfer(rtnMap);
+//            }
+//        }
 
 
         try {

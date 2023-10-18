@@ -32,12 +32,19 @@ public class Step2Service {
     }
 
     public DailyReportStep2Summary findCalSummary(DailyReportStep2Option option) {
-        return dailyReportStep2Mapper.selectCalSummary(option, getSessionLoginData().getUserId());
+
+        option.setSheetSS2(Integer.parseInt(getSessionLoginData().getUuserID()));
+        option.setSheetsubSS2(Integer.parseInt(getSessionLoginData().getUuserID()));
+        System.out.println("SS2?" + option.getSheetSS2());
+        System.out.println("subSS2?" + option.getSheetsubSS2());
+
+        return dailyReportStep2Mapper.selectCalSummary(option);
     }
 
     public List<DailyReportStep2Sub> findDispatchStatusList() {
-        System.out.println( dailyReportStep2Mapper.selectDispatchStatusList(getSessionLoginData().getUserId(),getToday()));
-        return dailyReportStep2Mapper.selectDispatchStatusList(getSessionLoginData().getUserId(),getToday());
+        String uuserID = getSessionLoginData().getUuserID();
+        System.out.println( dailyReportStep2Mapper.selectDispatchStatusList(uuserID,getToday()));
+        return dailyReportStep2Mapper.selectDispatchStatusList(uuserID,getToday());
     }
 
 
