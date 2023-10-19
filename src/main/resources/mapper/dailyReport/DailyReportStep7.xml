@@ -17,4 +17,17 @@
     <select id="findCarNoByLoginData" parameterType="DailyReportStep7CarNo" resultType="DailyReportStep7CarNo">
         SELECT * FROM tsheet_carno WHERE carNoSS2 = #{carNoSS2}
     </select>
+
+    <insert id="autoDispatchData" parameterType="DailyReportStep7CarNo">
+        INSERT INTO tSheet(carNo, date, carSubmit, carSubmitTel, salesman, sheetSS2, CurrStatus, writerIDX) SELECT #{carNoFull} as carNo, date, carSubmit, carSubmitTel, salesman, sheetSS2, CurrStatus, writerIDX FROM tsheet WHERE sheetID = #{parentID}
+        <selectKey order="AFTER" resultType="int" keyProperty="parentID">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+    <insert id="autoDispatchSubDataSub" parameterType="DailyReportStep7CarNo">
+        INSERT INTO tSheet_sub(SheetID2, fromsite, tosite, item, qty, qtyUp, sheetsubSS2, writerIDX2) SELECT #{parentID}, fromsite, tosite,item, #{carQty}, qtyUp, sheetsubSS2, writerIDX2 FROM tsheet_sub WHERE sheetsubID = #{subID}
+    </insert>
+    <update id="updateQtyParentsData" parameterType="DailyReportStep7Sub">
+        UPDATE tSheet_sub SET qty = (qty - #{qty}) WHERE sheetsubID = #{sheetsubID}
+    </update>
 </mapper>

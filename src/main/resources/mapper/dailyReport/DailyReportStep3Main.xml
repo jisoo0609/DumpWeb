@@ -90,6 +90,7 @@
         select carSubmit, carSubmitTel, salesman
         from tSheet
         where carSubmitTel like CONCAT('%', #{carSubmitTel}, '%')
+        group by carSubmitTel
         order by carSubmitTel asc;
     </select>
 

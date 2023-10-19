@@ -48,19 +48,18 @@
         SUM(Qty) as Qty,
         tosite,
         CarNo,
+        writerIDX,
         SheetID,
-        sheetsubSS2,
         currStatus
         FROM r3
         WHERE currStatus ="배차"
         GROUP BY
+        CarNo,
         fromsite,
         item,
-        tosite,
-        CarNo
+        tosite
     </select>
 
-    <!--
     <select id="submittedReportList" resultType="DailyReportStep2Sub">
         <include refid="res_table">
             <property name="sheetSS2" value="#{uuserID}"/>
@@ -75,15 +74,17 @@
         SUM(Qty) as Qty,
         tosite,
         CarNo,
+        writerIDX,
+        SheetID,
         currStatus
         FROM r3
         WHERE currStatus ="제출"
         GROUP BY
+        CarNo,
         fromsite,
         item,
-        tosite,
-        CarNo
+        tosite
     </select>
-     -->
+
 
 </mapper>
