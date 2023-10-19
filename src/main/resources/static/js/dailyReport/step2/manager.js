@@ -54,7 +54,7 @@ function printDispatchList(searchResultData) {
 
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.forEach((data, index) => {
-        const row1 = document.createElement("tr");
+        const row = document.createElement("tr");
         let order = [
             data.carNo, data.fromsite, data.tosite, data.item, data.qty];
 
@@ -63,7 +63,8 @@ function printDispatchList(searchResultData) {
                     <td>${order[1]}</td>
                     <td>${order[2]}</td> 
                     <td>${order[3]}</td>
-                    <td>${order[4]}</td> 
+                    <td>${order[4]}</td>
+                    <td>${order[5]}</td>
                  `;
 
         row.setAttribute("data-writerIdx", data.writerIDX);
