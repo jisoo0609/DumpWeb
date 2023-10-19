@@ -135,11 +135,16 @@ input[type = text]{
 
 .cashNbtns > p{
     white-space: nowrap;
+    height: 50px;
     border: 1px solid #0068b7;
     color: #0068b7;
     padding: 0 25px;
     line-height: 19px;
-    margin-right: 10%;
+    margin-right: 3%;
+}
+
+.cashNbtns > div{
+    display: flex;
 }
 
 input[value="이전화면"]{
@@ -154,10 +159,11 @@ input[value="이전화면"]{
 input[type = button]{
     background-color: #fff;
     font-weight: 600;
-    width: 70px;
+    text-align: center;
+    width: 32%;
     height: 40px;
     color: #0068b7;
-    margin-right: 5px;
+    margin-right: 3px;
     border: 1px solid #0068b7;
 }
 
