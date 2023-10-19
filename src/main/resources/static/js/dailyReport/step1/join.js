@@ -129,6 +129,11 @@ function printDispatchList(searchResultData) {
         tableBody.appendChild(row);
     });
 }
+function formatPhoneNumber(phoneNumber) {
+    // 전화번호를 하이픈으로 분리
+    const formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    return formattedPhoneNumber;
+}
 
 //금일 차량 모집 공고
 function printCarRecruitmentList(searchResultData) {
@@ -157,7 +162,7 @@ function printCarRecruitmentList(searchResultData) {
             //팝업기능
         row.addEventListener("click", () => {
             carSubmitSpan.textContent = data.carSubmit; //제출처
-            carSubmitTelSpan.textContent = data.carSubmitTel; //제출처 번호
+            carSubmitTelSpan.textContent = formatPhoneNumber(data.carSubmitTel); //제출처 번호
             carSubmitTelSpan.href = `tel:${data.carSubmitTel}`; // tel: 링크 설정
             salesmanSpan.textContent = data.salesman; //담당자
 

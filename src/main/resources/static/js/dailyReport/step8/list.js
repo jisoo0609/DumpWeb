@@ -12,17 +12,31 @@ function changeTableColumnOrder() {
     return checkedNumber;
 }
 
-//라디오 값에 따라 테이블 헤더 바꾸는 함수
-function changeHeader() {
-    const headerElements = document.querySelectorAll("thead th");   // 헤더 요소들을 선택
+function changeHeader() {   //라디오버튼 선택값에 따라 헤더 바꾸는 함수
+    const headerRow = document.querySelector("thead tr"); // thead의 첫 번째 행을 선택
     const checkedNumber = changeTableColumnOrder();
+    while (headerRow.firstChild) {
+        headerRow.removeChild(headerRow.firstChild); // 기존 헤더 제거
+    }
 
-    if(checkedNumber === 0 ) {   // 차량 기준 선택
-        headerElements[7].textContent = "상태";
-        headerElements[8].textContent = "제출처확인";
-    } else if(checkedNumber === 1 || checkedNumber ===2){   // 운행일/품목 기준 선택
-        headerElements[7].textContent = "운반단가";
-        headerElements[8].textContent = "상태";
+    if (checkedNumber === 0) { // 차량 기준 선택
+        const headers = ["운행일", "상차지", "하차지", "품목", "차량번호", "대수", "상태", "확인"];
+        const widths = ["15%", "15%", "15%", "15%", "15%", "10%", "12%", "12%"];
+        for (let i = 0; i < headers.length; i++) {
+            const th = document.createElement("th");
+            th.textContent = headers[i];
+            th.style.width = widths[i];
+            headerRow.appendChild(th);
+        }
+    } else if (checkedNumber === 1 || checkedNumber === 2) { // 운행일 기준 & 품목 기준 선택
+        const headers = ["운행일", "상차지", "하차지", "품목", "차량번호", "대수", "운반단가"];
+        const widths = ["15%", "15%", "15%", "15%", "15%", "10%", "20%"];
+        for (let i = 0; i < headers.length; i++) {
+            const th = document.createElement("th");
+            th.textContent = headers[i];
+            th.style.width = widths[i];
+            headerRow.appendChild(th);
+        }
     }
 }
 
@@ -48,7 +62,6 @@ function printList(searchResultData) {
         ];
         if(checkedNumber===0){ //차량기준일 땐 제출처확인-상태 순서로.
             row.innerHTML = ` 
-                    <td>${no}</td>
                     <td>${order[0]}</td>
                     <td>${order[1]}</td> 
                     <td>${order[2]}</td>
@@ -56,12 +69,13 @@ function printList(searchResultData) {
                     <td>${order[4]}</td>
                     <td>${order[5]}</td>
                     <td class="currStatus">${order[7]}</td>
-                    <td>${order[8]}</td>
+                    <td> <input type="checkbox" class="checkConfirm" disabled
+                    ${order[8] == '1' ? 'checked' : ''}></td>
                  `;
-            no++;
-        }else {   //나머지 기준은 운반단가-상태 순서로.
+
+        }else {   //나머지 기준은 상태 지우고 운반단가가 마지막으로.
         row.innerHTML = ` 
-                    <td>${no}</td>
+                    
                     <td>${order[0]}</td>
                     <td>${order[1]}</td> 
                     <td>${order[2]}</td>
@@ -69,9 +83,8 @@ function printList(searchResultData) {
                     <td>${order[4]}</td>
                     <td>${order[5]}</td>
                     <td>${order[6].toLocaleString()}</td>
-                    <td class="currStatus">${order[7]}</td>
-                 `;
-        no++;}
+                     `;
+        }
         // 라디오 버튼의 선택값에 따라서 현재 기준 값을 설정
         let currentCriteria;
 
@@ -95,6 +108,10 @@ function printList(searchResultData) {
         row.setAttribute("receipt-sheetID", data.sheetID);
         row.setAttribute("receipt-writerIDX", data.writerIDX);
         row.setAttribute("receipt-sheetSS2", data.sheetSS2);
+        row.setAttribute("receipt-status", data.currStatus);
+        /*운반단가기준 & 품목기준에서는 테이블에서 "상태"열을 지워야 하므로
+         clickListThAndRedirect()함수에서 상태값을 받기위해 특성지정 */
+
         tableBody.appendChild(row);
     });
 
