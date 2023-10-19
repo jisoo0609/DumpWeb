@@ -163,15 +163,6 @@
             <table class="list-table" id="tableOrderByDate">
                 <thead>
                 <tr>
-                    <th>No</th>
-                    <th class="th_header">운행일</th>
-                    <th>상차지</th>
-                    <th>하차지</th>
-                    <th class="th_header">품목</th>
-                    <th class="th_header">차량번호</th>
-                    <th>대수</th>
-                    <th class="th_header">운반단가</th>
-                    <th>상태</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -172,6 +172,9 @@
         align-items: center;
         z-index: 1;
     }
+    #menusub, #carsub, #recruitment{
+        word-break: normal;
+    }
     .popup-content {
         background: #fff;
         padding: 20px;
