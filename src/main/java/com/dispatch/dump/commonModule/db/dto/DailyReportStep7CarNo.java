@@ -13,5 +13,10 @@ public class DailyReportStep7CarNo {
     private String carNoName;
     private int carNoSS;
     private int carNoSS2;
+    
+    //VO
+    private int parentID;       // LINE :: 미지정 배차주문 부모 IDX
+    private int subID;          // LINE :: 미지정 배차주문 IDX
+    private int carQty;         // LINE :: 배차수량
 
 }

@@ -11,4 +11,6 @@ public interface DailyReportStep2Mapper {
     DailyReportStep2Summary selectCalSummary(DailyReportStep2Option option);
     List<DailyReportStep2Sub> selectDispatchStatusList(String uuserID, String today);
 
+    List<DailyReportStep2Sub> submittedReportList(String uuserID, String today);
+
 }
