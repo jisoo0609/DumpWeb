@@ -36,5 +36,10 @@ public class Step2Controller {
     public List<DailyReportStep2Sub> dispatchStatusList() {
         return step2Service.findDispatchStatusList();
     }
+
+
+    @RequestMapping(value = "/manager/ajax/submittedlist", method = RequestMethod.GET)
+    @ResponseBody
+    public List<DailyReportStep2Sub> submittedReportList() {return step2Service.findSubmittedReportList(); }
 }
 

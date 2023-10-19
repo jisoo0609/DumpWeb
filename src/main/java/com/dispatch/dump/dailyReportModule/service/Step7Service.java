@@ -6,14 +6,17 @@ import com.dispatch.dump.commonModule.db.mapper.DailyReportStep7MainMapper;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep7SubMapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
+import org.json.JSONArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +51,7 @@ public class Step7Service {
             dailyReportStep7Main.setCarSubmitTel(String.valueOf(getSessionLoginData().getUserTel()));
             dailyReportStep7Main.setSalesman(String.valueOf(getSessionLoginData().getUserName()));
             //결재 체크 값
-            dailyReportStep7Main.setSheetSS(Integer.parseInt(loginData.getUserId()));
+//            dailyReportStep7Main.setSheetSS(Integer.parseInt(loginData.getUserId()));
             dailyReportStep7Main.setSheetSS2(Integer.parseInt(loginData.getUuserID()));
             dailyReportStep7Main.setWriterIDX(Integer.parseInt(loginData.getUuserID()));
             //writerIDX
@@ -110,6 +113,69 @@ public class Step7Service {
 
     public void carNoList(Model model) {
         model.addAttribute("carNoList", step7Mapper.findCarNoList());
+    }
+
+    public String driverList() {
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+        try {
+            HttpSession session = commonUtil.getSession();
+            Login loginData = (Login) session.getAttribute("loginInfo");
+            DailyReportStep7CarNo dailyReportStep7CarNo = new DailyReportStep7CarNo();
+            dailyReportStep7CarNo.setCarNoSS2(Integer.parseInt(loginData.getUuserID()));
+            rtnMap.put("driverList", step7Mapper.findCarNoByLoginData(dailyReportStep7CarNo));
+            rtnMap.put("httpCode", 200);
+        } catch (Exception e) {
+            log.error("Exception [" + e.getMessage() +"]");
+        }
+        return commonUtil.jsonFormatTransfer(rtnMap);
+    }
+
+    public String subInfo(int sheetsubID) {
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+        try {
+            DailyReportStep7Sub subData = dailyReportStep7SubMapper.findSubInfoBySheetSubID(sheetsubID);
+            rtnMap.put("view", subData);
+            rtnMap.put("httpCode", 200);
+        } catch (Exception e) {
+            log.error("Exception [" + e.getMessage() +"]");
+        }
+
+        return commonUtil.jsonFormatTransfer(rtnMap);
+    }
+
+    @Transactional
+    public String saveDispatchData(int parentID, String dispatchDataList) {
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+        try {
+            DailyReportStep7Sub dailyReportStep7Sub = dailyReportStep7SubMapper.findSubInfoBySheetSubID(parentID);
+            int dispatchQty = 0;
+
+
+            if (dispatchDataList != null && !dispatchDataList.equals("")) {
+                JSONArray jsonArray = new JSONArray(dispatchDataList);
+
+                for (Object o : jsonArray) {
+                    DailyReportStep7CarNo dispatchData = commonUtil.jsonToObject(o.toString(), DailyReportStep7CarNo.class);
+                    dispatchData.setParentID(dailyReportStep7Sub.getSheetID2());
+                    dispatchData.setSubID(dailyReportStep7Sub.getSheetsubID());
+                    step7Mapper.autoDispatchData(dispatchData);
+                    step7Mapper.autoDispatchSubDataSub(dispatchData);
+                    log.info(dispatchData.toString());
+                    dispatchQty += dispatchData.getCarQty();
+
+                }
+
+                log.info("total Dispatch: " + dispatchQty);
+
+                dailyReportStep7Sub.setQty(dispatchQty);
+                step7Mapper.updateQtyParentsData(dailyReportStep7Sub);
+
+                rtnMap.put("httpCode", 200);
+            }
+        } catch (Exception e) {
+            log.error("Exception [" + e.getMessage() +"]");
+        }
+        return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
 }
