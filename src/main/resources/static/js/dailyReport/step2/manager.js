@@ -62,7 +62,8 @@ function printDispatchList(searchResultData) {
         let order = [
             data.carNo, data.fromsite, data.tosite, data.item, data.qty , data.chk2];
 
-        row.innerHTML = ` 
+        row.innerHTML = `
+
                     <td>${order[0]}</td>
                     <td>${order[1]}</td>
                     <td>${order[2]}</td> 
