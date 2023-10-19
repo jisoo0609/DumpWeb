@@ -100,6 +100,7 @@
                             <th>하차지</th>
                             <th>품목</th>
                             <th>대수</th>
+                            <th>제출처 확인</th>
                         </tr>
                     </thead>
 
@@ -126,3 +127,5 @@
 <script src="/resources/js/dailyReport/step2/manager.js"></script>
 
 <%@ include file="/WEB-INF/jsp/include/footer.jsp" %>
+<script src="/resources/js/dailyReport/step2/click.js"></script>
+<script src="/resources/js/dailyReport/step2/DOMContentLoader.js"></script>

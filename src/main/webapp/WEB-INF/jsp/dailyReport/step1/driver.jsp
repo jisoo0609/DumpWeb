@@ -172,6 +172,9 @@
         align-items: center;
         z-index: 1;
     }
+    #menusub, #carsub, #recruitment{
+        word-break: normal;
+    }
     .popup-content {
         background: #fff;
         padding: 20px;
@@ -185,7 +188,25 @@
         border: none;
         padding: 10px 20px;
         border-radius: 5px;
+        margin-top: 10px;
         cursor: pointer;
+    }
+    .popup-maintext {
+        font-size: 20px;
+        margin: 15px;
+        border-bottom: 2px solid #006b87;
+    }
+    .popup-company {
+        margin-bottom: 10px;
+    }
+    .popup-company {
+        font-weight: bold;
+    }
+
+    .popup-company .car-submit,
+    .popup-company .car-salesman,
+    .popup-company .car-submitTel {
+        font-weight: normal;
     }
 
     @media (min-width: 551px) {
@@ -371,16 +392,16 @@
     <div id="popup-container" class="popup">
         <div class="popup-content">
             <div>
-                <h2>배차 공고</h2>
+                <h2 class="popup-maintext">배차 공고</h2>
             </div>
             <div>
-                <p>제출처 : <span class="car-submit"></span></p>
+                <p class="popup-company">제출처 : <span class="car-submit"></span></p>
             </div>
             <div>
-                <p>담당자 :<span class="car-salesman"></span></p>
+                <p class="popup-company">담당자 : <span class="car-salesman"></span></p>
             </div>
             <div>
-                <p>전화번호 :<a class="car-submitTel" href="#"></a></p>
+                <p  class="popup-company">전화번호 : <a class="car-submitTel" href="#"></a></p>
             </div>
             <div>
                 <button id="close-popup">닫기</button>

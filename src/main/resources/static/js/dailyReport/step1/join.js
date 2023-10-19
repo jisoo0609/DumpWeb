@@ -84,6 +84,7 @@ function groupAndSumData(searchResultData) {
         if (!groupedData[key]) {
             groupedData[key] = {
                 sheetID: data.sheetID,
+                sheetSS2: data.sheetSS2,
                 currStatus: data.currStatus,
                 carSubmit:data.carSubmit,
                 fromsite: data.fromsite,
@@ -108,13 +109,23 @@ function printDispatchList(searchResultData) {
     // 데이터를 그룹화하고 합산
     const groupedData = groupAndSumData(searchResultData);
 
+   groupedData.sort((a, b) => a.carSubmit.localeCompare(b.carSubmit));
+    // 'sheetSS2' 값을 기록할 변수
+    let prevSheetSS2 = null;
+
     // 검색 결과 데이터를 테이블 본문에 추가.
-    groupedData.forEach(data => {
+    groupedData.forEach((data, index) => {
         const row = document.createElement("tr");
 
-        // 'CurrStatus'가 '배차'인 경우 배경색 변경
-        if (data.currStatus === '배차') {
+        // 'CurrStatus'가 '제출'인 경우 배경색 변경
+        if (data.currStatus === '제출') {
             row.style.backgroundColor = '#84B8E8'; // 원하는 배경색으로 변경하세요.
+        }
+
+        // 현재 'sheetSS2' 값과 이전 값이 다를 때 빨간선 표시
+        if (index > 0 && data.sheetSS2 !== prevSheetSS2) {
+            row.style.borderTop = '2px solid red'; // 빨간색 상단 경계선
+            prevSheetSS2 = data.sheetSS2; // 이전 'sheetSS2' 값 업데이트
         }
 
         row.innerHTML = `
@@ -127,7 +138,16 @@ function printDispatchList(searchResultData) {
         row.setAttribute("data-sheetID", data.sheetID);
 
         tableBody.appendChild(row);
+
+        prevSheetSS2 = data.sheetSS2;
     });
+}
+
+
+function formatPhoneNumber(phoneNumber) {
+    // 전화번호를 하이픈으로 분리
+    const formattedPhoneNumber = phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+    return formattedPhoneNumber;
 }
 
 //금일 차량 모집 공고
@@ -157,7 +177,7 @@ function printCarRecruitmentList(searchResultData) {
             //팝업기능
         row.addEventListener("click", () => {
             carSubmitSpan.textContent = data.carSubmit; //제출처
-            carSubmitTelSpan.textContent = data.carSubmitTel; //제출처 번호
+            carSubmitTelSpan.textContent = formatPhoneNumber(data.carSubmitTel); //제출처 번호
             carSubmitTelSpan.href = `tel:${data.carSubmitTel}`; // tel: 링크 설정
             salesmanSpan.textContent = data.salesman; //담당자
 
@@ -173,14 +193,17 @@ function printFindList(searchResultData) {
     const tableBody = document.querySelector("#carsub");
     tableBody.innerHTML = "";
 
-    searchResultData.sort((a, b) => {
+    // 검색 결과 데이터를 필터링하고 날짜로 정렬.
+    const filteredData = searchResultData
+        .filter(data => data.rependdate !== null)
+        .sort((a, b) => {
             const dateA = new Date(a.rependdate);
             const dateB = new Date(b.rependdate);
             return dateA - dateB;
         });
 
-    // 검색 결과 데이터를 테이블 본문에 추가.
-    searchResultData.forEach((data, index) => {
+    // 필터링된 검색 결과 데이터를 테이블 본문에 추가.
+    filteredData.forEach((data, index) => {
         const row = document.createElement("tr");
         const rependdate = new Date(data.rependdate);
         // 월과 일을 두 자리 숫자로 표시하기 위해 패딩을 추가
@@ -197,16 +220,15 @@ function printFindList(searchResultData) {
         const formattedRepaddkm = Number(data.repaddkm).toLocaleString();
 
         row.innerHTML = `
-        <td>${data.drvClub}</td>
-        <td>${formattedDate}</td>
-        <td>${formattedRepaddkm}</td>
-        <td>${data.drvRem}</td>
-    `;
+            <td>${data.drvClub}</td>
+            <td>${formattedDate}</td>
+            <td>${formattedRepaddkm}</td>
+            <td>${data.drvRem}</td>
+        `;
         row.setAttribute("data-drive-id", data.driveID);
         tableBody.appendChild(row);
     });
 }
-
 
 
 function clickListStep5Redirect() {

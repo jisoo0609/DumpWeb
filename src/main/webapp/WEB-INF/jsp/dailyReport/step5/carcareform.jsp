@@ -52,7 +52,7 @@
                 </li>
                 <li class="tabBtn" data-tab="hiddenPart">
                     <label for="showHideCheckbox">다음 교환 주기 입력</label>
-                    <span class="drvInputSpan2"><input id="showHideCheckbox" type="checkbox" checked></span>
+                    <span class="drvInputSpan2"><input name="nextChkBtn" id="showHideCheckbox" type="checkbox" checked></span>
                 </li>
             </ul>
             <ul class="bdnUl" id="hiddenPart">
@@ -76,7 +76,7 @@
         <button class="openBtn" data-popName="drvpop1">삭제</button>
         <button onclick="save()">저장</button>
         <button class="openBtn" data-popName="drvpop2">입력취소</button>
-        <button class="openBtn" data-popName="drvpop3">이전화면</button>
+        <button class="openBtn" data-popName="drvpop3" onClick="history.go(-1)">이전화면</button>
     </div>
 
     <div id="drvpop1" class="drvPopup1">
@@ -95,13 +95,13 @@
         </div>
     </div>
 
-    <div id="drvpop3" class="drvPopup3">
-            <div>
-                <span class="material-symbols-outlined closeBtn">close</span>
-                <p>이전 화면으로 돌아가시겠습니까?</p>
-                <input type="button" value="확인" onClick="history.go(-1)">
-            </div>
-        </div>
+<%--    <div id="drvpop3" class="drvPopup3"> --%>
+<%--            <div> --%>
+<%--                <span class="material-symbols-outlined closeBtn">close</span> --%>
+<%--                <p>이전 화면으로 돌아가시겠습니까?</p> --%>
+<%--                <input type="button" value="확인" > --%>
+<%--            </div> --%>
+<%--        </div> --%>
 
     <table>
         <thead>
