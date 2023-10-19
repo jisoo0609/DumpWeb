@@ -114,7 +114,7 @@ function printDispatchList(searchResultData) {
     let prevSheetSS2 = null;
 
     // 검색 결과 데이터를 테이블 본문에 추가.
-    groupedData.forEach(data => {
+    groupedData.forEach((data, index) => {
         const row = document.createElement("tr");
 
         // 'CurrStatus'가 '배차'인 경우 배경색 변경
@@ -123,7 +123,7 @@ function printDispatchList(searchResultData) {
         }
 
         // 현재 'sheetSS2' 값과 이전 값이 다를 때 빨간선 표시
-        if (data.sheetSS2 !== prevSheetSS2) {
+        if (index > 0 && data.sheetSS2 !== prevSheetSS2) {
             row.style.borderTop = '2px solid red'; // 빨간색 상단 경계선
             prevSheetSS2 = data.sheetSS2; // 이전 'sheetSS2' 값 업데이트
         }
@@ -138,7 +138,8 @@ function printDispatchList(searchResultData) {
         row.setAttribute("data-sheetID", data.sheetID);
 
         tableBody.appendChild(row);
-        console.log(groupedData.map(data => data.sheetSS2));
+
+        prevSheetSS2 = data.sheetSS2;
     });
 }
 
