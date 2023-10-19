@@ -46,18 +46,34 @@ function printList(searchResultData) {
             data.date, data.fromsite, // 정렬 기준.
             data.tosite, data.item, data.carNo, data.qty, data.qtyup, data.currStatus, data.chk2
         ];
-        if(checkedNumber===0){ //차량기준일 땐 제출처확인-상태 순서로.
-            row.innerHTML = ` 
-                    <td>${no}</td>
-                    <td>${order[0]}</td>
-                    <td>${order[1]}</td> 
-                    <td>${order[2]}</td>
-                    <td>${order[3]}</td> 
-                    <td>${order[4]}</td>
-                    <td>${order[5]}</td>
-                    <td class="currStatus">${order[7]}</td>
-                    <td>${order[8]}</td>
-                 `;
+        if(checkedNumber===0){ //차량 기준일 땐 제출처확인-상태 순서로.
+            row.innerHTML = `
+                <td>${no}</td>
+                <td>${order[0]}</td>
+                <td>${order[1]}</td>
+                <td>${order[2]}</td>
+                <td>${order[3]}</td>
+                <td>${order[4]}</td>
+                <td>${order[5]}</td>
+                <td class="currStatus">${order[7]}</td>
+                <td>
+                    <input
+                    type="checkbox"
+                    class="checkConfirm"
+                    ${order[8] === 'true' ? 'checked' : ''}>
+                </td>
+            `;
+
+            // 체크박스 클릭 이벤트를 추가
+            const checkbox = row.querySelector(".checkConfirm");
+            checkbox.addEventListener("change", function () {
+                if (checkbox.checked) {
+                    order[8] = 'true';
+                } else {
+                    order[8] = 'false';
+                }
+                console.log(order[8]);
+            });
             no++;
         }else {   //나머지 기준은 운반단가-상태 순서로.
         row.innerHTML = ` 

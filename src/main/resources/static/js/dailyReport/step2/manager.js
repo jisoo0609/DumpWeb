@@ -54,7 +54,7 @@ function printDispatchList(searchResultData) {
 
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.forEach((data, index) => {
-        const row = document.createElement("tr");
+        const row= document.createElement("tr");
         let order = [
             data.carNo, data.fromsite, data.tosite, data.item, data.qty];
 
@@ -70,8 +70,11 @@ function printDispatchList(searchResultData) {
         row.setAttribute("data-writerIdx", data.writerIDX);
         row.setAttribute("data-sheet-id", data.sheetID);
 
-        tableBody1.appendChild(row);
-        tableBody2.appendChild(row);
+        if (data.currStatus === "배차") {
+            tableBody1.appendChild(row); // "배차"인 경우 tbody1에 추가
+        } else if (data.currStatus === "제출") {
+            tableBody2.appendChild(row); // "제출"인 경우 tbody2에 추가
+        }
     });
 };
 
