@@ -78,7 +78,7 @@
             </li>
             <li>
               <label class="golLabel" for="carNo"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호 또는 모집공고"></span>
+              <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호 또는 공고"></span>
 <%--              <div class="checkbox2">--%>
 <%--                <input id="chk67" type="checkbox">--%>
 <%--                <label class="check67" for="chk67">모집공고</label> <!--? 결제 체크박스 클릭시 수정 불가 -->--%>
@@ -96,7 +96,7 @@
       <button class="opBtn" data-popName="golPop1">삭제</button>
       <button class="opBtn" data-popName="golPop2">취소</button>
       <button class="opBtn" data-popName="golPop3">저장</button>
-      <button class="opBtn" data-popName="golPop4">이전화면</button>
+      <button class="opBtn" data-popName="golPop4" onClick="history.go(-1)">이전화면</button>
     </div>
 
 		<div id="golPop1" class="golPopup1">
@@ -122,15 +122,6 @@
 				<span class="material-symbols-outlined clBtn">close</span>
 				<p>정말 <span style="font-weight: bold;">저장</span>하시겠습니까?</p>
 				<input class="confirmBtn" type="button" value="확인" onClick="save()">
-				<input class="clBtn" type="button" value="취소">
-			</div>
-		</div>
-
-		<div id="golPop4" class="golPopup4">
-			<div>
-				<span class="material-symbols-outlined clBtn">close</span>
-				<p>정말 <span style="font-weight: bold;">이전화면</span>으로 돌아가시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인" onClick="history.go(-1)">
 				<input class="clBtn" type="button" value="취소">
 			</div>
 		</div>
