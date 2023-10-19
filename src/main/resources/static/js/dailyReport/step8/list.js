@@ -62,7 +62,6 @@ function printList(searchResultData) {
         ];
         if(checkedNumber===0){ //차량기준일 땐 제출처확인-상태 순서로.
             row.innerHTML = ` 
-                    
                     <td>${order[0]}</td>
                     <td>${order[1]}</td> 
                     <td>${order[2]}</td>
@@ -70,9 +69,10 @@ function printList(searchResultData) {
                     <td>${order[4]}</td>
                     <td>${order[5]}</td>
                     <td class="currStatus">${order[7]}</td>
-                    <td>${order[8]}</td>
+                    <td> <input type="checkbox" class="checkConfirm" disabled
+                    ${order[8] == '1' ? 'checked' : ''}></td>
                  `;
-            no++;
+
         }else {   //나머지 기준은 상태 지우고 운반단가가 마지막으로.
         row.innerHTML = ` 
                     
@@ -84,7 +84,7 @@ function printList(searchResultData) {
                     <td>${order[5]}</td>
                     <td>${order[6].toLocaleString()}</td>
                      `;
-        no++;}
+        }
         // 라디오 버튼의 선택값에 따라서 현재 기준 값을 설정
         let currentCriteria;
 
