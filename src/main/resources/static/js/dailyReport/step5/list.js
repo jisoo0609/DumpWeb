@@ -62,9 +62,5 @@ function printList(searchResultData) {
 
         row.setAttribute("data-drive-id", data.driveID);
         tableBody.appendChild(row);
-
-        if (data.driveID === parseInt(paramDriveID)) {
-            row.classList.add("red-line-divider");
-         }
     });
 };

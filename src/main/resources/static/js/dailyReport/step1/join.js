@@ -117,8 +117,8 @@ function printDispatchList(searchResultData) {
     groupedData.forEach((data, index) => {
         const row = document.createElement("tr");
 
-        // 'CurrStatus'가 '배차'인 경우 배경색 변경
-        if (data.currStatus === '배차') {
+        // 'CurrStatus'가 '제출'인 경우 배경색 변경
+        if (data.currStatus === '제출') {
             row.style.backgroundColor = '#84B8E8'; // 원하는 배경색으로 변경하세요.
         }
 

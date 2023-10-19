@@ -79,8 +79,8 @@ function deleteData(){
         data : {driveID : $("[name=driveID]").val()},
         success: function (data) {
             alert('삭제 되었습니다.');
+            location.reload(true)
             bindList();
-            location.reload();
         }
     })
 }
