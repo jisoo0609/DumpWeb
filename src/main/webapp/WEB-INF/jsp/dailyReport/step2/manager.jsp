@@ -8,7 +8,7 @@
     <article class="homescreen">
         <div class="date-container">
             <form name="option_frm">
-                <input type="hidden" name="sheetsubSS2" value="${sessionScope.loginInfo.uuserID}"/>
+                <input type="hidden" name="sheetSubSS2" value="${sessionScope.loginInfo.uuserID}"/>
                 <div class="date-picker">
 
                     <label class="start-text" for="start-date">운행일
@@ -74,59 +74,49 @@
 
 
         <section>
-
             <p class="today-car">금일 배차 현황</p>
-            <!-- <a href="/dailyReport/form"> -->
-            <table class="today-graph">
+                <table class="today-graph">
+                    <thead>
+                        <tr class="car-menu">
+                            <th>차량번호</th>
+                            <th>상차지</th>
+                            <th>하차지</th>
+                            <th>품목</th>
+                            <th>대수</th>
+                        </tr>
+                    </thead>
 
-                <thead>
-                <tr class="car-menu">
-                    <th>차량번호</th>
-                    <th>상차지</th>
-                    <th>하차지</th>
-                    <th>품목</th>
-                    <th>대수</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                <!-- 작업 -->
-                </tbody>
-
-            </table>
-               <!--  </a> -->
+                    <tbody id="tbody1">
+                    <!-- 작업 -->
+                    </tbody>
+                </table>
 
             <p class="car-care">제출 받은 일보</p>
-    <a href="/dailyReport/receipts">
-            <table class="car-graph">
+                <table class="car-graph">
+                    <thead>
+                        <tr class="car-menu">
+                            <th>차량번호</th>
+                            <th>상차지</th>
+                            <th>하차지</th>
+                            <th>품목</th>
+                            <th>대수</th>
+                        </tr>
+                    </thead>
 
-                <thead>
-                <tr class="car-menu">
-                    <th>차량번호</th>
-                    <th>상차지</th>
-                    <th>하차지</th>
-                    <th>품목</th>
-                    <th>대수</th>
-                </tr>
-                </thead>
+                    <tbody id="tbody2">
+                    <!-- 작업 -->
+                    </tbody>
+                </table>
 
-                <tbody>
-                <!-- 작업 -->
-                </tbody>
-            </table>
-               </a>
-
-                    <p class="today-recruitment">금일 차량 모집 공고</p>
-                           <table class="car-graph">
-                               <tr class="car-menu">
-
-                                   <th>상차지</th>
-                                   <th>하차지</th>
-                                   <th>품목</th>
-                                   <th>대수</th>
-                               </tr>
-                           </table>
-
+            <p class="today-recruitment">금일 차량 모집 공고</p>
+               <table class="car-graph">
+                   <tr class="car-menu">
+                       <th>상차지</th>
+                       <th>하차지</th>
+                       <th>품목</th>
+                       <th>대수</th>
+                   </tr>
+               </table>
         </section>
     </article>
 
