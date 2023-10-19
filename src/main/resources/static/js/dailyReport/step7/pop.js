@@ -1,3 +1,7 @@
+let dataArr = [];
+
+let totalDispatch = 0;
+
 document.addEventListener("DOMContentLoaded", function () {
     let clBtn = document.querySelectorAll(".clBtn");
     let opBtn = document.querySelectorAll(".opBtn");
@@ -65,8 +69,70 @@ function openPopupTest(pop_name) {
     $("#pop-" + pop_name).removeClass("dis-n");
 }
 
+function openPopupTest(pop_name, idx) {
+    $("#pop-" + pop_name).removeClass("dis-n");
+    // $("#parentIdx").val(idx);
+    $.ajax({
+        url:"/dailyReport/ajax/subInfo",
+        type:"GET",
+        data: {sheetsubID: idx},
+        async:false,
+        success: function (data) {
+            var json = $.parseJSON(data);
+            console.log(json);
+            if (json.httpCode == 200) {
+                $("#parentIdx").val(json.view.sheetsubID);
+                $("#parent-fromsite").text(json.view.fromsite);
+                $("#parent-tosite").text(json.view.tosite);
+                $("#parent-item").text(json.view.item);
+                $("#parent-qty").text(json.view.qty);
+            } else {
+                $("#parentIdx").val(0);
+                $("#parent-fromsite").text('ERROR!');
+                $("#parent-tosite").text('ERROR!');
+                $("#parent-item").text('ERROR!');
+                $("#parent-qty").text('ERROR!');
+            }
+        }
+    })
+    popupDataList();
+}
+
 function closePopUpTest(e) {
     $(e).closest(".layerMask").addClass("dis-n");
+}
+
+function popupDataList() {
+    $.ajax({
+        url:"/dailyReport/ajax/driverList",
+        type:"GET",
+        async:false,
+        success: function (data) {
+            var json = $.parseJSON(data);
+            console.log(json);
+            if (json.httpCode == 200) {
+                    var html = "";
+                if (json.driverList.length > 0) {
+                    $.each(json.driverList, function (i, t) {
+                        html += '<tr>';
+                        html += '<td class="a-center"><input type="checkbox" class="selectCarNo" onchange="$.toggleActiveRow(this);"></td>';
+                        html += '<td class="a-left">'+ t.carNoKey +'</td>';
+                        html += '<td class="a-center dispatchCarNo">'+ t.carNoFull +'</td>';
+                        html += '<td class="a-center">'+ t.carNoHp +'</td>';
+                        html += '<td class="a-center">'+ t.carNoName +'</td>';
+                        html += '<td class="a-center"><input type="text" value="1" class="a-center wp100 dispatchQty" style="background: #ccc; padding: 0;" onfocusout="$.changeQty(this);" disabled></td>';
+                        html += '</tr>';
+                    })
+                        $(".list-driver > tbody").html(html);
+                } else {
+                    html = '<tr>';
+                    html += '<td class="a-center" colspan="6">등록된 기사정보가 존재하지 않습니다.</td>';
+                    html += '</tr>';
+                    $(".list-driver > tbody").html(html);
+                }
+            }
+        }
+    })
 }
 
 function saveCarData() {
@@ -99,4 +165,102 @@ function saveCarData() {
 $.selectBoxChange = function (data, moveid) {
     $('input[name=' + moveid + ']').val(data);
     $('#' + moveid + '_clear').show();
+}
+
+/*
+    2023-10-17 김준형
+    미지정 배차등록 함수 생성
+ */
+/*
+    FUNCTION :: 차량번호 선택
+ */
+$.toggleActiveRow = function (obj) {
+    var tr = $(obj).parents("tr");
+    console.log(tr.html());
+    console.log($(obj).is(":checked"));
+    var index = dataArr.findIndex(data => data.carNoFull == $(tr).find(".dispatchCarNo").text());
+    if($(obj).is(":checked")) {
+        tr.find(".dispatchQty").prop('disabled', false);
+        tr.find(".dispatchQty").css('background', '#fff');
+        if (index == -1) {
+            var dispatchData = {carNoFull: $(tr).find(".dispatchCarNo").text(), carQty: Number($(tr).find(".dispatchQty").val())};
+            dataArr.push(dispatchData);
+            index = dataArr.findIndex(data => data.carNoFull == $(tr).find(".dispatchCarNo").text());
+        }
+
+    } else {
+        tr.find(".dispatchQty").prop('disabled', true);
+        tr.find(".dispatchQty").css('background', '#ccc');
+        if(index > -1) {
+            dataArr.splice(index, 1);
+        }
+    }
+
+    var qty = 0;
+    $.each(dataArr, (i, t) => {
+       qty += t.carQty;
+    })
+
+    totalDispatch = qty;
+    if (qty > Number($("#parent-qty").text())) {
+        alert("주문배차대수 이상으로 배차할 수 없습니다.");
+        $(obj).prop("checked", false);
+        $.toggleActiveRow(obj);
+    }
+
+
+    console.log(totalDispatch);
+
+    $("#view-count").text(totalDispatch);
+}
+
+$.changeQty = function (obj) {
+    var tr = $(obj).parents("tr");
+    var index = dataArr.findIndex(data => data.carNoFull == $(tr).find(".dispatchCarNo").text());
+    var temp = dataArr[index].carQty;
+
+
+    dataArr[index].carQty = Number($(obj).val());
+
+    var qty = 0;
+    $.each(dataArr, (i, t) => {
+        qty += t.carQty;
+    });
+
+    if (qty  > Number($("#parent-qty").text())) {
+        alert("주문배차대수 이상으로 배차할 수 없습니다.");
+        $(obj).val(temp);
+
+        console.log($(obj).val());
+        $.changeQty(obj);
+
+        return;
+    }
+
+    totalDispatch = qty;
+
+    console.log(totalDispatch);
+
+    $("#view-count").text(totalDispatch);
+}
+
+$.dispatchData = function () {
+    var parentID = $("#parentIdx").val();
+    $.ajax({
+        url: "/dailyReport/ajax/saveDispatchData",
+        type: "POST",
+        data: {parentID: parentID, dispatchDataList: JSON.stringify(dataArr)},
+        async: false,
+        success: function (data) {
+            var json = $.parseJSON(data);
+            console.log(json)
+            if (json.httpCode == 200) {
+                alert("일괄배차가 완료되었습니다.");
+                location.reload();
+            }
+
+        }
+    })
+
+
 }
