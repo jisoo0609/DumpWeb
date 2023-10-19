@@ -24,8 +24,13 @@ public interface DailyReportStep3MainMapper {
     /* FUNCTION ::  sheetSS2 수정 */
     int editBySheetSS2(DailyReportStep3Main dailyReportStep3Main);
     
-    /* FUNCTION ::  삭제를 위한 chk1 조회 */
-    boolean findBySheetID(int sheetID);
+    /* FUNCTION ::  수정, 삭제를 위한 chk1, chk2 조회 */
+    //boolean findBySheetID(int sheetID);
+
+    DailyReportStep3Main findByChkInfo(int sheetID);
+
+    /* FUNCTION :: writerIDX 수정용 */
+    int editByWriterIDX(DailyReportStep3Main dailyReportStep3Main);
 
     /* FUNCTION :: 일보 리스트 조회(전체조건) */
     DailyReportStep3Main findAllCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
