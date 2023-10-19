@@ -1,6 +1,7 @@
 /* DOMContentLoaded */
 document.addEventListener("DOMContentLoaded", function () {
     bindDispatchList();
+    bindSubmittedList();
 });
 
 
@@ -25,6 +26,17 @@ function bindDispatchList() {
     });
 }
 
+function bindSubmittedList() {
+    $.ajax({
+        url: "/dailyReport/manager/ajax/submittedlist",
+        type: "GET",
+        success: function (data) {
+            printDispatchList(data);
+        }
+    });
+}
+
+
 function printSummary(data) {
 
     const ttamount = document.getElementById("ttamount");
@@ -36,7 +48,8 @@ function printSummary(data) {
 
 function printDispatchList(searchResultData) {
     // 테이블 본문 내용 초기화
-    const tableBody = document.querySelector("table tbody");
+    const tableBody1 = document.querySelector("#tbody1");
+    const tableBody2 = document.querySelector("#tbody2");
     //tableBody.innerHTML = "";
 
     // 검색 결과 데이터를 테이블 본문에 추가.
@@ -50,14 +63,16 @@ function printDispatchList(searchResultData) {
                     <td>${order[1]}</td>
                     <td>${order[2]}</td> 
                     <td>${order[3]}</td>
-                    <td>${order[4]}</td> 
+                    <td>${order[4]}</td>
+                    <td>${order[5]}</td>
                  `;
 
-        row.setAttribute("data-sheet-sub-ss2", data.sheetsubSS2);
+        row.setAttribute("data-writerIdx", data.writerIDX);
         row.setAttribute("data-sheet-id", data.sheetID);
-        tableBody.appendChild(row);
-    });
 
+        tableBody1.appendChild(row);
+        tableBody2.appendChild(row);
+    });
 };
 
 /* DOMContentLoaded */
@@ -66,10 +81,12 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* 리스트의 행 클릭시, 파라미터와 함께 step5로 이동하도록 처리. */
-function clickListThAndRedirect() {
-    const tableBody = document.querySelector("table tbody");
 
-    tableBody.addEventListener("click", (event) => {
+function clickListThAndRedirect() {
+
+    const tableBody1 = document.querySelector("#tbody1");
+
+    tableBody1.addEventListener("click", (event) => {
         const parentRow = event.target.closest("tr");
         if (parentRow) {
             const sheetID = parentRow.getAttribute("data-sheet-id");
@@ -77,25 +94,24 @@ function clickListThAndRedirect() {
             if (sheetID === null) {
                 return;
             }
-console.log(sheetID)
+    console.log(sheetID)
+            const writerIdx = parentRow.getAttribute("data-writerIdx");
+    console.log(writerIdx)
 
-            const sheetSubSS2 = parentRow.getAttribute("data-sheet-sub-ss2");
-console.log(sheetSubSS2)
-            if (sheetSubSS2 !== null) {
-                const uuserID = document.querySelector('input[name="sheetSubSS2"]').value;
-console.log(uuseerID)
-                if(sheetSubSS2 ===  uuserID){
+            if (writerIdx !== null) {
+                const sheetSubSS2 = document.querySelector('input[name="sheetSubSS2"]').value;
+                if(sheetSubSS2 ===  writerIdx){
                     const url = `/dailyReport/orderform?groupSheetID=${sheetID}`;
                     window.location.href = url;
                 }
 
             }
-
             // if (userPosition === 'manager') {
             //     const url = `/dailyReport/orderform?sheetID=${sheetID}`;
             //     window.location.href = url;
             // }
         }
     });
+
 }
 

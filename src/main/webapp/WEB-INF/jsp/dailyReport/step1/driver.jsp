@@ -159,6 +159,52 @@
     .race-write-link {
         text-decoration-line: none;
     }
+    #popup-container {
+        background: rgba(0, 0, 0, 0.5);
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+     /*   display: flex;*/
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+    .popup-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: center;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+    #close-popup {
+        background: #0068b7;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+    .popup-maintext {
+        font-size: 20px;
+        margin: 15px;
+        border-bottom: 2px solid #006b87;
+    }
+    .popup-company {
+        margin-bottom: 10px;
+    }
+    .popup-company {
+        font-weight: bold;
+    }
+
+    .popup-company .car-submit,
+    .popup-company .car-salesman,
+    .popup-company .car-submitTel {
+        font-weight: normal;
+    }
 
     @media (min-width: 551px) {
         .start-text {
@@ -210,32 +256,32 @@
     <article class="homescreen">
         <div class="date-container">
             <form name="option_frm">
-            <div class="date-picker">
-                <label class="start-text" for="start-date"
-                >운행일
-                    <input id="datepicker1" name="startDate" readonly/>
-                    <span>~</span>
-                    <input id="datepicker2" name="endDate" readonly/>
-                </label>
-                <button id="update-button" type="button" onclick="bindSummary()">조회</button>
-                <ul class="basic-menu">
-                    <li>
-                        총 운반 금액 :
-                        <div class="carrying-money" id="boutmoney">원</div>
-                    </li>
-                    <li>
-                        총 운행 대수 :
-                        <div class="carrying-car" id="boutcar"> 대</div>
-                    </li>
-                    <li>
-                        총 비용 금액 :
-                        <div class="total-useamt" id="boutuseamt">원</div>
-                    </li>
-                    <li>마지막 등록일 :
-                        <div class="expense-date"  id="boutdate">일</div>
-                    </li>
-                </ul>
-            </div>
+                <div class="date-picker">
+                    <label class="start-text" for="start-date"
+                    >운행일
+                        <input id="datepicker1" name="startDate" readonly/>
+                        <span>~</span>
+                        <input id="datepicker2" name="endDate" readonly/>
+                    </label>
+                    <button id="update-button" type="button" onclick="bindSummary()">조회</button>
+                    <ul class="basic-menu">
+                        <li>
+                            총 운반 금액 :
+                            <div class="carrying-money" id="boutmoney">원</div>
+                        </li>
+                        <li>
+                            총 운행 대수 :
+                            <div class="carrying-car" id="boutcar"> 대</div>
+                        </li>
+                        <li>
+                            총 비용 금액 :
+                            <div class="total-useamt" id="boutuseamt">원</div>
+                        </li>
+                        <li>마지막 등록일 :
+                            <div class="expense-date"  id="boutdate">일</div>
+                        </li>
+                    </ul>
+                </div>
         </div>
         <section class="management">
             <section class="race-management">
@@ -298,7 +344,7 @@
         <section>
             <p class="today-car">금일 배차 현황</p>
             <table class="today-graph">
-            <thead>
+                <thead>
                 <tr class="today-menu">
                     <th>제출처</th>
                     <th>상차지</th>
@@ -312,7 +358,7 @@
             </table>
             <p class="car-care">차량 관리</p>
             <table class="car-graph">
-            <thead>
+                <thead>
                 <tr class="car-menu">
                     <th>분류</th>
                     <th>교환 예정일</th>
@@ -340,6 +386,25 @@
             </table>
         </section>
     </article>
+    <div id="popup-container" class="popup">
+        <div class="popup-content">
+            <div>
+                <h2 class="popup-maintext">배차 공고</h2>
+            </div>
+            <div>
+                <p class="popup-company">제출처 : <span class="car-submit"></span></p>
+            </div>
+            <div>
+                <p class="popup-company">담당자 : <span class="car-salesman"></span></p>
+            </div>
+            <div>
+                <p  class="popup-company">전화번호 : <a class="car-submitTel" href="#"></a></p>
+            </div>
+            <div>
+                <button id="close-popup">닫기</button>
+            </div>
+        </div>
+    </div>
 
 </section>
 

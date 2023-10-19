@@ -10,6 +10,12 @@
 //  })
 //}
 
+
+function getCheckParam(id){
+    const checkBox = document.getElementById(id);
+    return  "&" + id + "=" + checkBox.checked;
+}
+
 function cancel() {
   // 팝업 창을 숨기는 코드
   const golPop2 = document.querySelector("#golPop2");
@@ -18,15 +24,32 @@ function cancel() {
 }
 
 function save() {
-   $("#chk67").prop("disabled", false);
+   $("#fromsite").prop("disabled", false);
+   $("#tosite").prop("disabled", false);
+   $("#item").prop("disabled", false);
+   $("#Qty").prop("disabled", false);
+   $("#carNo").prop("disabled", false);
+   $("#Qtyup").prop("disabled", false);
+
+//   console.log($("[name=golForm]").serialize());
+
+    //fetch 코드도 고민해볼 것.
+    const checkBoxID = ["chk1"];
+
+    let checkData = "";
+
+    checkBoxID.forEach(id => checkData += getCheckParam(id));
+    const formData = $("[name=golForm]").serialize() + checkData;
+
+    console.log(formData);
 
   $.ajax({
       url: "/dailyReport/ajax/orderSave",
       type: "POST",
-      data: $("[name=golForm]").serialize(),
+      data: formData,
       async : false,
       success: function (data) {
-       console.log(data);
+       console.log("저장완료");
 //          alert("저장이 완료되었습니다.");
           bindList();
       }
@@ -91,12 +114,14 @@ function addTableRow(data) {
   if (!data) {
     html = '<tr><td colspan="6" style="text-align: center;">입력된 정보가 없습니다.</td></tr>';
   } else {
-    html = '<table>';
-    for (var i = 1; i < data.length; i++) {
+    // html = '<table>';
+    html = '';
+      console.log(data.length);
+    for (var i = 0; i < data.length; i++) {
       var subData = data[i];
-      var rowId = 'row' + i;
+      var rowId = i+1;
       html += '<tr>';
-      html += '<td>' + i + '</td>';
+      html += '<td>' + rowId + '</td>';
       html += '<td>' + subData.fromsite + '</td>';
       html += '<td>' + subData.tosite + '</td>';
       html += '<td>' + subData.item + '</td>';
@@ -105,15 +130,19 @@ function addTableRow(data) {
 
       // Check if carNo is empty or "미지정"
       if (subData.carNo === "" || subData.carNo === "미지정") {
-        html += '<td><button class="miJeongButton">미지정</button></td>';
+        html += '<td><button type="button" class="miJeongButton" onclick="openPopupTest(\'dispatchform\', '+ subData.sheetsubID +');">미지정</button></td>';
+      } else if (subData.carNo === "공고" || subData.carNo === "모집공고") {
+        html += '<td><button class="miJeongButton">공고</button></td>';
       } else {
         html += '<td>' + subData.carNo + '</td>';
       }
 
+//      html += '<td>' + subData.Qtyup + '</td>';
 
       html += '</tr>';
     }
-    html += '</table>';
+    console.log(html);
+    // html += '</table>';
   }
     // 데이터를 표시할 위치에 추가
     $('#tBody').html(html);
