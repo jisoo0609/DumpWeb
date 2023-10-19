@@ -87,7 +87,7 @@
 
     <!--제출처 전화번호로 조회-->
     <select id="findByCarSubmitTel" resultType="DailyReportStep3Main">
-        select carSubmit, carSubmitTel, salesman, CurrStatus
+        select carSubmit, carSubmitTel, salesman
         from tSheet
         where carSubmitTel like CONCAT('%', #{carSubmitTel}, '%')
         group by carSubmitTel

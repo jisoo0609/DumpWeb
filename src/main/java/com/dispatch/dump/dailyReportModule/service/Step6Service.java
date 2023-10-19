@@ -25,6 +25,7 @@ public class Step6Service {
 
     public List<DailyReportStep6> getCarListByOption(DailyReportStep6OptionForm optionForm) {
         optionForm.setCarNo(getSessionLoginData().getUserId());
+        System.out.println(dailyReportStep6Mapper.findCarListByOption(optionForm));
         return dailyReportStep6Mapper.findCarListByOption(optionForm);
     }
 

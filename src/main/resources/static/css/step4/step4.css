@@ -10,7 +10,6 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 }
 html, body{
     font-size: 14px;
-    /*background-color: #f5f5f5;*/
     color: #333;
     height: 100%;
 }
@@ -61,7 +60,7 @@ img[alt = calling_img]{
 
 .data_Area > div > label{
     white-space: nowrap;
-    padding-top: 16px;
+    padding-top: 7px;
     margin-right: 10%;
 }
 
@@ -129,21 +128,28 @@ input[type = text]{
 
 .cashNbtns{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     margin: 25px 0;
     padding-left: 2%;
 }
 
 .cashNbtns > p{
+    white-space: nowrap;
+    height: 50px;
     border: 1px solid #0068b7;
     color: #0068b7;
     padding: 0 25px;
     line-height: 19px;
-    margin-right: 10%;
+    margin-right: 3%;
 }
 
-input[value="일괄결재"]{
-    margin-right: 10px;
+.cashNbtns > div{
+    display: flex;
+}
+
+input[value="이전화면"]{
+    color: #ffffff !important;
+    background: #0068b7 !important;
 }
 
 .btn_area{
@@ -153,9 +159,11 @@ input[value="일괄결재"]{
 input[type = button]{
     background-color: #fff;
     font-weight: 600;
-    width: 80px;
+    text-align: center;
+    width: 32%;
     height: 40px;
     color: #0068b7;
+    margin-right: 3px;
     border: 1px solid #0068b7;
 }
 

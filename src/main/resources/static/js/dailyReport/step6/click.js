@@ -53,12 +53,10 @@ function PayCarList() {
 }
 
 
-
-
-
-
-
-
+// 이전화면 버튼 클릭 시 실행되는 함수
+function goBack(){
+    window.history.back();
+};
 
 
 /* js를 통해 search_btn이 눌릴 수 있도록 처리 */

@@ -34,8 +34,6 @@ function printTable(datas){
     // 테이블, 데이터 검색 텍스트, 테이블 헤더 정렬 태그 및 플래그
     const colGroup = document.querySelector(".lastCol");
     const tableBody = document.querySelector(".list-table tbody");
-    // const comment = document.querySelector(".total");
-    // const totalAmt = document.querySelector(".cashNbtns");
     const firstFlag = tableSort();
 
     let cost = 0;
@@ -43,7 +41,6 @@ function printTable(datas){
     let end = 0;
 
     tableBody.innerHTML = "";
-    // comment.innerHTML = "";
 
     if (datas.length > 0) {
 
@@ -94,8 +91,8 @@ function printTable(datas){
                     `<td>${order[7]}</td>`
                     :
                     ` <td style="text-align: right;">${order[6]}</td>`
-            }
-        `;
+                }
+            `;
 
             // 끝 값 설정
             if (firstFlag === 0 || firstFlag === 1)
@@ -112,19 +109,6 @@ function printTable(datas){
             tableBody.appendChild(row);
         })
     }
-
-    // // 텍스트 출력
-    // comment.innerHTML = `
-    //                 데이터
-    //                 <span>${datas.length}</span>건(총대수:
-    //                 <span>${totalQty}</span>대)이 검색되었습니다.
-    //     `;
-    //
-    // totalAmt.innerHTML = `
-    //                 <p>운반금액(원)<br>${cost.toLocaleString()}</p>
-    //                 <input type="button" value="일괄결재" onclick="submitBtn()">
-    //                 <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
-    // `;
 }
 
 // 텍스트 출력
@@ -144,8 +128,11 @@ function printSummary(datas){
 
     totalAmt.innerHTML = `
                     <p>운반금액(원)<br>${totalQtyup.toLocaleString()}</p>
-                    <input type="button" value="일괄결재" onclick="submitBtn()">
-                    <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
+                    <div>
+                        <input type="button" value="일괄결재" onclick="submitBtn()">
+                        <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
+                        <input type="button" value="이전화면" id="backBtn" onclick="history.go(-1)">
+                    </div>
     `;
 }
 
@@ -153,14 +140,14 @@ function printSummary(datas){
 function clickListRedirect(){
     const listRow = document.querySelector('table tbody');
 
-    listRow.addEventListener('click', event => {
-        let sheetID = event.target.parentElement.getAttribute("data-sheetID");
+        listRow.addEventListener('click', event => {
+                let sheetID = event.target.parentElement.getAttribute("data-sheetID");
 
-        // GET방식의 단순한 데이터 전달 방법
-        let url = "/dailyReport/form" + "?sheetID=" + sheetID;
+                // GET방식의 단순한 데이터 전달 방법
+                let url = "/dailyReport/form" + "?sheetID=" + sheetID;
 
 
-        window.location.href = url;
-    });
+                window.location.href = url;
+        });
 }
 

@@ -34,6 +34,7 @@ public class Step4Controller {
     @RequestMapping(value = "/ajax/list", method = RequestMethod.POST)
     @ResponseBody
     public List<DailyReportStep4> searchData(DailyReportStep4OptionForm optionForm){
+        System.out.println(step4Service.getCarListByOption(optionForm));
 
         return step4Service.getCarListByOption(optionForm);
     }

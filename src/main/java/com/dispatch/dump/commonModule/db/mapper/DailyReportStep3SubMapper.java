@@ -19,11 +19,13 @@ public interface DailyReportStep3SubMapper {
 
     DailyReportStep3Sub findBySheetsubIDAll(int sheetsubID);
 
+    List<DailyReportStep3Sub> selectAll(DailyReportStep3Main dailyReportStep3Main);
+
     /* FUNCTION ::  수정 */
     int editByTransportInfo(DailyReportStep3Sub dailyReportStep3Sub);
 
     /* FUNCTION ::  삭제 */
-    int deleteByOne(int sheetsubID);
+    int deleteByOne(DailyReportStep3Sub dailyReportStep3Sub);
 
     /* FUNCTION ::  전체삭제 */
     int deleteByTransInfo(DailyReportStep3Main dailyReportStep3Main);

@@ -39,7 +39,9 @@
         Qty,
         Qtyup,
         CurrStatus,
-        writerIDX
+        writerIDX,
+        sheetSS2,
+        chk2
 
         from r3
         <where>
@@ -91,11 +93,64 @@
             Qty,
             Qtyup,
             CarNo,
-            DATE_FORMAT(date,'%m.%d') as 'date'
+            DATE_FORMAT(date,'%Y-%m-%d') as 'date'
         from tsheet_sub, tsheet
         where sheetsubID=#{sheetsubID} and sheetID =#{sheetID}
     </select>
 
+    <!--일괄 결재-->
+    <update id="approveReceipts" parameterType="DailyReportStep8OptionForm">
+        UPDATE tsheet
+        SET chk1 = 1
+        WHERE sheetid IN (
+        SELECT tsheet.sheetid
+        FROM tsheet
+        JOIN tsheet_sub ON tsheet.sheetid = tsheet_sub.sheetid2
+        WHERE tsheet.sheetSS2 = #{sheetSS2}
+        AND tsheet.writerIDX = #{sheetSS2}
+        AND tsheet.date BETWEEN #{startDate} AND #{endDate}
+        AND tsheet_sub.sheetsubSS2 = #{sheetsubSS2}
+        <if test="CarNo != ''">
+            AND tsheet.CarNo = #{CarNo}
+        </if>
+        <if test="fromsite != ''">
+            AND tsheet_sub.fromsite = #{fromsite}
+        </if>
+        <if test="tosite != ''">
+            AND tsheet_sub.tosite = #{tosite}
+        </if>
+        <if test="item != ''">
+            AND tsheet_sub.item = #{item}
+        </if>
+        )
+    </update>
+
+    <!--일괄 결재 취소-->
+    <update id="cancelApproval" parameterType="DailyReportStep8OptionForm">
+        UPDATE tsheet
+        SET chk1 = 0
+        WHERE sheetid IN (
+        SELECT tsheet.sheetid
+        FROM tsheet
+        JOIN tsheet_sub ON tsheet.sheetid = tsheet_sub.sheetid2
+        WHERE tsheet.sheetSS2 = #{sheetSS2}
+        AND tsheet.writerIDX = #{sheetSS2}
+        AND tsheet.date BETWEEN #{startDate} AND #{endDate}
+        AND tsheet_sub.sheetsubSS2 = #{sheetsubSS2}
+        <if test="CarNo != ''">
+            AND tsheet.CarNo = #{CarNo}
+        </if>
+        <if test="fromsite != ''">
+            AND tsheet_sub.fromsite = #{fromsite}
+        </if>
+        <if test="tosite != ''">
+            AND tsheet_sub.tosite = #{tosite}
+        </if>
+        <if test="item != ''">
+            AND tsheet_sub.item = #{item}
+        </if>
+        )
+    </update>
 
     <!--기존꺼-->
     <!--    <sql id="res_table">-->

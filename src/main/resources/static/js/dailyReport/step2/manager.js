@@ -1,6 +1,7 @@
 /* DOMContentLoaded */
 document.addEventListener("DOMContentLoaded", function () {
     bindDispatchList();
+    bindSubmittedList();
 });
 
 
@@ -25,6 +26,17 @@ function bindDispatchList() {
     });
 }
 
+function bindSubmittedList() {
+    $.ajax({
+        url: "/dailyReport/manager/ajax/submittedlist",
+        type: "GET",
+        success: function (data) {
+            printDispatchList(data);
+        }
+    });
+}
+
+
 function printSummary(data) {
 
     const ttamount = document.getElementById("ttamount");
@@ -36,12 +48,13 @@ function printSummary(data) {
 
 function printDispatchList(searchResultData) {
     // 테이블 본문 내용 초기화
-    const tableBody = document.querySelector("table tbody");
+    const tableBody1 = document.querySelector("#tbody1");
+    const tableBody2 = document.querySelector("#tbody2");
     //tableBody.innerHTML = "";
 
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.forEach((data, index) => {
-        const row = document.createElement("tr");
+        const row1 = document.createElement("tr");
         let order = [
             data.carNo, data.fromsite, data.tosite, data.item, data.qty];
 
@@ -53,11 +66,12 @@ function printDispatchList(searchResultData) {
                     <td>${order[4]}</td> 
                  `;
 
-         row.setAttribute("data-user-position", data.userPosition);
-         row.setAttribute("data-sheet-id", data.sheetID);
-        tableBody.appendChild(row);
-    });
+        row.setAttribute("data-writerIdx", data.writerIDX);
+        row.setAttribute("data-sheet-id", data.sheetID);
 
+        tableBody1.appendChild(row);
+        tableBody2.appendChild(row);
+    });
 };
 
 /* DOMContentLoaded */
@@ -66,24 +80,37 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* 리스트의 행 클릭시, 파라미터와 함께 step5로 이동하도록 처리. */
-function clickListThAndRedirect() {
-    const tableBody = document.querySelector("table tbody");
 
-    tableBody.addEventListener("click", (event) => {
+function clickListThAndRedirect() {
+
+    const tableBody1 = document.querySelector("#tbody1");
+
+    tableBody1.addEventListener("click", (event) => {
         const parentRow = event.target.closest("tr");
         if (parentRow) {
-            const userPosition = parentRow.getAttribute("data-user-position");
             const sheetID = parentRow.getAttribute("data-sheet-id");
 
             if (sheetID === null) {
-                 return;
+                return;
             }
+    console.log(sheetID)
+            const writerIdx = parentRow.getAttribute("data-writerIdx");
+    console.log(writerIdx)
 
-            if(userPosition==='manager'){
-                const url = `/dailyReport/orderform?sheetID=${sheetID}`;
-                 window.location.href = url;
+            if (writerIdx !== null) {
+                const sheetSubSS2 = document.querySelector('input[name="sheetSubSS2"]').value;
+                if(sheetSubSS2 ===  writerIdx){
+                    const url = `/dailyReport/orderform?groupSheetID=${sheetID}`;
+                    window.location.href = url;
+                }
+
             }
-       }
+            // if (userPosition === 'manager') {
+            //     const url = `/dailyReport/orderform?sheetID=${sheetID}`;
+            //     window.location.href = url;
+            // }
+        }
     });
+
 }
 
