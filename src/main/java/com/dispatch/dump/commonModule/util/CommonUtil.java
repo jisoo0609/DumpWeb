@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +60,19 @@ public class CommonUtil {
             log.error("Exception ["+ e.getMessage() +"]");
         }
         return map;
+    }
+
+    public <T> T jsonToObject(String json, Class<T> aClass) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        T t = null;
+        try {
+            t = objectMapper.readValue(json, aClass);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return t;
     }
 
 

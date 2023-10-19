@@ -42,10 +42,21 @@ public class Step2Service {
     }
 
     public List<DailyReportStep2Sub> findDispatchStatusList() {
+
         String uuserID = getSessionLoginData().getUuserID();
         System.out.println( dailyReportStep2Mapper.selectDispatchStatusList(uuserID,getToday()));
+
         return dailyReportStep2Mapper.selectDispatchStatusList(uuserID,getToday());
     }
+
+    public List<DailyReportStep2Sub> findSubmittedReportList() {
+
+        String uuserID = getSessionLoginData().getUuserID();
+        System.out.println( dailyReportStep2Mapper.submittedReportList(uuserID,getToday()));
+
+        return dailyReportStep2Mapper.submittedReportList(uuserID,getToday());
+    }
+
 
 
 }
