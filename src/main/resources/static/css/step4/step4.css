@@ -70,6 +70,7 @@ img[alt = calling_img]{
     border: 1px solid #ddd;
     width: 25%;
     height: 35px;
+    font-size: 12px;
 }
 
 .adsearch_btn{
@@ -135,7 +136,7 @@ input[type = text]{
 
 .cashNbtns > p{
     white-space: nowrap;
-    height: 50px;
+    height: 40px;
     border: 1px solid #0068b7;
     color: #0068b7;
     padding: 0 25px;

@@ -33,6 +33,7 @@ $.successRowEdit = function() {
         type: 'alert',
         text: '수정 성공'
     });
+    closePop();
 }
 
 $.failEdit = function() {
@@ -97,4 +98,5 @@ $.successRemoval = function() {
         type: 'alert',
         text: '삭제성공'
     });
+    closePop();
 }

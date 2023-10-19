@@ -81,10 +81,10 @@
                useOil,
                drvrem,
                rependchk,
-               IF(rependdate IS NULL, '1999-01-01',rependdate) AS 'rependdate',
-                repaddkm
+               rependdate,
+               repaddkm
         FROM   tDrive
-        where carNo = #{carNo} AND rependchk = false
+        where carNo = #{carNo}
 
 
     </select>
