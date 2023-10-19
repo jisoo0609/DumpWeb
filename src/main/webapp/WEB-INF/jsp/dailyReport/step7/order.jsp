@@ -52,7 +52,7 @@
             <li>
               <label class="golLabel" for="date">주문일</label>
               <span class="golInputSpan"><input id="date" name="date"></span>
-              <button class="golSearch searchBtn" onClick="searchDate()">조회</button>
+              <button type="button" class="golSearch searchBtn" onClick="bindList()">조회</button>
               <div class="checkbox1">
                 <input id="chk1" type="checkbox">
                 <label class="check67" for="chk1">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
@@ -145,8 +145,8 @@
 					<th>대수</th>
 					<th>차량번호 <br> <span style="font-weight: normal;">(일괄배차)</span></th>
 				</tr>
-			</thead>
-			<tbody id="tBody">
+	  </thead>
+      <tbody id="tBody">
       </tbody>
     </table>
 </section>
