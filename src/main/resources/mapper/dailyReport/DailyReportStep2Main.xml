@@ -76,7 +76,8 @@
         CarNo,
         writerIDX,
         SheetID,
-        currStatus
+        currStatus,
+        chk2
         FROM r3
         WHERE currStatus ="제출"
         GROUP BY
