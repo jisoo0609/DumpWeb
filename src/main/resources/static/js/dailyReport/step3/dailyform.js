@@ -4,19 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(queryString);
 
     let sheetID = params.get("sheetID");
-    //console.log(sheetID);
 
     if (sheetID !== null) {
         getSheetIDDataByParams(sheetID);
     }
-    //clickListThAndRedirect();//step4에 있음
     $.showChk1;
     recoverState();
     approved();
-    //searchByCarsubmitTel(carsubmittel.value); 여기서 이렇게 부르면 안됨!
 });
-
-
 
 function valueToIndex(value) {
     switch (value) {
@@ -32,6 +27,8 @@ function valueToIndex(value) {
 }
 
 function getSheetIDDataByParams(sheetID) {
+    document.getElementById('sheetID').value=sheetID;
+
     $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
@@ -47,6 +44,7 @@ function getSheetIDDataByParams(sheetID) {
             document.getElementById('salesman').value=data.salesman;
             openable2 = true;
             document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
+
             $.list();
         }
     })
@@ -92,15 +90,20 @@ $.list = function() {
         cache: false,
         success: function (data) {
             console.log("제출처 정보는?"+data.carSubmitInfo);
-            //document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
-            if(undefined!==data.sheetID){
+            //운송정보 채우기
+            showTransportList(data);
+
+            //제출처 정보 채우기
+            if(null!==data.carSubmitInfo){
+                $.showCarSubmitInfo(data);
+            }
+
+            if(null!==data.carSubmitInfo){
                 $.saveSheetID(data);
             }
 
-            //운송정보 채우기
-            showTransportList(data);
-            //제출처 정보 채우기
-            $.showCarSubmitInfo(data);
+
+
         },
         error: function(xhr, status, error) {
             $.error();
@@ -115,14 +118,14 @@ $.showCarSubmitInfo = function(data){
     approved();
 }
 //chk정보를 불러오기 위한 함수
-/*$.showChk1 = function(data) {
+$.showChk1 = function(data) {
     document.getElementById("checkbox").checked = data.chk1;
     approved();
-};*/
+};
 
 //제출처 정보 수정을 위한 sheetID 저장
 $.saveSheetID = function(data){
-    document.getElementById("sheetID").value=data.sheetID;
+    document.getElementById("sheetID").value=data.carSubmitInfo.sheetID;
 }
 
 
@@ -326,7 +329,8 @@ $.deleteRow = function() {
 // 제출처 정보 수정
 // 기사가 결재 체크햇으면 해재해놓고 다시
 $.editSales = function(){
-    var sheetID = $("#sheetID").val();
+    alert("저장하기 버튼 기능 수정 중입니다");
+    /*var sheetID = $("#sheetID").val();
     var salesman = $("#salesman").val();
     var carSubmit = $("#carSubmit").val();
     var carSubmitTel = $("#carSubmitTel").val();
@@ -359,8 +363,7 @@ $.editSales = function(){
         })
     } else {
         $.inputInvalid();
-    }
-
+    }*/
 
 }
 
