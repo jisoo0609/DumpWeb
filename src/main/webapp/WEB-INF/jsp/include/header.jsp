@@ -191,14 +191,7 @@
 						<img src="/resources/image/login/ico-call.png" alt="" onclick="document.location.href='tel:01037177406'">
 
 						<span style="padding-left: 10px;">
-<%--							<c:choose>--%>
-<%--								<c:when test="${sessionScope.loginInfo.grade < 3}">--%>
-<%--									<img src="/resources/image/icons/ico_que.png" alt="" class="que-dis-mn" onclick="$.openLayerHelpMsgPopUp(this, 'W01-2');">--%>
-<%--								</c:when>--%>
-<%--								<c:when test="${sessionScope.loginInfo.grade < 5}">--%>
-<%--									<img src="/resources/image/icons/ico_que.png" alt="" class="que-dis-mn" onclick="$.openLayerHelpMsgPopUp(this, 'W01-3');">--%>
-<%--								</c:when>--%>
-<%--							</c:choose>--%>
+									<a href="https://kw.worknsales.com/dump" target="_blank"><img src="/resources/image/icons/ico_que.png" alt="" class="que-dis-mn" onclick=";"></a>
 							</span>
 					</span>
 
