@@ -126,7 +126,7 @@
         repaddkm
         FROM tdrive
         WHERE carno = #{userID}
-        ORDER BY driveId DESC
+        ORDER BY drvdate DESC
         LIMIT 10
     </select>
 
