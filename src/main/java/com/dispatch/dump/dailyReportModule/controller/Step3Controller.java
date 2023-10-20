@@ -56,9 +56,10 @@ public class Step3Controller {
 
         //제출처 정보
         DailyReportStep3Main carSubmitInfo=step3Service.findByCarSubmitInfo(dailyReportStep3Main);
-        System.out.println("carSubmitInfo는?"+carSubmitInfo);
         //운송정보
         List<DailyReportStep3Sub> transPortList = step3Service.list(dailyReportStep3Main);
+        System.out.println("carSubmitInfo는?"+carSubmitInfo);
+        System.out.println("transPortList는?"+transPortList);
 
         resultMap.put("carSubmitInfo", carSubmitInfo);
         resultMap.put("transPortList", transPortList);

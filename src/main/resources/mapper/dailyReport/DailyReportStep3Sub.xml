@@ -31,6 +31,26 @@
         )
     </select>
 
+    <select id="selectAll2" parameterType="DailyReportStep3Main" resultType="DailyReportStep3Sub">
+        SELECT
+        *
+        FROM
+        tSheet_sub
+        WHERE
+        sheetID2 IN (
+        SELECT
+        sheetID
+        FROM
+        tSheet
+        WHERE
+        carSubmitTel = #{carSubmitTel}
+        AND DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
+        AND (sheetSS2 = #{sheetSS2} and sheetSS = (SELECT UuserID FROM tsitePW WHERE Userid= #{CarNo}) OR
+        sheetSS IS NULL OR sheetSS=0)
+        AND CurrStatus = '제출'
+        )
+    </select>
+
     <!--운행 정보 저장-->
     <insert id="insertTransportInfo" parameterType="DailyReportStep3Sub">
         <!--idx 자동->따로 작성 X-->
