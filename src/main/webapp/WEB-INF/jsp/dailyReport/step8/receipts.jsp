@@ -156,22 +156,13 @@
                 <div class="btnWraaper">
                     <button class="common_btn" onclick="approveReceiptsList()">일괄결재</button>
                     <button class="common_btn" onclick="cancelApproval()">일괄취소</button>
-                    <button class="common_btn back_btn" onclick="confirmGoBack()" style="background:#0068b7; color:white;">이전화면</button>
+                    <button class="common_btn back_btn" onclick="goBack()" style="background:#0068b7; color:white;">이전화면</button>
                 </div>
             </div>
 
             <table class="list-table" id="tableOrderByDate">
                 <thead>
                 <tr>
-                    <th>No</th>
-                    <th class="th_header">운행일</th>
-                    <th>상차지</th>
-                    <th>하차지</th>
-                    <th class="th_header">품목</th>
-                    <th class="th_header">차량번호</th>
-                    <th>대수</th>
-                    <th class="th_header">운반단가</th>
-                    <th>상태</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -33,6 +33,7 @@ $.successRowEdit = function() {
         type: 'alert',
         text: '수정 성공'
     });
+    closePop();
 }
 
 $.failEdit = function() {
@@ -73,11 +74,8 @@ $.confirmRemoval = function() {
         type: 'alert',
         text: '정말 삭제하시겠습니까?',
         callback : function(result){
-            console.log(result);
             if (result == false) {
-                console.log(result);
                 $.deleteRow();
-                console.log("reached2");
             }
         }
     });
@@ -97,4 +95,5 @@ $.successRemoval = function() {
         type: 'alert',
         text: '삭제성공'
     });
+    closePop();
 }

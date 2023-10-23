@@ -9,11 +9,21 @@
     <insert id="insertDailyReportStep7sub" parameterType="DailyReportStep7Sub">
         insert into tSheet_sub
         (sheetID2, fromsite, tosite, item, Qty, Qtyup, sheetsubSS, sheetsubSS2, writeridx2)
-        values (#{sheetID2}, #{fromsite}, #{tosite}, #{item}, #{Qty}, #{Qtyup}, (SELECT sheetSS
-                                                                                 FROM tSheet
-                                                                                 WHERE sheetID = #{sheetID2}),
-                #{sheetsubSS2}, #{writeridx2})
+        values (#{sheetID2}, #{fromsite}, #{tosite}, #{item}, #{Qty},
+        <choose>
+            <when test="Qtyup != null">#{Qtyup}</when>
+            <otherwise>NULL</otherwise>
+        </choose>
+        , (SELECT sheetSS
+        FROM tSheet
+        WHERE sheetID = #{sheetID2}),
+        #{sheetsubSS2}, #{writeridx2})
 
     </insert>
+
+    <!-- 제출처 상세정보 조회-->
+    <select id="findSubInfoBySheetSubID" parameterType="int" resultType="DailyReportStep7Sub">
+        SELECT * FROM tsheet_sub WHERE sheetSubID = #{sheetSubID}
+    </select>
 
 </mapper>

@@ -25,6 +25,7 @@ public class DailyReportStep1Sub {
     private int sheetSS;            // LINE :: 회원 idx
     private int writerIDX;
     private String CurrStatus;      // LINE :: 배차상태
+    private int sheetSS2;           // LINE :: 제출처 idx
 
 
 /*

@@ -33,8 +33,6 @@ $(document).ready(function() {
             var dd = String(today.getDate()).padStart(2, "0");
             var formattedDate = yyyy + "-" + mm + "-" + dd;
 
-            exchangeDateInput.val(formattedDate);
-        } else {
             exchangeDateInput.val("");
         }
     });

@@ -14,5 +14,6 @@ public class DailyReportStep2Option {
     String endDate;
 
     private Integer sheetSS2;           // LINE :: 제출처 idx
+
     private Integer sheetsubSS2;         // LINE :: 제출처 idx
 }

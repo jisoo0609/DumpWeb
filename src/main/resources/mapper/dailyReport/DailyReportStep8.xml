@@ -40,7 +40,8 @@
         Qtyup,
         CurrStatus,
         writerIDX,
-        sheetSS2
+        sheetSS2,
+        chk2
 
         from r3
         <where>
@@ -92,7 +93,7 @@
             Qty,
             Qtyup,
             CarNo,
-            DATE_FORMAT(date,'%m.%d') as 'date'
+            DATE_FORMAT(date,'%Y-%m-%d') as 'date'
         from tsheet_sub, tsheet
         where sheetsubID=#{sheetsubID} and sheetID =#{sheetID}
     </select>

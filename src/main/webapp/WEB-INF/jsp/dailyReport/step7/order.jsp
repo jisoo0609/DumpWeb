@@ -52,7 +52,7 @@
             <li>
               <label class="golLabel" for="date">주문일</label>
               <span class="golInputSpan"><input id="date" name="date"></span>
-              <button class="golSearch searchBtn" onClick="searchDate()">조회</button>
+              <button type="button" class="golSearch searchBtn" onClick="bindList()">조회</button>
               <div class="checkbox1">
                 <input id="chk1" type="checkbox">
                 <label class="check67" for="chk1">결재</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
@@ -78,11 +78,11 @@
             </li>
             <li>
               <label class="golLabel" for="carNo"> 차량번호 <span><img class="golVoiceImg" src="/resources/image/step7/ico_mic.png" alt="음성인식 버튼"></span> </label>
-              <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호"></span>
-              <div class="checkbox2">
-                <input id="check67" type="checkbox">
-                <label class="check67" for="check67">모집공고</label> <!--? 결제 체크박스 클릭시 수정 불가 -->
-              </div>
+              <span class="golInputSpan"><input class="golIn" id="carNo" name="carNo" type="text" placeholder="미지정 또는 차량번호 또는 공고"></span>
+<%--              <div class="checkbox2">--%>
+<%--                <input id="chk67" type="checkbox">--%>
+<%--                <label class="check67" for="chk67">모집공고</label> <!--? 결제 체크박스 클릭시 수정 불가 -->--%>
+<%--              </div>--%>
             </li>
             <li>
               <label class="golLabel" for="Qtyup"> 운반비 </label>
@@ -96,7 +96,7 @@
       <button class="opBtn" data-popName="golPop1">삭제</button>
       <button class="opBtn" data-popName="golPop2">취소</button>
       <button class="opBtn" data-popName="golPop3">저장</button>
-      <button class="opBtn" data-popName="golPop4">이전화면</button>
+      <button class="opBtn" data-popName="golPop4" onClick="history.go(-1)">이전화면</button>
     </div>
 
 		<div id="golPop1" class="golPopup1">
@@ -126,15 +126,6 @@
 			</div>
 		</div>
 
-		<div id="golPop4" class="golPopup4">
-			<div>
-				<span class="material-symbols-outlined clBtn">close</span>
-				<p>정말 <span style="font-weight: bold;">이전화면</span>으로 돌아가시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인" onClick="history.go(-1)">
-				<input class="clBtn" type="button" value="취소">
-			</div>
-		</div>
-
     <table>
       <thead>
 				<tr>
@@ -145,8 +136,8 @@
 					<th>대수</th>
 					<th>차량번호 <br> <span style="font-weight: normal;">(일괄배차)</span></th>
 				</tr>
-			</thead>
-			<tbody id="tBody">
+	  </thead>
+      <tbody id="tBody">
       </tbody>
     </table>
 </section>
