@@ -70,6 +70,7 @@ img[alt = calling_img]{
     border: 1px solid #ddd;
     width: 25%;
     height: 35px;
+    font-size: 12px;
 }
 
 .adsearch_btn{
