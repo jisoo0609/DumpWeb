@@ -39,6 +39,7 @@
     --line-height: 25px;
     --main-blue: #0068B7;
     --sub-blue: #0068b778;
+    --back-blue: #cce0f3;
 }
 #dailyreport input[type=text], input[type=password], input[type=number], input[type=file], input[type=tel], textarea {
     padding-left: 5px;
@@ -310,4 +311,56 @@
     margin-top: 2px;
     margin-left: 5000px;
     width: 90%;
+}
+
+/* 검색 드롭다운을 위한 스타일 */
+.droptable{
+    margin-bottom: 10px;
+    border-bottom: 3px solid var(--back-blue);
+}
+.hiddenDrop {
+    line-height: var(--line-height);
+    font-size:  var(--main-font-size);
+    color: #616161;
+    max-height: 180px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.droptable thead {
+    background-color: var(--back-blue);
+}
+
+.droptable thead th:nth-child(1) {
+    color: #333;
+}
+
+.droptable thead th:nth-child(2),
+.droptable thead th:nth-child(3){
+    color: #616161;
+}
+
+.droptable thead th:nth-child(4){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.droptable tr {
+    border: 1px solid var(--back-blue);
+}
+
+.droptable td {
+    height: var(--main-height)
+    border: 1px solid var(--back-blue);
+}
+
+.autoCloseBtn {
+    border: 1px solid white;
+    color: #616161;
+    height: 23px;
+    width: 23px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

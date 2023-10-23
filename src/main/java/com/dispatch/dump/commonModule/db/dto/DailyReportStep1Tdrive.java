@@ -20,5 +20,4 @@ public class DailyReportStep1Tdrive {
     private boolean rependchk;      // LINE :: 교환확인여부
     private int driveSS;            // LINE :: 회원 idx
 
-
 }

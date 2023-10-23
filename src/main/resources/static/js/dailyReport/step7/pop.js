@@ -261,6 +261,36 @@ $.dispatchData = function () {
 
         }
     })
+}
 
+function memberChk() {
+    // alert("개발 중 입니다.");
+    $.ajax({
+        url: "/dailyReport/ajax/memberChk",
+        type: "POST",
+        data: {carNoFull: $("[name=carNoFull]").val()},
+        success: function (data) {
+            var json = $.parseJSON(data);
+            if (json.httpCode == 200) {
+                console.log(json.memberChk);
+                var html;
+                if (json.memberChk) {
+                    html = `가입된 회원입니다.`
+                    $("[name=carNoTel]").val(json.memberChk.carNoHp);
+                    $("[name=carNoName]").val(json.memberChk.carNoName);
+                } else {
+                    html = `<input type="button" value="기사에게 문자발송">`
 
+                }
+                $("#memberChk").html(html);
+            } else {
+                alert("요청을 처리하는 도중 오류가 발생하였습니다. 관리자에게 문의부탁드립니다.");
+                return false;
+            }
+
+        },
+        error: function () {
+            alert("서버와의 통신에 실패하였습니다.");
+        }
+    })
 }

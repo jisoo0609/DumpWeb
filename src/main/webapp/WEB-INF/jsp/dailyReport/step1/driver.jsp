@@ -2,6 +2,12 @@
          pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
+<%
+    response.setHeader("Pragma","no-cache");
+    response.setDateHeader("Expires",0);
+    response.setHeader("Cache-Control", "no-cache");
+%>
+
 <style>
     .homescreen {
         padding: 5px;
@@ -132,7 +138,7 @@
     }
 
     .car-menu th:nth-child(1) {
-        width: 100px;
+        width: 110px;
     }
     .car-graph td:nth-child(3) {
         text-align: right;
@@ -148,10 +154,10 @@
         width: 120px;
     }
     .car-menu th:nth-child(3) {
-        width: 140px;
+        width: 80px;
     }
     .car-menu th:nth-child(4) {
-        width: 140px;
+        width: 250px;
     }
     .car-search-link,
     .car-repair-link,
@@ -167,7 +173,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-     /*   display: flex;*/
+        /*   display: flex;*/
         justify-content: center;
         align-items: center;
         z-index: 1;
@@ -365,7 +371,7 @@
                 <tr class="car-menu">
                     <th>분류</th>
                     <th>교환 예정일</th>
-                    <th>교환 주행거리</th>
+                    <th>교환 km</th>
                     <th>비고</th>
                 </tr>
                 </thead>
