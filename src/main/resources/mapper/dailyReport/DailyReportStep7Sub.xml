@@ -8,8 +8,8 @@
     <!-- 제출처 정보 저장-->
     <insert id="insertDailyReportStep7sub" parameterType="DailyReportStep7Sub">
         insert into tSheet_sub
-        (sheetID2, fromsite, tosite, item, Qty, Qtyup, sheetsubSS, sheetsubSS2, writeridx2)
-        values (#{sheetID2}, #{fromsite}, #{tosite}, #{item}, #{Qty},
+        (sheetID2, fromsite, tosite, item, Qty, Rem, Qtyup, sheetsubSS, sheetsubSS2, writeridx2)
+        values (#{sheetID2}, #{fromsite}, #{tosite}, #{item}, #{Qty}, "",
         <choose>
             <when test="Qtyup != null">#{Qtyup}</when>
             <otherwise>NULL</otherwise>
@@ -26,4 +26,35 @@
         SELECT * FROM tsheet_sub WHERE sheetSubID = #{sheetSubID}
     </select>
 
+    <!--수정-->
+    <update id="editTsheetsub" parameterType="DailyReportStep7Sub">
+        update tsheet_sub
+        set
+        sheetsubSS2=#{sheetsubSS2}
+        where
+        sheetsubSS=#{sheetsubSS}
+        and
+        sheetID2=#{sheetID2}
+    </update>
+
+    <!--제출처 주문 수정-->
+    <update id="editSubmitInfo" parameterType="DailyReportStep7Sub">
+        update tsheet_sub s
+        <set>
+            s.fromsite=#{fromsite},
+            s.tosite=#{tosite},
+            s.item=#{item},
+            s.Qty=#{Qty},
+            s.Rem=#{Rem},
+            s.Qtyup=#{Qtyup},
+            s.writeridx2 = #{writeridx2}
+        </set>
+        where s.sheetsubID = #{sheetsubID}
+    </update>
+
+    <delete id="deleteByOne" parameterType="DailyReportStep7Sub" >
+        delete from tsheet_sub
+        where
+        sheetsubID = #{sheetsubID}
+    </delete>
 </mapper>
