@@ -15,6 +15,11 @@ public interface DailyReportStep7MainMapper {
     /* FUNCTION :: 일보 리스트 조회(전체조건) */
     List<DailyReportStep7Sub> selectReceptionList(String userId, String today);
 
+    /* FUNCTION ::  수정 */
+    int editOrder(DailyReportStep7Main dailyReportStep7Main);
+
+    /* FUNCTION ::  삭제를 위한 chk1 조회 */
+    boolean findBySheetID(int sheetID);
 
     //DailyReportStep7Main findDailyReportMainList(DailyReportStep7Main dailyReportStep7Main);
 }
