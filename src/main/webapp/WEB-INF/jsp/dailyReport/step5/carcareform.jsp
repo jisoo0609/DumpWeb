@@ -48,7 +48,7 @@
                 </li>
                 <li>
                     <label class="drvLabel">기타(설명) <span><img class="drvVoiceImg" src="/resources/image/step5/ico_mic.png" alt="음성인식 버튼"></span> </label>
-                    <span class="drvInputSpan"><textarea placeholder="주유소 및 정비소와 수리내용" id="drvRem voiceNotification" name="drvRem" class="voice-notification" cols="30" rows="2"></textarea></span>
+                    <span class="drvInputSpan"><textarea placeholder="주유소 및 정비소와 수리내용" id="voiceNotification" name="drvRem" class="voice-notification" cols="30" rows="2"></textarea></span>
                 </li>
                 <li class="tabBtn" data-tab="hiddenPart">
                     <label for="showHideCheckbox">다음 교환 주기 입력</label>
