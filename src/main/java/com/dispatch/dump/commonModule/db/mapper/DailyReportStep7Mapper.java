@@ -21,5 +21,7 @@ public interface DailyReportStep7Mapper {
 
     int updateQtyParentsData (DailyReportStep7Sub dailyReportStep7Sub);
 
+    DailyReportStep7CarNo findMemberChkByUserId(DailyReportStep7CarNo dailyReportStep7CarNo);
+
 
 }

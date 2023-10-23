@@ -49,6 +49,7 @@ public class Step2Service {
         return dailyReportStep2Mapper.selectDispatchStatusList(uuserID,getToday());
     }
 
+    // 제출 받은 일보
     public List<DailyReportStep2Sub> findSubmittedReportList() {
 
         String uuserID = getSessionLoginData().getUuserID();
@@ -56,6 +57,15 @@ public class Step2Service {
 
         return dailyReportStep2Mapper.submittedReportList(uuserID,getToday());
     }
+
+    public List<DailyReportStep2Sub> findRecruitmentReportList() {
+
+        String uuserID = getSessionLoginData().getUuserID();
+        System.out.println( dailyReportStep2Mapper.recruitmentReportList(uuserID,getToday()));
+
+        return dailyReportStep2Mapper.recruitmentReportList(uuserID,getToday());
+    }
+
 
 
 
