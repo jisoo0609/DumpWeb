@@ -199,4 +199,18 @@ public class Step7Service {
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
+    public String MemberChk(DailyReportStep7CarNo dailyReportStep7CarNo) {
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+
+        try {
+            DailyReportStep7CarNo memberChk = step7Mapper.findMemberChkByUserId(dailyReportStep7CarNo);
+            rtnMap.put("memberChk", memberChk);
+            rtnMap.put("httpCode", 200);
+        }catch (Exception e) {
+            log.error("Exception [" + e.getMessage() +"]");
+        }
+
+        return commonUtil.jsonFormatTransfer(rtnMap);
+    }
+
 }

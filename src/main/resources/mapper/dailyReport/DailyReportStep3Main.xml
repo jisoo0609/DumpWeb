@@ -85,7 +85,7 @@
     <!--제출처 정보 각 각 그룹회하여 조회-->
     <!--제출처 이름으로 조회-->
     <select id="findByCarSubmit" resultType="DailyReportStep3Main">
-        select carSubmit, carSubmitTel, salesman
+        select sheetID, carSubmit, carSubmitTel, salesman
         from tSheet
         where carSubmit like CONCAT('%', #{carSubmit}, '%')
         group by carSubmit
@@ -94,7 +94,7 @@
 
     <!--제출처 전화번호로 조회-->
     <select id="findByCarSubmitTel" resultType="DailyReportStep3Main">
-        select carSubmit, carSubmitTel, salesman
+        select sheetID, carSubmit, carSubmitTel, salesman
         from tSheet
         where carSubmitTel like CONCAT('%', #{carSubmitTel}, '%')
         group by carSubmitTel
@@ -103,7 +103,7 @@
 
     <!--영업사원으로 조회-->
     <select id="findBySalesman" resultType="DailyReportStep3Main">
-        select carSubmit, carSubmitTel, salesman
+        select sheetID, carSubmit, carSubmitTel, salesman
         from tSheet
         where salesman like CONCAT('%', #{salesman}, '%')
         group by salesman
