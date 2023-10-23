@@ -58,23 +58,12 @@ function printDispatchList(searchResultData, tbodyId) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector(`#${tbodyId}`);
     tableBody.innerHTML = "";
-
-    // 검색 결과 데이터를 테이블 본문에 추가.
+    
     searchResultData.forEach((data, index) => {
         const row = document.createElement("tr");
 
         if (data.carNo !== "") {
-
-            if (data.carNo === "공고" && tbodyId === "tbody3") {
-                const order = [data.fromsite, data.tosite, data.item, data.qty];
-                row.innerHTML = `
-                    <td>${order[0]}</td>
-                    <td>${order[1]}</td>
-                    <td>${order[2]}</td> 
-                    <td>${order[3]}</td>
-                `;
-            } else {
-                // 그 외의 경우 (CarNo가 데이터가 있거나 "공고"가 아닌 경우)
+            if (data.carNo !== "공고" || tbodyId !== "tbody1") {
                 const order = [data.carNo, data.fromsite, data.tosite, data.item, data.qty];
                 row.innerHTML = `
                     <td>${order[0]}</td>
@@ -103,6 +92,27 @@ function printDispatchList(searchResultData, tbodyId) {
                 <td>${order[2]}</td> 
                 <td>${order[3]}</td>
                 <td>${order[4]}</td>
+            `;
+
+            if (tbodyId === "tbody2") {
+                row.innerHTML += `
+                    <td>
+                        <input
+                        type="checkbox"
+                        class="checkConfirm"
+                        ${data.chk2 === true ? 'checked' : ''} disabled>
+                    </td>
+                `;
+            }
+        }
+
+        if (tbodyId === "tbody3") {
+            const order = [data.fromsite, data.tosite, data.item, data.qty];
+            row.innerHTML = `
+                <td>${order[0]}</td>
+                <td>${order[1]}</td>
+                <td>${order[2]}</td> 
+                <td>${order[3]}</td>
             `;
         }
 
