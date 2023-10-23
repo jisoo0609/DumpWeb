@@ -21,7 +21,7 @@
             <li><label>전체 차량번호</label>
               <span class="content" style="padding-left: 100px;">
                   <div class="input-group select">
-                    <input type="text" class="trn" style="width: 100%;" name="carNoFull" id="carNoFull" autocomplete="off">
+                    <input type="text" class="trn" style="width: 100%;" name="carNoFull" id="carNoFull" autocomplete="off" onchange="memberChk();">
                     <span class="input-group-clear dis-n" id="carNoFull_clear">x</span>
                     <select class="carNoFull" id="carNoFullBox" onchange="$.selectBoxChange(this.value, 'carNoFull');">
                     <option value="">직접입력</option>
@@ -30,6 +30,14 @@
                       </c:forEach>
                     </select>
               </div>
+              </span>
+            </li>
+            <li>
+              <label></label>
+              <span class="content" style="padding-left: 100px;">
+                  <div id="memberChk">
+
+                  </div>
               </span>
             </li>
             <li><label>휴대폰 번호</label>
