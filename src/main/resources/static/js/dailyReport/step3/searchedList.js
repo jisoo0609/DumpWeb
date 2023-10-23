@@ -217,7 +217,7 @@ function searchByCarsubmitTel(inputData) {
             }
 
             if (autoSearch == 1) { // 직접 타이핑해서 입력 중
-                if( carSubmitTel != "" && carSubmitTel != "010") {
+                if( carSubmitTel != "" && carSubmitTel != "010" && carSubmitTel.length <=3 ) {
                     showTelBox();
                     showTelList(data.list);
                 } else {
