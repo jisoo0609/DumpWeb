@@ -38,12 +38,15 @@ function showSearchedList(data) {
 }
 
 function getSheetIDDataBySelection(sheetID) {
+
+    console.log(sheetID);
+
     $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
-        async:false,
         data: {sheetID: sheetID},
         success: function (data) {
+            console.log(data);
             //이 부분 추후 정리할 것
             document.getElementById('carSubmit').value=data.carSubmit;
             openable1 = true;
@@ -170,6 +173,7 @@ function showTelList(data) {
             for ( let i = 0; i < amount; i++) {
                 let row = data[i]
                 let rowId = data[i].sheetID
+                console.log("showTelList rowId : " + rowId)
                 html += '<tr id="' + rowId + '">';
                 html += '   <td style="color: black;">'+ data[i].carSubmitTel +'</td>'
                 html += '   <td>'+ data[i].carSubmit +'</td>'
@@ -194,7 +198,7 @@ function offAutoSearch() {
     autoSearch = 0;
 }
 
-let autoCompleteData;
+
 function searchByCarsubmitTel(inputData) {
     const carSubmitTel = carsubmittel.val();
     $.ajax({
@@ -231,6 +235,7 @@ function searchByCarsubmitTel(inputData) {
 }
 
 function selectedByTel(sheetID) {
+    console.log(sheetID);
     getSheetIDDataBySelection(sheetID);
     offAutoSearch()
     hideTelBox();
