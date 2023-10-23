@@ -74,6 +74,12 @@ public class Step7Controller {
         return step7Service.saveDispatchData(parentID, dispatchDataList);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/ajax/memberChk", method = RequestMethod.POST)
+    public String MemberChk(DailyReportStep7CarNo dailyReportStep7CarNo) {
+        return step7Service.MemberChk(dailyReportStep7CarNo);
+    }
+
 
 
 }
