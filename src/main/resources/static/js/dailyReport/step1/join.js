@@ -8,12 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     carFindList();
 });
 
-window.addEventListener('pageshow', function (event) {
-    if (event.persisted || window.performance && window.performance.navigation.type == 2) {
-        location.reload();
-    }
-});
-
 function bindSummary() {
     $.ajax({
         url: "/dailyReport/driver/ajax/total",
