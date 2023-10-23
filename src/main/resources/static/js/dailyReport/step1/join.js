@@ -8,12 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     carFindList();
 });
 
-window.onpageshow = function(event){
-    if (event.persisted || (window.performance && window.performance.navigation.type === 2)){
-        window.location.reload();
-    }
-};
-
 function bindSummary() {
     $.ajax({
         url: "/dailyReport/driver/ajax/total",
@@ -34,6 +28,7 @@ function bindDispatchList() {
         }
     });
 }
+
 //금일 차량 모집 공고
 function bindCarRecruitList() {
     $.ajax({
@@ -44,6 +39,7 @@ function bindCarRecruitList() {
         }
     });
 }
+
 function carFindList() {
     $.ajax({
         url: "/dailyReport/driver/ajax/tdrivelist",
@@ -92,7 +88,7 @@ function groupAndSumData(searchResultData) {
                 sheetID: data.sheetID,
                 sheetSS2: data.sheetSS2,
                 currStatus: data.currStatus,
-                carSubmit:data.carSubmit,
+                carSubmit: data.carSubmit,
                 fromsite: data.fromsite,
                 tosite: data.tosite,
                 item: data.item,
@@ -115,7 +111,7 @@ function printDispatchList(searchResultData) {
     // 데이터를 그룹화하고 합산
     const groupedData = groupAndSumData(searchResultData);
 
-   groupedData.sort((a, b) => a.carSubmit.localeCompare(b.carSubmit));
+    groupedData.sort((a, b) => a.carSubmit.localeCompare(b.carSubmit));
     // 'sheetSS2' 값을 기록할 변수
     let prevSheetSS2 = null;
 
@@ -167,20 +163,19 @@ function printCarRecruitmentList(searchResultData) {
     const carSubmitTelSpan = document.querySelector(".car-submitTel");
 
 
-
 //리스트 출력 부분
     searchResultData.forEach(data => {
 
-            const row = document.createElement("tr");
+        const row = document.createElement("tr");
 
-            row.innerHTML = `
+        row.innerHTML = `
                 <td>${data.carSubmit}</td>
                 <td>${data.fromsite}</td>
                 <td>${data.tosite}</td>
                 <td>${data.item}</td>
                 <td>${data.qty}</td>
             `;
-            //팝업기능
+        //팝업기능
         row.addEventListener("click", () => {
             carSubmitSpan.textContent = data.carSubmit; //제출처
             carSubmitTelSpan.textContent = formatPhoneNumber(data.carSubmitTel); //제출처 번호
@@ -190,10 +185,11 @@ function printCarRecruitmentList(searchResultData) {
             popupContainer.style.display = "flex"; // 팝업 보이기
         });
 
-            tableBody.appendChild(row);
+        tableBody.appendChild(row);
 
     });
 }
+
 function printFindList(searchResultData) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector("#carsub");
@@ -250,6 +246,7 @@ function clickListStep5Redirect() {
         }
     });
 }
+
 function clickListStep3Redirect() {
     const tableBody = document.querySelector("#menusub");
 
@@ -260,18 +257,19 @@ function clickListStep3Redirect() {
 
     });
 }
+
 document.addEventListener("DOMContentLoaded", function () {
     // 리다이렉트
     clickListStep5Redirect();
     clickListStep3Redirect();
-  /*  chickList();*/
+    /*  chickList();*/
 });
 
 
 const popupContainer = document.getElementById("popup-container");
 const closePopupButton = document.getElementById("close-popup");
 
-closePopupButton.addEventListener("click", function() {
+closePopupButton.addEventListener("click", function () {
     // 이벤트의 기본 동작(여기서는 링크를 클릭할 때의 기본 동작)을 막습니다.
     event.preventDefault();
     // 팝업 창을 숨기기
