@@ -204,7 +204,7 @@ function searchByCarsubmitTel(inputData) {
             const isMember = $("#isMember");
             const inviteBtn = $("#inviteBtn");
             if(data.checkData!=null){ // 가입된 거래처
-                isMember.text("가입된 회원 입니다");
+                isMember.text("회원");
                 $("#inviteBtn").css("margin-left", "5000px");
             }else{
                 isMember.text("");

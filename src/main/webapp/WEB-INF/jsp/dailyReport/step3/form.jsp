@@ -95,7 +95,7 @@
                             </div>
                             <div id="invite">
                                 <span id="isMember">거래처 상태</span>
-                                <button type="button" class="btn addBtn" id ="inviteBtn" onclick="$.invite()">신규회원 초대하기</button>
+                                <button type="button" class="btn addBtn" id ="inviteBtn" onclick="$.invite()">비회원 초대하기</button>
                             </div>
                         </li>
                         <%@ include file="searchCarSubmitTel.jsp" %>
@@ -186,7 +186,7 @@
             <button type="button" class="btn btn-white" onclick="clearInputs()">전체삭제</button>
             <button type="button" class="btn btn-blue" id="submitBtn" onClick="$.editSales() submitConfirmation()">제출하기</button>
             <button type="button" class="btn btn-blue " onClick="$.editSales()">저장하기</button>
-            <button type="button" class="btn btn-white " onClick="history.go(-1)">이전화면</button>
+            <button type="button" class="btn btn-white " onClick="pageGoBack()">이전화면</button>
         </div>
     </div>
 </section>

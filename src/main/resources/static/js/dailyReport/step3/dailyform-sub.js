@@ -8,6 +8,10 @@ var openable3 = false;
 var openable4 = true; //기본적으로 오늘 날자를 세팅해 놓으므로 true로 둠
 
 
+function pageGoBack() {
+    window.location.href = document.referrer;
+}
+
 
 /* DDDDDD-DATE-EEEEEE */
 const dateInput = document.getElementById('date');
