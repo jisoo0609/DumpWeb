@@ -30,4 +30,8 @@ public interface DailyReportStep3SubMapper {
 
     /* FUNCTION ::  전체삭제 */
     int deleteByTransInfo(DailyReportStep3Main dailyReportStep3Main);
+
+    int updateSheetID2(DailyReportStep3Main dailyReportStep3Main);
+
+    int deleteParentDataExceptSheetID(DailyReportStep3Main dailyReportStep3Main);
 }

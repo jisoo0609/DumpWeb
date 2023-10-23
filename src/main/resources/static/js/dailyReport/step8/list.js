@@ -51,7 +51,6 @@ function printList(searchResultData) {
     //라디오 선택 값 얻어옴
     const checkedNumber = changeTableColumnOrder();
     let prevCriteria;
-    let no = 1;
 
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.forEach((data, index) => {
@@ -168,6 +167,7 @@ function printSummary(searchResultData) {
     // 검색 결과 텍스트 생성
     const dataCount = searchResultData.length;
     const totalCount = searchResultData.reduce((total, data) => total + (data.qty * data.qtyup), 0);
+    const totalQty = searchResultData.reduce((total, data) => total + data.qty, 0);
 
     //비용금액 버튼 내용 변경
     const costButton = document.querySelector(".agreement_container .transportCost");
@@ -175,7 +175,7 @@ function printSummary(searchResultData) {
 
     // 결과를 result_search 요소에 출력
     const resultSearch = document.querySelector("#total");
-    resultSearch.innerHTML = `<h1 style="color:#333">데이터 <span class="blue" style="color:#0068b7">${dataCount}</span>건이 검색되었습니다.</h1>`;
+    resultSearch.innerHTML = `<h1 style="color:#333">데이터 <span class="blue" style="color:#0068b7">${dataCount}</span>건(총대수:<span class="blue" style="color:#0068b7">${totalQty}</span>대)이 검색되었습니다.</h1>`;
 }
 
 //라디오 정렬값에 따라 테이블 헤더&바디 순서 변경하는 코드 -> 후에 대표님 요청사항이 또 바뀌면 그때 사용하기

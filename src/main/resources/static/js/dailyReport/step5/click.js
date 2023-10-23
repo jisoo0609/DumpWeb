@@ -9,10 +9,27 @@ function save() {
     theForm = document.entry_form;
 
 
-    if (theForm.drvClub.value === "" || theForm.drvDate.value === "" || theForm.lastKm.value === "" || theForm.useAmt.value === "") {
-        alert("모든 필수 항목을 입력해 주세요.");
-        return;
+    if(theForm.drvClub.value==="" || theForm.drvDate.value==="" || theForm.lastKm.value==="" || theForm.useAmt.value==="" || theForm.useOil.value===""){
+        if(theForm.drvClub.value==""){
+            alert("품목을 선택해 주세요.")
+            return
+        }else if(theForm.drvDate.value==""){
+            alert("날짜를 선택해 주세요.")
+            return theForm.drvDate.focus();
+        }else if(theForm.lastKm.value==""){
+            alert("최종 주행 거리를 입력해 주세요.")
+            return theForm.lastKm.focus();
+        }else if(theForm.useAmt.value==""){
+            alert("사용 금액을 입력해 주세요.")
+            return theForm.useAmt.focus();
+        }
     }
+
+//    if (theForm.drvClub.value === "" || theForm.drvDate.value === "" || theForm.lastKm.value === "" || theForm.useAmt.value === "") {
+//        alert("모든 필수 항목을 입력해 주세요.");
+//        return;
+//    }
+
 //    if (theForm.drvClub.value === "요소수") {
 //        if (theForm.rependdate.value === "" || theForm.repaddkm.value === "") {
 //            alert("요소수 항목을 선택하면 교환 예정일과 교환 주행거리를 입력해야 합니다.");

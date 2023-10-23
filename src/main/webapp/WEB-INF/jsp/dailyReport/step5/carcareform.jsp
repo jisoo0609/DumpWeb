@@ -53,6 +53,7 @@
                 <li class="tabBtn" data-tab="hiddenPart">
                     <label for="showHideCheckbox">다음 교환 주기 입력</label>
                     <span class="drvInputSpan2"><input name="nextChkBtn" id="showHideCheckbox" type="checkbox" checked></span>
+                    <span style="font-weight: normal;">체크를 풀면 <span style="color: red;">교환 예정일이 초기화</span> 됩니다.</span>
                 </li>
             </ul>
             <ul class="bdnUl" id="hiddenPart">
