@@ -2,12 +2,6 @@
          pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/header.jsp" %>
 
-<%
-    response.setHeader("Pragma","no-cache");
-    response.setDateHeader("Expires",0);
-    response.setHeader("Cache-Control", "no-cache");
-%>
-
 <style>
     .homescreen {
         padding: 5px;

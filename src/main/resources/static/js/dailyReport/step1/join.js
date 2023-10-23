@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
     carFindList();
 });
 
+window.onpageshow = function(event){
+    if (event.persisted || (window.performance && window.performance.navigation.type === 2)){
+        window.location.reload();
+    }
+};
 
 function bindSummary() {
     $.ajax({
