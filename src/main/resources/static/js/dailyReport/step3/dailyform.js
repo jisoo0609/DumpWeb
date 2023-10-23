@@ -143,7 +143,7 @@ function showTransportList(data){
             html += '   <td>' + subData.qty + '</td>';
             html += '   <td>' + subData.rem + '</td>';
             html += '   <td style="display: none;">' + subData.sheetsubID + '</td>';
-            html += '   <td style="display: none;">' + subData. qtyup + '</td>';
+            html += '   <td style="display: none;">' + subData.qtyup + '</td>';
             html += '</tr>';
         }
         html += '</table>';
