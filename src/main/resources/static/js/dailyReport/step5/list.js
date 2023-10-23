@@ -11,30 +11,32 @@ function printList(searchResultData) {
     const tableBody = document.querySelector("table tbody");
     tableBody.innerHTML = "";
 
-     const queryString = window.location.search;
-     const params = new URLSearchParams(queryString);
-     let paramDriveID = params.get("driveID");
+    searchResultData.sort((a, b) => new Date(b.drvdate) - new Date(a.drvdate));
 
-    console.log(paramDriveID);
-    console.log(searchResultData);
-
-    if(paramDriveID !== null){
-    let firstRowIdx;
-
-    for(let i=0; i < searchResultData.length; i++){
-        if(searchResultData[i].driveID === parseInt(paramDriveID)){
-            firstRowIdx = i;
-            break;
-        }
-    }
-
-    console.log(firstRowIdx);
-
-    const firstRow = searchResultData.splice(firstRowIdx, 1)[0];
-    searchResultData.splice(0, 0, firstRow);
-    }
-
-    console.log(searchResultData);
+//     const queryString = window.location.search;
+//     const params = new URLSearchParams(queryString);
+//     let paramDriveID = params.get("driveID");
+//
+//    console.log(paramDriveID);
+//    console.log(searchResultData);
+//
+//    if(paramDriveID !== null){
+//    let firstRowIdx;
+//
+//    for(let i=0; i < searchResultData.length; i++){
+//        if(searchResultData[i].driveID === parseInt(paramDriveID)){
+//            firstRowIdx = i;
+//            break;
+//        }
+//    }
+//
+//    console.log(firstRowIdx);
+//
+//    const firstRow = searchResultData.splice(firstRowIdx, 1)[0];
+//    searchResultData.splice(0, 0, firstRow);
+//    }
+//
+//    console.log(searchResultData);
 
     // 검색 결과 데이터를 테이블 본문에 추가.
     searchResultData.slice(0, 10).forEach((data, index) => {

@@ -92,6 +92,27 @@ public class Step7Service {
         System.out.println(dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUuserID(),dailyReportStep7Main.getDate()));
         return dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUuserID(),dailyReportStep7Main.getDate());
     }
+
+    //제출처 주문 정보 삭제
+    public String delete(DailyReportStep7Sub dailyReportStep7Sub){
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+
+        int sheetID = dailyReportStep7SubMapper.findBySheetsubID(dailyReportStep7Sub.getSheetsubID());
+        System.out.println("sheetID는?"+sheetID);
+        boolean chk1 = dailyReportStep7MainMapper.findBySheetID(sheetID);
+        System.out.println("chk1은?"+chk1);
+
+        if(chk1==false){
+            System.out.println("도달");
+            dailyReportStep7Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
+            dailyReportStep7SubMapper.deleteByOne(dailyReportStep7Sub);
+            rtnMap.put("httpCode",200);
+        }else{
+            rtnMap.put("httpCode",422);
+        }
+        return commonUtil.jsonFormatTransfer(rtnMap);
+    }
+
     public String saveCarData(DailyReportStep7CarNo dailyReportStep7CarNo) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
         try {
