@@ -12,23 +12,21 @@ function hideCarSubmitBox() {
 
 function showSearchedList(data) {
     let html;
-    if(!data) {
+    if (!data) {
         html = '<div>검색된 기록이 없습니다.</div>';
     } else {
         let amount = data.length;
         html = '<table>';
-        if (amount > 0 ) {
-            for ( let i = 0; i < amount; i++) {
+        if (amount > 0) {
+            for (let i = 0; i < amount; i++) {
                 let row = data[i]
                 let rowId = data[i].sheetID
-
-                console.log('showSearchedList rowId : ' +rowId );
-                html += `<tr id="' + rowId + '">`;
-                html += `   <td style="color: black;">'+ data[i].carSubmit +'</td>`
-                html += `   <td>'+ data[i].salesman +'</td>`
-                html += `   <td>'+ data[i].carSubmitTel +'</td>`
-                html += `  <td><button type="button" class="addBtn" style="width: 50px;" onclick="selectedByCarSubmit('+rowId+')">선택</button></td>`
-                html += `</tr>`
+                html += '<tr id="' + rowId + '">';
+                html += '   <td style="color: black;">' + data[i].carSubmit + '</td>'
+                html += '   <td>' + data[i].salesman + '</td>'
+                html += '   <td>' + data[i].carSubmitTel + '</td>'
+                html += '   <td><button type="button" class="addBtn" style="width: 50px;" onclick="selectedByCarSubmit(' + rowId + ')">선택</button></td>'
+                html += '</tr>'
             }
         } else {
             html += '<tr><td colspan="4" style="text-align: center;">검색된 결과가 없습니다</td></tr>'
@@ -40,20 +38,19 @@ function showSearchedList(data) {
 }
 
 function getSheetIDDataBySelection(sheetID) {
-
-    console.log(sheetID);
-
     $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
+        async: false,
         data: {sheetID: sheetID},
         success: function (data) {
+            console.log(data);
             //이 부분 추후 정리할 것
-            document.getElementById('carSubmit').value=data.carSubmit;
+            document.getElementById('carSubmit').value = data.carSubmit;
             openable1 = true;
-            document.getElementById('salesman').value=data.salesman;
+            document.getElementById('salesman').value = data.salesman;
             openable2 = true;
-            document.getElementById('carSubmitTel').value=data.carSubmitTel;
+            document.getElementById('carSubmitTel').value = data.carSubmitTel;
             openable3 = true;
             searchByCarsubmitTel(data.carSubmitTel);
         }
@@ -70,9 +67,9 @@ function searchByCarsubmit(inputField) {
     $.ajax({
         url: "/dailyReport/search/carSubmit",
         method: "GET",
-        data: { "carSubmit": carSubmit },
+        data: {"carSubmit": carSubmit},
         success: function (data) {
-            if( carSubmit!= "") {
+            if (carSubmit != "") {
                 showCarSubmitBox();
                 showSearchedList(data);
             } else {
@@ -100,20 +97,20 @@ function hideSalesmanBox() {
 
 function showSalesList(data) {
     let html;
-    if(!data) {
+    if (!data) {
         html = '<div>검색된 기록이 없습니다.</div>';
     } else {
         let amount = data.length;
         html = '<table>';
-        if (amount > 0 ) {
-            for ( let i = 0; i < amount; i++) {
+        if (amount > 0) {
+            for (let i = 0; i < amount; i++) {
                 let row = data[i]
                 let rowId = data[i].sheetID
                 html += '<tr id="' + rowId + '">';
-                html += '   <td style="color: black;">'+ data[i].salesman +'</td>'
-                html += '   <td>'+ data[i].carSubmit +'</td>'
-                html += '   <td>'+ data[i].carSubmitTel +'</td>'
-                html += '   <td><button type="button" class="addBtn" style="width: 50px;" onclick="selectedBySalesman('+rowId+')">선택</button></td>'
+                html += '   <td style="color: black;">' + data[i].salesman + '</td>'
+                html += '   <td>' + data[i].carSubmit + '</td>'
+                html += '   <td>' + data[i].carSubmitTel + '</td>'
+                html += '   <td><button type="button" class="addBtn" style="width: 50px;" onclick="selectedBySalesman(' + rowId + ')">선택</button></td>'
                 html += '</tr>'
             }
         } else {
@@ -130,9 +127,9 @@ function searchBySalesman(inputData) {
     $.ajax({
         url: "/dailyReport/search/salesman",
         method: "GET",
-        data: { "salesman": salesman },
-        success: function(data) {
-            if( salesman!= "") {
+        data: {"salesman": salesman},
+        success: function (data) {
+            if (salesman != "") {
                 showSalesmanBox();
                 showSalesList(data);
             } else {
@@ -140,16 +137,17 @@ function searchBySalesman(inputData) {
                 $.list();
             }
         },
-        error: function(error) {
+        error: function (error) {
             console.error('Ajax 요청 실패:', error);
         }
-   });
+    });
 }
 
 function selectedBySalesman(sheetID) {
     getSheetIDDataBySelection(sheetID);
     hideSalesmanBox();
 }
+
 //----------------------------------carsubmitTel---------------------------------------//
 const telDrop = $('#telList');
 const telBox = document.getElementById('carSubmitTelBox');
@@ -165,21 +163,20 @@ function hideTelBox() {
 
 function showTelList(data) {
     let html;
-    if(!data) {
+    if (!data) {
         html = '<div>검색된 기록이 없습니다.</div>';
     } else {
         let amount = data.length;
         html = '<table>';
-        if (amount > 0 ) {
-            for ( let i = 0; i < amount; i++) {
+        if (amount > 0) {
+            for (let i = 0; i < amount; i++) {
                 let row = data[i]
                 let rowId = data[i].sheetID
-                console.log("showTelList rowId : " + rowId)
                 html += '<tr id="' + rowId + '">';
-                html += '   <td style="color: black;">'+ data[i].carSubmitTel +'</td>'
-                html += '   <td>'+ data[i].carSubmit +'</td>'
-                html += '   <td>'+ data[i].salesman +'</td>'
-                html += '   <td><button type="button" class="addBtn" style="width: 50px;" onclick="selectedByTel('+rowId+')">선택</button></td>'
+                html += '   <td style="color: black;">' + data[i].carSubmitTel + '</td>'
+                html += '   <td>' + data[i].carSubmit + '</td>'
+                html += '   <td>' + data[i].salesman + '</td>'
+                html += '   <td><button type="button" class="addBtn" style="width: 50px;" onclick="selectedByTel(' + rowId + ')">선택</button></td>'
                 html += '</tr>'
             }
         } else {
@@ -192,33 +189,36 @@ function showTelList(data) {
 }
 
 let autoSearch = 0;
+
 function onAutoSearch() {
     autoSearch = 1;
 }
+
 function offAutoSearch() {
     autoSearch = 0;
 }
 
+let autoCompleteData;
 
 function searchByCarsubmitTel(inputData) {
     const carSubmitTel = carsubmittel.val();
     $.ajax({
         url: "/dailyReport/search/carSubmitTel",
         method: "GET",
-        data: { "carSubmitTel": carSubmitTel },
-        success: function(data) {
+        data: {"carSubmitTel": carSubmitTel},
+        success: function (data) {
             const isMember = $("#isMember");
             const inviteBtn = $("#inviteBtn");
-            if(data.checkData!=null){ // 가입된 거래처
+            if (data.checkData != null) { // 가입된 거래처
                 isMember.text("회원");
                 $("#inviteBtn").css("margin-left", "5000px");
-            }else{
+            } else {
                 isMember.text("");
                 $("#inviteBtn").css("margin-left", "auto");
             }
 
             if (autoSearch == 1) { // 직접 타이핑해서 입력 중
-                if( carSubmitTel != "" && carSubmitTel != "010" && carSubmitTel.length <=3 ) {
+                if (carSubmitTel != "" && carSubmitTel != "010" && carSubmitTel.length >= 4) {
                     showTelBox();
                     showTelList(data.list);
                 } else {
@@ -228,10 +228,10 @@ function searchByCarsubmitTel(inputData) {
             }
             listData();
         },
-        error: function(error) {
+        error: function (error) {
             console.error('Ajax 요청 실패:', error);
         }
-   });
+    });
 
 }
 
