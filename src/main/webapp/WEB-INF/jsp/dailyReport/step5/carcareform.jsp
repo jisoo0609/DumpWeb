@@ -77,7 +77,7 @@
         <button class="openBtn" data-popName="drvpop1">삭제</button>
         <button onclick="save()">저장</button>
         <button class="openBtn" data-popName="drvpop2">입력취소</button>
-        <button class="openBtn" data-popName="drvpop3" onClick="history.go(-1)">이전화면</button>
+        <button class="openBtn" data-popName="drvpop3" onClick="window.location.href = document.referrer;">이전화면</button>
     </div>
 
     <div id="drvpop1" class="drvPopup1">
