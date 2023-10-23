@@ -55,7 +55,7 @@ function PayCarList() {
 
 // 이전화면 버튼 클릭 시 실행되는 함수
 function goBack(){
-    window.history.back();
+    window.location.href = document.referrer;
 };
 
 

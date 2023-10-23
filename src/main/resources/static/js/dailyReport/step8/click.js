@@ -32,15 +32,15 @@ function cancelApproval() {
 
 // 이전화면 버튼 클릭 시 실행되는 함수
 function goBack(){
-    window.history.back();
+    window.location.href = document.referrer;
 };
 
-/* js를 통해 search_btn이 눌릴 수 있도록 처리 */
+//js를 통해 search_btn이 눌릴 수 있도록 처리
 function clickSearchButton(){
     document.querySelector(".search_btn").onclick();
 }
 
-/* 리스트의 행 클릭시, 상태값에 따라 파라미터와 함께 step3 or step7로 이동하도록 처리. */
+//리스트의 행 클릭시, 상태값에 따라 파라미터와 함께 step3 or step7로 이동하도록 처리.
 function clickListThAndRedirect(){
     const listRow = document.querySelector("table tbody");
 
@@ -70,7 +70,7 @@ function clickListThAndRedirect(){
     });
 }
 
-/* 선택한 옵션을 통해 데이터를 받아올 수 있도록 ajax POST 처리. */
+//선택한 옵션을 통해 데이터를 받아올 수 있도록 ajax POST 처리.
 function bindList() {
     $.ajax({
         url: "/dailyReport/receipts/ajax/list",

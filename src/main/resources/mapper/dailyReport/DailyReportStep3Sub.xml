@@ -140,4 +140,27 @@
         and
         writeridx2=#{writeridx2}
     </delete>
+
+    <sql id="updateClause">
+        WITH r1 AS
+                 (
+                     SELECT carSubmitTel, `date`
+                     FROM tsheet
+                     WHERE sheetID = #{sheetID}
+                 ), r2 as (
+            select sheetID
+            from tsheet t
+                     inner join r1 on t.carSubmitTel = r1.carSubmitTel and t.date = r1.date
+        )
+    </sql>
+
+    <update id="updateSheetID2" parameterType="DailyReportStep3Main">
+        <include refid="updateClause"></include>
+        UPDATE tsheet_sub SET sheetID2 = #{sheetID}, sheetsubSS = #{sheetSS}, writerIDX2 = #{writerIDX} WHERE sheetID2 IN (SELECT * FROM r2)
+    </update>
+
+    <delete id="deleteParentDataExceptSheetID" parameterType="DailyReportStep3Main">
+        <include refid="updateClause"></include>
+        DELETE FROM tsheet WHERE sheetID IN(SELECT * FROM r2 WHERE sheetID != #{sheetID})
+    </delete>
 </mapper>
