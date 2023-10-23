@@ -87,5 +87,31 @@
         tosite
     </select>
 
+    <select id="recruitmentReportList" resultType="DailyReportStep2Sub">
+        <include refid="res_table">
+            <property name="sheetSS2" value="#{uuserID}"/>
+            <property name="sheetsubSS2" value="#{uuserID}"/>
+            <property name="startDate" value="#{today}"/>
+            <property name="endDate" value="#{today}"/>
+        </include>
+
+        SELECT
+        fromsite,
+        tosite,
+        item,
+        SUM(Qty) as Qty,
+        CarNo,
+        writerIDX,
+        SheetID
+        FROM r3
+        WHERE CarNo = "공고"
+        GROUP BY
+        CarNo,
+        fromsite,
+        tosite,
+        item
+
+    </select>
+
 
 </mapper>
