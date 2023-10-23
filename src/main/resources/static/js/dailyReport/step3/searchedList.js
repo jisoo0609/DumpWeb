@@ -21,12 +21,14 @@ function showSearchedList(data) {
             for ( let i = 0; i < amount; i++) {
                 let row = data[i]
                 let rowId = data[i].sheetID
-                html += '<tr id="' + rowId + '">';
-                html += '   <td style="color: black;">'+ data[i].carSubmit +'</td>'
-                html += '   <td>'+ data[i].salesman +'</td>'
-                html += '   <td>'+ data[i].carSubmitTel +'</td>'
-                html += '   <td><button type="button" class="addBtn" style="width: 50px;" onclick="selectedByCarSubmit('+rowId+')">선택</button></td>'
-                html += '</tr>'
+
+                console.log('showSearchedList rowId : ' +rowId );
+                html += `<tr id="' + rowId + '">`;
+                html += `   <td style="color: black;">'+ data[i].carSubmit +'</td>`
+                html += `   <td>'+ data[i].salesman +'</td>`
+                html += `   <td>'+ data[i].carSubmitTel +'</td>`
+                html += `  <td><button type="button" class="addBtn" style="width: 50px;" onclick="selectedByCarSubmit('+rowId+')">선택</button></td>`
+                html += `</tr>`
             }
         } else {
             html += '<tr><td colspan="4" style="text-align: center;">검색된 결과가 없습니다</td></tr>'
@@ -38,12 +40,16 @@ function showSearchedList(data) {
 }
 
 function getSheetIDDataBySelection(sheetID) {
+
+    console.log(sheetID);
+
     $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
         async:false,
         data: {sheetID: sheetID},
         success: function (data) {
+            console.logs(data);
             //이 부분 추후 정리할 것
             document.getElementById('carSubmit').value=data.carSubmit;
             openable1 = true;
@@ -231,6 +237,7 @@ function searchByCarsubmitTel(inputData) {
 }
 
 function selectedByTel(sheetID) {
+    console.log('selectedByTel sheetID : ' +sheetID );
     getSheetIDDataBySelection(sheetID);
     offAutoSearch()
     hideTelBox();
