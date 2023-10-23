@@ -42,6 +42,7 @@ function printList(searchResultData) {
     searchResultData.slice(0, 10).forEach((data, index) => {
         const row = document.createElement("tr");
 
+
         // 교환 예정일이나 교환주행거리중 하나라도 값이 있으면 O,
         // 다음교환주기 값이 전부 빈 값이어도 교환 완료 확인이 체크되었으면 X,
         // 교환 예정일이나 교환주행거리중 하나라도 값이 있어도 교환 완료 확인이 체크표시면 x
