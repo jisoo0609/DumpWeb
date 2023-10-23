@@ -109,7 +109,7 @@
         FROM tdrive
         WHERE carno = #{userID}
         AND drvdate LIKE CONCAT(#{date}, '%')
-        ORDER BY drvdate DESC
+        ORDER BY drvdate DESC, driveID DESC
     </select>
 
     <select id="selectFirstTDriveList" resultType="DailyReportStep5">
@@ -126,7 +126,7 @@
         repaddkm
         FROM tdrive
         WHERE carno = #{userID}
-        ORDER BY driveId DESC
+        ORDER BY drvdate DESC
         LIMIT 10
     </select>
 

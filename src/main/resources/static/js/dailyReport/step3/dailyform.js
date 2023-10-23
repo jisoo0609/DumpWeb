@@ -4,19 +4,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(queryString);
 
     let sheetID = params.get("sheetID");
-    //console.log(sheetID);
 
     if (sheetID !== null) {
         getSheetIDDataByParams(sheetID);
     }
-    //clickListThAndRedirect();//step4에 있음
     $.showChk1;
     recoverState();
     approved();
-    //searchByCarsubmitTel(carsubmittel.value); 여기서 이렇게 부르면 안됨!
 });
-
-
 
 function valueToIndex(value) {
     switch (value) {
@@ -32,6 +27,8 @@ function valueToIndex(value) {
 }
 
 function getSheetIDDataByParams(sheetID) {
+    document.getElementById('sheetID').value=sheetID;
+
     $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
@@ -47,6 +44,7 @@ function getSheetIDDataByParams(sheetID) {
             document.getElementById('salesman').value=data.salesman;
             openable2 = true;
             document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
+
             $.list();
         }
     })
@@ -91,21 +89,33 @@ $.list = function() {
         contentType: false,
         cache: false,
         success: function (data) {
-            //console.log(JSON.stringify(data, null, 2));
-            console.log("운송 DATA는?"+JSON.stringify(data));
-            //document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
-            //console.log("$.list() data: ",data.currStatus)
-            if(undefined!==data.sheetID){
+            console.log("제출처 정보는?"+data.carSubmitInfo);
+            //운송정보 채우기
+            showTransportList(data);
+
+            //제출처 정보 채우기
+            if(null!==data.carSubmitInfo){
+                $.showCarSubmitInfo(data);
+            }
+
+            if(null!==data.carSubmitInfo){
                 $.saveSheetID(data);
             }
-            //$.showChk1(data);
 
-            showTransportList(data);
+
+
         },
         error: function(xhr, status, error) {
             $.error();
         }
     })
+}
+$.showCarSubmitInfo = function(data){
+    //currStatus정보 채우기
+    document.getElementById('CurrStatus').options[valueToIndex(data.carSubmitInfo.currStatus)].selected = true;
+    //chk정보 채우기
+    document.getElementById("checkbox").checked = data.carSubmitInfo.chk1;
+    approved();
 }
 //chk정보를 불러오기 위한 함수
 $.showChk1 = function(data) {
@@ -115,44 +125,19 @@ $.showChk1 = function(data) {
 
 //제출처 정보 수정을 위한 sheetID 저장
 $.saveSheetID = function(data){
-    document.getElementById("sheetID").value=data.sheetID;
+    document.getElementById("sheetID").value=data.carSubmitInfo.sheetID;
 }
 
-/*function showTransportList(data){
-    let html;
-    if (!data) {
-        html = '   <td colspan="5" style="text-align: center;">저장된 운송 정보가 없습니다</td>';
-    } else {
-        // 서버에서 반환된 데이터를 이용하여 테이블 형태로 생성
-        html = '<table>';
-        for (let i = 0; i < data.dailyReportStep3SubList.length; i++) {
-            let subData = data.dailyReportStep3SubList[i];
-            let rowId = 'row' + i;
-            html += '<tr id="' + rowId + '" onclick="fillPop(event)">';
-            html += '   <td>' + subData.fromsite + '</td>';
-            html += '   <td>' + subData.tosite + '</td>';
-            html += '   <td>' + subData.item + '</td>';
-            html += '   <td>' + subData.qty + '</td>';
-            html += '   <td>' + subData.rem + '</td>';
-            html += '   <td style="display: none;">' + subData.sheetsubID + '</td>';
-            html += '   <td style="display: none;">' + subData. qtyup + '</td>';
-            html += '</tr>';
-        }
-        html += '</table>';
-    }
-        // 데이터를 표시할 위치에 추가
-        $('#transportContainer').html(html);
-}*/
 
 function showTransportList(data){
     let html;
-    if (!data) {
+    if (!data.transPortList) {
         html = '   <td colspan="5" style="text-align: center;">저장된 운송 정보가 없습니다</td>';
     } else {
         // 서버에서 반환된 데이터를 이용하여 테이블 형태로 생성
         html = '<table>';
-        for (let i = 0; i < data.length; i++) {
-            let subData = data[i];
+        for (let i = 0; i < data.transPortList.length; i++) {
+            let subData = data.transPortList[i];
             let rowId = 'row' + i;
             html += '<tr id="' + rowId + '" onclick="fillPop(event)">';
             html += '   <td>' + subData.fromsite + '</td>';
@@ -242,7 +227,7 @@ function searchByCarsubmitTel(inputData) {
 
             if(data.checkData!=null){ // 가입된 거래처
                 //console.log("checkData는?",data.checkData);
-                isMember.text("가입된 회원 입니다");
+                isMember.text("회원");
                 $("#inviteBtn").css("margin-left", "5000px");
 
             }else{
@@ -344,7 +329,8 @@ $.deleteRow = function() {
 // 제출처 정보 수정
 // 기사가 결재 체크햇으면 해재해놓고 다시
 $.editSales = function(){
-    var sheetID = $("#sheetID").val();
+    alert("저장하기 버튼 기능 수정 중입니다");
+    /*var sheetID = $("#sheetID").val();
     var salesman = $("#salesman").val();
     var carSubmit = $("#carSubmit").val();
     var carSubmitTel = $("#carSubmitTel").val();
@@ -377,8 +363,7 @@ $.editSales = function(){
         })
     } else {
         $.inputInvalid();
-    }
-
+    }*/
 
 }
 

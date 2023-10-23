@@ -27,7 +27,27 @@
         carSubmitTel = #{carSubmitTel}
         AND DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
         AND (sheetSS = #{sheetSS} and sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid= #{carSubmitTel}) OR
-        sheetSS2 IS NULL)
+        sheetSS2 IS NULL OR sheetSS2=0)
+        )
+    </select>
+
+    <select id="selectAll2" parameterType="DailyReportStep3Main" resultType="DailyReportStep3Sub">
+        SELECT
+        *
+        FROM
+        tSheet_sub
+        WHERE
+        sheetID2 IN (
+        SELECT
+        sheetID
+        FROM
+        tSheet
+        WHERE
+        carSubmitTel = #{carSubmitTel}
+        AND DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
+        AND (sheetSS2 = #{sheetSS2} and sheetSS = (SELECT UuserID FROM tsitePW WHERE Userid= #{CarNo}) OR
+        sheetSS IS NULL OR sheetSS=0)
+        AND CurrStatus = '제출'
         )
     </select>
 
@@ -73,8 +93,7 @@
         select * from tSheet_sub where sheetsubID=#{sheetsubID}
     </select>
 
-    <!--운행 정보 수정-->
-    <!--sheetsubSS2 수정-->
+
     <update id="editBySheetsubSS2" parameterType="DailyReportStep3Sub">
         update tSheet_sub
         set
@@ -85,18 +104,20 @@
         sheetID2=#{sheetID2}
     </update>
 
+    <!--운행 정보 수정-->
+    <!--sheetsubSS2 수정-->
     <update id="editByTransportInfo" parameterType="DailyReportStep3Sub">
-        update tSheet_sub
+        update tSheet_sub s
         <set>
-            fromsite=#{fromsite},
-            tosite=#{tosite},
-            item=#{item},
-            Qty=#{Qty},
-            Rem=#{Rem},
-            Qtyup=#{Qtyup}
+            s.fromsite=#{fromsite},
+            s.tosite=#{tosite},
+            s.item=#{item},
+            s.Qty=#{Qty},
+            s.Rem=#{Rem},
+            s.Qtyup=#{Qtyup},
+            s.writeridx2 = #{writeridx2}
         </set>
-        where sheetsubID=#{sheetsubID}
-        and writeridx2=#{writeridx2}
+        where s.sheetsubID = #{sheetsubID}
     </update>
 
     <!--운행정보 삭제(1건)-->
@@ -104,7 +125,6 @@
         delete from tSheet_sub
         where
         sheetsubID = #{sheetsubID}
-        and writeridx2 = #{writeridx2}
     </delete>
 
     <!--전체삭제-->

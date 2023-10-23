@@ -143,15 +143,22 @@
         .today-graph td, .car-graph td{
              border: 1px solid black;
              text-align: center;
-             font-size:14px
+             font-size: 14px;
+             word-break: break-all;
+             -webkit-line-clamp: 2;
+             -webkit-box-orient: vertical;
+             overflow: hidden;
         }
+
     .today-graph td:nth-child(6){
         display: none;
         }
+
     .car-menu th:nth-child(2) {
         border-left: 1px solid;
         border-right: 1px solid;
     }
+
     .car-search-link,
     .car-repair-link,
     .race-search-link,
@@ -188,6 +195,7 @@
         .car-menu {
             height: 30px;
         }
+
 
         .basic-menu {
             place-items: center;
