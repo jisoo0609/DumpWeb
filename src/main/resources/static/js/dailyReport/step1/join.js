@@ -8,11 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     carFindList();
 });
 
-window.addEventListener('pageshow', (event) => {
-    if (event.persisted) {
-        location.reload();
-    }
-});
 
 function bindSummary() {
     $.ajax({
@@ -267,10 +262,6 @@ document.addEventListener("DOMContentLoaded", function () {
   /*  chickList();*/
 });
 
-window.addEventListener('popstate', function (event) {
-    // 뒤로가기 버튼을 감지했을 때 실행할 코드
-    window.location.reload(); // 페이지 새로고침
-});
 
 const popupContainer = document.getElementById("popup-container");
 const closePopupButton = document.getElementById("close-popup");
