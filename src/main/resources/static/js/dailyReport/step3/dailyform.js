@@ -110,7 +110,9 @@ $.showCarSubmitInfo = function(data){
     //currStatus정보 채우기
     document.getElementById('CurrStatus').options[valueToIndex(data.carSubmitInfo.currStatus)].selected = true;
     //chk정보 채우기
-    document.getElementById("checkbox").checked = data.carSubmitInfo.chk1;
+    document.getElementById("checkbox").checked
+
+    = data.carSubmitInfo.chk1;
     approved();
 }
 //chk정보를 불러오기 위한 함수
@@ -128,7 +130,7 @@ $.saveSheetID = function(data){
 
 function showTransportList(data){
     let html;
-    if (!data.transPortList) {
+    if (data.transPortList.length === 0) {
         html = '   <td colspan="5" style="text-align: center;">저장된 운송 정보가 없습니다</td>';
     } else {
         // 서버에서 반환된 데이터를 이용하여 테이블 형태로 생성

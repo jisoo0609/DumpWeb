@@ -41,6 +41,7 @@ function getSheetIDDataBySelection(sheetID) {
     $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
+        async:false,
         data: {sheetID: sheetID},
         success: function (data) {
             //이 부분 추후 정리할 것
@@ -121,25 +122,25 @@ function showSalesList(data) {
 }
 
 function searchBySalesman(inputData) {
-        var salesman = $("#salesman").val();
-        $.ajax({
-            url: "/dailyReport/search/salesman",
-            method: "GET",
-            data: { "salesman": salesman },
-            success: function(data) {
-                if( salesman!= "") {
-                    showSalesmanBox();
-                    showSalesList(data);
-                } else {
-                    hideSalesmanBox();
-                    $.list();
-                }
-            },
-            error: function(error) {
-                console.error('Ajax 요청 실패:', error);
+    var salesman = $("#salesman").val();
+    $.ajax({
+        url: "/dailyReport/search/salesman",
+        method: "GET",
+        data: { "salesman": salesman },
+        success: function(data) {
+            if( salesman!= "") {
+                showSalesmanBox();
+                showSalesList(data);
+            } else {
+                hideSalesmanBox();
+                $.list();
             }
-       });
-    }
+        },
+        error: function(error) {
+            console.error('Ajax 요청 실패:', error);
+        }
+   });
+}
 
 function selectedBySalesman(sheetID) {
     getSheetIDDataBySelection(sheetID);
@@ -204,7 +205,7 @@ function searchByCarsubmitTel(inputData) {
             const isMember = $("#isMember");
             const inviteBtn = $("#inviteBtn");
             if(data.checkData!=null){ // 가입된 거래처
-                isMember.text("가입된 회원 입니다");
+                isMember.text("회원");
                 $("#inviteBtn").css("margin-left", "5000px");
             }else{
                 isMember.text("");

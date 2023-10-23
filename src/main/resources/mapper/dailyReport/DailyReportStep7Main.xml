@@ -65,6 +65,17 @@
         select * from r3
     </select>
 
+    <!--수정-->
+    <update id="editTsheet" parameterType="DailyReportStep7Main">
+        upate tsheet
+        set
+        sheetSS2=#{sheetSS2}
+        where
+        sheetSS=#{sheetSS}
+        and
+        sheetID=#{sheetID}
+    </update>
+
     <!--삭제 관련-->
     <!--sheetID로 조회-->
     <select id="findBySheetID" parameterType="int" resultType="boolean">
