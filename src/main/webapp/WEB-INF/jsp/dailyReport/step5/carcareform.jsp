@@ -53,6 +53,7 @@
                 <li class="tabBtn" data-tab="hiddenPart">
                     <label for="showHideCheckbox">다음 교환 주기 입력</label>
                     <span class="drvInputSpan2"><input name="nextChkBtn" id="showHideCheckbox" type="checkbox" checked></span>
+                    <span style="font-weight: normal;">체크를 풀면 <span style="color: red;">교환 예정일이 초기화</span> 됩니다.</span>
                 </li>
             </ul>
             <ul class="bdnUl" id="hiddenPart">
@@ -76,7 +77,7 @@
         <button class="openBtn" data-popName="drvpop1">삭제</button>
         <button onclick="save()">저장</button>
         <button class="openBtn" data-popName="drvpop2">입력취소</button>
-        <button class="openBtn" data-popName="drvpop3" onClick="history.go(-1)">이전화면</button>
+        <button class="openBtn" data-popName="drvpop3" onClick="window.location.href = document.referrer">이전화면</button>
     </div>
 
     <div id="drvpop1" class="drvPopup1">

@@ -2,7 +2,7 @@ if('SpeechRecongition' in window || 'webkitSpeechRecognition' in window){
       const SpeechRecongition = window.SpeechRecongition || window.webkitSpeechRecognition;
 
       const Images = document.querySelectorAll('.drvVoiceImg');
-      const textInput = document.querySelectorAll('.voiceNotification');
+      const textInput = document.querySelectorAll('.voice-notification');
 
       Images.forEach((images,idx) => {
             images.addEventListener('click', () => {
