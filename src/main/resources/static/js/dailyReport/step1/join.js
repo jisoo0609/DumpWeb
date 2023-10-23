@@ -193,14 +193,17 @@ function printFindList(searchResultData) {
     const tableBody = document.querySelector("#carsub");
     tableBody.innerHTML = "";
 
-    searchResultData.sort((a, b) => {
+    // 검색 결과 데이터를 필터링하고 날짜로 정렬.
+    const filteredData = searchResultData
+        .filter(data => data.rependdate !== null)
+        .sort((a, b) => {
             const dateA = new Date(a.rependdate);
             const dateB = new Date(b.rependdate);
             return dateA - dateB;
         });
 
-    // 검색 결과 데이터를 테이블 본문에 추가.
-    searchResultData.forEach((data, index) => {
+    // 필터링된 검색 결과 데이터를 테이블 본문에 추가.
+    filteredData.forEach((data, index) => {
         const row = document.createElement("tr");
         const rependdate = new Date(data.rependdate);
         // 월과 일을 두 자리 숫자로 표시하기 위해 패딩을 추가
@@ -217,16 +220,15 @@ function printFindList(searchResultData) {
         const formattedRepaddkm = Number(data.repaddkm).toLocaleString();
 
         row.innerHTML = `
-        <td>${data.drvClub}</td>
-        <td>${formattedDate}</td>
-        <td>${formattedRepaddkm}</td>
-        <td>${data.drvRem}</td>
-    `;
+            <td>${data.drvClub}</td>
+            <td>${formattedDate}</td>
+            <td>${formattedRepaddkm}</td>
+            <td>${data.drvRem}</td>
+        `;
         row.setAttribute("data-drive-id", data.driveID);
         tableBody.appendChild(row);
     });
 }
-
 
 
 function clickListStep5Redirect() {

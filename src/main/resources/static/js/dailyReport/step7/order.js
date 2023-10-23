@@ -130,6 +130,12 @@ function addTableRow(data) {
   }
     // 데이터를 표시할 위치에 추가
     $('#tBody').html(html);
+
+    row.setAttribute("receipt-subID", data.sheetsubID);
+    row.setAttribute("receipt-sheetID", data.sheetID);
+    row.setAttribute("receipt-writerIDX", data.writerIDX);
+    row.setAttribute("receipt-sheetSS2", data.sheetSS2);
+    tableBody.appendChild(row);
 }
 
 
@@ -150,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function getSheetsubIDDataByParams(sheetsubID, sheetID) {
     $.ajax({
-        url: "/dailyReport/receipts/ajax/details",
+        url: "/dailyReport/ajax/details",
         type: "POST",
         data: {sheetsubID: sheetsubID , sheetID: sheetID},
         success: function (data) {
@@ -166,9 +172,8 @@ function getSheetsubIDDataByParams(sheetsubID, sheetID) {
 }
 
 /* 리스트의 행 클릭시, 상태값에 따라 파라미터와 함께 step3 or step7로 이동하도록 처리. */
-function clickListThAndRedirect() {
+function clickListThAndRedirect(){
     const listRow = document.querySelector("table tbody");
-    const inputFields = ["date", "fromsite", "tosite", "item", "Qty", "carNo", "Qtyup"]; // 입력 필드 목록
 
     listRow.addEventListener("click", (event) => {
         const currStatus = event.target.parentElement.querySelector(".currStatus"); // 상태 열
@@ -176,37 +181,15 @@ function clickListThAndRedirect() {
         if (currStatus) {
             const status = currStatus.textContent;
             console.log("Clicked Status:", status);
-            let subID = event.target.parentElement.getAttribute("subID");
-            let sheetID = event.target.parentElement.getAttribute("sheetID");
-            let writerIDX = event.target.parentElement.getAttribute("writerIDX"); // 작성자 구별은 추후 구현
-            let sheetSS2 = event.target.parentElement.getAttribute("sheetSS2");
-            console.log("writerIDX?" + writerIDX);
-            console.log("sheetSS2?" + sheetSS2);
+            let subID = event.target.parentElement.getAttribute("receipt-subID")
+            let sheetID = event.target.parentElement.getAttribute("receipt-sheetID")
+            let writerIDX = event.target.parentElement.getAttribute("receipt-writerIDX") //작성자구별은 추후 구현
+            let sheetSS2 = event.target.parentElement.getAttribute("receipt-sheetSS2")
+            console.log("writerIDX?" + writerIDX)
+            console.log("sheetSS2?" + sheetSS2)
 
-//            if (status === "제출") {  // "제출" 상태일 때는 무조건 step3로 이동
-//                window.location.href = "/dailyReport/form" + "?sheetID=" + sheetID;
-//            } else if (status === "배차" && writerIDX === sheetSS2) { // "배차" 상태일 때 작성자가 나자신이면 step7로 이동
-//                window.location.href = "/dailyReport/orderform" + "?subID=" + subID + "&sheetID=" + sheetID;
-//            } else if (status === "배차" && writerIDX != sheetSS2) { // "배차" 상태일 때 작성자가 기사면 알림 띄우고 이동은 x
-//                console.log("기사가 등록한 전표입니다.");
-//                alert("기사가 등록한 전표입니다.");
-//            }
 
-            // 클릭한 행의 데이터를 얻어옵니다.
-            const rowData = {
-                date: event.target.parentElement.querySelector(".date").textContent,
-                fromsite: event.target.parentElement.querySelector(".fromsite").textContent,
-                tosite: event.target.parentElement.querySelector(".tosite").textContent,
-                item: event.target.parentElement.querySelector(".item").textContent,
-                Qty: event.target.parentElement.querySelector(".Qty").textContent,
-                carNo: event.target.parentElement.querySelector(".carNo").textContent,
-                Qtyup: event.target.parentElement.querySelector(".Qtyup").textContent,
-            };
-
-            // 클릭한 행의 데이터를 입력 필드에 표시합니다.
-            inputFields.forEach((field) => {
-                document.getElementById(field).value = rowData[field];
-            });
+            window.location.href = "/dailyReport/orderform" + "?subID=" +  subID + "&sheetID=" + sheetID;
         }
     });
 }

@@ -70,7 +70,7 @@
                                 <input type="text" class="wp100 voice input" name="carSubmit" id="carSubmit" oninput="validateInput1(this)"
                                     autocomplete="on" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}" onkeyup="searchByCarsubmit(this)">
                             </span>
-                            <div id="searchDrop"></div>
+
                         </li>
 
                         <li >
@@ -94,7 +94,7 @@
                             </div>
                             <div id="invite">
                                 <span id="isMember">거래처 상태</span>
-                                <button type="button" class="btn addBtn" id ="inviteBtn" onclick="$.invite()">신규회원 초대하기</button>
+                                <button type="button" class="btn addBtn" id ="inviteBtn" onclick="$.invite()">비회원 초대하기</button>
                             </div>
                         </li>
 
