@@ -8,6 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
     carFindList();
 });
 
+window.onpageshow = function(event){
+    if (event.persisted || (window.performance && window.performance.navigation.type === 2)){
+        window.location.reload();
+    }
+};
+
 function bindSummary() {
     $.ajax({
         url: "/dailyReport/driver/ajax/total",
@@ -195,7 +201,8 @@ function printFindList(searchResultData) {
 
     // 검색 결과 데이터를 필터링하고 날짜로 정렬.
     const filteredData = searchResultData
-        .filter(data => data.rependdate !== null)
+        .filter(data => (data.rependdate !== null) && (data.rependchk !== true))
+        //교환예정일O,교환 완료 확인X 인 값만 나오게 필터링
         .sort((a, b) => {
             const dateA = new Date(a.rependdate);
             const dateB = new Date(b.rependdate);
@@ -260,6 +267,7 @@ document.addEventListener("DOMContentLoaded", function () {
   /*  chickList();*/
 });
 
+
 const popupContainer = document.getElementById("popup-container");
 const closePopupButton = document.getElementById("close-popup");
 
@@ -270,6 +278,7 @@ closePopupButton.addEventListener("click", function() {
     popupContainer.style.display = "none";
 
 });
+
 
 /*function chickList() {
     const tableBody = document.querySelector("#recruitment");
