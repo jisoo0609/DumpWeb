@@ -145,13 +145,13 @@
     .car-menu th:nth-child(2) {
         border-left: 1px solid;
         border-right: 1px solid;
-        width: 120px;
+        width: 80px;
     }
     .car-menu th:nth-child(3) {
-        width: 140px;
+        width: 100px;
     }
     .car-menu th:nth-child(4) {
-        width: 140px;
+        width: 250px;
     }
     .car-search-link,
     .car-repair-link,
@@ -365,7 +365,7 @@
                 <tr class="car-menu">
                     <th>분류</th>
                     <th>교환 예정일</th>
-                    <th>교환 주행거리</th>
+                    <th>교환 km</th>
                     <th>비고</th>
                 </tr>
                 </thead>
