@@ -132,7 +132,7 @@
     }
 
     .car-menu th:nth-child(1) {
-        width: 100px;
+        width: 110px;
     }
     .car-graph td:nth-child(3) {
         text-align: right;
@@ -145,10 +145,10 @@
     .car-menu th:nth-child(2) {
         border-left: 1px solid;
         border-right: 1px solid;
-        width: 80px;
+        width: 120px;
     }
     .car-menu th:nth-child(3) {
-        width: 100px;
+        width: 80px;
     }
     .car-menu th:nth-child(4) {
         width: 250px;
