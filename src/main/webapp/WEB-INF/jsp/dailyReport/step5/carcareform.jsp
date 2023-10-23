@@ -52,7 +52,7 @@
                 </li>
                 <li class="tabBtn" data-tab="hiddenPart">
                     <label for="showHideCheckbox">다음 교환 주기 입력</label>
-                    <span class="drvInputSpan2"><input id="showHideCheckbox" type="checkbox" checked></span>
+                    <span class="drvInputSpan2"><input name="nextChkBtn" id="showHideCheckbox" type="checkbox" checked></span>
                 </li>
             </ul>
             <ul class="bdnUl" id="hiddenPart">

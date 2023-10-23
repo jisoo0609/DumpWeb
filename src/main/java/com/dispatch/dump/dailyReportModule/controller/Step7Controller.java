@@ -43,6 +43,13 @@ public class Step7Controller {
 
     }
 
+    /*제출처 주문 삭제*/
+    @RequestMapping(value = "/ajax/delete", method = RequestMethod.GET)
+    @ResponseBody
+    public String delete(DailyReportStep7Sub dailyReportStep7Sub){
+        return step7Service.delete(dailyReportStep7Sub);
+    }
+
     @ResponseBody
     @RequestMapping(value = "/ajax/saveCarData")
     public String saveCarData(DailyReportStep7CarNo dailyReportStep7CarNo) {

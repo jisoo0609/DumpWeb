@@ -42,17 +42,28 @@ public class Step3Controller {
         step3Service.save(dailyReportStep3Main, dailyReportStep3Sub);
     }
 
-    /*목록조회*/
-    /*    @RequestMapping(value = "/workspace/ajax/list", method = RequestMethod.POST)
+
+/*    @RequestMapping(value = "/workspace/ajax/list", method = RequestMethod.POST)
     @ResponseBody
-    public DailyReportStep3Main list(DailyReportStep3Main dailyReportStep3Main) {
+    public List<DailyReportStep3Sub> list(DailyReportStep3Main dailyReportStep3Main) {
         return step3Service.list(dailyReportStep3Main);
     }*/
 
     @RequestMapping(value = "/workspace/ajax/list", method = RequestMethod.POST)
     @ResponseBody
-    public List<DailyReportStep3Sub> list(DailyReportStep3Main dailyReportStep3Main) {
-        return step3Service.list(dailyReportStep3Main);
+    public Map<String, Object> list(DailyReportStep3Main dailyReportStep3Main) {
+        Map<String, Object> resultMap = new HashMap<>();
+
+        //제출처 정보
+        DailyReportStep3Main carSubmitInfo=step3Service.findByCarSubmitInfo(dailyReportStep3Main);
+        //운송정보
+        List<DailyReportStep3Sub> transPortList = step3Service.list(dailyReportStep3Main);
+        System.out.println("carSubmitInfo는?"+carSubmitInfo);
+        System.out.println("transPortList는?"+transPortList);
+
+        resultMap.put("carSubmitInfo", carSubmitInfo);
+        resultMap.put("transPortList", transPortList);
+        return resultMap;
     }
 
     @RequestMapping(value = "/search/carSubmit", method = RequestMethod.GET)
@@ -67,10 +78,9 @@ public class Step3Controller {
     public Map<String, Object> carSubmitTelList(DailyReportStep3Main dailyReportStep3Main) {
         Map<String, Object> resultMap = new HashMap<>();
         List<DailyReportStep3Main> list = step3Service.searchByCarSubmitTel(dailyReportStep3Main);
-        System.out.println("list는?"+list);
+
         Login login = new Login();
         login.setUserId(dailyReportStep3Main.getCarSubmitTel());
-
         Login checkData = step3Service.findByUserInfo(login);
 
         resultMap.put("list", list);
@@ -102,7 +112,6 @@ public class Step3Controller {
     public String delete(DailyReportStep3Sub dailyReportStep3Sub) {
         return step3Service.delete(dailyReportStep3Sub);
     }
-
 
     /*전체삭제*/
     @RequestMapping(value = "/workspace/ajax/deleteAll", method = RequestMethod.POST)

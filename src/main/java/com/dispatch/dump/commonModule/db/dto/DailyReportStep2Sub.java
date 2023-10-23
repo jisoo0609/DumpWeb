@@ -26,4 +26,6 @@ public class DailyReportStep2Sub {
     private int writerIDX;
 
     private String CarNo;
+
+    private boolean chk2; // 제출처 승인 or 미승인
 }

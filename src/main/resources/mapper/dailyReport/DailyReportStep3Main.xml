@@ -22,6 +22,15 @@
         />
     </resultMap>
 
+    <!--제출처 정보 조회-->
+    <select id="findByCarSubmitInfoOne" parameterType="DailyReportStep3Main">
+        select * from tSheet
+        whrere
+        date = #{date}
+        and
+        carSubmitTel = #{carSubmitTel}
+    </select>
+
     <!--모든 정보 조회-->
     <select id="findAllCarSubmitInfo"  resultMap="DailyReportStep3MainMapper" parameterType="DailyReportStep3Main">
         select * from tSheet
@@ -34,14 +43,13 @@
 
     <!--검증용-->
     <select id="findCarSubmitInfo"  resultMap="DailyReportStep3MainMapper" parameterType="DailyReportStep3Main">
-        select * from tSheet
-        where
-        date = #{date}
-        and
-        carSubmitTel = #{carSubmitTel}
-        and
-        sheetSS=#{sheetSS}
-        order by carSubmit asc
+        SELECT *
+        FROM tSheet
+        WHERE DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
+        AND carSubmitTel = #{carSubmitTel}
+        AND (sheetSS = #{sheetSS} OR sheetSS2 = (SELECT UuserID FROM tsitePW WHERE UuserID= #{carSubmitTel}))
+        ORDER BY date ASC
+        LIMIT 1;
     </select>
 
     <!--제출처 정보 저장-->
@@ -51,7 +59,6 @@
         (CarNo, carSubmit, carSubmitTel, salesman, chk1, date, sheetSS, sheetSS2, writerIDX, CurrStatus)
         values
         (#{CarNo}, #{carSubmit}, #{carSubmitTel}, #{salesman}, #{chk1}, #{date}, #{sheetSS}, #{sheetSS2}, #{writerIDX}, #{CurrStatus})
-        <!--CurrStatus는 프론트 디자인 완성되면 적용예정-->
 
         <selectKey
                 keyColumn="sheetID"
@@ -103,6 +110,24 @@
         order by salesman asc;
     </select>
 
+    <!--step8관련 : 제출처 페이지 이동시 조회-->
+    <select id="findBySheetIDForStep8" parameterType="int" resultType="DailyReportStep3Main">
+        select
+        SheetID,
+        CarNo,
+        DATE_FORMAT(date, '%Y-%m-%d') as date,
+        carSubmit,
+        carSubmitTel,
+        salesman,
+        chk1,
+        chk2,
+        CurrStatus,
+        sheetSS
+        from tSheet
+        where sheetID=#{sheetID}
+    </select>
+    <!--chk2반영하기-->
+
     <!--step4관련: 페이지 이동시 조회-->
     <select id="findBySheetIDForStep4" parameterType="int" resultType="DailyReportStep3Main">
         select
@@ -112,11 +137,13 @@
         carSubmitTel,
         salesman,
         chk1,
+        chk2,
         CurrStatus,
         sheetSS
         from tSheet
         where sheetID=#{sheetID}
     </select>
+    <!--chk2반영하기-->
 
     <!--수정 관련-->
     <!--sheetSS2 수정-->
@@ -130,7 +157,7 @@
         sheetID=#{sheetID}
     </update>
 
-    <!--제출처정보 수정-->
+    <!--제출처정보 수정 : 수정할 것-->
     <update id="editByCarSubmit" parameterType="DailyReportStep3Main">
         update tSheet
         set
@@ -145,10 +172,23 @@
         sheetID=#{sheetID}
     </update>
 
+    <!--writerIDX 수정-->
+    <update id="editByWriterIDX" parameterType="DailyReportStep3Main">
+        update tSheet
+        set
+        writerIDX = #{writerIDX}
+        where
+        sheetID = #{sheetID}
+    </update>
+
     <!--삭제 관련-->
     <!--sheetID로 조회-->
-    <select id="findBySheetID" parameterType="int" resultType="boolean">
-        select chk1 from tSheet where sheetID=#{sheetID}
+    <select id="findByChkInfo" parameterType="int" resultType="DailyReportStep3Main">
+        select chk1, chk2 from tSheet where sheetID=#{sheetID}
+    </select>
+
+    <select id="findByCarNo" parameterType="int" resultType="String">
+        select CarNo from tSheet where sheetID=#{sheetID}
     </select>
 
     <!--전체삭제-->
