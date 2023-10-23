@@ -41,6 +41,7 @@ function getSheetIDDataBySelection(sheetID) {
     $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
+        async:false,
         data: {sheetID: sheetID},
         success: function (data) {
             //이 부분 추후 정리할 것
@@ -121,25 +122,25 @@ function showSalesList(data) {
 }
 
 function searchBySalesman(inputData) {
-        var salesman = $("#salesman").val();
-        $.ajax({
-            url: "/dailyReport/search/salesman",
-            method: "GET",
-            data: { "salesman": salesman },
-            success: function(data) {
-                if( salesman!= "") {
-                    showSalesmanBox();
-                    showSalesList(data);
-                } else {
-                    hideSalesmanBox();
-                    $.list();
-                }
-            },
-            error: function(error) {
-                console.error('Ajax 요청 실패:', error);
+    var salesman = $("#salesman").val();
+    $.ajax({
+        url: "/dailyReport/search/salesman",
+        method: "GET",
+        data: { "salesman": salesman },
+        success: function(data) {
+            if( salesman!= "") {
+                showSalesmanBox();
+                showSalesList(data);
+            } else {
+                hideSalesmanBox();
+                $.list();
             }
-       });
-    }
+        },
+        error: function(error) {
+            console.error('Ajax 요청 실패:', error);
+        }
+   });
+}
 
 function selectedBySalesman(sheetID) {
     getSheetIDDataBySelection(sheetID);

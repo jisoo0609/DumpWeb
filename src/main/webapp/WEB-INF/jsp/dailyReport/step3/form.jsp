@@ -67,7 +67,7 @@
                             <label class="t10">제출처</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input type="text" class="wp100 voice input" name="carSubmit" id="carSubmit" style="width: 100%;" onfocus="showCarSubmitBox()"
+                                <input type="text" class="wp100 voice input" name="carSubmit" id="carSubmit" style="width: 100%;" onfocus="showCarSubmitBox(); hideSalesmanBox(); hideTelBox();"
                                 oninput="validateInput1(this)" autocomplete="off" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}" onkeyup="searchByCarsubmit(this)">
 
                             </span>
@@ -78,7 +78,7 @@
                             <label class="t10">담당자</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input  type="text" class="wp100 voice input" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}" onfocus="showSalesmanBox()"
+                                <input  type="text" class="wp100 voice input" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}" onfocus="showSalesmanBox(); hideCarSubmitBox(); hideTelBox();"
                                        placeholder="담당자" autocomplete="off" oninput="validateInput2(this)" onkeyup="searchBySalesman(this)">
                             </span>
                         </li>
@@ -89,7 +89,7 @@
                                 <span class="content">
                                     <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
                                            list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" onkeyup="onAutoSearch(); searchByCarsubmitTel(this);"
+                                           style="margin-left: 75px; width: 100px;" onfocus="fill010(); hideCarSubmitBox(); hideSalesmanBox();" onkeyup="onAutoSearch(); searchByCarsubmitTel(this);"
                                     >
                                 </span>
                             </div>
