@@ -37,9 +37,14 @@ public class Step2Controller {
         return step2Service.findDispatchStatusList();
     }
 
-
+    // 제출 받은 일보
     @RequestMapping(value = "/manager/ajax/submittedlist", method = RequestMethod.GET)
     @ResponseBody
     public List<DailyReportStep2Sub> submittedReportList() {return step2Service.findSubmittedReportList(); }
+
+    // 금일 차량 모집 공고
+    @RequestMapping(value = "/manager/ajax/recruitmentlist", method = RequestMethod.GET)
+    @ResponseBody
+    public List<DailyReportStep2Sub> recruitmentReportList() {return step2Service.findRecruitmentReportList(); }
 }
 

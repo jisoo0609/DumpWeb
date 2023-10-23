@@ -13,4 +13,6 @@ public interface DailyReportStep2Mapper {
 
     List<DailyReportStep2Sub> submittedReportList(String uuserID, String today);
 
+    List<DailyReportStep2Sub> recruitmentReportList(String uuserID, String today);
+
 }
