@@ -111,12 +111,18 @@
 
             <p class="today-recruitment">금일 차량 모집 공고</p>
                <table class="car-graph">
-                   <tr class="car-menu3">
-                       <th>상차지</th>
-                       <th>하차지</th>
-                       <th>품목</th>
-                       <th>대수</th>
-                   </tr>
+                   <thead>
+                       <tr class="car-menu">
+                           <th>상차지</th>
+                           <th>하차지</th>
+                           <th>품목</th>
+                           <th>대수</th>
+                       </tr>
+                   </thead>
+
+                   <tbody id="tbody3">
+                   <!-- 작업 -->
+                   </tbody>
                </table>
         </section>
     </article>

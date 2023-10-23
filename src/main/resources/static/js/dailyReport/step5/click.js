@@ -37,6 +37,7 @@ function save() {
 //        }
 //    }
 
+
  // 인풋이 공란일 때 빈값이 디비에 저장 가능하게 해주는 코드
     if (document.querySelector('input[name="useOil"]').value.length === 0) {
         document.querySelector('input[name="useOil"]').value = '';
