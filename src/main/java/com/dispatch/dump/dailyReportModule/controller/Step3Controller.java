@@ -30,7 +30,7 @@ public class Step3Controller {
     /*step4요청 : sheetID로 조회 후 제출처정보 반영*/
     @RequestMapping(value = "/form/ajax/details", method = RequestMethod.POST)
     @ResponseBody
-    public DailyReportStep3Main carSubmitDetails(int sheetID) {
+    public DailyReportStep3Main carSubmitDetails(@RequestParam("sheetID") int sheetID) {
         return step3Service.findTCarSubmitDetails(sheetID);
     }
 

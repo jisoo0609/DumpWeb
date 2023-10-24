@@ -37,11 +37,10 @@ function showSearchedList(data) {
     carsubmitDrop.html(html);
 }
 
-async function getSheetIDDataBySelection(sheetID) {
-    await $.ajax({
+function getSheetIDDataBySelection(sheetID) {
+    $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
-        async: false,
         data: {sheetID: sheetID},
         success: function (data) {
             console.log(data);
@@ -57,8 +56,8 @@ async function getSheetIDDataBySelection(sheetID) {
     })
 }
 
-async function selectedByCarSubmit(sheetID) {
-    await getSheetIDDataBySelection(sheetID);
+function selectedByCarSubmit(sheetID) {
+    getSheetIDDataBySelection(sheetID);
     hideCarSubmitBox();
 }
 
