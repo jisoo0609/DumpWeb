@@ -1,10 +1,10 @@
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", function () {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
     let sheetID = params.get("sheetID");
 
     if (sheetID !== null) {
-        await getSheetIDDataByParams(sheetID);
+        getSheetIDDataByParams(sheetID);
     }
     //clickListThAndRedirect();//step4에 있음
     $.showChk1;
@@ -28,13 +28,12 @@ function valueToIndex(value) {
     }
 }
 
-async function getSheetIDDataByParams(sheetID) {
+function getSheetIDDataByParams(sheetID) {
     document.getElementById('sheetID').value=sheetID;
 
-    await $.ajax({
+    $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
-        async: false,
         data: {sheetID: sheetID},
         success: function (data) {
             //이 부분 추후 정리할 것
