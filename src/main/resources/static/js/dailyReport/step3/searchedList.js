@@ -41,9 +41,9 @@ function getSheetIDDataBySelection(sheetID) {
     $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
-        data: {sheetID: sheetID},
+        headers: {'Content-Type': 'application/json'},
+        data: JSON.stringify({sheetID: sheetID}),
         success: function (data) {
-            console.log(data);
             //이 부분 추후 정리할 것
             document.getElementById('carSubmit').value = data.carSubmit;
             openable1 = true;
