@@ -249,25 +249,15 @@ $.deleteRow = function() {
 // 제출처 정보 수정
 // 기사가 결재 체크햇으면 해재해놓고 다시
 $.editSales = function(){
-    alert("기능 수정 중")
-    /*var sheetID = $("#sheetID").val();
-    var salesman = $("#salesman").val();
-    var carSubmit = $("#carSubmit").val();
-    var carSubmitTel = $("#carSubmitTel").val();
-    var CurrStatus = $("#CurrStatus").val();
-    var chk1 = $("#checkbox").val();
+    var formData = new FormData($("[name=frm]")[0]);
     if (checkInputs() === 1) {
         $.ajax({
             url:"/dailyReport/workspace/ajax/edit/carSubmit",
             type:"POST",
-            data:{
-                "sheetID":sheetID,
-                "salesman":salesman,
-                "carSubmit":carSubmit,
-                "carSubmitTel":carSubmitTel,
-                "CurrStatus" : CurrStatus,
-                "chk1": chk1
-            },
+            data:formData,
+            processData: false,
+            contentType: false,
+            cache: false,
             success : function (data) {
                 var json = $.parseJSON(data);
                 if(json.httpCode == 200){
@@ -283,7 +273,7 @@ $.editSales = function(){
         })
     } else {
         $.inputInvalid();
-    }*/
+    }
 }
 
 $.invite = function () {
