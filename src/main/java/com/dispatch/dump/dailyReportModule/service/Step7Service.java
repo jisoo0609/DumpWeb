@@ -4,6 +4,7 @@ import com.dispatch.dump.commonModule.db.dto.*;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep7Mapper;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep7MainMapper;
 import com.dispatch.dump.commonModule.db.mapper.DailyReportStep7SubMapper;
+import com.dispatch.dump.commonModule.db.mapper.LoginMapper;
 import com.dispatch.dump.commonModule.util.CommonUtil;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONArray;
@@ -29,7 +30,7 @@ public class Step7Service {
     private final DailyReportStep7SubMapper dailyReportStep7SubMapper;
     private final DailyReportStep7Mapper step7Mapper;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-
+    private final LoginMapper loginMapper;
     public Login getSessionLoginData() {
         return (Login) commonUtil.getSession().getAttribute("loginInfo");
     }
@@ -93,22 +94,26 @@ public class Step7Service {
         return dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUuserID(),dailyReportStep7Main.getDate());
     }
 
-    //제출처 주문 정보 삭제
+    public Login findByUserInfo(Login login) {
+        return loginMapper.findAdvUserInfo(login);
+    }
+
+
+    /*운송정보 삭제*/
     public String delete(DailyReportStep7Sub dailyReportStep7Sub){
         Map<String, Object> rtnMap = commonUtil.returnMap();
-
-        int sheetID = dailyReportStep7SubMapper.findBySheetsubID(dailyReportStep7Sub.getSheetsubID());
-        System.out.println("sheetID는?"+sheetID);
-        boolean chk1 = dailyReportStep7MainMapper.findBySheetID(sheetID);
-        System.out.println("chk1은?"+chk1);
-
-        if(chk1==false){
-            System.out.println("도달");
-            dailyReportStep7Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
-            dailyReportStep7SubMapper.deleteByOne(dailyReportStep7Sub);
-            rtnMap.put("httpCode",200);
+        int sheetID=dailyReportStep7SubMapper.findBySheetsubID(dailyReportStep7Sub.getSheetsubID());
+        DailyReportStep7Main dailyReportStep7Main=dailyReportStep7MainMapper.findByChkInfo(sheetID);
+        if(dailyReportStep7Main.isChk1()==false&&dailyReportStep7Main.isChk2()==false){
+            Login login= new Login();
+            login.setUserId(getSessionLoginData().getUserId());
+            Login loginInfo=findByUserInfo(login);
+            if(loginInfo.getUserPosition().equals("manager")){
+                dailyReportStep7SubMapper.deleteByOne(dailyReportStep7Sub);
+                rtnMap.put("httpCode", 200);
+            }
         }else{
-            rtnMap.put("httpCode",422);
+            rtnMap.put("httpCode", 422);
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }

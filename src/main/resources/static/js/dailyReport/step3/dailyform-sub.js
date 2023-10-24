@@ -8,6 +8,10 @@ var openable3 = false;
 var openable4 = true; //기본적으로 오늘 날자를 세팅해 놓으므로 true로 둠
 
 
+function pageGoBack() {
+    window.location.href = document.referrer;
+}
+
 
 /* DDDDDD-DATE-EEEEEE */
 const dateInput = document.getElementById('date');
@@ -330,7 +334,7 @@ function listData() {
 
 
 function checkInputs() {
-    // 거래처정보가 저장되거나 수정 될 때는 모든 인풋이 차있어야 한다.
+    // 거래처정보가 저장되거나 수정 될 때는 모든 인onAutoSearch()풋이 차있어야 한다.
     return openable1 & openable2 & openable3 & openable4;
 }
 

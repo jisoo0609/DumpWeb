@@ -2,7 +2,7 @@ if('SpeechRecongition' in window || 'webkitSpeechRecognition' in window){
       const SpeechRecongition = window.SpeechRecongition || window.webkitSpeechRecognition;
 
       const Images = document.querySelectorAll('.drvVoiceImg');
-      const textInput = document.querySelectorAll('.voiceNotification');
+      const textInput = document.querySelectorAll('.voice-notification');
 
       Images.forEach((images,idx) => {
             images.addEventListener('click', () => {
@@ -21,7 +21,7 @@ if('SpeechRecongition' in window || 'webkitSpeechRecognition' in window){
                       recognition.stop();
                     };
 
-            // Set a timeout for 5 seconds
+            // 5초동안 인식 없으면 종료
             setTimeout(() => {
                   recognition.stop();
                   textInput[idx].placeholder = '입력된 음성이 없습니다';

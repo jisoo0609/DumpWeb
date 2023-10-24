@@ -48,11 +48,12 @@
                 </li>
                 <li>
                     <label class="drvLabel">기타(설명) <span><img class="drvVoiceImg" src="/resources/image/step5/ico_mic.png" alt="음성인식 버튼"></span> </label>
-                    <span class="drvInputSpan"><textarea placeholder="주유소 및 정비소와 수리내용" id="voiceNotification" name="drvRem" class="voice-notification" cols="30" rows="2"></textarea></span>
+                    <span class="drvInputSpan"><textarea placeholder="주유소 및 정비소와 수리내용" id="drvRem voiceNotification" name="drvRem" class="voice-notification" cols="30" rows="2"></textarea></span>
                 </li>
                 <li class="tabBtn" data-tab="hiddenPart">
                     <label for="showHideCheckbox">다음 교환 주기 입력</label>
                     <span class="drvInputSpan2"><input name="nextChkBtn" id="showHideCheckbox" type="checkbox" checked></span>
+                    <span style="font-weight: normal;">체크를 풀면 <span style="color: red;">교환 예정일이 초기화</span> 됩니다.</span>
                 </li>
             </ul>
             <ul class="bdnUl" id="hiddenPart">
@@ -76,7 +77,7 @@
         <button class="openBtn" data-popName="drvpop1">삭제</button>
         <button onclick="save()">저장</button>
         <button class="openBtn" data-popName="drvpop2">입력취소</button>
-        <button class="openBtn" data-popName="drvpop3" onClick="history.go(-1)">이전화면</button>
+        <button class="openBtn" data-popName="drvpop3" onClick="window.location.href = document.referrer">이전화면</button>
     </div>
 
     <div id="drvpop1" class="drvPopup1">
