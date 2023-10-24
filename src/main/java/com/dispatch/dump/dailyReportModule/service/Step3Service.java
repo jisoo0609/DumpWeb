@@ -124,12 +124,6 @@ public class Step3Service {
         return resultData;
     }
 
-    public DailyReportStep3Main findByCarSubmitInfo2(DailyReportStep3Main dailyReportStep3Main){
-        dailyReportStep3Main.setUuserID(Integer.parseInt(getSessionLoginData().getUuserID()));
-        //dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
-        return dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
-    }
-
     public DailyReportStep3Main findTCarSubmitDetails(int sheetID){
         return dailyReportStep3MainMapper.findBySheetIDForStep4(sheetID);
     }
