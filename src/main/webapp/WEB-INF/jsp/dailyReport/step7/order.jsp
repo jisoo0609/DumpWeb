@@ -4,7 +4,6 @@
 <link rel="stylesheet" type="text/css" href="/resources/css/step7/order.css">
 <script src="/resources/js/dailyReport/step7/pop.js"></script>
 <script src="/resources/js/dailyReport/step7/order.js"></script>
-<script src="/resources/js/dailyReport/step7/param.js"></script>
 <script type="text/javascript" src="/resources/js/dailyReport/form.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>" ></script>
 <script type="text/javascript"
         src="/resources/js/dailyReport/list.js?jsVerType=20<fmt:formatDate value="<%=new java.util.Date()%>" pattern="yyyyMMddHHmmss"/>"></script>
@@ -103,7 +102,7 @@
 			<div>
 				<span class="material-symbols-outlined clBtn">close</span>
 				<p>정말 <span style="font-weight: bold;">삭제</span>하시겠습니까?</p>
-				<input class="confirmBtn" type="button" value="확인">
+				<input class="confirmBtn" type="button" value="확인" onclick="orderDelete()">
 				<input class="clBtn" type="button" value="취소">
 			</div>
 		</div>

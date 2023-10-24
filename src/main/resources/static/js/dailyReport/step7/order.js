@@ -1,40 +1,23 @@
-//function delete() {
-//  $.ajax({
-//    url: "/dailyReprot/ajax/orderDelete",
-//    type: "POST",
-//    data: $("[name=golForm]").serialize(),
-//    async : false,
-//    success: function (data) {
-//
-//    }
-//  })
-//}
-
+function cancel() {
+    // 팝업 창을 숨기는 코드
+    const golPop2 = document.querySelector("#golPop2");
+    golPop2.classList.remove("active");
+    emptyRow();
+}
 
 function getCheckParam(id){
     const checkBox = document.getElementById(id);
     return  "&" + id + "=" + checkBox.checked;
 }
 
-function cancel() {
-  // 팝업 창을 숨기는 코드
-  const golPop2 = document.querySelector("#golPop2");
-  golPop2.classList.remove("active");
-  emptyRow();
-}
-
-// 데이터를 저장하는 ajax
 function save() {
-   $("#fromsite").prop("disabled", false);
-   $("#tosite").prop("disabled", false);
-   $("#item").prop("disabled", false);
-   $("#Qty").prop("disabled", false);
-   $("#carNo").prop("disabled", false);
-   $("#Qtyup").prop("disabled", false);
+    $("#fromsite").prop("disabled", false);
+    $("#tosite").prop("disabled", false);
+    $("#item").prop("disabled", false);
+    $("#Qty").prop("disabled", false);
+    $("#carNo").prop("disabled", false);
+    $("#Qtyup").prop("disabled", false);
 
-//   console.log($("[name=golForm]").serialize());
-
-    //fetch 코드도 고민해볼 것.
     const checkBoxID = ["chk1"];
 
     let checkData = "";
@@ -44,97 +27,154 @@ function save() {
 
     console.log(formData);
 
-  $.ajax({
-      url: "/dailyReport/ajax/orderSave",
-      type: "POST",
-      data: formData,
-      async : false,
-      success: function (data) {
-       console.log("저장완료");
-//          alert("저장이 완료되었습니다.");
-          bindList();
-      }
-  })
+    $.ajax({
+        url: "/dailyReport/ajax/orderSave",
+        type: "POST",
+        data: formData,
+        async: false,
+        success: function (data) {
+            alert("저장이 완료되었습니다.");
+            bindList();
+        }
+    })
 }
 
 /* 선택한 옵션을 통해 데이터를 받아올 수 있도록 ajax POST 처리. */
 function bindList() {
-  $.ajax({
-      url: "/dailyReport/ajax/orderList",
-      type: "POST",
-      data: $("[name=golForm]").serialize(),
-      success: function (data) {
-        console.log(data);
-        // 팝업 창을 숨기는 코드
-        const golPop3 = document.querySelector("#golPop3");
-        golPop3.classList.remove("active");
-        // 필드 값 초기화
-        emptyRow();
-        // 표에 새 행을 추가
-        addTableRow(data);
-      }
-  })
+    $.ajax({
+        url: "/dailyReport/ajax/orderList",
+        type: "POST",
+        data: $("[name=golForm]").serialize(),
+        success: function (data) {
+            // 팝업 창을 숨기는 코드
+            const golPop3 = document.querySelector("#golPop3");
+            golPop3.classList.remove("active");
+            emptyRow();
+            printTable(data);
+        }
+    })
 }
 
 /* 저장&확인 버튼을 눌렀을 때, input 필드에 있는 값 초기화 */
 function emptyRow() {
-  const fromsiteInput = document.querySelector("#fromsite");
-  const tositeInput = document.querySelector("#tosite");
-  const itemInput = document.querySelector("#item");
-  const QtyInput = document.querySelector("#Qty");
-  const carNoInput = document.querySelector("#carNo");
-  const QtyupInput = document.querySelector("#Qtyup");
+    const fromsiteInput = document.querySelector("#fromsite");
+    const tositeInput = document.querySelector("#tosite");
+    const itemInput = document.querySelector("#item");
+    const QtyInput = document.querySelector("#Qty");
+    const carNoInput = document.querySelector("#carNo");
+    const QtyupInput = document.querySelector("#Qtyup");
 
-  fromsiteInput.value = "";
-  tositeInput.value = "";
-  itemInput.value = "";
-  QtyInput.value = "";
-  carNoInput.value = "";
-  QtyupInput.value = "";
+    fromsiteInput.value = "";
+    tositeInput.value = "";
+    itemInput.value = "";
+    QtyInput.value = "";
+    carNoInput.value = "";
+    QtyupInput.value = "";
 }
 
 /* 표에 새 행을 추가 */
-// 원래 addTableRow... 조회까지 연관되어있는가?
-//function addTableRow(data) {
-//  var html;
-//  if (!data) {
-//    html = '<tr><td colspan="6" style="text-align: center;">입력된 정보가 없습니다.</td></tr>';
-//  } else {
-//    // html = '<table>';
-//    html = '';
-//      console.log(data.length);
-//    for (var i = 0; i < data.length; i++) {
-//      var subData = data[i];
-//      var rowId = i+1;
-//      html += '<tr>';
-//      html += '<td>' + rowId + '</td>';
-//      html += '<td>' + subData.fromsite + '</td>';
-//      html += '<td>' + subData.tosite + '</td>';
-//      html += '<td>' + subData.item + '</td>';
-//      html += '<td>' + subData.qty + '</td>';
-////      html += '<td>' + subData.carNo + '</td>';
-//
-//      // Check if carNo is empty or "미지정"
-//      if (subData.carNo === "" || subData.carNo === "미지정") {
-//        html += '<td><button type="button" class="miJeongButton" onclick="openPopupTest(\'dispatchform\', '+ subData.sheetsubID +');">미지정</button></td>';
-//      } else if (subData.carNo === "공고" || subData.carNo === "모집공고") {
-//        html += '<td><button class="miJeongButton">공고</button></td>';
-//      } else {
-//        html += '<td>' + subData.carNo + '</td>';
-//      }
-//
-//      html += '</tr>';
-//    }
-//    console.log(html);
-//    // html += '</table>';
-//  }
-//    // 데이터를 표시할 위치에 추가
-//    $('#tBody').html(html);
-//}
+function printTable(searchResultData) {
 
-function addTableRow(data) {
-  cont tableBody = document.querySelector("table tbody");
-  tableBody.innerHTML = "";
+    const tableBody = document.querySelector("table tbody");
+    tableBody.innerHTML = "";
 
-  searchResultData.sort((a, b) => new Date(b.drvdate) - new Date(a.drvdate));
+    if (!searchResultData) {
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center;">입력된 정보가 없습니다.</td></tr>';
+        return;
+    }
 
+    searchResultData.slice(0, 10).forEach((data, index) => {
+        const row = document.createElement("tr");
+
+        let order = [
+            data.fromsite,
+            data.tosite,
+            data.item,
+            data.qty,
+            data.carNo
+        ];
+
+        //데이터 테이블에 출력
+        row.innerHTML = `
+            <td>${index + 1}</td>   
+            <td>${order[0]}</td>
+            <td>${order[1]}</td>
+            <td>${order[2]}</td>
+            <td>${order[3]}</td>
+            <td>${order[4]}</td>
+        `;
+
+        row.setAttribute("data-sheet-sub-id", data.sheetsubID);
+        tableBody.appendChild(row);
+    });
+}
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+
+    let sheetsubID = params.get("subID");
+
+    if (sheetsubID !== null) {
+        getSheetsubIDDataByParams(sheetsubID);
+    }
+    else{
+        bindList();
+    }
+    clickListThAndRedirect();
+});
+
+function orderDelete(){
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+
+    let sheetsubID = params.get("subID");
+
+    $.ajax({
+        url: "/dailyReport/ajax/orderDelete",
+        type: "DELETE",
+        data: {sheetsubID: sheetsubID},
+        success: function (data) {
+            alert("삭제 되었습니다.");
+            window.location.href = '/dailyReport/orderform';
+        }
+    })
+
+}
+
+
+
+
+function getSheetsubIDDataByParams(sheetsubID) {
+    $.ajax({
+        url: "/dailyReport/ajax/details",
+        type: "POST",
+        data: {sheetsubID: sheetsubID},
+        success: function (data) {
+            document.getElementById('date').value = data.drvDate;
+            document.getElementById('fromsite').value = data.fromsite;
+            document.getElementById('tosite').value = data.tosite;
+            document.getElementById('item').value = data.item;
+            document.getElementById('Qty').value = data.qty;
+            document.getElementById('carNo').value = data.carNo;
+            document.getElementById('Qtyup').value = data.qtyup;
+        }
+    })
+}
+
+/* 리스트의 행 클릭시, 상태값에 따라 파라미터와 함께 step3 or step7로 이동하도록 처리. */
+function clickListThAndRedirect() {
+    const tableBody = document.querySelector("table tbody");
+
+    tableBody.addEventListener("click", (event) => {
+        const parentRow = event.target.closest("tr");
+        if (parentRow) {
+            const sheetsubID = parentRow.getAttribute("data-sheet-sub-id");
+            if (sheetsubID) {
+                const url = `/dailyReport/orderform?subID=${sheetsubID}`;
+                window.location.href = url;
+            }
+        }
+    });
+}
