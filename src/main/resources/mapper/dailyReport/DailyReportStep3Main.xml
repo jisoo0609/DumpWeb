@@ -124,7 +124,7 @@
         CurrStatus,
         sheetSS
         from tSheet
-        where sheetID=#{sheetID}
+        where sheetID = #{sheetID}
     </select>
     <!--chk2반영하기-->
 
@@ -141,7 +141,7 @@
         CurrStatus,
         sheetSS
         from tSheet
-        where sheetID=#{sheetID}
+        where sheetID = #{sheetID}
     </select>
     <!--chk2반영하기-->
 
@@ -150,26 +150,26 @@
     <update id="editBySheetSS2" parameterType="DailyReportStep3Main">
         update tSheet
         set
-        sheetSS2=#{sheetSS2}
+        sheetSS2 = #{sheetSS2}
         where
-        sheetSS=#{sheetSS}
+        sheetSS = #{sheetSS}
         and
-        sheetID=#{sheetID}
+        sheetID = #{sheetID}
     </update>
 
     <!--제출처정보 수정 : 수정할 것-->
     <update id="editByCarSubmit" parameterType="DailyReportStep3Main">
         update tSheet
         set
-        carSubmit=#{carSubmit},
-        carSubmitTel=#{carSubmitTel},
-        salesman=#{salesman},
-        chk1=#{chk1},
-        CurrStatus=#{CurrStatus}
+        carSubmit = #{carSubmit},
+        carSubmitTel = #{carSubmitTel},
+        salesman = #{salesman},
+        chk1 = #{chk1},
+        CurrStatus = #{CurrStatus}
         where
-        sheetSS=#{sheetSS}
+        sheetSS = #{sheetSS}
         and
-        sheetID=#{sheetID}
+        sheetID = #{sheetID}
     </update>
 
     <!--writerIDX 수정-->
