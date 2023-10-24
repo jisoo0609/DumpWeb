@@ -215,7 +215,7 @@
             <div>
                 <input type="button" value="일괄결재" onclick="submitBtn()">
                 <input type="button" value="일괄취소" id="cancelBtn" onclick="cancelBtn()">
-                <input type="button" value="이전화면" id="backBtn" onclick="history.go(-1)">
+                <input type="button" value="이전화면" id="backBtn" onclick="window.location.href=document.referrer;">
             </div>
         </div>
         <div>

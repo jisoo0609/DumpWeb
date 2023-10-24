@@ -97,11 +97,11 @@
     <update id="editBySheetsubSS2" parameterType="DailyReportStep3Sub">
         update tSheet_sub
         set
-        sheetsubSS2=#{sheetsubSS2}
+        sheetsubSS2 = #{sheetsubSS2}
         where
-        sheetsubSS=#{sheetsubSS}
+        sheetsubSS = #{sheetsubSS}
         and
-        sheetID2=#{sheetID2}
+        sheetID2 = #{sheetID2}
     </update>
 
     <!--운행 정보 수정-->
@@ -109,12 +109,12 @@
     <update id="editByTransportInfo" parameterType="DailyReportStep3Sub">
         update tSheet_sub s
         <set>
-            s.fromsite=#{fromsite},
-            s.tosite=#{tosite},
-            s.item=#{item},
-            s.Qty=#{Qty},
-            s.Rem=#{Rem},
-            s.Qtyup=#{Qtyup},
+            s.fromsite = #{fromsite},
+            s.tosite = #{tosite},
+            s.item = #{item},
+            s.Qty = #{Qty},
+            s.Rem = #{Rem},
+            s.Qtyup = #{Qtyup},
             s.writeridx2 = #{writeridx2}
         </set>
         where s.sheetsubID = #{sheetsubID}
