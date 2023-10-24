@@ -96,7 +96,7 @@
       <button class="opBtn" data-popName="golPop1">삭제</button>
       <button class="opBtn" data-popName="golPop2">취소</button>
       <button class="opBtn" data-popName="golPop3">저장</button>
-      <button class="opBtn" data-popName="golPop4" onClick="window.location.href = document.referrer">이전화면</button>
+      <button class="opBtn" data-popName="golPop4" onClick="history.go(-1)">이전화면</button>
     </div>
 
 		<div id="golPop1" class="golPopup1">

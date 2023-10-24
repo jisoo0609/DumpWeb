@@ -23,6 +23,7 @@ function cancel() {
   emptyRow();
 }
 
+// 데이터를 저장하는 ajax
 function save() {
    $("#fromsite").prop("disabled", false);
    $("#tosite").prop("disabled", false);
@@ -93,41 +94,47 @@ function emptyRow() {
 }
 
 /* 표에 새 행을 추가 */
+// 원래 addTableRow... 조회까지 연관되어있는가?
+//function addTableRow(data) {
+//  var html;
+//  if (!data) {
+//    html = '<tr><td colspan="6" style="text-align: center;">입력된 정보가 없습니다.</td></tr>';
+//  } else {
+//    // html = '<table>';
+//    html = '';
+//      console.log(data.length);
+//    for (var i = 0; i < data.length; i++) {
+//      var subData = data[i];
+//      var rowId = i+1;
+//      html += '<tr>';
+//      html += '<td>' + rowId + '</td>';
+//      html += '<td>' + subData.fromsite + '</td>';
+//      html += '<td>' + subData.tosite + '</td>';
+//      html += '<td>' + subData.item + '</td>';
+//      html += '<td>' + subData.qty + '</td>';
+////      html += '<td>' + subData.carNo + '</td>';
+//
+//      // Check if carNo is empty or "미지정"
+//      if (subData.carNo === "" || subData.carNo === "미지정") {
+//        html += '<td><button type="button" class="miJeongButton" onclick="openPopupTest(\'dispatchform\', '+ subData.sheetsubID +');">미지정</button></td>';
+//      } else if (subData.carNo === "공고" || subData.carNo === "모집공고") {
+//        html += '<td><button class="miJeongButton">공고</button></td>';
+//      } else {
+//        html += '<td>' + subData.carNo + '</td>';
+//      }
+//
+//      html += '</tr>';
+//    }
+//    console.log(html);
+//    // html += '</table>';
+//  }
+//    // 데이터를 표시할 위치에 추가
+//    $('#tBody').html(html);
+//}
+
 function addTableRow(data) {
-  var html;
-  if (!data) {
-    html = '<tr><td colspan="6" style="text-align: center;">입력된 정보가 없습니다.</td></tr>';
-  } else {
-    // html = '<table>';
-    html = '';
-      console.log(data.length);
-    for (var i = 0; i < data.length; i++) {
-      var subData = data[i];
-      var rowId = i+1;
-      html += '<tr>';
-      html += '<td>' + rowId + '</td>';
-      html += '<td>' + subData.fromsite + '</td>';
-      html += '<td>' + subData.tosite + '</td>';
-      html += '<td>' + subData.item + '</td>';
-      html += '<td>' + subData.qty + '</td>';
-//      html += '<td>' + subData.carNo + '</td>';
+  cont tableBody = document.querySelector("table tbody");
+  tableBody.innerHTML = "";
 
-      // Check if carNo is empty or "미지정"
-      if (subData.carNo === "" || subData.carNo === "미지정") {
-        html += '<td><button type="button" class="miJeongButton" onclick="openPopupTest(\'dispatchform\', '+ subData.sheetsubID +');">미지정</button></td>';
-      } else if (subData.carNo === "공고" || subData.carNo === "모집공고") {
-        html += '<td><button class="miJeongButton">공고</button></td>';
-      } else {
-        html += '<td>' + subData.carNo + '</td>';
-      }
+  searchResultData.sort((a, b) => new Date(b.drvdate) - new Date(a.drvdate));
 
-//      html += '<td>' + subData.Qtyup + '</td>';
-
-      html += '</tr>';
-    }
-    console.log(html + '\n');
-    // html += '</table>';
-  }
-    // 데이터를 표시할 위치에 추가
-    $('#tBody').html(html);
-}
