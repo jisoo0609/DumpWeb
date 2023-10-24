@@ -2,8 +2,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     bindDispatchList();
     bindSubmittedList();
+    bindRecruitmentList();
 });
-
 
 function bindSummary() {
     $.ajax({
@@ -21,7 +21,7 @@ function bindDispatchList() {
         url: "/dailyReport/manager/ajax/submitlist",
         type: "GET",
         success: function (data) {
-            printDispatchList(data);
+            printDispatchList(data, "tbody1");
         }
     });
 }
@@ -31,14 +31,22 @@ function bindSubmittedList() {
         url: "/dailyReport/manager/ajax/submittedlist",
         type: "GET",
         success: function (data) {
-            printDispatchList(data);
+            printDispatchList(data, "tbody2");
         }
     });
 }
 
+function bindRecruitmentList() {
+    $.ajax({
+        url: "/dailyReport/manager/ajax/recruitmentlist",
+        type: "GET",
+        success: function (data) {
+            printDispatchList(data, "tbody3");
+        }
+    });
+}
 
 function printSummary(data) {
-
     const ttamount = document.getElementById("ttamount");
     const tncars = document.getElementById("tncars");
 
@@ -46,52 +54,74 @@ function printSummary(data) {
     tncars.innerHTML = data.totalTrips.toLocaleString();
 }
 
-function printDispatchList(searchResultData) {
+function printDispatchList(searchResultData, tbodyId) {
     // 테이블 본문 내용 초기화
-    const tableBody1 = document.querySelector("#tbody1");
-    const tableBody2 = document.querySelector("#tbody2");
-    //tableBody.innerHTML = "";
-
-    // 검색 결과 데이터를 테이블 본문에 추가.
+    const tableBody = document.querySelector(`#${tbodyId}`);
+    tableBody.innerHTML = "";
+    
     searchResultData.forEach((data, index) => {
-        const row= document.createElement("tr");
-        if (data.carNo===''){
-        data.carNo="미지정"
-        }
+        const row = document.createElement("tr");
 
-        let order = [
-            data.carNo, data.fromsite, data.tosite, data.item, data.qty , data.chk2];
-
-        row.innerHTML = `
-
+        if (data.carNo !== "") {
+            if (data.carNo !== "공고" || tbodyId !== "tbody1") {
+                const order = [data.carNo, data.fromsite, data.tosite, data.item, data.qty];
+                row.innerHTML = `
                     <td>${order[0]}</td>
                     <td>${order[1]}</td>
                     <td>${order[2]}</td> 
                     <td>${order[3]}</td>
                     <td>${order[4]}</td>
+                `;
 
-                     <td>
-                                        <input
-                                        type="checkbox"
-                                        class="checkConfirm"
+                if (tbodyId === "tbody2") {
+                    row.innerHTML += `
+                        <td>
+                            <input
+                            type="checkbox"
+                            class="checkConfirm"
+                            ${data.chk2 === true ? 'checked' : ''} disabled>
+                        </td>
+                    `;
+                }
+            }
+        } else {
+            const order = ["미지정", data.fromsite, data.tosite, data.item, data.qty];
+            row.innerHTML = `
+                <td>${order[0]}</td>
+                <td>${order[1]}</td>
+                <td>${order[2]}</td> 
+                <td>${order[3]}</td>
+                <td>${order[4]}</td>
+            `;
 
-                                       ${order[5] === true ? 'checked' : ''} disabled>
-                     </td>
-                 `;
+            if (tbodyId === "tbody2") {
+                row.innerHTML += `
+                    <td>
+                        <input
+                        type="checkbox"
+                        class="checkConfirm"
+                        ${data.chk2 === true ? 'checked' : ''} disabled>
+                    </td>
+                `;
+            }
+        }
 
-
-
+        if (tbodyId === "tbody3") {
+            const order = [data.fromsite, data.tosite, data.item, data.qty];
+            row.innerHTML = `
+                <td>${order[0]}</td>
+                <td>${order[1]}</td>
+                <td>${order[2]}</td> 
+                <td>${order[3]}</td>
+            `;
+        }
 
         row.setAttribute("data-writerIdx", data.writerIDX);
         row.setAttribute("data-sheet-id", data.sheetID);
 
-        if (data.currStatus === "배차") {
-            tableBody1.appendChild(row); // "배차"인 경우 tbody1에 추가
-        } else if (data.currStatus === "제출") {
-            tableBody2.appendChild(row); // "제출"인 경우 tbody2에 추가
-        }
+        tableBody.appendChild(row);
     });
-};
+}
 
 /* DOMContentLoaded */
 document.addEventListener("DOMContentLoaded", function () {

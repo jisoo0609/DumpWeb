@@ -14,6 +14,10 @@
         SELECT userId FROM tsitepw WHERE userPosition = 'driver'
     </select>
 
+    <select id="findMemberChkByUserId" parameterType="DailyReportStep7CarNo" resultType="DailyReportStep7CarNo">
+        SELECT userId as carNoFull, userName carNoName, userTel as carNoHp FROM tsitepw WHERE userid  = #{carNoFull} AND userPosition = 'driver'
+    </select>
+
     <select id="findCarNoByLoginData" parameterType="DailyReportStep7CarNo" resultType="DailyReportStep7CarNo">
         SELECT * FROM tsheet_carno WHERE carNoSS2 = #{carNoSS2}
     </select>

@@ -8,6 +8,10 @@ var openable3 = false;
 var openable4 = true; //기본적으로 오늘 날자를 세팅해 놓으므로 true로 둠
 
 
+function pageGoBack() {
+    window.location.href = document.referrer;
+}
+
 
 /* DDDDDD-DATE-EEEEEE */
 const dateInput = document.getElementById('date');
@@ -83,18 +87,17 @@ function validateInput2(input) {
 }
 
 /* function : oninput 인풋이 바르지 않으면 보더컬러를 red로 바꿈 */
-let openValue3;
-function validateInput3(input) {
-    const carSubmitTel = input.value;
-    openValue3 = carSubmitTel
-    if (phoneNumberPattern.test(carSubmitTel)) {
-        input.style.borderColor = '';
+function validateInput3(tel) {
+    if (phoneNumberPattern.test(tel)) {
+        telInput.style.borderColor = '';
+        telInput.style.borderColor = '';
         openable3 = true;
-        listData()
     } else {
-        input.style.borderColor = 'red';
+        telInput.style.borderColor = 'red';
         openable3 = false;
     }
+
+
 }
 
 
@@ -102,9 +105,6 @@ function loadInputValues() {
     const sales1 = document.getElementById('carSubmit');
     const sales2 = document.getElementById('salesman');
     const sales3 = document.getElementById('carSubmitTel');
-    console.log(sales1.value);
-    console.log(sales2.value);
-    console.log(sales3.value);
 
     if (sales1.value !== null) {
         openable1 = true;
@@ -115,6 +115,7 @@ function loadInputValues() {
     if (sales3.value !== null) {
         openable3 = true;
     }
+
     searchByCarsubmitTel(sales3);
 }
 
@@ -127,6 +128,7 @@ function openPop() {
     } else {
         openable4 = true;
     }
+    validateInput3(telInput.value)
     if(chk.value === '0') {
         if(openable1 & openable2 & openable3 & openable4 === true) {
             popup.style.display = 'flex';
@@ -332,11 +334,11 @@ function listData() {
 
 
 function checkInputs() {
-    // 거래처정보가 저장되거나 수정 될 때는 모든 인풋이 차있어야 한다.
+    // 거래처정보가 저장되거나 수정 될 때는 모든 인onAutoSearch()풋이 차있어야 한다.
     return openable1 & openable2 & openable3 & openable4;
 }
 
-function mutallyApproved() {
+function mutuallyApproved() {
 
 }
 
