@@ -173,7 +173,7 @@
         z-index: 1;
     }
     #menusub, #carsub, #recruitment{
-        word-break: normal;
+        word-break: break-all;
     }
     .popup-content {
         background: #fff;

@@ -26,7 +26,7 @@ public interface DailyReportStep3MainMapper {
 
     /* FUNCTION ::  sheetSS2 수정 */
     int editBySheetSS2(DailyReportStep3Main dailyReportStep3Main);
-    
+
     /* FUNCTION ::  수정, 삭제를 위한 chk1, chk2 조회 */
     //boolean findBySheetID(int sheetID);
 
@@ -40,8 +40,10 @@ public interface DailyReportStep3MainMapper {
     /* FUNCTION :: 일보 리스트 조회(전체조건) */
     DailyReportStep3Main findAllCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
 
-    /* FUNCTION :: 검증용 */
-    DailyReportStep3Main findCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
+    /* FUNCTION :: 저장하기버튼  : 3.기존 데이터 삭제 */
+    int deleteByOldData(DailyReportStep3Main dailyReportStep3Main);
+
+    List<DailyReportStep3Main> findCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
 
     /* 전체 삭제 */
     int deleteByCarsubmitInfo(DailyReportStep3Main dailyReportStep3Main);

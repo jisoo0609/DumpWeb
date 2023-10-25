@@ -7,6 +7,7 @@ public class DailyReportStep7Sub {
 
     //tSheetSub 테이블
     private int sheetsubID;
+    private String drvDate;
     private int sheetID2;            // LINE :: tSheet FK
     private String fromsite;         // LINE :: 상차지
     private String tosite;           // LINE :: 하차지

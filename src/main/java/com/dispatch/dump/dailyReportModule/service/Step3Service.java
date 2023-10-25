@@ -124,30 +124,40 @@ public class Step3Service {
         return resultData;
     }
 
-    public DailyReportStep3Main findByCarSubmitInfo2(DailyReportStep3Main dailyReportStep3Main){
-        dailyReportStep3Main.setUuserID(Integer.parseInt(getSessionLoginData().getUuserID()));
-        //dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
-        return dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
-    }
-
     public DailyReportStep3Main findTCarSubmitDetails(int sheetID){
         return dailyReportStep3MainMapper.findBySheetIDForStep4(sheetID);
     }
 
     /*제출처 정보 수정*/
-    public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
+    public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
-        dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
-        System.out.println("SheetID는?"+dailyReportStep3Main.getSheetID());
-        int result=dailyReportStep3MainMapper.editByCarSubmit(dailyReportStep3Main);
+        //기사일때와 제출처일때 기능 분리
+        Login login = new Login();
+        login.setUserId(getSessionLoginData().getUserId());
+        Login loginInfo = findByUserInfo(login);
+        if (loginInfo.getUserPosition().equals("driver")) {
+            //1. 제출처 정보 신규 등록
+            dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+            dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
+            dailyReportStep3Main.setCarNo(getSessionLoginData().getUserId());
 
-        if (result > 0) {
-            rtnMap.put("httpCode", 200);
-        } else {
-            rtnMap.put("httpCode", 422);
+            int resultByInsert = dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
+            if (0 < resultByInsert) {
+                System.out.println("sheetID값은?" + dailyReportStep3Main.getSheetID());
+                int resultOfEdit = dailyReportStep3SubMapper.editByTransPortInfos(dailyReportStep3Main);
+                if (0 < resultOfEdit) {
+                    dailyReportStep3MainMapper.deleteByOldData(dailyReportStep3Main);
+                    rtnMap.put("httpCode", 200);
+                }else{
+                    rtnMap.put("httpCode", 422);
+                }
+            }
+
+
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
+
 
     /*운송정보 수정*/
     public String edit(DailyReportStep3Sub dailyReportStep3Sub){

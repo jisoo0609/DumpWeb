@@ -21,9 +21,29 @@
 
     </insert>
 
+    <sql id="subInfo">
+        WITH r1 AS (SELECT *
+                    FROM tsheet_sub
+                    WHERE sheetsubID = ${sheetsubID}),
+             r2 AS (SELECT sheetsubID,
+                           DATE_FORMAT(date,"%Y-%m-%d") as drvDate,
+                           CarNo,
+                           fromsite,
+                           tosite,
+                           item,
+                           Qty,
+                           Qtyup
+                    FROM tsheet
+                             INNER JOIN r1 on r1.sheetID2 = tsheet.sheetID)
+    </sql>
+
     <!-- 제출처 상세정보 조회-->
     <select id="findSubInfoBySheetSubID" parameterType="int" resultType="DailyReportStep7Sub">
-        SELECT * FROM tsheet_sub WHERE sheetSubID = #{sheetSubID}
+        <include refid="subInfo">
+            <property name="sheetsubID" value="#{sheetsubID}"/>
+        </include>
+        SELECT *
+        FROM r2
     </select>
 
     <!--수정-->

@@ -1,11 +1,8 @@
 package com.dispatch.dump.dailyReportModule.controller;
 
-import com.dispatch.dump.commonModule.db.dto.DailyReport;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep7CarNo;
+import com.dispatch.dump.commonModule.db.dto.*;
 import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step7Service;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep7Main;
-import com.dispatch.dump.commonModule.db.dto.DailyReportStep7Sub;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,6 +32,12 @@ public class Step7Controller {
         return step7Service.searchOrderList(dailyReportStep7Main);
     }
 
+    @RequestMapping(value = "/ajax/details", method = RequestMethod.POST)
+    @ResponseBody
+    public DailyReportStep7Sub tSheetSubDetails(int sheetsubID) {
+        return step7Service.findSheetSubDetails(sheetsubID);
+    }
+
     @RequestMapping(value = "/orderform", method = RequestMethod.GET)
     public String step7(Model model, DailyReport dailyReport) {
         dailyReportService.list(model, dailyReport);
@@ -44,7 +47,7 @@ public class Step7Controller {
     }
 
     /*제출처 주문 삭제*/
-    @RequestMapping(value = "/ajax/delete", method = RequestMethod.GET)
+    @RequestMapping(value = "/ajax/orderDelete", method = RequestMethod.DELETE)
     @ResponseBody
     public String delete(DailyReportStep7Sub dailyReportStep7Sub){
         return step7Service.delete(dailyReportStep7Sub);
@@ -60,12 +63,6 @@ public class Step7Controller {
     @RequestMapping(value = "/ajax/driverList")
     public String driverList() {
         return step7Service.driverList();
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/ajax/subInfo")
-    public String subInfo(int sheetsubID) {
-        return step7Service.subInfo(sheetsubID);
     }
 
     @ResponseBody

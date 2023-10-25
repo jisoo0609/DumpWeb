@@ -31,12 +31,13 @@ public class Step7Service {
     private final DailyReportStep7Mapper step7Mapper;
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final LoginMapper loginMapper;
+
     public Login getSessionLoginData() {
         return (Login) commonUtil.getSession().getAttribute("loginInfo");
     }
 
     //제출처 주문 정보 저장
-    public String saveOrder(DailyReportStep7Main dailyReportStep7Main, DailyReportStep7Sub dailyReportStep7Sub){
+    public String saveOrder(DailyReportStep7Main dailyReportStep7Main, DailyReportStep7Sub dailyReportStep7Sub) {
 
         Map<String, Object> rtnMap = commonUtil.returnMap();
         HttpSession session = commonUtil.getSession();
@@ -67,14 +68,14 @@ public class Step7Service {
             rtnMap.put("httpCode", 200);
 
         } catch (Exception e) {
-            log.error("Exception["+ e.getMessage() +"]");
+            log.error("Exception[" + e.getMessage() + "]");
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
 
     }
 
     //오늘 날짜 받기
-    public String getToday(){
+    public String getToday() {
         //SimpleDateFormat 객체 생성하여 날짜 포맷 설정
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         //현재 시스템 시간을 기반으로 Date 객체 생성
@@ -87,11 +88,11 @@ public class Step7Service {
     }
 
     //제출처 주문 정보 조회
-    public List<DailyReportStep7Sub> searchOrderList(DailyReportStep7Main dailyReportStep7Main){
+    public List<DailyReportStep7Sub> searchOrderList(DailyReportStep7Main dailyReportStep7Main) {
         System.out.println(dailyReportStep7Main);
         System.out.println(getSessionLoginData().getUuserID());
-        System.out.println(dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUuserID(),dailyReportStep7Main.getDate()));
-        return dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUuserID(),dailyReportStep7Main.getDate());
+        System.out.println(dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUuserID(), dailyReportStep7Main.getDate()));
+        return dailyReportStep7MainMapper.selectReceptionList(getSessionLoginData().getUuserID(), dailyReportStep7Main.getDate());
     }
 
     public Login findByUserInfo(Login login) {
@@ -100,22 +101,27 @@ public class Step7Service {
 
 
     /*운송정보 삭제*/
-    public String delete(DailyReportStep7Sub dailyReportStep7Sub){
-        Map<String, Object> rtnMap = commonUtil.returnMap();
-        int sheetID=dailyReportStep7SubMapper.findBySheetsubID(dailyReportStep7Sub.getSheetsubID());
-        DailyReportStep7Main dailyReportStep7Main=dailyReportStep7MainMapper.findByChkInfo(sheetID);
-        if(dailyReportStep7Main.isChk1()==false&&dailyReportStep7Main.isChk2()==false){
-            Login login= new Login();
+    public String delete(DailyReportStep7Sub dailyReportStep7Sub) {
+
+        dailyReportStep7SubMapper.deleteByOne(dailyReportStep7Sub);
+
+        /*Map<String, Object> rtnMap = commonUtil.returnMap();
+        int sheetID = dailyReportStep7SubMapper.findBySheetsubID(dailyReportStep7Sub.getSheetsubID());
+        DailyReportStep7Main dailyReportStep7Main = dailyReportStep7MainMapper.findByChkInfo(sheetID);
+        if (dailyReportStep7Main.isChk1() == false && dailyReportStep7Main.isChk2() == false) {
+            Login login = new Login();
             login.setUserId(getSessionLoginData().getUserId());
-            Login loginInfo=findByUserInfo(login);
-            if(loginInfo.getUserPosition().equals("manager")){
+            Login loginInfo = findByUserInfo(login);
+            if (loginInfo.getUserPosition().equals("manager")) {
                 dailyReportStep7SubMapper.deleteByOne(dailyReportStep7Sub);
                 rtnMap.put("httpCode", 200);
             }
-        }else{
+        } else {
             rtnMap.put("httpCode", 422);
-        }
-        return commonUtil.jsonFormatTransfer(rtnMap);
+        }*/
+        //return commonUtil.jsonFormatTransfer(rtnMap);
+
+        return "제거 완료";
     }
 
     public String saveCarData(DailyReportStep7CarNo dailyReportStep7CarNo) {
@@ -130,7 +136,7 @@ public class Step7Service {
 
             rtnMap.put("httpCode", 200);
         } catch (Exception e) {
-            log.error("Exception [" + e.getMessage() +"]");
+            log.error("Exception [" + e.getMessage() + "]");
         }
 
 
@@ -151,22 +157,13 @@ public class Step7Service {
             rtnMap.put("driverList", step7Mapper.findCarNoByLoginData(dailyReportStep7CarNo));
             rtnMap.put("httpCode", 200);
         } catch (Exception e) {
-            log.error("Exception [" + e.getMessage() +"]");
+            log.error("Exception [" + e.getMessage() + "]");
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
-    public String subInfo(int sheetsubID) {
-        Map<String, Object> rtnMap = commonUtil.returnMap();
-        try {
-            DailyReportStep7Sub subData = dailyReportStep7SubMapper.findSubInfoBySheetSubID(sheetsubID);
-            rtnMap.put("view", subData);
-            rtnMap.put("httpCode", 200);
-        } catch (Exception e) {
-            log.error("Exception [" + e.getMessage() +"]");
-        }
-
-        return commonUtil.jsonFormatTransfer(rtnMap);
+    public DailyReportStep7Sub findSheetSubDetails(int sheetsubID) {
+        return dailyReportStep7SubMapper.findSubInfoBySheetSubID(sheetsubID);
     }
 
     @Transactional
@@ -199,7 +196,7 @@ public class Step7Service {
                 rtnMap.put("httpCode", 200);
             }
         } catch (Exception e) {
-            log.error("Exception [" + e.getMessage() +"]");
+            log.error("Exception [" + e.getMessage() + "]");
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
@@ -211,8 +208,8 @@ public class Step7Service {
             DailyReportStep7CarNo memberChk = step7Mapper.findMemberChkByUserId(dailyReportStep7CarNo);
             rtnMap.put("memberChk", memberChk);
             rtnMap.put("httpCode", 200);
-        }catch (Exception e) {
-            log.error("Exception [" + e.getMessage() +"]");
+        } catch (Exception e) {
+            log.error("Exception [" + e.getMessage() + "]");
         }
 
         return commonUtil.jsonFormatTransfer(rtnMap);
