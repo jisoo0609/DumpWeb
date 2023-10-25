@@ -26,6 +26,7 @@
                     FROM tsheet_sub
                     WHERE sheetsubID = ${sheetsubID}),
              r2 AS (SELECT sheetsubID,
+                           sheetID2,
                            DATE_FORMAT(date,"%Y-%m-%d") as drvDate,
                            CarNo,
                            fromsite,
@@ -77,4 +78,5 @@
         where
         sheetsubID = #{sheetsubID}
     </delete>
+
 </mapper>

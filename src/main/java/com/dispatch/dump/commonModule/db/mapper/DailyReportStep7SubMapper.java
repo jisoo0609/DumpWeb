@@ -16,4 +16,6 @@ public interface DailyReportStep7SubMapper {
     int deleteByOne(DailyReportStep7Sub dailyReportStep7Sub);
 
     DailyReportStep7Sub findSubInfoBySheetSubID(int sheetsubID);
+
+    int editSubmitInfo(DailyReportStep7Sub DailyReportStep7Sub);
 }

@@ -65,8 +65,7 @@
         select * from r3
     </select>
 
-    <!--수정-->
-    <update id="editTsheet" parameterType="DailyReportStep7Main">
+    <!--    <update id="editTsheet" parameterType="DailyReportStep7Main">
         upate tsheet
         set
         sheetSS2=#{sheetSS2}
@@ -74,6 +73,14 @@
         sheetSS=#{sheetSS}
         and
         sheetID=#{sheetID}
+    </update>-->
+
+
+    <update id="editTsheet" parameterType="DailyReportStep7Sub">
+        update tsheet
+        set CarNo = #{carNo}
+        where
+        sheetID=#{sheetID2}
     </update>
 
     <!--삭제 관련-->
