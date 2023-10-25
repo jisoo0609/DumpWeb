@@ -24,13 +24,25 @@
     </select>
 
     <!--검증용-->
-    <select id="findCarSubmitInfo"  resultType="List" parameterType="DailyReportStep3Main">
+    <!--
+    <select id="findCarSubmitInfo" resultType="DailyReportStep3Main" parameterType="DailyReportStep3Main">
         SELECT *
         FROM tSheet
         WHERE DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
         AND carSubmitTel = #{carSubmitTel}
-        AND (sheetSS = #{sheetSS} OR sheetSS2 = (SELECT UuserID FROM tsitePW WHERE UuserID= #{carSubmitTel}))
+        AND sheetSS = #{sheetSS}
+        AND writerIDX=#{writerIDX}
         ORDER BY date DESC
+    </select>
+    -->
+    <select id="findCarSubmitInfo" resultType="DailyReportStep3Main" parameterType="DailyReportStep3Main">
+        SELECT *
+        FROM tSheet
+        WHERE DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
+        AND carSubmitTel = #{carSubmitTel}
+        AND writerIDX  = #{writerIDX}
+        ORDER BY sheetID ASC
+        LIMIT 1;
     </select>
 
     <!--제출처 정보 저장-->
@@ -79,7 +91,7 @@
         from tSheet
         where carSubmitTel like CONCAT('%', #{carSubmitTel}, '%')
         group by carSubmitTel
-        order by carSubmitTel asc;
+        order by carSubmitTel asc
     </select>
 
     <!--영업사원으로 조회-->
@@ -112,6 +124,7 @@
     <!--step4관련: 페이지 이동시 조회-->
     <select id="findBySheetIDForStep4" parameterType="int" resultType="DailyReportStep3Main">
         select
+        sheetID,
         CarNo,
         DATE_FORMAT(date, '%Y-%m-%d') as date,
         carSubmit,
@@ -138,8 +151,14 @@
         sheetID=#{sheetID}
     </update>
 
-    <!--제출처정보 수정 : 수정할 것-->
-    <update id="editByCarSubmit" parameterType="DailyReportStep3Main">
+    <!--
+    제출처정보 수정 : 수정할 것
+    2개로 만들어야됨
+    회원정보가 있을때랑 없을때
+    있을때는 : chk1하고 currstatus만 수정 가능
+    없을때는 : 전부 수정 가능
+    -->
+    <update id="editByCarSubmit1" parameterType="DailyReportStep3Main">
         update tSheet
         set
         carSubmit=#{carSubmit},
@@ -147,12 +166,38 @@
         salesman=#{salesman},
         chk1=#{chk1},
         CurrStatus=#{CurrStatus}
-        where
-        sheetSS=#{sheetSS}
-        and
+        WHERE
         sheetID=#{sheetID}
+        AND (sheetSS = #{sheetSS} and sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid= #{carSubmitTel}) OR
+        sheetSS2 IS NULL OR sheetSS2=0)
+    </update>
+    <update id="editByCarSubmit2" parameterType="DailyReportStep3Main">
+        update tSheet
+        set
+        chk1=#{chk1},
+        CurrStatus = #{CurrStatus}
+        WHERE
+        sheetID=#{sheetID}
+        AND
+        sheetSS = #{sheetSS}
+        AND sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid = #{carSubmitTel})
     </update>
 
+    <update id="editByOldCarSubmit" parameterType="DailyReportStep3Main">
+        update tSheet
+        set
+        carSubmit=#{carSubmit},
+        carSubmitTel=#{carSubmitTel},
+        salesman=#{salesman}
+        where
+        sheetID=(select sheetID
+        from tSheet
+        where carSubmitTel=#{carSubmitTel}
+        AND
+        writerIDX=#{writerIDX}
+        group by carSubmitTel
+        )
+    </update>
     <!--writerIDX 수정-->
     <update id="editByWriterIDX" parameterType="DailyReportStep3Main">
         update tSheet
@@ -172,35 +217,78 @@
         select CarNo from tSheet where sheetID=#{sheetID}
     </select>
 
-    <!--저장하기버튼  : 3.기존 데이터 삭제-->
-    <delete id="deleteByOldData" parameterType="DailyReportStep3Main">
-        DELETE FROM tSheet
-        WHERE sheetID IN (
+    <update id="submitByCarsubmitInfo" parameterType="DailyReportStep3Main">
+        update tSheet
+        set
+        chk1 = 1,
+        CurrStatus = "제출",
+        writerIDX = #{writerIDX}
+        WHERE
+        DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
+        AND
+        carSubmitTel = #{carSubmitTel}
+        AND
+        sheetID = (
         SELECT sheetID
         FROM tSheet
-        WHERE
-        carSubmitTel = #{carSubmitTel}
-        AND (
-        sheetSS = #{sheetSS}
-        AND (
-        sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid = #{carSubmitTel})
-        OR sheetSS2 IS NULL
-        OR sheetSS2 = 0
+        WHERE DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
+        AND carSubmitTel = #{carSubmitTel}
+        AND sheetSS = #{sheetSS}
+        AND sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid = #{carSubmitTel})
+        ORDER BY sheetID ASC
+        LIMIT 1
         )
+        AND
+        sheetSS = #{sheetSS} and sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid= #{carSubmitTel})
+    </update>
+
+    <!--제출하기  : 가비지 데이터 삭제-->
+    <delete id="deleteByOldData" parameterType="DailyReportStep3Main">
+        delete from tSheet
+        where
+        sheetID!=(
+        SELECT sheetID
+        FROM tSheet
+        WHERE DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
+        AND carSubmitTel = #{carSubmitTel}
+        AND sheetSS = #{sheetSS}
+        AND sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid = #{carSubmitTel})
+        ORDER BY sheetID ASC
+        LIMIT 1
         )
         AND
         DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
-        )
-        AND sheetID != #{sheetID};
+        AND
+        carSubmitTel=#{carSubmitTel}
+        AND
+        sheetSS = #{sheetSS}
+        AND sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid = #{carSubmitTel})
     </delete>
+
+    <!--제출처 결재 기능 -->
+    <update id="approvalByCarSubmit" parameterType="DailyReportStep3Main">
+        update tSheet
+        set
+        chk2=#{chk2},
+        chk1=#{chk1},
+        CurrStatus=#{CurrStatus}
+        Where
+        DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
+        AND
+        carSubmitTel = #{carSubmitTel}
+        AND
+        sheetSS = #{sheetSS} and sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid= #{carSubmitTel})
+    </update>
 
     <!--전체삭제-->
     <delete id="deleteByCarsubmitInfo" parameterType="DailyReportStep3Main">
         delete from tSheet
         where carSubmitTel = #{carSubmitTel}
-        and date = #{date}
-        and chk1 = 0
-        and writerIDX = #{writerIDX}
+        AND DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
+        AND chk1 = 0
+        AND chk2 = 0
+        AND (sheetSS = #{sheetSS} and sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid= #{carSubmitTel}) OR
+        sheetSS2 IS NULL OR sheetSS2=0)
     </delete>
 
 </mapper>

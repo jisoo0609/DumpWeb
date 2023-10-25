@@ -16,7 +16,7 @@ public interface DailyReportStep3MainMapper {
     List<DailyReportStep3Main> findBySalesman(DailyReportStep3Main dailyReportStep3Main);
 
     /* FUNCTION ::  제출처 정보 수정 */
-    int editByCarSubmit(DailyReportStep3Main dailyReportStep3Main);
+    //int editByCarSubmit(DailyReportStep3Main dailyReportStep3Main);
 
     /* FUNCTION ::  step8를 위한 조회 */
     DailyReportStep3Main findBySheetIDForStep8(int sheetID);
@@ -34,16 +34,27 @@ public interface DailyReportStep3MainMapper {
 
     String findByCarNo(int sheetID);
 
+    int editByOldCarSubmit(DailyReportStep3Main dailyReportStep3Main);
+
     /* FUNCTION :: writerIDX 수정용 */
     int editByWriterIDX(DailyReportStep3Main dailyReportStep3Main);
-
+    
     /* FUNCTION :: 일보 리스트 조회(전체조건) */
     DailyReportStep3Main findAllCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
 
-    /* FUNCTION :: 저장하기버튼  : 3.기존 데이터 삭제 */
+    /* FUNCTION :: 제출처 결재 */
+    int approvalByCarSubmit(DailyReportStep3Main dailyReportStep3Main);
+    
+    /* FUNCTION :: 제출하기 */
+    int submitByCarsubmitInfo(DailyReportStep3Main dailyReportStep3Main);
+
+    /* FUNCTION :: 제출하기 : 데이터 정리 */
     int deleteByOldData(DailyReportStep3Main dailyReportStep3Main);
 
-    List<DailyReportStep3Main> findCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
+    int editByCarSubmit1(DailyReportStep3Main dailyReportStep3Main);
+    int editByCarSubmit2(DailyReportStep3Main dailyReportStep3Main);
+
+    DailyReportStep3Main findCarSubmitInfo(DailyReportStep3Main dailyReportStep3Main);
 
     /* 전체 삭제 */
     int deleteByCarsubmitInfo(DailyReportStep3Main dailyReportStep3Main);
