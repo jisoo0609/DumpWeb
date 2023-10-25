@@ -49,7 +49,6 @@ function bindList() {
             // 팝업 창을 숨기는 코드
             const golPop3 = document.querySelector("#golPop3");
             golPop3.classList.remove("active");
-            emptyRow();
             printTable(data);
         }
     })
@@ -118,6 +117,8 @@ function printTable(searchResultData) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
+
+
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
@@ -125,9 +126,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (sheetsubID !== null) {
         getSheetsubIDDataByParams(sheetsubID);
-    } else {
-        bindList();
     }
+
+    bindList();
     clickListThAndRedirect();
 });
 
@@ -154,6 +155,7 @@ function getSheetsubIDDataByParams(sheetsubID) {
     $.ajax({
         url: "/dailyReport/ajax/details",
         type: "POST",
+        async: false,
         data: {sheetsubID: sheetsubID},
         success: function (data) {
             document.getElementById('date').value = data.drvDate;
@@ -174,7 +176,7 @@ function clickListThAndRedirect() {
     tableBody.addEventListener("click", (event) => {
 
         const row = event.target;
-        if(row.type ==='button'){
+        if (row.type === 'button') {
             return;
         }
 
