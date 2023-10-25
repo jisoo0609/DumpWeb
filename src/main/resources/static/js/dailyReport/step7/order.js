@@ -5,9 +5,9 @@ function cancel() {
     emptyRow();
 }
 
-function getCheckParam(id){
+function getCheckParam(id) {
     const checkBox = document.getElementById(id);
-    return  "&" + id + "=" + checkBox.checked;
+    return "&" + id + "=" + checkBox.checked;
 }
 
 function save() {
@@ -101,8 +101,15 @@ function printTable(searchResultData) {
             <td>${order[1]}</td>
             <td>${order[2]}</td>
             <td>${order[3]}</td>
-            <td>${order[4]}</td>
-        `;
+            `;
+
+        if (data.carNo === "" || data.carNo === "미지정") {
+            row.innerHTML += `<td><button type="button" class="miJeongButton" onclick="openPopupTest(\'dispatchform\', ' + data.sheetsubID + ');">미지정</button></td>`;
+        } else if (data.carNo === "공고" || data.carNo === "모집공고") {
+            row.innerHTML += `<td><button class="miJeongButton">공고</button></td>`;
+        } else {
+            row.innerHTML += `<td>` + data.carNo + `</td>`;
+        }
 
         row.setAttribute("data-sheet-sub-id", data.sheetsubID);
         tableBody.appendChild(row);
@@ -118,14 +125,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (sheetsubID !== null) {
         getSheetsubIDDataByParams(sheetsubID);
-    }
-    else{
+    } else {
         bindList();
     }
     clickListThAndRedirect();
 });
 
-function orderDelete(){
+function orderDelete() {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
@@ -142,8 +148,6 @@ function orderDelete(){
     })
 
 }
-
-
 
 
 function getSheetsubIDDataByParams(sheetsubID) {
@@ -168,7 +172,15 @@ function clickListThAndRedirect() {
     const tableBody = document.querySelector("table tbody");
 
     tableBody.addEventListener("click", (event) => {
+
+        const row = event.target;
+        if(row.type ==='button'){
+            return;
+        }
+
         const parentRow = event.target.closest("tr");
+
+
         if (parentRow) {
             const sheetsubID = parentRow.getAttribute("data-sheet-sub-id");
             if (sheetsubID) {
