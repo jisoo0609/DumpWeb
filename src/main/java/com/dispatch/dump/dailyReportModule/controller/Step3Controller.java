@@ -116,8 +116,14 @@ public class Step3Controller {
     /*전체삭제*/
     @RequestMapping(value = "/workspace/ajax/deleteAll", method = RequestMethod.POST)
     @ResponseBody
-    public void delete(DailyReportStep3Main dailyReportStep3Main) {
-        step3Service.deleteAll(dailyReportStep3Main);
+    public String deleteAll(DailyReportStep3Main dailyReportStep3Main) {
+        return step3Service.deleteAll(dailyReportStep3Main);
+    }
+
+    @RequestMapping(value = "/workspace/ajax/saveSales", method = RequestMethod.POST)
+    @ResponseBody
+    public String saveSales(DailyReportStep3Main dailyReportStep3Main) {
+        return step3Service.saveSales(dailyReportStep3Main);
     }
 }
 

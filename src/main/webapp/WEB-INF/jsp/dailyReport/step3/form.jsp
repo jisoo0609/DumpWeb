@@ -183,8 +183,8 @@
         </div>
 
         <div class="btn-area">
-            <button type="button" class="btn btn-white" onclick="clearInputs()">전체삭제</button>
-            <button type="button" class="btn btn-blue" id="submitBtn" onClick="$.editSales() submitConfirmation()">제출하기</button>
+            <button type="button" class="btn btn-white" onclick="$.deleteAll()">전체삭제</button>
+            <button type="button" class="btn btn-blue" id="submitBtn" onClick="$.saveSales()">제출하기</button>
             <button type="button" class="btn btn-blue " onClick="$.editSales()">저장하기</button>
             <button type="button" class="btn btn-white " onClick="pageGoBack()">이전화면</button>
         </div>

@@ -10,6 +10,8 @@ import com.dispatch.dump.commonModule.util.CommonUtil;
 import com.dispatch.dump.commonModule.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +31,6 @@ public class Step3Service {
     public void saveTransPortInfo(DailyReportStep3Sub dailyReportStep3Sub){
         dailyReportStep3Sub.setSheetsubSS(Integer.parseInt(getSessionLoginData().getUuserID()));
         dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
-        System.out.println("Writeridx2는?"+dailyReportStep3Sub.getWriteridx2());
         dailyReportStep3SubMapper.insertTransportInfo(dailyReportStep3Sub);
     };
 
@@ -47,26 +48,53 @@ public class Step3Service {
 
         Login login=new Login();
         login.setUserId(dailyReportStep3Main.getCarSubmitTel());
-        
+
         Login userInfo=findByUserInfo(login);
         if(userInfo!=null){
             dailyReportStep3Main.setSheetSS2(Integer.parseInt(userInfo.getUuserID()));
             dailyReportStep3Sub.setSheetsubSS2(Integer.parseInt(userInfo.getUuserID()));
-            dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
 
-            if (dailyReportStep3Main.getImageFile() != null) {
-                fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+            DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
+            if(carSubmitResult!=null){
+                //sheetSS2와 sheetsubSS2 update-> 회원가입할때 SS2를 update하는 과정을 거친다면 필요없음
+                //dailyReportStep3MainMapper.editBySheetSS2(dailyReportStep3Main);
+                //dailyReportStep3SubMapper.editBySheetsubSS2(dailyReportStep3Sub);
+
+                System.out.println("find main Data.");
+                dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
+                saveTransPortInfo(dailyReportStep3Sub);
+            }else{
+                System.out.println("not found main Data.");
+                dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+                dailyReportStep3Main.setCarSubmit(userInfo.getUserSS());
+                dailyReportStep3Main.setCarSubmitTel(userInfo.getUserTel());
+                dailyReportStep3Main.setSalesman(userInfo.getUserName());
+
+                dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
+
+                if (dailyReportStep3Main.getImageFile() != null) {
+                    fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                }
+                dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
+                saveTransPortInfo(dailyReportStep3Sub);
             }
-            dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
-            saveTransPortInfo(dailyReportStep3Sub);
         }else{
-            dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
+            DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
+            if(carSubmitResult!=null){
+                System.out.println("find main Data.");
+                dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
+                saveTransPortInfo(dailyReportStep3Sub);
+            }else{
+                System.out.println("not found main Data.");
+                dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+                dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
 
-            if (dailyReportStep3Main.getImageFile() != null) {
-                fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                if (dailyReportStep3Main.getImageFile() != null) {
+                    fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                }
+                dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
+                saveTransPortInfo(dailyReportStep3Sub);
             }
-            dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
-            saveTransPortInfo(dailyReportStep3Sub);
         }
     }
     
@@ -97,6 +125,19 @@ public class Step3Service {
 
     //제출처 연락처 카테고리 생성용
     public List<DailyReportStep3Main> searchByCarSubmitTel(DailyReportStep3Main dailyReportStep3Main) {
+        //dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
+        //가입된 회원정보가 있다면
+        Login login2 = new Login();
+        login2.setUserId(dailyReportStep3Main.getCarSubmitTel());
+        Login loginInfo2 = findByUserInfo(login2);
+
+        if(loginInfo2!=null){
+            //회원가입 정보로 업데이트 해주기
+            dailyReportStep3Main.setCarSubmit(loginInfo2.getUserSS());
+            dailyReportStep3Main.setCarSubmitTel(loginInfo2.getUserTel());
+            dailyReportStep3Main.setSalesman(loginInfo2.getUserName());
+            dailyReportStep3MainMapper.editByOldCarSubmit(dailyReportStep3Main);
+        }
         return dailyReportStep3MainMapper.findByCarSubmitTel(dailyReportStep3Main);
     }
 
@@ -116,8 +157,14 @@ public class Step3Service {
 
         DailyReportStep3Main resultData=null;
         if(loginInfo.getUserPosition().equals("driver")){
-            //dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
-            //resultData=dailyReportStep3MainMapper.selectAll(dailyReportStep3Main);
+            dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+            dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
+
+            if(dailyReportStep3Main.getSheetID() != 0){
+                resultData=dailyReportStep3MainMapper.findBySheetIDForStep4(sheetID);
+            }else{
+                resultData=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
+            }
         }else if(loginInfo.getUserPosition().equals("manager")){
             resultData=dailyReportStep3MainMapper.findBySheetIDForStep8(sheetID);
         }
@@ -128,36 +175,36 @@ public class Step3Service {
         return dailyReportStep3MainMapper.findBySheetIDForStep4(sheetID);
     }
 
-    /*제출처 정보 수정*/
+    /*제출처 정보 저장하기 기능*/
     public String editByCarSubmit(DailyReportStep3Main dailyReportStep3Main) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
-        //기사일때와 제출처일때 기능 분리
         Login login = new Login();
         login.setUserId(getSessionLoginData().getUserId());
         Login loginInfo = findByUserInfo(login);
+
+        //휴대폰 번호로 제출처가 존재하는지 확인
+        Login login2 = new Login();
+        login2.setUserId(dailyReportStep3Main.getCarSubmitTel());
+        Login loginInfo2 = findByUserInfo(login2);
+        dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+        //기사일때만
         if (loginInfo.getUserPosition().equals("driver")) {
-            //1. 제출처 정보 신규 등록
-            dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
-            dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
-            dailyReportStep3Main.setCarNo(getSessionLoginData().getUserId());
+            if(loginInfo2!=null){
+                System.out.println("sheetID는?"+dailyReportStep3Main.getSheetID());
+                System.out.println("CurrStatus는?"+dailyReportStep3Main.getCurrStatus());
+                dailyReportStep3MainMapper.editByCarSubmit2(dailyReportStep3Main);
+            }else{
+                System.out.println("sheetID는?"+dailyReportStep3Main.getSheetID());
+                System.out.println("salesman은?"+dailyReportStep3Main.getSalesman());
 
-            int resultByInsert = dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
-            if (0 < resultByInsert) {
-                System.out.println("sheetID값은?" + dailyReportStep3Main.getSheetID());
-                int resultOfEdit = dailyReportStep3SubMapper.editByTransPortInfos(dailyReportStep3Main);
-                if (0 < resultOfEdit) {
-                    dailyReportStep3MainMapper.deleteByOldData(dailyReportStep3Main);
-                    rtnMap.put("httpCode", 200);
-                }else{
-                    rtnMap.put("httpCode", 422);
-                }
+                dailyReportStep3MainMapper.editByCarSubmit1(dailyReportStep3Main);
             }
-
-
+            rtnMap.put("httpCode", 200);
+        }else{
+            rtnMap.put("httpCode",422);
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
-
 
     /*운송정보 수정*/
     public String edit(DailyReportStep3Sub dailyReportStep3Sub){
@@ -176,7 +223,6 @@ public class Step3Service {
             if(loginInfo.getUserPosition().equals("driver")){
                 dailyReportStep3Sub.setWriteridx2(Integer.parseInt(getSessionLoginData().getUuserID()));
                 dailyReportStep3SubMapper.editByTransportInfo(dailyReportStep3Sub);
-                //상위테이블의 writerIDX도 같이 수정해주기 -- 여기가 안됨
                 dailyReportStep3MainMapper.editByWriterIDX(dailyReportStep3Main);
                 rtnMap.put("httpCode", 200);
             }
@@ -206,11 +252,60 @@ public class Step3Service {
     }
 
     /*전체삭제*/
-    public void deleteAll(DailyReportStep3Main dailyReportStep3Main){
-         int result=dailyReportStep3SubMapper.deleteByTransInfo(dailyReportStep3Main);
-            if(result>0){
+    @Transactional
+    public String deleteAll(DailyReportStep3Main dailyReportStep3Main){
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+        Login login = new Login();
+        login.setUserId(getSessionLoginData().getUserId());
+        Login loginInfo = findByUserInfo(login);
+        //기사일때만
+        if (loginInfo.getUserPosition().equals("driver")) {
+            dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+            int subResult=dailyReportStep3SubMapper.deleteByTransInfo(dailyReportStep3Main);
+            if(subResult>0){
                 dailyReportStep3MainMapper.deleteByCarsubmitInfo(dailyReportStep3Main);
+                rtnMap.put("httpCode", 200);
+            }else{
+                rtnMap.put("httpCode", 422);
             }
+        }else{
+            rtnMap.put("httpCode", 422);
+        }
+        return commonUtil.jsonFormatTransfer(rtnMap);
+    }
+    
+    //제출하기
+    @Transactional
+    public String saveSales(DailyReportStep3Main dailyReportStep3Main){
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+
+        //로그인 한 사람 정보 확인 - 기사인지, 제출처인지
+        Login login = new Login();
+        login.setUserId(getSessionLoginData().getUserId());
+        Login loginInfo = findByUserInfo(login);
+
+        //휴대폰 번호로 제출처가 존재하는지 확인
+        Login login2 = new Login();
+        login2.setUserId(dailyReportStep3Main.getCarSubmitTel());
+        Login loginInfo2 = findByUserInfo(login);
+        System.out.println("loginInfo2는?"+loginInfo2);
+        //기사이면서 제출처가 존재할때만
+        if(loginInfo.getUserPosition().equals("driver") && loginInfo2!=null){
+            //기사일때만
+            dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+            dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
+            //sub 데이터 수정
+            dailyReportStep3SubMapper.submitByTransPortInfo(dailyReportStep3Main);
+            //tsheet 데이터 수정
+            dailyReportStep3MainMapper.submitByCarsubmitInfo(dailyReportStep3Main);
+            //사용하지 않는 tSheet 데이터 삭제
+            dailyReportStep3MainMapper.deleteByOldData(dailyReportStep3Main);
+            rtnMap.put("httpCode", 200);
+        }else if(loginInfo.getUserPosition().equals("manager") || loginInfo2==null){
+            //기사가 아니거나 OR 제출처 회원정보가 없는 경우
+            rtnMap.put("httpCode", 422);
+        }
+        return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
 }

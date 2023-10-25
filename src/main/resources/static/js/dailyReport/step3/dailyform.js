@@ -63,6 +63,7 @@ $.emptyRow = function() {
 /*제출처, 운송정보 저장*/
 $.save = function() {
     var formData = new FormData($("[name=frm]")[0]);
+    console.log("formData는?"+formData);
     $.ajax({
         url: "/dailyReport/workspace/ajax/save",
         type: "POST",
@@ -96,8 +97,6 @@ $.list = function() {
             //제출처 정보 채우기
             if(null!==data.carSubmitInfo){
                 $.showCarSubmitInfo(data);
-            }
-            if(null!==data.carSubmitInfo){
                 $.saveSheetID(data);
             }
         },
@@ -111,9 +110,7 @@ $.showCarSubmitInfo = function(data){
     //currStatus정보 채우기
     document.getElementById('CurrStatus').options[valueToIndex(data.carSubmitInfo.currStatus)].selected = true;
     //chk정보 채우기
-    document.getElementById("checkbox").checked
-
-    = data.carSubmitInfo.chk1;
+    document.getElementById("checkbox").checked= data.carSubmitInfo.chk1;
     approved();
 }
 //chk정보를 불러오기 위한 함수
@@ -124,9 +121,7 @@ $.showChk1 = function(data) {
 
 //제출처 정보 수정을 위한 sheetID 저장
 $.saveSheetID = function(data){
-
-
- document.getElementById("sheetID").value=data.carSubmitInfo.sheetID;
+    document.getElementById("sheetID").value=data.carSubmitInfo.sheetID;
 }
 
 function showTransportList(data){
@@ -274,6 +269,49 @@ $.editSales = function(){
     } else {
         $.inputInvalid();
     }
+}
+
+//전체삭제
+$.deleteAll = function () {
+    var formData = new FormData($("[name=frm]")[0]);
+    $.ajax({
+        url : "/dailyReport/workspace/ajax/deleteAll",
+        type : "POST",
+        data : formData,
+        processData: false,
+        contentType: false,
+        cache: false,
+        success : function (data) {
+            var json = $.parseJSON(data);
+            if(json.httpCode == 200){
+                alert("삭제 완료");
+            }else{
+                alert("삭제 실패");
+            }
+
+        },
+        error : function (data) {
+            alert("삭제 에러");
+        }
+    })
+}
+
+$.saveSales = function(){
+    var formData = new FormData($("[name=frm]")[0]);
+    $.ajax({
+        url : "/dailyReport/workspace/ajax/saveSales",
+        type : "POST",
+        data : formData,
+        processData: false,
+        contentType: false,
+        cache: false,
+        success : function (data) {
+            alert("제출 완료");
+        },
+        error : function (data) {
+            alert("제출 에러");
+        }
+    })
 }
 
 $.invite = function () {
