@@ -44,11 +44,8 @@ public class Step7Service {
 
         try {
 
-            System.out.println(dailyReportStep7Main);
-            System.out.println(dailyReportStep7Sub);
             Login loginData = (Login) session.getAttribute("loginInfo");
 
-            //System.out.println(loginData);
             dailyReportStep7Main.setCarSubmit(String.valueOf(getSessionLoginData().getUserSS()));
             dailyReportStep7Main.setCarSubmitTel(String.valueOf(getSessionLoginData().getUserTel()));
             dailyReportStep7Main.setSalesman(String.valueOf(getSessionLoginData().getUserName()));
@@ -58,13 +55,25 @@ public class Step7Service {
             dailyReportStep7Main.setWriterIDX(Integer.parseInt(loginData.getUuserID()));
             //writerIDX
 
-            dailyReportStep7MainMapper.insertDailyReportStep7(dailyReportStep7Main);
+            if (dailyReportStep7Sub.getSheetsubID() == 0) {
+                dailyReportStep7MainMapper.insertDailyReportStep7(dailyReportStep7Main);
+                dailyReportStep7Sub.setSheetID2(dailyReportStep7Main.getSheetID());
+                dailyReportStep7Sub.setSheetsubSS2(Integer.parseInt(loginData.getUuserID()));
+                dailyReportStep7Sub.setWriteridx2(Integer.parseInt(loginData.getUuserID()));
+            }
 
-            dailyReportStep7Sub.setSheetID2(dailyReportStep7Main.getSheetID());
-            dailyReportStep7Sub.setSheetsubSS2(Integer.parseInt(loginData.getUuserID()));
-            dailyReportStep7Sub.setWriteridx2(Integer.parseInt(loginData.getUuserID()));
 
-            dailyReportStep7SubMapper.insertDailyReportStep7sub(dailyReportStep7Sub);
+            System.out.println(dailyReportStep7Sub.getSheetsubID());
+            System.out.println(dailyReportStep7Sub.getSheetID2());
+
+            if (dailyReportStep7Sub.getSheetsubID() == 0) {
+                dailyReportStep7SubMapper.insertDailyReportStep7sub(dailyReportStep7Sub);
+            }
+            else{
+                System.out.println("확인용 : "+dailyReportStep7Sub);
+                dailyReportStep7SubMapper.editSubmitInfo(dailyReportStep7Sub);
+                dailyReportStep7MainMapper.editTsheet(dailyReportStep7Sub);
+            }
             rtnMap.put("httpCode", 200);
 
         } catch (Exception e) {

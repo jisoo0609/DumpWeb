@@ -11,6 +11,13 @@ function getCheckParam(id) {
 }
 
 function save() {
+
+    if(document.querySelector('input[name="Qty"]').value == ''){
+        alert("대수를 입력해주세요");
+        document.querySelector("#golPop3").classList.remove("active");
+        return;
+    }
+
     $("#fromsite").prop("disabled", false);
     $("#tosite").prop("disabled", false);
     $("#item").prop("disabled", false);
@@ -34,7 +41,7 @@ function save() {
         async: false,
         success: function (data) {
             alert("저장이 완료되었습니다.");
-            bindList();
+            window.location.href = '/dailyReport/orderform';
         }
     })
 }
@@ -49,7 +56,6 @@ function bindList() {
             // 팝업 창을 숨기는 코드
             const golPop3 = document.querySelector("#golPop3");
             golPop3.classList.remove("active");
-            emptyRow();
             printTable(data);
         }
     })
@@ -118,6 +124,8 @@ function printTable(searchResultData) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
+
+
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
 
@@ -125,9 +133,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (sheetsubID !== null) {
         getSheetsubIDDataByParams(sheetsubID);
-    } else {
-        bindList();
     }
+
+    bindList();
     clickListThAndRedirect();
 });
 
@@ -154,8 +162,12 @@ function getSheetsubIDDataByParams(sheetsubID) {
     $.ajax({
         url: "/dailyReport/ajax/details",
         type: "POST",
+        async: false,
         data: {sheetsubID: sheetsubID},
         success: function (data) {
+            console.log(data);
+            document.getElementById('sheetsubID').value = data.sheetsubID;
+            document.getElementById('sheetID2').value = data.sheetID2;
             document.getElementById('date').value = data.drvDate;
             document.getElementById('fromsite').value = data.fromsite;
             document.getElementById('tosite').value = data.tosite;
@@ -174,7 +186,7 @@ function clickListThAndRedirect() {
     tableBody.addEventListener("click", (event) => {
 
         const row = event.target;
-        if(row.type ==='button'){
+        if (row.type === 'button') {
             return;
         }
 
