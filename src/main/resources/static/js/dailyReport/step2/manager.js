@@ -50,15 +50,15 @@ function printSummary(data) {
     const ttamount = document.getElementById("ttamount");
     const tncars = document.getElementById("tncars");
 
-    ttamount.innerHTML = data.totalTransportationCost.toLocaleString();
-    tncars.innerHTML = data.totalTrips.toLocaleString();
+    ttamount.innerHTML = "총 운반 금액: " + data.totalTransportationCost.toLocaleString() + "원";
+    tncars.innerHTML = "총 운반 대수: " + data.totalTrips.toLocaleString() + "원";
 }
 
 function printDispatchList(searchResultData, tbodyId) {
     // 테이블 본문 내용 초기화
     const tableBody = document.querySelector(`#${tbodyId}`);
     tableBody.innerHTML = "";
-    
+
     searchResultData.forEach((data, index) => {
         const row = document.createElement("tr");
 
@@ -87,7 +87,7 @@ function printDispatchList(searchResultData, tbodyId) {
         } else {
             const order = ["미지정", data.fromsite, data.tosite, data.item, data.qty];
             row.innerHTML = `
-                <td>${order[0]}</td>
+                <td class="carNoDesign">${order[0]}</td>
                 <td>${order[1]}</td>
                 <td>${order[2]}</td> 
                 <td>${order[3]}</td>
