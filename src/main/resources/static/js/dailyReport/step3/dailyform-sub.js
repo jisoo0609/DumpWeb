@@ -259,7 +259,7 @@ function approved() {
 
         // 거래처정보 인풋 비활성화
         inputElements.forEach(function(input) {
-            input.disabled = true;
+            //input.disabled = true;
             input.style.backgroundColor = "#F2F2F2";
             input.style.color = "black"
         });

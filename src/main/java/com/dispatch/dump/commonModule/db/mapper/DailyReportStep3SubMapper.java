@@ -28,6 +28,9 @@ public interface DailyReportStep3SubMapper {
     /* FUNCTION ::  삭제 */
     int deleteByOne(DailyReportStep3Sub dailyReportStep3Sub);
 
+    /* FUNCTION ::  저장하기 버튼 : 3.운송정보 수정 */
+    int editByTransPortInfos(DailyReportStep3Main dailyReportStep3Main);
+
     /* FUNCTION ::  전체삭제 */
     int deleteByTransInfo(DailyReportStep3Main dailyReportStep3Main);
 

@@ -23,12 +23,6 @@ public class DailyReportStep3Main {
     private int writerIDX;          // LINE :: 작성자 idx
     private String CurrStatus;      // LINE :: 배차상태
 
-    private int UuserID;
-
-    private List<DailyReportStep3Sub> dailyReportStep3SubList;//mybatis의 collection에 사용
-    
     private MultipartFile imageFile;    // LINE :: 전표이미지 파일
 
-    // VO
-    //private long idx;
 }
