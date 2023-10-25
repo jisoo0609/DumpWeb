@@ -18,7 +18,7 @@ public interface DailyReportStep7MainMapper {
     DailyReportStep7Main findByChkInfo(int sheetID);
 
     /* FUNCTION ::  수정 */
-    int updateTsheet(DailyReportStep7Main dailyReportStep7Main);
+    int editTsheet(DailyReportStep7Sub dailyReportStep7Sub);
 
     /* FUNCTION ::  삭제를 위한 chk1 조회 */
     boolean findBySheetID(int sheetID);

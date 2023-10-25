@@ -49,6 +49,9 @@
         <fieldset>
           <ul>
             <li>
+                <input type="hidden" name="sheetsubID" id="sheetsubID" value="0">
+                <input type="hidden" name="sheetID2" id="sheetID2" value ="0">
+
               <label class="golLabel" for="date">주문일</label>
               <span class="golInputSpan"><input id="date" name="date"></span>
               <button type="button" class="golSearch searchBtn" onClick="bindList()">조회</button>

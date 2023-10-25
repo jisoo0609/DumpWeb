@@ -11,6 +11,13 @@ function getCheckParam(id) {
 }
 
 function save() {
+
+    if(document.querySelector('input[name="Qty"]').value == ''){
+        alert("대수를 입력해주세요");
+        document.querySelector("#golPop3").classList.remove("active");
+        return;
+    }
+
     $("#fromsite").prop("disabled", false);
     $("#tosite").prop("disabled", false);
     $("#item").prop("disabled", false);
@@ -34,7 +41,7 @@ function save() {
         async: false,
         success: function (data) {
             alert("저장이 완료되었습니다.");
-            bindList();
+            window.location.href = '/dailyReport/orderform';
         }
     })
 }
@@ -158,6 +165,9 @@ function getSheetsubIDDataByParams(sheetsubID) {
         async: false,
         data: {sheetsubID: sheetsubID},
         success: function (data) {
+            console.log(data);
+            document.getElementById('sheetsubID').value = data.sheetsubID;
+            document.getElementById('sheetID2').value = data.sheetID2;
             document.getElementById('date').value = data.drvDate;
             document.getElementById('fromsite').value = data.fromsite;
             document.getElementById('tosite').value = data.tosite;
