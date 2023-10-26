@@ -190,7 +190,7 @@ public class Step3Service {
                 System.out.println("sheetID는?"+dailyReportStep3Main.getSheetID());
                 System.out.println("CurrStatus는?"+dailyReportStep3Main.getCurrStatus());
                 if(!dailyReportStep3Main.getImageFile().isEmpty() && dailyReportStep3Main.getImgIdx() > 0) {
-                    updateFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                    updateFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getImgIdx());
                 } else if (!dailyReportStep3Main.getImageFile().isEmpty() && dailyReportStep3Main.getImgIdx() == 0) {
                     uploadFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
                 }
@@ -199,7 +199,7 @@ public class Step3Service {
                 System.out.println("sheetID는?"+dailyReportStep3Main.getSheetID());
                 System.out.println("salesman은?"+dailyReportStep3Main.getSalesman());
                 if(!dailyReportStep3Main.getImageFile().isEmpty() && dailyReportStep3Main.getImgIdx() > 0) {
-                    updateFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                    updateFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getImgIdx());
                 } else if (!dailyReportStep3Main.getImageFile().isEmpty() && dailyReportStep3Main.getImgIdx() == 0) {
                     uploadFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
                 }

@@ -129,7 +129,7 @@ public class FileUtil {
 
             fileDTO.setFileName(fileName);
             fileDTO.setExt(ext);
-            fileDTO.setSheetID(idx);
+            fileDTO.setSheetID(fileInfo.getSheetID());
 
 //            fileMapper.updateFileInfoBySheetID(fileDTO);
 
