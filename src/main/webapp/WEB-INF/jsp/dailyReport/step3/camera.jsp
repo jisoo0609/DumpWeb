@@ -68,9 +68,10 @@
     <script>
         let capturedPhotoData = null;
         let modalOpen = false;
+        let cameraBtn = document.getElementById('cameraBtn');
 
         if (capturedPhotoData) {
-            document.getElementById('cameraBtn').innerText = '사진 재촬영';
+            cameraBtn.innerText = '사진 재촬영';
         }
 
         window.onload = function () {
