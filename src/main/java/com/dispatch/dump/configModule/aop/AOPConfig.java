@@ -44,7 +44,20 @@ public class AOPConfig {
                 result = "redirect:/";
 //                result = pjp.proceed();
             } else {
-                result = pjp.proceed();
+                if (loginInfo.getUserPosition().equals("driver")) {
+                    if (!(className.equals("Step1Controller") || className.equals("Step3Controller") || className.equals("Step4Controller") || className.equals("Step5Controller") || className.equals("Step6Controller"))) {
+                        result = "redirect:/";
+                    } else {
+                        result = pjp.proceed();
+
+                    }
+                } else {
+                    if (!(className.equals("Step2Controller") || className.equals("Step7Controller") || className.equals("Step8Controller"))) {
+                        result = "redirect:/";
+                    } else {
+                        result = pjp.proceed();
+                    }
+                }
             }
         }
                 return result;

@@ -140,9 +140,11 @@
         chk1,
         chk2,
         CurrStatus,
-        sheetSS
+        sheetSS,
+        IFNULL(tfile.idx, 0) as imgIdx
         from tSheet
-        where sheetID=#{sheetID}
+        LEFT JOIN tfile ON tfile.t_idx = tsheet.sheetID
+        where sheetID = #{sheetID}
     </select>
     <!--chk2반영하기-->
 

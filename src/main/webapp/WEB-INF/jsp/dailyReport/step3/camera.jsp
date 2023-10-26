@@ -40,7 +40,7 @@
 </style>
 
 <div>
-
+    <input type="hidden" id="imgIdx" name="imgIdx" value="0">
     <button id="cameraBtn" class="btn addBtn" type="button" style="margin: -1px 5px 0 auto; width: 100px;" onclick="handleCameraButtonClick()">전표 사진촬영</button>
 
     <div id="modal" class="modal" style="display: none;">
@@ -74,9 +74,22 @@
             cameraBtn.innerText = '사진 재촬영';
         }
 
+        window.onload = function () {
+            if (imgIdx > 0) {
+                document.getElementById('cameraBtn').innerText = '전표사진 조회';
+            }
+        }
+
+
         function handleCameraButtonClick() {
-            if (capturedPhotoData) {
-                openModal();
+            if (imgIdx > 0) {
+                if (capturedPhotoData) {
+                    openModalwithNewImg();
+                } else {
+                    openModalwithImg(imgIdx);
+                }
+            } else if (capturedPhotoData) {
+                openModalwithNewImg();
             } else {
                 openNativeCamera();
             }
@@ -87,13 +100,21 @@
             input.click();
         }
 
-        function openModal() {
+        function openModalwithNewImg() {
             if (capturedPhotoData) {
                 const modalPhoto = document.getElementById('modalPhoto');
                 modalPhoto.src = capturedPhotoData;
                 document.getElementById('modal').style.display = 'block';
                 modalOpen = true;
             }
+        }
+
+        function openModalwithImg(img) {
+            var imgUrl = '/common/getFile/' + img;
+                const modalPhoto = document.getElementById('modalPhoto');
+                modalPhoto.src = imgUrl;
+                document.getElementById('modal').style.display = 'block';
+                modalOpen = true;
         }
 
         function closeModal() {
@@ -113,10 +134,12 @@
             if (file) {
                 capturedPhotoData = URL.createObjectURL(file);
                 document.getElementById('cameraBtn').innerText = '사진 재촬영';
-                if (modalOpen) {
-                    closeModal();
-                }
+                openModalwithNewImg();
+                // if (modalOpen) {
+                //     closeModal();
+                // }
             }
         });
 
     </script>
+</div>

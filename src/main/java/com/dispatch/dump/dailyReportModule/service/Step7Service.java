@@ -175,6 +175,11 @@ public class Step7Service {
         return dailyReportStep7SubMapper.findSubInfoBySheetSubID(sheetsubID);
     }
 
+
+
+    /*
+    *   FUNCTION :: 미지정 배차정보 저장
+    * */
     @Transactional
     public String saveDispatchData(int parentID, String dispatchDataList) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
@@ -210,6 +215,10 @@ public class Step7Service {
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
+
+    /*
+    * FUNCTION :: 계정등록 여부 확인
+    * */
     public String MemberChk(DailyReportStep7CarNo dailyReportStep7CarNo) {
         Map<String, Object> rtnMap = commonUtil.returnMap();
 

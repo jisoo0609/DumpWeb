@@ -6,5 +6,5 @@ public interface FileMapper {
 
     int insertFileInfoBySheetID(FileDTO fileDTO);
 
-    FileDTO findFileInfoBySheetID(int sheetID);
+    FileDTO findFileInfoBySheetID(int idx);
 }
