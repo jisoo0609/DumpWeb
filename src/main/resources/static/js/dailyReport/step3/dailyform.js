@@ -28,34 +28,29 @@ function valueToIndex(value) {
 
 const carSubmit = document.getElementById('carSubmit');
 const date = document.getElementById('date');
-
+const salesman = document.getElementById('salesman')
+const carSubmitTel = document.getElementById('carSubmitTel');
 function getSheetIDDataByParams(sheetID) {
     document.getElementById('sheetID').value=sheetID;
-
     $.ajax({
         url: "/dailyReport/form/ajax/details",
         type: "POST",
         headers: {'Content-Type': 'application/json'},
         data: JSON.stringify({sheetID: sheetID}),
         success: function (data) {
-            console.log(data);
             //이 부분 추후 정리할 것
             carSubmit.value=data.carSubmit;
             openable1 = true;
             date.value=data.date;
-            document.getElementById('carSubmitTel').value=data.carSubmitTel;
+            carSubmitTel.value=data.carSubmitTel;
             openable3 = true;
             searchByCarsubmitTel(data.carSubmitTel);
-            document.getElementById('salesman').value=data.salesman;
+            salesman.value=data.salesman;
             openable2 = true;
-            document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
-            imgIdx = Number(data.imgIdx);
-            document.getElementById('imgIdx').value= Number(imgIdx);
+            CurrStatus.options[valueToIndex(data.currStatus)].selected = true;
             $.list();
-
             showChk1(data.chk1);
             showChk2(data.chk2);
-
         }
     })
 }

@@ -89,7 +89,7 @@
                                 <span class="content">
                                     <input  type="tel" class="wp100 input manager" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
                                            list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" onkeyup="onAutoSearch(); searchByCarsubmitTel(this);"
+                                           style="margin-left: 75px; width: 100px;" onfocus="fill010(); hideSalesmanBox(); hideCarSubmitBox(); showTelBox();" onkeyup="onAutoSearch(); searchByCarsubmitTel(this);"
                                     >
                                 </span>
                             </div>
@@ -147,7 +147,7 @@
                             <span class="v-mid" data-trn-key="TR_MENU_KEY_375">운송 정보 등록</span>
                         </p>
                         <div class="haveTwo">
-                            <button class="btn addBtn driver" type="button" style="margin: -1px 5px 0 auto; width: 100px;" onclick="openPop()">
+                            <button class="btn addBtn driver" type="button" style="margin: -1px 5px 0 auto; width: 100px;" onclick="hideCarSubmitBox(); hideSalesmanBox(); hideTelBox();openPop();">
                                 운송 신규등록
                             </button>
                             <%@ include file="popupInput.jsp" %>

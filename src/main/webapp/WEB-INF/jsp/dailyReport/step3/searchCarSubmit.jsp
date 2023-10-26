@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<div id="carSubmitBox" class="hidden" onblur="hideCarSubmitBox()">
+<div id="carSubmitBox" class="hidden" >
     <table class="droptable">
        <colgroup>
             <col width="25%">
