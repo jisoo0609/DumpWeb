@@ -42,12 +42,13 @@
                                 </span>
                         </li>
 
-                        <li>
-                            <label style="font-size : var( --main-font-size);">비고</label>
-                            <span class="content">
-                                <textarea class="Rem ml75 input" name="Rem" id="Rem" cols="40" rows="1" autocomplete="off"
-                                          style="height: auto; resize:none; overflow-y: auto;"></textarea>
+                        <li style="height: calc(var(--main-height) * 2);">
+                        <label style="font-size : var( --main-font-size);">비고</label>
+                        <span class="content ml75" style="height: calc(var(--main-height) * 2); display: block;">
+                        <textarea class="Rem input" name="Rem" id="Rem" autocomplete="off" cols="30" rows="10"
+                        style="overflow-y: scroll; resize: none; font-size: var(--main-font-size); width: 100%; height: calc(var(--main-height) * 2)!important; "></textarea>
                         </li>
+
 
                         <div style="display: block; height: 30px; padding-top: 3px;">
                             <label for="checkbox" id="checkboxLabel" style="height: 15px; font-size: var( --main-font-size);">운반 금액 표시:</label>

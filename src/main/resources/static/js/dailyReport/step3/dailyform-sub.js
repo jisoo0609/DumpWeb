@@ -182,17 +182,6 @@ function closePop() {
 }
 
 
-
-
-/* 비고 사이즈 자동변경 */
-const freetext = document.getElementById('Rem');
-freetext.oninput = event => {
-    const inputValue = event.target;
-    freetext.style.height = 0
-    freetext.style.height = 22 + inputValue.scrollHeight + 'px';
-};
-
-
 /* 대수, 운반단가로 합계보여주기 */
     //<!-- "대수"와 "운반 단가" 입력 요소 가져오기 -->
 const QtyInput = document.getElementById('Qty');
