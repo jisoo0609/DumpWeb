@@ -2,15 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
     let sheetID = params.get("sheetID");
+    changeByPosition();
 
     if (sheetID !== null) {
         getSheetIDDataByParams(sheetID);
     }
-    //clickListThAndRedirect();//step4에 있음
-    $.showChk1;
-    recoverState();
-    approved();
-    //searchByCarsubmitTel(carsubmittel.value); 여기서 이렇게 부르면 안됨!
+    recoverState(); // 운송비 보여주는 체크박스
 });
 
 
@@ -28,6 +25,9 @@ function valueToIndex(value) {
     }
 }
 
+const carSubmit = document.getElementById('carSubmit');
+const date = document.getElementById('date');
+
 function getSheetIDDataByParams(sheetID) {
     document.getElementById('sheetID').value=sheetID;
 
@@ -38,9 +38,9 @@ function getSheetIDDataByParams(sheetID) {
         data: JSON.stringify({sheetID: sheetID}),
         success: function (data) {
             //이 부분 추후 정리할 것
-            document.getElementById('carSubmit').value=data.carSubmit;
+            carSubmit.value=data.carSubmit;
             openable1 = true;
-            document.getElementById('date').value=data.date;
+            date.value=data.date;
             document.getElementById('carSubmitTel').value=data.carSubmitTel;
             openable3 = true;
             searchByCarsubmitTel(data.carSubmitTel);
@@ -48,6 +48,8 @@ function getSheetIDDataByParams(sheetID) {
             openable2 = true;
             document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
             $.list();
+            showChk1(data.chk1);
+            showChk2(data.chk2);
         }
     })
 }
@@ -63,7 +65,6 @@ $.emptyRow = function() {
 /*제출처, 운송정보 저장*/
 $.save = function() {
     var formData = new FormData($("[name=frm]")[0]);
-    console.log("formData는?"+formData);
     $.ajax({
         url: "/dailyReport/workspace/ajax/save",
         type: "POST",
@@ -112,12 +113,11 @@ $.showCarSubmitInfo = function(data){
     //chk정보 채우기
     document.getElementById("checkbox").checked= data.carSubmitInfo.chk1;
     approved();
+
+    showChk1(data.carSubmitInfo.chk1);
 }
-//chk정보를 불러오기 위한 함수
-$.showChk1 = function(data) {
-    document.getElementById("checkbox").checked = data.chk1;
-    approved();
-};
+
+
 
 //제출처 정보 수정을 위한 sheetID 저장
 $.saveSheetID = function(data){

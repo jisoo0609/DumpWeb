@@ -23,7 +23,7 @@
         </div>
 
         <%-- 차량번호 확인하기 --%>
-        <input type="hidden" type="text" name="CarNo" id="CarNo" value="${sessionScope.loginInfo.userId}" />
+        <input type="hidden" type="text" name="userPosition" id="userPosition" value="${sessionScope.loginInfo.userPosition}" />
 
 
         <form name="layerFrm" method="post">
@@ -67,7 +67,7 @@
                             <label class="t10">제출처</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input type="text" class="wp100 voice input" name="carSubmit" id="carSubmit" style="width: 100%;" onfocus="showCarSubmitBox(); hideSalesmanBox(); hideTelBox();"
+                                <input type="text" class="wp100 voice input manager" name="carSubmit" id="carSubmit" style="width: 100%;" onfocus="showCarSubmitBox(); hideSalesmanBox(); hideTelBox();"
                                 oninput="validateInput1(this)" autocomplete="off" placeholder="제출처" value="${!empty view ? view.carSubmit : ''}" onkeyup="searchByCarsubmit(this)">
 
                             </span>
@@ -78,7 +78,7 @@
                             <label class="t10">담당자</label>
                             <img src="/resources/image/icons/ico_mic.png" alt="마이크" class="icon_mic">
                             <span class="content">
-                                <input  type="text" class="wp100 voice input" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}" onfocus="showSalesmanBox(); hideCarSubmitBox(); hideTelBox();"
+                                <input  type="text" class="wp100 voice input manager" name="salesman" id="salesman" value="${!empty view ? view.salesman : ''}" onfocus="showSalesmanBox(); hideCarSubmitBox(); hideTelBox();"
                                        placeholder="담당자" autocomplete="off" oninput="validateInput2(this)" onkeyup="searchBySalesman(this)">
                             </span>
                         </li>
@@ -87,9 +87,9 @@
                             <div style="width: 60%; height: var(--main-height)">
                                 <label class="t10">휴대폰</label>
                                 <span class="content">
-                                    <input  type="tel" class="wp100 input" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
+                                    <input  type="tel" class="wp100 input manager" name="carSubmitTel" id="carSubmitTel" value="${!empty view ? view.carSubmitTel : ''}"
                                            list="insiteDataList" placeholder="-없이 숫자8자리 입력" autocomplete="off" pattern="010[0-9]{8}" maxlength="11"
-                                           style="margin-left: 75px; width: 100px;" onfocus="fill010(); hideCarSubmitBox(); hideSalesmanBox();" onkeyup="onAutoSearch(); searchByCarsubmitTel(this);"
+                                           style="margin-left: 75px; width: 100px;" onfocus="fill010()" onkeyup="onAutoSearch(); searchByCarsubmitTel(this);"
                                     >
                                 </span>
                             </div>
@@ -104,8 +104,8 @@
                             <div class="datediv" style="width: 59%; height: var(--main-height)">
                                 <label class="t10">운행일</label>
                                 <span class="content">
-                                    <input type="text" class="datepicker input" id="date" name="date" style="width: 100px; margin-left: 75px; text-align: left; padding-left: 5px;"
-                                        value="${!empty view ? view.date : ''}" placeholder="운행일" readonly autocomplete="off" onchange="listData()">
+                                    <input type="text" class="datepicker manager" id="date" name="date" style="width: 100px; margin-left: 75px; text-align: left; padding-left: 5px;"
+                                        value="${!empty view ? view.date : ''}" placeholder="운행일" autocomplete="off" onchange="listData()" >
                                 </span>
                             </div>
                             <%--
@@ -117,7 +117,7 @@
                             <div style="width: 41%; height: var(--main-height)">
                                 <label>진행</label>
                                 <span class="content">
-                                    <select id="CurrStatus" name="CurrStatus" style="width: 70px; margin-left: auto;">
+                                    <select id="CurrStatus" class="manager" name="CurrStatus" style="width: 70px; margin-left: auto;">
                                         <option value="배차">배차</option>
                                         <option value="상차">상차</option>
                                         <option value="하차">하차</option>
@@ -131,7 +131,7 @@
                         <li>
                             <div id="mutualApproval">
                                 <label>제출처 결재 확인</label>
-                                <input type="checkbox" class="chkbx" name="chk0" value="0" onChange="mutallyApproved()">
+                                <input type="checkbox" class="chkbx" id="chk2" name="chk2" value="0" onChange="mutuallyApproved(this.value)">
                             </div>
 
                             <div id="approval">
@@ -147,7 +147,7 @@
                             <span class="v-mid" data-trn-key="TR_MENU_KEY_375">운송 정보 등록</span>
                         </p>
                         <div class="haveTwo">
-                            <button class="btn addBtn" type="button" style="margin: -1px 5px 0 auto; width: 100px;" onclick="openPop()">
+                            <button class="btn addBtn driver" type="button" style="margin: -1px 5px 0 auto; width: 100px;" onclick="openPop()">
                                 운송 신규등록
                             </button>
                             <%@ include file="popupInput.jsp" %>
@@ -183,9 +183,9 @@
         </div>
 
         <div class="btn-area">
-            <button type="button" class="btn btn-white" onclick="$.deleteAll()">전체삭제</button>
-            <button type="button" class="btn btn-blue" id="submitBtn" onClick="$.saveSales()">제출하기</button>
-            <button type="button" class="btn btn-blue " onClick="$.editSales()">저장하기</button>
+            <button type="button" class="btn btn-white driver" onclick="$.deleteAll()">전체삭제</button>
+            <button type="button" class="btn btn-blue driver" id="submitBtn" onClick="$.saveSales()">제출하기</button>
+            <button type="button" class="btn btn-blue driver" onClick="$.editSales()">저장하기</button>
             <button type="button" class="btn btn-white " onClick="pageGoBack()">이전화면</button>
         </div>
     </div>
@@ -200,3 +200,5 @@
 <script src="/resources/js/dailyReport/step3/messages.js"></script>
 <script src="/resources/js/dailyReport/step3/voicememo.js"></script>
 <script src="/resources/js/dailyReport/step3/searchedList.js"></script>
+<script src="/resources/js/dailyReport/step3/checkbox.js"></script>
+<script src="/resources/js/dailyReport/step3/userposition.js"></script>

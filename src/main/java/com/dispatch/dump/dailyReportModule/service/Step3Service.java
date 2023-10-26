@@ -109,8 +109,12 @@ public class Step3Service {
 
         List<DailyReportStep3Sub> resultData=null;
         if(loginInfo.getUserPosition().equals("driver")){
+
             dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
+            System.out.println("전체정보?"+dailyReportStep3Main);
             resultData=dailyReportStep3SubMapper.selectAll(dailyReportStep3Main);
+            System.out.println("resultData?"+resultData);
+
         }else if(loginInfo.getUserPosition().equals("manager")){
             dailyReportStep3Main.setSheetSS2(Integer.parseInt(getSessionLoginData().getUuserID()));
             resultData=dailyReportStep3SubMapper.selectAll2(dailyReportStep3Main);
@@ -120,12 +124,13 @@ public class Step3Service {
 
     //제출처 카테고리 생성용
     public List<DailyReportStep3Main> searchByCarSubmit(DailyReportStep3Main dailyReportStep3Main) {
+        dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
         return dailyReportStep3MainMapper.findByCarSubmit(dailyReportStep3Main);
     }
 
     //제출처 연락처 카테고리 생성용
     public List<DailyReportStep3Main> searchByCarSubmitTel(DailyReportStep3Main dailyReportStep3Main) {
-        //dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
+        dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
         //가입된 회원정보가 있다면
         Login login2 = new Login();
         login2.setUserId(dailyReportStep3Main.getCarSubmitTel());
@@ -143,6 +148,7 @@ public class Step3Service {
 
     //영업사원 카테고리 생성용
     public List<DailyReportStep3Main> searchBySalesman(DailyReportStep3Main dailyReportStep3Main) {
+        dailyReportStep3Main.setWriterIDX(Integer.parseInt(getSessionLoginData().getUuserID()));
         return dailyReportStep3MainMapper.findBySalesman(dailyReportStep3Main);
     }
 
@@ -308,6 +314,19 @@ public class Step3Service {
         return commonUtil.jsonFormatTransfer(rtnMap);
     }
 
+    public String approvalByCarSubmit(DailyReportStep3Main dailyReportStep3Main){
+        Map<String, Object> rtnMap = commonUtil.returnMap();
+        String CarNo=dailyReportStep3MainMapper.findByCarNo(dailyReportStep3Main.getSheetID());
+        dailyReportStep3Main.setCarNo(CarNo);
+        dailyReportStep3Main.setSheetSS2(Integer.parseInt(getSessionLoginData().getUuserID()));
+
+        int result=dailyReportStep3MainMapper.approvalByCarSubmit(dailyReportStep3Main);
+
+        if(result>0){
+            rtnMap.put("httpCode", 200);
+        }
+        return commonUtil.jsonFormatTransfer(rtnMap);
+    }
 }
 
 

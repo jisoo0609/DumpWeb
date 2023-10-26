@@ -40,7 +40,7 @@ $.failEdit = function() {
     modal({
         title: '알림메시지',
         type: 'alert',
-        text: '수정 실패'
+        text: '저장 실패'
     });
 }
 
@@ -71,10 +71,10 @@ $.successSearch = function() {
 $.confirmRemoval = function() {
     modal({
         title: '알림메시지',
-        type: 'alert',
+        type: 'confirm',
         text: '정말 삭제하시겠습니까?',
         callback : function(result){
-            if (result == false) {
+            if (result == true) {
                 $.deleteRow();
             }
         }
@@ -96,4 +96,12 @@ $.successRemoval = function() {
         text: '삭제성공'
     });
     closePop();
+}
+
+$.notMember = function() {
+    modal({
+        title: '주의',
+        type: 'alert',
+        text: '제출처가 가입된 회원이 아니므로 제출 할 수 없습니다'
+    });
 }

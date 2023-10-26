@@ -1,7 +1,6 @@
 const canvas = document.getElementById("canvas");
 const popup = document.getElementById('popup');
 const chk = document.getElementById('checkbox');
-const CurrStatus = document.getElementById('CurrStatus');
 var openable1 = false;
 var openable2 = false;
 var openable3 = false;
@@ -123,28 +122,40 @@ function loadInputValues() {
 
 /* function : open popup */
 function openPop() {
-    if(dateInput === '') { // 데이트 기록이 없으면 운송정보를 추가할 수 없다.
-        openable4 = false;
-    } else {
-        openable4 = true;
-    }
-    validateInput3(telInput.value)
-    if(chk.value === '0') {
-        if(openable1 & openable2 & openable3 & openable4 === true) {
-            popup.style.display = 'flex';
-            updateTotalAmount();
-            saved.forEach(function(elem){
-                elem.classList.add('hidden');
-            })
-            unsaved.forEach(function(elem) {
-                initialize(elem)
-            });
+    if(position == "driver") {
+        if(dateInput === '') { // 데이트 기록이 없으면 운송정보를 추가할 수 없다.
+            openable4 = false;
         } else {
-            $.inputInvalid();
+            openable4 = true;
+        }
+        validateInput3(telInput.value)
+        if(chk.value === '0') {
+            if(openable1 & openable2 & openable3 & openable4 === true) {
+                popup.style.display = 'flex';
+                updateTotalAmount();
+                saved.forEach(function(elem){
+                    elem.classList.add('hidden');
+                })
+                unsaved.forEach(function(elem) {
+                    initialize(elem)
+                });
+            } else {
+                $.inputInvalid();
+            }
+        } else {
+            $.checkedAlert();
         }
     } else {
-        $.checkedAlert();
+        popup.style.display = 'flex';
+        updateTotalAmount();
+        saved.forEach(function(elem){
+            elem.classList.add('hidden');
+        })
+        unsaved.forEach(function(elem) {
+            initialize(elem)
+        });
     }
+
 }
 
 const saved = popup.querySelectorAll('.saved')
@@ -237,7 +248,7 @@ function showOrHide() {
     }
 }
 
-/* 전체 삭제 버튼 누르면 인풋 비우기 */
+/* 전체 삭제 버튼 누르면 인풋 비우기*/
 function clearInputs() {
     const inputs = canvas.getElementsByTagName("input");
     for (let i = 0; i < inputs.length; i++) {
@@ -338,10 +349,3 @@ function checkInputs() {
     return openable1 & openable2 & openable3 & openable4;
 }
 
-function mutuallyApproved() {
-
-}
-
-function openDrop() {
-
-}
