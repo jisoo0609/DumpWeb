@@ -51,7 +51,7 @@ function printSummary(data) {
     const tncars = document.getElementById("tncars");
 
     ttamount.innerHTML = "총 운반 금액: " + data.totalTransportationCost.toLocaleString() + "원";
-    tncars.innerHTML = "총 운반 대수: " + data.totalTrips.toLocaleString() + "원";
+    tncars.innerHTML = "총 운반 대수: " + data.totalTrips.toLocaleString() + "대";
 }
 
 function printDispatchList(searchResultData, tbodyId) {
