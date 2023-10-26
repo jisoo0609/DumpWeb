@@ -1,14 +1,13 @@
 package com.dispatch.dump.dailyReportModule.controller;
 
-import com.dispatch.dump.commonModule.db.dto.DailyReport;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep8;
 import com.dispatch.dump.commonModule.db.dto.DailyReportStep8OptionForm;
-import com.dispatch.dump.dailyReportModule.service.DailyReportService;
 import com.dispatch.dump.dailyReportModule.service.Step8Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -24,10 +23,10 @@ public class Step8Controller {
     public String step8() {
         return "/dailyReport/step8/receipts";
     }
+
     @RequestMapping(value = "/receipts/ajax/list", method = RequestMethod.POST)
     @ResponseBody
-    public List<DailyReportStep8> receiptsList(DailyReportStep8OptionForm option){
-        System.out.println("검색조건 : " + option);
+    public List<DailyReportStep8> receiptsList(DailyReportStep8OptionForm option) {
         return step8Service.searchReceiptList(option);
     }
 
@@ -37,11 +36,9 @@ public class Step8Controller {
         return step8Service.getSelectBoxData(option);
     }
 
-
     @RequestMapping(value = "/receipts/ajax/details", method = RequestMethod.POST)
     @ResponseBody
     public DailyReportStep8 getReceiptsDetails(int sheetsubID, int sheetID) {
-        System.out.println(sheetsubID);
         return step8Service.getReceiptsDetails(sheetsubID, sheetID);
     }
 
