@@ -94,14 +94,12 @@ function printList(searchResultData) {
         } else if (checkedNumber === 2) {
             currentCriteria = order[0]; // 운행일 기준
         }
-        console.log("prevCriteria : " + prevCriteria)
 
         //빨간 기준선 추가
         if (index > 0 && prevCriteria !== currentCriteria) {
             row.classList.add("red-line-divider");
         }
         prevCriteria = currentCriteria;
-        console.log("currentCriteria : " + currentCriteria)
 
         row.setAttribute("receipt-subID", data.sheetsubID);
         row.setAttribute("receipt-sheetID", data.sheetID);
