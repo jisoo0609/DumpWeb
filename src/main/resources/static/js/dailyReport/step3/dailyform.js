@@ -1,3 +1,4 @@
+let imgIdx;
 document.addEventListener("DOMContentLoaded", function () {
     const queryString = window.location.search;
     const params = new URLSearchParams(queryString);
@@ -37,6 +38,7 @@ function getSheetIDDataByParams(sheetID) {
         headers: {'Content-Type': 'application/json'},
         data: JSON.stringify({sheetID: sheetID}),
         success: function (data) {
+            console.log(data);
             //이 부분 추후 정리할 것
             document.getElementById('carSubmit').value=data.carSubmit;
             openable1 = true;
@@ -47,7 +49,10 @@ function getSheetIDDataByParams(sheetID) {
             document.getElementById('salesman').value=data.salesman;
             openable2 = true;
             document.getElementById('CurrStatus').options[valueToIndex(data.currStatus)].selected = true;
+            imgIdx = Number(data.imgIdx);
+            document.getElementById('imgIdx').value= Number(imgIdx);
             $.list();
+
         }
     })
 }
@@ -316,4 +321,12 @@ $.saveSales = function(){
 
 $.invite = function () {
     console.log("문자를 보내 초대를 해보자.")
+}
+
+function submitConfirmation() {
+    $("[name=chk1]").prop("checked", true);
+
+    $("[name=CurrStatus] option[value=제출]").prop('disabled', false);
+    $("[name=CurrStatus] option[value=제출]").prop('selected', true);
+
 }

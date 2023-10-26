@@ -125,5 +125,11 @@ public class Step3Controller {
     public String saveSales(DailyReportStep3Main dailyReportStep3Main) {
         return step3Service.saveSales(dailyReportStep3Main);
     }
+
+//    @RequestMapping(value = "/workspace/ajax/submit", method = RequestMethod.POST)
+//    @ResponseBody
+//    public String submitMainData(DailyReportStep3Main dailyReportStep3Main) throws Exception {
+//        return step3Service.submitMainData(dailyReportStep3Main);
+//    }
 }
 
