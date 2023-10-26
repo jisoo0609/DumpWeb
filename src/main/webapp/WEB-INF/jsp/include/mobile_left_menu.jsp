@@ -23,62 +23,69 @@
     </div>
 
     <ul class="mobile-navi-dept1">
-        <li>
-            <p>
-                <a class="left_menu" href="/dailyReport/driver">
-                    <span style="font-weight: bold; color: blue;">①</span> 기사용 메뉴
-                </a>
-            </p>
-        </li>
-        <li>
-            <p>
-                <a class="left_menu" href="/dailyReport/manager">
-                    <span style="font-weight: bold; color: blue;">②</span> 제출처용 메뉴
-                </a>
-            </p>
-        </li>
-         <li>
-            <p>
-                <a class="left_menu" href="/dailyReport/form">
-                    <span style="font-weight: bold; color: blue;">③</span> 운행일보 등록
-                </a>
-            </p>
-         </li>
-         <li>
-             <p>
-                 <a class="left_menu" href="/dailyReport/list">
-                     <span style="font-weight: bold; color: blue;">④</span> 운행일보 조회
-                 </a>
-             </p>
-         </li>
-         <li>
-             <p>
-                 <a class="left_menu" href="/dailyReport/carcareform">
-                     <span style="font-weight: bold; color: blue;">⑤</span> 차량관리 차계부 등록
-                 </a>
-             </p>
-         </li>
-         <li>
-              <p>
-                  <a class="left_menu" href="/dailyReport/carcarelist">
-                      <span style="font-weight: bold; color: blue;">⑥</span> 차량관리 차계부 조회
-                  </a>
-              </p>
-         </li>
-         <li>
-                <p>
-                    <a class="left_menu" href="/dailyReport/orderform">
-                        <span style="font-weight: bold; color: blue;">⑦</span> 제출처 주문 등록
-                    </a>
-                </p>
-         </li>
-         <li>
-               <p>
-                   <a class="left_menu" href="/dailyReport/receipts">
-                       <span style="font-weight: bold; color: blue;">⑧</span> 제출처 전표 조회
-                   </a>
-               </p>
-         </li>
+
+        <c:choose>
+        <c:when test="${sessionScope.loginInfo.userPosition == 'driver'}">
+                <li>
+                    <p>
+                        <a class="left_menu" href="/dailyReport/driver">
+                            <span style="font-weight: bold; color: blue;">①</span> 기사용 메뉴
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="left_menu" href="/dailyReport/form">
+                            <span style="font-weight: bold; color: blue;">②</span> 운행일보 등록
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="left_menu" href="/dailyReport/list">
+                            <span style="font-weight: bold; color: blue;">③</span> 운행일보 조회
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="left_menu" href="/dailyReport/carcareform">
+                            <span style="font-weight: bold; color: blue;">④</span> 차량관리 차계부 등록
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="left_menu" href="/dailyReport/carcarelist">
+                            <span style="font-weight: bold; color: blue;">⑤</span> 차량관리 차계부 조회
+                        </a>
+                    </p>
+                </li>
+        </c:when>
+            <c:otherwise>
+                <li>
+                    <p>
+                        <a class="left_menu" href="/dailyReport/manager">
+                            <span style="font-weight: bold; color: blue;">①</span> 제출처용 메뉴
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="left_menu" href="/dailyReport/orderform">
+                            <span style="font-weight: bold; color: blue;">②</span> 제출처 주문 등록
+                        </a>
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        <a class="left_menu" href="/dailyReport/receipts">
+                            <span style="font-weight: bold; color: blue;">③</span> 제출처 전표 조회
+                        </a>
+                    </p>
+                </li>
+            </c:otherwise>
+        </c:choose>
 
     </ul>
 </nav>

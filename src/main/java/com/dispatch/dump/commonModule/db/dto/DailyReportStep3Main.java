@@ -25,4 +25,8 @@ public class DailyReportStep3Main {
 
     private MultipartFile imageFile;    // LINE :: 전표이미지 파일
 
+    private int imgIdx;
+
+    // VO
+    //private long idx;
 }

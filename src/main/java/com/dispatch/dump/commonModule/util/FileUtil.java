@@ -36,15 +36,14 @@ public class FileUtil {
             File uploadFile = new File(uploadFilePath);
             FileDTO fileDTO = new FileDTO();
 
+            file.transferTo(uploadFile);
+
             fileDTO.setFileName(fileName);
             fileDTO.setUuid(uuid);
             fileDTO.setExt(ext);
             fileDTO.setSheetID(sheetID);
 
             fileMapper.insertFileInfoBySheetID(fileDTO);
-
-
-            file.transferTo(uploadFile);
             log.info(fileName);
         } catch (IOException e) {
             log.error("Excepetion ["+ e.getMessage() +"]");
@@ -77,6 +76,66 @@ public class FileUtil {
 
             os.flush();
             os.close();
+
+        } catch (Exception e) {
+            log.error("Excepetion ["+ e.getMessage() +"]");
+        }
+
+    }
+
+    public boolean deleteImageFile(int idx) {
+
+        boolean result = false;
+
+        FileDTO fileInfo = fileMapper.findFileInfoBySheetID(idx);
+
+        File deleteFile = new File(UPLOAD_PATH + fileInfo.getUuid());
+
+        log.info(fileInfo.getFileName());
+
+        try {
+
+            if (deleteFile.delete()) {
+                result = true;
+            } else {
+                result = false;
+            }
+
+
+        } catch (Exception e) {
+            log.error("Excepetion ["+ e.getMessage() +"]");
+        }
+
+        return result;
+
+    }
+
+    public void updateImageFile(MultipartFile file, int idx) {
+
+        FileDTO fileInfo = fileMapper.findFileInfoBySheetID(idx);
+
+        File orgFile = new File(UPLOAD_PATH + fileInfo.getUuid());
+
+        log.info(fileInfo.getFileName());
+
+        try {
+            String fileName =  file.getOriginalFilename();
+            String ext = getExtension(fileName);
+
+
+            file.transferTo(orgFile);
+
+            FileDTO fileDTO = new FileDTO();
+
+            fileDTO.setFileName(fileName);
+            fileDTO.setExt(ext);
+            fileDTO.setSheetID(fileInfo.getSheetID());
+
+//            fileMapper.updateFileInfoBySheetID(fileDTO);
+
+
+
+
 
         } catch (Exception e) {
             log.error("Excepetion ["+ e.getMessage() +"]");

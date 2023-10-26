@@ -132,6 +132,12 @@
 					alert("핸드폰번호를 입력해주세요.");
 					$("[name=userTel]").focus();
 					return false;
+				} else {
+					var phoneChk = phoneNumChk($("[name=userTel]").val());
+
+					if (!phoneChk) {
+						return phoneChk;
+					}
 				}
 			}
 
@@ -328,7 +334,7 @@
 					</div>
 					<div class="b-loginM__input">
 						<label>휴대폰번호</label>
-						<input type="text" name="userTel" value="010-" autocomplete="off">
+						<input type="text" name="userTel" value="010" autocomplete="off">
 					</div>
 					<div class="b-loginM__input">
 						<label>기사이름</label>

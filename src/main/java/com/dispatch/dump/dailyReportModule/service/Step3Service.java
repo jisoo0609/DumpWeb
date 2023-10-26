@@ -11,7 +11,7 @@ import com.dispatch.dump.commonModule.util.FileUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +48,7 @@ public class Step3Service {
 
         Login login=new Login();
         login.setUserId(dailyReportStep3Main.getCarSubmitTel());
-
+        
         Login userInfo=findByUserInfo(login);
         if(userInfo!=null){
             dailyReportStep3Main.setSheetSS2(Integer.parseInt(userInfo.getUuserID()));
@@ -56,9 +56,6 @@ public class Step3Service {
 
             DailyReportStep3Main carSubmitResult=dailyReportStep3MainMapper.findCarSubmitInfo(dailyReportStep3Main);
             if(carSubmitResult!=null){
-                //sheetSS2와 sheetsubSS2 update-> 회원가입할때 SS2를 update하는 과정을 거친다면 필요없음
-                //dailyReportStep3MainMapper.editBySheetSS2(dailyReportStep3Main);
-                //dailyReportStep3SubMapper.editBySheetsubSS2(dailyReportStep3Sub);
 
                 System.out.println("find main Data.");
                 dailyReportStep3Sub.setSheetID2(carSubmitResult.getSheetID());
@@ -72,8 +69,8 @@ public class Step3Service {
 
                 dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
 
-                if (dailyReportStep3Main.getImageFile() != null) {
-                    fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                if (!dailyReportStep3Main.getImageFile().isEmpty()) {
+                    uploadFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
                 }
                 dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
                 saveTransPortInfo(dailyReportStep3Sub);
@@ -89,8 +86,8 @@ public class Step3Service {
                 dailyReportStep3Main.setSheetSS(Integer.parseInt(getSessionLoginData().getUuserID()));
                 dailyReportStep3MainMapper.insertCarSubmitInfo(dailyReportStep3Main);
 
-                if (dailyReportStep3Main.getImageFile() != null) {
-                    fileUtil.fileUpload(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                if (!dailyReportStep3Main.getImageFile().isEmpty()) {
+                    uploadFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
                 }
                 dailyReportStep3Sub.setSheetID2(dailyReportStep3Main.getSheetID());
                 saveTransPortInfo(dailyReportStep3Sub);
@@ -192,11 +189,20 @@ public class Step3Service {
             if(loginInfo2!=null){
                 System.out.println("sheetID는?"+dailyReportStep3Main.getSheetID());
                 System.out.println("CurrStatus는?"+dailyReportStep3Main.getCurrStatus());
+                if(!dailyReportStep3Main.getImageFile().isEmpty() && dailyReportStep3Main.getImgIdx() > 0) {
+                    updateFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getImgIdx());
+                } else if (!dailyReportStep3Main.getImageFile().isEmpty() && dailyReportStep3Main.getImgIdx() == 0) {
+                    uploadFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                }
                 dailyReportStep3MainMapper.editByCarSubmit2(dailyReportStep3Main);
             }else{
                 System.out.println("sheetID는?"+dailyReportStep3Main.getSheetID());
                 System.out.println("salesman은?"+dailyReportStep3Main.getSalesman());
-
+                if(!dailyReportStep3Main.getImageFile().isEmpty() && dailyReportStep3Main.getImgIdx() > 0) {
+                    updateFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getImgIdx());
+                } else if (!dailyReportStep3Main.getImageFile().isEmpty() && dailyReportStep3Main.getImgIdx() == 0) {
+                    uploadFileBySheetID(dailyReportStep3Main.getImageFile(), dailyReportStep3Main.getSheetID());
+                }
                 dailyReportStep3MainMapper.editByCarSubmit1(dailyReportStep3Main);
             }
             rtnMap.put("httpCode", 200);
@@ -306,6 +312,14 @@ public class Step3Service {
             rtnMap.put("httpCode", 422);
         }
         return commonUtil.jsonFormatTransfer(rtnMap);
+    }
+
+    public void uploadFileBySheetID(MultipartFile file, int sheetID) {
+        fileUtil.fileUpload(file, sheetID);
+    }
+
+    public void updateFileBySheetID(MultipartFile file, int sheetID) {
+        fileUtil.updateImageFile(file, sheetID);
     }
 
 }

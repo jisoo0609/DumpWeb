@@ -9,7 +9,7 @@
     </insert>
 
     <select id="findFileInfoBySheetID" resultType="FileDTO" parameterType="Integer">
-        SELECT file_name as fileName, file_ext as ext, uuid, t_idx as sheetID FROM tFile WHERE t_idx = #{sheetID}
+        SELECT file_name as fileName, file_ext as ext, uuid, t_idx as sheetID FROM tFile WHERE idx = #{idx}
     </select>
 
 </mapper>
