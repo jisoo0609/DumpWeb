@@ -294,13 +294,13 @@
 
     <!--전체삭제-->
     <delete id="deleteByCarsubmitInfo" parameterType="DailyReportStep3Main">
-        delete from tSheet
-        where carSubmitTel = #{carSubmitTel}
+        DELETE FROM tSheet
+        WHERE carSubmitTel = #{carSubmitTel}
         AND DATE_FORMAT(date, '%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
         AND chk1 = 0
         AND chk2 = 0
-        AND (sheetSS = #{sheetSS} and sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid= #{carSubmitTel}) OR
-        sheetSS2 IS NULL OR sheetSS2=0))
+        AND (sheetSS = #{sheetSS} AND sheetSS2 = (SELECT UuserID FROM tsitePW WHERE Userid = #{carSubmitTel}) OR
+        sheetSS2 IS NULL OR sheetSS2 = 0)
     </delete>
 
 </mapper>

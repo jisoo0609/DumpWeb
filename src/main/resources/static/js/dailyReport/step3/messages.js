@@ -81,6 +81,19 @@ $.confirmRemoval = function() {
     });
 }
 
+$.confirmTotalRemoval = function() {
+    modal({
+        title: '알림메시지',
+        type: 'confirm',
+        text: '당일 이 거래처에 대한 운송기록이 다 삭제됩니다.<br> 정말 삭제하시겠습니까?',
+        callback : function(result){
+            if (result == true) {
+                $.deleteAll();
+            }
+        }
+    });
+}
+
 $.failRemoval = function() {
     modal({
         title: '주의',
@@ -102,6 +115,23 @@ $.notMember = function() {
     modal({
         title: '주의',
         type: 'alert',
-        text: '제출처가 가입된 회원이 아니므로 제출 할 수 없습니다'
+        text: '제출처가 가입된 회원이 아니므로 제출 할 수 없습니다.<br/>제출처를 초대해 주세요.'
     });
+}
+
+$.failSubmit = function() {
+    modal({
+        title: '주의',
+        type: 'alert',
+        text: '제출 실패'
+    });
+}
+
+$.successSubmit = function() {
+    modal({
+        title: '알림',
+        type: 'alert',
+        text: '제출 성공'
+    });
+    closePop();
 }

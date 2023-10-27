@@ -95,7 +95,7 @@
                             </div>
                             <div id="invite">
                                 <span id="isMember">거래처 상태</span>
-                                <button type="button" class="btn addBtn" id ="inviteBtn" onclick="$.invite()">비회원 초대하기</button>
+                                <button type="button" class="btn addBtn" id ="inviteBtn" onclick="$.invite(); hideSalesmanBox(); hideCarSubmitBox(); hideTelBox(); ">비회원 초대하기</button>
                             </div>
                         </li>
                         <%@ include file="searchCarSubmitTel.jsp" %>
@@ -105,7 +105,7 @@
                                 <label class="t10">운행일</label>
                                 <span class="content">
                                     <input type="text" class="datepicker manager" id="date" name="date" style="width: 100px; margin-left: 75px; text-align: left; padding-left: 5px;"
-                                        value="${!empty view ? view.date : ''}" placeholder="운행일" autocomplete="off" onchange="listData()" >
+                                        value="${!empty view ? view.date : ''}" placeholder="운행일" autocomplete="off" onchange="listData()" onclick="hideSalesmanBox(); hideCarSubmitBox(); hideTelBox();">
                                 </span>
                             </div>
                             <%--
@@ -183,8 +183,8 @@
         </div>
 
         <div class="btn-area">
-            <button type="button" class="btn btn-white driver" onclick="$.deleteAll()">전체삭제</button>
-            <button type="button" class="btn btn-blue driver" id="submitBtn" onClick="$.saveSales()">제출하기</button>
+            <button type="button" class="btn btn-white driver" onclick="$.confirmTotalRemoval()">전체삭제</button>
+            <button type="button" class="btn btn-blue driver" id="submitBtn" onClick="driverToManager()">제출하기</button>
             <button type="button" class="btn btn-blue driver" onClick="$.editSales()">저장하기</button>
             <button type="button" class="btn btn-white " onClick="pageGoBack()">이전화면</button>
         </div>
