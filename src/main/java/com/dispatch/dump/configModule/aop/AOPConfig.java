@@ -52,7 +52,7 @@ public class AOPConfig {
 
                     }
                 } else {
-                    if (!(className.equals("Step2Controller") || className.equals("Step7Controller") || className.equals("Step8Controller"))) {
+                    if (!(className.equals("Step2Controller") || className.equals("Step3Controller") || className.equals("Step7Controller") || className.equals("Step8Controller"))) {
                         result = "redirect:/";
                     } else {
                         result = pjp.proceed();
