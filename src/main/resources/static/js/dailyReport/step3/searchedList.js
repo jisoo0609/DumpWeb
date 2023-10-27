@@ -52,8 +52,6 @@ function getSheetIDDataBySelection(sheetID) {
             document.getElementById('carSubmitTel').value = data.carSubmitTel;
             openable3 = true;
             searchByCarsubmitTel(data.carSubmitTel);
-            showChk1(data.chk1);
-            showChk2(data.chk2);
         }
     })
 }
@@ -199,6 +197,7 @@ function offAutoSearch() {
     autoSearch = 0;
 }
 
+let isJoined;
 function searchByCarsubmitTel(inputData) {
     const carSubmitTel = carsubmittel.val();
     $.ajax({
@@ -209,9 +208,11 @@ function searchByCarsubmitTel(inputData) {
             const isMember = $("#isMember");
             const inviteBtn = $("#inviteBtn");
             if (data.checkData != null) { // 가입된 거래처
+                isJoined = true;
                 isMember.text("회원");
                 $("#inviteBtn").css("margin-left", "5000px");
             } else {
+                isJoined = false;
                 isMember.text("");
                 $("#inviteBtn").css("margin-left", "auto");
             }

@@ -63,6 +63,14 @@ $.emptyRow = function() {
     }
 }
 
+$.emptyCarSubmit = function(){
+    carSubmit.value="";
+    salesman.value="";
+    carSubmitTel.value="";
+
+    $.list();
+}
+
 /*제출처, 운송정보 저장*/
 $.save = function() {
     var formData = new FormData($("[name=frm]")[0]);
@@ -245,6 +253,11 @@ $.deleteRow = function() {
 // 제출처 정보 수정
 // 기사가 결재 체크햇으면 해재해놓고 다시
 $.editSales = function(){
+    let restore = false;
+    if(CurrStatus.disabled == true) {
+        restore = true;
+        CurrStatus.disabled = false;
+    }
     var formData = new FormData($("[name=frm]")[0]);
     if (checkInputs() === 1) {
         $.ajax({
@@ -267,10 +280,15 @@ $.editSales = function(){
                 console.error('수정 실패:', error);
             }
         })
+        if(restore == true) {
+            CurrStatus.disabled = true;
+        }
     } else {
         $.inputInvalid();
     }
 }
+
+
 
 //전체삭제
 $.deleteAll = function () {
@@ -283,11 +301,11 @@ $.deleteAll = function () {
         contentType: false,
         cache: false,
         success : function (data) {
-            var json = $.parseJSON(data);
             if(json.httpCode == 200){
-                alert("삭제 완료");
-            }else{
-                alert("삭제 실패");
+                 $.emptyCarSubmit();
+                 $.successRemoval();
+            } else {
+                $.failRemoval();
             }
 
         },
@@ -295,6 +313,15 @@ $.deleteAll = function () {
             alert("삭제 에러");
         }
     })
+}
+
+function driverToManager() {
+    if(isJoined == true) {
+        $.saveSales();
+        $.editSales();
+    } else {
+        $.notMember();
+    }
 }
 
 $.saveSales = function(){
@@ -307,10 +334,12 @@ $.saveSales = function(){
         contentType: false,
         cache: false,
         success : function (data) {
-            alert("제출 완료");
+            submitCheck();
+            showChk1(true);
+            $.successSubmit();
         },
         error : function (data) {
-            alert("제출 에러");
+            $.failSubmit();
         }
     })
 }
